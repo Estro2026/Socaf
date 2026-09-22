@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Socaf — Alberatura del nuovo sito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14161a; --panel:#1b1e24; --panel2:#20242b; --line:#2a2f38;
+    --text:#e8eaed; --muted:#8b9199; --dim:#646b75;
+    --new:#4db6a0; --warn:#d9a441; --ghost:#565d67;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin:0 auto;padding:60px 40px 100px}
+
+  header{margin-bottom:38px}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--muted);margin-bottom:16px}
+  h1{font-family:Archivo,sans-serif;font-weight:700;font-size:40px;line-height:1.1;margin:0 0 12px;letter-spacing:-.02em}
+  .lede{font-size:16.5px;color:var(--muted);max-width:72ch;margin:0}
+
+  .disclaimer{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 4px 4px 0;padding:18px 22px;font-size:14px;color:var(--muted);max-width:78ch;margin:26px 0 0}
+  .disclaimer strong{color:var(--text);font-weight:600}
+
+  /* ---------- legenda ---------- */
+  .legend{display:flex;gap:10px 26px;flex-wrap:wrap;margin:34px 0 10px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted);align-items:center}
+  .legend .k{display:flex;align-items:center;gap:8px}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;padding:2px 7px;border-radius:3px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+  .tag.nuova{color:var(--new);border-color:rgba(77,182,160,.45);background:rgba(77,182,160,.09)}
+  .tag.cambia{color:var(--warn);border-color:rgba(217,164,65,.42);background:rgba(217,164,65,.08)}
+  .tag.aperta{color:var(--warn);border-style:dashed;border-color:rgba(217,164,65,.5)}
+  .tag.ghost{color:var(--ghost);border-style:dashed}
+
+  /* ---------- albero ---------- */
+  .tree{margin:34px 0 0;font-size:14.5px}
+  .root{
+    display:inline-flex;align-items:baseline;gap:14px;
+    border:1px solid var(--line);border-radius:5px;background:var(--panel2);
+    padding:13px 20px;
+  }
+  .root .rn{font-family:Archivo,sans-serif;font-weight:600;font-size:17px}
+  .root .ru{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--dim)}
+
+  ul.branch{list-style:none;margin:0;padding:0 0 0 26px;position:relative}
+  ul.branch > li{position:relative;padding:0 0 0 30px;margin:14px 0 0}
+  /* linea verticale del ramo */
+  ul.branch > li::before{
+    content:"";position:absolute;left:0;top:-14px;bottom:0;width:1px;background:var(--line);
+  }
+  ul.branch > li:last-child::before{bottom:auto;height:32px}
+  /* gomito orizzontale */
+  ul.branch > li::after{
+    content:"";position:absolute;left:0;top:18px;width:22px;height:1px;background:var(--line);
+  }
+  ul.branch.deep > li::after{top:15px}
+
+  /* nodo */
+  .node{
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+    border:1px solid var(--line);border-radius:5px;background:var(--panel);
+    padding:11px 16px;
+  }
+  .node .nm{font-family:Archivo,sans-serif;font-weight:600;font-size:15.5px;letter-spacing:-.01em}
+  .node .url{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--new)}
+  .node .url.off{color:var(--ghost)}
+  .node .cnt{font-size:12.5px;color:var(--dim);margin-left:auto;white-space:nowrap}
+
+  /* nodo di primo livello: più presente */
+  li.top > .node{background:var(--panel2);padding:14px 18px;border-color:#333a45}
+  li.top > .node .nm{font-size:17px}
+  li.top{margin-top:22px !important}
+
+  /* nodo che non è una pagina */
+  .node.ghost{background:transparent;border-style:dashed;border-color:#2e343d}
+  .node.ghost .nm{color:var(--ghost);font-weight:500}
+
+  /* nodo terminale leggero */
+  .node.leaf{padding:8px 14px;background:transparent}
+  .node.leaf .nm{font-family:Inter,sans-serif;font-weight:500;font-size:14px}
+  .node.leaf .url{font-size:12px}
+
+  /* collegamenti in uscita */
+  .links{padding:8px 0 2px 30px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .lnk{
+    font-size:11.5px;color:#7fa9d8;border:1px solid rgba(127,169,216,.28);
+    background:rgba(127,169,216,.07);border-radius:3px;padding:3px 9px;white-space:nowrap;
+  }
+  .lnk::before{content:"↗ ";color:rgba(127,169,216,.65)}
+  .links .from{font-size:11.5px;color:var(--dim);margin-right:2px}
+
+  /* sottocategorie inline */
+  .subs{padding:9px 0 2px 30px;display:flex;flex-wrap:wrap;gap:6px}
+  .sub{
+    font-size:12px;color:var(--muted);border:1px solid #262c34;border-radius:3px;
+    padding:3px 9px;background:rgba(255,255,255,.012)
+  }
+  .sub b{font-family:'IBM Plex Mono',monospace;font-weight:500;color:var(--dim);font-size:11px;margin-left:5px}
+
+  /* ---------- note ---------- */
+  .notes{margin-top:74px;border-top:1px solid var(--line);padding-top:12px}
+  .notes h2{font-family:Archivo,sans-serif;font-weight:600;font-size:24px;margin:26px 0 26px;letter-spacing:-.01em}
+  .note{margin:0 0 30px;padding-left:18px;border-left:2px solid var(--line);max-width:80ch}
+  .note h3{font-family:Archivo,sans-serif;font-weight:600;font-size:15.5px;margin:0 0 8px}
+  .note p{font-size:14.5px;color:var(--muted);margin:0 0 9px}
+  .note p:last-child{margin-bottom:0}
+  .note strong{color:var(--text);font-weight:600}
+  .note code{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--new)}
+
+  .open{border-left-color:var(--warn);background:rgba(217,164,65,.045);padding:16px 20px;border-radius:0 4px 4px 0}
+  .open h3{color:var(--warn)}
+
+  .card{border:1px solid var(--line);border-radius:6px;background:var(--panel);padding:20px 24px;margin:26px 0 0;max-width:82ch}
+  .card h3{font-family:Archivo,sans-serif;font-weight:600;font-size:15.5px;margin:0 0 14px}
+  .card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:9px 18px;font-size:14px}
+  .card dt{font-weight:600;color:var(--text);white-space:nowrap}
+  .card dd{margin:0;color:var(--muted)}
+
+
+  @media (max-width:820px){
+    .wrap{padding:40px 20px 70px}
+    h1{font-size:30px}
+    ul.branch{padding-left:12px}
+    ul.branch > li{padding-left:22px}
+    ul.branch > li::after{width:15px}
+    .node .cnt{margin-left:0;width:100%}
+    .card dl{grid-template-columns:1fr;gap:3px 0}
+    .card dd{margin-bottom:9px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>L'alberatura del nuovo sito</h1>
+  <p class="lede">Come sono organizzate le pagine del sito nuovo e che indirizzo avranno. Il catalogo resta quello di oggi — sei famiglie di macchine, 28 sottocategorie, 119 schede — e mantiene gli stessi indirizzi. Cambia cosa sta in evidenza e come le pagine si collegano tra loro.</p>
+
+  <div class="disclaimer">
+    <strong>L'alberatura non è il menu.</strong> Questo schema descrive come sono organizzate le pagine e i loro indirizzi: è la struttura che Google legge e che determina il posizionamento. Il menu di navigazione è un'altra cosa e verrà disegnato a partire da qui: non mostrerà tutte le voci di questo schema, e diverse pagine importanti si raggiungeranno da dentro le altre pagine invece che dal menu.
+  </div>
+
+  <div class="disclaimer" style="border-left-color:#7fa9d8">
+    <strong>I collegamenti contano quanto la struttura.</strong> Sotto ogni sezione dell'albero è indicato dove porta: sono i collegamenti interni che tengono insieme il sito e che oggi in gran parte non esistono. Una macchina rimanda al settore in cui si usa, al suo noleggio e ai prodotti che servono per farla funzionare; un settore rimanda alle macchine e agli articoli che ne parlano. È il motivo per cui chi entra da una pagina qualsiasi trova comunque il resto.
+  </div>
+
+  <div class="legend">
+    <span class="k"><span class="tag">resta com'è</span> indirizzo invariato</span>
+    <span class="k"><span class="tag nuova">nuova</span> pagina che oggi non esiste</span>
+    <span class="k"><span class="tag cambia">cambia indirizzo</span> serve un reindirizzamento</span>
+    <span class="k"><span class="tag aperta">da decidere</span> voce aperta</span>
+    <span class="k"><span class="tag ghost">non è una pagina</span> solo etichetta o percorso</span>
+    <span class="k"><span class="lnk">collegamento</span> dove porta questa sezione</span>
+  </div>
+</header>
+
+<!-- ============ ALBERO ============ -->
+<div class="tree">
+
+  <div class="root">
+    <span class="rn">Gruppo Socaf</span>
+    <span class="ru">socaf.it</span>
+  </div>
+
+  <ul class="branch">
+
+    <!-- 1. MACCHINE -->
+    <li class="top">
+      <div class="node ghost">
+        <span class="nm">Macchine</span>
+        <span class="url off">nessun indirizzo</span>
+        <span class="tag ghost">non è una pagina</span>
+        <span class="cnt">6 famiglie · 28 sottocategorie · 119 schede</span>
+      </div>
+      <div class="links"><span class="from">da ogni scheda macchina:</span><span class="lnk">ai settori in cui si usa</span><span class="lnk">al noleggio della sua famiglia</span><span class="lnk">alla pagina usato</span><span class="lnk">ai prodotti compatibili</span></div>
+
+      <ul class="branch deep">
+        <li>
+          <div class="node">
+            <span class="nm">Lavapavimenti</span>
+            <span class="url">/lavapavimenti/</span>
+            <span class="tag">resta com'è</span>
+            <span class="cnt">24 schede</span>
+          </div>
+          <div class="subs">
+            <span class="sub">Uomo a bordo<b>8</b></span>
+            <span class="sub">Uomo a terra<b>5</b></span>
+            <span class="sub">Piccole<b>5</b></span>
+            <span class="sub">i-mop<b>4</b></span>
+            <span class="sub">Combinate<b>2</b></span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <span class="nm">Spazzatrici</span>
+            <span class="url">/spazzatrici/</span>
+            <span class="tag">resta com'è</span>
+            <span class="cnt">19 schede</span>
+          </div>
+          <div class="subs">
+            <span class="sub">Uomo a bordo<b>9</b></span>
+            <span class="sub">Stradali<b>7</b></span>
+            <span class="sub">Uomo a terra<b>3</b></span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <span class="nm">Idropulitrici</span>
+            <span class="url">/idropulitrici/</span>
+            <span class="tag">resta com'è</span>
+            <span class="cnt">17 schede</span>
+          </div>
+          <div class="subs">
+            <span class="sub">Ad acqua calda<b>5</b></span>
+            <span class="sub">Ad acqua fredda<b>4</b></span>
+            <span class="sub">Impianti fissi<b>4</b></span>
+            <span class="sub">Autonome<b>2</b></span>
+            <span class="sub">Alte prestazioni<b>2</b></span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <span class="nm">Aspiratori</span>
+            <span class="url">/aspiratori/</span>
+            <span class="tag">resta com'è</span>
+            <span class="cnt">25 schede</span>
+          </div>
+          <div class="subs">
+            <span class="sub">Industriali<b>9</b></span>
+            <span class="sub">Certificati ATEX<b>5</b></span>
+            <span class="sub">Per olio e trucioli<b>5</b></span>
+            <span class="sub">Professionali<b>4</b></span>
+            <span class="sub">Elettroventilatori<b>2</b></span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <span class="nm">Robot</span>
+            <span class="url">/robot/</span>
+            <span class="tag">resta com'è</span>
+            <span class="cnt">4 schede</span>
+          </div>
+          <div class="subs">
+            <span class="sub">Robot lavapavimenti<b>3</b></span>
+            <span class="sub">Robot spazzatrici<b>1</b></span>
+          </div>
+        </li>
+        <li>
+          <div class="node">
+            <span class="nm">Altri macchinari</span>
+            <span class="url">/altri-macchinari/</span>
+            <span class="tag">resta com'è</span>
+            <span class="cnt">30 schede</span>
+          </div>
+          <div class="subs">
+            <span class="sub">Vasche lavapezzi<b>10</b></span>
+            <span class="sub">Generatori di vapore<b>8</b></span>
+            <span class="sub">Lavatappezzeria<b>5</b></span>
+            <span class="sub">Monospazzole<b>2</b></span>
+            <span class="sub">Purificatori aria<b>2</b></span>
+            <span class="sub">Pulizia pannelli solari<b>1</b></span>
+            <span class="sub">Nebulizzatori<b>1</b></span>
+            <span class="sub">Battitappeti<b>1</b></span>
+          </div>
+        </li>
+      </ul>
+    </li>
+
+    <!-- 2. NOLEGGIO -->
+    <li class="top">
+      <div class="node">
+        <span class="nm">Noleggio</span>
+        <span class="url">/noleggio/</span>
+        <span class="tag nuova">nuova sezione</span>
+        <span class="cnt">1 pagina d'ingresso + 4 famiglie</span>
+      </div>
+      <div class="links"><span class="from">da ogni pagina noleggio:</span><span class="lnk">alle schede macchina della famiglia</span><span class="lnk">alla richiesta di preventivo</span></div>
+      <ul class="branch deep">
+        <li><div class="node leaf"><span class="nm">Noleggio lavapavimenti</span><span class="url">/noleggio/lavapavimenti/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Noleggio idropulitrici</span><span class="url">/noleggio/idropulitrici/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Noleggio spazzatrici</span><span class="url">/noleggio/spazzatrici/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Noleggio lavamoquette</span><span class="url off">indirizzo da definire</span><span class="tag aperta">da confermare</span></div></li>
+      </ul>
+    </li>
+
+    <!-- 3. USATO -->
+    <li class="top">
+      <div class="node">
+        <span class="nm">Usato</span>
+        <span class="url">/usato/</span>
+        <span class="tag nuova">sale di livello</span>
+        <span class="cnt">1 pagina d'ingresso + 5 famiglie</span>
+      </div>
+      <div class="links"><span class="from">da ogni pagina usato:</span><span class="lnk">alla famiglia di macchine nuove</span><span class="lnk">alla supervalutazione</span><span class="lnk">alla richiesta di disponibilità</span></div>
+      <ul class="branch deep">
+        <li><div class="node leaf"><span class="nm">Idropulitrici usate</span><span class="url">/usato/idropulitrici-usate/</span><span class="tag">resta com'è</span><span class="cnt">187 clic · posizione 8</span></div></li>
+        <li><div class="node leaf"><span class="nm">Lavapavimenti usate</span><span class="url">/usato/lavapavimenti-usate/</span><span class="tag">resta com'è</span><span class="cnt">170 clic · posizione 10</span></div></li>
+        <li><div class="node leaf"><span class="nm">Spazzatrici usate</span><span class="url">/usato/spazzatrici-usate/</span><span class="tag">resta com'è</span><span class="cnt">39 clic</span></div></li>
+        <li><div class="node leaf"><span class="nm">Aspiratori usati</span><span class="url">/usato/aspiratori-usati/</span><span class="tag">resta com'è</span><span class="cnt">7 clic</span></div></li>
+        <li><div class="node leaf"><span class="nm">Altri macchinari usati</span><span class="url">/usato/altri-macchinari-usati/</span><span class="tag">resta com'è</span><span class="cnt">2 clic</span></div></li>
+      </ul>
+    </li>
+
+    <!-- 4. SETTORI -->
+    <li class="top">
+      <div class="node">
+        <span class="nm">Settori</span>
+        <span class="url">/settori/</span>
+        <span class="tag cambia">cambia indirizzo</span>
+        <span class="cnt">5 esistenti + 2 proposti</span>
+      </div>
+      <div class="links"><span class="from">da ogni pagina settore:</span><span class="lnk">alle 8-12 macchine scelte</span><span class="lnk">ai prodotti più usati</span><span class="lnk">alle referenze del settore</span><span class="lnk">agli approfondimenti</span></div>
+      <ul class="branch deep">
+        <li><div class="node leaf"><span class="nm">Industria</span><span class="url">/settori/industria/</span><span class="tag cambia">cambia indirizzo</span></div></li>
+        <li><div class="node leaf"><span class="nm">Imprese di pulizia</span><span class="url">/settori/imprese-di-pulizia/</span><span class="tag cambia">cambia indirizzo</span></div></li>
+        <li><div class="node leaf"><span class="nm">Ho.Re.Ca.</span><span class="url">/settori/horeca/</span><span class="tag cambia">cambia indirizzo</span></div></li>
+        <li><div class="node leaf"><span class="nm">Retail</span><span class="url">/settori/retail/</span><span class="tag cambia">cambia indirizzo</span></div></li>
+        <li><div class="node leaf"><span class="nm">Logistica</span><span class="url">/settori/logistica/</span><span class="tag cambia">cambia indirizzo</span></div></li>
+        <li><div class="node leaf"><span class="nm">Officine e metalmeccanica</span><span class="url">/settori/officine-metalmeccanica/</span><span class="tag nuova">proposta</span></div></li>
+        <li><div class="node leaf"><span class="nm">Edilizia e cantieri</span><span class="url">/settori/edilizia-cantieri/</span><span class="tag nuova">proposta</span></div></li>
+      </ul>
+    </li>
+
+    <!-- 5. PRODOTTI -->
+    <li class="top">
+      <div class="node">
+        <span class="nm">Prodotti per la pulizia</span>
+        <span class="url">/prodotti-per-la-pulizia/</span>
+        <span class="tag">resta com'è</span>
+        <span class="cnt">da 8 a 13 categorie</span>
+      </div>
+      <div class="links"><span class="from">da ogni categoria:</span><span class="lnk">alle macchine su cui si usano</span><span class="lnk">al catalogo da scaricare</span></div>
+      <ul class="branch deep">
+        <li><div class="node leaf"><span class="nm">Detergenti per pavimenti e parquet</span><span class="url">/detergenti-pavimenti-parquet/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Detergenti enzimatici</span><span class="url">/detergenti-enzimatici/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Detergenti disinfettanti e igienizzanti</span><span class="url">/detergenti-disinfettanti/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Detergenti multiuso e sgrassanti</span><span class="url">/detergenti-multiuso-sgrassanti/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Detersivi per lavanderia industriale</span><span class="url">/detersivi-lavanderia-industriale/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Igiene mani</span><span class="url">/igiene-mani/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Carrelli per pulizie</span><span class="url">/carrelli-per-pulizie/</span><span class="tag nuova">nuova</span></div></li>
+        <li><div class="node leaf"><span class="nm">Attrezzature</span><span class="url">/attrezzature/</span><span class="tag">resta com'è</span></div></li>
+        <li><div class="node leaf"><span class="nm">Panni, stracci e microfibra</span><span class="url">/panni-stracci-microfibra/</span><span class="tag">resta com'è</span></div></li>
+        <li><div class="node leaf"><span class="nm">Carta e dispenser</span><span class="url">/carta-e-dispenser/</span><span class="tag cambia">due pagine si uniscono</span></div></li>
+        <li><div class="node leaf"><span class="nm">Sacchi</span><span class="url">/sacchi/</span><span class="tag">resta com'è</span></div></li>
+        <li><div class="node leaf"><span class="nm">Dispositivi di protezione individuale</span><span class="url">/dispositivi-di-protezione-individuale/</span><span class="tag">resta com'è</span></div></li>
+        <li><div class="node leaf"><span class="nm">Ecolabel</span><span class="url">/ecolabel/</span><span class="tag">resta com'è</span></div></li>
+      </ul>
+    </li>
+
+    <!-- 6. SERVIZI -->
+    <li class="top">
+      <div class="node">
+        <span class="nm">Servizi</span>
+        <span class="url">/servizi/</span>
+        <span class="tag">resta com'è</span>
+        <span class="cnt">4 pagine — escono noleggio e usato</span>
+      </div>
+      <div class="links"><span class="from">da ogni servizio:</span><span class="lnk">alle macchine a cui si applica</span><span class="lnk">alla richiesta di contatto</span></div>
+      <ul class="branch deep">
+        <li><div class="node leaf"><span class="nm">Pronto intervento</span><span class="url">/servizi/pronto-intervento/</span><span class="tag">resta com'è</span></div></li>
+        <li><div class="node leaf"><span class="nm">Consulenza tecnica</span><span class="url">/servizi/consulenza-tecnica/</span><span class="tag">resta com'è</span></div></li>
+        <li><div class="node leaf"><span class="nm">Soluzioni finanziarie</span><span class="url">/servizi/soluzioni-finanziarie/</span><span class="tag">resta com'è</span></div></li>
+        <li><div class="node leaf"><span class="nm">Supervalutazione dell'usato</span><span class="url">/servizi/supervalutazione-dell-usato/</span><span class="tag">resta com'è</span><span class="cnt">collegata all'usato</span></div></li>
+      </ul>
+    </li>
+
+    <!-- 7. APPROFONDIMENTI -->
+    <li class="top">
+      <div class="node">
+        <span class="nm">Approfondimenti</span>
+        <span class="url">/news/</span>
+        <span class="tag">nuovo nome, stesso indirizzo</span>
+        <span class="cnt">184 articoli · 830 clic · 10% del sito</span>
+      </div>
+      <div class="links"><span class="from">da ogni articolo:</span><span class="lnk">alle macchine di cui parla</span><span class="lnk">ai settori di cui parla</span></div>
+      <ul class="branch deep">
+        <li>
+          <div class="node leaf">
+            <span class="nm">I 184 articoli</span>
+            <span class="url">/news/[titolo-articolo]/</span>
+            <span class="tag">resta com'è</span>
+            <span class="cnt">nessun indirizzo cambia</span>
+          </div>
+          <div class="subs">
+            <span class="sub">Macchine collegate<b>a mano</b></span>
+            <span class="sub">Settori collegati<b>a mano</b></span>
+          </div>
+        </li>
+      </ul>
+    </li>
+
+    <!-- 8. AZIENDA -->
+    <li class="top">
+      <div class="node">
+        <span class="nm">Azienda</span>
+        <span class="url">/azienda/</span>
+        <span class="tag cambia">cambia indirizzo</span>
+        <span class="cnt">5 pagine</span>
+      </div>
+      <div class="links"><span class="from">dalle referenze:</span><span class="lnk">alle pagine settore</span><span class="lnk">alle macchine installate</span></div>
+      <ul class="branch deep">
+        <li><div class="node leaf"><span class="nm">Chi siamo</span><span class="url">/azienda/chi-siamo/</span><span class="tag cambia">assorbe Aziende</span></div></li>
+        <li><div class="node leaf"><span class="nm">Innovazione tecnologica</span><span class="url">/azienda/innovazione-tecnologica/</span><span class="tag cambia">cambia indirizzo</span></div></li>
+        <li><div class="node leaf"><span class="nm">Il nostro impegno</span><span class="url">/azienda/il-nostro-impegno/</span><span class="tag cambia">cambia indirizzo</span></div></li>
+        <li>
+          <div class="node leaf"><span class="nm">Referenze</span><span class="url">/azienda/referenze/</span><span class="tag cambia">cambia indirizzo</span><span class="cnt">7 schede cliente</span></div>
+        </li>
+        <li><div class="node leaf"><span class="nm">Lavora con noi</span><span class="url">/azienda/lavora-con-noi/</span><span class="tag cambia">assorbe Careers</span></div></li>
+      </ul>
+    </li>
+
+    <!-- 9. CONTATTI + SEDI -->
+    <li class="top">
+      <div class="node">
+        <span class="nm">Contatti</span>
+        <span class="url">/contatti/</span>
+        <span class="tag">resta com'è</span>
+        <span class="cnt">diventa l'elenco delle sedi</span>
+      </div>
+      <div class="links"><span class="from">da contatti:</span><span class="lnk">alle cinque schede sede</span></div>
+      <ul class="branch deep">
+        <li>
+          <div class="node ghost">
+            <span class="nm">Sedi</span>
+            <span class="url off">/sedi/</span>
+            <span class="tag ghost">non è una pagina</span>
+            <span class="cnt">solo l'inizio dell'indirizzo delle cinque schede</span>
+          </div>
+          <ul class="branch deep">
+            <li><div class="node leaf"><span class="nm">Osio Sotto (BG) — sede principale</span><span class="url">/sedi/osio-sotto/</span><span class="tag nuova">nuova</span></div></li>
+            <li><div class="node leaf"><span class="nm">Brescia</span><span class="url">/sedi/brescia/</span><span class="tag nuova">nuova</span></div></li>
+            <li><div class="node leaf"><span class="nm">Milano</span><span class="url">/sedi/milano/</span><span class="tag nuova">nuova</span></div></li>
+            <li><div class="node leaf"><span class="nm">Verona</span><span class="url">/sedi/verona/</span><span class="tag nuova">nuova</span></div></li>
+            <li><div class="node leaf"><span class="nm">Pordenone</span><span class="url">/sedi/pordenone/</span><span class="tag nuova">nuova</span></div></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <!-- 10. I DUE MARCHI DEL GRUPPO -->
+    <li class="top">
+      <div class="node ghost">
+        <span class="nm">I due marchi del gruppo</span>
+        <span class="url off">nessuna pagina su socaf.it</span>
+        <span class="cnt">collegamenti diretti ai loro siti</span>
+      </div>
+      <ul class="branch deep">
+        <li><div class="node leaf"><span class="nm">Caldofacile</span><span class="url off">&rarr; sito dedicato</span><span class="tag">da home e pi&egrave; di pagina</span></div></li>
+        <li><div class="node leaf"><span class="nm">Aquarial</span><span class="url off">&rarr; sito dedicato</span><span class="tag">da home e pi&egrave; di pagina</span></div></li>
+      </ul>
+    </li>
+
+  </ul>
+</div>
+
+<!-- ============ COSA CAMBIA DENTRO LE PAGINE ============ -->
+<div class="card">
+  <h3>Cosa contiene ogni scheda macchina, in più rispetto a oggi</h3>
+  <dl>
+    <dt>Settori di utilizzo</dt><dd>In quali ambienti si usa questa macchina, con il collegamento alla pagina del settore.</dd>
+    <dt>Disponibile a noleggio</dt><dd>Se la macchina si può noleggiare, con il collegamento alla richiesta.</dd>
+    <dt>Disponibile usata</dt><dd>Se ne esiste una versione usata, con il collegamento alla pagina che spiega la formula.</dd>
+    <dt>I prodotti giusti</dt><dd>I detergenti e i consumabili adatti a questa macchina: chi la compra non deve cercarli altrove.</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>Cosa contiene ogni pagina settore</h3>
+  <dl>
+    <dt>8-12 macchine</dt><dd>Scelte a mano per quel settore, non l'intero catalogo filtrato.</dd>
+    <dt>I prodotti più usati</dt><dd>I consumabili tipici di quell'ambiente.</dd>
+    <dt>Le referenze</dt><dd>I clienti Socaf di quel settore.</dd>
+    <dt>Gli approfondimenti</dt><dd>Gli articoli dedicati a quel tipo di pulizia.</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>Come si costruiscono i collegamenti</h3>
+  <p style="font-size:14.5px;color:var(--muted);margin:0 0 16px;max-width:78ch">Non tutti allo stesso modo. Dove esiste una regola il collegamento è automatico e non va mantenuto; dove serve una scelta commerciale si decide una volta e vale per tutte le pagine sotto. Il lavoro vero è concentrato in un punto solo.</p>
+  <dl>
+    <dt>Macchina → settore</dt><dd><strong>Automatico.</strong> Si indica a quali settori appartiene una macchina e i due lati si allineano da soli: la macchina compare nella pagina del settore, il settore compare nella scheda della macchina. Nessun collegamento da mantenere.</dd>
+    <dt>Famiglia → prodotti</dt><dd><strong>Sei decisioni.</strong> Per ogni famiglia si scelgono le categorie di prodotto da mostrare — chi guarda le lavapavimenti vuole detergenti per pavimenti e microfibra, non i carrelli. Le schede della famiglia le ereditano tutte. È una scelta commerciale, non una regola tecnica: la fa Socaf.</dd>
+    <dt>Settore → macchine</dt><dd><strong>Sette decisioni.</strong> Su ogni pagina settore si scelgono a mano le 8-12 macchine giuste per quell'ambiente, invece di mostrare il catalogo filtrato. È la differenza tra una pagina utile e un elenco.</dd>
+    <dt>Articolo → macchine</dt><dd><strong>L'unico lavoro di volume.</strong> Su ogni articolo si indicano le macchine di cui parla davvero. Non si può automatizzare cercando i nomi nel testo: un articolo che cita tre modelli come esempio finirebbe agganciato a tre schede che non trattano. Il sistema propone i modelli che compaiono nel testo, chi scrive conferma o toglie.</dd>
+    <dt>Da dove partire</dt><dd>Dai venti articoli che generano più traffico, non da tutti e 184. Il lancio non aspetta che siano tutti collegati.</dd>
+  </dl>
+</div>
+
+<!-- ============ NOTE ============ -->
+<div class="notes">
+  <h2>Perché è organizzata così</h2>
+
+  <div class="note">
+    <h3>Le macchine</h3>
+    <p>Le sei famiglie restano al primo livello con gli indirizzi che hanno oggi: nessuna delle 119 schede prodotto cambia indirizzo, e il posizionamento già guadagnato resta intatto.</p>
+    <p>Nel menu le sei famiglie saranno raccolte sotto un'unica voce, ma non esiste una pagina che le contiene: non ci sono ricerche che la giustifichino e aggiungerebbe solo un passaggio in più prima di arrivare alla macchina.</p>
+  </div>
+
+  <div class="note">
+    <h3>Il noleggio</h3>
+    <p>Oggi il noleggio è una pagina dentro Servizi, al terzo livello: appare su Google 11.894 volte in tre mesi e raccoglie 77 clic. Diventa una sezione a sé, l'unica davvero nuova di tutta l'alberatura. E si divide, perché quella pagina contiene già al suo interno tre sezioni diverse — lavapavimenti, spazzatrici, idropulitrici — impilate sotto un unico indirizzo.</p>
+    <p>La pagina d'ingresso tiene tutto quello che vale per ogni tipo di macchina: formule, durate, vantaggi, richiesta di preventivo. Le pagine di famiglia rispondono a chi cerca già una macchina precisa — <strong>"noleggio lavapavimenti" e "noleggio idropulitrice" da soli valgono più di quattromila ricerche al mese</strong>.</p>
+    <p>Non è un secondo catalogo: le macchine restano quelle della sezione macchine. Ogni scheda segnala se quella macchina è noleggiabile e porta alla pagina della sua famiglia.</p>
+  </div>
+
+  <div class="note">
+    <h3>I settori</h3>
+    <p>Le pagine settore esistono già ma non portano a nessuna macchina: in tre mesi raccolgono 24 clic su 8.213 volte apparse. Nel sito nuovo diventano una vera porta d'ingresso al catalogo.</p>
+    <p><strong>Attenzione agli indirizzi:</strong> oggi stanno sotto <code>/settore/</code> al singolare, con indirizzi lunghi del tipo <code>/settore/macchine-per-la-pulizia-dedicate-all-industria/</code>. Passando a <code>/settori/industria/</code> cambiano tutti e sei gli indirizzi esistenti. Il costo del cambio è basso — sono pagine che raccolgono 24 clic in tre mesi — ma i sei reindirizzamenti vanno nel piano di migrazione.</p>
+    <p>I due settori proposti nascono da macchine che Socaf ha già a catalogo ma che nessuna pagina racconta: dieci vasche lavapezzi e cinque aspiratori per olio e trucioli servono solo alle officine, e gli aspiratori per polveri sono la macchina del cantiere.</p>
+    <p>Il collegamento funziona nei due sensi: dalla pagina settore si arriva alle macchine, e da ogni scheda macchina si torna ai settori in cui si usa. È il modello che abbiamo verificato su RCM, ed è il collegamento che oggi manca in entrambe le direzioni.</p>
+  </div>
+
+  <div class="note">
+    <h3>I prodotti per la pulizia</h3>
+    <p>È già la sezione con il tasso di clic più alto del catalogo, pur avendo nove pagine contro le trentuno delle lavapavimenti. Le categorie non cambiano impostazione: cambia il loro dimensionamento, perché oggi due tengono dentro quasi metà delle ricerche e due quasi nessuna.</p>
+    <p><strong>Come si leggono gli indirizzi:</strong> sono tutti figli di <code>/prodotti-per-la-pulizia/</code>. La categoria dei detergenti enzimatici, per esteso, è <code>/prodotti-per-la-pulizia/detergenti-enzimatici/</code>. Le categorie passano da 8 a 13: cinque nascono dalla divisione dei detergenti, oggi accorpati in un'unica pagina che deve rispondere a domande molto diverse tra loro. L'igiene mani non esisteva, i carrelli escono dalle attrezzature dove erano nascosti, carta e dispenser si uniscono.</p>
+    <p>Chi ha comprato una macchina Socaf trova i prodotti adatti direttamente nella pagina della sua macchina, senza passare da qui. Chi arriva da Google cercando i prodotti entra dalla pagina che le raccoglie. Due pubblici diversi, due percorsi, un catalogo solo.</p>
+  </div>
+
+  <div class="note">
+    <h3>L'usato</h3>
+    <p>Le cinque pagine dell'usato esistono già al primo livello e sono tra le più forti del sito: <strong>405 clic in tre mesi</strong>, il 4,9% del traffico, con idropulitrici usate in ottava posizione su Google e lavapavimenti usate in decima. Restano dove sono, con gli indirizzi che hanno oggi.</p>
+    <p>Sopra di loro nasce una pagina d'ingresso che spiega come funziona la formula: garanzia, revisione, disponibilità, supervalutazione della macchina vecchia. È il ruolo che oggi ha una pagina dentro Servizi, spostato al livello a cui le persone arrivano davvero.</p>
+    <p>La struttura è la stessa del noleggio — una pagina che spiega la formula, sotto le pagine di famiglia che intercettano chi cerca già una macchina precisa — ma con una differenza importante: <strong>qui le pagine di famiglia non vanno create, esistono e si posizionano già.</strong> Tenendo gli indirizzi attuali non serve nessun reindirizzamento sulle due pagine migliori del gruppo.</p>
+    <p>Aspiratori usati e altri macchinari usati valgono 9 clic in tutto, ma restano: non costano nulla da mantenere e completano l'elenco per chi arriva dalla pagina d'ingresso.</p>
+    <p>Le singole schede della macchina usata (24 pagine, circa 89 clic complessivi) non sopravvivono: il magazzino cambia continuamente e una scheda per unità è ingestibile. Chi ci arriva viene portato alla pagina della famiglia corrispondente.</p>
+  </div>
+
+  <div class="note">
+    <h3>I servizi</h3>
+    <p>Dai servizi escono il noleggio e l'usato, che diventano due sezioni a sé. Restano i tre servizi legati alla macchina già acquistata — pronto intervento, consulenza tecnica, soluzioni finanziarie — più la supervalutazione, che è il rovescio dell'usato: chi vende la macchina vecchia e chi ne compra una usata sono le due facce della stessa formula, e le due pagine si rimandano tra loro.</p>
+    <p>Noleggio e usato al primo livello non si fanno concorrenza su Google: chi cerca "idropulitrice usata" e chi cerca "noleggio idropulitrice" sono due persone con due esigenze diverse. Se Socaf vuole dare più evidenza al noleggio, che è un ricavo ricorrente, quella scelta si fa nel menu — dove le due voci possono avere peso diverso — non negli indirizzi.</p>
+  </div>
+
+  <div class="note">
+    <h3>Gli approfondimenti</h3>
+    <p>Gli articoli già pubblicati producono <strong>830 clic in tre mesi, il 10% del sito</strong>: quanto un'intera categoria di macchine. Non vanno rifatti e non vanno spostati. <strong>Nel menu la sezione si chiama Approfondimenti</strong>, ma l'indirizzo resta <code>/news/</code> e nessuno dei 184 indirizzi cambia.</p>
+    <p>La ragione è concreta. Cambiare anche l'indirizzo significherebbe 184 reindirizzamenti, e le <strong>due citazioni più autorevoli che Socaf possiede da altri siti puntano proprio a due articoli</strong>: un grande portale estero e un sito del settore pulizie. Sono i collegamenti più preziosi e più fragili del sito. In cambio non si guadagnerebbe una posizione: il beneficio del riordino viene dai collegamenti, non da come è scritto l'indirizzo.</p>
+    <p>Quello che cambia è come gli articoli si agganciano al resto. Su ogni articolo si indicano a mano <strong>le macchine e i settori di cui parla</strong>, scegliendoli da un elenco. Il collegamento vale automaticamente nei due sensi: se un articolo su come scegliere una lavapavimenti indica tre modelli, quelle tre schede prodotto mostrano da sole l'articolo, senza doverlo ripetere dall'altra parte.</p>
+    <p>Non servono categorie né etichette: creerebbero pagine di raccolta nuove da governare senza aggiungere nulla. Un'etichetta dice che l'articolo parla di lavapavimenti; il collegamento dice <em>a quale</em> lavapavimenti si riferisce, ed è quello che serve. I settori invece non richiedono nessun lavoro in più: l'articolo eredita il settore dalle macchine che indica.</p>
+    <p>Il risultato: 184 articoli che oggi vivono isolati diventano altrettante porte d'ingresso al catalogo, e 119 schede prodotto si arricchiscono di contenuto che esiste già — senza scrivere una riga nuova e senza toccare un indirizzo.</p>
+  </div>
+
+  <div class="note open">
+    <h3>Da mettere in conto · il lavoro di collegamento</h3>
+    <p>I collegamenti si assegnano a mano, articolo per articolo. Su 184 articoli è lavoro redazionale che va pianificato e assegnato: la proposta è <strong>partire dai venti articoli che generano più traffico</strong> e completare il resto gradualmente, invece di bloccare il lancio in attesa che siano tutti collegati.</p>
+    <p>Un caso richiede attenzione subito: gli <strong>otto articoli che parlano di noleggio</strong> si sovrappongono alla nuova sezione noleggio. Vanno collegati a quelle pagine al lancio, altrimenti restano a contendersi le stesse ricerche.</p>
+  </div>
+
+  <div class="note">
+    <h3>L'azienda e le sedi</h3>
+    <p>Le pagine istituzionali oggi sono sparse al primo livello e due coppie si sovrappongono: Chi siamo e Aziende raccontano entrambe il gruppo, Lavora con noi e Careers si dividono le posizioni aperte e il racconto dell'ambiente di lavoro. Si uniscono solo quelle: le altre restano pagine a sé, raccolte in una sezione comune.</p>
+    <p>Sotto Referenze restano le sette schede cliente già pubblicate (XPO Logistics, Cisalfa, Amica Chips, Il Gigante e le altre): cambiano indirizzo insieme alla pagina che le raccoglie. Sono anche il materiale da cui attingono le pagine settore.</p>
+    <p>Cinque schede sede, una per punto fisico, gestite come contenuti a sé con indirizzo, telefono, orari e referenti in campi separati. Gli stessi campi alimentano il testo della pagina e le informazioni che i motori di ricerca leggono, così il recapito non può divergere tra le due. Non entrano nel menu: si raggiungono dalla pagina Contatti e dal piè di pagina.</p>
+    <p><strong><code>/sedi/</code> non è una pagina.</strong> È solo la parte iniziale dell'indirizzo delle cinque schede: non esiste una pagina che le raccoglie, e chi apre <code>/sedi/</code> non trova nulla. Da non creare in fase di sviluppo.</p>
+  </div>
+
+  <div class="note">
+    <h3>I collegamenti tra le sezioni</h3>
+    <p>Oggi le sezioni del sito sono compartimenti stagni: le pagine settore non portano a nessuna macchina, le schede macchina non dicono in quali ambienti si usano, i 184 articoli non rimandano ai prodotti di cui parlano, e chi compra una macchina non scopre da lì i consumabili che le servono.</p>
+    <p>Il sito nuovo li collega nei due sensi. Il beneficio è doppio: chi naviga trova la pagina successiva senza tornare al menu, e Google capisce che quelle pagine parlano dello stesso argomento — che è il modo in cui una sezione forte aiuta a posizionare quelle vicine.</p>
+  </div>
+
+  <div class="note">
+    <h3>I due marchi del gruppo</h3>
+    <p>Riscaldamento industriale e raffrescamento evaporativo <strong>non diventano pagine di socaf.it</strong>. Sono prodotti che il sito non vende: una pagina dedicata non pu&ograve; concludere nulla, e finirebbe per contendere le stesse ricerche ai siti di Caldofacile e Aquarial invece di aiutarli.</p>
+    <p>I due marchi si raggiungono da una sezione in home e dal pi&egrave; di pagina, con collegamento diretto ai loro siti. Stesso messaggio, nessuna pagina da scrivere e da mantenere.</p>
+  </div>
+</div>
+
+
+</div>
+</body>
+</html>

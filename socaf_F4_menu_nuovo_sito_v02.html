@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Socaf — Il menu del nuovo sito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14161a; --panel:#1b1e24; --panel2:#20242b; --line:#2a2f38;
+    --text:#e8eaed; --muted:#8b9199; --dim:#646b75;
+    --new:#4db6a0; --warn:#d9a441;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:60px 40px 100px}
+
+  header{margin-bottom:40px}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--muted);margin-bottom:16px}
+  h1{font-family:Archivo,sans-serif;font-weight:700;font-size:40px;line-height:1.1;margin:0 0 12px;letter-spacing:-.02em}
+  .lede{font-size:16.5px;color:var(--muted);max-width:72ch;margin:0}
+
+  .disclaimer{border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:0 4px 4px 0;padding:18px 22px;font-size:14px;color:var(--muted);max-width:78ch;margin:28px 0 0}
+  .disclaimer strong{color:var(--text);font-weight:600}
+
+  h2{font-family:Archivo,sans-serif;font-weight:600;font-size:21px;margin:52px 0 8px;letter-spacing:-.01em}
+  .h2note{font-size:14px;color:var(--muted);margin:0 0 22px;max-width:82ch}
+
+  /* barra menu */
+  .bar{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:0;overflow:hidden;margin-top:8px}
+  .toprow{display:flex;align-items:center;gap:20px;padding:10px 22px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--dim);flex-wrap:wrap}
+  .toprow .sp{margin-left:auto}
+  .mainrow{display:flex;align-items:center;gap:6px;padding:16px 18px;flex-wrap:wrap}
+  .logo{font-family:Archivo,sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;margin-right:16px}
+  .item{font-size:14.5px;padding:9px 14px;border-radius:4px;white-space:nowrap;position:relative}
+  .item.drop{color:var(--text)}
+  .item.drop::after{content:" ▾";color:var(--dim);font-size:11px}
+  .item.flat{color:var(--text);border-bottom:2px solid var(--new)}
+  .cta{margin-left:auto;font-family:Archivo,sans-serif;font-weight:600;font-size:16px;padding:10px 18px;border:1px solid var(--new);color:var(--new);border-radius:4px;white-space:nowrap;text-decoration:none;letter-spacing:.01em}
+
+  .legendrow{display:flex;gap:28px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--muted)}
+  .legendrow .k{display:flex;align-items:center;gap:9px}
+  .chip{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;border-radius:3px;padding:2px 7px}
+  .chip.a{border:1px solid var(--dim);color:var(--dim)}
+  .chip.b{border:1px solid var(--new);color:var(--new)}
+
+  /* tendine */
+  .drops{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:22px}
+  .dd{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:20px 22px}
+  .dd h3{font-family:Archivo,sans-serif;font-weight:600;font-size:16px;margin:0 0 3px}
+  .dd .st{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim);margin-bottom:14px}
+  .dd ul{list-style:none;margin:0;padding:0}
+  .dd li{font-size:14px;color:var(--muted);padding:6px 0;border-top:1px solid var(--line)}
+  .dd li:first-child{border-top:none}
+  .dd li.newitem{color:var(--new)}
+
+  /* voci semplici */
+  .flats{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:22px}
+  .fl{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--new);border-radius:0 5px 5px 0;padding:20px 22px}
+  .fl h3{font-family:Archivo,sans-serif;font-weight:600;font-size:16px;margin:0 0 8px}
+  .fl p{font-size:14px;color:var(--muted);margin:0}
+
+  /* regola */
+  .rule{margin-top:26px;border:1px dashed var(--line);border-radius:5px;padding:24px 26px}
+  .rule .lab{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--new);margin-bottom:14px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:10.5px;letter-spacing:.09em;color:var(--muted)}
+  td.q{color:var(--muted);font-size:13.5px}
+
+  .mobile{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:22px 26px}
+  .mobile h3{font-family:Archivo,sans-serif;font-weight:600;font-size:16px;margin:0 0 10px}
+  .mobile p{font-size:14px;color:var(--muted);margin:0 0 8px}
+  .mobile p:last-child{margin:0}
+
+  footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-size:12.5px;color:var(--dim)}
+
+  @media (max-width:880px){
+    .wrap{padding:40px 22px 70px}
+    h1{font-size:30px}
+    .drops,.flats{grid-template-columns:1fr}
+    .cta{margin-left:0}
+  }
+  @media print{body{background:#fff;color:#111}.dd,.fl,.rule{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">GRUPPO SOCAF — FASE 4 — NUOVA ARCHITETTURA</div>
+  <h1>Il menu del nuovo sito</h1>
+  <p class="lede">Sei voci più il numero verde. Quattro si aprono a tendina, due si cliccano e basta — e la differenza non è estetica: dipende da cosa cercano le persone su Google.</p>
+
+  <div class="disclaimer">
+    <strong>Il menu non è l'alberatura.</strong> L'alberatura descrive come sono organizzate tutte le pagine del sito e i loro indirizzi. Il menu mostra solo le strade principali: diverse pagine importanti si raggiungeranno da dentro le altre pagine — dalla scheda di una macchina, da una pagina settore, dal piè di pagina — e non dal menu.
+  </div>
+</header>
+
+<h2>La barra di navigazione</h2>
+<p class="h2note">Sei voci, e in fondo il numero verde: è l'azione che vogliamo far compiere, e chi compra macchine industriali preferisce chiamare piuttosto che compilare un modulo. In alto una riga di servizio con le scorciatoie.</p>
+
+<div class="bar">
+  <div class="toprow">
+    <span>Pronto intervento</span>
+    <span>Approfondimenti</span>
+    <span class="sp">Cerca</span>
+  </div>
+  <div class="mainrow">
+    <span class="logo">SOCAF</span>
+    <span class="item drop">Macchine</span>
+    <span class="item flat">Noleggio</span>
+    <span class="item drop">Settori</span>
+    <span class="item flat">Prodotti per la pulizia</span>
+    <span class="item drop">Servizi</span>
+    <span class="item drop">Azienda</span>
+    <a class="cta" href="tel:800480110">800 480110</a>
+  </div>
+</div>
+
+<div class="legendrow">
+  <div class="k"><span class="chip a">▾ tendina</span><span>si apre e mostra le voci sotto</span></div>
+  <div class="k"><span class="chip b">voce semplice</span><span>si clicca e porta a una pagina</span></div>
+</div>
+
+<h2>Le quattro tendine</h2>
+<p class="h2note">Si aprono e mostrano le voci al livello sotto. Le sottocategorie non entrano nel menu: restano sulla pagina di famiglia, che è il momento in cui quella scelta ha senso.</p>
+
+<div class="drops">
+  <div class="dd">
+    <h3>Macchine</h3>
+    <div class="st">nessuna pagina propria</div>
+    <ul>
+      <li>Lavapavimenti</li>
+      <li>Spazzatrici</li>
+      <li>Idropulitrici</li>
+      <li>Aspiratori</li>
+      <li>Robot</li>
+      <li>Altri macchinari</li>
+    </ul>
+  </div>
+  <div class="dd">
+    <h3>Settori</h3>
+    <div class="st">nessuna pagina nel menu</div>
+    <ul>
+      <li>Industria</li>
+      <li>Imprese di pulizia</li>
+      <li>Ho.Re.Ca.</li>
+      <li>Retail</li>
+      <li>Logistica</li>
+      <li class="newitem">Officine e metalmeccanica</li>
+      <li class="newitem">Edilizia e cantieri</li>
+    </ul>
+  </div>
+  <div class="dd">
+    <h3>Servizi</h3>
+    <div class="st">nessuna pagina propria</div>
+    <ul>
+      <li>Pronto intervento</li>
+      <li>Consulenza tecnica</li>
+      <li>Soluzioni finanziarie</li>
+      <li>Usato</li>
+      <li>Supervalutazione dell'usato</li>
+    </ul>
+  </div>
+</div>
+
+<div class="drops" style="grid-template-columns:1fr 2fr">
+  <div class="dd">
+    <h3>Azienda</h3>
+    <div class="st">nessuna pagina propria</div>
+    <ul>
+      <li>Chi siamo</li>
+      <li>Innovazione tecnologica</li>
+      <li>Il nostro impegno</li>
+      <li>Referenze</li>
+      <li>Lavora con noi</li>
+      <li>Contatti</li>
+    </ul>
+  </div>
+  <div class="dd" style="border-style:dashed">
+    <h3>Perché le sottocategorie non sono nel menu</h3>
+    <div class="st">&nbsp;</div>
+    <p style="font-size:14px;color:var(--muted);margin:0 0 10px">Le sei famiglie di macchine hanno 28 sottocategorie in tutto. Metterle nel menu significherebbe un pannello con quasi quaranta voci: chi arriva non sceglie, si blocca.</p>
+    <p style="font-size:14px;color:var(--muted);margin:0">La scelta tra lavapavimenti uomo a bordo, uomo a terra, piccole, i-mop e combinate ha senso quando si è già deciso che serve una lavapavimenti. Quel momento è la pagina di famiglia, non il menu.</p>
+  </div>
+</div>
+
+<h2>Le due voci semplici</h2>
+<p class="h2note">Non si aprono: si cliccano e portano a una pagina. Sono anche le due su cui vogliamo che il traffico atterri.</p>
+
+<div class="flats">
+  <div class="fl">
+    <h3>Noleggio</h3>
+    <p>Una voce che non si apre si legge come una destinazione, non come una categoria. È l'offerta su cui Socaf vuole spingere e deve essere l'unica cosa nel menu che sembra un'offerta. Le quattro famiglie a noleggio stanno dentro la pagina, come primo blocco.</p>
+  </div>
+  <div class="fl">
+    <h3>Prodotti per la pulizia</h3>
+    <p>Ha tredici categorie sotto, ma la pagina che le raccoglie è quella che risponde a chi cerca "prodotti per la pulizia professionale" senza sapere ancora quale categoria gli serve: circa 4.500 ricerche al mese. Se la tendina la scavalcasse, quella pagina non verrebbe mai raggiunta dal menu.</p>
+  </div>
+</div>
+
+<div class="rule">
+  <div class="lab">LA REGOLA CHE DECIDE TENDINA O NON TENDINA</div>
+  <p style="font-size:14.5px;color:var(--text);margin:0 0 16px;max-width:76ch"><strong>La tendina si apre solo dove la pagina che raccoglie non ha ricerche proprie.</strong> Dove invece le ha, la voce si clicca e porta lì.</p>
+  <table>
+    <thead><tr><th>VOCE</th><th>LA GENTE CERCA QUESTO?</th><th>COMPORTAMENTO</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Macchine</strong></td><td class="q">No — nessuno cerca "macchine" in astratto, si cerca la lavapavimenti</td><td>Tendina, nessuna pagina</td></tr>
+      <tr><td><strong>Settori</strong></td><td class="q">No — chi cerca sa già se ha un capannone o un hotel</td><td>Tendina, nessuna pagina nel menu</td></tr>
+      <tr><td><strong>Servizi</strong></td><td class="q">No — si cerca l'assistenza o il finanziamento, non "servizi"</td><td>Tendina, nessuna pagina</td></tr>
+      <tr><td><strong>Azienda</strong></td><td class="q">No — si cerca Socaf per nome, e si arriva in home</td><td>Tendina, nessuna pagina</td></tr>
+      <tr><td><strong>Noleggio</strong></td><td class="q">Sì — circa 460 ricerche al mese sulle formule generiche</td><td>Voce semplice, porta alla pagina</td></tr>
+      <tr><td><strong>Prodotti per la pulizia</strong></td><td class="q">Sì — circa 4.500 ricerche al mese</td><td>Voce semplice, porta alla pagina</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Quello che non sta nel menu</h2>
+<p class="h2note">Non tutto quello che conta deve essere nel menu. Alcune pagine si raggiungono meglio da dove servono.</p>
+
+<div class="flats">
+  <div class="fl" style="border-left-color:var(--dim)">
+    <h3>Gli approfondimenti</h3>
+    <p>Producono il 10% dei clic del sito, ma arrivano quasi tutti da Google, non dal menu. Stanno nella riga di servizio in alto e dentro le pagine settore e famiglia, dove sono pertinenti.</p>
+  </div>
+  <div class="fl" style="border-left-color:var(--dim)">
+    <h3>La pagina che raccoglie i settori</h3>
+    <p>Esiste ma non si raggiunge né dal menu né dalla home: in home ci sono i sette settori, che portano direttamente alle loro pagine. Serve da atterraggio per chi arriva da fuori e da destinazione delle briciole di pane delle sette pagine settore.</p>
+  </div>
+  <div class="fl" style="border-left-color:var(--dim)">
+    <h3>Le sottocategorie e le schede macchina</h3>
+    <p>Si raggiungono dalla pagina di famiglia, dalle pagine settore e dal noleggio. Sono 147 pagine: nessun menu può contenerle.</p>
+  </div>
+  <div class="fl" style="border-left-color:var(--dim)">
+    <h3>Riscaldamento e raffrescamento</h3>
+    <p>Non sono pagine di socaf.it. Caldofacile e Aquarial si raggiungono con un collegamento diretto ai loro siti, dal piè di pagina e da una sezione in home: non sono il mestiere di Socaf.</p>
+  </div>
+</div>
+
+<div class="mobile">
+  <h3>Su telefono</h3>
+  <p>Il menu si apre a fisarmonica. Noleggio e il numero verde restano fissi in alto: da telefono, chiamare è a un tocco di distanza e va sfruttato.</p>
+  <p>Dentro Macchine, le sei famiglie. Dentro Settori, i sette ambienti. Nessun pannello largo: su schermo stretto un elenco lungo si scorre, un pannello a colonne no.</p>
+</div>
+
+<footer>
+  Gruppo Socaf — Fase 4, nuova architettura del sito · documento di lavoro, versione 01<br>
+  Le voci e le tendine riflettono l'alberatura del sito nuovo. Volumi di ricerca: media trimestrale.
+</footer>
+
+</div>
+</body>
+</html>
