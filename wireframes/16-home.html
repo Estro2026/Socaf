@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D16 · Home — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D16" data-name="Home" data-url="/ · 1 pagina · esattamente 8 blocchi"></div>
+<header data-header></header>
+
+<div class="wrap">
+
+  <!-- Niente breadcrumbs in home (BM §C) -->
+
+  <div class="row">
+    <section class="block" style="padding-top:0">
+      <span class="block-id">BLOCCO 1 · Apertura con ricerca</span>
+
+      <div class="hero">
+        <div class="hero-inner">
+          <div>
+            <p class="kicker">Soluzioni per il cleaning</p>
+            <h1>Macchine e prodotti per la <em style="font-style:normal;color:var(--red)">pulizia professionale</em></h1>
+            <p class="lede">Da 40 anni al fianco di industria, imprese di pulizia, logistica e Ho.Re.Ca.
+              Cerca la macchina che ti serve, oppure chiamaci: ti risponde un consulente.</p>
+
+            <form class="search" data-search role="search" style="margin-top:30px">
+              <input type="search" placeholder="Cerca una macchina, un prodotto, un settore…" aria-label="Cerca nel sito">
+              <button type="submit">Cerca</button>
+            </form>
+
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="tel:800480110">Chiama 800 480110</a>
+              <a class="btn btn-ghost" href="04-noleggio.html" data-url="/noleggio/">Scopri il noleggio</a>
+            </div>
+          </div>
+
+          <div class="hero-figure">Immagine di apertura — « Human style » da Visual Identity</div>
+        </div>
+
+        <div class="hero-stats">
+          <div><b>119</b><span>macchine a catalogo</span></div>
+          <div><b>6</b><span>famiglie</span></div>
+          <div><b>5</b><span>sedi</span></div>
+          <div><b>40</b><span>anni di attività</span></div>
+        </div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 114 — Apertura con ricerca</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagina statica impostata come home</dd>
+        <dt>Ricerca</dt><dd>Form di ricerca nativo WordPress → <code>/?s=</code>, template D17</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Perché la ricerca in apertura</dt><dd>Il sito ha 147 pagine di catalogo e nessun filtro:
+          la ricerca è il percorso rapido per chi sa già cosa cerca. È l'unica alternativa alla navigazione
+          per famiglie.</dd>
+        <dt>Numero verde</dt><dd>Presente sia nell'header sia qui. È la CTA principale del sito.</dd>
+        <dt>Niente</dt><dd>Nessuno slider, nessun carosello, nessun video di sfondo:
+          costano QA e performance e non sono nel brief.</dd>
+      </dl>
+      <div class="est">Stima 2 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 2 · Le sei famiglie</span>
+      <h2>Le macchine</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Lavapavimenti</span>
+            <p class="card-desc">Lavasciuga per ogni superficie: piccole, uomo a terra, uomo a bordo, combinate, i-mop.</p>
+            <span class="card-meta">24 macchine</span>
+            <a class="card-link" href="03-famiglia.html" data-url="/lavapavimenti/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Spazzatrici</span>
+            <p class="card-desc">Uomo a terra, uomo a bordo e stradali.</p>
+            <span class="card-meta">19 macchine</span>
+            <a class="card-link" href="03-famiglia.html" data-url="/spazzatrici/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Idropulitrici</span>
+            <p class="card-desc">Acqua fredda e calda, alte prestazioni, impianti fissi, autonome.</p>
+            <span class="card-meta">17 macchine</span>
+            <a class="card-link" href="03-famiglia.html" data-url="/idropulitrici/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Aspiratori</span>
+            <p class="card-desc">Industriali, professionali, ATEX, per olio e trucioli, elettroventilatori.</p>
+            <span class="card-meta">25 macchine</span>
+            <a class="card-link" href="03-famiglia.html" data-url="/aspiratori/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Robot</span>
+            <p class="card-desc">Robot lavapavimenti e robot spazzatrici.</p>
+            <span class="card-meta">4 macchine</span>
+            <a class="card-link" href="03-famiglia.html" data-url="/robot/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Altri macchinari</span>
+            <p class="card-desc">Vasche lavapezzi, generatori di vapore, monospazzole, lavatappezzeria e altro.</p>
+            <span class="card-meta">30 macchine</span>
+            <a class="card-link" href="03-famiglia.html" data-url="/altri-macchinari/">Vedi</a></div></article>
+      </div>
+      <p class="small" style="margin-top:14px"><b>Non esiste una pagina che contiene le sei famiglie.</b>
+        Nel menu sono raccolte sotto la voce Macchine, ma quella voce non è cliccabile: non ci sono ricerche
+        che giustifichino una pagina in più prima di arrivare alla macchina.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 115 — Le sei famiglie</div>
+      <dl>
+        <dt>Origine</dt><dd>Termini di primo livello della tassonomia <code>famiglia</code></dd>
+        <dt>Query</dt><dd>Listing Grid su termini, <code>parent = 0</code>, ordine manuale</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Riuso</dt><dd>Stesso elenco della tendina Macchine, del blocco 12 di D3 e dello stato vuoto di D17.
+          <b>Una sola sorgente, quattro usi.</b></dd>
+        <dt>Link</dt><dd>Alle <b>pagine</b> famiglia</dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 3 · Noleggio e usato — <span class="openpoint">OP-07</span></span>
+      <h2>Non serve per forza comprarla</h2>
+      <p class="lede" style="margin-bottom:28px">Tre modi di avere la macchina che ti serve:
+        nuova, a noleggio o usata e garantita.</p>
+
+      <div class="formule">
+        <a class="formula formula-nol" href="04-noleggio.html" data-url="/noleggio/">
+          <span class="formula-art ph ph-volume"></span>
+          <span class="formula-body">
+            <span class="kicker">Formula · la più scelta</span>
+            <span class="formula-h">Noleggio</span>
+            <span class="formula-p">Lavapavimenti, idropulitrici e spazzatrici per il tempo che ti serve,
+              con assistenza e manutenzione comprese. Ritiro e consegna da tutte e cinque le sedi.</span>
+            <span class="formula-go">Scopri il noleggio</span>
+          </span>
+        </a>
+        <a class="formula formula-usa" href="06-usato.html" data-url="/usato/">
+          <span class="formula-art ph ph-pattern"></span>
+          <span class="formula-body">
+            <span class="kicker">Formula</span>
+            <span class="formula-h">Usato garantito</span>
+            <span class="formula-p">Macchine ricondizionate in ogni parte e garantite da 3 a 12 mesi,
+              con supervalutazione della macchina che hai già.</span>
+            <span class="formula-go">Scopri l'usato</span>
+          </span>
+        </a>
+      </div>
+
+      <p class="small"><span class="openpoint">OP-07</span>
+        <b>Due decisioni aperte</b>: il peso relativo di noleggio e usato (qui il noleggio è più largo)
+        e se il blocco vada <b>prima</b> o <b>dopo</b> le sei famiglie (qui dopo).
+        Entrambe le alternative valgono circa un'ora di lavoro.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 116 — Noleggio e usato in home</div>
+      <dl>
+        <dt>Origine</dt><dd>Blocco statico</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Open point</dt><dd><span class="openpoint">OP-07</span> Peso e posizione.
+          L'ipotesi disegnata dà più peso al noleggio: è coerente con F4, dove il noleggio è
+          « l'unica cosa nel menu che sembra un'offerta », ed è un ricavo ricorrente.</dd>
+        <dt>Link</dt><dd><code>/noleggio/</code> · <code>/usato/</code></dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · I settori</span>
+      <h2>Per il tuo settore</h2>
+      <div class="chips">
+        <a class="chip" href="09-settore.html" data-url="/settori/industria/">Industria</a>
+        <a class="chip" href="09-settore.html" data-url="/settori/imprese-di-pulizia/">Imprese di pulizia</a>
+        <a class="chip" href="09-settore.html" data-url="/settori/horeca/">Ho.Re.Ca.</a>
+        <a class="chip" href="09-settore.html" data-url="/settori/retail/">Retail</a>
+        <a class="chip" href="09-settore.html" data-url="/settori/logistica/">Logistica</a>
+        <a class="chip" href="09-settore.html" data-url="/settori/officine-metalmeccanica/">Officine e metalmeccanica</a>
+        <a class="chip" href="09-settore.html" data-url="/settori/edilizia-cantieri/">Edilizia e cantieri</a>
+      </div>
+      <p class="small" style="margin-top:14px">I sette settori portano <b>direttamente</b> alle loro pagine.
+        La pagina che li raccoglie (<code>/settori/</code>) non si raggiunge dalla home.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 117 — I settori in home</div>
+      <dl>
+        <dt>Query</dt><dd>Pagine figlie di <code>/settori/</code></dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Regola</dt><dd><b>Nessun link a <code>/settori/</code></b> né dalla home né dal menu.
+          Quella pagina serve da atterraggio esterno e da destinazione dei breadcrumbs.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Prodotti per la pulizia</span>
+      <div class="grid grid-2" style="gap:26px;align-items:center">
+        <div>
+          <h2>Prodotti per la pulizia professionale</h2>
+          <p>Detergenti, carta, attrezzature, panni, carrelli e dispositivi di protezione:
+            tredici categorie di prodotti professionali, con consulenza sulla scelta.</p>
+          <a class="btn btn-ghost" href="10-prodotti-pulizia.html" data-url="/prodotti-per-la-pulizia/">Vedi i prodotti</a>
+        </div>
+        <div class="ph ph-wide">Immagine prodotti</div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 118 — Prodotti in home</div>
+      <dl>
+        <dt>Origine</dt><dd>Blocco statico, un solo link</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Nota</dt><dd>Un blocco solo, non le 13 categorie: la pagina hub ha domanda propria
+          (~4.500 ricerche/mese) ed è lei la destinazione.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Aquarial e Caldofacile</span>
+      <h2>I marchi del gruppo</h2>
+      <div class="grid grid-2">
+        <article class="card"><div class="card-media ph ph-wide">Logo Aquarial</div>
+          <div class="card-body"><span class="card-name">Aquarial</span>
+            <p class="card-desc">Raffrescamento evaporativo per ambienti industriali.</p>
+            <span class="card-meta">Sito dedicato ↗</span>
+            <a class="card-link" href="https://www.aquarial.it/" target="_blank" rel="noopener">Vai al sito</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo Caldofacile</div>
+          <div class="card-body"><span class="card-name">Caldofacile</span>
+            <p class="card-desc">Riscaldamento industriale e generatori d'aria calda.</p>
+            <span class="card-meta">Sito dedicato ↗</span>
+            <a class="card-link" href="https://www.caldofacile.it/" target="_blank" rel="noopener">Vai al sito</a></div></article>
+      </div>
+      <p class="small" style="margin-top:14px"><b>Portano direttamente ai siti dei due marchi, in una scheda nuova.</b>
+        Le due pagine ponte di socaf.it (<code>/raffrescamento/</code> e <code>/riscaldamento/</code>)
+        vengono eliminate.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 119 — Aquarial e Caldofacile</div>
+      <dl>
+        <dt>Origine</dt><dd>Blocco statico, due link esterni</dd>
+        <dt>Link</dt><dd>Siti dei due marchi, <code>target="_blank" rel="noopener"</code></dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Migrazione</dt><dd><code>/raffrescamento/</code> e <code>/riscaldamento/</code> vanno
+          <b>rimosse</b>. <span class="taskflag t-client">Client task</span>: decidere se rediretarle
+          alla home o restituire 410. Un redirect verso un sito esterno non è consigliabile.</dd>
+        <dt>Perché</dt><dd>Sono prodotti che questo sito non vende: una pagina dedicata contenderebbe
+          le stesse ricerche ai siti dei due marchi invece di aiutarli.</dd>
+        <dt>URL da verificare</dt><dd><span class="openpoint">OPEN</span> I due indirizzi vanno confermati da Socaf.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Le cinque sedi</span>
+      <h2>Cinque sedi</h2>
+      <div data-sedi=""></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 120 — Sedi in home</div>
+      <dl>
+        <dt>Componente</dt><dd>Blocco sedi globale, identico a D4, D5, D6, D7, D15</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 8 · Richiesta informazioni</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi maggiori informazioni</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente entro 48 ore.</p>
+        <div class="fields">
+          <div class="field"><label for="e-nome">Nome e cognome *</label><input id="e-nome" required></div>
+          <div class="field"><label for="e-az">Azienda *</label><input id="e-az" required></div>
+          <div class="field"><label for="e-mail">Email *</label><input id="e-mail" type="email" required></div>
+          <div class="field"><label for="e-tel">Telefono</label><input id="e-tel" type="tel"></div>
+          <div class="field full"><label for="e-msg">Messaggio</label><textarea id="e-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|Home"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 121 — Form in home</div>
+      <dl><dt>Componente</dt><dd>Modello globale</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row wf-doc">
+    <section class="block">
+      <span class="block-id">VERIFICA · Cosa NON sta in home</span>
+      <div class="notice">
+        <h3 style="margin-bottom:10px">Otto blocchi, non nove</h3>
+        <p><b>Servizi, referenze e articoli recenti restano fuori dalla home.</b> Si raggiungono dal menu
+          e dal piè di pagina. Non sono stati aggiunti « perché stanno bene ».</p>
+        <p class="mb0 small">Fuori anche: prezzi, carrello, comparatore, filtri, newsletter pop-up,
+          slider di loghi clienti, contatore di anni di esperienza, testimonianze. Nessuno di questi
+          è previsto dal brief.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 122 — Perimetro della home</div>
+      <dl>
+        <dt>Regola</dt><dd>La home contiene <b>esattamente</b> gli 8 blocchi del brief. Ogni blocco in più
+          è tempo di sviluppo, QA responsive e manutenzione che il budget non prevede.</dd>
+        <dt>Performance</dt><dd>Home senza slider e senza mappa: è la pagina più visitata e deve essere
+          la più leggera. Le immagini delle 6 famiglie in <code>loading="lazy"</code> tranne le prime tre.</dd>
+      </dl>
+      <div class="est">—</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D15 · Contatti — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D15" data-name="Contatti" data-url="/contatti/ · 1 pagina · diventa l'elenco delle sedi"></div>
+<header data-header="Azienda"></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <span aria-current="page">Contatti</span>
+  </nav>
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">BLOCCHI 1–3 · Breadcrumbs, titolo, recapiti principali</span>
+      <h1>Contatti</h1>
+      <p class="lede">Cinque sedi tra Lombardia, Veneto e Friuli. Il modo più veloce per parlare con un consulente
+        è il numero verde.</p>
+
+      <div class="grid grid-2" style="gap:26px;align-items:start;margin-top:24px">
+        <div class="promo" style="border-left-color:var(--red)">
+          <p class="kicker" style="margin-bottom:6px">Sede principale</p>
+          <h3>Socaf S.p.A. — Osio Sotto (BG)</h3>
+          <address style="font-style:normal;color:var(--grey);margin-bottom:12px">
+            Via Trieste, 14 — 24046 Osio Sotto (BG)
+          </address>
+          <p style="margin:0 0 14px">
+            <a href="tel:+390354876054">+39 035 4876054</a> · <a href="mailto:info@socaf.it">info@socaf.it</a>
+          </p>
+          <a class="btn btn-primary" href="tel:800480110">Numero verde 800 480110</a>
+        </div>
+        <div class="notice">
+          <h4>Pronto intervento</h4>
+          <p class="small">Per un guasto su una macchina già in servizio.</p>
+          <a class="btn-link" href="18-pagine-restanti.html" data-url="/servizi/pronto-intervento/">Pronto intervento</a>
+          <div class="hr" style="margin:16px 0"></div>
+          <h4>Lavora con noi</h4>
+          <p class="small">Le posizioni aperte.</p>
+          <a class="btn-link" href="18-pagine-restanti.html" data-url="/azienda/lavora-con-noi/">Lavora con noi</a>
+        </div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 110 — Recapiti principali</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagina WordPress + campi della <b>sede di Osio Sotto</b> letti dinamicamente</dd>
+        <dt>Query</dt><dd>CPT <code>sede</code> dove <code>sede_principale = 1</code>, limite 1</dd>
+        <dt>Regola</dt><dd>Il recapito <b>non si riscrive a mano</b> qui: si legge dal CPT.
+          Se cambia il telefono di Osio Sotto, cambia in un posto solo e si aggiorna ovunque.</dd>
+        <dt>URL</dt><dd><code>/contatti/</code> — <b>resta com'è</b></dd>
+        <dt>Menu</dt><dd>Sta dentro la tendina <b>Azienda</b>, ultima voce.</dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · Le cinque sedi</span>
+      <h2>Le nostre sedi</h2>
+      <div data-sedi="Dati reali delle cinque sedi. Verona e Pordenone sono società del gruppo con ragione sociale propria."></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 111 — Le cinque sedi</div>
+      <dl>
+        <dt>Componente</dt><dd>Blocco sedi globale, identico a D4, D5, D6, D7, D16</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Attenzione</dt><dd>Tre sedi sono <b>Socaf S.p.A.</b>, una è <b>Bottoni S.r.l.</b> (Verona)
+          e una <b>Tecno Clean S.r.l.</b> (Pordenone), con email e domini propri.
+          Il campo <code>ragione_sociale</code> non è decorativo: serve per i dati strutturati
+          e per non attribuire a Socaf recapiti di altre società.</dd>
+        <dt>Link</dt><dd><code>/sedi/[sede]/</code> — <b>le schede sede si raggiungono da qui e dal piè di pagina</b>,
+          non dal menu.</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Mappa con tutte le sedi</span>
+      <h2>Dove siamo</h2>
+      <div class="ph ph-map" style="aspect-ratio:2/1">Mappa con i cinque marcatori — coordinate dai campi del CPT <code>sede</code></div>
+      <p class="small" style="margin-top:12px">Ogni marcatore porta alla scheda della sede.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 112 — Mappa multi-sede</div>
+      <dl>
+        <dt>Origine</dt><dd>Coordinate di tutti e 5 i post <code>sede</code></dd>
+        <dt>Implementazione</dt><dd>Widget Google Maps di Elementor con marcatori multipli, oppure
+          uno snippet che genera l'embed dalle coordinate. <b>Una mappa sola</b>, non cinque iframe.</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Cookie</dt><dd>Caricamento differito dietro il consenso, come su D14.</dd>
+        <dt>Link</dt><dd>Ogni marcatore → <code>/sedi/[sede]/</code></dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Form di contatto</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi maggiori informazioni</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente entro 48 ore.</p>
+        <div class="fields">
+          <div class="field"><label for="d-nome">Nome e cognome *</label><input id="d-nome" required></div>
+          <div class="field"><label for="d-az">Azienda *</label><input id="d-az" required></div>
+          <div class="field"><label for="d-mail">Email *</label><input id="d-mail" type="email" required></div>
+          <div class="field"><label for="d-tel">Telefono</label><input id="d-tel" type="tel"></div>
+          <div class="field full"><label for="d-msg">Messaggio</label><textarea id="d-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|Contatti"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento a che i miei dati personali vengano utilizzati in accordo con la privacy e cookie policy. *</label>
+          <label class="consent full"><input type="checkbox"> Acconsento all'uso dei miei dati personali per finalità di marketing diretto correlate ai servizi offerti.</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 113 — Form di contatto</div>
+      <dl>
+        <dt>Componente</dt><dd>Modello globale + <b>secondo consenso facoltativo</b> (marketing diretto),
+          già presente sul sito attuale. È l'unica pagina dove compaiono entrambi i consensi.</dd>
+        <dt>Attenzione</dt><dd>Il consenso marketing è <b>facoltativo</b> e separato: non può essere
+          precompilato né condizionare l'invio.</dd>
+        <dt>Implementazione</dt><dd>Elementor Pro Form, azione Email + eventuale integrazione CRM
+          (non prevista in questo perimetro).</dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D6 · Ingresso usato — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D6" data-name="Pagina d'ingresso dell'usato" data-url="/usato/ · 1 pagina nuova"></div>
+<header data-header="Servizi"></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <span aria-current="page">Usato</span>
+  </nav>
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">BLOCCHI 1–2 · Breadcrumbs e titolo</span>
+      <h1>Macchine per la pulizia usate e garantite</h1>
+      <p class="lede">Socaf rende disponibili le sue macchine usate per incontrare le esigenze del mercato.
+        Una macchina per le pulizie usata ma perfettamente funzionante e garantita è una soluzione affidabile
+        per moltissime esigenze. Il periodo di garanzia va dai 3 fino ai 12 mesi.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 51 — Ingresso usato</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagina WordPress nuova, al primo livello</dd>
+        <dt>URL</dt><dd><code>/usato/</code> — <b>nuovo</b>. Redirect da <code>/servizi/usato/</code>.
+          Le 5 pagine figlie esistono già e <b>non cambiano indirizzo</b>.</dd>
+        <dt>Menu</dt><dd>Sta dentro la tendina <b>Servizi</b> (voce « Usato »), non al primo livello del menu.
+          Il livello superiore ce l'ha nell'alberatura, non nella barra.</dd>
+        <dt>SEO</dt><dd>Intent commerciale. Le 5 pagine figlie valgono 405 clic in 3 mesi, il 4,9% del traffico,
+          con idropulitrici usate in 8ª posizione e lavapavimenti usate in 10ª.
+          <b>Questa pagina non deve cannibalizzarle</b>: parla della <i>formula</i>
+          (garanzia, revisione, supervalutazione), non delle macchine.</dd>
+        <dt>Contenuto</dt><dd>Testo di partenza reale da <code>/servizi/usato/</code></dd>
+      </dl>
+      <div class="est">Stima 2 h (dentro le 10 h di D6+D7)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 3 · Come funziona l'usato Socaf</span>
+      <h2>Come funziona l'usato garantito</h2>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 250–400 PAROLE</p>
+      <p>Abbiamo creato la formula dell'usato garantito per soddisfare le richieste delle aziende alla ricerca
+        di macchine per la pulizia più economiche senza però rinunciare alla qualità.</p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
+      <div class="skel" data-lines="6"></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 52 — Come funziona</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+      </dl>
+      <div class="est">0 h (contenuto)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · Garanzia e revisione</span>
+      <h2>Garanzia e revisione</h2>
+      <p>Prima di entrare a far parte del parco usato, ogni macchina viene totalmente ricondizionata in tutte
+        le sue parti: la parte meccanica viene controllata e, se necessario, revisionata; i materiali di consumo
+        (spazzole e lamine) sono verificati ed eventualmente sostituiti; le parti in acciaio e i serbatoi sono,
+        al bisogno, riverniciati.</p>
+      <div class="why" style="margin-top:20px">
+        <div class="why-item"><span class="why-num">01</span><h3>Garanzia 3–12 mesi</h3><p>Durata definita per macchina.</p></div>
+        <div class="why-item"><span class="why-num">02</span><h3>Ricondizionamento completo</h3><p>Meccanica, materiali di consumo, estetica.</p></div>
+        <div class="why-item"><span class="why-num">03</span><h3>Assistenza post vendita</h3><p>La stessa delle macchine nuove.</p></div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 53 — Garanzia e revisione</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina, statico. Testo reale già disponibile.</dd>
+        <dt>Implementazione</dt><dd>Sezione Elementor a 3 colonne, Icon Box. Nessun ACF.</dd>
+        <dt>Riuso</dt><dd>Lo stesso blocco compare su D7 (blocco 5): salvarlo come <b>modello globale</b>,
+          così il testo della garanzia vive in un posto solo.</dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Cosa c'è di usato — le 5 famiglie</span>
+      <h2>Cosa c'è di usato</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Lavapavimenti usate</span>
+            <p class="card-desc">Piccole, uomo a terra, uomo a bordo, combinate e i-mop.</p>
+            <a class="card-link" href="07-usato-famiglia.html" data-url="/usato/lavapavimenti-usate/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Idropulitrici usate</span>
+            <p class="card-desc">Acqua fredda, acqua calda, alte prestazioni, autonome.</p>
+            <a class="card-link" href="07-usato-famiglia.html" data-url="/usato/idropulitrici-usate/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Spazzatrici usate</span>
+            <p class="card-desc">Uomo a terra, uomo a bordo, stradali.</p>
+            <a class="card-link" href="07-usato-famiglia.html" data-url="/usato/spazzatrici-usate/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Aspiratori usati</span>
+            <p class="card-desc">Industriali, professionali, per olio e trucioli.</p>
+            <a class="card-link" href="07-usato-famiglia.html" data-url="/usato/aspiratori-usati/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Altri macchinari usati</span>
+            <p class="card-desc">Generatori di vapore, lavatappezzeria, battitappeto.</p>
+            <span class="card-meta"><span class="openpoint">OP-04 · perimetro da aprire</span></span>
+            <a class="card-link" href="07-usato-famiglia.html" data-url="/usato/altri-macchinari-usati/">Vedi</a></div></article>
+      </div>
+      <p class="small" style="margin-top:14px">Le cinque pagine esistono già e sono tra le più forti del sito:
+        <b>gli indirizzi non si toccano</b>.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 54 — Le cinque famiglie usate</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagine figlie di <code>/usato/</code></dd>
+        <dt>URL invariati</dt><dd><code>/usato/lavapavimenti-usate/</code> ·
+          <code>/usato/idropulitrici-usate/</code> · <code>/usato/spazzatrici-usate/</code> ·
+          <code>/usato/aspiratori-usati/</code> · <code>/usato/altri-macchinari-usati/</code></dd>
+        <dt>Attenzione</dt><dd>Nel nuovo sito queste pagine diventano <b>figlie</b> di <code>/usato/</code>.
+          Sul sito attuale sono già sotto <code>/usato/</code>: la gerarchia di WordPress deve produrre
+          esattamente gli stessi slug. <b>Nessun redirect sulle due pagine migliori del gruppo.</b></dd>
+        <dt>Query</dt><dd>Listing Grid su pagine, <code>post_parent</code> = corrente</dd>
+        <dt>Condizione</dt><dd><span class="cond">Famiglia senza macchine marcate usate → la pagina non va creata</span>,
+          quindi non compare qui.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Hai una macchina da sostituire</span>
+      <div class="promo promo-usa">
+        <h3>Hai una macchina da sostituire?</h3>
+        <p>Valutiamo la tua macchina usata e la scaliamo dall'acquisto della nuova. È il rovescio dell'usato garantito:
+          chi vende la macchina vecchia e chi ne compra una usata sono le due facce della stessa formula.</p>
+        <a class="btn-link" href="18-pagine-restanti.html" data-url="/servizi/supervalutazione-dell-usato/">Supervalutazione dell'usato</a>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 55 — Supervalutazione</div>
+      <dl>
+        <dt>Origine</dt><dd>Blocco statico</dd>
+        <dt>Link</dt><dd><code>/servizi/supervalutazione-dell-usato/</code> — <b>collegamento reciproco</b>:
+          quella pagina deve rimandare a <code>/usato/</code></dd>
+        <dt>Riuso</dt><dd>Stesso blocco su D7 (blocco 9). Modello globale.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Domande frequenti</span>
+      <h2>Domande frequenti sull'usato</h2>
+      <div class="faq">
+        <details><summary>Quanto dura la garanzia su una macchina usata?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>Cosa comprende il ricondizionamento?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Come faccio a sapere se il modello che mi serve è disponibile?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Posso vedere la macchina prima di comprarla?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>Quanto vale la mia macchina usata in permuta?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 56 — FAQ usato</div>
+      <dl>
+        <dt>Componente</dt><dd>Accordion globale</dd>
+        <dt>SEO</dt><dd>La terza domanda risponde all'obiezione vera dell'usato: il magazzino cambia.
+          È il motivo per cui <b>non esistono schede di singola macchina usata</b>.</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 8 · Dove vedere le macchine — le 5 sedi</span>
+      <h2>Dove vedere le macchine</h2>
+      <div data-sedi=""></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 57 — Sedi su D6</div>
+      <dl><dt>Componente</dt><dd>Blocco sedi globale, identico a D4 e D5</dd>
+        <dt>Condizione</dt><dd>Sempre</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 9 · Richiesta disponibilità</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi disponibilità</h3>
+        <p class="form-sub">Dicci che macchina ti serve: ti diciamo cosa abbiamo in questo momento.</p>
+        <div class="fields">
+          <div class="field"><label for="u-nome">Nome e cognome *</label><input id="u-nome" required></div>
+          <div class="field"><label for="u-az">Azienda *</label><input id="u-az" required></div>
+          <div class="field"><label for="u-mail">Email *</label><input id="u-mail" type="email" required></div>
+          <div class="field"><label for="u-tel">Telefono</label><input id="u-tel" type="tel"></div>
+          <div class="field full"><label for="u-msg">Messaggio</label><textarea id="u-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|Macchine per la pulizia usate e garantite"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Richiedi disponibilità</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 58 — Form disponibilità</div>
+      <dl>
+        <dt>Componente</dt><dd>Modello globale, etichetta del pulsante diversa</dd>
+        <dt>Perché « disponibilità »</dt><dd>L'usato dice quali modelli si vendono usati, non quali unità sono
+          in magazzino adesso. La richiesta serve proprio a colmare quello scarto.</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

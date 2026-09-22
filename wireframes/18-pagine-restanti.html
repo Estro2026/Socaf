@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D18 · Pagine restanti — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D18" data-name="Servizi, azienda, referenze" data-url="/servizi/ · /azienda/ · /azienda/referenze/ · ~14 pagine"></div>
+<header data-header="Servizi"></header>
+
+<div class="wrap">
+
+  <div class="row wf-doc">
+    <section class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">PREMESSA · Un solo impianto per quattordici pagine</span>
+      <h1>Pagine istituzionali, servizi e referenze</h1>
+      <p class="lede">Servizi, azienda, referenze e pagine di elenco hanno tutte la stessa forma:
+        breadcrumbs, titolo, testo, eventuali collegamenti al catalogo, richiesta di contatto.
+        Un template, quattordici istanze.</p>
+      <div class="table-scroll">
+        <table class="specs">
+          <thead><tr><th style="width:42%">Pagina</th><th style="white-space:normal">Note</th></tr></thead>
+          <tbody>
+            <tr><th><code>/servizi/</code></th><td style="white-space:normal">Elenco dei 4 servizi. <b>Noleggio e usato escono da qui</b> e diventano sezioni a sé.</td></tr>
+            <tr><th><code>/servizi/pronto-intervento/</code></th><td style="white-space:normal">Resta com'è. Presente anche nella riga di servizio dell'header.</td></tr>
+            <tr><th><code>/servizi/consulenza-tecnica/</code></th><td style="white-space:normal">Resta com'è</td></tr>
+            <tr><th><code>/servizi/soluzioni-finanziarie/</code></th><td style="white-space:normal">Resta com'è</td></tr>
+            <tr><th><code>/servizi/supervalutazione-dell-usato/</code></th><td style="white-space:normal">Resta com'è. <b>Collegamento reciproco con <code>/usato/</code></b></td></tr>
+            <tr><th><code>/azienda/</code></th><td style="white-space:normal">Cambia indirizzo. Elenco delle 5 pagine istituzionali</td></tr>
+            <tr><th><code>/azienda/chi-siamo/</code></th><td style="white-space:normal"><b>Assorbe</b> la pagina « Aziende »: 2 redirect</td></tr>
+            <tr><th><code>/azienda/innovazione-tecnologica/</code></th><td style="white-space:normal">Cambia indirizzo (oggi <code>/servizi/innovazione-tecnologica/</code>)</td></tr>
+            <tr><th><code>/azienda/il-nostro-impegno/</code></th><td style="white-space:normal">Cambia indirizzo (oggi <code>/il-nostro-impegno/</code>)</td></tr>
+            <tr><th><code>/azienda/lavora-con-noi/</code></th><td style="white-space:normal"><b>Assorbe</b> « Careers »: 2 redirect</td></tr>
+            <tr><th><code>/azienda/referenze/</code></th><td style="white-space:normal">Cambia indirizzo (oggi <code>/referenze/</code>). Elenco delle schede</td></tr>
+            <tr><th><code>/azienda/referenze/[cliente]/</code></th><td style="white-space:normal">CPT <code>referenza</code>. 6 schede reali + <span class="openpoint">OP-01</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notice" style="margin-top:20px">
+        <p class="mb0"><b>Le pagine di riscaldamento industriale e raffrescamento evaporativo non si fanno.</b>
+        <code>/raffrescamento/</code> e <code>/riscaldamento/</code> vengono eliminate: i due marchi si raggiungono
+        dal blocco in home e dal piè di pagina, direttamente sui loro siti.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 128 — Perimetro di D18</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagine WordPress + CPT <code>referenza</code></dd>
+        <dt>Template</dt><dd><b>Uno solo</b> per le pagine di testo, più un Single per la referenza e
+          due varianti di elenco (servizi, azienda, referenze). Non quattordici layout diversi.</dd>
+        <dt>Redirect</dt><dd>Circa 12: Aziende → Chi siamo, Careers → Lavora con noi, /il-nostro-impegno/,
+          /servizi/innovazione-tecnologica/, /referenze/ + 6 schede,
+          /servizi/noleggio-macchine/ → /noleggio/, /servizi/usato/ → /usato/.</dd>
+        <dt>SEO</dt><dd>Nessun cluster dedicato. Non sono pagine di posizionamento:
+          nel cluster Asse 2 il gruppo « Servizi » è stato <b>rimosso</b> dal workbook per volume trascurabile.
+          Titoli descrittivi, niente forzature.</dd>
+      </dl>
+      <div class="est">Stima 10 h in totale</div>
+    </div>
+  </div>
+
+  <hr class="hr">
+
+  <!-- ============ VARIANTE A ============ -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">VARIANTE A · Pagina di testo — es. <code>/servizi/pronto-intervento/</code></span>
+
+      <nav class="crumbs" aria-label="Percorso" style="padding-top:0">
+        <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+        <a href="18-pagine-restanti.html" data-url="/servizi/">Servizi</a><span class="sep">/</span>
+        <span aria-current="page">Pronto intervento</span>
+      </nav>
+
+      <h1 style="margin-top:14px">Pronto intervento</h1>
+      <p class="lede">Siamo disponibili per prevenire difetti che possono compromettere il funzionamento
+        delle macchine.</p>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 300–500 PAROLE</p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
+      <h2>Come funziona l'intervento</h2><div class="skel" data-lines="6"></div>
+      <h2>Tempi di risposta</h2><div class="skel" data-lines="5"></div>
+
+      <h3 style="margin-top:28px">A quali macchine si applica</h3>
+      <div class="chips">
+        <a class="chip" href="03-famiglia.html" data-url="/lavapavimenti/">Lavapavimenti</a>
+        <a class="chip" href="03-famiglia.html" data-url="/spazzatrici/">Spazzatrici</a>
+        <a class="chip" href="03-famiglia.html" data-url="/idropulitrici/">Idropulitrici</a>
+        <a class="chip" href="03-famiglia.html" data-url="/aspiratori/">Aspiratori</a>
+        <a class="chip" href="03-famiglia.html" data-url="/robot/">Robot</a>
+        <a class="chip" href="03-famiglia.html" data-url="/altri-macchinari/">Altri macchinari</a>
+      </div>
+
+      <h3 style="margin-top:28px">Da quale sede</h3>
+      <div data-sedi=""></div>
+
+      <div style="margin-top:28px">
+        <form class="form" data-demo-form>
+          <h3>Richiedi un intervento</h3>
+          <p class="form-sub">Verrai contattato da un nostro tecnico.</p>
+          <div class="fields">
+            <div class="field"><label for="k-nome">Nome e cognome *</label><input id="k-nome" required></div>
+            <div class="field"><label for="k-az">Azienda *</label><input id="k-az" required></div>
+            <div class="field"><label for="k-mail">Email *</label><input id="k-mail" type="email" required></div>
+            <div class="field"><label for="k-tel">Telefono</label><input id="k-tel" type="tel"></div>
+            <div class="field full"><label for="k-msg">Messaggio</label><textarea id="k-msg"></textarea></div>
+            <div class="field full" data-hidden-field="pagina di provenienza|Pronto intervento"></div>
+            <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+          </div>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:16px">
+            <button class="btn btn-primary" type="submit">Invia richiesta</button>
+            <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+          </div>
+          <p class="small" data-form-msg style="margin:10px 0 0"></p>
+        </form>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 129 — Pagina di testo</div>
+      <dl>
+        <dt>Blocchi</dt><dd>Breadcrumbs · titolo · testo · collegamenti al catalogo
+          (<span class="cond">condizionale</span>) · sedi (<span class="cond">condizionale</span>) · form</dd>
+        <dt>Origine</dt><dd>Contenuto della pagina. Nessun ACF, nessuna query dinamica
+          tranne il blocco sedi (modello globale).</dd>
+        <dt>Condizione</dt><dd><span class="cond">« A quali macchine si applica »</span> e
+          <span class="cond">« Da quale sede »</span> compaiono solo dove ha senso:
+          su « Soluzioni finanziarie » il blocco sedi non serve.</dd>
+        <dt>Implementazione</dt><dd><b>Un solo template Elementor</b>, i blocchi opzionali si aggiungono
+          o si tolgono in pagina. Non serve un Theme Builder dedicato.</dd>
+        <dt>Riuso</dt><dd>9 pagine su 14 usano questa forma.</dd>
+      </dl>
+      <div class="est">Stima 3 h (template + popolamento layout)</div>
+    </div>
+  </div>
+
+  <hr class="hr">
+
+  <!-- ============ VARIANTE B ============ -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">VARIANTE B · Pagina di elenco — es. <code>/servizi/</code></span>
+
+      <nav class="crumbs" aria-label="Percorso" style="padding-top:0">
+        <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+        <span aria-current="page">Servizi</span>
+      </nav>
+
+      <h1 style="margin-top:14px">Servizi</h1>
+      <p class="lede">Quello che facciamo dopo la vendita: assistenza, consulenza, finanziamento e valutazione
+        della macchina che hai già.</p>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 150–250 PAROLE — testo breve</p>
+      <div class="skel" data-lines="4"></div>
+
+      <div class="grid grid-2" style="margin-top:26px">
+        <article class="card"><div class="card-media ph ph-wide">Immagine servizio</div>
+          <div class="card-body"><span class="card-name">Pronto intervento</span>
+            <p class="card-desc">Siamo disponibili per prevenire difetti che possono compromettere il funzionamento delle macchine.</p>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/servizi/pronto-intervento/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine servizio</div>
+          <div class="card-body"><span class="card-name">Consulenza tecnica</span>
+            <p class="card-desc">Individuiamo la macchina adatta all'ambiente e alle esigenze del cliente.</p>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/servizi/consulenza-tecnica/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine servizio</div>
+          <div class="card-body"><span class="card-name">Soluzioni finanziarie</span>
+            <p class="card-desc">Soluzioni personalizzate per tutta la gamma di prodotti e macchine, con più tipologie di pagamento.</p>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/servizi/soluzioni-finanziarie/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine servizio</div>
+          <div class="card-body"><span class="card-name">Supervalutazione dell'usato</span>
+            <p class="card-desc">Valutiamo la tua macchina usata e la scaliamo dall'acquisto della nuova.</p>
+            <span class="card-meta">Collegata a /usato/</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/servizi/supervalutazione-dell-usato/">Vedi</a></div></article>
+      </div>
+
+      <div class="notice" style="margin-top:22px">
+        <p class="mb0 small"><b>Quattro servizi, non sei.</b> Noleggio e usato sono usciti da questa sezione
+        e sono diventati sezioni di primo livello. Restano i tre servizi legati alla macchina già acquistata,
+        più la supervalutazione.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 130 — Pagina di elenco</div>
+      <dl>
+        <dt>Query</dt><dd>Listing Grid su pagine, <code>post_parent</code> = corrente, ordine manuale</dd>
+        <dt>Istanze</dt><dd><code>/servizi/</code> (4 card) e <code>/azienda/</code> (5 card)</dd>
+        <dt>Componente</dt><dd>Stessa card delle sottocategorie e delle categorie prodotto.
+          <b>Nessuna variante grafica.</b></dd>
+        <dt>Migrazione</dt><dd>Le voci « Noleggio macchine » e « Usato garantito » vanno rimosse da
+          <code>/servizi/</code> e rediretate a <code>/noleggio/</code> e <code>/usato/</code>.</dd>
+      </dl>
+      <div class="est">Stima 2 h (2 istanze)</div>
+    </div>
+  </div>
+
+  <hr class="hr">
+
+  <!-- ============ VARIANTE C ============ -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">VARIANTE C · Elenco referenze — <code>/azienda/referenze/</code></span>
+
+      <nav class="crumbs" aria-label="Percorso" style="padding-top:0">
+        <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+        <a href="18-pagine-restanti.html" data-url="/azienda/">Azienda</a><span class="sep">/</span>
+        <span aria-current="page">Referenze</span>
+      </nav>
+
+      <h1 style="margin-top:14px">Referenze</h1>
+      <p class="lede">I clienti che hanno scelto Socaf, e cosa usano.</p>
+
+      <div class="grid grid-3" style="margin-top:22px">
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Il Gigante</span>
+            <p class="card-desc">Dal 1972 il Gruppo il Gigante sviluppa grandi superfici, centri commerciali e supermercati cittadini in Lombardia, Piemonte ed Emilia Romagna.</p>
+            <span class="card-meta">Retail</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/il-gigante/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">XPO Logistics</span>
+            <p class="card-desc">Azienda americana con sedi in tutta Europa, si occupa di logistica, trasporti e gestione della supply chain.</p>
+            <span class="card-meta">Logistica · partner dal 2015</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/xpo-logistics/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Cisalfa</span>
+            <p class="card-desc">Catena di negozi di articoli sportivi.</p>
+            <span class="card-meta">Retail</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/cisalfa/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Amica Chips S.p.A.</span>
+            <p class="card-desc">Industria alimentare.</p>
+            <span class="card-meta">Industria</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/amica-chips-s-p-a/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Lupo S.r.l.</span>
+            <span class="card-meta">Industria</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/lupo-srl/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Progect S.r.l.</span>
+            <span class="card-meta">Imprese di pulizia</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/progect-srl/">Vedi</a></div></article>
+        <article class="card" style="border-style:dashed">
+          <div class="card-media ph ph-wide">—</div>
+          <div class="card-body"><span class="card-name muted">[REFERENZA DA IDENTIFICARE]</span>
+            <p class="card-desc muted">I documenti dichiarano 7 referenze, il sito attuale ne espone 6.</p>
+            <span class="card-meta"><span class="openpoint">OP-01</span></span></div></article>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 131 — Elenco referenze</div>
+      <dl>
+        <dt>Origine</dt><dd>CPT <code>referenza</code></dd>
+        <dt>Query</dt><dd>Listing Grid, tutte, ordine manuale</dd>
+        <dt>URL</dt><dd><code>/azienda/referenze/</code> — <b>cambia indirizzo</b>.
+          Il CPT va registrato con <code>rewrite = ['slug' => 'azienda/referenze', 'with_front' => false]</code>
+          e l'archivio disattivato: la pagina di elenco è una pagina, non l'archivio del CPT,
+          altrimenti i due si contendono l'indirizzo (stessa logica delle tassonomie).</dd>
+        <dt>Open point</dt><dd><span class="openpoint">OP-01</span> La settima referenza non è identificabile.
+          <b>Nessun nome è stato inventato.</b></dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+  <hr class="hr">
+
+  <!-- ============ VARIANTE D ============ -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">VARIANTE D · Scheda referenza — <code>/azienda/referenze/[cliente]/</code></span>
+
+      <nav class="crumbs" aria-label="Percorso" style="padding-top:0">
+        <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+        <a href="18-pagine-restanti.html" data-url="/azienda/">Azienda</a><span class="sep">/</span>
+        <a href="18-pagine-restanti.html" data-url="/azienda/referenze/">Referenze</a><span class="sep">/</span>
+        <span aria-current="page">XPO Logistics</span>
+      </nav>
+
+      <h1 style="margin-top:14px">XPO Logistics</h1>
+
+      <div class="grid grid-2" style="gap:30px;align-items:start;margin-top:20px">
+        <div>
+          <p>XPO Logistics è un'azienda americana, con sedi in tutta Europa, che si occupa di servizi di logistica,
+            trasporti e assistenza nella gestione della supply chain. Gli esperti di XPO Logistics forniscono la
+            propria esperienza ad aziende di ogni settore, in tutti i livelli della filiera.</p>
+          <div class="skel" data-lines="5"></div>
+        </div>
+        <div class="promo" style="border-left-color:var(--grey)">
+          <h4>Partner dal</h4><p>2015</p>
+          <h4>Location di nostra assistenza</h4><p>Magazzino di Settala (MI)</p>
+          <h4>Prodotti Socaf scelti</h4>
+          <ul style="margin:0 0 14px"><li>Spazzatrici industriali</li><li>Lavapavimenti uomo a bordo</li><li>Prodotti di detergenza specifici</li></ul>
+          <h4>Settore</h4>
+          <p class="mb0"><a href="09-settore.html" data-url="/settori/logistica/">Logistica</a></p>
+        </div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 132 — Scheda referenza</div>
+      <dl>
+        <dt>Origine</dt><dd>CPT <code>referenza</code> · Single template Elementor</dd>
+        <dt>Campi</dt><dd><code>logo</code>, <code>partner_dal</code>, <code>sede_assistita</code>,
+          <code>prodotti_scelti</code> (Repeater), <code>sito_web</code>, <code>settore</code> (tassonomia)</dd>
+        <dt>Relazione</dt><dd><code>referenza → settore</code>: <b>bidirezionale automatica</b>.
+          Si compila qui, la pagina settore si popola da sola. 7 assegnazioni in tutto.</dd>
+        <dt>Dati reali</dt><dd>I valori mostrati sono quelli reali della scheda XPO Logistics su socaf.it.</dd>
+        <dt>Attenzione</dt><dd>Non collegare le referenze alle <b>singole macchine</b>: il brief prevede
+          solo la relazione con il settore. Aggiungerla sarebbe un campo e 7 compilazioni in più fuori perimetro.</dd>
+      </dl>
+      <div class="est">Stima 2 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

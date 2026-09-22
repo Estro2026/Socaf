@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D8 · Ingresso settori — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D8" data-name="Pagina d'ingresso dei settori" data-url="/settori/ · 1 pagina · non raggiungibile da menu né da home"></div>
+<header data-header="Settori"></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <span aria-current="page">Settori</span>
+  </nav>
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">BLOCCHI 1–3 · Breadcrumbs, titolo, testo introduttivo</span>
+      <h1>Macchine per la pulizia per settore</h1>
+      <p class="lede">Ogni ambiente ha esigenze di pulizia diverse: un capannone industriale, un hotel,
+        un supermercato e un magazzino logistico non si puliscono con la stessa macchina.
+        Da 40 anni Socaf interpreta le peculiarità di ogni settore con le soluzioni del panorama mondiale del cleaning.</p>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 150–250 PAROLE — testo breve</p>
+      <div class="skel" data-lines="4"></div>
+      <div class="notice">
+        <p class="mb0 small"><b>Non ci si arriva né dal menu né dalla home.</b> La tendina Settori porta
+        direttamente alle sette pagine; in home ci sono i sette settori. Questa pagina serve da atterraggio
+        per chi arriva da fuori e da destinazione dei breadcrumbs delle sette pagine settore.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 68 — Ingresso settori</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagina WordPress</dd>
+        <dt>URL</dt><dd><code>/settori/</code> — <b>cambia indirizzo</b>. Oggi è <code>/settore/</code>
+          al singolare. Redirect 301.</dd>
+        <dt>Menu</dt><dd>La tendina « Settori » non contiene questa pagina. La voce di primo livello
+          <b>non è cliccabile</b>: si apre e basta.</dd>
+        <dt>SEO</dt><dd>Testo breve: la domanda vera è sui singoli settori, non sul concetto di « settori ».
+          <span class="openpoint">OP-13</span> <b>6 redirect</b> nel piano di migrazione: le 5 pagine settore
+          attuali più l'hub <code>/settore/</code>.</dd>
+        <dt>Costo del cambio</dt><dd>Basso: le pagine settore attuali raccolgono 24 clic in 3 mesi
+          su 8.213 impression. Il guadagno atteso viene dai collegamenti al catalogo, che oggi non esistono.</dd>
+      </dl>
+      <div class="est">Stima 2 h (dentro le 12 h di D8+D9)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · I sette settori</span>
+      <h2>I sette settori</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine settore</div>
+          <div class="card-body"><span class="card-name">Industria</span>
+            <p class="card-desc">Manifatturiera e alimentare: resa degli impianti e salute degli operatori.</p>
+            <a class="card-link" href="09-settore.html" data-url="/settori/industria/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine settore</div>
+          <div class="card-body"><span class="card-name">Imprese di pulizia</span>
+            <p class="card-desc">Chi pulisce per mestiere: produttività, costi di esercizio, parco macchine.</p>
+            <a class="card-link" href="09-settore.html" data-url="/settori/imprese-di-pulizia/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine settore</div>
+          <div class="card-body"><span class="card-name">Ho.Re.Ca.</span>
+            <p class="card-desc">Hotel, ristoranti, bar: pulizia silenziosa e in orari compatibili con gli ospiti.</p>
+            <a class="card-link" href="09-settore.html" data-url="/settori/horeca/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine settore</div>
+          <div class="card-body"><span class="card-name">Retail</span>
+            <p class="card-desc">Negozi, supermercati e centri commerciali.</p>
+            <a class="card-link" href="09-settore.html" data-url="/settori/retail/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine settore</div>
+          <div class="card-body"><span class="card-name">Logistica</span>
+            <p class="card-desc">Magazzini, piattaforme e aree di movimentazione.</p>
+            <a class="card-link" href="09-settore.html" data-url="/settori/logistica/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine settore</div>
+          <div class="card-body"><span class="card-name">Officine e metalmeccanica</span>
+            <p class="card-desc">Vasche lavapezzi e aspiratori per olio e trucioli.</p>
+            <span class="card-meta">Settore nuovo</span>
+            <a class="card-link" href="09-settore.html" data-url="/settori/officine-metalmeccanica/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine settore</div>
+          <div class="card-body"><span class="card-name">Edilizia e cantieri</span>
+            <p class="card-desc">Aspiratori per polveri e idropulitrici per superfici esterne.</p>
+            <span class="card-meta">Settore nuovo</span>
+            <a class="card-link" href="09-settore.html" data-url="/settori/edilizia-cantieri/">Vedi</a></div></article>
+      </div>
+      <p class="small" style="margin-top:14px">Cinque settori esistono e cambiano indirizzo; due sono nuovi e
+        <b>nascono da macchine già a catalogo</b>: dieci vasche lavapezzi e cinque aspiratori per olio e trucioli
+        per le officine, gli aspiratori per polveri per i cantieri.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 69 — I sette settori</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagine figlie di <code>/settori/</code></dd>
+        <dt>Query</dt><dd>JetEngine Listing Grid su pagine, <code>post_parent</code> = corrente</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Riuso</dt><dd>Lo stesso elenco alimenta la tendina Settori del menu e il blocco 4 della home.</dd>
+        <dt>Attenzione</dt><dd>Le pagine settore sono <b>pagine</b>, non archivi della tassonomia
+          <code>settore</code>. La tassonomia esiste per collegare le macchine, i suoi archivi sono spenti.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Le referenze</span>
+      <h2>I clienti Socaf</h2>
+      <div class="grid grid-4">
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">XPO Logistics</span><span class="card-meta">Logistica · dal 2015</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/xpo-logistics/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Il Gigante</span><span class="card-meta">Retail</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/il-gigante/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Cisalfa</span><span class="card-meta">Retail</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/cisalfa/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Amica Chips</span><span class="card-meta">Industria alimentare</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/amica-chips-s-p-a/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Lupo S.r.l.</span><span class="card-meta">Industria</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/lupo-srl/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
+          <div class="card-body"><span class="card-name">Progect S.r.l.</span><span class="card-meta">Imprese di pulizia</span>
+            <a class="card-link" href="18-pagine-restanti.html" data-url="/azienda/referenze/progect-srl/">Vedi</a></div></article>
+        <article class="card" style="border-style:dashed">
+          <div class="card-media ph ph-wide">—</div>
+          <div class="card-body"><span class="card-name muted">[REFERENZA DA IDENTIFICARE]</span>
+            <span class="card-meta"><span class="openpoint">OP-01</span></span></div></article>
+      </div>
+      <p class="small" style="margin-top:14px"><span class="openpoint">OP-01</span>
+        I documenti dichiarano <b>7</b> referenze, sul sito attuale ne risultano <b>6</b>.
+        La settima non è identificabile: nessun nome è stato inventato.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 70 — Referenze su D8</div>
+      <dl>
+        <dt>Origine</dt><dd>CPT <code>referenza</code></dd>
+        <dt>Campi</dt><dd><code>logo</code>, <code>settore</code> (tassonomia, relazione bidirezionale),
+          <code>partner_dal</code>, <code>prodotti_scelti</code>, <code>sede_assistita</code></dd>
+        <dt>Query</dt><dd>Listing Grid su CPT <code>referenza</code>, <b>tutte</b> (qui non c'è il limite 3
+          che vale invece sulla pagina settore)</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Link</dt><dd><code>/azienda/referenze/[cliente]/</code> — <b>cambia indirizzo</b>:
+          oggi sono su <code>/referenze/[cliente]/</code>. 6 (o 7) redirect + 1 per l'elenco.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Richiesta informazioni</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi maggiori informazioni</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente.</p>
+        <div class="fields">
+          <div class="field"><label for="s-nome">Nome e cognome *</label><input id="s-nome" required></div>
+          <div class="field"><label for="s-az">Azienda *</label><input id="s-az" required></div>
+          <div class="field"><label for="s-mail">Email *</label><input id="s-mail" type="email" required></div>
+          <div class="field"><label for="s-tel">Telefono</label><input id="s-tel" type="tel"></div>
+          <div class="field full"><label for="s-msg">Messaggio</label><textarea id="s-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|Macchine per la pulizia per settore"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 71 — Form su D8</div>
+      <dl><dt>Componente</dt><dd>Modello globale</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

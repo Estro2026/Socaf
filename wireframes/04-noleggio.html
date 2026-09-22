@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D4 · Ingresso noleggio — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D4" data-name="Pagina d'ingresso del noleggio" data-url="/noleggio/ · 1 pagina · sezione nuova"></div>
+<header data-header="Noleggio"></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <span aria-current="page">Noleggio</span>
+  </nav>
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">BLOCCHI 1–2 · Breadcrumbs e titolo</span>
+      <h1>Noleggio macchine per la pulizia industriale</h1>
+      <p class="lede">Acquistare una lavapavimenti industriale o una spazzatrice non è l'unica soluzione.
+        Con Socaf puoi noleggiare ogni tipo di macchina per la pulizia industriale, che ti serva per mesi
+        o per pochissimi giorni.</p>
+      <div class="notice">
+        <p class="mb0 small"><b>Questa pagina non elenca macchine.</b> Spiega la formula — durate, cosa è incluso,
+        assistenza, consegna — e manda alle landing di famiglia. Le macchine restano nella sezione Macchine.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 32 — Ingresso noleggio</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagina WordPress. <b>Sezione nuova</b>: oggi il noleggio è una pagina dentro Servizi,
+          al terzo livello.</dd>
+        <dt>URL</dt><dd><code>/noleggio/</code> — nuovo. Redirect da <code>/servizi/noleggio-macchine/</code>.</dd>
+        <dt>Menu</dt><dd>Voce semplice, <b>non tendina</b>: porta qui. Su mobile resta fissa in alto
+          insieme al numero verde.</dd>
+        <dt>SEO</dt><dd>Cluster Asse 2 · Noleggio (8 kw / 830 vol) · intent commerciale.
+          Primaria <code>noleggio macchine pulizia</code> (140). Varianti
+          <code>noleggio macchine per pulizia</code> (140), <code>noleggio lavatappeti</code> (90).
+          La pagina di oggi appare 11.894 volte in 3 mesi e raccoglie 77 clic: il problema è la profondità, non la domanda.</dd>
+        <dt>Contenuto</dt><dd>Testo di partenza reale già presente su <code>/servizi/noleggio-macchine/</code>,
+          da riscrivere sul cluster. <span class="taskflag t-seo">SEO task</span></dd>
+      </dl>
+      <div class="est">Stima 2 h (dentro le 12 h di D4+D5)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 3 · Come funziona il noleggio</span>
+      <h2>Come funziona il noleggio Socaf</h2>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 250–400 PAROLE</p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
+      <div class="skel" data-lines="6"></div>
+      <div class="steps" style="margin-top:22px">
+        <div class="step"><h4>Ci dici cosa ti serve</h4><p>Superficie, ambiente, durata.</p></div>
+        <div class="step"><h4>Ti proponiamo la macchina</h4><p>Consulenza tecnica inclusa.</p></div>
+        <div class="step"><h4>Consegna e formazione</h4><p>Da una delle cinque sedi.</p></div>
+        <div class="step"><h4>Assistenza per tutta la durata</h4><p>Pronto intervento compreso.</p></div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 33 — Come funziona</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina, statico</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Implementazione</dt><dd>Elementor · sezione a 4 colonne con widget Icon Box.
+          Nessun ACF, nessuna query.</dd>
+        <dt>Responsive</dt><dd>4 → 2 → 1 colonna</dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · Le formule e le durate</span>
+      <h2>Le formule e le durate</h2>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 200–350 PAROLE</p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-client">Client task</span>
+        Le durate e il perimetro di « cosa è incluso » sono un dato commerciale di Socaf.</p>
+      <div class="table-scroll">
+        <table class="specs">
+          <thead><tr><th style="width:26%">Formula</th><th style="white-space:normal">Durata</th><th style="white-space:normal">Cosa comprende</th></tr></thead>
+          <tbody>
+            <tr><th>Noleggio breve</th><td style="white-space:normal">[da definire]</td><td style="white-space:normal">[da definire]</td></tr>
+            <tr><th>Noleggio stagionale</th><td style="white-space:normal">[da definire]</td><td style="white-space:normal">[da definire]</td></tr>
+            <tr><th>Noleggio a lungo termine</th><td style="white-space:normal">[da definire]</td><td style="white-space:normal">[da definire]</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small" style="margin-top:12px"><b>Nessun prezzo in tabella.</b> La colonna « quanto costa »
+        non esiste: la richiesta di preventivo è la conversione della pagina.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 34 — Formule e durate</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina. Tabella statica, non un CPT.</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Attenzione</dt><dd>Non introdurre un campo prezzo « per comodità ». Il modello dati non prevede
+          prezzi in nessun punto: l'e-commerce è una fase separata.</dd>
+        <dt>Responsive</dt><dd>Tabella in <code>.table-scroll</code>: scorre, non manda in overflow la pagina.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Cosa si può noleggiare — le famiglie a noleggio</span>
+      <h2>Cosa si può noleggiare</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Noleggio lavapavimenti</span>
+            <p class="card-desc">Lavasciuga uomo a terra, uomo a bordo, i-mop.</p>
+            <a class="card-link" href="05-noleggio-famiglia.html" data-url="/noleggio/lavapavimenti/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Noleggio idropulitrici</span>
+            <p class="card-desc">Acqua fredda, acqua calda, autonome a scoppio.</p>
+            <a class="card-link" href="05-noleggio-famiglia.html" data-url="/noleggio/idropulitrici/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Noleggio spazzatrici</span>
+            <p class="card-desc">Uomo a terra, uomo a bordo, stradali.</p>
+            <a class="card-link" href="05-noleggio-famiglia.html" data-url="/noleggio/spazzatrici/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+          <div class="card-body"><span class="card-name">Noleggio lavamoquette</span>
+            <p class="card-desc">Lavatappezzeria e lavatessuti.</p>
+            <span class="card-meta"><span class="openpoint">OP-02 · indirizzo da confermare</span></span>
+            <a class="card-link" href="05-noleggio-famiglia.html" data-url="/noleggio/lavamoquette/">Vedi</a></div></article>
+      </div>
+      <div class="notice" style="margin-top:18px">
+        <p class="mb0 small"><span class="openpoint">OP-03</span>
+          <b>Noleggio monospazzole</b> e <b>noleggio aspiratori</b> non sono nell'alberatura e sono da aprire con Socaf.
+          Esiste domanda misurabile sulle monospazzole (<code>noleggio monospazzola per pavimenti</code> 320,
+          <code>noleggio monospazzole</code> 320). Finché non sono confermate <b>non vanno create</b>:
+          una landing senza macchine attive non si fa.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 35 — Cosa si può noleggiare</div>
+      <dl>
+        <dt>Origine</dt><dd>Elenco delle pagine figlie di <code>/noleggio/</code></dd>
+        <dt>Query</dt><dd>JetEngine Listing Grid su pagine, <code>post_parent</code> = pagina corrente,
+          ordine manuale</dd>
+        <dt>Condizione</dt><dd>Sempre. <span class="cond">Landing senza macchine attive → la landing non va creata</span>,
+          quindi non compare qui da sola (BM §E).</dd>
+        <dt>Link</dt><dd><code>/noleggio/lavapavimenti/</code> · <code>/noleggio/idropulitrici/</code> ·
+          <code>/noleggio/spazzatrici/</code> · lavamoquette <span class="openpoint">OP-02</span></dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Perché noleggiare</span>
+      <h2>Perché noleggiare invece di acquistare</h2>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 300–450 PAROLE</p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span>
+        Base reale già disponibile: flessibilità, costi iniziali ridotti, manutenzione inclusa.</p>
+
+      <div class="why">
+        <div class="why-item">
+          <span class="why-num">01</span>
+          <h3>Flessibilità</h3>
+          <p>Le esigenze di pulizia cambiano con il lavoro, le stagioni e gli imprevisti.</p>
+          <div class="skel" data-lines="3"></div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">02</span>
+          <h3>Costi iniziali ridotti</h3>
+          <p>Nessun investimento in conto capitale: solo canoni periodici.</p>
+          <div class="skel" data-lines="3"></div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">03</span>
+          <h3>Manutenzione compresa</h3>
+          <p>Assistenza, ricambi e materiali di consumo dentro il canone.</p>
+          <div class="skel" data-lines="3"></div>
+        </div>
+      </div>
+      <p class="small"><b>È un elenco di ragioni, non prosa.</b> Se restassero paragrafi con H3 sarebbero
+        indistinguibili dalle domande frequenti che seguono subito dopo, e la pagina sembrerebbe ripetersi.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 36 — Perché noleggiare</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina</dd>
+        <dt>SEO</dt><dd>Qui va intercettata anche la domanda comparativa « conviene noleggiare o comprare »,
+          che oggi risponde solo un articolo. Collegamento reciproco con <code>/usato/</code>:
+          sono le tre alternative all'acquisto nuovo.</dd>
+      </dl>
+      <div class="est">0 h (contenuto)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Domande frequenti</span>
+      <h2>Domande frequenti sul noleggio</h2>
+      <div class="faq">
+        <details><summary>Qual è la durata minima di noleggio?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>La manutenzione è compresa nel canone?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Chi consegna e ritira la macchina?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>Se la macchina si guasta durante il noleggio?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Posso riscattare la macchina a fine noleggio?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 37 — FAQ noleggio</div>
+      <dl><dt>Componente</dt><dd>Accordion globale. Nessuna variante.</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 8 · Dove ritirare e consegnare — le 5 sedi</span>
+      <h2>Dove ritirare e consegnare</h2>
+      <div data-sedi="Osio Sotto è la sede principale e sta sempre per prima."></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 38 — Blocco sedi</div>
+      <dl>
+        <dt>Origine</dt><dd>CPT <code>sede</code> · 5 istanze</dd>
+        <dt>Campi</dt><dd><code>citta</code>, <code>ragione_sociale</code>, <code>indirizzo</code>,
+          <code>cap</code>, <code>comune</code>, <code>provincia</code>, <code>telefono</code>, <code>email</code>,
+          <code>sede_principale</code> (Vero/falso) — <b>campi separati, mai un blocco di testo</b></dd>
+        <dt>Query</dt><dd>JetEngine Listing Grid · CPT <code>sede</code> · ordine per
+          <code>sede_principale</code> DESC poi <code>menu_order</code>: Osio Sotto per prima</dd>
+        <dt>Condizione</dt><dd>Sempre. <b>Obbligatorio su D4 e D5</b>: risponde alle ricerche di noleggio
+          con riferimento locale (cluster geografico, 25 kw / 6.690 vol).</dd>
+        <dt>Riuso</dt><dd>D4, D5, D6, D7, D15, D16 — un solo modello globale</dd>
+        <dt>Link</dt><dd><code>/sedi/[sede]/</code></dd>
+      </dl>
+      <div class="est">Stima 1,5 h (componente globale)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 9 · Articoli sul noleggio — <span class="cond">condizionale</span> · max 3</span>
+      <h2>Approfondimenti sul noleggio</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Noleggio lavapavimenti: con Socaf conviene!</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/noleggio-lavapavimenti/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Noleggio idropulitrice: perché scegliere di affittarne una</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/noleggio-idropulitrice-perche-scegliere-di-affittarne-una/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Noleggio spazzatrici: prova Socaf</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/noleggio-spazzatrici-prova-socaf/">Leggi</a></div></article>
+      </div>
+      <p class="small" style="margin-top:12px">
+        <span class="taskflag t-data">Data entry</span>
+        <b>Gli otto articoli che parlano di noleggio vanno collegati a questa pagina al lancio</b>, non dopo:
+        altrimenti restano a contendersi le stesse ricerche della nuova sezione.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 39 — Articoli sul noleggio</div>
+      <dl>
+        <dt>Origine</dt><dd>Relazione ACF <code>articolo → pagina</code>, compilata dal lato articolo</dd>
+        <dt>Condizione</dt><dd><span class="cond">Se almeno un articolo.</span></dd>
+        <dt>Query</dt><dd>JetEngine Listing Grid sulla relazione inversa, limite 3</dd>
+        <dt>Priorità</dt><dd>Gli 8 articoli di noleggio sono il primo scaglione di data entry, prima dei 20 più letti.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 10 · Richiesta preventivo</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi un preventivo di noleggio</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente.</p>
+        <div class="fields">
+          <div class="field"><label for="n-nome">Nome e cognome *</label><input id="n-nome" required></div>
+          <div class="field"><label for="n-az">Azienda *</label><input id="n-az" required></div>
+          <div class="field"><label for="n-mail">Email *</label><input id="n-mail" type="email" required></div>
+          <div class="field"><label for="n-tel">Telefono</label><input id="n-tel" type="tel"></div>
+          <div class="field full"><label for="n-msg">Messaggio</label><textarea id="n-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|Noleggio macchine per la pulizia industriale"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Richiedi preventivo</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 40 — Form preventivo</div>
+      <dl>
+        <dt>Componente</dt><dd><b>Stesso form generico</b>, con solo l'etichetta del pulsante diversa.
+          Non è una terza variante: è il modello globale con un'etichetta sovrascritta.</dd>
+        <dt>Campo nascosto</dt><dd><code>pagina_provenienza</code></dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

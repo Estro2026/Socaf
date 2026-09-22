@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D17 · Risultati di ricerca — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D17" data-name="Risultati di ricerca" data-url="/?s= · 1 template · noindex"></div>
+<header data-header></header>
+
+<div class="wrap">
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:24px">
+      <span class="block-id">BLOCCO 1 · Campo di ricerca con il termine cercato</span>
+      <h1>Risultati per « <span data-query>lavapavimenti</span> »</h1>
+      <form class="search" data-search role="search" style="margin-top:18px">
+        <input type="search" data-query-input value="lavapavimenti" aria-label="Cerca nel sito">
+        <button type="submit">Cerca</button>
+      </form>
+      <p class="small" style="margin-top:14px">
+        Prova a cercare <b>zzz</b> per vedere lo stato « nessun risultato ».</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 123 — Template di ricerca</div>
+      <dl>
+        <dt>Origine</dt><dd>Ricerca nativa di WordPress · <code>/?s=termine</code></dd>
+        <dt>Implementazione</dt><dd>Elementor Pro · Theme Builder → Search Results</dd>
+        <dt>SEO</dt><dd><b><code>noindex, follow</code></b>. The SEO Framework lo imposta di serie sulle
+          pagine di ricerca: verificare che resti attivo.</dd>
+        <dt>Post type inclusi</dt><dd><code>macchina</code>, <code>page</code>, <code>post</code>.
+          Esclusi: <code>sede</code> e <code>referenza</code> (raggiungibili dai loro contesti).</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Attenzione</dt><dd>Il CPT <code>macchina</code> deve avere
+          <code>exclude_from_search = false</code>, altrimenti i risultati principali del sito non compaiono.</dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+  <!-- ================= STATO PIENO ================= -->
+  <div data-results-full>
+
+    <div class="row">
+      <section class="block">
+        <span class="block-id">BLOCCO 2 · Risultati macchine — <span class="cond">condizionale</span> · vengono per prime</span>
+        <h2>Macchine <span class="small muted">(6)</span></h2>
+        <div class="grid grid-3">
+          <article class="card"><div class="card-media" style="padding:0"><img src="../assets/images/la511-40-bt-01.png" alt="LA 511-40 BT"></div>
+            <div class="card-body"><span class="card-name">LA 511-40 BT</span>
+              <p class="card-desc">Lavasciuga pavimenti industriale uomo a terra, robusta, semplice e Made in Italy.</p>
+              <div class="tags"><span class="tag tag-nol">Noleggio</span><span class="tag tag-usa">Usato</span></div>
+              <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-terra/lavapavimenti-socaf-la-511-40-bt/">Vedi</a></div></article>
+          <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+            <div class="card-body"><span class="card-name">LA 410-15 B</span>
+              <p class="card-desc">Lavapavimenti industriale con grande manovrabilità, perfetta anche in curva.</p>
+              <div class="tags"><span class="tag tag-nol">Noleggio</span></div>
+              <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-terra/lavapavimenti-socaf-la-410-15-b/">Vedi</a></div></article>
+          <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+            <div class="card-body"><span class="card-name">i-mop XL</span>
+              <p class="card-desc">La lavasciuga rivoluzionaria, flessibile e potente.</p>
+              <div class="tags"><span class="tag tag-nol">Noleggio</span><span class="tag tag-usa">Usato</span></div>
+              <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/i-mop/lavapavimenti-i-mop-xl/">Vedi</a></div></article>
+          <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+            <div class="card-body"><span class="card-name">VIP 105</span>
+              <p class="card-desc">Lavapavimenti uomo a bordo ad alte prestazioni.</p>
+              <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-bordo/lavapavimenti-vip-105/">Vedi</a></div></article>
+          <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+            <div class="card-body"><span class="card-name">Serie MAGNA</span>
+              <p class="card-desc">Lavapavimenti uomo a bordo per grandi superfici.</p>
+              <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-bordo/lavapavimenti-serie-magna/">Vedi</a></div></article>
+          <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+            <div class="card-body"><span class="card-name">Ecobot 75</span>
+              <p class="card-desc">Robot lavapavimenti autonomo.</p>
+              <a class="card-link" href="01-scheda-macchina.html" data-url="/robot/robot-lavapavimenti/ecobot-75/">Vedi</a></div></article>
+        </div>
+      </section>
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 124 — Risultati macchine</div>
+        <dl>
+          <dt>Query</dt><dd>Ricerca ristretta al CPT <code>macchina</code></dd>
+          <dt>Ordine</dt><dd><b>Le macchine vengono per prime</b>, raggruppate per tipo di contenuto.
+            Tre query separate, non una sola con ordinamento misto.</dd>
+          <dt>Condizione</dt><dd><span class="cond">Se almeno un risultato.</span> Nessun risultato in questa
+            sezione → il titolo « Macchine » non compare.</dd>
+          <dt>Componente</dt><dd>Card macchina, identica a ovunque</dd>
+          <dt>Implementazione</dt><dd>Tre widget Posts di Elementor con
+            <code>post_type</code> diverso e <code>s</code> ereditato dalla query di ricerca.
+            Alternativa: tre Listing Grid JetEngine. Nessun motore di ricerca custom, nessun plugin di ricerca.</dd>
+        </dl>
+        <div class="est">Stima 2 h</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <section class="block">
+        <span class="block-id">BLOCCO 3 · Risultati pagine — <span class="cond">condizionale</span></span>
+        <h2>Pagine <span class="small muted">(5)</span></h2>
+        <ul class="stack-sm" style="list-style:none;padding:0">
+          <li><a href="03-famiglia.html" data-url="/lavapavimenti/"><b>Lavapavimenti professionali e lavasciuga industriali</b></a>
+            <div class="small muted mono">/lavapavimenti/</div></li>
+          <li><a href="02-sottocategoria.html" data-url="/lavapavimenti/lavapavimenti-uomo-terra/"><b>Lavasciuga pavimenti a batteria uomo a terra</b></a>
+            <div class="small muted mono">/lavapavimenti/lavapavimenti-uomo-terra/</div></li>
+          <li><a href="05-noleggio-famiglia.html" data-url="/noleggio/lavapavimenti/"><b>Noleggio lavapavimenti e lavasciuga pavimenti</b></a>
+            <div class="small muted mono">/noleggio/lavapavimenti/</div></li>
+          <li><a href="07-usato-famiglia.html" data-url="/usato/lavapavimenti-usate/"><b>Lavapavimenti usate e lavasciuga industriali usate</b></a>
+            <div class="small muted mono">/usato/lavapavimenti-usate/</div></li>
+          <li><a href="11-categoria-prodotto.html" data-url="/prodotti-per-la-pulizia/detergenti-pavimenti-parquet/"><b>Detergente pavimenti professionale e detersivo per parquet</b></a>
+            <div class="small muted mono">/prodotti-per-la-pulizia/detergenti-pavimenti-parquet/</div></li>
+        </ul>
+      </section>
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 125 — Risultati pagine</div>
+        <dl>
+          <dt>Query</dt><dd>Ricerca ristretta a <code>page</code></dd>
+          <dt>Formato</dt><dd>Elenco testuale, non card: le pagine non hanno un'immagine di prodotto
+            e una griglia di card vuote peggiorerebbe la lettura.</dd>
+          <dt>Condizione</dt><dd><span class="cond">Se almeno un risultato.</span></dd>
+        </dl>
+        <div class="est">Stima 0,5 h</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <section class="block">
+        <span class="block-id">BLOCCO 4 · Risultati articoli — <span class="cond">condizionale</span></span>
+        <h2>Approfondimenti <span class="small muted">(3)</span></h2>
+        <div class="grid grid-3">
+          <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+            <div class="card-body"><span class="card-name">Come funziona una macchina lavapavimenti?</span>
+              <span class="card-meta">Approfondimento</span>
+              <a class="card-link" href="12-articolo.html" data-url="/news/come-funziona-macchina-lavapavimenti/">Leggi</a></div></article>
+          <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+            <div class="card-body"><span class="card-name">Le 10 regole d'oro per la manutenzione della tua lavapavimenti</span>
+              <span class="card-meta">Approfondimento</span>
+              <a class="card-link" href="12-articolo.html" data-url="/news/10-regole-oro-manutenzione-lavapavimenti/">Leggi</a></div></article>
+          <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+            <div class="card-body"><span class="card-name">Noleggio lavapavimenti: con Socaf conviene!</span>
+              <span class="card-meta">Approfondimento</span>
+              <a class="card-link" href="12-articolo.html" data-url="/news/noleggio-lavapavimenti/">Leggi</a></div></article>
+        </div>
+      </section>
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 126 — Risultati articoli</div>
+        <dl>
+          <dt>Query</dt><dd>Ricerca ristretta a <code>post</code></dd>
+          <dt>Condizione</dt><dd><span class="cond">Se almeno un risultato.</span></dd>
+          <dt>Paginazione</dt><dd>Su ciascuna delle tre sezioni si mostrano al massimo i primi risultati
+            con un « vedi tutti » se la sezione eccede. <b>Da semplificare</b> se il budget stringe:
+            un limite fisso per sezione senza paginazione è accettabile.</dd>
+        </dl>
+        <div class="est">Riusato, 0 h</div>
+      </div>
+    </div>
+
+  </div><!-- /stato pieno -->
+
+  <!-- ================= STATO VUOTO ================= -->
+  <div data-results-empty hidden>
+    <div class="row">
+      <section class="block">
+        <span class="block-id">BLOCCO 5 · Nessun risultato — <b>l'unico empty state disegnato del sito</b></span>
+        <div class="empty-state">
+          <h2>Nessun risultato per « <span data-query></span> »</h2>
+          <p class="muted" style="max-width:52ch;margin:0 auto 24px">Prova a cercare il nome del modello,
+            oppure parti da una delle sei famiglie di macchine.</p>
+        </div>
+
+        <h3 style="margin-top:32px">Le sei famiglie di macchine</h3>
+        <div class="chips">
+          <a class="chip" href="03-famiglia.html" data-url="/lavapavimenti/">Lavapavimenti</a>
+          <a class="chip" href="03-famiglia.html" data-url="/spazzatrici/">Spazzatrici</a>
+          <a class="chip" href="03-famiglia.html" data-url="/idropulitrici/">Idropulitrici</a>
+          <a class="chip" href="03-famiglia.html" data-url="/aspiratori/">Aspiratori</a>
+          <a class="chip" href="03-famiglia.html" data-url="/robot/">Robot</a>
+          <a class="chip" href="03-famiglia.html" data-url="/altri-macchinari/">Altri macchinari</a>
+        </div>
+
+        <div class="promo" style="margin-top:28px;border-left-color:var(--red)">
+          <h3>Non trovi quello che cerchi?</h3>
+          <p>Chiamaci: un consulente ti aiuta a individuare la macchina giusta.</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="tel:800480110">800 480110</a>
+            <a class="btn btn-ghost" href="15-contatti.html" data-url="/contatti/">Contatti</a>
+          </div>
+        </div>
+      </section>
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 127 — Stato « nessun risultato »</div>
+        <dl>
+          <dt>Condizione</dt><dd><span class="cond">Se zero risultati su tutti e tre i tipi di contenuto.</span></dd>
+          <dt>Contenuto</dt><dd><b>Le sei famiglie e il collegamento ai contatti.</b> Non un generico
+            « nessun risultato »: chi non trova deve poter ripartire.</dd>
+          <dt>Regola del sito</dt><dd>È <b>l'unica eccezione</b> alla regola « un blocco senza dati sparisce ».
+            Ovunque altrove nel sito lo stato vuoto non esiste.</dd>
+          <dt>Riuso</dt><dd>L'elenco delle 6 famiglie è lo stesso della home e del menu: una sorgente sola.</dd>
+          <dt>QA</dt><dd>Test obbligatorio con un termine senza risultati prima della consegna.</dd>
+        </dl>
+        <div class="est">Stima 1 h</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

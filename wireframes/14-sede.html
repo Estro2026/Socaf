@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D14 · Scheda sede — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D14" data-name="Scheda sede" data-url="/sedi/[sede]/ · 5 schede · CPT sede · /sedi/ non è una pagina"></div>
+<header data-header="Azienda"></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <a href="15-contatti.html" data-url="/contatti/">Contatti</a><span class="sep">/</span>
+    <span aria-current="page">Osio Sotto</span>
+  </nav>
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">BLOCCHI 1–6 · Identificazione e recapiti della sede</span>
+      <p class="kicker" style="color:var(--red)">Sede principale</p>
+      <h1>Socaf Osio Sotto (Bergamo)</h1>
+
+      <div class="grid grid-2" style="gap:32px;align-items:start;margin-top:22px">
+        <div class="stack">
+          <div>
+            <h4>Indirizzo</h4>
+            <address style="font-style:normal;font-size:16.5px">
+              Socaf S.p.A.<br>
+              Via Trieste, 14<br>
+              24046 Osio Sotto (BG)<br>
+              Italia
+            </address>
+          </div>
+          <div>
+            <h4>Telefono ed email</h4>
+            <p style="margin:0"><a href="tel:+390354876054">+39 035 4876054</a><br>
+              <a href="mailto:info@socaf.it">info@socaf.it</a></p>
+            <p style="margin:10px 0 0"><a class="btn btn-primary" href="tel:800480110">Numero verde 800 480110</a></p>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div>
+            <h4>Orari</h4>
+            <div class="table-scroll">
+              <table class="specs">
+                <tbody>
+                  <tr><th>Lunedì – Giovedì</th><td>[DA CONFERMARE]</td></tr>
+                  <tr><th>Venerdì</th><td>[DA CONFERMARE]</td></tr>
+                  <tr><th>Sabato</th><td>[DA CONFERMARE]</td></tr>
+                  <tr><th>Domenica</th><td>Chiuso</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small" style="margin-top:8px"><span class="taskflag t-client">Client task</span> Orari reali da Socaf.</p>
+          </div>
+          <div>
+            <h4>Referente<span class="cond"> — condizionale</span></h4>
+            <p style="margin:0">[NOME REFERENTE]<br><span class="small muted">Se il campo non è compilato il blocco non compare.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 104 — Scheda sede</div>
+      <dl>
+        <dt>Origine</dt><dd>CPT <code>sede</code> · 5 istanze · <b>archivio disattivato</b></dd>
+        <dt>Campi</dt><dd>gruppo <code>Sede — recapiti</code>: <code>ragione_sociale</code>,
+          <code>via</code>, <code>cap</code>, <code>comune</code>, <code>provincia</code>,
+          <code>telefono</code>, <code>email</code>, <code>latitudine</code>, <code>longitudine</code>,
+          <code>referente</code>, <code>sede_principale</code> (Vero/falso).<br>
+          gruppo <code>Sede — orari</code>: <code>orari</code> Repeater <code>giorno</code> + <code>fascia</code>.</dd>
+        <dt>Regola</dt><dd><b>Campi separati, mai un blocco di testo.</b> Gli stessi campi alimentano la pagina
+          e i dati strutturati: il recapito non può divergere tra i due.</dd>
+        <dt>Condizione</dt><dd><span class="cond">Referente</span>: solo se compilato.
+          <span class="cond">Foto</span>: solo se caricate.</dd>
+        <dt>Attenzione URL</dt><dd><code>/sedi/</code> <b>non è una pagina</b>: l'archivio del CPT va disattivato
+          (<code>has_archive = false</code>), chi apre quell'indirizzo trova un 404. <b>Da non creare.</b></dd>
+        <dt>Menu</dt><dd>Le schede sede <b>non entrano nel menu</b>: si raggiungono da Contatti e dal piè di pagina.</dd>
+        <dt>SEO</dt><dd>Cluster Asse 2 · Geografico (25 kw / 6.690 vol): Milano, Verona, Bergamo, Brescia
+          compaiono nelle ricerche. Dati strutturati <code>LocalBusiness</code> per ogni sede,
+          con <code>Organization</code> su Osio Sotto marcata come principale.</dd>
+      </dl>
+      <div class="est">Stima 3 h (dentro le 6 h di D14)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Mappa</span>
+      <h2>Come arrivare</h2>
+      <div class="ph ph-map">Mappa — coordinate dai campi <code>latitudine</code> / <code>longitudine</code></div>
+      <p class="small" style="margin-top:12px">Nel wireframe la mappa è un segnaposto: non si carica uno script
+        di terze parti prima del consenso ai cookie.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 105 — Mappa</div>
+      <dl>
+        <dt>Origine</dt><dd>Campi <code>latitudine</code> e <code>longitudine</code> (numerici separati,
+          non un campo Google Map che richiederebbe la API key anche solo in redazione)</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Implementazione</dt><dd>Widget Google Maps di Elementor con Dynamic Tag sulle coordinate,
+          oppure iframe statico. <b>Caricamento differito dietro il consenso cookie</b>: senza consenso
+          si mostra un segnaposto cliccabile.</dd>
+        <dt>Performance</dt><dd>La mappa è il singolo elemento più pesante di questa pagina.
+          Lazy load obbligatorio.</dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 8 · Cosa si fa in questa sede</span>
+      <h2>Cosa si fa in questa sede</h2>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 150–250 PAROLE</p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-client">Client task</span>
+        Showroom, magazzino, officina di assistenza, ritiro noleggio: cosa c'è davvero in ogni sede lo sa Socaf.</p>
+      <div class="skel" data-lines="5"></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 106 — Cosa si fa in questa sede</div>
+      <dl>
+        <dt>Campo</dt><dd><code>cosa_si_fa</code> — Textarea / WYSIWYG</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Perché conta</dt><dd>È il blocco che qualifica la sede per chi arriva da una ricerca locale:
+          « c'è lo showroom? posso ritirare qui il noleggio? ».</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 9 · Foto — <span class="cond">condizionale</span></span>
+      <h2>La sede</h2>
+      <div class="grid grid-3">
+        <div class="ph ph-img">Foto sede 1</div>
+        <div class="ph ph-img">Foto sede 2</div>
+        <div class="ph ph-img">Foto sede 3</div>
+      </div>
+      <p class="small" style="margin-top:12px">
+        <span class="taskflag t-content">Content task</span>
+        <span class="cond">Sede senza foto → il blocco non compare.</span>
+        La produzione fotografica segue il « Human style » della Visual Identity: operatori e professionisti
+        in contesti autentici e operativi.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 107 — Galleria sede</div>
+      <dl>
+        <dt>Campo</dt><dd><code>foto</code> — Galleria ACF, non obbligatorio</dd>
+        <dt>Condizione</dt><dd><span class="cond">Solo se caricata.</span> Al lancio è probabile che diverse
+          sedi ne siano prive: il blocco sparisce, non resta vuoto.</dd>
+        <dt>Fuori perimetro</dt><dd><span class="taskflag t-content">Content task</span> servizio fotografico</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 10 · Le altre sedi</span>
+      <h2>Le altre sedi</h2>
+      <div data-sedi="La sede corrente compare comunque nell'elenco: in produzione va esclusa dalla query."></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 108 — Le altre sedi</div>
+      <dl>
+        <dt>Query</dt><dd>Listing Grid · CPT <code>sede</code> · <b>post corrente escluso</b> ·
+          ordine per <code>sede_principale</code> DESC</dd>
+        <dt>Condizione</dt><dd>Sempre (restano 4)</dd>
+        <dt>Componente</dt><dd>Blocco sedi globale, con il parametro « escludi corrente ».
+          Nel wireframe l'esclusione non è applicata: è annotata qui.</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 11 · Richiesta informazioni</span>
+      <form class="form" data-demo-form>
+        <h3>Scrivi a questa sede</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente.</p>
+        <div class="fields">
+          <div class="field"><label for="c-nome">Nome e cognome *</label><input id="c-nome" required></div>
+          <div class="field"><label for="c-az">Azienda *</label><input id="c-az" required></div>
+          <div class="field"><label for="c-mail">Email *</label><input id="c-mail" type="email" required></div>
+          <div class="field"><label for="c-tel">Telefono</label><input id="c-tel" type="tel"></div>
+          <div class="field full"><label for="c-msg">Messaggio</label><textarea id="c-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|Socaf Osio Sotto (Bergamo)"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <a class="btn btn-ghost" href="tel:+390354876054">+39 035 4876054</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 109 — Form di sede</div>
+      <dl>
+        <dt>Componente</dt><dd>Modello globale</dd>
+        <dt>Variante</dt><dd>Il campo nascosto porta il nome della sede. <b>Se l'instradamento delle email
+          deve cambiare per sede</b> (Verona → Bottoni, Pordenone → Tecno Clean) serve una Display Condition
+          sull'azione Email del form, o un campo nascosto con l'indirizzo destinatario.
+          <span class="taskflag t-client">Client task</span>: chi riceve le richieste delle sedi partecipate?</dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

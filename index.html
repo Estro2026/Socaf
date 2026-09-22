@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Socaf — Wireframe del nuovo sito</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/css/wireframe.css">
+</head>
+<body>
+
+<div class="devbar" style="position:static">
+  <div class="dv-title">SOCAF · WIREFRAME NUOVO SITO <span>· 19 template · low/mid fidelity</span></div>
+  <div class="dv-actions">
+    <a class="dv-btn" href="docs/source-map.md">source-map</a>
+    <a class="dv-btn" href="docs/dev-notes.md">dev-notes</a>
+    <a class="dv-btn" href="docs/dev-estimate.md">dev-estimate</a>
+    <a class="dv-btn" href="docs/open-points.md">open-points</a>
+  </div>
+</div>
+
+<div class="wrap" style="max-width:1240px">
+
+  <section class="section">
+    <p class="kicker">Fase 5 — wireframe navigabile</p>
+    <h1 style="max-width:20ch">Il wireframe del nuovo sito Socaf</h1>
+    <p class="lede">Diciannove template, non 119 pagine. Struttura, gerarchia dei contenuti, navigazione,
+      componenti ricorrenti, stati condizionali e note tecniche per lo sviluppo WordPress + Elementor Pro.</p>
+    <p class="small" style="max-width:76ch"><b>Non è ancora lo sviluppo</b> e non è l'art direction definitiva:
+      i contenuti restano segnaposto dimensionati sulla lunghezza reale dei testi.
+      Il linguaggio visivo è quello della Visual Identity — superfici traslucide, riflessi, angoli morbidi —
+      con BC Novatica per i titoli e Neue Haas Unica per il testo corrente.</p>
+
+    <div class="kpi" style="margin-top:30px">
+      <div><b>19</b><span>template</span></div>
+      <div><b>6</b><span>famiglie</span></div>
+      <div><b>28</b><span>sottocategorie</span></div>
+      <div><b>119</b><span>schede macchina</span></div>
+      <div><b>7</b><span>settori</span></div>
+      <div><b>13</b><span>categorie prodotto</span></div>
+      <div><b>5</b><span>sedi</span></div>
+      <div><b>184</b><span>articoli</span></div>
+    </div>
+
+    <div class="notice">
+      <p><b>Due modi di leggerlo, un solo file.</b></p>
+      <p style="margin-bottom:8px"><b>Vista sito</b> — è quella che si apre di default: si vede solo
+      l'interfaccia destinata al cliente, come sarà il sito. Nessun richiamo tecnico.</p>
+      <p style="margin-bottom:8px"><b>Vista wireframe</b> — dal pulsante <b>« Mostra note DEV »</b> nella
+      barra scura. Accanto a ogni blocco compare un <b>richiamo numerato</b>: cliccandolo si apre un pannello
+      laterale con la nota per lo sviluppatore, la lunghezza prevista del testo, le condizioni, i task e gli
+      open point. Dal pannello si passa alla nota precedente o successiva.</p>
+      <p class="mb0"><b>Le note non spostano nulla.</b> I richiami sono fuori dal flusso e le annotazioni
+      stanno nel pannello: <b>la pagina ha esattamente la stessa altezza nelle due viste</b>, così la
+      lunghezza che si vede è quella vera. Verificato a 1440, 1024, 768 e 390 px.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>I tre template prioritari</h2>
+    <p class="muted" style="max-width:74ch">Definiscono quasi tutti i componenti del sito: card macchina,
+      card sottocategoria, card articolo, etichette, blocchi noleggio e usato, breadcrumbs, FAQ e form.
+      Vanno approvati per primi.</p>
+    <div class="dash-grid" style="margin-top:20px">
+      <div class="dash-card"><span class="d-code">D1</span>
+        <a class="d-name" href="wireframes/01-scheda-macchina.html">Scheda macchina</a>
+        <span class="d-url">/[famiglia]/[sottocategoria]/[modello]/</span>
+        <span class="d-meta">119 istanze · CPT <code>macchina</code> · dati reali LA 511-40 BT · 17 blocchi</span></div>
+      <div class="dash-card"><span class="d-code">D2</span>
+        <a class="d-name" href="wireframes/02-sottocategoria.html">Archivio sottocategoria</a>
+        <span class="d-url">/[famiglia]/[sottocategoria]/</span>
+        <span class="d-meta">28 pagine · 12 blocchi · <b>tutte e 28 navigabili con i prodotti veri</b></span></div>
+      <div class="dash-card"><span class="d-code">D3</span>
+        <a class="d-name" href="wireframes/03-famiglia.html">Pagina famiglia</a>
+        <span class="d-url">/[famiglia]/</span>
+        <span class="d-meta">6 pagine · 13 blocchi · <b>tutte e 6 navigabili</b></span></div>
+    </div>
+
+    <div class="notice" style="margin-top:22px">
+      <p class="mb0"><b>D1, D2 e D3 non mostrano un solo esempio.</b> Sono alimentati dal catalogo reale
+      estratto da socaf.it: <b>28 sottocategorie, 6 famiglie e 116 schede</b> con nomi e descrizioni veri.
+      Clicca una sottocategoria dal blocco « le altre » o una famiglia dal menu Macchine: la pagina cambia
+      davvero. Cosa resta segnaposto: immagini, specifiche tecniche (tranne la LA 511-40 BT) e i flag
+      noleggio/usato, che sono un data entry ancora da fare.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Noleggio e usato</h2>
+    <div class="dash-grid">
+      <div class="dash-card"><span class="d-code">D4</span>
+        <a class="d-name" href="wireframes/04-noleggio.html">Ingresso noleggio</a>
+        <span class="d-url">/noleggio/</span>
+        <span class="d-meta">1 pagina · sezione nuova · non elenca macchine</span></div>
+      <div class="dash-card"><span class="d-code">D5</span>
+        <a class="d-name" href="wireframes/05-noleggio-famiglia.html">Noleggio per famiglia</a>
+        <span class="d-url">/noleggio/[famiglia]/</span>
+        <span class="d-meta">4 pagine + 2 da confermare · sedi obbligatorie</span></div>
+      <div class="dash-card"><span class="d-code">D6</span>
+        <a class="d-name" href="wireframes/06-usato.html">Ingresso usato</a>
+        <span class="d-url">/usato/</span>
+        <span class="d-meta">1 pagina nuova · sale di livello</span></div>
+      <div class="dash-card"><span class="d-code">D7</span>
+        <a class="d-name" href="wireframes/07-usato-famiglia.html">Usato per famiglia</a>
+        <span class="d-url">/usato/[famiglia]-usate/</span>
+        <span class="d-meta">5 pagine · <b>indirizzi invariati</b></span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Settori e prodotti</h2>
+    <div class="dash-grid">
+      <div class="dash-card"><span class="d-code">D8</span>
+        <a class="d-name" href="wireframes/08-settori.html">Ingresso settori</a>
+        <span class="d-url">/settori/</span>
+        <span class="d-meta">1 pagina · fuori dal menu e dalla home</span></div>
+      <div class="dash-card"><span class="d-code">D9</span>
+        <a class="d-name" href="wireframes/09-settore.html">Pagina settore</a>
+        <span class="d-url">/settori/[settore]/</span>
+        <span class="d-meta">7 pagine · 5 cambiano indirizzo, 2 nuove</span></div>
+      <div class="dash-card"><span class="d-code">D10</span>
+        <a class="d-name" href="wireframes/10-prodotti-pulizia.html">Ingresso prodotti</a>
+        <span class="d-url">/prodotti-per-la-pulizia/</span>
+        <span class="d-meta">1 pagina · ~4.500 ricerche/mese</span></div>
+      <div class="dash-card"><span class="d-code">D11</span>
+        <a class="d-name" href="wireframes/11-categoria-prodotto.html">Categoria prodotto</a>
+        <span class="d-url">/prodotti-per-la-pulizia/[categoria]/</span>
+        <span class="d-meta">13 pagine · nessuna scheda prodotto sotto</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Contenuti, sedi e contatti</h2>
+    <div class="dash-grid">
+      <div class="dash-card"><span class="d-code">D12</span>
+        <a class="d-name" href="wireframes/12-articolo.html">Articolo</a>
+        <span class="d-url">/news/[titolo]/</span>
+        <span class="d-meta">184 post · nessun indirizzo cambia</span></div>
+      <div class="dash-card"><span class="d-code">D13</span>
+        <a class="d-name" href="wireframes/13-approfondimenti.html">Archivio Approfondimenti</a>
+        <span class="d-url">/news/</span>
+        <span class="d-meta">12 per pagina · nessun filtro</span></div>
+      <div class="dash-card"><span class="d-code">D14</span>
+        <a class="d-name" href="wireframes/14-sede.html">Scheda sede</a>
+        <span class="d-url">/sedi/[sede]/</span>
+        <span class="d-meta">5 schede · <code>/sedi/</code> non è una pagina</span></div>
+      <div class="dash-card"><span class="d-code">D15</span>
+        <a class="d-name" href="wireframes/15-contatti.html">Contatti</a>
+        <span class="d-url">/contatti/</span>
+        <span class="d-meta">1 pagina · diventa l'elenco delle sedi</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Home, ricerca e impianto</h2>
+    <div class="dash-grid">
+      <div class="dash-card"><span class="d-code">D16</span>
+        <a class="d-name" href="wireframes/16-home.html">Home</a>
+        <span class="d-url">/</span>
+        <span class="d-meta">esattamente 8 blocchi</span></div>
+      <div class="dash-card"><span class="d-code">D17</span>
+        <a class="d-name" href="wireframes/17-risultati-ricerca.html">Risultati di ricerca</a>
+        <span class="d-url">/?s=</span>
+        <span class="d-meta">l'unico empty state del sito · noindex</span></div>
+      <div class="dash-card"><span class="d-code">D18</span>
+        <a class="d-name" href="wireframes/18-pagine-restanti.html">Servizi, azienda, referenze</a>
+        <span class="d-url">/servizi/ · /azienda/ · /azienda/referenze/</span>
+        <span class="d-meta">~14 pagine · 4 varianti di un solo impianto</span></div>
+      <div class="dash-card"><span class="d-code">D19</span>
+        <a class="d-name" href="wireframes/19-header-menu-footer.html">Header, menu e footer</a>
+        <span class="d-url">componenti globali</span>
+        <span class="d-meta">6 voci · 4 tendine · numero verde</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Documenti</h2>
+    <div class="dash-grid">
+      <div class="dash-card"><span class="d-code">AUDIT</span>
+        <a class="d-name" href="docs/source-map.md">source-map.md</a>
+        <span class="d-meta">Matrice di copertura: template, URL, fonte, blocchi obbligatori e condizionali,
+          collegamenti, cluster SEO, contenuti disponibili e mancanti</span></div>
+      <div class="dash-card"><span class="d-code">DEV</span>
+        <a class="d-name" href="docs/dev-notes.md">dev-notes.md</a>
+        <span class="d-meta">Note per lo sviluppatore WordPress: modello dati, ACF, JetEngine,
+          query, condizioni, relazioni, SEO tecnico, template per template</span></div>
+      <div class="dash-card"><span class="d-code">STIMA</span>
+        <a class="d-name" href="docs/dev-estimate.md">dev-estimate.md</a>
+        <span class="d-meta">228 h previste · 12 h di buffer · 240 h massimo</span></div>
+      <div class="dash-card"><span class="d-code">OPEN</span>
+        <a class="d-name" href="docs/open-points.md">open-points.md</a>
+        <span class="d-meta">14 punti aperti, nessuno risolto inventando</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Regole rispettate</h2>
+    <div class="grid grid-2" style="gap:16px">
+      <div class="promo" style="border-left-color:var(--grey)">
+        <h4>Nel wireframe c'è</h4>
+        <ul class="mb0 small" style="margin-top:6px">
+          <li>Gli indirizzi dell'alberatura, slug reali verificati sulla sitemap di socaf.it</li>
+          <li>Il menu di Fase 4, senza reinterpretazioni</li>
+          <li>Tutti i blocchi previsti da ogni template</li>
+          <li>Ogni condizione « quando appare » annotata</li>
+          <li>Dati reali sulla scheda macchina e sulle cinque sedi</li>
+          <li>Segnaposto dimensionati sulla lunghezza reale dei testi</li>
+          <li>Il numero verde su ogni pagina</li>
+        </ul>
+      </div>
+      <div class="promo" style="border-left-color:var(--grey)">
+        <h4>Nel wireframe non c'è</h4>
+        <ul class="mb0 small" style="margin-top:6px">
+          <li>Filtri di qualsiasi tipo, JetSmartFilters, facet, configuratori</li>
+          <li>Prezzi, carrello, checkout, schede ecommerce, wishlist, comparatore</li>
+          <li>Schede di singolo prodotto per la pulizia</li>
+          <li>Pagine per la singola macchina usata</li>
+          <li>Voci di menu oltre le sei previste, sottocategorie nel menu</li>
+          <li>Sezioni non presenti nel Brief mockup</li>
+          <li>Animazioni, parallax, scroll-jacking, librerie esterne, Google Fonts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Note tecniche sul wireframe</h2>
+    <ul class="small" style="max-width:82ch">
+      <li>HTML, CSS e JavaScript semplice. <b>Nessun framework, nessuna build.</b>
+        Ogni file si apre direttamente.</li>
+      <li>Header, footer, blocco sedi e campi nascosti sono generati da
+        <code>assets/js/wireframe.js</code>: in questo modo esistono in un punto solo e restano coerenti
+        su tutti i diciannove file — esattamente come diventeranno modelli globali di Elementor.</li>
+      <li>I link interni puntano al template che rappresenta quella pagina;
+        <b>l'indirizzo reale del nuovo sito è nel tooltip</b> di ogni link e nelle note DEV.</li>
+      <li>Interazioni implementate: tendine del menu, fisarmonica mobile, accordion FAQ,
+        cambio immagine in galleria, ricerca demo, mostra/nascondi note DEV. Nient'altro.</li>
+      <li>Responsive verificato a 1440, 1024, 768 e 390 px, in entrambe le viste.</li>
+      <li><b>BC Novatica</b> è caricato da <code>assets/fonts</code> via <code>@font-face</code>.
+        <b>Neue Haas Unica</b> è cablato ma i file non sono nel progetto: finché mancano si usa un
+        neo-grottesco di sistema, che è la stessa classe tipografica. Vedi
+        <a href="docs/open-points.md">OP-11</a>.</li>
+      <li>Il logo è quello ufficiale del progetto (<code>assets/logo</code>).
+        L'effetto vetro usa <code>backdrop-filter</code>, supportato da tutti i browser correnti;
+        dove manca, le superfici restano opache e leggibili.</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="small mb0">Socaf — wireframe del nuovo sito · documento di lavoro.
+      Le note DEV fanno parte del wireframe ma non dell'interfaccia destinata al cliente.</p>
+  </div>
+</footer>
+
+<script src="assets/js/catalogo.js"></script>
+<script src="assets/js/wireframe.js"></script>
+</body>
+</html>

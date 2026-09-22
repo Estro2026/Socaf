@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D3 · Pagina famiglia — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body data-tpl="famiglia">
+
+<div data-devbar data-code="D3" data-name="Pagina famiglia" data-url="6 pagine"></div>
+<header data-header></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <span aria-current="page" data-fam-crumb></span>
+  </nav>
+
+  <!-- 1/2/3 -->
+  <div class="row">
+    <section class="block" style="padding-top:26px">
+      <span class="block-id">BLOCCHI 1–3 · Breadcrumbs, titolo, testo introduttivo</span>
+      <h1 data-fam-h1></h1>
+      <p class="lede" data-fam-intro></p>
+      <p class="small"><b>La pagina elenca sottocategorie, non macchine.</b> Le schede si raggiungono
+        dalle pagine di sottocategoria. Cambia famiglia dal blocco « le altre famiglie » in fondo.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 22 — Intestazione della famiglia</div>
+      <dl>
+        <dt>Origine</dt><dd><b>Pagina WordPress</b> di primo livello. Le 34 pagine di catalogo
+          (6 famiglie + 28 sottocategorie) sono costruite a mano con Elementor, non sono archivi.</dd>
+        <dt>URL</dt><dd><b>Resta com'è.</b> Nessuna delle 6 famiglie cambia indirizzo.</dd>
+        <dt>Tassonomia</dt><dd>Una sola tassonomia gerarchica <code>famiglia</code> su due livelli,
+          registrata da <b>ACF Pro</b>, con base vuota e URL gerarchici. Archivi spenti.</dd>
+        <dt>Regola redazionale</dt><dd>Sulla macchina si assegna <b>solo la sottocategoria</b>:
+          la famiglia si eredita dal termine padre.</dd>
+        <dt>SEO</dt><dd>Cluster Asse 1 della famiglia. Primaria nel titolo, varianti negli H2 del testo lungo.</dd>
+      </dl>
+      <div class="est">Stima 1,5 h (template) — ×6 istanze è popolamento</div>
+    </div>
+  </div>
+
+  <!-- 4 · Elenco sottocategorie -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · Elenco sottocategorie — termini figli</span>
+      <h2 data-fam-h2></h2>
+      <div class="grid grid-3" data-fam-subs></div>
+      <p class="small">Nomi reali delle sottocategorie con il conteggio vero delle macchine.
+        Il nome della card è <b>costruito sulle parole della ricerca</b>, non sul nome del termine.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 23 — Card sottocategoria</div>
+      <dl>
+        <dt>Origine</dt><dd>Termini figli della tassonomia <code>famiglia</code></dd>
+        <dt>Query</dt><dd>JetEngine Listing Grid · <b>il loop gira su termini</b>, non su post ·
+          <code>parent</code> = termine della famiglia corrente</dd>
+        <dt>Campi</dt><dd>Su Taxonomy Term: <code>immagine</code>, <code>nome_seo</code>,
+          <code>descrizione_breve</code>. Il conteggio è <code>count</code> del termine.</dd>
+        <dt>Condizione</dt><dd>Sempre. Da 2 (robot) a 8 (altri macchinari) card.</dd>
+        <dt>Link</dt><dd>Alla <b>pagina</b> di sottocategoria, non all'archivio del termine (spento).</dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+  <!-- 5 · Testo di approfondimento -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Testo di approfondimento — il lavoro più pesante del sito</span>
+      <h2 data-fam-approf></h2>
+      <p class="wordcount" data-fam-words></p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
+
+      <h3>Cosa sono</h3><div class="skel" data-lines="7"></div>
+      <h3>Come si scelgono</h3><div class="skel" data-lines="8"></div>
+      <h3>Differenze tra i tipi</h3><div class="skel" data-lines="9"></div>
+      <h3>Per quali ambienti</h3><div class="skel" data-lines="7"></div>
+      <h3>Costi indicativi</h3><div class="skel" data-lines="6"></div>
+      <h3>Cosa serve per la manutenzione</h3><div class="skel" data-lines="6"></div>
+
+      <p class="small">Il testo sta <b>sotto</b> l'elenco delle sottocategorie, non sopra.
+        <b>Altri macchinari fa eccezione</b>: testo breve, con il solo compito di smistare.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 24 — Testo di famiglia</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina</dd>
+        <dt>Quantità</dt><dd>800–1200 parole × 5 famiglie + 1 breve (Altri macchinari):
+          il blocco redazionale più grosso del progetto</dd>
+        <dt>SEO</dt><dd>Keyword principale nel titolo, varianti nei sottotitoli. Qui vanno intercettate anche
+          le comparative (<code>miglior lavapavimenti</code> 5.400, <code>migliori lavasciuga</code> 4.400)
+          che oggi non hanno una pagina che risponda.</dd>
+        <dt>Prezzi</dt><dd>« Costi indicativi » risponde in prosa a <code>lavapavimenti professionali prezzi</code>.
+          <b>Nessun prezzo di listino, nessun campo prezzo</b>: l'e-commerce è fuori progetto.</dd>
+      </dl>
+      <div class="est">Stima 0 h di sviluppo (contenuto)</div>
+    </div>
+  </div>
+
+  <!-- 6 · FAQ -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Domande frequenti</span>
+      <h2>Domande frequenti</h2>
+      <div class="faq">
+        <details><summary>Come si sceglie la dimensione giusta?</summary>
+          <div class="faq-body"><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Si possono usare anche all'esterno?</summary>
+          <div class="faq-body"><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>Quanto costa una macchina professionale?</summary>
+          <div class="faq-body"><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Conviene comprarla, noleggiarla o prenderla usata?</summary>
+          <div class="faq-body"><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Che assistenza è compresa?</summary>
+          <div class="faq-body"><div class="skel" data-lines="2"></div></div></details>
+      </div>
+      <p class="small"><span class="todo">[CONTENUTO DA REDIGERE]</span>
+        <span class="taskflag t-seo">SEO task</span></p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 25 — FAQ di famiglia</div>
+      <dl><dt>Componente</dt><dd>Lo stesso accordion di D2 — nessuna variante grafica</dd>
+        <dt>Condizione</dt><dd>Sempre</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <!-- 7 · Le più richieste -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Le più richieste — selezione manuale 5–6 macchine</span>
+      <h2 data-fam-top-title></h2>
+      <div class="grid grid-3" data-fam-top></div>
+      <p class="small"><span class="taskflag t-client">Client task</span>
+        Nomi reali, ma <b>la scelta delle 5–6 macchine la fa Socaf</b>: sei decisioni commerciali.
+        Nel wireframe sono mostrate le prime della famiglia. Il blocco sta <b>in basso</b>, dopo il contenuto.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 26 — Le più richieste</div>
+      <dl>
+        <dt>Origine</dt><dd>Campo sul termine famiglia</dd>
+        <dt>Campo</dt><dd><code>macchine_piu_richieste</code> — ACF Relationship verso il CPT
+          <code>macchina</code>, min 5 / max 6</dd>
+        <dt>Condizione</dt><dd>Sempre. Se la selezione non è compilata il blocco resta vuoto e sparisce:
+          va compilato prima del lancio.</dd>
+        <dt>Query</dt><dd>JetEngine Listing Grid sulla relazione, ordine manuale</dd>
+        <dt>Fuori perimetro</dt><dd><span class="taskflag t-client">Client task</span> 6 selezioni</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <!-- 8/9 -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCHI 8–9 · Noleggio e usato — <span class="cond">condizionali</span></span>
+      <div class="promo-pair" data-fam-promo></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 27 — Noleggio e usato su D3</div>
+      <dl>
+        <dt>Condizione</dt><dd><span class="cond">Robot</span>: nessuna landing di noleggio e nessuna pagina
+          usato → entrambi i blocchi spariscono, con loro l'intera sezione.
+          <span class="cond">Aspiratori e altri macchinari</span>: solo usato.</dd>
+        <dt>Matrice</dt><dd>Noleggio: lavapavimenti, idropulitrici, spazzatrici (+ lavamoquette
+          <span class="openpoint">OP-02</span>). Usato: lavapavimenti, idropulitrici, spazzatrici,
+          aspiratori, altri macchinari.</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <!-- 10 · Dove si usano -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 10 · Dove si usano</span>
+      <h2>Dove si usano</h2>
+      <div class="chips">
+        <a class="chip" href="09-settore.html?s=industria" data-url="/settori/industria/">Industria</a>
+        <a class="chip" href="09-settore.html?s=imprese-di-pulizia" data-url="/settori/imprese-di-pulizia/">Imprese di pulizia</a>
+        <a class="chip" href="09-settore.html?s=horeca" data-url="/settori/horeca/">Ho.Re.Ca.</a>
+        <a class="chip" href="09-settore.html?s=retail" data-url="/settori/retail/">Retail</a>
+        <a class="chip" href="09-settore.html?s=logistica" data-url="/settori/logistica/">Logistica</a>
+        <a class="chip" href="09-settore.html?s=officine-metalmeccanica" data-url="/settori/officine-metalmeccanica/">Officine e metalmeccanica</a>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 28 — Dove si usano (famiglia)</div>
+      <dl>
+        <dt>Condizione</dt><dd>Sempre su D3 (a differenza di D2, dove è condizionale)</dd>
+        <dt>Query</dt><dd>Stessa funzione di D2, applicata a tutte le macchine della famiglia</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <!-- 11 · Articoli -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 11 · Articoli collegati — <span class="cond">condizionale</span> · max 3</span>
+      <h2>Approfondimenti</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Come funziona una macchina lavapavimenti?</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/come-funziona-macchina-lavapavimenti/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Le 10 regole d'oro per la manutenzione della tua lavapavimenti</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/10-regole-oro-manutenzione-lavapavimenti/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Scegli le lavapavimenti usate: più risparmio, maggiore convenienza</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/scegli-le-lavapavimenti-usate-piu-risparmio-maggiore-convenienza/">Leggi</a></div></article>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 29 — Articoli di famiglia</div>
+      <dl>
+        <dt>Query</dt><dd>Stessa logica di D2, ma sulle macchine di <b>tutta</b> la famiglia. Limite 3.</dd>
+        <dt>Condizione</dt><dd><span class="cond">Se almeno un articolo.</span></dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <!-- 12 · Le altre famiglie -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 12 · Le altre famiglie</span>
+      <h2>Le altre macchine Socaf</h2>
+      <div class="chips" data-fam-others></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 30 — Le altre famiglie</div>
+      <dl>
+        <dt>Query</dt><dd>Termini di primo livello di <code>famiglia</code>, corrente marcato</dd>
+        <dt>Riuso</dt><dd>Lo stesso elenco alimenta la tendina Macchine, il blocco 2 della home e lo stato
+          vuoto della ricerca (D17). <b>Una sola sorgente.</b></dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <!-- 13 · Form -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 13 · Richiesta informazioni — variante generica</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi maggiori informazioni</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente.</p>
+        <div class="fields">
+          <div class="field"><label for="h-nome">Nome e cognome *</label><input id="h-nome" required></div>
+          <div class="field"><label for="h-az">Azienda *</label><input id="h-az" required></div>
+          <div class="field"><label for="h-mail">Email *</label><input id="h-mail" type="email" required></div>
+          <div class="field"><label for="h-tel">Telefono</label><input id="h-tel" type="tel"></div>
+          <div class="field full"><label for="h-msg">Messaggio</label><textarea id="h-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|titolo della famiglia"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:18px">
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 31 — Form su D3</div>
+      <dl><dt>Componente</dt><dd>Modello globale, identico a D2. Nessuna variante.</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

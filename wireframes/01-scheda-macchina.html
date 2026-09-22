@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D1 · Scheda macchina — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body data-tpl="macchina">
+
+<div data-devbar data-code="D1" data-name="Scheda macchina" data-url="119 istanze · CPT macchina"></div>
+<header data-header></header>
+
+<div class="wrap">
+
+  <!-- 1 · Breadcrumbs -->
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <span data-m-crumb-fam></span><span class="sep">/</span>
+    <span data-m-crumb-sub></span><span class="sep">/</span>
+    <span aria-current="page" data-m-crumb></span>
+  </nav>
+
+  <div class="split">
+    <!-- ================= COLONNA CONTENUTO ================= -->
+    <div>
+
+      <!-- 2/3/4/5/6/7 -->
+      <section class="block" style="padding-top:26px">
+        <span class="block-id">BLOCCHI 2–7 · Riconoscere la macchina</span>
+
+        <div class="grid grid-2" style="gap:34px;align-items:start">
+          <div data-gallery>
+            <div class="gallery-main" data-m-reale>
+              <img src="../assets/images/la511-40-bt-01.png" alt="Lavapavimenti Socaf LA 511-40 BT">
+            </div>
+            <div class="gallery-main ph ph-volume" data-m-generico>Immagine principale — prima della galleria</div>
+            <div class="thumbs">
+              <button class="thumb" type="button" aria-selected="true" data-m-reale>
+                <img src="../assets/images/la511-40-bt-01.png" alt="Vista d'insieme"></button>
+              <button class="thumb" type="button" aria-selected="false" data-m-reale>
+                <img src="../assets/images/la511-40-bt-02.jpg" alt="Pannello comandi"></button>
+              <span class="thumb ph ph-volume" data-m-generico></span>
+              <span class="thumb ph ph-volume" data-m-generico></span>
+              <span class="thumb ph" style="border-style:dashed;font-size:10px">3</span>
+              <span class="thumb ph" style="border-style:dashed;font-size:10px">4</span>
+            </div>
+          </div>
+
+          <div class="stack">
+            <p class="kicker" style="margin:0">by Socaf</p>
+            <h1 style="margin:0" data-m-nome></h1>
+            <div class="tags" data-m-tags></div>
+            <p class="lede" style="margin:0" data-m-desc></p>
+
+            <p style="margin:0" data-m-reale>LA 511-40 BT è dotata di un sistema di trazione assistita che
+              movimenta automaticamente la macchina durante il lavoro, riducendo lo sforzo dell'operatore e
+              migliorando comfort, maneggevolezza e produttività. Il pannello comandi, con contaore integrato
+              e indicatore del livello soluzione, permette un controllo immediato dello stato operativo.</p>
+            <div class="skel" data-lines="4" data-m-generico></div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+              <a class="btn btn-primary" href="#richiesta">Richiedi informazioni</a>
+              <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+            </div>
+          </div>
+        </div>
+        <p class="small">Su questa macchina i dati sono <b>reali</b>: nome, descrizione, punti di forza,
+          20 righe di specifiche, PDF e due fotografie vengono da socaf.it. Sulle altre 115 schede il template
+          mostra nome e descrizione reali, il resto è segnaposto.</p>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 01 — Intestazione, galleria, etichette</div>
+        <dl>
+          <dt>Origine</dt><dd>ACF Pro · CPT <code>macchina</code></dd>
+          <dt>Campi</dt><dd><code>galleria_immagini</code> (Galleria, obbligatorio) · <code>descrizione_breve</code>
+            (Textarea 200 caratteri, obbligatorio) · <code>disponibile_noleggio</code> e
+            <code>disponibile_usata</code> (Vero/falso, obbligatori) · titolo = post title</dd>
+          <dt>Condizione</dt><dd><span class="cond">Etichetta noleggio</span> solo se
+            <code>disponibile_noleggio = true</code>. <span class="cond">Etichetta usato</span> solo se
+            <code>disponibile_usata = true</code>. <span class="cond">Miniature</span> solo con più di
+            un'immagine: con una sola la riga non viene stampata.</dd>
+          <dt>Regola</dt><dd>Una sola galleria. Nessun campo « immagine principale » separato:
+            la prima immagine fa da principale qui e nelle card.</dd>
+          <dt>Implementazione</dt><dd>Elementor Pro · Theme Builder → Single <code>macchina</code>,
+            widget Gallery nativo. Etichette = modello globale riusato dalla card, con Display Condition ACF.</dd>
+          <dt>Link</dt><dd>Nessuno: le etichette non sono cliccabili (BM §C).</dd>
+        </dl>
+        <div class="est">Stima 3 h (dentro le 14 h di D1)</div>
+      </div>
+
+      <!-- 8 · Punti di forza -->
+      <section class="block">
+        <span class="block-id">BLOCCO 8 · Punti di forza — repeater 3–5 voci</span>
+        <h2>Caratteristiche principali</h2>
+        <ul class="strengths" data-m-reale>
+          <li><b>Trazione assistita</b> — movimenta automaticamente la macchina e riduce lo sforzo dell'operatore.</li>
+          <li><b>Aggancio e sgancio automatico della spazzola</b> — riduce tempi e sforzi nel montaggio.</li>
+          <li><b>Attacco tergipavimento in alluminio</b> — resistenza e durata anche in uso intensivo.</li>
+          <li><b>Emergency Stop</b> — arresto immediato della macchina in caso di necessità.</li>
+          <li><b>Sistema Start &amp; Stop</b> — spegne spazzole, aspirazione, trazione e flusso acqua durante le soste.</li>
+        </ul>
+        <ul class="strengths" data-m-generico>
+          <li><div class="skel" data-lines="1" style="margin:0"></div></li>
+          <li><div class="skel" data-lines="1" style="margin:0"></div></li>
+          <li><div class="skel" data-lines="1" style="margin:0"></div></li>
+          <li><div class="skel" data-lines="1" style="margin:0"></div></li>
+        </ul>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 02 — Punti di forza</div>
+        <dl>
+          <dt>Origine</dt><dd>ACF Pro · gruppo <code>Macchina — dati tecnici</code></dd>
+          <dt>Campo</dt><dd><code>punti_di_forza</code> — Repeater, min 3 / max 5, sottocampi
+            <code>titolo</code> + <code>testo</code></dd>
+          <dt>Condizione</dt><dd>Sempre (campo obbligatorio)</dd>
+          <dt>Implementazione</dt><dd>Widget Loop/Repeater ACF o Text Editor con shortcode.
+            Nessun widget su misura.</dd>
+        </dl>
+        <div class="est">Stima 1 h</div>
+      </div>
+
+      <!-- 9 · Specifiche tecniche -->
+      <section class="block">
+        <span class="block-id">BLOCCO 9 · Specifiche tecniche — repeater etichetta + valore</span>
+        <h2>Caratteristiche tecniche</h2>
+        <div class="table-scroll" data-m-reale>
+          <table class="specs">
+            <tbody>
+              <tr><th>Produttività teorica fino a m²/h</th><td>2040</td></tr>
+              <tr><th>Larghezza lavoro mm</th><td>510</td></tr>
+              <tr><th>Motore spazzole (n.) V/W</th><td>(1) 24/500</td></tr>
+              <tr><th>Giri spazzole giri/min</th><td>140</td></tr>
+              <tr><th>Pressione sulle spazzole kg</th><td>23</td></tr>
+              <tr><th>Serbatoio soluzione l</th><td>40</td></tr>
+              <tr><th>Serbatoio recupero l</th><td>40</td></tr>
+              <tr><th>Motore aspirazione V/W</th><td>24/422</td></tr>
+              <tr><th>Depressione aspiratore mbar</th><td>180</td></tr>
+              <tr><th>Alimentazione V</th><td>24</td></tr>
+              <tr><th>Trazione tipo</th><td>automatica</td></tr>
+              <tr><th>Batterie (n.) V/Ah C20</th><td>(2) 12/110 ACIDO</td></tr>
+              <tr><th>Autonomia batterie fino a h</th><td>2</td></tr>
+              <tr><th>Velocità massima di avanzamento km/h</th><td>4</td></tr>
+              <tr><th>Motore trazione V/W</th><td>24/150</td></tr>
+              <tr><th>Dimensioni macchina (L × h × l) mm</th><td>1.225 / 1.030 / 597</td></tr>
+              <tr><th>Larghezza tergipavimento mm</th><td>705</td></tr>
+              <tr><th>Peso a vuoto senza batterie kg</th><td>92</td></tr>
+              <tr><th>Peso in lavoro (GVW) kg</th><td>184</td></tr>
+              <tr><th>Livello acustico (ISO 11201) dB (A)</th><td>66,2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-scroll" data-m-generico>
+          <table class="specs">
+            <tbody>
+              <tr><th>Produttività teorica</th><td>—</td></tr>
+              <tr><th>Larghezza di lavoro</th><td>—</td></tr>
+              <tr><th>Alimentazione</th><td>—</td></tr>
+              <tr><th>Capacità serbatoi</th><td>—</td></tr>
+              <tr><th>Autonomia</th><td>—</td></tr>
+              <tr><th>Dimensioni</th><td>—</td></tr>
+              <tr><th>Peso</th><td>—</td></tr>
+              <tr><th>Livello acustico</th><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small"><span class="taskflag t-data">Data entry</span>
+          Il numero di righe varia per macchina: da 8 a oltre 20.</p>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 03 — Specifiche tecniche</div>
+        <dl>
+          <dt>Campo</dt><dd><code>specifiche_tecniche</code> — Repeater libero,
+            <code>etichetta</code> + <code>valore</code></dd>
+          <dt>Condizione</dt><dd>Sempre. Numero di righe variabile per macchina.</dd>
+          <dt>Regola redazionale</dt><dd>Dentro la stessa famiglia le etichette vanno scritte uguali.
+            Non c'è validazione tecnica: è disciplina di data entry.</dd>
+          <dt>Niente filtri</dt><dd>Il repeater resta libero proprio perché non deve alimentare facet.</dd>
+          <dt>Responsive</dt><dd>Sotto 560px la tabella scorre dentro il suo contenitore:
+            nessun overflow di pagina.</dd>
+        </dl>
+        <div class="est">Stima 1,5 h</div>
+      </div>
+
+      <!-- 10 · PDF -->
+      <section class="block">
+        <span class="block-id">BLOCCO 10 · Scheda tecnica PDF — <span class="cond">condizionale</span></span>
+        <a class="download" data-m-reale href="https://www.datocms-assets.com/60899/1789554706-la511-40-bt.pdf" target="_blank" rel="noopener">
+          <span class="ext">PDF</span> Scarica la scheda tecnica
+        </a>
+        <span class="download" data-m-generico style="border-style:dashed;color:var(--grey)">
+          <span class="ext">PDF</span> Scheda tecnica — se caricata
+        </span>
+        <p class="small">Sulle macchine senza PDF caricato <b>questo blocco non compare</b>:
+          nessuno stato vuoto, nessun pulsante disattivato.</p>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 04 — Scheda tecnica</div>
+        <dl>
+          <dt>Campo</dt><dd><code>scheda_tecnica</code> — tipo File (PDF), non obbligatorio</dd>
+          <dt>Condizione</dt><dd><span class="cond">Solo se il file è caricato.</span>
+            Display Condition Elementor su campo ACF non vuoto. Il blocco sparisce, non si svuota.</dd>
+          <dt>Implementazione</dt><dd>Widget Button con Dynamic Tag → ACF File URL</dd>
+        </dl>
+        <div class="est">Stima 0,5 h</div>
+      </div>
+
+      <!-- 11/12 · Noleggio e usato -->
+      <section class="block">
+        <span class="block-id">BLOCCHI 11–12 · Noleggio e usato — <span class="cond">condizionali</span></span>
+        <div class="promo-pair">
+          <div class="promo promo-nol" data-m-if-nol>
+            <span class="promo-mark"></span>
+            <h3>Questa macchina si può noleggiare</h3>
+            <p>Formule brevi o pluriennali, assistenza e consegna incluse. La stessa macchina, senza acquistarla.</p>
+            <a class="btn-link" data-m-nol-link href="05-noleggio-famiglia.html">Vai al noleggio</a>
+          </div>
+          <div class="promo promo-usa" data-m-if-usa>
+            <span class="promo-mark"></span>
+            <h3>Disponibile anche usata</h3>
+            <p>Macchine ricondizionate e garantite da 3 a 12 mesi. Stessa efficacia, investimento più contenuto.</p>
+            <a class="btn-link" data-m-usa-link href="07-usato-famiglia.html">Vai all'usato</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 05 — Blocchi noleggio e usato</div>
+        <dl>
+          <dt>Origine</dt><dd>Modelli globali Elementor, riusati anche su D2 e D3</dd>
+          <dt>Campi</dt><dd><code>disponibile_noleggio</code> · <code>disponibile_usata</code></dd>
+          <dt>Condizione</dt><dd><span class="cond">Noleggio</span>: campo vero <i>e</i> la famiglia ha una
+            landing. <span class="cond">Usato</span>: campo vero. Se entrambi falsi spariscono etichette
+            <i>e</i> blocchi, e resta la sola voce « macchina nuova » nel form.</dd>
+          <dt>Query</dt><dd>Costruzione dell'URL dallo slug del termine padre → Code Snippets.
+            Gli slug dell'usato cambiano genere (<code>-usate</code> / <code>-usati</code>):
+            serve una mappa esplicita, non una concatenazione.</dd>
+        </dl>
+        <div class="est">Stima 1,5 h</div>
+      </div>
+
+      <!-- 13 · Dove si usa -->
+      <section class="block">
+        <span class="block-id">BLOCCO 13 · Dove si usa — <span class="cond">condizionale</span></span>
+        <h2>Dove si usa</h2>
+        <div class="chips">
+          <a class="chip" href="09-settore.html?s=industria" data-url="/settori/industria/">Industria</a>
+          <a class="chip" href="09-settore.html?s=imprese-di-pulizia" data-url="/settori/imprese-di-pulizia/">Imprese di pulizia</a>
+          <a class="chip" href="09-settore.html?s=logistica" data-url="/settori/logistica/">Logistica</a>
+        </div>
+        <p class="small"><span class="taskflag t-data">Data entry</span>
+          I settori mostrati sono l'assegnazione da compilare sulla scheda: 119 assegnazioni, una volta sola.</p>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 06 — Dove si usa</div>
+        <dl>
+          <dt>Origine</dt><dd>Tassonomia <code>settore</code> assegnata sulla scheda macchina</dd>
+          <dt>Campo</dt><dd><code>settori_di_utilizzo</code> — Tassonomia, valori multipli, non obbligatorio</dd>
+          <dt>Condizione</dt><dd><span class="cond">Se almeno un settore assegnato.</span></dd>
+          <dt>Relazione</dt><dd>Bidirezionale automatica. <b>Attenzione</b>: questo verso alimenta referenze e
+            articoli, <i>non</i> l'elenco delle 8–12 macchine della pagina settore, che è una selezione
+            manuale separata.</dd>
+          <dt>Implementazione</dt><dd>Widget Post Terms + mappa termine → pagina in Code Snippets,
+            perché gli archivi della tassonomia sono disattivati.</dd>
+        </dl>
+        <div class="est">Stima 1 h + <span class="taskflag t-data">Data entry</span> 119 assegnazioni</div>
+      </div>
+
+      <!-- 14 · Detergenti -->
+      <section class="block">
+        <span class="block-id">BLOCCO 14 · Detergenti e consumabili per questa macchina</span>
+        <h2>I prodotti giusti per questa macchina</h2>
+        <div class="grid grid-3">
+          <div class="card"><div class="card-media ph ph-pattern ph-wide">Immagine categoria</div>
+            <div class="card-body"><span class="card-name">Detergenti per pavimenti e parquet</span>
+              <a class="card-link" href="11-categoria-prodotto.html?c=detergenti-pavimenti-parquet" data-url="/prodotti-per-la-pulizia/detergenti-pavimenti-parquet/">Vedi</a></div></div>
+          <div class="card"><div class="card-media ph ph-pattern ph-wide">Immagine categoria</div>
+            <div class="card-body"><span class="card-name">Panni, stracci e microfibra</span>
+              <a class="card-link" href="11-categoria-prodotto.html?c=panni-stracci-microfibra" data-url="/prodotti-per-la-pulizia/panni-stracci-microfibra/">Vedi</a></div></div>
+          <div class="card"><div class="card-media ph ph-pattern ph-wide">Immagine categoria</div>
+            <div class="card-body"><span class="card-name">Attrezzature</span>
+              <a class="card-link" href="11-categoria-prodotto.html?c=attrezzature" data-url="/prodotti-per-la-pulizia/attrezzature/">Vedi</a></div></div>
+        </div>
+        <p class="small"><span class="taskflag t-client">Client task</span> <span class="openpoint">OP-10</span>
+          Le categorie arrivano dalla famiglia, non si compilano sulla singola scheda.
+          Le tre mostrate sono un'ipotesi: la scelta è una delle sei decisioni commerciali di Socaf.</p>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 07 — Detergenti e consumabili</div>
+        <dl>
+          <dt>Origine</dt><dd>Campo sul <b>termine famiglia</b>, ereditato da tutte le schede della famiglia</dd>
+          <dt>Campo</dt><dd><code>categorie_prodotto_collegate</code> — ACF Relationship verso le pagine
+            categoria, su Taxonomy Term (solo livello 1)</dd>
+          <dt>Condizione</dt><dd>Sempre. È il motivo per cui le 6 selezioni sono bloccanti: senza,
+            il blocco resta vuoto su tutte e 119 le schede.</dd>
+          <dt>Query</dt><dd>Risalire dalla sottocategoria al termine padre e leggerne il campo →
+            Code Snippets, poi Listing Grid sulle pagine restituite.</dd>
+        </dl>
+        <div class="est">Stima 1,5 h</div>
+      </div>
+
+      <!-- 15 · Articoli -->
+      <section class="block">
+        <span class="block-id">BLOCCO 15 · Articoli collegati — <span class="cond">condizionale</span> · max 3</span>
+        <h2>Approfondimenti su questa macchina</h2>
+        <div class="grid grid-3">
+          <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+            <div class="card-body"><span class="card-name">Le 10 regole d'oro per la manutenzione della tua lavapavimenti</span>
+              <span class="card-meta">Approfondimento</span>
+              <a class="card-link" href="12-articolo.html" data-url="/news/10-regole-oro-manutenzione-lavapavimenti/">Leggi</a></div></article>
+          <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+            <div class="card-body"><span class="card-name">Come funziona una macchina lavapavimenti?</span>
+              <span class="card-meta">Approfondimento</span>
+              <a class="card-link" href="12-articolo.html" data-url="/news/come-funziona-macchina-lavapavimenti/">Leggi</a></div></article>
+          <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+            <div class="card-body"><span class="card-name">Noleggio lavapavimenti: con Socaf conviene!</span>
+              <span class="card-meta">Approfondimento</span>
+              <a class="card-link" href="12-articolo.html" data-url="/news/noleggio-lavapavimenti/">Leggi</a></div></article>
+        </div>
+        <p class="small">Titoli reali. Al lancio <b>la maggior parte delle 119 schede non avrà articoli
+          collegati</b>: su quelle il blocco non compare.</p>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 08 — Articoli collegati</div>
+        <dl>
+          <dt>Origine</dt><dd>Relazione bidirezionale ACF <code>articolo ↔ macchina</code>,
+            <b>compilata dal lato articolo</b> (D12 blocco 6)</dd>
+          <dt>Campo</dt><dd>Nessun campo su questa schermata: il lato macchina si popola da solo.</dd>
+          <dt>Condizione</dt><dd><span class="cond">Se almeno un articolo collegato.</span></dd>
+          <dt>Query</dt><dd>Listing Grid sulla relazione, <b>limite 3</b>, data discendente</dd>
+        </dl>
+        <div class="est">Stima 1 h + <span class="taskflag t-data">Data entry</span> 184 articoli</div>
+      </div>
+
+      <!-- 16 · Correlate -->
+      <section class="block">
+        <span class="block-id">BLOCCO 16 · Macchine correlate — max 4</span>
+        <h2 data-m-correlate-title></h2>
+        <div class="grid grid-4" data-m-correlate></div>
+        <p class="small">Nomi e descrizioni reali delle altre macchine della sottocategoria.
+          <span class="openpoint">OP-05</span> automatiche o scelte a mano: da decidere.</p>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 09 — Macchine correlate</div>
+        <dl>
+          <dt>Query</dt><dd>Listing Grid · CPT <code>macchina</code> · tassonomia <code>famiglia</code> =
+            termine corrente · <b>post corrente escluso</b> · limite 4</dd>
+          <dt>Condizione</dt><dd>Sempre — <span class="cond">tranne quando la sottocategoria ha una sola
+            macchina</span>: la query torna vuota e il blocco sparisce. Succede su robot spazzatrici,
+            nebulizzatori, battitappeti e pulizia pannelli solari.</dd>
+          <dt>Componente</dt><dd>Card macchina — <b>lo stesso identico modello</b> di D2, D3, D5, D7, D9, D17.</dd>
+          <dt>Open point</dt><dd><span class="openpoint">OP-05</span> L'alternativa manuale costerebbe
+            un campo relazione su 119 schede: 0 h di sviluppo in più, ma data entry non previsto.</dd>
+        </dl>
+        <div class="est">Stima 1 h</div>
+      </div>
+
+    </div><!-- /colonna contenuto -->
+
+    <!-- ================= COLONNA FORM (sticky) ================= -->
+    <aside class="sticky-col" id="richiesta">
+      <section class="block" style="padding-top:26px">
+        <span class="block-id">BLOCCO 17 · Richiesta informazioni — variante scheda macchina</span>
+        <form class="form" data-demo-form>
+          <h3>Richiedi informazioni</h3>
+          <p class="form-sub">Verrai contattato da un nostro consulente.</p>
+
+          <div class="fields" style="grid-template-columns:minmax(0,1fr)">
+            <div class="field"><label for="f-nome">Nome e cognome *</label><input id="f-nome" required></div>
+            <div class="field"><label for="f-az">Azienda *</label><input id="f-az" required></div>
+            <div class="field"><label for="f-mail">Email *</label><input id="f-mail" type="email" required></div>
+            <div class="field"><label for="f-tel">Telefono</label><input id="f-tel" type="tel"></div>
+
+            <div class="field">
+              <label>Tipo di richiesta *</label>
+              <div class="radio-set" style="flex-direction:column;gap:9px">
+                <label><input type="radio" name="tipo" value="nuova" checked> Macchina nuova</label>
+                <label><input type="radio" name="tipo" value="usata"> Macchina usata</label>
+                <label><input type="radio" name="tipo" value="noleggio"> Macchina a noleggio</label>
+              </div>
+            </div>
+
+            <div class="field"><label for="f-msg">Messaggio</label><textarea id="f-msg"></textarea></div>
+            <div data-hidden-field="modello|titolo della macchina corrente"></div>
+            <label class="consent"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+          </div>
+
+          <button class="btn btn-primary" type="submit" style="margin-top:18px;width:100%">Invia richiesta</button>
+          <p class="small" data-form-msg style="margin:10px 0 0"></p>
+
+          <div class="hr" style="margin:20px 0"></div>
+          <p class="small" style="margin:0">Preferisci parlarne?<br>
+            <a class="btn-link" href="tel:800480110" style="font-size:18px">800 480110</a></p>
+        </form>
+      </section>
+
+      <div class="devnote">
+        <div class="dn-h">DEV NOTE 10 — Form scheda macchina</div>
+        <dl>
+          <dt>Origine</dt><dd>Elementor Pro · widget Form (nessun plugin form aggiuntivo)</dd>
+          <dt>Campi</dt><dd>nome, azienda, email, telefono, messaggio, <code>tipo_di_richiesta</code> (radio),
+            <code>modello</code> (hidden)</dd>
+          <dt>Campo nascosto</dt><dd><code>modello</code> = titolo del post corrente, via Dynamic Tag.
+            La richiesta arriva già qualificata.</dd>
+          <dt>Condizione</dt><dd><b>Nel wireframe si disegnano tutte e tre le voci</b> (BM §C).
+            <span class="cond">Nel sito reale</span> « usata » compare solo se <code>disponibile_usata</code>
+            è vero e « a noleggio » solo se <code>disponibile_noleggio</code> è vero.</dd>
+          <dt>Implementazione</dt><dd>Un solo form con Display Conditions sulle opzioni, non tre form diversi.</dd>
+          <dt>Posizione</dt><dd><span class="openpoint">OP-06</span> Colonna laterale sticky ≥1024px,
+            blocco in linea sotto le specifiche &lt;1024px. È l'ipotesi indicata dal brief come prima da provare.</dd>
+        </dl>
+        <div class="est">Stima 2 h</div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- documentazione di template: non è una parte del sito -->
+  <div class="row wf-doc">
+    <div class="block">
+      <span class="block-id">NOTA SEO E STATI CONDIZIONALI DI D1</span>
+      <p><b>La scheda macchina non porta testo lungo.</b> Specifiche leggibili e collegamenti in evidenza:
+        è una pagina di prodotto, non una pagina di posizionamento. Il traffico sulle keyword generiche lo
+        intercettano la pagina famiglia (D3) e la sottocategoria (D2).</p>
+      <p><b>Title da template</b>: <code>[nome macchina] | [sottocategoria] | Socaf</code>, non 119 title a mano.
+        200–350 parole complessive. Schema <code>Product</code> <b>senza <code>offers</code></b>: niente prezzo,
+        l'e-commerce è fuori progetto. Le specifiche alimentano <code>additionalProperty</code>.</p>
+      <p><b>URL</b>: <code>/[famiglia]/[sottocategoria]/[modello]/</code> — nessuno dei 119 indirizzi cambia.
+        Slug verificati sulla sitemap di socaf.it.</p>
+      <p><b>Cosa può mancare</b>: PDF · miniature (una sola immagine) · settori · etichette e blocchi
+        noleggio/usato · articoli collegati · macchine correlate. Su molte delle 119 schede mancherà più
+        di un blocco: quando manca, il blocco <b>sparisce</b>, non si svuota.</p>
+    </div>
+    <div class="devnote">
+      <div class="dn-h">SEO tecnico e QA di D1</div>
+      <dl>
+        <dt>Plugin</dt><dd>The SEO Framework</dd>
+        <dt>Regola generale</dt><dd>Un blocco senza dati <b>non si mostra vuoto: sparisce</b>.
+          Unica eccezione del sito: D17, risultati di ricerca.</dd>
+        <dt>QA</dt><dd>Test obbligatorio su una scheda « povera »: nessun PDF, una immagine, nessun settore,
+          nessun articolo, né noleggio né usato.</dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

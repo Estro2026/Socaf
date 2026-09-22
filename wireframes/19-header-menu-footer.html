@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D19 · Header, menu e footer — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D19" data-name="Header, menu e piè di pagina" data-url="Fase 4 — ripreso senza modifiche"></div>
+<header data-header></header>
+
+<div class="wrap">
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">L'HEADER QUI SOPRA È QUELLO REALE</span>
+      <h1>Header, menu e piè di pagina</h1>
+      <p class="lede">L'header in cima a questa pagina è lo stesso componente montato su tutti i diciannove
+        template. Qui sotto è documentato voce per voce. <b>Il menu non è stato reinterpretato</b>:
+        è quello definito in Fase 4.</p>
+      <div class="notice">
+        <p class="mb0 small"><b>Il menu non è l'alberatura.</b> L'alberatura descrive come sono organizzate
+        tutte le pagine e i loro indirizzi. Il menu mostra solo le strade principali: diverse pagine importanti
+        si raggiungono da dentro le altre pagine — dalla scheda di una macchina, da una pagina settore,
+        dal piè di pagina — e non dal menu.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 133 — Header globale</div>
+      <dl>
+        <dt>Implementazione</dt><dd>Elementor Pro · Theme Builder → <b>Header</b>, condizione
+          « Entire Site ». Un solo header per tutto il sito.</dd>
+        <dt>Widget</dt><dd>Site Logo · Nav Menu · Button (numero verde) · Search Form.
+          <b>Tutti nativi, nessun widget su misura.</b></dd>
+        <dt>Menu WordPress</dt><dd>Due menu registrati: <code>principale</code> (6 voci) e
+          <code>servizio</code> (3 voci). Le tendine sono sottovoci del menu principale.</dd>
+        <dt>Voci non cliccabili</dt><dd>Macchine, Settori, Servizi e Azienda sono <b>Custom Link</b> con
+          URL <code>#</code>: aprono la tendina e basta. Su mobile diventano toggle della fisarmonica.</dd>
+      </dl>
+      <div class="est">Stima 6 h (dentro le 24 h di D19 + componenti globali)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">RIGA DI SERVIZIO · sopra la barra principale</span>
+      <h2>Riga di servizio</h2>
+      <div class="table-scroll">
+        <table class="specs">
+          <thead><tr><th style="width:30%">Voce</th><th style="white-space:normal">Destinazione</th></tr></thead>
+          <tbody>
+            <tr><th>Pronto intervento</th><td style="white-space:normal"><code>/servizi/pronto-intervento/</code></td></tr>
+            <tr><th>Approfondimenti</th><td style="white-space:normal"><code>/news/</code> — nome nuovo, indirizzo invariato</td></tr>
+            <tr><th>Cerca</th><td style="white-space:normal"><code>/?s=</code> — a destra, separata dalle altre due</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small" style="margin-top:12px">Gli approfondimenti producono il 10% dei clic del sito,
+        ma arrivano quasi tutti da Google, non dal menu: per questo stanno qui e non tra le sei voci.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 134 — Riga di servizio</div>
+      <dl>
+        <dt>Implementazione</dt><dd>Sezione superiore dell'header, menu <code>servizio</code></dd>
+        <dt>Responsive</dt><dd>Resta visibile fino a 420px, poi si compatta (font più piccolo, gap ridotto).
+          Non sparisce: « Pronto intervento » è utile proprio da telefono.</dd>
+        <dt>Cerca</dt><dd>Nel wireframe porta a D17. In produzione: widget Search Form, o un link a
+          <code>/?s=</code> con campo che si apre al clic.
+          <b>Preferire il link semplice</b>: un overlay di ricerca è JS in più senza beneficio misurabile.</dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BARRA PRINCIPALE · logo, sei voci, numero verde</span>
+      <h2>Le sei voci</h2>
+      <div class="table-scroll">
+        <table class="specs">
+          <thead><tr><th style="width:24%">Voce</th><th style="white-space:normal;width:26%">Comportamento</th><th style="white-space:normal">Contenuto</th></tr></thead>
+          <tbody>
+            <tr><th>Macchine</th><td style="white-space:normal">Tendina, nessuna pagina propria</td><td style="white-space:normal">Le sei famiglie</td></tr>
+            <tr><th>Noleggio</th><td style="white-space:normal"><b>Voce semplice</b></td><td style="white-space:normal"><code>/noleggio/</code></td></tr>
+            <tr><th>Settori</th><td style="white-space:normal">Tendina, nessuna pagina nel menu</td><td style="white-space:normal">I sette settori</td></tr>
+            <tr><th>Prodotti per la pulizia</th><td style="white-space:normal"><b>Voce semplice</b></td><td style="white-space:normal"><code>/prodotti-per-la-pulizia/</code></td></tr>
+            <tr><th>Servizi</th><td style="white-space:normal">Tendina, nessuna pagina propria</td><td style="white-space:normal">Pronto intervento, consulenza tecnica, soluzioni finanziarie, usato, supervalutazione</td></tr>
+            <tr><th>Azienda</th><td style="white-space:normal">Tendina, nessuna pagina propria</td><td style="white-space:normal">Chi siamo, innovazione, impegno, referenze, lavora con noi, contatti</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:28px">La regola che decide tendina o non tendina</h3>
+      <p><b>La tendina si apre solo dove la pagina che raccoglie non ha ricerche proprie.</b>
+        Dove invece le ha, la voce si clicca e porta lì.</p>
+      <div class="table-scroll">
+        <table class="specs">
+          <thead><tr><th style="width:26%">Voce</th><th style="white-space:normal">La gente cerca questo?</th></tr></thead>
+          <tbody>
+            <tr><th>Macchine</th><td style="white-space:normal">No — si cerca la lavapavimenti, non « macchine » in astratto</td></tr>
+            <tr><th>Settori</th><td style="white-space:normal">No — chi cerca sa già se ha un capannone o un hotel</td></tr>
+            <tr><th>Servizi</th><td style="white-space:normal">No — si cerca l'assistenza o il finanziamento</td></tr>
+            <tr><th>Azienda</th><td style="white-space:normal">No — si cerca Socaf per nome, e si arriva in home</td></tr>
+            <tr><th>Noleggio</th><td style="white-space:normal"><b>Sì</b> — circa 460 ricerche/mese sulle formule generiche</td></tr>
+            <tr><th>Prodotti per la pulizia</th><td style="white-space:normal"><b>Sì</b> — circa 4.500 ricerche/mese</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice" style="margin-top:22px">
+        <p><b>Le 28 sottocategorie non entrano nel menu.</b> Sarebbe un pannello da quasi quaranta voci:
+        chi arriva non sceglie, si blocca. La scelta tra uomo a bordo, uomo a terra, piccole, i-mop e combinate
+        ha senso quando si è già deciso che serve una lavapavimenti — e quel momento è la pagina di famiglia.</p>
+        <p class="mb0 small"><b>Verificato nel wireframe</b>: la tendina Macchine contiene 6 voci, non 34.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 135 — Barra principale</div>
+      <dl>
+        <dt>Widget</dt><dd>Nav Menu di Elementor Pro, layout Horizontal, dropdown nativo</dd>
+        <dt>Tendine</dt><dd>Semplici elenchi verticali: <b>niente mega-menu a colonne</b>,
+          niente immagini nelle tendine, niente contenuti dinamici. Sono link, e basta.</dd>
+        <dt>Costo</dt><dd>Un mega-menu con immagini costerebbe 4–6 h in più e QA responsive aggiuntiva,
+          per un beneficio che il documento F4 esclude esplicitamente.</dd>
+        <dt>Accessibilità</dt><dd>Le voci con tendina sono <code>&lt;button aria-expanded&gt;</code>,
+          non link vuoti. Chiusura con Esc e clic esterno.</dd>
+        <dt>Manutenzione</dt><dd>Aggiungere una famiglia o un settore = una voce di menu in più.
+          Nessun codice da toccare.</dd>
+      </dl>
+      <div class="est">Stima 2 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">CTA PRINCIPALE · 800 480110</span>
+      <h2>Il numero verde</h2>
+      <p><b>È la chiamata all'azione principale del sito, su ogni pagina.</b> Chi compra macchine industriali
+        preferisce chiamare piuttosto che compilare un modulo. È l'unico elemento in evidenza della barra.</p>
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:18px">
+        <a class="phone-cta" href="tel:800480110" style="margin:0"><span class="lbl">Numero verde</span>800 480110</a>
+        <span class="small muted">Stato normale</span>
+      </div>
+      <p class="small" style="margin-top:16px">Su telefono resta in barra, accanto al burger, e si ripete
+        in cima al pannello a fisarmonica: <b>chiamare è a un tocco di distanza</b>.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 136 — Numero verde</div>
+      <dl>
+        <dt>Implementazione</dt><dd>Widget Button con <code>href="tel:800480110"</code></dd>
+        <dt>Condizione</dt><dd>Sempre, su ogni template</dd>
+        <dt>Accento</dt><dd>È il punto in cui il rosso Socaf (<code>#e4002b</code>) è giustificato.
+          Nel wireframe è l'unico elemento pieno di colore insieme ai pulsanti primari.</dd>
+        <dt>Tracciamento</dt><dd>Evento di conversione sul clic (GA4). <span class="taskflag t-client">Client task</span>:
+          confermare se il numero verde è tracciato anche in ingresso (call tracking).</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">MOBILE · fisarmonica, niente pannelli a colonne</span>
+      <h2>Su telefono</h2>
+      <p>Riduci la finestra sotto i 1024px e apri il menu con il pulsante « Menu » in alto:
+        il pannello è quello reale.</p>
+      <ul>
+        <li><b>Fisarmonica</b>: ogni voce con tendina si apre in verticale. Nessun pannello a colonne:
+          su schermo stretto un elenco lungo si scorre, un pannello a colonne no.</li>
+        <li><b>Noleggio e numero verde restano fissi in alto</b> nel pannello, sopra tutte le altre voci.</li>
+        <li><b>Il numero verde resta anche in barra</b>, sempre visibile senza aprire il menu.</li>
+        <li>Dentro Macchine le sei famiglie. Dentro Settori i sette ambienti.</li>
+        <li>In fondo al pannello: Pronto intervento, Approfondimenti, Cerca.</li>
+      </ul>
+      <div class="notice" style="margin-top:18px">
+        <p class="mb0 small"><b>Breakpoint: 1024px.</b> Sopra, menu orizzontale con tendine.
+        Sotto, burger e fisarmonica. Testato a 1440 · 1024 · 768 · 390.</p>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 137 — Menu mobile</div>
+      <dl>
+        <dt>Implementazione</dt><dd>Nav Menu di Elementor Pro, breakpoint « Tablet » impostato a 1024px,
+          Toggle Full Width, Submenu « Dropdown ». <b>Nativo, zero JS custom.</b></dd>
+        <dt>Blocco fisso in cima</dt><dd>Noleggio + numero verde: due Button dentro un contenitore
+          visibile solo sotto il breakpoint. Si ottiene con le Responsive Visibility di Elementor.</dd>
+        <dt>Attenzione</dt><dd>Il breakpoint di default di Elementor è 1024 per Tablet:
+          con sei voci lunghe (« Prodotti per la pulizia ») la barra orizzontale va a capo già a ~1100px.
+          <b>Verificare a 1024 e 1100 prima della consegna.</b></dd>
+        <dt>Costo</dt><dd>Nessuna riga di JS su misura. Un menu mobile custom costerebbe 4 h e QA.</dd>
+      </dl>
+      <div class="est">Stima 2 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">QUELLO CHE NON STA NEL MENU</span>
+      <h2>Quello che non sta nel menu</h2>
+      <div class="grid grid-2">
+        <div class="promo" style="border-left-color:var(--grey)"><h4>Gli approfondimenti</h4>
+          <p class="mb0 small">Nella riga di servizio e dentro le pagine settore e famiglia, dove sono pertinenti.</p></div>
+        <div class="promo" style="border-left-color:var(--grey)"><h4>La pagina che raccoglie i settori</h4>
+          <p class="mb0 small">Esiste ma non si raggiunge né dal menu né dalla home: atterraggio esterno e destinazione dei breadcrumbs.</p></div>
+        <div class="promo" style="border-left-color:var(--grey)"><h4>Le sottocategorie e le schede macchina</h4>
+          <p class="mb0 small">147 pagine. Si raggiungono dalla pagina di famiglia, dalle pagine settore e dal noleggio.</p></div>
+        <div class="promo" style="border-left-color:var(--grey)"><h4>Le schede sede</h4>
+          <p class="mb0 small">Si raggiungono da Contatti e dal piè di pagina.</p></div>
+        <div class="promo" style="border-left-color:var(--grey)"><h4>Riscaldamento e raffrescamento</h4>
+          <p class="mb0 small">Non sono pagine di socaf.it. Caldofacile e Aquarial si raggiungono dai loro siti.</p></div>
+        <div class="promo" style="border-left-color:var(--grey)"><h4>I 184 articoli</h4>
+          <p class="mb0 small">Dall'archivio, dalla ricerca e dai blocchi « approfondimenti » delle pagine di catalogo.</p></div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 138 — Fuori dal menu</div>
+      <dl>
+        <dt>Verifica</dt><dd>In QA: nessun link a <code>/settori/</code> da menu o home;
+          nessuna sottocategoria nel menu; nessuna scheda sede nel menu.</dd>
+      </dl>
+      <div class="est">Compreso nella QA</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">PIÈ DI PAGINA · quello qui sotto è reale</span>
+      <h2>Il piè di pagina</h2>
+      <p>Il footer in fondo a questa pagina è il componente reale, montato su tutti i template. Contiene:</p>
+      <ul>
+        <li><b>Le cinque sedi</b>, con Osio Sotto marcata come principale</li>
+        <li><b>I collegamenti ad Aquarial e Caldofacile</b>, diretti ai loro siti</li>
+        <li><b>Le pagine legali</b>: privacy, cookie, whistleblowing, politica per la qualità</li>
+        <li><b>I recapiti</b>, numero verde compreso</li>
+        <li>Le scorciatoie al catalogo, alle formule e ai servizi</li>
+      </ul>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 139 — Footer globale</div>
+      <dl>
+        <dt>Implementazione</dt><dd>Elementor Pro · Theme Builder → <b>Footer</b>, condizione « Entire Site »</dd>
+        <dt>Sedi</dt><dd>Elenco dinamico dal CPT <code>sede</code>, <b>non riscritto a mano</b>.
+          Stessa sorgente del blocco sedi.</dd>
+        <dt>Condizione</dt><dd>Sempre, su ogni template compresa la home</dd>
+        <dt>Responsive</dt><dd>4 → 2 → 1 colonna</dd>
+        <dt>Legali</dt><dd>Le pagine privacy, cookie, whistleblowing e politica per la qualità esistono già:
+          verificarne gli indirizzi in migrazione. <span class="taskflag t-client">Client task</span></dd>
+      </dl>
+      <div class="est">Stima 3 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BREADCRUMBS · componente globale</span>
+      <h2>Breadcrumbs</h2>
+      <p>Presenti <b>ovunque tranne che in home</b>. La catena segue la gerarchia delle pagine,
+        con due eccezioni da impostare a mano:</p>
+      <div class="table-scroll">
+        <table class="specs">
+          <thead><tr><th style="width:28%">Template</th><th style="white-space:normal">Catena</th></tr></thead>
+          <tbody>
+            <tr><th>D1 · Scheda macchina</th><td style="white-space:normal">Home / Famiglia / Sottocategoria / Modello</td></tr>
+            <tr><th>D2 · Sottocategoria</th><td style="white-space:normal">Home / Famiglia / Sottocategoria</td></tr>
+            <tr><th>D3 · Famiglia</th><td style="white-space:normal">Home / Famiglia</td></tr>
+            <tr><th>D9 · Settore</th><td style="white-space:normal">Home / Settori / Settore</td></tr>
+            <tr><th>D14 · Sede</th><td style="white-space:normal">Home / <b>Contatti</b> / Sede — <i>eccezione</i>: la gerarchia direbbe <code>/sedi/</code>, che non è una pagina</td></tr>
+            <tr><th>D12 · Articolo</th><td style="white-space:normal">Home / <b>Approfondimenti</b> / Articolo — <i>eccezione</i>: il nome visibile non è lo slug</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 140 — Breadcrumbs</div>
+      <dl>
+        <dt>Origine</dt><dd>The SEO Framework genera i breadcrumb e i dati strutturati
+          <code>BreadcrumbList</code>. Widget Breadcrumbs di Elementor per la resa.</dd>
+        <dt>Eccezioni</dt><dd>D14 e D12 vanno forzate: filtro su
+          <code>the_seo_framework_breadcrumb_list</code> in <b>Code Snippets</b>, ~25 righe.
+          Per D1 la catena deriva dalla tassonomia gerarchica ed è automatica.</dd>
+        <dt>Condizione</dt><dd>Ovunque tranne la home</dd>
+        <dt>Responsive</dt><dd>Va a capo su più righe, non scorre orizzontalmente: su D1 la catena è lunga
+          (4 livelli, con nomi di sottocategoria estesi) e a 390px occupa 2–3 righe. Verificato.</dd>
+      </dl>
+      <div class="est">Stima 2 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">RICERCA · componente globale</span>
+      <h2>Ricerca</h2>
+      <form class="search" data-search role="search">
+        <input type="search" placeholder="Cerca una macchina, un prodotto, un settore…" aria-label="Cerca nel sito">
+        <button type="submit">Cerca</button>
+      </form>
+      <p class="small" style="margin-top:14px">Lo stesso componente sta nella riga di servizio (come link),
+        in apertura di home e sulla pagina dei risultati. <b>Un solo disegno.</b></p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 141 — Ricerca</div>
+      <dl>
+        <dt>Implementazione</dt><dd>Widget Search Form di Elementor Pro, salvato come modello globale</dd>
+        <dt>Destinazione</dt><dd><code>/?s=termine</code> → template D17</dd>
+        <dt>Niente</dt><dd>Nessun autocomplete, nessun suggerimento in tempo reale, nessun plugin di ricerca
+          avanzata. Sono 6–10 h che il budget non ha e che la ricerca nativa non giustifica su 147 pagine.</dd>
+        <dt>Miglioramento a costo zero</dt><dd>In Code Snippets, includere nella ricerca anche il campo
+          <code>descrizione_breve</code> delle macchine: ~15 righe, migliora sensibilmente i risultati.</dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

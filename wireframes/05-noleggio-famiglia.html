@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D5 · Landing noleggio per famiglia — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D5" data-name="Landing di noleggio per famiglia" data-url="/noleggio/[famiglia]/ · 4 pagine + 2 da confermare"></div>
+<header data-header="Noleggio"></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <a href="04-noleggio.html" data-url="/noleggio/">Noleggio</a><span class="sep">/</span>
+    <span aria-current="page">Noleggio lavapavimenti</span>
+  </nav>
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">BLOCCHI 1–3 · Breadcrumbs, titolo, testo introduttivo</span>
+      <h1>Noleggio lavapavimenti e lavasciuga pavimenti</h1>
+      <p class="lede">Noleggia una lavasciuga pavimenti professionale per il tempo che ti serve: per un cantiere,
+        per una punta di lavoro stagionale o per anni, con assistenza e manutenzione comprese.
+        Ritiro e consegna da tutte e cinque le sedi.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 41 — Landing di noleggio</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagina WordPress figlia di <code>/noleggio/</code></dd>
+        <dt>Istanze</dt><dd>4 confermate: lavapavimenti, idropulitrici, spazzatrici, lavamoquette
+          (<span class="openpoint">OP-02</span> indirizzo). Monospazzole e aspiratori:
+          <span class="openpoint">OP-03</span>, non create.</dd>
+        <dt>SEO</dt><dd>Questa è la pagina che giustifica la divisione della sezione:
+          <code>noleggio lavapavimenti</code> (720) + <code>noleggio lavasciuga pavimenti</code> (720)
+          + <code>noleggio macchinari pulizia pavimenti</code> (260) = oltre 1.700 ricerche/mese
+          solo su questa famiglia. Primaria nel titolo, varianti negli H2.</dd>
+        <dt>Regola</dt><dd><b>Non è un secondo catalogo.</b> Le card portano alle schede macchina normali,
+          non a schede « noleggio » duplicate.</dd>
+      </dl>
+      <div class="est">Stima 2,5 h (template) — ×4 istanze è popolamento</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · Le macchine a noleggio — elenco automatico</span>
+      <h2>Le lavapavimenti che puoi noleggiare</h2>
+      <div class="grid grid-4">
+        <article class="card"><div class="card-media" style="padding:0"><img src="../assets/images/la511-40-bt-01.png" alt="LA 511-40 BT"></div>
+          <div class="card-body"><span class="card-name">LA 511-40 BT</span>
+            <p class="card-desc">Lavasciuga pavimenti industriale uomo a terra, robusta, semplice e Made in Italy.</p>
+            <div class="tags"><span class="tag tag-nol">Noleggio</span><span class="tag tag-usa">Usato</span></div>
+            <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-terra/lavapavimenti-socaf-la-511-40-bt/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+          <div class="card-body"><span class="card-name">LA 410-15 B</span>
+            <p class="card-desc">Lavapavimenti industriale con grande manovrabilità, perfetta anche in curva.</p>
+            <div class="tags"><span class="tag tag-nol">Noleggio</span></div>
+            <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-terra/lavapavimenti-socaf-la-410-15-b/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+          <div class="card-body"><span class="card-name">LA 430-30 — LA 500-30</span>
+            <p class="card-desc">Lavapavimenti industriale uomo a terra LA 430-30 – LA 500-30.</p>
+            <div class="tags"><span class="tag tag-nol">Noleggio</span><span class="tag tag-usa">Usato</span></div>
+            <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-terra/lavapavimenti-industriale-uomo-a-terra-la-430-30-la-500-30/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+          <div class="card-body"><span class="card-name">i-mop XL</span>
+            <p class="card-desc">La lavasciuga rivoluzionaria, flessibile e potente.</p>
+            <div class="tags"><span class="tag tag-nol">Noleggio</span><span class="tag tag-usa">Usato</span></div>
+            <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/i-mop/lavapavimenti-i-mop-xl/">Vedi</a></div></article>
+      </div>
+      <p class="small" style="margin-top:14px">Elenco <b>automatico</b>: tutte le macchine della famiglia con
+        <code>disponibile_noleggio = vero</code>. Nessuna selezione manuale, nessun filtro.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 42 — Elenco macchine a noleggio</div>
+      <dl>
+        <dt>Query</dt><dd>JetEngine Listing Grid · CPT <code>macchina</code> ·
+          tassonomia <code>famiglia</code> = termine padre della famiglia (include tutte le sottocategorie figlie) ·
+          meta <code>disponibile_noleggio = 1</code></dd>
+        <dt>Attenzione</dt><dd>La query deve includere i termini <b>discendenti</b>, non solo il padre:
+          le macchine sono assegnate alle sottocategorie, mai alla famiglia.
+          <code>include_children = true</code> nella tax_query.</dd>
+        <dt>Condizione</dt><dd>Sempre — <span class="cond">ma se nessuna macchina della famiglia ha il flag,
+          la landing non va creata</span> (BM §E). Verifica prima del lancio.</dd>
+        <dt>Componente</dt><dd>Card macchina, identica. Le card portano alle <b>schede normali</b>.</dd>
+        <dt>Link</dt><dd><code>/[famiglia]/[sottocategoria]/[modello]/</code></dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Formule e durate per questa famiglia</span>
+      <h2>Formule e durate per il noleggio di lavapavimenti</h2>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 150–250 PAROLE</p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-client">Client task</span></p>
+      <div class="skel" data-lines="5"></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 43 — Formule per famiglia</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina. Specifico della famiglia: le durate tipiche di una
+          lavapavimenti non sono quelle di un'idropulitrice da cantiere.</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+      </dl>
+      <div class="est">0 h (contenuto)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Testo di approfondimento</span>
+      <h2>Quando conviene noleggiare una lavapavimenti</h2>
+      <p class="wordcount">LUNGHEZZA PREVISTA · 400–600 PAROLE</p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
+      <h3>Quando il noleggio conviene</h3><div class="skel" data-lines="6"></div>
+      <h3>Che macchina serve per la tua superficie</h3><div class="skel" data-lines="6"></div>
+      <h3>Cosa comprende il canone</h3><div class="skel" data-lines="5"></div>
+      <p class="small"><b>Sotto l'elenco delle macchine, non sopra.</b></p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 44 — Approfondimento di landing</div>
+      <dl>
+        <dt>Quantità</dt><dd>400–600 parole × 4 landing</dd>
+        <dt>SEO</dt><dd>Sottotitoli sulle varianti del cluster. Evitare la sovrapposizione con il testo di D4:
+          lì si spiega la formula in generale, qui si parla della macchina.</dd>
+      </dl>
+      <div class="est">0 h (contenuto)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Domande frequenti</span>
+      <h2>Domande frequenti sul noleggio di lavapavimenti</h2>
+      <div class="faq">
+        <details><summary>Che larghezza di lavoro serve per il mio capannone?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Le batterie e il caricabatterie sono compresi?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>Chi forma gli operatori all'uso della macchina?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>Il detergente è incluso nel noleggio?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 45 — FAQ di landing</div>
+      <dl><dt>Componente</dt><dd>Accordion globale</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 8 · Comprare invece di noleggiare</span>
+      <div class="promo-pair">
+        <div class="promo" style="border-left-color:var(--grey)">
+          <h3>Preferisci acquistarla nuova?</h3>
+          <p>Le 24 lavapavimenti del catalogo, divise in cinque tipologie.</p>
+          <a class="btn-link" href="03-famiglia.html" data-url="/lavapavimenti/">Lavapavimenti</a>
+        </div>
+        <div class="promo promo-usa">
+          <h3>Oppure usata e garantita</h3>
+          <p>Ricondizionate e garantite da 3 a 12 mesi, con supervalutazione della macchina che hai già.</p>
+          <a class="btn-link" href="07-usato-famiglia.html" data-url="/usato/lavapavimenti-usate/">Lavapavimenti usate</a>
+        </div>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 46 — Comprare invece di noleggiare</div>
+      <dl>
+        <dt>Origine</dt><dd>Due link statici costruiti sullo slug della famiglia</dd>
+        <dt>Condizione</dt><dd>Sempre. <span class="cond">Se la famiglia non ha pagina usato</span> resta il solo
+          rimando alla famiglia.</dd>
+        <dt>Perché</dt><dd>Chi cerca « noleggio lavapavimenti » e chi cerca « lavapavimenti usate » sono due persone
+          diverse, ma chi arriva qui può cambiare idea. Il collegamento evita che torni su Google.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 9 · Le altre famiglie a noleggio</span>
+      <h2>Cos'altro puoi noleggiare</h2>
+      <div class="chips">
+        <span class="chip" aria-current="true">Lavapavimenti</span>
+        <a class="chip" href="05-noleggio-famiglia.html" data-url="/noleggio/idropulitrici/">Idropulitrici</a>
+        <a class="chip" href="05-noleggio-famiglia.html" data-url="/noleggio/spazzatrici/">Spazzatrici</a>
+        <a class="chip" href="05-noleggio-famiglia.html" data-url="/noleggio/lavamoquette/">Lavamoquette</a>
+        <span class="chip is-open">Monospazzole — OP-03</span>
+        <span class="chip is-open">Aspiratori — OP-03</span>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 47 — Altre landing</div>
+      <dl>
+        <dt>Query</dt><dd>Pagine sorelle (<code>post_parent</code> = <code>/noleggio/</code>), corrente marcata</dd>
+        <dt>Nota</dt><dd>Le due voci tratteggiate <b>non esistono nel sito</b>: sono qui solo per rendere
+          visibile l'open point. Non vanno sviluppate finché Socaf non conferma.</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 10 · Dove ritirare e consegnare — <b>obbligatorio su questo template</b></span>
+      <h2>Dove ritirare e consegnare</h2>
+      <div data-sedi="Il blocco delle sedi è obbligatorio sulle landing di noleggio: risponde alle ricerche con riferimento locale."></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 48 — Sedi su D5</div>
+      <dl>
+        <dt>Componente</dt><dd>Blocco sedi globale, identico a D4</dd>
+        <dt>Condizione</dt><dd>Sempre. <b>Non rimuovibile</b> dal template: è un requisito SEO, non una scelta di layout.</dd>
+        <dt>SEO</dt><dd>Cluster geografico Asse 2 (25 kw / 6.690 vol) — Milano, Verona, Bergamo, Brescia
+          compaiono tutte nelle ricerche.</dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 11 · Articoli collegati — <span class="cond">condizionale</span> · max 3</span>
+      <h2>Approfondimenti</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Noleggio lavapavimenti: con Socaf conviene!</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/noleggio-lavapavimenti/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Noleggio macchine pulizia pavimenti: prova la lavapavimenti uomo a terra SC 450</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/noleggio-macchine-pulizia-pavimenti-prova-lavapavimenti-uomo-a-terra-sc-450/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Scopri il noleggio di macchine per la pulizia</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/scopri-noleggio-macchine-pulizia/">Leggi</a></div></article>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 49 — Articoli di landing</div>
+      <dl>
+        <dt>Query</dt><dd>Relazione articolo → pagina, limite 3</dd>
+        <dt>Condizione</dt><dd><span class="cond">Se almeno un articolo.</span></dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 12 · Richiesta preventivo</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi un preventivo di noleggio</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente.</p>
+        <div class="fields">
+          <div class="field"><label for="p-nome">Nome e cognome *</label><input id="p-nome" required></div>
+          <div class="field"><label for="p-az">Azienda *</label><input id="p-az" required></div>
+          <div class="field"><label for="p-mail">Email *</label><input id="p-mail" type="email" required></div>
+          <div class="field"><label for="p-tel">Telefono</label><input id="p-tel" type="tel"></div>
+          <div class="field full"><label for="p-msg">Messaggio</label><textarea id="p-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|Noleggio lavapavimenti e lavasciuga pavimenti"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Richiedi preventivo</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 50 — Form su D5</div>
+      <dl><dt>Componente</dt><dd>Modello globale. Il campo nascosto porta il titolo della landing,
+        così si sa da quale famiglia arriva la richiesta.</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

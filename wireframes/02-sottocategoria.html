@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D2 · Archivio sottocategoria — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body data-tpl="sottocategoria">
+
+<div data-devbar data-code="D2" data-name="Archivio sottocategoria" data-url="28 pagine"></div>
+<header data-header></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <span data-sub-crumb-fam></span><span class="sep">/</span>
+    <span aria-current="page" data-sub-crumb></span>
+  </nav>
+
+  <!-- 1/2/3 -->
+  <div class="row">
+    <section class="block" style="padding-top:26px">
+      <span class="block-id">BLOCCHI 1–3 · Breadcrumbs, titolo, testo introduttivo</span>
+      <h1 data-sub-h1></h1>
+      <p class="lede" data-sub-intro></p>
+      <p class="small">Il titolo usa <b>le parole della ricerca</b>, non il nome del termine: il termine
+        di catalogo resta quello dell'alberatura. Cambia sottocategoria dal blocco « le altre » in fondo
+        per vedere le altre 27 istanze di questo stesso template.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 13 — Intestazione della sottocategoria</div>
+      <dl>
+        <dt>Origine</dt><dd><b>Pagina WordPress</b>, figlia della pagina famiglia. <b>Non</b> un archivio di tassonomia.</dd>
+        <dt>Campo</dt><dd>Titolo e contenuto della pagina. Nessun ACF per questi tre blocchi.</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Regola</dt><dd>La generazione degli archivi della tassonomia <code>famiglia</code> va <b>spenta</b>:
+          altrimenti termine e pagina si contendono lo stesso indirizzo.</dd>
+        <dt>Attenzione</dt><dd>Rinominare un termine è un'operazione doppia: va cambiato <b>anche lo slug della
+          pagina</b>. Sono 28 coppie termine/pagina da tenere allineate.</dd>
+        <dt>SEO</dt><dd>Titolo costruito sulla ricerca. Le 8 sottocategorie con domanda misurabile ricevono
+          400–600 parole, le altre 20 ne ricevono 200–300.</dd>
+      </dl>
+      <div class="est">Stima 1,5 h (template) — ×28 istanze è popolamento, non sviluppo</div>
+    </div>
+  </div>
+
+  <!-- 4 · Elenco macchine -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · Elenco macchine — tutte quelle della sottocategoria</span>
+      <h2 data-sub-h2></h2>
+      <div class="grid grid-3" data-sub-list></div>
+      <p class="small">Nomi e descrizioni reali presi da socaf.it. <b>Nessun filtro</b>, nessuna paginazione:
+        l'elenco mostra <span data-sub-count></span>, cioè tutte quelle della sottocategoria.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 14 — Elenco macchine</div>
+      <dl>
+        <dt>Origine</dt><dd>CPT <code>macchina</code></dd>
+        <dt>Query</dt><dd>JetEngine Listing Grid · tassonomia <code>famiglia</code> = termine della pagina
+          corrente · <b>nessun limite</b> (BM §E: « macchine negli elenchi di sottocategoria → tutte »)</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Componente</dt><dd>Card macchina — <b>stesso modello globale</b> di D1, D3, D5, D7, D9, D17.
+          Griglia di elementi identici: nessuna card più grande delle altre.</dd>
+        <dt>Etichette</dt><dd>Noleggio e usato sono <b>segnaposto</b> finché non è fatto il data entry dei
+          238 flag. La famiglia senza noleggio non le mostra mai.</dd>
+        <dt>Niente filtri</dt><dd>JetSmartFilters non entra nel progetto.</dd>
+        <dt>Responsive</dt><dd>3 colonne ≥900px · 2 colonne 560–900px · 1 colonna &lt;560px</dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+  <!-- 5 · Testo di approfondimento -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Testo di approfondimento — obbligatorio e corposo</span>
+      <h2 data-sub-approf></h2>
+      <p class="wordcount" data-sub-words></p>
+      <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
+
+      <div data-sub-par><h3>Cosa sono</h3><div class="skel" data-sub-skel data-lines="6"></div></div>
+      <div data-sub-par><h3>Come si scelgono</h3><div class="skel" data-sub-skel data-lines="7"></div></div>
+      <div data-sub-par><h3>Dove si usano</h3><div class="skel" data-sub-skel data-lines="6"></div></div>
+      <div data-sub-par><h3>Cosa cambia tra i modelli</h3><div class="skel" data-sub-skel data-lines="7"></div></div>
+      <div data-sub-par><h3>Manutenzione</h3><div class="skel" data-sub-skel data-lines="5"></div></div>
+
+      <p class="small"><b>La struttura del testo è la stessa su tutte e 28 le pagine</b>, cambia solo quanto
+        viene sviluppata: le 8 con domanda forte sviluppano tutti e cinque i sottotitoli, le altre 20 ne
+        tengono due o tre. Sta <b>sotto</b> l'elenco delle macchine, non sopra.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 15 — Testo di approfondimento</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina (editor Elementor). Nessun ACF.</dd>
+        <dt>Condizione</dt><dd>Sempre — è il contenuto che fa posizionare la pagina</dd>
+        <dt>Posizione</dt><dd><b>Sotto l'elenco macchine, mai sopra</b>: chi arriva deve vedere subito i prodotti.</dd>
+        <dt>SEO</dt><dd>Sottotitoli che coprono le intenzioni di ricerca del cluster, non un paragrafo unico.</dd>
+        <dt>Le 8 con testo lungo</dt><dd>Idropulitrici → Autonome · Altri macch. → Monospazzole ·
+          Idropulitrici → Ad acqua calda · Robot → Robot lavapavimenti · Altri macch. → Generatori di vapore ·
+          Altri macch. → Vasche lavapezzi · Lavapavimenti → Uomo a terra · Spazzatrici → Stradali</dd>
+        <dt>Fuori perimetro</dt><dd><span class="taskflag t-seo">SEO task</span> La scrittura non è sviluppo.</dd>
+      </dl>
+      <div class="est">Stima 0 h di sviluppo (contenuto)</div>
+    </div>
+  </div>
+
+  <!-- 6 · FAQ -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Domande frequenti — accordion, tutte chiuse</span>
+      <h2 data-sub-faq-title></h2>
+      <div class="faq">
+        <details><summary>Quanto dura la batteria?</summary>
+          <div class="faq-body"><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Che superficie riesce a pulire in un'ora?</summary>
+          <div class="faq-body"><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>Serve un'abilitazione per usarla?</summary>
+          <div class="faq-body"><div class="skel" data-lines="2"></div></div></details>
+        <details><summary>Ogni quanto vanno sostituiti i materiali di consumo?</summary>
+          <div class="faq-body"><div class="skel" data-lines="3"></div></div></details>
+        <details><summary>Conviene comprarla, noleggiarla o prenderla usata?</summary>
+          <div class="faq-body"><div class="skel" data-lines="3"></div></div></details>
+      </div>
+      <p class="small"><span class="todo">[CONTENUTO DA REDIGERE]</span>
+        <span class="taskflag t-seo">SEO task</span> Le domande vanno riscritte per ogni sottocategoria.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 16 — Domande frequenti</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina · widget Accordion nativo di Elementor Pro</dd>
+        <dt>Stato iniziale</dt><dd><b>Tutte le voci chiuse</b> all'apertura della pagina</dd>
+        <dt>Riuso</dt><dd>Stesso componente su D3, D4, D5, D6, D7, D9, D10, D11</dd>
+        <dt>SEO</dt><dd>Coda lunga che il testo principale non copre + risposte alle obiezioni prima del
+          preventivo. <b>Scritte per chi legge</b>: Google mostra i rich result FAQ solo a una minoranza di siti.</dd>
+      </dl>
+      <div class="est">Stima 1 h (componente globale)</div>
+    </div>
+  </div>
+
+  <!-- 8/9 · Noleggio e usato -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCHI 8–9 · Noleggio e usato — <span class="cond">condizionali</span></span>
+      <div class="promo-pair" data-sub-promo></div>
+      <p class="small">Compaiono solo se la famiglia ha una landing di noleggio e una pagina usato.
+        Su <b>Robot</b> non compare nessuno dei due.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 17 — Noleggio e usato su D2</div>
+      <dl>
+        <dt>Origine</dt><dd>Stessi modelli globali di D1 e D3</dd>
+        <dt>Condizione</dt><dd><span class="cond">Noleggio</span>: solo se la <b>famiglia</b> ha una landing.
+          <span class="cond">Usato</span>: solo se esiste la pagina usato della famiglia.</dd>
+        <dt>Query</dt><dd>Nessuna: due campi Vero/falso sul termine famiglia, letti risalendo al padre.</dd>
+        <dt>Link</dt><dd><code>/noleggio/[famiglia]/</code> · <code>/usato/[famiglia]-usate/</code> —
+          il suffisso cambia genere, serve una mappa esplicita.</dd>
+      </dl>
+      <div class="est">Compreso nei componenti riutilizzabili</div>
+    </div>
+  </div>
+
+  <!-- 7 · Le altre sottocategorie -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Le altre sottocategorie — termini fratelli</span>
+      <h2 data-sub-siblings-title></h2>
+      <div class="chips" data-sub-siblings></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 18 — Sottocategorie fratelli</div>
+      <dl>
+        <dt>Query</dt><dd>Pagine figlie della stessa pagina genitore (<code>post_parent</code>),
+          pagina corrente marcata come corrente</dd>
+        <dt>Condizione</dt><dd>Sempre. Le famiglie hanno da 2 a 8 sottocategorie.</dd>
+        <dt>Implementazione</dt><dd>JetEngine Listing Grid su pagine. Preferibile alla creazione di 6 menu.</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <!-- 10 · Dove si usano -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 10 · Dove si usano — <span class="cond">condizionale</span></span>
+      <h2>Dove si usano</h2>
+      <div class="chips">
+        <a class="chip" href="09-settore.html?s=industria" data-url="/settori/industria/">Industria</a>
+        <a class="chip" href="09-settore.html?s=imprese-di-pulizia" data-url="/settori/imprese-di-pulizia/">Imprese di pulizia</a>
+        <a class="chip" href="09-settore.html?s=horeca" data-url="/settori/horeca/">Ho.Re.Ca.</a>
+        <a class="chip" href="09-settore.html?s=logistica" data-url="/settori/logistica/">Logistica</a>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 19 — Dove si usano</div>
+      <dl>
+        <dt>Origine</dt><dd>Unione dei settori delle macchine presenti nell'elenco del blocco 4</dd>
+        <dt>Query</dt><dd>Termini distinti della tassonomia <code>settore</code> sui post del loop.
+          Non è una Listing Grid: funzione in <b>Code Snippets</b> (~25 righe) con transient di cache.</dd>
+        <dt>Condizione</dt><dd><span class="cond">Se almeno un settore.</span> Prima che il data entry sia
+          completo il blocco resterà vuoto su molte pagine: previsto, sparisce.</dd>
+      </dl>
+      <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+  <!-- 11 · Articoli collegati -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 11 · Articoli collegati — <span class="cond">condizionale</span> · max 3</span>
+      <h2>Approfondimenti</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Sei proprio sicuro di sapere tutto quel che serve sulle lavasciuga pavimenti?</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/tutto-quel-che-serve-sulle-lavasciuga-pavimenti/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Come funziona una macchina lavapavimenti?</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/come-funziona-macchina-lavapavimenti/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Le 10 regole d'oro per la manutenzione della tua lavapavimenti</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/10-regole-oro-manutenzione-lavapavimenti/">Leggi</a></div></article>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 20 — Articoli collegati su pagina di catalogo</div>
+      <dl>
+        <dt>Origine</dt><dd>Articoli collegati alle macchine dell'elenco — relazione <b>di secondo grado</b></dd>
+        <dt>Query</dt><dd>Code Snippets: ID delle macchine del loop → relazione inversa articolo↔macchina →
+          deduplica → <b>limite 3</b>. ~30 righe, con transient.</dd>
+        <dt>Condizione</dt><dd><span class="cond">Se almeno un articolo.</span></dd>
+        <dt>Attenzione</dt><dd>È la query più costosa del sito: la cache non è opzionale.</dd>
+      </dl>
+      <div class="est">Stima 1,5 h</div>
+    </div>
+  </div>
+
+  <!-- 12 · Form -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 12 · Richiesta informazioni — variante generica</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi maggiori informazioni</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente.</p>
+        <div class="fields">
+          <div class="field"><label for="g-nome">Nome e cognome *</label><input id="g-nome" required></div>
+          <div class="field"><label for="g-az">Azienda *</label><input id="g-az" required></div>
+          <div class="field"><label for="g-mail">Email *</label><input id="g-mail" type="email" required></div>
+          <div class="field"><label for="g-tel">Telefono</label><input id="g-tel" type="tel"></div>
+          <div class="field full"><label for="g-msg">Messaggio</label><textarea id="g-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|titolo della sottocategoria"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:18px">
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 21 — Form generico</div>
+      <dl>
+        <dt>Origine</dt><dd>Elementor Pro · widget Form, salvato come <b>modello globale</b></dd>
+        <dt>Campi</dt><dd>nome, azienda, email, telefono, messaggio + campo nascosto
+          <code>pagina_provenienza</code> = titolo della pagina (Dynamic Tag)</dd>
+        <dt>Differenza da D1</dt><dd>Qui <b>non</b> c'è « tipo di richiesta » e <b>non</b> c'è il campo nascosto
+          con il modello. Due varianti, un solo form da manutenere.</dd>
+        <dt>Riuso</dt><dd>Ovunque tranne D1</dd>
+      </dl>
+      <div class="est">Compreso nelle 24 h di D19 + componenti globali</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

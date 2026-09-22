@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D12 · Articolo — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body>
+
+<div data-devbar data-code="D12" data-name="Articolo" data-url="/news/[titolo]/ · 184 articoli · post nativi · nessun indirizzo cambia"></div>
+<header data-header></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso">
+    <a href="16-home.html" data-url="/">Home</a><span class="sep">/</span>
+    <a href="13-approfondimenti.html" data-url="/news/">Approfondimenti</a><span class="sep">/</span>
+    <span aria-current="page">Noleggio lavapavimenti: con Socaf conviene!</span>
+  </nav>
+
+  <div class="row">
+    <article class="block" style="border-top:0;padding-top:20px">
+      <span class="block-id">BLOCCHI 1–5 · Breadcrumbs, titolo, data, immagine, corpo</span>
+      <h1 style="max-width:22ch">Noleggio lavapavimenti: con Socaf conviene!</h1>
+      <p class="small" style="margin-bottom:22px"><time datetime="2024-03-12">12 marzo 2024</time></p>
+
+      <div class="ph ph-wide" style="margin-bottom:26px">Immagine in evidenza — <span class="cond">condizionale</span></div>
+
+      <p class="lede wf-doc">Titolo e data sono reali (articolo esistente su socaf.it). Il corpo è rappresentato come
+        segnaposto dimensionato: gli articoli esistenti non vanno riscritti né spostati.</p>
+
+      <div class="skel" data-lines="7"></div>
+      <h2>Un sottotitolo dell'articolo</h2>
+      <div class="skel" data-lines="8"></div>
+      <h2>Un altro sottotitolo</h2>
+      <div class="skel" data-lines="7"></div>
+      <ul>
+        <li>Elenco puntato nel corpo dell'articolo</li>
+        <li>Gli articoli esistenti hanno struttura varia</li>
+        <li>Il template deve reggere H2, H3, liste, immagini in linea e citazioni</li>
+      </ul>
+      <div class="skel" data-lines="6"></div>
+    </article>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 95 — Articolo</div>
+      <dl>
+        <dt>Origine</dt><dd><b>Post nativi</b> di WordPress. Nessun CPT.</dd>
+        <dt>URL</dt><dd><code>/news/[titolo]/</code> — <b>nessuno dei 184 indirizzi cambia.</b>
+          Permalink structure <code>/news/%postname%/</code>.</dd>
+        <dt>Perché</dt><dd>Cambiare indirizzo significherebbe 184 redirect, e le <b>due citazioni più autorevoli
+          che Socaf possiede da altri siti puntano proprio a due articoli</b>. Sono i collegamenti più preziosi
+          e più fragili del sito. Il beneficio del riordino viene dai collegamenti, non dallo slug.</dd>
+        <dt>Nome</dt><dd>Nel menu la sezione si chiama <b>Approfondimenti</b>, l'indirizzo resta <code>/news/</code>.</dd>
+        <dt>Condizione</dt><dd><span class="cond">Immagine in evidenza</span>: solo se caricata.
+          Nelle card l'assenza non fa collassare l'altezza.</dd>
+        <dt>Niente categorie e niente tag</dt><dd>Non vanno create pagine di raccolta. Le eventuali categorie
+          esistenti vanno rimosse o comunque <code>noindex</code>, e i loro archivi disattivati.</dd>
+        <dt>Implementazione</dt><dd>Elementor Pro · Theme Builder → Single Post</dd>
+        <dt>SEO</dt><dd>Gli articoli producono 830 clic in 3 mesi, il 10% del sito: quanto un'intera categoria
+          di macchine. Alimentati dall'Asse 3 (Guide e long tail, 28 kw / 8.960 vol) — che <b>non genera
+          pagine nuove</b>, ma può guidare l'aggiornamento di articoli esistenti.</dd>
+      </dl>
+      <div class="est">Stima 3 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Le macchine di cui parla — <span class="cond">condizionale</span> · relazione manuale</span>
+      <h2>Le macchine di cui parla questo articolo</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media" style="padding:0"><img src="../assets/images/la511-40-bt-01.png" alt="LA 511-40 BT"></div>
+          <div class="card-body"><span class="card-name">LA 511-40 BT</span>
+            <p class="card-desc">Lavasciuga pavimenti industriale uomo a terra, robusta, semplice e Made in Italy.</p>
+            <div class="tags"><span class="tag tag-nol">Noleggio</span><span class="tag tag-usa">Usato</span></div>
+            <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-terra/lavapavimenti-socaf-la-511-40-bt/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+          <div class="card-body"><span class="card-name">i-mop XL</span>
+            <p class="card-desc">La lavasciuga rivoluzionaria, flessibile e potente.</p>
+            <div class="tags"><span class="tag tag-nol">Noleggio</span><span class="tag tag-usa">Usato</span></div>
+            <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/i-mop/lavapavimenti-i-mop-xl/">Vedi</a></div></article>
+        <article class="card"><div class="card-media ph ph-img">Prima immagine della galleria</div>
+          <div class="card-body"><span class="card-name">LA 410-15 B</span>
+            <p class="card-desc">Lavapavimenti industriale con grande manovrabilità, perfetta anche in curva.</p>
+            <div class="tags"><span class="tag tag-nol">Noleggio</span></div>
+            <a class="card-link" href="01-scheda-macchina.html" data-url="/lavapavimenti/lavapavimenti-uomo-terra/lavapavimenti-socaf-la-410-15-b/">Vedi</a></div></article>
+      </div>
+      <p class="small" style="margin-top:14px">
+        <span class="taskflag t-data">Data entry</span>
+        <b>È l'unico lavoro di volume del progetto</b>: 184 articoli, a scaglioni.
+        Da compilare solo qui: il lato macchina si popola da solo.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 96 — Relazione articolo → macchina</div>
+      <dl>
+        <dt>Origine</dt><dd>ACF Pro · <b>relazione bidirezionale</b> <code>articolo ↔ macchina</code></dd>
+        <dt>Campo</dt><dd><code>macchine_citate</code> — ACF Relationship verso il CPT <code>macchina</code>,
+          bidirezionale attiva</dd>
+        <dt>Posizione nell'editor</dt><dd><b>In evidenza nella schermata di modifica</b>, non in fondo alla
+          colonna laterale. Chi scrive deve trovarlo senza cercarlo: ACF Field Group con posizione
+          <i>After content</i> e priorità alta. Non è un dettaglio estetico: è la condizione perché
+          184 compilazioni vengano fatte davvero.</dd>
+        <dt>Automatizzabile?</dt><dd><b>No.</b> Cercare i nomi dei modelli nel testo aggancerebbe un articolo
+          che cita tre modelli come esempio a tre schede che non tratta. Si può <b>proporre</b>
+          (Code Snippets che cerca i titoli nel contenuto e mostra i candidati), chi scrive conferma o toglie.
+          ~2 h di sviluppo che risparmiano decine di ore redazionali: <b>incluse nella stima</b>.</dd>
+        <dt>Condizione</dt><dd><span class="cond">Se almeno una macchina.</span></dd>
+        <dt>Ordine di lavorazione</dt><dd>1) gli 8 articoli sul noleggio — <b>al lancio</b>;
+          2) i 20 con più traffico; 3) i restanti 156, gradualmente. <b>Il lancio non aspetta.</b></dd>
+      </dl>
+      <div class="est">Stima 2 h + <span class="taskflag t-data">Data entry</span> 184 articoli (fuori dalle 240 h)</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Dove si usano — <span class="cond">condizionale</span> · ereditato</span>
+      <h2>Dove si usano</h2>
+      <div class="chips">
+        <a class="chip" href="09-settore.html" data-url="/settori/industria/">Industria</a>
+        <a class="chip" href="09-settore.html" data-url="/settori/imprese-di-pulizia/">Imprese di pulizia</a>
+        <a class="chip" href="09-settore.html" data-url="/settori/logistica/">Logistica</a>
+      </div>
+      <p class="small" style="margin-top:12px"><b>Questo blocco non si compila.</b> I settori arrivano dalle
+        macchine indicate nel blocco 6: zero decisioni redazionali in più.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 97 — Settori ereditati</div>
+      <dl>
+        <dt>Origine</dt><dd>Tassonomia <code>settore</code> delle macchine del blocco 6</dd>
+        <dt>Query</dt><dd>Code Snippets: macchine collegate → termini settore → deduplica.
+          <b>Stessa funzione</b> usata da D2 e D3 (DEV NOTE 19), con un ingresso diverso.</dd>
+        <dt>Condizione</dt><dd><span class="cond">Se almeno un settore.</span> Dipende a cascata dal blocco 6:
+          senza macchine collegate non ci sono settori.</dd>
+        <dt>Campo</dt><dd>Nessuno. <b>Non esiste un campo settore sull'articolo.</b></dd>
+      </dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 8 · Altri articoli</span>
+      <h2>Altri approfondimenti</h2>
+      <div class="grid grid-3">
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Come funziona una macchina lavapavimenti?</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/come-funziona-macchina-lavapavimenti/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Le 10 regole d'oro per la manutenzione della tua lavapavimenti</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/10-regole-oro-manutenzione-lavapavimenti/">Leggi</a></div></article>
+        <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
+          <div class="card-body"><span class="card-name">Scopri il noleggio di macchine per la pulizia</span>
+            <span class="card-meta">Approfondimento</span>
+            <a class="card-link" href="12-articolo.html" data-url="/news/scopri-noleggio-macchine-pulizia/">Leggi</a></div></article>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 98 — Altri articoli</div>
+      <dl>
+        <dt>Query</dt><dd>Post recenti, articolo corrente escluso, limite 3.
+          <b>Non</b> « articoli correlati » per categoria: le categorie non esistono.</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Componente</dt><dd>Card articolo, la stessa di D13 e delle pagine di catalogo</dd>
+      </dl>
+      <div class="est">Stima 0,5 h</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 9 · Richiesta informazioni</span>
+      <form class="form" data-demo-form>
+        <h3>Richiedi maggiori informazioni</h3>
+        <p class="form-sub">Verrai contattato da un nostro consulente.</p>
+        <div class="fields">
+          <div class="field"><label for="a-nome">Nome e cognome *</label><input id="a-nome" required></div>
+          <div class="field"><label for="a-az">Azienda *</label><input id="a-az" required></div>
+          <div class="field"><label for="a-mail">Email *</label><input id="a-mail" type="email" required></div>
+          <div class="field"><label for="a-tel">Telefono</label><input id="a-tel" type="tel"></div>
+          <div class="field full"><label for="a-msg">Messaggio</label><textarea id="a-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|Noleggio lavapavimenti: con Socaf conviene!"></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 99 — Form su D12</div>
+      <dl><dt>Componente</dt><dd>Modello globale. Il campo nascosto porta il titolo dell'articolo.</dd></dl>
+      <div class="est">Riusato, 0 h</div>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>
