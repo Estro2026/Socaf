@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D20 · Pagine di servizi e azienda — Wireframe Socaf</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="../assets/css/wireframe.css">
+</head>
+<body data-tpl="pagina">
+
+<div data-devbar data-code="D20" data-name="Pagine di servizi e azienda" data-url="/servizi/… · /azienda/…"></div>
+<header data-header="Servizi"></header>
+
+<div class="wrap">
+
+  <nav class="crumbs" aria-label="Percorso" data-p-crumbs></nav>
+
+  <div class="row">
+    <section class="block" style="border-top:0;padding-top:12px">
+      <span class="block-id">BLOCCHI 1–2 · Titolo e testo di apertura</span>
+      <h1 data-p-h1>Pagina</h1>
+      <p class="lede" data-p-lede></p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 129 — Pagina di testo (template D18 · variante A)</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagina WordPress. Un solo template Elementor per tutte le pagine di Servizi e Azienda:
+          i blocchi opzionali si aggiungono o si tolgono in pagina.</dd>
+        <dt>Testi</dt><dd>Quelli attuali di socaf.it, ripresi così come sono (fonte indicata nella barra in alto).
+          Dove socaf.it non ha un testo compare il riquadro « Servono informazioni ».</dd>
+        <dt>SEO</dt><dd>Nessun cluster dedicato: titoli descrittivi, niente forzature.</dd>
+      </dl>
+      <div class="est">Stima 3 h (template + popolamento)</div>
+    </div>
+  </div>
+
+  <div class="row" data-p-if="corpo">
+    <section class="block">
+      <span class="block-id">BLOCCO 3 · Testo della pagina</span>
+      <div class="testo-pagina" data-p-corpo></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 130 — Testo</div>
+      <dl>
+        <dt>Origine</dt><dd>Contenuto della pagina (editor). Sottotitoli H2, elenchi nativi.</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="row" data-p-if="elenco">
+    <section class="block">
+      <span class="block-id">BLOCCO 4 · Elenco delle pagine figlie</span>
+      <div class="grid grid-2" data-p-elenco></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 131 — Pagina di elenco</div>
+      <dl>
+        <dt>Origine</dt><dd>Pagine figlie: titolo, estratto (primo paragrafo), immagine in evidenza</dd>
+        <dt>Condizione</dt><dd>Solo sulle pagine di elenco (Servizi, Azienda, Referenze)</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="row" data-p-if="macchine">
+    <section class="block">
+      <span class="block-id">BLOCCO 5 · Collegamenti al catalogo — <span class="cond">condizionale</span></span>
+      <h2>Su quali macchine</h2>
+      <div class="chips">
+        <a class="chip" href="03-famiglia.html" data-url="/lavapavimenti/">Lavapavimenti</a>
+        <a class="chip" href="03-famiglia.html" data-url="/spazzatrici/">Spazzatrici</a>
+        <a class="chip" href="03-famiglia.html" data-url="/idropulitrici/">Idropulitrici</a>
+        <a class="chip" href="03-famiglia.html" data-url="/aspiratori/">Aspiratori</a>
+        <a class="chip" href="03-famiglia.html" data-url="/robot/">Robot</a>
+        <a class="chip" href="03-famiglia.html" data-url="/altri-macchinari/">Altri macchinari</a>
+      </div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 132 — Collegamenti al catalogo</div>
+      <dl><dt>Condizione</dt><dd>Solo dove il servizio riguarda le macchine (pronto intervento, consulenza tecnica)</dd></dl>
+    </div>
+  </div>
+
+  <div class="row" data-p-if="sedi">
+    <section class="block">
+      <span class="block-id">BLOCCO 6 · Sedi — <span class="cond">condizionale</span></span>
+      <h2>Le nostre sedi</h2>
+      <div data-sedi=""></div>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 133 — Sedi</div>
+      <dl><dt>Origine</dt><dd>CPT <code>sede</code>, modello globale</dd></dl>
+    </div>
+  </div>
+
+  <div class="row" data-p-if="form">
+    <section class="block">
+      <span class="block-id">BLOCCO 7 · Richiesta di contatto</span>
+      <form class="form" data-demo-form>
+        <h3 data-p-form>Richiedi maggiori informazioni</h3>
+        <p class="form-sub">Ti ricontatta un nostro consulente.</p>
+        <div class="fields">
+          <div class="field"><label for="k-nome">Nome e cognome *</label><input id="k-nome" required></div>
+          <div class="field"><label for="k-az">Azienda *</label><input id="k-az" required></div>
+          <div class="field"><label for="k-mail">Email *</label><input id="k-mail" type="email" required></div>
+          <div class="field"><label for="k-tel">Telefono</label><input id="k-tel" type="tel"></div>
+          <div class="field full"><label for="k-msg">Messaggio</label><textarea id="k-msg"></textarea></div>
+          <div class="field full" data-hidden-field="pagina di provenienza|—" data-p-hidden></div>
+          <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:16px">
+          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+        </div>
+        <p class="small" data-form-msg style="margin:10px 0 0"></p>
+      </form>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 134 — Form</div>
+      <dl><dt>Origine</dt><dd>Elementor Pro Form · campo nascosto con la pagina di provenienza</dd></dl>
+    </div>
+  </div>
+
+</div>
+
+<footer data-footer></footer>
+<script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/testi.js"></script>
+<script src="../assets/js/wireframe.js"></script>
+</body>
+</html>

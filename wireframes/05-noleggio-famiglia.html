@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../assets/css/wireframe.css">
 </head>
-<body>
+<body data-istanza="noleggio">
 
 <div data-devbar data-code="D5" data-name="Landing di noleggio per famiglia" data-url="/noleggio/[famiglia]/ · 4 pagine + 2 da confermare"></div>
 <header data-header="Noleggio"></header>
@@ -49,8 +49,8 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 4 · Le macchine a noleggio — elenco automatico</span>
-      <h2>Le lavapavimenti che puoi noleggiare</h2>
-      <div class="grid grid-4">
+      <h2 data-t="Le {plur} che puoi noleggiare">Le lavapavimenti che puoi noleggiare</h2>
+      <div class="grid grid-4" data-grid>
         <article class="card"><div class="card-media" style="padding:0"><img src="../assets/images/la511-40-bt-01.png" alt="LA 511-40 BT"></div>
           <div class="card-body"><span class="card-name">LA 511-40 BT</span>
             <p class="card-desc">Lavasciuga pavimenti industriale uomo a terra, robusta, semplice e Made in Italy.</p>
@@ -96,7 +96,7 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 5 · Formule e durate per questa famiglia</span>
-      <h2>Formule e durate per il noleggio di lavapavimenti</h2>
+      <h2 data-t="Formule e durate per il noleggio di {plur}">Formule e durate per il noleggio di lavapavimenti</h2>
       <p class="wordcount">LUNGHEZZA PREVISTA · 150–250 PAROLE</p>
       <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-client">Client task</span></p>
       <div class="skel" data-lines="5"></div>
@@ -115,7 +115,7 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 6 · Testo di approfondimento</span>
-      <h2>Quando conviene noleggiare una lavapavimenti</h2>
+      <h2 data-t="Quando conviene noleggiare {sing}">Quando conviene noleggiare una lavapavimenti</h2>
       <p class="wordcount">LUNGHEZZA PREVISTA · 400–600 PAROLE</p>
       <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
       <h3>Quando il noleggio conviene</h3><div class="skel" data-lines="6"></div>
@@ -137,7 +137,7 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 7 · Domande frequenti</span>
-      <h2>Domande frequenti sul noleggio di lavapavimenti</h2>
+      <h2 data-t="Domande frequenti sul noleggio di {plur}">Domande frequenti sul noleggio di lavapavimenti</h2>
       <div class="faq">
         <details><summary>Che larghezza di lavoro serve per il mio capannone?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="3"></div></div></details>
         <details><summary>Le batterie e il caricabatterie sono compresi?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
@@ -158,13 +158,13 @@
       <div class="promo-pair">
         <div class="promo" style="border-left-color:var(--grey)">
           <h3>Preferisci acquistarla nuova?</h3>
-          <p>Le 24 lavapavimenti del catalogo, divise in cinque tipologie.</p>
-          <a class="btn-link" href="03-famiglia.html" data-url="/lavapavimenti/">Lavapavimenti</a>
+          <p data-t="{catalogo}">Le 24 lavapavimenti del catalogo, divise in cinque tipologie.</p>
+          <a class="btn-link" href="03-famiglia.html" data-url="/lavapavimenti/" data-url-t="/{famcat}/" data-t="{Nome}">Lavapavimenti</a>
         </div>
         <div class="promo promo-usa">
           <h3>Oppure usata e garantita</h3>
           <p>Ricondizionate e garantite da 3 a 12 mesi, con supervalutazione della macchina che hai già.</p>
-          <a class="btn-link" href="07-usato-famiglia.html" data-url="/usato/lavapavimenti-usate/">Lavapavimenti usate</a>
+          <a class="btn-link" href="07-usato-famiglia.html" data-url="/usato/lavapavimenti-usate/" data-url-t="/usato/{usato}/" data-t="{Nome} usate">Lavapavimenti usate</a>
         </div>
       </div>
     </section>
@@ -185,7 +185,7 @@
     <section class="block">
       <span class="block-id">BLOCCO 9 · Le altre famiglie a noleggio</span>
       <h2>Cos'altro puoi noleggiare</h2>
-      <div class="chips">
+      <div class="chips" data-altri>
         <span class="chip" aria-current="true">Lavapavimenti</span>
         <a class="chip" href="05-noleggio-famiglia.html" data-url="/noleggio/idropulitrici/">Idropulitrici</a>
         <a class="chip" href="05-noleggio-famiglia.html" data-url="/noleggio/spazzatrici/">Spazzatrici</a>
@@ -227,7 +227,7 @@
     <section class="block">
       <span class="block-id">BLOCCO 11 · Articoli collegati — <span class="cond">condizionale</span> · max 3</span>
       <h2>Approfondimenti</h2>
-      <div class="grid grid-3">
+      <div class="grid grid-3" data-solo="lavapavimenti" data-solo-info="Articoli di approfondimento su questo noleggio: da selezionare tra le news di socaf.it.">
         <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
           <div class="card-body"><span class="card-name">Noleggio lavapavimenti: con Socaf conviene!</span>
             <span class="card-meta">Approfondimento</span>
@@ -286,6 +286,7 @@
 
 <footer data-footer></footer>
 <script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/testi.js"></script>
 <script src="../assets/js/wireframe.js"></script>
 </body>
 </html>

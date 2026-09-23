@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../assets/css/wireframe.css">
 </head>
-<body>
+<body data-istanza="categoria">
 
 <div data-devbar data-code="D11" data-name="Pagina categoria di prodotto" data-url="/prodotti-per-la-pulizia/[categoria]/ · 13 pagine"></div>
 <header data-header="Prodotti per la pulizia"></header>
@@ -58,7 +58,7 @@
       <span class="block-id">BLOCCO 4 · Cosa comprende — elenco testuale, non una griglia di card</span>
       <h2>Cosa comprende questa categoria</h2>
       <div class="cols-2">
-        <ul>
+        <ul data-solo="detergenti-pavimenti-parquet" data-solo-info="Elenco delle tipologie di questa categoria: da fornire (Socaf).">
           <li>Detergenti neutri per lavaggio quotidiano</li>
           <li>Detergenti alcalini per sporco grasso</li>
           <li>Detergenti acidi per residui calcarei e cementizi</li>
@@ -94,7 +94,7 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 5 · Catalogo da scaricare</span>
-      <a class="download" href="#"><span class="ext">PDF</span> Catalogo Detergenti 2023</a>
+      <a class="download" href="#"><span class="ext">PDF</span> <span data-t="{pdf}">Catalogo Detergenti 2023</span></a>
       <p class="small" style="margin-top:12px"><span class="openpoint">OP-08</span>
         BM §E dichiara che ogni categoria ha un catalogo, quindi il blocco c'è sempre.
         Se per alcune categorie il PDF non esiste, il blocco torna condizionale.</p>
@@ -113,7 +113,7 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 6 · Testo di approfondimento — testo lungo</span>
-      <h2>Come si sceglie un detergente per pavimenti professionale</h2>
+      <h2 data-t="{approf}">Come si sceglie un detergente per pavimenti professionale</h2>
       <p class="wordcount">LUNGHEZZA PREVISTA · 800–1200 PAROLE — una delle 5 categorie con testo lungo</p>
       <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
       <h3>pH: neutro, alcalino, acido</h3><div class="skel" data-lines="7"></div>
@@ -199,7 +199,7 @@
     <section class="block">
       <span class="block-id">BLOCCO 9 · Le altre categorie</span>
       <h2>Le altre categorie</h2>
-      <div class="chips">
+      <div class="chips" data-altri>
         <span class="chip" aria-current="true">Detergenti per pavimenti e parquet</span>
         <a class="chip" href="11-categoria-prodotto.html" data-url="/prodotti-per-la-pulizia/detergenti-enzimatici/">Detergenti enzimatici</a>
         <a class="chip" href="11-categoria-prodotto.html" data-url="/prodotti-per-la-pulizia/detergenti-disinfettanti/">Detergenti disinfettanti e igienizzanti</a>
@@ -259,6 +259,7 @@
 
 <footer data-footer></footer>
 <script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/testi.js"></script>
 <script src="../assets/js/wireframe.js"></script>
 </body>
 </html>

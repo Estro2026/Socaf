@@ -14,8 +14,8 @@ Vedi §Fuori perimetro.
 | # | Area | Template coinvolti | Ore | Complessità |
 | --- | --- | --- | --- | --- |
 | 1 | Fondamenta WordPress, ACF, CPT, tassonomie, permalink | — | **20** | Alta |
-| 2 | D19 + componenti globali: header, footer, menu, breadcrumbs, ricerca, form | D19 | **24** | Media |
-| 3 | Componenti dinamici riutilizzabili: card, listing, FAQ, noleggio, usato, sedi | tutti | **20** | Media |
+| 2 | D19 + componenti globali: header, footer, menu, breadcrumbs, ricerca, form | D19 | **23** | Media |
+| 3 | Componenti dinamici riutilizzabili: card, listing, FAQ, noleggio, usato, sedi | tutti | **19** | Media |
 | 4 | Scheda macchina | D1 | **14** | Alta |
 | 5 | Archivio sottocategoria | D2 | **10** | Media |
 | 6 | Pagina famiglia | D3 | **10** | Media |
@@ -27,11 +27,12 @@ Vedi §Fuori perimetro.
 | 12 | Archivio Approfondimenti | D13 | **6** | Bassa |
 | 13 | Scheda sede | D14 | **6** | Bassa |
 | 14 | Contatti | D15 | **6** | Bassa |
-| 15 | Home | D16 | **10** | Media |
+| 15 | Home | D16 | **8** | Media |
 | 16 | Risultati di ricerca | D17 | **8** | Media |
-| 17 | Pagine istituzionali, servizi, referenze | D18 | **10** | Bassa |
+| 17 | Pagine istituzionali, servizi, referenze | D18 · D20 | **8** | Bassa |
 | 18 | Responsive, accessibilità, cross-browser, QA | tutti | **20** | Media |
 | 19 | SEO tecnico, redirect, performance, QA tecnico | tutti | **12** | Alta |
+| 20 | Linguaggio visivo VI, pannello testi a schede, stili form | tutti | **6** | Bassa |
 
 **PREVISIONE: 228 h** · **BUFFER: 12 h** · **MASSIMO: 240 h**
 
@@ -65,12 +66,12 @@ del previsto (il sito oggi non è WordPress: i 184 articoli e le 119 schede vann
 
 ---
 
-### 2 · D19 + componenti globali — 24 h · complessità media
+### 2 · D19 + componenti globali — 23 h · complessità media
 
 **Cosa comprende**
 Header (6 h) · footer (3 h) · riga di servizio (1,5 h) · menu desktop (2 h) · menu mobile (2 h) ·
 numero verde (0,5 h) · breadcrumbs con le due eccezioni (2 h) · ricerca come componente (1,5 h) ·
-i due form come modelli globali (4 h) · impostazione dei breakpoint e prima passata responsive (1,5 h).
+i due form come modelli globali (3 h: gli stili di radio, consenso e scelta a pillole sono nell'area 20) · impostazione dei breakpoint e prima passata responsive (1,5 h).
 
 **Componenti riutilizzati da qui in poi**: header, footer, breadcrumbs, form generico, form macchina, ricerca.
 
@@ -87,15 +88,15 @@ e non va introdotto. Un overlay di ricerca animato al posto del link semplice: +
 
 ---
 
-### 3 · Componenti dinamici riutilizzabili — 20 h · complessità media
+### 3 · Componenti dinamici riutilizzabili — 19 h · complessità media
 
 **Cosa comprende**
-Card macchina (3 h) · card sottocategoria (1,5 h) · card articolo (1,5 h) · etichette noleggio e usato (1 h) ·
+Card macchina (2 h: fondo segnaposto e stato hover sono stili globali dell'area 20) · card sottocategoria (1,5 h) · card articolo (1,5 h) · etichette noleggio e usato (1 h) ·
 blocco noleggio e blocco usato (2 h) · blocco sedi (1,5 h) · accordion FAQ (1 h) ·
 blocco « garanzia e revisione » (1 h) · blocco « supervalutazione » (0,5 h) ·
 Code Snippets #1–#5 e #8–#9 (5 h) · impostazione della struttura dei Listing Grid JetEngine (2 h).
 
-**Perché vale 20 h e non meno**
+**Perché vale 19 h e non meno**
 Questi componenti compaiono su 15 template. Farli bene una volta è quello che tiene D1–D18
 a 10–14 h l'uno invece di 20. **È l'investimento che rende il budget possibile.**
 
@@ -262,11 +263,11 @@ mappa multi-sede (1,5 h) · form con doppio consenso (1,5 h) · responsive e QA 
 
 ---
 
-### 15 · D16 — Home — 10 h · media
+### 15 · D16 — Home — 8 h · media
 
-Apertura con ricerca (2 h) · le 6 famiglie (1 h) · noleggio e usato (1 h) · settori (0,5 h) ·
+Apertura con ricerca (1 h: gradiente, bolla e taglio rosso della hero sono nell'area 20) · le 6 famiglie (1 h) · noleggio e usato (1 h) · settori (0,5 h) ·
 prodotti (0,5 h) · Aquarial e Caldofacile (0,5 h) · sedi (riusato) · form (riusato) ·
-responsive e QA accurate (3 h) · performance (1,5 h).
+responsive e QA accurate (3 h) · performance (0,5 h: i Core Web Vitals della home sono già misurati nell'area 19).
 
 **Perché il responsive costa più che altrove**: è la pagina più vista, su tutti i dispositivi.
 
@@ -291,10 +292,12 @@ snippet per includere `descrizione_breve` (0,5 h) · SEO `noindex` (0,5 h) · re
 
 ---
 
-### 17 · D18 — Pagine istituzionali — 10 h · bassa
+### 17 · D18 + D20 — Pagine istituzionali, servizi, referenze — 8 h · bassa
 
-Template di pagina di testo (3 h) · due pagine di elenco (2 h) · elenco referenze (1,5 h) ·
-Single referenza (2 h) · impostazione delle 9 pagine di testo (1,5 h).
+**Un solo template di pagina (D20)** per le 17 pagine di Servizi e Azienda: testo, elenco delle pagine
+figlie ed elenco referenze sono blocchi opzionali dello stesso template, non layout diversi.
+Template unico (3 h) · elenchi e referenze come blocchi opzionali (1,5 h) · Single referenza (1,5 h) ·
+impostazione delle 17 pagine (2 h).
 
 **Rischi**: il CPT `referenza` con rewrite annidato sotto `/azienda/referenze/` e archivio spento
 è la stessa insidia delle tassonomie. OP-01 aperto.
@@ -324,6 +327,23 @@ il posizionamento (1 h) · Core Web Vitals su home e D1 (2 h) · QA tecnico fina
   o sui 184 articoli costa traffico reale, non teorico.
 - ⚠ Le due citazioni più autorevoli che Socaf possiede da altri siti puntano a **due articoli**:
   quei due indirizzi non possono rompersi.
+
+### 20 · Linguaggio visivo VI, pannello testi, stili form — 6 h · bassa
+
+Fondo di pagina e fasce alternate (frost, contorni, vetro rigato) come **classi CSS globali**
+da assegnare alla sezione Elementor (1,5 h) · bolle come **un solo asset SVG** riusato, movimento con
+un keyframe CSS e rispetto di `prefers-reduced-motion` (1 h) · hero con gradiente « fluid energy » e
+taglio rosso (0,5 h) · pannello testi a schede con il **widget Tabs nativo di Elementor Pro**
+(verticale su desktop, orizzontale su mobile), solo stilizzato, nessun JavaScript su misura (2 h) ·
+radio a pillole, consenso, CTA del footer (0,5 h) · card: fondo segnaposto e hover (0,5 h).
+
+**Regole che tengono il costo a 6 h**
+- Niente librerie di animazione, parallax o canvas: solo gradienti CSS e un SVG.
+- Le fasce si alternano per classe, non si disegnano pagina per pagina.
+- Il pannello a schede è il widget nativo: se servisse un comportamento diverso, si semplifica la resa.
+
+**Da dove vengono le ore**: nessuna dal buffer. Sono state liberate nelle aree 2, 3, 15 e 17
+(stili spostati qui, performance della home già contata in area 19, template D20 unico).
 
 ---
 
@@ -379,7 +399,7 @@ e una modifica ai componenti dopo l'area 10 si propaga su quindici template.
 | Varianti della card macchina per contesto | +1,5 h ciascuna | Una card, sempre la stessa |
 | Ricerca con autocomplete / plugin dedicato | +6–10 h | Ricerca nativa + snippet #9 |
 | Widget Elementor su misura | +8 h ciascuno | Se serve un widget custom, si semplifica la resa |
-| Animazioni, parallax, librerie di motion | +10 h e QA | Esclusi |
+| Animazioni, parallax, librerie di motion oltre il keyframe CSS dell'area 20 | +10 h e QA | Esclusi |
 | Blocchi aggiunti alla home | +2–4 h ciascuno | La home ha otto blocchi |
 | Landing noleggio monospazzole e aspiratori (OP-03) | +2 h | Solo se Socaf le apre — **non con il buffer** |
 | Conflitti di rewrite non previsti | +4–8 h | Test in staging prima di popolare |

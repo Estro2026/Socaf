@@ -714,7 +714,7 @@ body:not(.notes-on) .dropdown .dd-note{display:none}
 .stack-lg > * + *{margin-top:28px}
 .muted{color:var(--grey)}
 .mt0{margin-top:0}.mb0{margin-bottom:0}
-.split{display:grid;gap:var(--gap);grid-template-columns:minmax(0,1fr) 370px;align-items:start}
+.split{display:grid;gap:var(--gap);grid-template-columns:minmax(0,1fr) clamp(400px,31vw,520px);align-items:start}
 @media (max-width:1023px){.split{grid-template-columns:minmax(0,1fr)}}
 .sticky-col{position:sticky;top:104px}
 @media (max-width:1023px){.sticky-col{position:static}}
@@ -917,3 +917,445 @@ body:not(.notes-on) .dropdown .dd-note{display:none}
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important;scroll-behavior:auto !important}
 }
+
+/* ------------------------------------ 20. Revisione (sett. 2026) --- */
+
+/* 20.1 Hero: tutta dentro la viewport, sotto devbar + header.
+   --hero-offset = devbar (~40) + riga di servizio (40) + barra (80) + margini. */
+:root{--hero-offset:196px}
+@media (max-width:1023px){:root{--hero-offset:170px}}
+.hero{
+  display:flex;flex-direction:column;margin-top:12px;
+  height:calc(100svh - var(--hero-offset));min-height:440px;max-height:860px;
+  padding:clamp(24px,3.2vh,48px) clamp(24px,4vw,56px);
+}
+.hero-inner{flex:1 1 auto;min-height:0;align-items:stretch}
+.hero-inner > div:first-child{display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:clamp(32px,min(4.6vw,6.2vh),60px)}
+.hero .lede{font-size:clamp(16px,min(1.6vw,2.2vh),20px);margin-bottom:0}
+.hero .search{margin-top:clamp(16px,2.6vh,30px) !important}
+.hero-cta{margin-top:clamp(14px,2.2vh,26px)}
+.hero-figure{min-height:0;height:100%}
+.hero-stats{margin-top:clamp(16px,2.6vh,30px);padding-top:clamp(12px,2vh,22px)}
+@media (max-width:980px){
+  .hero{height:auto;max-height:none;min-height:calc(100svh - var(--hero-offset))}
+  .hero-figure{height:auto;min-height:200px}
+}
+
+/* 20.2 Voci con tendina: freccia (triangolo) leggibile */
+.nav-btn .caret,.mobile-panel .acc > button .caret{
+  display:inline-block;width:0;height:0;font-size:0;flex:0 0 auto;
+  border-left:4px solid transparent;border-right:4px solid transparent;
+  border-top:5px solid var(--grey);margin-left:1px;opacity:.85;
+  transition:transform .18s ease;
+}
+.mobile-panel .acc > button .caret{border-left-width:5px;border-right-width:5px;border-top-width:6px}
+.mobile-panel .acc > button[aria-expanded="true"] .caret{transform:rotate(180deg)}
+.nav-btn[aria-expanded="true"] .caret{border-top-color:var(--red)}
+
+/* 20.3 Tendine opache: non si confondono col testo sotto */
+.dropdown{
+  background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;
+  border:1px solid rgba(0,30,42,.14);z-index:60;
+  box-shadow:0 2px 6px rgba(0,30,42,.08), 0 24px 48px -16px rgba(0,30,42,.38);
+}
+.dropdown a:hover{background:#f1f4f6}
+.mobile-panel{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none}
+.mobile-sticky{background:#fff}
+.mobile-panel .acc-body{background:#f5f7f8}
+
+/* 20.4 Elenchi: niente pallini né numeri. Segno = linea diagonale a 42°
+   (The Slice) per gli elenchi, triangolo per i passi. */
+.block ul:not([class]),.block ol:not([class]),.faq-body ul,.faq-body ol{list-style:none;padding-left:0}
+.block ul:not([class]) > li,.block ol:not([class]) > li,.faq-body li{position:relative;padding-left:24px}
+.block ul:not([class]) > li::before,.block ol:not([class]) > li::before,.faq-body li::before,
+.strengths li::before{
+  content:"";position:absolute;left:4px;top:.28em;width:2px;height:1em;border-radius:1px;
+  background:var(--red);transform:rotate(42deg);transform-origin:center;
+}
+.strengths li::before{left:5px;top:.2em;height:1.05em;width:3px}
+.step::before{
+  content:"";counter-increment:none;width:0;height:0;border-radius:0;background:none;
+  border-top:8px solid transparent;border-bottom:8px solid transparent;
+  border-left:12px solid var(--red);display:block;margin-bottom:14px;
+}
+
+/* 20.5 Footer con logo */
+.footer-brand{display:flex;align-items:center;gap:22px 32px;flex-wrap:wrap;
+  padding-bottom:28px;margin-bottom:30px;border-bottom:1px solid var(--glass-edge)}
+.footer-brand .brand img{height:40px}
+.footer-brand p{margin:0;max-width:52ch;color:var(--grey);font-size:14.5px;flex:1 1 280px}
+.footer-brand .phone-cta{margin-left:auto}
+@media (max-width:640px){.footer-brand .phone-cta{margin-left:0}}
+
+/* 20.6 Testi reali e contenuti mancanti */
+.testo p,.testo-pagina p{max-width:72ch}
+.testo-pagina h2{margin-top:1.4em}
+.testo-pagina h2:first-child{margin-top:0}
+.need-info{
+  display:flex;flex-direction:column;gap:3px;max-width:72ch;margin:0 0 1.05em;
+  padding:12px 16px;border-radius:var(--r-sm);
+  border:1px dashed rgba(163,92,0,.45);background:var(--open-bg);color:#6b4a14;font-size:14px;
+}
+.need-info b{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--open)}
+p.lede + .need-info,h1 + .need-info{margin-top:6px}
+
+/* 20.7 Ricerca in apertura: il testo guida non si taglia */
+.hero .search input{font-size:15.5px;text-overflow:ellipsis}
+.claim{font-family:var(--font-display);font-weight:600;font-size:clamp(19px,1.9vw,24px);
+  letter-spacing:-.01em;margin:-.1em 0 .5em;color:var(--red)}
+
+/* ---------------------------------- 21. Linguaggio visivo (socafvi) --- */
+/* Dalla Visual Identity: bolle di sapone iridescenti rosso/blu, gradienti
+   « blue frost », « red burst », « fluid energy », linee diagonali a 42°,
+   linee di contorno concentriche, vetro rigato, triangolo rosso d'angolo.
+   Tutto decorativo: nessun elemento porta contenuto (aria-hidden). */
+html,body{overflow-x:clip}
+
+/* 21.1 Fondo di pagina: due bolle della VI, molto tenui, + trama diagonale */
+.vi-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.vi-bg::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(-42deg,rgba(0,30,42,.028) 0 1px,transparent 1px 26px);
+  -webkit-mask:linear-gradient(115deg,transparent 30%,#000 75%);mask:linear-gradient(115deg,transparent 30%,#000 75%);
+}
+
+/* 21.2 Fasce a tutta larghezza, alternate: vetro, contorni, vetro rigato */
+.row.vi-band{position:relative;isolation:isolate}
+.row.vi-band::before{
+  content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);
+  border-top:1px solid rgba(255,255,255,.8);border-bottom:1px solid rgba(255,255,255,.8);
+}
+/* blue frost */
+.vi-band--frost::before{
+  background:
+    radial-gradient(900px 420px at 88% 0%,rgba(79,189,247,.26),transparent 65%),
+    radial-gradient(700px 380px at 6% 100%,rgba(0,133,207,.14),transparent 62%),
+    linear-gradient(180deg,rgba(255,255,255,.55),rgba(232,244,252,.7));
+}
+/* linee di contorno concentriche (copertine di capitolo) */
+.vi-band--contour::before{
+  background:
+    repeating-radial-gradient(ellipse 120% 150% at 104% 50%,transparent 0 30px,rgba(0,133,207,.13) 30px 32px),
+    linear-gradient(100deg,rgba(255,255,255,.7) 30%,rgba(214,236,250,.75));
+  -webkit-mask:linear-gradient(90deg,rgba(0,0,0,.55),#000 60%);mask:linear-gradient(90deg,rgba(0,0,0,.55),#000 60%);
+}
+/* vetro rigato su « fluid energy » tenue */
+.vi-band--ribbed::before{
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 2px,rgba(255,255,255,0) 2px 16px),
+    radial-gradient(600px 300px at 12% 20%,rgba(228,0,43,.10),transparent 70%),
+    radial-gradient(800px 380px at 90% 90%,rgba(0,133,207,.16),transparent 70%),
+    linear-gradient(135deg,rgba(247,250,252,.8),rgba(234,242,249,.8));
+}
+
+/* 21.3 Hero: « fluid energy » in movimento, bolla, taglio rosso */
+.hero::before{
+  background:
+    radial-gradient(700px 440px at 90% -10%,rgba(0,133,207,.34),transparent 62%),
+    radial-gradient(520px 380px at 2% 110%,rgba(228,0,43,.20),transparent 64%),
+    repeating-linear-gradient(-42deg,rgba(255,255,255,.35) 0 1px,transparent 1px 22px);
+}
+.hero::after{
+  top:auto;left:auto;right:0;bottom:0;width:clamp(70px,9vw,130px);height:clamp(70px,9vw,130px);
+  transform:none;background:linear-gradient(135deg,var(--red),var(--red-deep));
+  clip-path:polygon(100% 0,100% 100%,0 100%);
+}
+.hero-figure{
+  background:
+    radial-gradient(60% 55% at 22% 25%,rgba(79,189,247,.85),transparent 70%),
+    radial-gradient(55% 60% at 80% 78%,rgba(228,0,43,.8),transparent 70%),
+    radial-gradient(40% 40% at 60% 35%,rgba(255,255,255,.9),transparent 70%),
+    linear-gradient(160deg,#0085cf,#4fbdf7 40%,#f5f7f9 55%,#e4002b);
+  background-size:160% 160%;
+  animation:vi-fluid 18s ease-in-out infinite alternate;
+  color:#fff;text-shadow:0 1px 8px rgba(0,30,42,.35);
+}
+@keyframes vi-fluid{0%{background-position:0% 30%}100%{background-position:100% 70%}}
+.hero-figure::after{
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.28) 0 2px,rgba(255,255,255,0) 2px 14px);
+  border-left:0;width:46%;right:-8%;
+}
+
+/* 21.4 Footer: contorni concentrici + triangolo rosso d'angolo */
+.site-footer{position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(226,240,250,.85))}
+.site-footer::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:repeating-radial-gradient(ellipse 90% 120% at 100% 0%,transparent 0 28px,rgba(0,133,207,.12) 28px 30px);
+  -webkit-mask:linear-gradient(90deg,transparent 35%,#000);mask:linear-gradient(90deg,transparent 35%,#000);
+}
+.site-footer::after{
+  content:"";position:absolute;right:0;bottom:0;width:110px;height:110px;z-index:-1;
+  background:linear-gradient(135deg,var(--red),var(--red-deep));clip-path:polygon(100% 0,100% 100%,0 100%);
+}
+
+/* 21.5 Card e riquadri: vetro con riflesso iridescente al passaggio */
+.card{transition:box-shadow .2s ease,transform .2s ease}
+.card:hover{transform:translateY(-2px);
+  box-shadow:0 2px 6px rgba(0,30,42,.05),0 22px 40px -18px rgba(0,133,207,.35),0 0 0 1px rgba(228,0,43,.10)}
+.card .card-media.ph{
+  background:
+    radial-gradient(70% 90% at 15% 10%,rgba(79,189,247,.35),transparent 70%),
+    radial-gradient(60% 80% at 95% 100%,rgba(228,0,43,.18),transparent 70%),
+    repeating-linear-gradient(-42deg,rgba(255,255,255,.5) 0 1px,transparent 1px 16px),
+    #eef4f8;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-figure{animation:none !important}
+  .card:hover{transform:none}
+}
+
+/* ------------------------------------------ 22. Form e testi lunghi --- */
+/* 22.1 Radio e checkbox non ereditano la larghezza dei campi di testo */
+.field input[type=radio],.field input[type=checkbox],.consent input{
+  width:18px;height:18px;min-width:18px;flex:0 0 18px;padding:0;margin:0;
+  accent-color:var(--red);border-radius:0;background:none;box-shadow:none}
+/* Tipo di richiesta: tre pillole affiancate, non una colonna alta */
+.radio-set{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:8px;padding:0}
+.radio-set label{
+  position:relative;justify-content:center;text-align:center;gap:0;
+  padding:10px 8px;border-radius:var(--r-pill);cursor:pointer;
+  border:1px solid rgba(0,30,42,.14);background:rgba(255,255,255,.75);
+  font-size:13.5px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);line-height:1.2}
+.radio-set label input{position:absolute;opacity:0;pointer-events:none}
+.radio-set label:has(input:checked){background:var(--ink);color:#fff;border-color:var(--ink)}
+.radio-set label:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:2px}
+.consent{align-items:flex-start}
+.consent input{margin-top:1px}
+/* Form nella colonna laterale: più compatto */
+
+
+/* 22.3 Footer: la CTA ha gli stessi colori di quella dell'header */
+.site-footer a.phone-cta,.site-footer a.phone-cta:hover{color:#fff;text-decoration:none}
+.site-footer a.phone-cta .lbl{color:rgba(255,255,255,.82)}
+.f-tag{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:var(--r-pill);
+  font-size:11px;font-weight:600;color:var(--grey);background:rgba(0,30,42,.06);vertical-align:1px}
+
+/* 22.2 Testi lunghi: pannello a schede. Indice a sinistra, un contenuto alla volta.
+   Un solo segno per volta: il triangolo sulla voce attiva, la diagonale negli elenchi. */
+.t-tabs{display:grid;grid-template-columns:minmax(220px,300px) minmax(0,1fr);gap:clamp(18px,3vw,36px);
+  align-items:start;margin:10px 0 6px;max-width:1180px}
+.t-nav{display:flex;flex-direction:column;gap:4px;position:sticky;top:150px;
+  padding-left:14px;border-left:1px solid rgba(0,30,42,.12)}
+.t-nav [role=tab]{
+  position:relative;text-align:left;background:none;border:0;cursor:pointer;
+  padding:11px 14px 11px 18px;border-radius:var(--r-sm);
+  font-family:var(--font-display);font-weight:500;font-size:15px;line-height:1.3;color:var(--grey);
+  transition:background .15s ease,color .15s ease}
+.t-nav [role=tab]:hover{background:rgba(255,255,255,.7);color:var(--ink)}
+.t-nav [role=tab][aria-selected=true]{background:rgba(255,255,255,.92);color:var(--ink);font-weight:700;
+  box-shadow:var(--shadow-sm)}
+.t-nav [role=tab][aria-selected=true]::before{
+  content:"";position:absolute;left:-15px;top:50%;transform:translateY(-50%);
+  border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:10px solid var(--red)}
+.t-nav [role=tab].is-vuoto{font-style:italic}
+.t-pane{
+  position:relative;overflow:hidden;isolation:isolate;
+  padding:clamp(22px,3vw,38px) clamp(22px,3vw,40px);border-radius:var(--r-lg);
+  background:
+    radial-gradient(420px 260px at 100% 0%,rgba(79,189,247,.20),transparent 70%),
+    radial-gradient(360px 240px at 0% 100%,rgba(228,0,43,.07),transparent 70%),
+    rgba(255,255,255,.78);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-line);box-shadow:var(--shadow);
+  animation:t-in .25s ease}
+.t-pane[hidden]{display:none}
+.t-pane h3{font-size:clamp(20px,2vw,26px);margin:0 0 14px;max-width:34ch}
+.t-pane .testo{font-size:16px;color:#2e3a41;columns:2 30ch;column-gap:36px}
+.t-pane .testo p,.t-pane .testo ul{break-inside:avoid-column}
+.t-pane .testo p{margin-bottom:.9em}
+.t-pane .need-info{margin:0}
+@keyframes t-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (max-width:860px){
+  .t-tabs{grid-template-columns:minmax(0,1fr)}
+  .t-nav{position:static;flex-direction:row;overflow-x:auto;gap:8px;padding:2px 0 8px;border-left:0;
+    scroll-snap-type:x proximity;-webkit-mask:linear-gradient(90deg,#000 85%,transparent);mask:linear-gradient(90deg,#000 85%,transparent)}
+  .t-nav [role=tab]{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start;padding:9px 16px;
+    border-radius:var(--r-pill);border:1px solid rgba(0,30,42,.12);background:rgba(255,255,255,.6)}
+  .t-nav [role=tab][aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .t-nav [role=tab][aria-selected=true]::before{display:none}
+  .t-pane .testo{columns:auto}
+}
+@media (prefers-reduced-motion:reduce){.t-pane{animation:none}}
+@media (max-width:860px){.t-nav{scrollbar-width:none;position:relative}.t-nav::-webkit-scrollbar{display:none}}
+
+/* ------------------------------------------ 23. Blocco sedi --- */
+/* Elenco statico: nessun filtro, nessuna interazione. Cinque schede
+   sulla stessa riga, tutte della stessa misura. */
+.sedi{display:grid;gap:14px;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch}
+.sede{
+  position:relative;padding:22px 22px 20px;border-radius:var(--r);font-size:14.5px;
+  background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--glass-line);box-shadow:var(--shadow-sm);
+}
+.sede.is-main{
+  border-color:rgba(228,0,43,.3);
+  background:radial-gradient(420px 220px at 100% 0%,rgba(228,0,43,.07),transparent 70%),var(--glass-strong);
+}
+.sede .main-flag{font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:8px;
+  color:var(--red)}
+.sede .main-flag.alt{color:var(--grey)}
+.sede .city{font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;
+  font-size:clamp(19px,1.7vw,23px);line-height:1.15}
+
+.sede .co{font-size:13px;color:var(--grey);margin-top:2px}
+.sede address{font-style:normal;color:#36434b;margin:12px 0 0;line-height:1.5}
+.sede-rec{display:flex;flex-direction:column;gap:2px;margin:10px 0 14px;font-size:14.5px}
+
+@media (max-width:1180px){.sedi{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:780px){.sedi{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){
+  .sedi{grid-template-columns:minmax(0,1fr)}
+
+}
+/* 21.6 Bolle di sapone della Visual Identity: immagine fornita dal cliente
+   (assets/bolla.webp), ridotta a 1100 px in assets/images/bolla.webp:
+   l originale è 12608 px, 153 milioni di pixel da decodificare a ogni pagina. */
+.vi-bolla{
+  position:absolute;pointer-events:none;
+  background-image:url("../images/bolla.webp");
+  background-repeat:no-repeat;background-size:contain;background-position:center;
+  animation:vi-float 26s ease-in-out infinite alternate;
+}
+.vi-bolla.b1{width:min(560px,44vw);aspect-ratio:1;right:-5%;top:14%;opacity:.7}
+.vi-bolla.b2{width:min(320px,30vw);aspect-ratio:1;left:-5%;bottom:12%;opacity:.55;animation-name:vi-float-2;
+  animation-duration:34s;animation-delay:-11s}
+@media (max-width:760px){.vi-bolla.b2{display:none}.vi-bolla.b1{right:-20%}}
+@media (prefers-reduced-motion:reduce){.vi-bolla{animation:none}}
+
+/* ------------------------------- 24. Voci di menu: pillola di vetro --- */
+/* Hover e voce aperta: pillola lucida con riflesso in alto, bordo chiaro,
+   ombra morbida e una passata di luce diagonale (The Slice, 42°). */
+.nav-btn,.nav-flat{
+  position:relative;isolation:isolate;overflow:hidden;
+  transition:color .18s ease,box-shadow .22s ease,transform .18s ease;
+}
+.nav-btn:hover,.nav-flat:hover,.nav-btn[aria-expanded="true"]{background:none}
+.nav-btn::before,.nav-flat::before{
+  content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
+  opacity:0;transform:scale(.94);transition:opacity .2s ease,transform .2s ease;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.78) 42%,rgba(226,240,250,.72) 100%);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,1) inset,
+    0 -6px 12px -8px rgba(0,133,207,.5) inset,
+    0 6px 16px -8px rgba(0,30,42,.28),
+    0 1px 2px rgba(0,30,42,.06);
+}
+/* passata di luce: il taglio a 42° del logotipo */
+.nav-btn::after,.nav-flat::after{
+  content:"";position:absolute;z-index:-1;top:-60%;left:-40%;width:42%;height:220%;
+  transform:rotate(42deg) translateX(-140%);opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
+  transition:transform .55s ease,opacity .2s ease;
+}
+.nav-btn:hover::before,.nav-flat:hover::before,
+.nav-btn[aria-expanded="true"]::before{opacity:1;transform:scale(1)}
+.nav-btn:hover::after,.nav-flat:hover::after{opacity:.9;transform:rotate(42deg) translateX(320%)}
+.nav-btn:hover,.nav-flat:hover{color:var(--ink);transform:translateY(-1px)}
+.nav-btn[aria-expanded="true"]{color:var(--ink)}
+.nav-btn[aria-expanded="true"]::before{
+  background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.92) 45%,rgba(214,234,248,.9) 100%);
+}
+@media (prefers-reduced-motion:reduce){
+  .nav-btn::after,.nav-flat::after{display:none}
+  .nav-btn:hover,.nav-flat:hover{transform:none}
+}
+
+/* 24.1 Form nella colonna laterale della scheda macchina: più largo,
+   campi corti affiancati, testo e scelte a tutta larghezza. */
+.split .form{padding:clamp(24px,2.2vw,32px)}
+.split .form .fields{gap:14px}
+.split .form textarea{min-height:96px}
+@media (max-width:1023px){
+  .split .form{max-width:680px}
+}
+
+/* 24.2 Scheda macchina: la galleria è il punto focale, non un riquadro.
+   Colonna immagine più larga della colonna testo e formato più alto. */
+.split .grid-2:has(> [data-gallery]){grid-template-columns:1.25fr 1fr}
+.gallery-main{aspect-ratio:1/1;padding:18px}
+.thumb{width:92px;height:74px}
+@media (max-width:1279px){
+  .split .grid-2:has(> [data-gallery]){grid-template-columns:minmax(0,1fr)}
+  .gallery-main{aspect-ratio:4/3;max-width:760px}
+}
+/* Riquadri immagine delle card: più alti, le macchine si vedono */
+.ph-img{aspect-ratio:1/1}
+.ph-wide{aspect-ratio:3/2}
+.card .card-media img{width:100%;aspect-ratio:1/1;object-fit:contain;padding:10px}
+
+/* ------------------------- 25. Impaginazione e header fisso --- */
+/* 25.1 Il contenuto occupa la stessa larghezza del menu: dal logo alla CTA.
+   Nessuna colonna più stretta, nessun blocco appoggiato a sinistra. */
+.row > .block,.row > .section{margin-inline:auto;width:100%;max-width:none}
+.wrap > .crumbs,.wrap > .hero{margin-inline:auto;width:100%}
+.wrap > .crumbs,.wrap > .hero{max-width:none}
+/* La scheda macchina resta più larga: galleria grande e form comodo */
+.split{margin-inline:auto;max-width:none;grid-template-columns:minmax(0,1fr) clamp(400px,29vw,520px)}
+.row.vi-band > .block{margin-inline:auto}
+.split > div > .block,.split > aside > .block{max-width:none}
+.t-tabs{max-width:none}
+.faq{max-width:none}
+.testo-pagina p,.testo p{max-width:78ch}
+
+/* 25.2 La riga di servizio resta visibile: l'header si ferma sotto la barra DEV */
+.site-header{top:var(--devbar-h,0px)}
+.sticky-col{top:calc(var(--devbar-h,0px) + var(--header-h,104px) + 16px)}
+
+/* 25.3 « Perché noleggiare »: schede numerate, tutte della stessa altezza */
+.why{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.why-item{display:flex;flex-direction:column;padding:24px 24px 22px}
+.why-item h3{font-size:17px;line-height:1.25;margin:0 0 8px;min-height:2.5em}
+.why-item p{font-size:14.5px;color:var(--grey);margin:0}
+.why-num{font-size:12px}
+@media (max-width:1000px){.why{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.why{grid-template-columns:minmax(0,1fr)}.why-item h3{min-height:0}}
+
+/* 25.4 Pannello a schede numerato (« Perché noleggiare ») */
+.t-nav .t-num{
+  display:inline-block;min-width:22px;margin-right:9px;
+  font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--blue);opacity:.8}
+.t-nav [role=tab][aria-selected=true] .t-num{color:var(--red);opacity:1}
+.t-pane-num{
+  position:absolute;top:clamp(16px,2vw,26px);right:clamp(20px,2.4vw,34px);
+  font-family:var(--font-display);font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(46px,6vw,82px);line-height:1;color:rgba(0,133,207,.14)}
+.t-tabs--num .t-pane h3{padding-right:90px}
+/* Il numero sta in una colonna sua: il testo che va a capo resta allineato */
+.t-tabs--num .t-nav [role=tab]{display:grid;grid-template-columns:22px minmax(0,1fr);column-gap:10px;align-items:start}
+.t-tabs--num .t-nav .t-num{min-width:0;margin:0;line-height:1.55}
+@media (max-width:860px){
+  .t-tabs--num .t-nav [role=tab]{display:inline-flex;gap:8px;align-items:center}
+  .t-tabs--num .t-nav .t-num{line-height:1}
+}
+/* Movimento delle bolle: deriva lenta con leggera rotazione e respiro */
+@keyframes vi-float{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+  35%{transform:translate3d(26px,-30px,0) rotate(5deg) scale(1.04)}
+  70%{transform:translate3d(-14px,-12px,0) rotate(-3deg) scale(1.01)}
+  100%{transform:translate3d(10px,22px,0) rotate(4deg) scale(1.03)}
+}
+@keyframes vi-float-2{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+  40%{transform:translate3d(-22px,26px,0) rotate(-6deg) scale(1.05)}
+  75%{transform:translate3d(16px,10px,0) rotate(3deg) scale(1.02)}
+  100%{transform:translate3d(-12px,-20px,0) rotate(-4deg) scale(1)}
+}
+.vi-bolla{animation-duration:30s;animation-timing-function:cubic-bezier(.45,.05,.55,.95)}
+.vi-bolla.b2{animation-duration:38s}
+
+/* --------------------------- 26. Comparsa della pagina --- */
+/* Header, footer, testi e blocchi globali sono montati da wireframe.js.
+   Senza questo accorgimento il browser disegnerebbe prima la pagina « nuda »
+   e poi la completerebbe, con un salto visibile. La pagina resta quindi
+   invisibile finché il montaggio non è finito (classe wf-pronto).
+   Rete di sicurezza: se lo script non parte, l'animazione la mostra comunque
+   dopo 1,2 s, così il contenuto non resta mai nascosto. */
+body{opacity:0;animation:wf-reveal .01s linear 1.2s forwards}
+body.wf-pronto{opacity:1;animation:none;transition:opacity .18s ease}
+@keyframes wf-reveal{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){body.wf-pronto{transition:none}}

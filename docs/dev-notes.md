@@ -271,7 +271,7 @@ I transient (punti 5 e 6) non sono opzionali: sono le query più costose del sit
   **zero JS su misura**.
 - **Accessibilità**: le voci con tendina sono `<button aria-expanded>`, chiusura con Esc e clic esterno.
 
-**Stima: 6 h** (dentro le 24 h di D19 + componenti globali)
+**Stima: 6 h** (dentro le 23 h di D19 + componenti globali)
 
 ---
 
@@ -563,7 +563,7 @@ Non c'è validazione tecnica: è disciplina di data entry.
 | **Marchi** | Link diretti ai siti di Aquarial e Caldofacile, scheda nuova. `/raffrescamento/` e `/riscaldamento/` vengono **eliminate**. |
 | **Performance** | Pagina più visitata e più leggera: niente slider, niente mappa. Immagini famiglie in `loading="lazy"` tranne le prime tre. |
 | **Aperto** | OP-07 (peso e posizione del blocco 3) |
-| **Stima** | **10 h** |
+| **Stima** | **8 h** |
 
 ---
 
@@ -585,13 +585,18 @@ Vedi la sezione **SEARCH**. **Stima: 8 h**
 | **Non si fanno** | `/raffrescamento/` e `/riscaldamento/`: eliminate. **Client task**: redirect alla home o 410 (un redirect verso un sito esterno non è consigliabile). |
 | **Attenzione** | Non collegare le referenze alle singole macchine: il brief prevede solo la relazione con il settore. |
 | **Aperto** | OP-01 (la settima referenza) |
-| **Stima** | **10 h** |
+| **Stima** | **8 h** (D18 + D20, template unico) |
+
+## Linguaggio visivo VI · pannello testi · stili form
+
+Classi CSS globali per fondo e fasce, un solo SVG per le bolle, widget Tabs nativo di Elementor per i testi lunghi,
+stili di radio a pillole e consenso. Nessuna libreria, nessun JavaScript su misura. **Stima: 6 h** (area 20 di `dev-estimate.md`).
 
 ---
 
 ## D19 · Header, menu e footer
 
-Vedi le sezioni **HEADER** e **FOOTER**. **Stima: 24 h** con i componenti globali
+Vedi le sezioni **HEADER** e **FOOTER**. **Stima: 23 h** con i componenti globali
 (breadcrumbs, ricerca, form).
 
 ---

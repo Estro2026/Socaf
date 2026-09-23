@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../assets/css/wireframe.css">
 </head>
-<body>
+<body data-fonte="/news/noleggio-lavapavimenti/">
 
 <div data-devbar data-code="D12" data-name="Articolo" data-url="/news/[titolo]/ · 184 articoli · post nativi · nessun indirizzo cambia"></div>
 <header data-header></header>
@@ -116,33 +116,7 @@
 
   <div class="row">
     <section class="block">
-      <span class="block-id">BLOCCO 7 · Dove si usano — <span class="cond">condizionale</span> · ereditato</span>
-      <h2>Dove si usano</h2>
-      <div class="chips">
-        <a class="chip" href="09-settore.html" data-url="/settori/industria/">Industria</a>
-        <a class="chip" href="09-settore.html" data-url="/settori/imprese-di-pulizia/">Imprese di pulizia</a>
-        <a class="chip" href="09-settore.html" data-url="/settori/logistica/">Logistica</a>
-      </div>
-      <p class="small" style="margin-top:12px"><b>Questo blocco non si compila.</b> I settori arrivano dalle
-        macchine indicate nel blocco 6: zero decisioni redazionali in più.</p>
-    </section>
-    <div class="devnote">
-      <div class="dn-h">DEV NOTE 97 — Settori ereditati</div>
-      <dl>
-        <dt>Origine</dt><dd>Tassonomia <code>settore</code> delle macchine del blocco 6</dd>
-        <dt>Query</dt><dd>Code Snippets: macchine collegate → termini settore → deduplica.
-          <b>Stessa funzione</b> usata da D2 e D3 (DEV NOTE 19), con un ingresso diverso.</dd>
-        <dt>Condizione</dt><dd><span class="cond">Se almeno un settore.</span> Dipende a cascata dal blocco 6:
-          senza macchine collegate non ci sono settori.</dd>
-        <dt>Campo</dt><dd>Nessuno. <b>Non esiste un campo settore sull'articolo.</b></dd>
-      </dl>
-      <div class="est">Riusato, 0 h</div>
-    </div>
-  </div>
-
-  <div class="row">
-    <section class="block">
-      <span class="block-id">BLOCCO 8 · Altri articoli</span>
+      <span class="block-id">BLOCCO 7 · Altri articoli</span>
       <h2>Altri approfondimenti</h2>
       <div class="grid grid-3">
         <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
@@ -173,7 +147,7 @@
 
   <div class="row">
     <section class="block">
-      <span class="block-id">BLOCCO 9 · Richiesta informazioni</span>
+      <span class="block-id">BLOCCO 8 · Richiesta informazioni</span>
       <form class="form" data-demo-form>
         <h3>Richiedi maggiori informazioni</h3>
         <p class="form-sub">Verrai contattato da un nostro consulente.</p>
@@ -204,6 +178,7 @@
 
 <footer data-footer></footer>
 <script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/testi.js"></script>
 <script src="../assets/js/wireframe.js"></script>
 </body>
 </html>

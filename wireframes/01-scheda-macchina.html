@@ -374,24 +374,24 @@
           <h3>Richiedi informazioni</h3>
           <p class="form-sub">Verrai contattato da un nostro consulente.</p>
 
-          <div class="fields" style="grid-template-columns:minmax(0,1fr)">
+          <div class="fields">
             <div class="field"><label for="f-nome">Nome e cognome *</label><input id="f-nome" required></div>
             <div class="field"><label for="f-az">Azienda *</label><input id="f-az" required></div>
             <div class="field"><label for="f-mail">Email *</label><input id="f-mail" type="email" required></div>
             <div class="field"><label for="f-tel">Telefono</label><input id="f-tel" type="tel"></div>
 
-            <div class="field">
+            <div class="field full">
               <label>Tipo di richiesta *</label>
-              <div class="radio-set" style="flex-direction:column;gap:9px">
+              <div class="radio-set">
                 <label><input type="radio" name="tipo" value="nuova" checked> Macchina nuova</label>
                 <label><input type="radio" name="tipo" value="usata"> Macchina usata</label>
                 <label><input type="radio" name="tipo" value="noleggio"> Macchina a noleggio</label>
               </div>
             </div>
 
-            <div class="field"><label for="f-msg">Messaggio</label><textarea id="f-msg"></textarea></div>
+            <div class="field full"><label for="f-msg">Messaggio</label><textarea id="f-msg"></textarea></div>
             <div data-hidden-field="modello|titolo della macchina corrente"></div>
-            <label class="consent"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
+            <label class="consent full"><input type="checkbox" required> Acconsento al trattamento dei dati secondo la privacy policy. *</label>
           </div>
 
           <button class="btn btn-primary" type="submit" style="margin-top:18px;width:100%">Invia richiesta</button>
@@ -456,6 +456,7 @@
 
 <footer data-footer></footer>
 <script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/testi.js"></script>
 <script src="../assets/js/wireframe.js"></script>
 </body>
 </html>

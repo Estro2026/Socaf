@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../assets/css/wireframe.css">
 </head>
-<body>
+<body data-istanza="sede">
 
 <div data-devbar data-code="D14" data-name="Scheda sede" data-url="/sedi/[sede]/ · 5 schede · CPT sede · /sedi/ non è una pagina"></div>
 <header data-header="Azienda"></header>
@@ -23,14 +23,14 @@
   <div class="row">
     <section class="block" style="border-top:0;padding-top:20px">
       <span class="block-id">BLOCCHI 1–6 · Identificazione e recapiti della sede</span>
-      <p class="kicker" style="color:var(--red)">Sede principale</p>
+      <p class="kicker" style="color:var(--red)" data-sede-main>Sede principale</p>
       <h1>Socaf Osio Sotto (Bergamo)</h1>
 
       <div class="grid grid-2" style="gap:32px;align-items:start;margin-top:22px">
         <div class="stack">
           <div>
             <h4>Indirizzo</h4>
-            <address style="font-style:normal;font-size:16.5px">
+            <address style="font-style:normal;font-size:16.5px" data-sede-addr>
               Socaf S.p.A.<br>
               Via Trieste, 14<br>
               24046 Osio Sotto (BG)<br>
@@ -39,7 +39,7 @@
           </div>
           <div>
             <h4>Telefono ed email</h4>
-            <p style="margin:0"><a href="tel:+390354876054">+39 035 4876054</a><br>
+            <p style="margin:0" data-sede-tel><a href="tel:+390354876054">+39 035 4876054</a><br>
               <a href="mailto:info@socaf.it">info@socaf.it</a></p>
             <p style="margin:10px 0 0"><a class="btn btn-primary" href="tel:800480110">Numero verde 800 480110</a></p>
           </div>
@@ -165,26 +165,7 @@
 
   <div class="row">
     <section class="block">
-      <span class="block-id">BLOCCO 10 · Le altre sedi</span>
-      <h2>Le altre sedi</h2>
-      <div data-sedi="La sede corrente compare comunque nell'elenco: in produzione va esclusa dalla query."></div>
-    </section>
-    <div class="devnote">
-      <div class="dn-h">DEV NOTE 108 — Le altre sedi</div>
-      <dl>
-        <dt>Query</dt><dd>Listing Grid · CPT <code>sede</code> · <b>post corrente escluso</b> ·
-          ordine per <code>sede_principale</code> DESC</dd>
-        <dt>Condizione</dt><dd>Sempre (restano 4)</dd>
-        <dt>Componente</dt><dd>Blocco sedi globale, con il parametro « escludi corrente ».
-          Nel wireframe l'esclusione non è applicata: è annotata qui.</dd>
-      </dl>
-      <div class="est">Riusato, 0 h</div>
-    </div>
-  </div>
-
-  <div class="row">
-    <section class="block">
-      <span class="block-id">BLOCCO 11 · Richiesta informazioni</span>
+      <span class="block-id">BLOCCO 10 · Richiesta informazioni</span>
       <form class="form" data-demo-form>
         <h3>Scrivi a questa sede</h3>
         <p class="form-sub">Verrai contattato da un nostro consulente.</p>
@@ -221,6 +202,7 @@
 
 <footer data-footer></footer>
 <script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/testi.js"></script>
 <script src="../assets/js/wireframe.js"></script>
 </body>
 </html>

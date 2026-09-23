@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../assets/css/wireframe.css">
 </head>
-<body>
+<body data-istanza="settore">
 
 <div data-devbar data-code="D9" data-name="Pagina settore" data-url="/settori/[settore]/ · 7 pagine"></div>
 <header data-header="Settori"></header>
@@ -50,8 +50,8 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 4 · Le macchine per questo settore — selezione manuale 8–12</span>
-      <h2>Le macchine per l'industria</h2>
-      <div class="grid grid-4">
+      <h2 data-t="Le macchine per {per}">Le macchine per l'industria</h2>
+      <div class="grid grid-4" data-grid>
         <article class="card"><div class="card-media" style="padding:0"><img src="../assets/images/la511-40-bt-01.png" alt="LA 511-40 BT"></div>
           <div class="card-body"><span class="card-name">LA 511-40 BT</span>
             <p class="card-desc">Lavasciuga pavimenti industriale uomo a terra, robusta e semplice.</p>
@@ -116,7 +116,7 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 5 · I prodotti più usati — selezione manuale di categorie</span>
-      <h2>I prodotti più usati nell'industria</h2>
+      <h2 data-t="I prodotti più usati {in}">I prodotti più usati nell'industria</h2>
       <div class="grid grid-4">
         <div class="card"><div class="card-media ph ph-wide">Immagine categoria</div>
           <div class="card-body"><span class="card-name">Detergenti multiuso e sgrassanti</span>
@@ -151,7 +151,7 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 6 · Testo di approfondimento</span>
-      <h2>Come si pulisce un ambiente industriale</h2>
+      <h2 data-t="{approf}">Come si pulisce un ambiente industriale</h2>
       <p class="wordcount">LUNGHEZZA PREVISTA · 800–1200 PAROLE — Industria e Imprese di pulizia</p>
       <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
       <h3>Le esigenze di pulizia di un capannone</h3><div class="skel" data-lines="7"></div>
@@ -203,8 +203,8 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 8 · Le referenze del settore — <span class="cond">condizionale</span> · max 3</span>
-      <h2>I nostri clienti nell'industria</h2>
-      <div class="grid grid-3">
+      <h2 data-t="I nostri clienti {in}">I nostri clienti nell'industria</h2>
+      <div class="grid grid-3" data-referenze>
         <article class="card"><div class="card-media ph ph-wide">Logo cliente</div>
           <div class="card-body"><span class="card-name">Amica Chips</span>
             <p class="card-desc">Industria alimentare.</p>
@@ -234,8 +234,8 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 9 · Approfondimenti — <span class="cond">condizionale</span> · max 3</span>
-      <h2>Approfondimenti sulla pulizia industriale</h2>
-      <div class="grid grid-3">
+      <h2 data-t="Approfondimenti per {per}">Approfondimenti sulla pulizia industriale</h2>
+      <div class="grid grid-3" data-solo="industria" data-solo-info="Articoli di approfondimento per questo settore: da selezionare tra le news di socaf.it.">
         <article class="card"><div class="card-media ph ph-wide">Immagine in evidenza</div>
           <div class="card-body"><span class="card-name">Cosa si intende per pulizie industriali e come si fanno</span>
             <span class="card-meta">Approfondimento</span>
@@ -269,7 +269,7 @@
     <section class="block">
       <span class="block-id">BLOCCO 10 · Gli altri settori</span>
       <h2>Gli altri settori</h2>
-      <div class="chips">
+      <div class="chips" data-altri>
         <span class="chip" aria-current="true">Industria</span>
         <a class="chip" href="09-settore.html" data-url="/settori/imprese-di-pulizia/">Imprese di pulizia</a>
         <a class="chip" href="09-settore.html" data-url="/settori/horeca/">Ho.Re.Ca.</a>
@@ -319,6 +319,7 @@
 
 <footer data-footer></footer>
 <script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/testi.js"></script>
 <script src="../assets/js/wireframe.js"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../assets/css/wireframe.css">
 </head>
-<body>
+<body data-istanza="usato">
 
 <div data-devbar data-code="D7" data-name="Pagina usato di famiglia" data-url="/usato/[famiglia]-usate/ · 5 pagine · indirizzi invariati"></div>
 <header data-header="Servizi"></header>
@@ -59,7 +59,7 @@
     <section class="block">
       <span class="block-id">BLOCCO 4 · Le macchine che si vendono usate — elenco automatico</span>
       <h2>I modelli che vendiamo usati</h2>
-      <div class="grid grid-4">
+      <div class="grid grid-4" data-grid>
         <article class="card"><div class="card-media" style="padding:0"><img src="../assets/images/la511-40-bt-01.png" alt="LA 511-40 BT"></div>
           <div class="card-body"><span class="card-name">LA 511-40 BT</span>
             <p class="card-desc">Lavasciuga pavimenti industriale uomo a terra, robusta, semplice e Made in Italy.</p>
@@ -125,11 +125,11 @@
   <div class="row">
     <section class="block">
       <span class="block-id">BLOCCO 6 · Testo di approfondimento</span>
-      <h2>Conviene comprare una lavapavimenti usata?</h2>
+      <h2 data-t="Conviene comprare {sing} usata?">Conviene comprare una lavapavimenti usata?</h2>
       <p class="wordcount">LUNGHEZZA PREVISTA · 400–600 PAROLE</p>
       <p><span class="todo">[CONTENUTO DA REDIGERE]</span> <span class="taskflag t-seo">SEO task</span></p>
       <h3>Quando l'usato conviene</h3><div class="skel" data-lines="6"></div>
-      <h3>Cosa controllare su una lavapavimenti usata</h3><div class="skel" data-lines="7"></div>
+      <h3 data-t="Cosa controllare su {sing} usata">Cosa controllare su una lavapavimenti usata</h3><div class="skel" data-lines="7"></div>
       <h3>Usato, noleggio o nuovo: come scegliere</h3><div class="skel" data-lines="6"></div>
     </section>
     <div class="devnote">
@@ -149,7 +149,7 @@
       <span class="block-id">BLOCCO 7 · Domande frequenti</span>
       <h2>Domande frequenti</h2>
       <div class="faq">
-        <details><summary>Quante ore di lavoro ha una lavapavimenti usata Socaf?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
+        <details><summary data-t="Quante ore di lavoro ha {sing} usata Socaf?">Quante ore di lavoro ha una lavapavimenti usata Socaf?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
         <details><summary>Le batterie sono nuove o usate?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
         <details><summary>Si trovano i ricambi per i modelli usati?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="3"></div></div></details>
         <details><summary>Quanto si risparmia rispetto al nuovo?</summary><div class="faq-body"><span class="todo">[CONTENUTO DA REDIGERE]</span><div class="skel" data-lines="2"></div></div></details>
@@ -168,8 +168,8 @@
       <div class="promo-pair">
         <div class="promo" style="border-left-color:var(--grey)">
           <h3>Le stesse macchine, nuove</h3>
-          <p>Le 24 lavapavimenti del catalogo, divise in cinque tipologie.</p>
-          <a class="btn-link" href="03-famiglia.html" data-url="/lavapavimenti/">Lavapavimenti</a>
+          <p data-t="{catalogo}">Le 24 lavapavimenti del catalogo, divise in cinque tipologie.</p>
+          <a class="btn-link" href="03-famiglia.html" data-url="/lavapavimenti/" data-url-t="/{famcat}/" data-t="{Nome}">Lavapavimenti</a>
         </div>
         <div class="promo promo-usa">
           <h3>Hai una macchina da sostituire?</h3>
@@ -194,7 +194,7 @@
     <section class="block">
       <span class="block-id">BLOCCO 10 · Le altre famiglie usate</span>
       <h2>Le altre macchine usate</h2>
-      <div class="chips">
+      <div class="chips" data-altri>
         <span class="chip" aria-current="true">Lavapavimenti usate</span>
         <a class="chip" href="07-usato-famiglia.html" data-url="/usato/idropulitrici-usate/">Idropulitrici usate</a>
         <a class="chip" href="07-usato-famiglia.html" data-url="/usato/spazzatrici-usate/">Spazzatrici usate</a>
@@ -259,6 +259,7 @@
 
 <footer data-footer></footer>
 <script src="../assets/js/catalogo.js"></script>
+<script src="../assets/js/testi.js"></script>
 <script src="../assets/js/wireframe.js"></script>
 </body>
 </html>
