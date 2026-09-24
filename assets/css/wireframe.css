@@ -896,6 +896,42 @@ body:not(.notes-on) .dropdown .dd-note{display:none}
 .formula-nol::after{background:linear-gradient(210deg,rgba(0,133,207,.3),transparent 78%)}
 .formula-usa::after{background:linear-gradient(210deg,rgba(228,0,43,.24),transparent 78%)}
 
+/* 18.2 Il gruppo — fascia con i tre marchi */
+.gruppo{
+  position:relative;overflow:hidden;text-align:center;
+  padding:clamp(34px,4.5vw,58px) clamp(22px,4vw,48px);
+  border-radius:clamp(18px,2.2vw,28px);border:1px solid var(--glass-line);
+  background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:var(--shadow-sm);
+}
+/* The Slice, in coppia speculare: è una fusione */
+.gruppo::before,.gruppo::after{
+  content:"";position:absolute;top:0;bottom:0;width:26%;pointer-events:none;
+}
+.gruppo::before{left:0;clip-path:polygon(0 0, 100% 0, 0 100%);
+  background:linear-gradient(140deg,rgba(0,133,207,.16),transparent 72%)}
+.gruppo::after{right:0;clip-path:polygon(100% 0, 100% 100%, 0 100%);
+  background:linear-gradient(320deg,rgba(228,0,43,.13),transparent 72%)}
+.gruppo > *{position:relative;z-index:1}
+.gruppo-h{font-size:clamp(23px,2.7vw,36px);max-width:22ch;margin:0 auto .5em;line-height:1.14}
+.gruppo-lede{margin:0 auto 34px;max-width:56ch}
+.loghi{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(26px,5vw,68px);flex-wrap:wrap;margin-bottom:30px;
+}
+.logo-item{display:flex;align-items:center;justify-content:center;height:56px}
+.logo-item img{height:100%;width:auto;object-fit:contain}
+.logo-item.is-ph{
+  min-width:170px;padding:0 24px;border:1px dashed var(--line-strong);border-radius:var(--r);
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);
+  background:rgba(255,255,255,.45);
+}
+@media (max-width:560px){
+  .loghi{gap:22px}
+  .logo-item{height:44px}
+  .logo-item.is-ph{min-width:140px;font-size:10.5px}
+}
+
 /* Passi numerati (come funziona) — variante orizzontale dello stesso segno */
 .steps{display:grid;gap:16px;grid-template-columns:repeat(4,minmax(0,1fr));counter-reset:s}
 @media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}

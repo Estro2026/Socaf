@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div data-devbar data-code="D16" data-name="Home" data-url="/ · 1 pagina · esattamente 8 blocchi"></div>
+<div data-devbar data-code="D16" data-name="Home" data-url="/ · 1 pagina · 8 blocchi da brief + 1 aggiunto"></div>
 <header data-header></header>
 
 <div class="wrap">
@@ -118,6 +118,59 @@
         <dt>Link</dt><dd>Alle <b>pagine</b> famiglia</dd>
       </dl>
       <div class="est">Stima 1 h</div>
+    </div>
+  </div>
+
+  <!-- BLOCCO 2bis · Il gruppo — aggiunta richiesta da Socaf, fuori dagli 8 blocchi del Brief mockup -->
+  <div class="row">
+    <section class="block">
+      <span class="block-id">BLOCCO 2bis · Il gruppo — <span class="cond">aggiunta richiesta da Socaf, non prevista dal Brief mockup</span></span>
+
+      <div class="gruppo">
+        <p class="kicker">Il gruppo</p>
+        <h2 class="gruppo-h">Dalla fusione di tre aziende,<br>il tuo partner affidabile per la pulizia industriale</h2>
+        <p class="lede gruppo-lede">Socaf, Bottoni e Tecno Clean: tre storie confluite in un unico gruppo.
+          Cinque sedi tra Lombardia, Veneto e Friuli, una sola squadra.</p>
+
+        <div class="loghi">
+          <div class="logo-item">
+            <img src="../assets/logo/socaf21-payoff-rgb.svg" alt="Socaf — Soluzioni per il cleaning">
+          </div>
+          <div class="logo-item is-ph">Logo Bottoni S.r.l.</div>
+          <div class="logo-item is-ph">Logo Tecno Clean S.r.l.</div>
+        </div>
+      </div>
+
+      <p class="small"><span class="taskflag t-content">Content task</span>
+        Il logo Socaf è quello ufficiale del progetto. <b>I loghi di Bottoni e Tecno Clean non sono negli
+        asset</b>: vanno forniti in vettoriale, possibilmente in versione monocromatica per stare su una
+        riga sola senza rumore. Il testo lungo della fusione resta su <code>/azienda/chi-siamo/</code>:
+        qui non c'è nemmeno un collegamento, il blocco dichiara e basta.</p>
+    </section>
+    <div class="devnote">
+      <div class="dn-h">DEV NOTE 115bis — Il gruppo (blocco aggiunto)</div>
+      <dl>
+        <dt>Origine</dt><dd>Blocco statico. Nessun ACF, nessuna query.</dd>
+        <dt>Condizione</dt><dd>Sempre</dd>
+        <dt>Posizione</dt><dd>Dopo le sei famiglie, <b>prima</b> del blocco noleggio/usato,
+          come richiesto da Socaf.</dd>
+        <dt>Link</dt><dd><b>Nessuno.</b> Il blocco non porta da nessuna parte: è una dichiarazione di
+          identità, non un percorso. La storia del gruppo resta su <code>/azienda/chi-siamo/</code>,
+          raggiungibile dal menu Azienda e dal piè di pagina.</dd>
+        <dt>Implementazione</dt><dd>Sezione Elementor con widget Image ×3 in una riga.
+          I loghi vanno allineati otticamente, non per bounding box: proporzioni e pesi visivi sono diversi.
+          Altezza di riferimento comune, non larghezza.</dd>
+        <dt>Contenuto</dt><dd>Dato reale verificabile: Socaf S.p.A. (Osio Sotto, Castenedolo, Mazzo di Rho),
+          <b>Bottoni S.r.l.</b> (Settimo di Pescantina, VR) e <b>Tecno Clean S.r.l.</b> (Cordenons, PN)
+          sono le tre ragioni sociali delle cinque sedi. Il gruppo ha già un articolo dedicato alla fusione.</dd>
+        <dt>Attenzione al perimetro</dt><dd>Il Brief mockup §D16 elenca <b>otto</b> blocchi e dice
+          « non aggiungere alla home sezioni solo perché stanno bene ». Questo è il nono, aggiunto su
+          richiesta esplicita del cliente: è una decisione sua, non una deriva del wireframe.
+          <span class="openpoint">OP-16</span></dd>
+        <dt>SEO</dt><dd>Nessun cluster. Serve alla fiducia, non al posizionamento: chi cerca « Socaf »
+          arriva in home e deve capire subito chi ha davanti.</dd>
+      </dl>
+      <div class="est">Stima 1 h — <b>fuori dalle 228 h originali</b>, vedi dev-estimate</div>
     </div>
   </div>
 

@@ -27,14 +27,14 @@ Vedi §Fuori perimetro.
 | 12 | Archivio Approfondimenti | D13 | **6** | Bassa |
 | 13 | Scheda sede | D14 | **6** | Bassa |
 | 14 | Contatti | D15 | **6** | Bassa |
-| 15 | Home | D16 | **8** | Media |
+| 15 | Home | D16 | **9** | Media |
 | 16 | Risultati di ricerca | D17 | **8** | Media |
 | 17 | Pagine istituzionali, servizi, referenze | D18 · D20 | **8** | Bassa |
 | 18 | Responsive, accessibilità, cross-browser, QA | tutti | **20** | Media |
 | 19 | SEO tecnico, redirect, performance, QA tecnico | tutti | **12** | Alta |
 | 20 | Linguaggio visivo VI, pannello testi a schede, stili form | tutti | **6** | Bassa |
 
-**PREVISIONE: 228 h** · **BUFFER: 12 h** · **MASSIMO: 240 h**
+**PREVISIONE: 229 h** · **BUFFER: 11 h** · **MASSIMO: 240 h**
 
 ---
 
@@ -263,17 +263,32 @@ mappa multi-sede (1,5 h) · form con doppio consenso (1,5 h) · responsive e QA 
 
 ---
 
-### 15 · D16 — Home — 8 h · media
+### 15 · D16 — Home — 9 h · media
 
-Apertura con ricerca (1 h: gradiente, bolla e taglio rosso della hero sono nell'area 20) · le 6 famiglie (1 h) · noleggio e usato (1 h) · settori (0,5 h) ·
+Apertura con ricerca (1 h: gradiente, bolla e taglio rosso della hero sono nell'area 20) · le 6 famiglie (1 h) ·
+**il gruppo / fusione (1 h)** · noleggio e usato (1 h) · settori (0,5 h) ·
 prodotti (0,5 h) · Aquarial e Caldofacile (0,5 h) · sedi (riusato) · form (riusato) ·
 responsive e QA accurate (3 h) · performance (0,5 h: i Core Web Vitals della home sono già misurati nell'area 19).
 
 **Perché il responsive costa più che altrove**: è la pagina più vista, su tutti i dispositivi.
 
+**Il nono blocco** · <span>OP-16</span>
+Socaf ha chiesto una sezione sulla fusione — « Dalla fusione di 3 aziende, il tuo partner affidabile per la
+pulizia industriale » con i loghi di Socaf, Bottoni e Tecno Clean — collocata prima del blocco noleggio/usato.
+È una fascia statica: un titolo, una riga di testo, tre immagini e un collegamento. **1 h.**
+Non richiede ACF né query.
+
+⚠ **Questa ora esce dal buffer.** La previsione passa da 228 a **229 h** e il buffer da 12 a **11 h**;
+il tetto di 240 h resta rispettato. Va però detto che il brief prescrive di **non usare il buffer per
+introdurre funzionalità nuove**: è una deroga consapevole, non un assorbimento silenzioso.
+Se si preferisce tenere il buffer intatto, l'ora va recuperata altrove — la candidata più indolore è
+l'area 17, dove le pagine istituzionali possono condividere un layout in più.
+
 **Rischi**
-- ⚠ **Il rischio principale della home è l'aggiunta di blocchi.** Ogni sezione in più è 2–4 h
-  di sviluppo, QA responsive e manutenzione. Il brief prevede otto blocchi: sono otto.
+- ⚠ **Il rischio principale della home resta l'aggiunta di blocchi.** Ogni sezione in più è 2–4 h
+  di sviluppo, QA responsive e manutenzione. Il brief ne prevede otto; con la fusione sono nove.
+  Il decimo va discusso, non aggiunto.
+- <span>CONTENT TASK</span> i loghi di Bottoni e Tecno Clean non sono negli asset: servono in vettoriale.
 - OP-07 aperto (peso e posizione del blocco 3): entrambe le alternative valgono circa 1 h.
 
 ---
@@ -460,8 +475,12 @@ non su WordPress. La migrazione dei 184 articoli e delle 119 schede non è un'es
 ## PREVISIONE
 
 ```
-PREVISIONE     228 h
-BUFFER          12 h
+PREVISIONE     229 h
+BUFFER          11 h
 ────────────────────
 MASSIMO        240 h
 ```
+
+L'ora in più rispetto alle 228 iniziali è il **blocco sulla fusione in home**, richiesto da Socaf
+a wireframe già impostato (OP-16). Il tetto di 240 h resta rispettato, ma il buffer scende da 12 a 11:
+se si vuole tenerlo intatto, l'ora va recuperata dall'area 17.

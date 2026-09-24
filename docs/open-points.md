@@ -146,6 +146,26 @@ gli indirizzi esistenti ».
 **Soluzione adottata**: 7 pagine settore nel nuovo sito; **6 redirect** nel piano di migrazione
 (5 pagine + l'hub `/settore/` → `/settori/`). Registrato in `dev-notes.md` §SEO tecnico.
 
+## OP-16 · Un nono blocco in home: il focus sulla fusione
+**Tipo**: aggiunta richiesta dal cliente, in deroga al brief
+**In conflitto con**: `Brief mockup.md` §D16, che elenca **otto** blocchi e prescrive
+« Servizi, referenze e articoli recenti restano fuori dalla home »; e la regola generale
+« non aggiungere alla home sezioni solo perché stanno bene ».
+**Richiesta**: una sezione che metta a fuoco la fusione — « Dalla fusione di 3 aziende, il tuo partner
+affidabile per la pulizia industriale » — con i loghi di Socaf, Bottoni e Tecno Clean,
+collocata **prima** del blocco noleggio/usato.
+**Stato**: realizzata. È una decisione esplicita di Socaf, non una deriva del wireframe: la annoto qui
+perché resti tracciata la deroga.
+**Fondatezza del contenuto**: il dato è verificabile. Le cinque sedi hanno tre ragioni sociali —
+Socaf S.p.A. (Osio Sotto, Castenedolo, Mazzo di Rho), Bottoni S.r.l. (Settimo di Pescantina, VR),
+Tecno Clean S.r.l. (Cordenons, PN) — e il gruppo ha già un articolo dedicato alla fusione.
+Nessun claim è stato inventato.
+**Cosa manca**: <span>CONTENT TASK</span> i **loghi di Bottoni e Tecno Clean** non sono negli asset
+del progetto. Servono in vettoriale, possibilmente monocromatici, per stare su una riga sola.
+Nel wireframe sono due segnaposto dichiarati.
+**Effetto sul budget**: +1 h su D16 (vedi `dev-estimate.md`). Il testo lungo della fusione **non** va
+duplicato qui: resta su `/azienda/chi-siamo/`, che per alberatura assorbe « Aziende ».
+
 ## OP-15 · 116 schede raggiungibili contro le 119 dichiarate
 **Tipo**: contraddizione da verificare
 **Documenti in conflitto**: `socaf_alberatura_nuovo_sito_v02.html` dichiara **119** schede macchina
