@@ -1,0 +1,15 @@
+hero.webm — video di apertura della home.
+
+Questo file è un SEGNAPOSTO generato dal wireframe: un'animazione « liquid glass »
+costruita con uno shader WebGL sui colori del marchio (bianco, azzurro cristallo,
+blu Socaf, rosso), registrata in un loop chiuso di 12 secondi a 25 fotogrammi al
+secondo, 1280x720, senza audio.
+
+Il giro è perfetto: l'ultimo fotogramma coincide con il primo, quindi il loop non
+ha stacchi.
+
+In produzione va sostituito con il video reale di Socaf (« human style » della
+Visual Identity), consegnato in due formati:
+  hero.mp4  — H.264, per Safari e iOS
+  hero.webm — VP9
+Indicazioni: 8-12 secondi, senza audio, sotto i 4 MB, 1920x1080 ritagliabile.

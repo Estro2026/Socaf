@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="../assets/css/wireframe.css">
 </head>
-<body>
+<body data-pagina="home">
 
 <div data-devbar data-code="D16" data-name="Home" data-url="/ · 1 pagina · 8 blocchi da brief + 1 aggiunto"></div>
 <header data-header></header>
@@ -20,35 +20,43 @@
     <section class="block" style="padding-top:0">
       <span class="block-id">BLOCCO 1 · Apertura con ricerca</span>
 
-      <div class="hero">
-        <div class="hero-inner">
-          <div>
+      <section class="hero-full" data-liquid>
+        <video class="hero-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+          <source src="../assets/video/hero.webm" type="video/webm">
+          <source src="../assets/video/hero.mp4" type="video/mp4">
+        </video>
+        <span class="hero-velo" aria-hidden="true"></span>
+        <span class="liquid" aria-hidden="true"></span>
+
+        <div class="hero-cnt">
+          <div class="hero-copy">
             <p class="kicker">Soluzioni per il cleaning</p>
-            <h1>Macchine e prodotti per la <em style="font-style:normal;color:var(--red)">pulizia professionale</em></h1>
+            <h1>Macchine e prodotti per la <em>pulizia professionale</em></h1>
             <p class="lede">Da 40 anni al fianco di industria, imprese di pulizia, logistica e Ho.Re.Ca.
               Cerca la macchina che ti serve, oppure chiamaci: ti risponde un consulente.</p>
-
-            <form class="search" data-search role="search" style="margin-top:30px">
-              <input type="search" placeholder="Cerca macchine, prodotti, settori" aria-label="Cerca nel sito">
-              <button type="submit">Cerca</button>
-            </form>
-
-            <div class="hero-cta">
-              <a class="btn btn-primary" href="tel:800480110">Chiama 800 480110</a>
-              <a class="btn btn-ghost" href="04-noleggio.html" data-url="/noleggio/">Scopri il noleggio</a>
-            </div>
           </div>
 
-          <div class="hero-figure">Immagine di apertura — « Human style » da Visual Identity</div>
+          <form class="search liquid-glass" data-search role="search">
+            <input type="search" placeholder="Cerca macchine, prodotti, settori" aria-label="Cerca nel sito">
+            <button type="submit">Cerca</button>
+          </form>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="tel:800480110">Chiama 800 480110</a>
+            <a class="btn btn-glass" href="04-noleggio.html" data-url="/noleggio/">Scopri il noleggio</a>
+          </div>
+
+          <div class="hero-stats">
+            <div><b>119</b><span>macchine a catalogo</span></div>
+            <div><b>6</b><span>famiglie</span></div>
+            <div><b>5</b><span>sedi</span></div>
+            <div><b>40</b><span>anni di attività</span></div>
+          </div>
         </div>
 
-        <div class="hero-stats">
-          <div><b>119</b><span>macchine a catalogo</span></div>
-          <div><b>6</b><span>famiglie</span></div>
-          <div><b>5</b><span>sedi</span></div>
-          <div><b>40</b><span>anni di attività</span></div>
-        </div>
-      </div>
+        <span class="hero-nota">Video in loop a tutta pagina — « Human style » da Visual Identity
+          <b>da fornire</b> · <code>assets/video/hero.mp4</code></span>
+      </section>
     </section>
     <div class="devnote">
       <div class="dn-h">DEV NOTE 114 — Apertura con ricerca</div>
@@ -67,11 +75,13 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" data-mood="macchine">
+    <div class="macchine-scena" aria-hidden="true"></div>
     <section class="block">
       <span class="block-id">BLOCCO 2 · Le sei famiglie</span>
       <h2>Le macchine</h2>
-      <div class="grid grid-3">
+      <p class="board-hint" aria-hidden="true">Trascina o scorri lateralmente</p>
+      <div class="board" data-board><div class="board-track">
         <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
           <div class="card-body"><span class="card-name">Lavapavimenti</span>
             <p class="card-desc">Lavasciuga per ogni superficie: piccole, uomo a terra, uomo a bordo, combinate, i-mop.</p>
@@ -102,7 +112,7 @@
             <p class="card-desc">Vasche lavapezzi, generatori di vapore, monospazzole, lavatappezzeria e altro.</p>
             <span class="card-meta">30 macchine</span>
             <a class="card-link" href="03-famiglia.html" data-url="/altri-macchinari/">Vedi</a></div></article>
-      </div>
+      </div></div>
       <p class="small" style="margin-top:14px"><b>Non esiste una pagina che contiene le sei famiglie.</b>
         Nel menu sono raccolte sotto la voce Macchine, ma quella voce non è cliccabile: non ci sono ricerche
         che giustifichino una pagina in più prima di arrivare alla macchina.</p>
@@ -122,7 +132,8 @@
   </div>
 
   <!-- BLOCCO 2bis · Il gruppo — aggiunta richiesta da Socaf, fuori dagli 8 blocchi del Brief mockup -->
-  <div class="row">
+  <div class="row row-gruppo" data-mood="azzurro">
+    <div class="gruppo-scena" aria-hidden="true"></div>
     <section class="block">
       <span class="block-id">BLOCCO 2bis · Il gruppo — <span class="cond">aggiunta richiesta da Socaf, non prevista dal Brief mockup</span></span>
 
@@ -179,7 +190,7 @@
       <span class="block-id">BLOCCO 3 · Noleggio e usato — <span class="openpoint">OP-07</span></span>
       <h2>Non serve per forza comprarla</h2>
       <p class="lede" style="margin-bottom:28px">Tre modi di avere la macchina che ti serve:
-        nuova, a noleggio o usata e garantita.</p>
+        nuova, a noleggio o usata e&nbsp;garantita.</p>
 
       <div class="formule">
         <a class="formula formula-nol" href="04-noleggio.html" data-url="/noleggio/">
@@ -227,14 +238,14 @@
     <section class="block">
       <span class="block-id">BLOCCO 4 · I settori</span>
       <h2>Per il tuo settore</h2>
-      <div class="chips">
-        <a class="chip" href="09-settore.html" data-url="/settori/industria/">Industria</a>
-        <a class="chip" href="09-settore.html" data-url="/settori/imprese-di-pulizia/">Imprese di pulizia</a>
-        <a class="chip" href="09-settore.html" data-url="/settori/horeca/">Ho.Re.Ca.</a>
-        <a class="chip" href="09-settore.html" data-url="/settori/retail/">Retail</a>
-        <a class="chip" href="09-settore.html" data-url="/settori/logistica/">Logistica</a>
-        <a class="chip" href="09-settore.html" data-url="/settori/officine-metalmeccanica/">Officine e metalmeccanica</a>
-        <a class="chip" href="09-settore.html" data-url="/settori/edilizia-cantieri/">Edilizia e cantieri</a>
+      <div class="tiles" data-tiles>
+        <a class="tile" href="09-settore.html" data-url="/settori/industria/"><span>Industria</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/imprese-di-pulizia/"><span>Imprese di pulizia</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/horeca/"><span>Ho.Re.Ca.</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/retail/"><span>Retail</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/logistica/"><span>Logistica</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/officine-metalmeccanica/"><span>Officine e metalmeccanica</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/edilizia-cantieri/"><span>Edilizia e cantieri</span></a>
       </div>
       <p class="small" style="margin-top:14px">I sette settori portano <b>direttamente</b> alle loro pagine.
         La pagina che li raccoglie (<code>/settori/</code>) non si raggiunge dalla home.</p>
@@ -251,15 +262,15 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-prodotti">
     <section class="block">
       <span class="block-id">BLOCCO 5 · Prodotti per la pulizia</span>
       <div class="grid grid-2" style="gap:26px;align-items:center">
         <div>
-          <h2>Prodotti per la pulizia professionale</h2>
+          <h2>Prodotti per la pulizia<br>professionale</h2>
           <p>Detergenti, carta, attrezzature, panni, carrelli e dispositivi di protezione:
             tredici categorie di prodotti professionali, con consulenza sulla scelta.</p>
-          <a class="btn btn-ghost" href="10-prodotti-pulizia.html" data-url="/prodotti-per-la-pulizia/">Vedi i prodotti</a>
+          <a class="btn btn-glass" href="10-prodotti-pulizia.html" data-url="/prodotti-per-la-pulizia/">Vedi i prodotti</a>
         </div>
         <div class="ph ph-wide">Immagine prodotti</div>
       </div>
@@ -276,7 +287,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-vetro row-marchi" data-mood="rosso">
     <section class="block">
       <span class="block-id">BLOCCO 6 · Aquarial e Caldofacile</span>
       <h2>I marchi del gruppo</h2>
@@ -313,7 +324,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-vetro row-sedi">
     <section class="block">
       <span class="block-id">BLOCCO 7 · Le cinque sedi</span>
       <p class="kicker">Vicini a te</p>
@@ -331,7 +342,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-vetro row-form">
     <section class="block">
       <span class="block-id">BLOCCO 8 · Richiesta informazioni</span>
       <form class="form" data-demo-form>
@@ -348,7 +359,7 @@
         </div>
         <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
           <button class="btn btn-primary" type="submit">Invia richiesta</button>
-          <a class="btn btn-ghost" href="tel:800480110">800 480110</a>
+          <a class="btn btn-glass" href="tel:800480110">800 480110</a>
         </div>
         <p class="small" data-form-msg style="margin:10px 0 0"></p>
       </form>

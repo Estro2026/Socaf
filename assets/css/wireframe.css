@@ -62,11 +62,11 @@
   --blue-crystal:#4fbdf7;  /* VI · Crystal Blue */
 
   /* Glass */
-  --glass:rgba(255,255,255,.62);
-  --glass-strong:rgba(255,255,255,.82);
-  --glass-line:rgba(255,255,255,.75);
+  --glass:rgba(255,255,255,.42);
+  --glass-strong:rgba(255,255,255,.60);
+  --glass-line:rgba(255,255,255,.62);
   --glass-edge:rgba(0,30,42,.09);
-  --blur:saturate(165%) blur(16px);
+  --blur:saturate(180%) blur(20px);
   --shadow:0 2px 6px rgba(0,30,42,.04), 0 14px 34px -14px rgba(0,30,42,.16);
   --shadow-sm:0 1px 3px rgba(0,30,42,.05), 0 6px 16px -10px rgba(0,30,42,.14);
 
@@ -1262,43 +1262,30 @@ html,body{overflow-x:clip}
 @media (prefers-reduced-motion:reduce){.vi-bolla{animation:none}}
 
 /* ------------------------------- 24. Voci di menu: pillola di vetro --- */
-/* Hover e voce aperta: pillola lucida con riflesso in alto, bordo chiaro,
-   ombra morbida e una passata di luce diagonale (The Slice, 42°). */
+/* Prompt applicato: liquid glass, frosted glass effect, soft lighting,
+   tranquil mood, smooth rounded shapes — palette Socaf (rosso/blu):
+   niente verde, non è nella Visual Identity.
+   Via il fascio di luce diagonale e l'alone blu: restano un vetro
+   smerigliato fermo e un'ombra morbida neutra, senza bagliori colorati. */
 .nav-btn,.nav-flat{
-  position:relative;isolation:isolate;overflow:hidden;
-  transition:color .18s ease,box-shadow .22s ease,transform .18s ease;
+  position:relative;isolation:isolate;
+  transition:color .18s ease;
 }
 .nav-btn:hover,.nav-flat:hover,.nav-btn[aria-expanded="true"]{background:none}
 .nav-btn::before,.nav-flat::before{
   content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
-  opacity:0;transform:scale(.94);transition:opacity .2s ease,transform .2s ease;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.78) 42%,rgba(226,240,250,.72) 100%);
-  border:1px solid rgba(255,255,255,.95);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,1) inset,
-    0 -6px 12px -8px rgba(0,133,207,.5) inset,
-    0 6px 16px -8px rgba(0,30,42,.28),
-    0 1px 2px rgba(0,30,42,.06);
-}
-/* passata di luce: il taglio a 42° del logotipo */
-.nav-btn::after,.nav-flat::after{
-  content:"";position:absolute;z-index:-1;top:-60%;left:-40%;width:42%;height:220%;
-  transform:rotate(42deg) translateX(-140%);opacity:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
-  transition:transform .55s ease,opacity .2s ease;
+  opacity:0;transform:scale(.97);transition:opacity .22s ease,transform .22s ease;
+  background:rgba(255,255,255,.62);
+  backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 8px 18px -12px rgba(0,30,42,.22);
 }
 .nav-btn:hover::before,.nav-flat:hover::before,
 .nav-btn[aria-expanded="true"]::before{opacity:1;transform:scale(1)}
-.nav-btn:hover::after,.nav-flat:hover::after{opacity:.9;transform:rotate(42deg) translateX(320%)}
-.nav-btn:hover,.nav-flat:hover{color:var(--ink);transform:translateY(-1px)}
+.nav-btn:hover,.nav-flat:hover{color:var(--ink)}
 .nav-btn[aria-expanded="true"]{color:var(--ink)}
-.nav-btn[aria-expanded="true"]::before{
-  background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.92) 45%,rgba(214,234,248,.9) 100%);
-}
 @media (prefers-reduced-motion:reduce){
-  .nav-btn::after,.nav-flat::after{display:none}
-  .nav-btn:hover,.nav-flat:hover{transform:none}
+  .nav-btn::before,.nav-flat::before{transition:opacity .01s}
 }
 
 /* 24.1 Form nella colonna laterale della scheda macchina: più largo,
@@ -1395,3 +1382,2153 @@ body{opacity:0;animation:wf-reveal .01s linear 1.2s forwards}
 body.wf-pronto{opacity:1;animation:none;transition:opacity .18s ease}
 @keyframes wf-reveal{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){body.wf-pronto{transition:none}}
+
+/* --------------------- 27. Hero: video in loop + onda liquida --- */
+/* Il riquadro grafico diventa un video di sfondo. Al passaggio del mouse
+   una scia liquida segue il puntatore (deformazione SVG + luce). */
+.hero-figure{overflow:hidden;isolation:isolate}
+.hero-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;
+  border:0;display:block}
+.hero-nota{
+  position:relative;z-index:1;max-width:30ch;font-size:11.5px;line-height:1.5;
+  letter-spacing:.04em;text-transform:none;font-weight:600;
+  padding:10px 14px;border-radius:var(--r-sm);
+  background:rgba(0,30,42,.34);backdrop-filter:blur(6px);color:#fff}
+.hero-nota code{background:rgba(255,255,255,.18);color:#fff}
+.ha-video .hero-nota{display:none}
+/* Onda liquida: due luci che seguono il puntatore, deformate dal filtro SVG */
+.liquid{
+  position:absolute;inset:-25%;z-index:0;opacity:0;pointer-events:none;
+  transition:opacity .35s ease;
+  background:
+    radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.75) 0 4%,rgba(255,255,255,0) 20%),
+    radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(79,189,247,.55) 6%,rgba(79,189,247,0) 30%),
+    radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(228,0,43,.4) 14%,rgba(228,0,43,0) 42%);
+  filter:url(#wf-liquid) blur(3px);
+  mix-blend-mode:screen;
+}
+.hero-figure:hover .liquid,.hero-figure:focus-within .liquid{opacity:1}
+.wf-filtri{position:absolute;width:0;height:0;overflow:hidden}
+@media (hover:none){.liquid{display:none}}
+@media (prefers-reduced-motion:reduce){.liquid{filter:none;transition:none}}
+
+/* -------------------- 28. Vetro più trasparente e triangolo attivo --- */
+/* 28.1 I box lasciano intravedere il fondo che cambia sotto */
+.t-pane{background:
+  radial-gradient(420px 260px at 100% 0%,rgba(79,189,247,.18),transparent 70%),
+  radial-gradient(360px 240px at 0% 100%,rgba(228,0,43,.07),transparent 70%),
+  rgba(255,255,255,.52)}
+.site-header{background:rgba(255,255,255,.58)}
+.site-footer{background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(226,240,250,.62))}
+.sedi-schede .sede,.sede{backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+.form{background:var(--glass-strong)}
+.card{backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+/* i testi restano leggibili anche su vetro più trasparente */
+.card-desc,.sede address,.t-pane .testo{color:#2b373e}
+
+/* ================== 29. HOME · regia visiva (liquid glass) ==================
+   Il fondo cambia colore lungo lo scorrimento e i box, molto trasparenti,
+   lo lasciano intravedere. Tre stati: chiaro → azzurro → rosso/bianco. */
+.mood{position:fixed;inset:0;z-index:-2;pointer-events:none}
+.mood span{position:absolute;inset:0;opacity:0;transition:opacity 1.1s ease}
+.mood .chiaro{
+  background:
+    radial-gradient(1100px 620px at 8% -8%,rgba(0,133,207,.13),transparent 60%),
+    radial-gradient(880px 520px at 98% 4%,rgba(228,0,43,.07),transparent 62%),
+    linear-gradient(180deg,#f4f7f9,#eef1f4 46%,#f2f4f6)}
+.mood .azzurro{
+  background:
+    radial-gradient(900px 640px at 82% 6%,rgba(79,189,247,.55),transparent 62%),
+    radial-gradient(1000px 700px at 6% 90%,rgba(0,133,207,.35),transparent 60%),
+    linear-gradient(180deg,#e6f3fb,#d7ecfa 55%,#eaf4fb)}
+.mood .rosso{
+  background:
+    radial-gradient(900px 620px at 88% 10%,rgba(228,0,43,.30),transparent 60%),
+    radial-gradient(900px 640px at 4% 92%,rgba(163,16,0,.16),transparent 62%),
+    linear-gradient(180deg,#fdf1f3,#ffffff 60%,#fbf4f5)}
+body.mood-chiaro .mood .chiaro,
+body.mood-azzurro .mood .azzurro,
+body.mood-rosso .mood .rosso{opacity:1}
+/* il vetro scurisce appena il fondo diventa intenso, per il contrasto */
+body.mood-azzurro{--glass:rgba(255,255,255,.46);--glass-strong:rgba(255,255,255,.64)}
+body.mood-rosso{--glass:rgba(255,255,255,.5);--glass-strong:rgba(255,255,255,.68)}
+
+/* 29.1 Hero: un solo strato di vetro liquido, niente riquadri dentro riquadri */
+body[data-pagina="home"] .hero{
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.55);
+  backdrop-filter:saturate(180%) blur(26px);-webkit-backdrop-filter:saturate(180%) blur(26px);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 40px 80px -48px rgba(0,30,42,.45);
+}
+/* riflesso speculare che segue il puntatore su tutta la hero */
+body[data-pagina="home"] .hero::before{
+  background:
+    radial-gradient(600px 420px at var(--hx,70%) var(--hy,20%),rgba(255,255,255,.55),transparent 60%),
+    radial-gradient(700px 460px at 90% -10%,rgba(0,133,207,.22),transparent 62%),
+    radial-gradient(520px 380px at 2% 110%,rgba(228,0,43,.14),transparent 64%);
+  transition:background-position .3s ease;
+}
+/* via il triangolo fisso: resta solo come segnale al passaggio del mouse */
+body[data-pagina="home"] .hero::after,.site-footer::after{display:none}
+body[data-pagina="home"] .hero-figure{border-radius:var(--r-lg);border-color:rgba(255,255,255,.6)}
+body[data-pagina="home"] .hero-stats{border-top-color:rgba(255,255,255,.5)}
+
+/* 29.2 Vuoti strategici: il respiro fa parte della grafica */
+body[data-pagina="home"] .row + .row{margin-top:clamp(20px,5vh,64px)}
+body[data-pagina="home"] .block{padding-block:clamp(36px,6vh,72px)}
+
+/* ---------- 30. Lavagna dei prodotti e riquadri liquidi (home) ---------- */
+.board-hint{
+  font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);
+  margin:-6px 0 18px;display:flex;align-items:center;gap:8px}
+.board-hint::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,var(--grey),transparent)}
+.board{
+  margin-inline:calc(var(--pad) * -1);padding-inline:var(--pad);
+  overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 3%,#000 94%,transparent);
+          mask:linear-gradient(90deg,transparent,#000 3%,#000 94%,transparent)}
+.board::-webkit-scrollbar{display:none}
+.board.is-drag{cursor:grabbing;scroll-behavior:auto}
+.board-track{display:flex;gap:22px;padding:34px 0 46px;width:max-content}
+.board .card{
+  flex:0 0 clamp(240px,23vw,320px);
+  background:rgba(255,255,255,.34);border-color:rgba(255,255,255,.6);
+  transition:transform .4s cubic-bezier(.2,.8,.3,1),filter .35s ease,opacity .35s ease,box-shadow .3s ease;
+  animation:galleggia 9s ease-in-out infinite alternate}
+.board .card:nth-child(2n){margin-top:34px;animation-duration:11s;animation-delay:-3s}
+.board .card:nth-child(3n){margin-top:-18px;animation-duration:13s;animation-delay:-6s}
+.board .card:nth-child(5n){margin-top:52px}
+@keyframes galleggia{from{transform:translateY(-6px)}to{transform:translateY(10px)}}
+/* al passaggio del mouse il resto della lavagna sfuma: resta una sola macchina a fuoco */
+.board:hover .card{filter:blur(2.5px) saturate(.9);opacity:.55}
+.board .card:hover{filter:none;opacity:1;transform:translateY(-8px) scale(1.02);
+  box-shadow:0 2px 6px rgba(0,30,42,.06),0 34px 60px -26px rgba(0,133,207,.5)}
+.board .card:hover::before{opacity:1;transform:translateX(0)}
+
+/* Riquadri liquidi dei settori: stessa lavagna, forma a pillola */
+.tiles{display:flex;flex-wrap:wrap;gap:14px;margin-top:6px}
+.tile{
+  position:relative;display:inline-flex;align-items:center;padding:16px 26px;border-radius:var(--r-pill);
+  background:rgba(255,255,255,.34);border:1px solid rgba(255,255,255,.62);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 14px 30px -20px rgba(0,30,42,.45);
+  font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--ink);
+  animation:galleggia 10s ease-in-out infinite alternate;
+  transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .3s ease,background .3s ease}
+.tile:nth-child(2n){animation-duration:13s;animation-delay:-4s}
+.tile:nth-child(3n){animation-duration:8s;animation-delay:-7s}
+.tile:hover{text-decoration:none;background:rgba(255,255,255,.62);transform:translateY(-4px) scale(1.03);
+  box-shadow:0 1px 0 #fff inset,0 26px 44px -22px rgba(0,133,207,.55)}
+.tile::before{
+  content:"";position:absolute;left:12px;top:50%;margin-top:-6px;
+  width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;
+  border-left:9px solid var(--red);opacity:0;transform:translateX(-6px);
+  transition:opacity .2s ease,transform .25s cubic-bezier(.2,.8,.3,1)}
+.tile:hover::before,.tile:focus-visible::before{opacity:1;transform:translateX(0)}
+.tile:hover span{transform:translateX(8px);display:inline-block;transition:transform .25s ease}
+
+/* Formule noleggio/usato: meno sovrapposizione, materia che prosegue in basso */
+body[data-pagina="home"] .formule{gap:26px}
+body[data-pagina="home"] .formula{background:rgba(255,255,255,.3);border-color:rgba(255,255,255,.6)}
+body[data-pagina="home"] .formula::after{opacity:.6}
+body[data-pagina="home"] .materia{
+  position:absolute;left:50%;transform:translateX(-50%);width:100vw;height:120%;top:30%;z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(800px 420px at 20% 0%,rgba(0,133,207,.18),transparent 62%),
+    radial-gradient(700px 520px at 88% 40%,rgba(228,0,43,.10),transparent 60%),
+    repeating-linear-gradient(-42deg,rgba(255,255,255,.4) 0 2px,rgba(255,255,255,0) 2px 18px);
+  -webkit-mask:linear-gradient(180deg,transparent,#000 22%,#000 70%,transparent);
+          mask:linear-gradient(180deg,transparent,#000 22%,#000 70%,transparent)}
+
+@media (prefers-reduced-motion:reduce){
+  .board .card,.tile{animation:none}
+  .board:hover .card{filter:none;opacity:1}
+}
+
+/* sulla home il fondo lo dipinge .mood: il gradiente di base darebbe sopra */
+body[data-pagina="home"]::before{background:none}
+body[data-pagina="home"] .vi-bg::before{opacity:.6}
+
+/* ============ 32. HOME · hero a tutta pagina con video in loop ============
+   Niente contenitore: il video è il fondo della sezione, il testo ci sta sopra.
+   I soli elementi di vetro sono la ricerca e i pulsanti. */
+body[data-pagina="home"] .vi-bg{display:none}          /* via le bolle */
+body[data-pagina="home"] .hero-full{
+  position:relative;isolation:isolate;
+  width:100vw;margin-left:calc(50% - 50vw);
+  min-height:calc(100svh - var(--devbar-h,0px) - var(--header-h,120px));
+  display:flex;align-items:flex-end;
+  padding:clamp(40px,10vh,110px) 0 clamp(28px,5vh,56px);
+}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;display:block}
+/* finché il video non c'è: gradiente « fluid energy » in movimento */
+.hero-full{background:
+  radial-gradient(60% 55% at 18% 22%,rgba(79,189,247,.95),transparent 70%),
+  radial-gradient(55% 60% at 82% 76%,rgba(228,0,43,.9),transparent 70%),
+  linear-gradient(160deg,#0085cf,#4fbdf7 38%,#f5f7f9 56%,#e4002b);
+  background-size:170% 170%;animation:vi-fluid 22s ease-in-out infinite alternate}
+.hero-velo{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(0,30,42,.55) 0%,rgba(0,30,42,.18) 38%,rgba(0,30,42,.62) 100%),
+    repeating-linear-gradient(-42deg,rgba(255,255,255,.07) 0 1px,transparent 1px 26px)}
+.hero-cnt{position:relative;z-index:1;width:min(var(--maxw),100%);
+  margin-inline:auto;padding-inline:var(--pad);color:#fff}
+.hero-cnt .kicker{color:rgba(255,255,255,.8)}
+.hero-cnt h1{color:#fff;font-size:clamp(40px,6.4vw,84px);line-height:1;letter-spacing:-.035em;
+  max-width:18ch;text-shadow:0 2px 30px rgba(0,30,42,.35)}
+.hero-cnt h1 em{font-style:normal;color:#fff;
+  background:linear-gradient(180deg,#fff,#ffd7de);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+.hero-cnt .lede{color:rgba(255,255,255,.88);max-width:52ch;font-size:clamp(16px,1.5vw,19px)}
+.hero-cnt .search{margin-top:clamp(20px,3vh,34px);max-width:560px;
+  background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.45);
+  backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px)}
+.hero-cnt .search input{color:#fff}
+.hero-cnt .search input::placeholder{color:rgba(255,255,255,.7)}
+.hero-cnt .hero-cta{margin-top:clamp(16px,2.4vh,26px)}
+.hero-cnt .hero-stats{margin-top:clamp(26px,4vh,48px);padding-top:clamp(16px,2.4vh,26px);
+  border-top:1px solid rgba(255,255,255,.28)}
+.hero-cnt .hero-stats b{color:#fff}
+.hero-cnt .hero-stats span{color:rgba(255,255,255,.72)}
+.hero-full .hero-nota{position:absolute;right:var(--pad);top:clamp(18px,4vh,34px);z-index:2;max-width:26ch}
+.hero-full .liquid{inset:0;mix-blend-mode:soft-light;opacity:0;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.25) 0,rgba(0,0,0,.7) 14%,#000 30%);
+          mask-image:linear-gradient(180deg,rgba(0,0,0,.25) 0,rgba(0,0,0,.7) 14%,#000 30%);}
+.hero-full:hover .liquid{opacity:1}
+body[data-pagina="home"] .hero-full + *{margin-top:0}
+@media (max-width:820px){
+  body[data-pagina="home"] .hero-full{min-height:auto;padding-block:clamp(60px,14vh,120px)}
+  .hero-full .hero-nota{position:static;display:inline-block;margin:18px var(--pad) 0}
+}
+
+/* ---------------- 33. Triangolo: un segno solo, usato bene ----------------
+   Non più un adesivo che entra da sinistra. Il triangolo è il taglio d'angolo
+   della Visual Identity: si apre dall'angolo della scheda puntata, e sostituisce
+   la freccia nei link. */
+.card,.sede,.formula,.why-item,.tile{position:relative;overflow:hidden}
+.card::after,.sede::after,.formula::after{
+  content:"";position:absolute;right:0;bottom:0;z-index:2;pointer-events:none;
+  width:clamp(44px,5vw,64px);aspect-ratio:1;
+  background:linear-gradient(135deg,var(--red),var(--red-deep));
+  clip-path:polygon(100% 0,100% 100%,0 100%);
+  transform:translate(101%,101%);opacity:.92;
+  transition:transform .42s cubic-bezier(.2,.8,.25,1);
+}
+.card:hover::after,.card:focus-within::after,
+.sede:hover::after,.formula:hover::after{transform:translate(0,0)}
+.sede.is-main::after{transform:translate(0,0);opacity:.2}
+.sede.is-main:hover::after{opacity:.92}
+/* i link interni usano il triangolo al posto della freccetta */
+.btn-link::after,.card-link::after,.formula-go::after{content:""}
+.btn-link{display:inline-flex;align-items:center;gap:9px}
+.btn-link::before,.formula-go::before{
+  content:"";width:0;height:0;flex:0 0 auto;
+  border-top:5px solid transparent;border-bottom:5px solid transparent;
+  border-left:8px solid currentColor;
+  transition:transform .28s cubic-bezier(.2,.8,.25,1)}
+.formula-go{display:inline-flex;align-items:center;gap:9px}
+a:hover > .formula-go::before,.btn-link:hover::before,.formula:hover .formula-go::before{transform:translateX(5px)}
+/* nell'indice dei pannelli resta il triangolo di selezione, invariato */
+
+
+/* ===================== 35. Sistema dei pulsanti =====================
+   Tre varianti dello stesso colore — vetro, contorno, pieno — con la stessa
+   geometria (raggio, bordo di 1,5 px, altezza) e la stessa curva di movimento.
+   La logica degli stati è unica per tutte e tre:
+     riposo    → la variante come è
+     puntato   → il colore guadagna corpo di un gradino (vetro → contorno →
+                 pieno), il tasto si alza di 1 px e prende un alone del colore
+     premuto   → scende di 1 px, ombra interna, nessun alone
+     tastiera  → anello del colore a 3 px, staccato dal bordo
+   Il colore si cambia con una variabile sola: --btn. */
+.btn{
+  --btn:var(--red);
+  --btn-scuro:#b8001d;
+  --btn-chiaro:255,71,106;
+  --btn-rgb:228,0,43;
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:46px;padding:12px 26px;border-radius:var(--r-pill);
+  border:1.5px solid transparent;cursor:pointer;
+  font-family:var(--font-display);font-weight:700;font-size:15.5px;letter-spacing:-.01em;
+  text-decoration:none;overflow:visible;
+  transition:background-color .24s cubic-bezier(.2,.8,.3,1),
+             border-color .24s cubic-bezier(.2,.8,.3,1),
+             color .2s ease,box-shadow .28s cubic-bezier(.2,.8,.3,1),
+             transform .16s cubic-bezier(.2,.8,.3,1),
+             backdrop-filter .24s ease;
+}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(var(--btn-rgb),.35)}
+
+/* 35.1 Vetro — il più leggero: vive sopra il video e sopra le immagini */
+/* Ombre neutre e soffuse: niente alone colorato che imita un bagliore.
+   Il colore vive in sfondo e bordo (frosted glass), l'ombra resta un
+   sollevamento discreto — soft lighting, tranquil mood. */
+.btn-glass{
+  background-color:rgba(var(--btn-rgb),.16);
+  border-color:rgba(var(--btn-rgb),.38);
+  color:var(--btn);
+  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+  box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 10px 20px -16px rgba(0,30,42,.28);
+}
+.btn-glass:hover{                 /* guadagna corpo: diventa un contorno pieno */
+  background-color:rgba(var(--btn-rgb),.10);
+  border-color:var(--btn);
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 14px 26px -18px rgba(0,30,42,.32);
+}
+.btn-glass:active{background-color:rgba(var(--btn-rgb),.26);box-shadow:0 2px 6px rgba(0,30,42,.22) inset}
+
+/* 35.2 Contorno — il passo intermedio */
+.btn-ghost{
+  background-color:transparent;border-color:rgba(var(--btn-rgb),.55);color:var(--btn);
+  box-shadow:none;
+}
+.btn-ghost:hover{                 /* guadagna corpo: si riempie */
+  background-color:var(--btn);border-color:var(--btn);color:#fff;
+  box-shadow:0 12px 22px -16px rgba(0,30,42,.3);
+}
+.btn-ghost:active{background-color:var(--btn-scuro);border-color:var(--btn-scuro);
+  box-shadow:0 2px 8px rgba(0,30,42,.25) inset}
+
+/* 35.3 Pieno — il più pesante: si può solo scurire */
+.btn-primary{
+  background-color:var(--btn);border-color:var(--btn);color:#fff;
+  box-shadow:0 1px 0 rgba(255,255,255,.28) inset,0 12px 22px -14px rgba(0,30,42,.32);
+}
+.btn-primary:hover{
+  background-color:var(--btn-scuro);border-color:var(--btn-scuro);
+  box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 14px 26px -14px rgba(0,30,42,.38);
+}
+.btn-primary:active{background-color:#9c0018;border-color:#9c0018;
+  box-shadow:0 3px 10px rgba(0,30,42,.3) inset}
+
+/* 35.4 Varianti di colore: cambia solo --btn */
+.btn-ink{--btn:var(--ink);--btn-scuro:#000f16;--btn-rgb:0,30,42}
+.btn-blu{--btn:var(--blue);--btn-scuro:#00669e;--btn-rgb:0,133,207}
+/* su fondo scuro (hero sul video) il vetro è bianco, ma gli stati non cambiano */
+.hero-cnt .btn-glass{--btn:#fff;--btn-scuro:#e9f3f8;--btn-rgb:255,255,255;color:#fff}
+.hero-cnt .btn-glass:hover{color:#fff;border-color:#fff;background-color:rgba(255,255,255,.2)}
+.hero-cnt .btn-glass:active{background-color:rgba(255,255,255,.3)}
+
+/* 35.5 Gli altri tasti seguono la stessa logica */
+.phone-cta{
+  background:var(--red);border:1.5px solid var(--red);box-shadow:0 1px 0 rgba(255,255,255,.28) inset,
+    0 12px 22px -14px rgba(0,30,42,.32);
+  transition:background-color .24s cubic-bezier(.2,.8,.3,1),box-shadow .28s ease,transform .16s ease}
+.phone-cta:hover{background:#b8001d;transform:translateY(-1px);
+  box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 14px 26px -14px rgba(0,30,42,.38)}
+.phone-cta:active{transform:translateY(1px);background:#9c0018;box-shadow:0 3px 10px rgba(0,30,42,.3) inset}
+.search button{
+  border:1.5px solid var(--ink);background:var(--ink);color:#fff;
+  transition:background-color .24s cubic-bezier(.2,.8,.3,1),box-shadow .28s ease,transform .16s ease}
+.search button:hover{background:#00232f;transform:translateY(-1px);box-shadow:0 12px 20px -16px rgba(0,30,42,.4)}
+.search button:active{transform:translateY(1px);background:#000f16;box-shadow:0 3px 10px rgba(0,0,0,.35) inset}
+@media (prefers-reduced-motion:reduce){
+  .btn,.phone-cta,.search button{transition:background-color .01s,border-color .01s,color .01s}
+  .btn:hover,.btn:active,.phone-cta:hover,.search button:hover{transform:none}
+}
+
+/* ================= 36. Header: capsula di vetro sospesa =================
+   La barra non è più un rettangolo attaccato al bordo: è una capsula di vetro
+   smerigliato che galleggia sul contenuto, con la riga di servizio sottile
+   sopra. Scorrendo si stringe e si fa più densa: risponde, non sparisce. */
+.site-header{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  border-bottom:0;box-shadow:none}
+.topbar{
+  background:rgba(255,255,255,.5);backdrop-filter:saturate(170%) blur(14px);
+  -webkit-backdrop-filter:saturate(170%) blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.5);font-size:12.5px}
+.topbar a{color:#3f4d55}
+.mainbar{padding:12px 0;transition:padding .3s cubic-bezier(.2,.8,.3,1)}
+/* Capsula del menu: vetro smerigliato fermo, ombra neutra e soffusa.
+   Via l'alone blu e il velo colorato dietro il vetro (cluttered background,
+   harsh glow): restano superficie e profondità, niente bagliore. */
+.mainbar .wrap{
+  position:relative;isolation:isolate;
+  min-height:70px;padding-inline:18px 14px;border-radius:26px;
+  background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.42));
+  backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 14px 30px -22px rgba(0,30,42,.35);
+  transition:min-height .3s cubic-bezier(.2,.8,.3,1),background .3s ease,box-shadow .3s ease;
+}
+/* stato compatto: scorrendo la capsula si stringe e si fa più solida */
+.site-header.is-ridotto .mainbar{padding:8px 0}
+.site-header.is-ridotto .mainbar .wrap{
+  min-height:58px;
+  background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,255,255,.66));
+  box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 16px 34px -24px rgba(0,30,42,.4)}
+.site-header.is-ridotto .brand img{height:30px}
+.brand img{transition:height .3s cubic-bezier(.2,.8,.3,1)}
+
+/* le tendine seguono lo stesso materiale, ma restano leggibili */
+.dropdown{
+  background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(246,251,254,.95));
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+  border:1px solid rgba(255,255,255,.9);border-radius:22px;padding:10px;
+  box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 22px 44px -22px rgba(0,30,42,.32)}
+.dropdown a{border-radius:14px}
+.dropdown a:hover{background:rgba(0,133,207,.08)}
+.mobile-panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(244,250,253,.94));
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+.burger{
+  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.6));
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 10px 20px -14px rgba(0,30,42,.32)}
+@media (max-width:1023px){.mainbar .wrap{min-height:60px;border-radius:22px}}
+@media (prefers-reduced-motion:reduce){.mainbar,.mainbar .wrap,.brand img{transition:none}}
+
+/* ============ 37. Vetro liquido (dalla reference) con regole Socaf ============
+   Stessa costruzione della reference — velo quasi invisibile, sfocatura,
+   bordo in gradiente ottenuto con due maschere — ma dentro le regole della
+   Visual Identity: fondo blu Socaf, testo in BC Novatica, rosso solo come segno. */
+.liquid-glass{
+  position:relative;overflow:hidden;border:none;
+  background:rgba(255,255,255,.04);background-blend-mode:luminosity;
+  backdrop-filter:blur(6px) saturate(160%);-webkit-backdrop-filter:blur(6px) saturate(160%);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.18);
+}
+.liquid-glass::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  border-radius:inherit;padding:1.4px;
+  background:linear-gradient(180deg,
+    rgba(255,255,255,.45) 0%,rgba(255,255,255,.15) 20%,
+    rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,
+    rgba(255,255,255,.15) 80%,rgba(255,255,255,.45) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+          mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+
+/* ---------- 37.1 Hero: fondo blu VI, video sopra, contenuto al centro ---------- */
+body[data-pagina="home"] .hero-full{
+  align-items:center;text-align:center;
+  background:linear-gradient(180deg,#0085cf 0%,#00679f 45%,#001e2a 100%);
+  animation:none;
+}
+.hero-bg{opacity:.85}
+/* il velo riporta tutto nella gamma del marchio: blu Socaf, non i colori del video */
+.hero-velo{
+  background:
+    linear-gradient(180deg,rgba(0,30,42,.45) 0%,rgba(0,103,159,.18) 42%,rgba(0,30,42,.72) 100%),
+    repeating-linear-gradient(-42deg,rgba(255,255,255,.06) 0 1px,transparent 1px 26px);
+}
+.hero-velo::after{
+  content:"";position:absolute;inset:0;background:var(--blue);
+  mix-blend-mode:color;opacity:.5}
+.hero-cnt{text-align:center;display:flex;flex-direction:column;align-items:center;
+  gap:clamp(14px,2.2vh,26px)}
+.hero-cnt .kicker{
+  font-size:clamp(10px,.85vw,11.5px);letter-spacing:.2em;color:rgba(255,255,255,.8);margin:0}
+.hero-cnt h1{
+  margin:0;max-width:16ch;font-size:clamp(42px,6.6vw,88px);line-height:1.04;letter-spacing:-.03em;
+  background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.95) 45%,rgba(255,255,255,.72) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:none}
+.hero-cnt h1 em{-webkit-text-fill-color:transparent;background:inherit;-webkit-background-clip:text}
+.hero-cnt .lede{margin:0;max-width:56ch;color:rgba(255,255,255,.85)}
+.hero-cnt .search{
+  margin:0;width:min(560px,100%);padding:6px 6px 6px 8px;
+  background:rgba(255,255,255,.05);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,.18)}
+.hero-cnt .hero-cta{justify-content:center;margin:0}
+.hero-cnt .hero-stats{justify-content:center;gap:clamp(24px,4vw,64px);width:100%}
+/* i pulsanti della hero diventano pillole di vetro, stessa famiglia di stati */
+.hero-cnt .btn-glass{background-color:rgba(255,255,255,.06);border-color:transparent}
+.hero-cnt .btn-glass:hover{background-color:rgba(255,255,255,.12)}
+.hero-cnt .btn-primary{box-shadow:inset 0 1px 1px rgba(255,255,255,.28),0 16px 30px -16px rgba(0,30,42,.8)}
+@media (max-width:820px){.hero-cnt h1{max-width:100%}}
+
+/* 37.2 Ingresso della hero: gli elementi salgono a scalare, come nella reference */
+body[data-pagina="home"] .hero-cnt > *{opacity:0;transform:translateY(18px);
+  animation:hero-su .9s cubic-bezier(.16,1,.3,1) forwards}
+body[data-pagina="home"] .hero-cnt > *:nth-child(1){animation-delay:.10s}
+body[data-pagina="home"] .hero-cnt > *:nth-child(2){animation-delay:.18s}
+body[data-pagina="home"] .hero-cnt > *:nth-child(3){animation-delay:.30s}
+body[data-pagina="home"] .hero-cnt > *:nth-child(4){animation-delay:.42s}
+body[data-pagina="home"] .hero-cnt > *:nth-child(5){animation-delay:.54s}
+body[data-pagina="home"] .hero-cnt > *:nth-child(6){animation-delay:.72s}
+@keyframes hero-su{to{opacity:1;transform:none}}
+/* cursore del testo che si scrive da solo */
+.hero-cnt .search input{caret-color:#fff}
+@media (prefers-reduced-motion:reduce){
+  body[data-pagina="home"] .hero-cnt > *{opacity:1;transform:none;animation:none}
+}
+/* la hero parte subito sotto l'header: niente imbottitura del blocco */
+body[data-pagina="home"] .wrap > .row:first-child > .block{padding-top:0;padding-bottom:0}
+body[data-pagina="home"] .wrap > .row:first-child{margin-top:0}
+/* la hero si adatta anche agli schermi bassi: niente contenuto che sborda */
+body[data-pagina="home"] .hero-full{padding:clamp(24px,4vh,64px) 0 clamp(20px,3vh,44px)}
+body[data-pagina="home"] .hero-cnt{gap:clamp(10px,1.8vh,22px)}
+body[data-pagina="home"] .hero-cnt h1{font-size:clamp(36px,min(6.4vw,8.4vh),84px)}
+body[data-pagina="home"] .hero-cnt .lede{font-size:clamp(15px,min(1.45vw,2vh),18px)}
+body[data-pagina="home"] .hero-cnt .hero-stats{margin-top:clamp(10px,1.6vh,22px);padding-top:clamp(12px,1.8vh,20px)}
+
+/* ========== 38. Disciplina del vetro (regole Liquid Glass di Apple) ==========
+   Regola: il vetro appartiene allo strato di navigazione — barra, pulsanti,
+   ricerca, chip, tendine. I contenuti (card, testi, schede, form) stanno su
+   superfici piene: si leggono meglio e il vetro torna a significare qualcosa.
+   Seconda regola: il vetro non campiona altro vetro, quindi niente vetro
+   dentro vetro. Terza: esiste sempre lo stato « vetro spento ». */
+
+/* 38.1 Contenuti: superfici piene, non più vetro */
+.card,.sede,.formula,.why-item,.faq,.promo,.download,.form,.t-pane,.step,.hidden-field{
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.card{background:#fff;border-color:rgba(0,30,42,.08)}
+.sede{background:#fff;border-color:rgba(0,30,42,.08)}
+.sede.is-main{background:linear-gradient(180deg,#fff,#fff6f7);border-color:rgba(228,0,43,.28)}
+.formula,.why-item,.step,.promo{background:#fff;border-color:rgba(0,30,42,.08)}
+.faq{background:#fff;border-color:rgba(0,30,42,.08)}
+.form{background:#fff;border-color:rgba(0,30,42,.10)}
+.t-pane{
+  background:linear-gradient(180deg,#ffffff,#f7fbfe);
+  border-color:rgba(0,30,42,.08)}
+.t-nav [role=tab][aria-selected=true]{background:#fff}
+.board .card{background:#fff}
+.dn-drawer{background:#fff}
+/* le ombre sostituiscono la sfocatura nel dare profondità */
+.card,.sede,.formula,.why-item,.faq,.promo,.form,.t-pane,.step{
+  box-shadow:0 1px 2px rgba(0,30,42,.06),0 18px 34px -26px rgba(0,30,42,.45)}
+
+/* 38.2 Navigazione e controlli: qui il vetro resta, ed è l'unico posto */
+.site-header .mainbar .wrap,.topbar,.dropdown,.mobile-panel,.burger,
+.btn-glass,.hero-cnt .search,.chip,.tile,.liquid-glass{
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+}
+/* materiale « chiaro »: solo sopra il video, dove il fondo è vivo */
+.hero-cnt .search,.hero-cnt .btn-glass{
+  backdrop-filter:blur(6px) saturate(160%);-webkit-backdrop-filter:blur(6px) saturate(160%);
+  background-color:rgba(255,255,255,.06)}
+
+/* 38.3 Niente vetro dentro vetro: i controlli dentro una superficie di vetro
+   diventano pieni, così non si campiano tra loro */
+.dropdown .chip,.mobile-panel .chip,.mainbar .wrap .btn,
+.dropdown a,.mobile-panel a{backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* 38.4 Vetro interattivo: solo la pressione cede, niente alone che segue
+   il mouse — era il "bagliore col mouse" da togliere. */
+.btn-glass,.chip,.tile,.nav-btn,.phone-cta{position:relative}
+.btn-glass:active,.chip:active,.tile:active{transform:scale(.97)}
+
+/* 38.5 Vetro spento: chi riduce trasparenze o movimento vede superfici piene */
+@media (prefers-reduced-transparency:reduce){
+  .site-header .mainbar .wrap,.topbar,.dropdown,.mobile-panel,.burger,
+  .btn-glass,.hero-cnt .search,.chip,.tile,.liquid-glass{
+    backdrop-filter:none;-webkit-backdrop-filter:none;background-color:rgba(255,255,255,.92)}
+  .hero-cnt .search,.hero-cnt .btn-glass{background-color:rgba(0,30,42,.55)}
+}
+
+/* ---- 39. Hero viva: la superficie si modella con il puntatore ----
+   Niente cursore a croce: resta il puntatore normale. L'effetto si affievolisce
+   verso l'alto, così non entra in conflitto visivo con l'header sospeso sopra. */
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block;
+  touch-action:none;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.35) 0,rgba(0,0,0,.85) 16%,#000 32%);
+          mask-image:linear-gradient(180deg,rgba(0,0,0,.35) 0,rgba(0,0,0,.85) 16%,#000 32%);}
+.hero-full.ha-canvas .hero-bg{display:none}          /* il video resta come riserva */
+
+/* ---- 39.1 Hero luminosa e ariosa: il testo si stacca senza contenitore ----
+   Niente riquadro dietro le parole: la leggibilità viene da un velo morbido,
+   senza bordi, e da una gerarchia di luce. Palette pastello della VI —
+   azzurro cristallo e bianco. Il giallo del riferimento non esiste nella
+   Visual Identity Socaf: non è stato introdotto. */
+.hero-velo{
+  background:
+    radial-gradient(120% 90% at 50% 62%,rgba(0,30,42,.55) 0%,rgba(0,30,42,.28) 38%,rgba(0,30,42,0) 72%),
+    linear-gradient(180deg,rgba(0,30,42,.30) 0%,rgba(0,103,159,.06) 45%,rgba(0,30,42,.42) 100%),
+    repeating-linear-gradient(-42deg,rgba(255,255,255,.05) 0 1px,transparent 1px 26px);
+}
+.hero-velo::after{opacity:.34}                      /* meno tinta: più aria */
+.hero-cnt h1{
+  background:linear-gradient(180deg,#ffffff 0%,#eaf6fe 55%,#c9e8fb 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 18px rgba(0,30,42,.35))}
+.hero-cnt .kicker{color:#bfe6fb}
+.hero-cnt .lede{color:rgba(255,255,255,.92);text-shadow:0 1px 14px rgba(0,30,42,.45)}
+.hero-cnt .hero-stats b{text-shadow:0 1px 12px rgba(0,30,42,.4)}
+/* profondità a strati: la ricerca galleggia, i numeri restano sul fondo */
+.hero-cnt .search{box-shadow:0 1px 1px rgba(255,255,255,.35) inset,0 22px 40px -24px rgba(0,30,42,.75)}
+.hero-cnt .hero-stats{border-top-color:rgba(255,255,255,.22)}
+
+/* ---- 39.2 Il testo come vetro proprio: mobile app UI, glassmorphism ----
+   Prompt applicato: frosted glass + soft gradients, bright airy lighting,
+   layered depth, tranquil/inviting mood — pastello azzurro/bianco della VI,
+   niente giallo: non è nel brand Socaf. Il pannello dà al titolo un livello
+   di profondità in più rispetto a ricerca e pulsanti, che restano il loro. */
+.hero-copy{
+  display:inline-flex;flex-direction:column;gap:.4em;
+  padding:clamp(18px,2.6vw,30px) clamp(22px,3.2vw,36px);
+  border-radius:clamp(20px,2.4vw,28px);
+  background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(197,232,251,.10) 60%,rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.34);
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 30px 60px -34px rgba(0,30,42,.5);
+}
+@media (max-width:820px){.hero-copy{padding:16px 20px}}
+
+/* ================= 40. Header · sleek liquid glass =================
+   Prompt: sleek navigation bar, liquid glass, frosted glass, soft lighting,
+   muted palette with subtle gradients, minimalistic, modern and elegant.
+   Negativi: niente ombre dure, niente fasce che affollano, niente colori
+   accesi fuori dal rosso Socaf della CTA, nessun dettaglio superfluo.
+   Questo blocco chiude e prevale sulle regole header precedenti. */
+.site-header{--hd-ink:#1f2f37;--hd-muted:#5d6b72}
+
+/* Riga di servizio: non più una fascia di vetro, solo testo sottile */
+.topbar{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;
+  border-bottom:0;font-size:12px;letter-spacing:.02em}
+.topbar .wrap{min-height:34px;gap:22px}
+.topbar a{color:var(--hd-muted);transition:color .2s ease}
+.topbar a:hover{color:var(--hd-ink)}
+
+/* La capsula: più bassa, filo di contorno, gradiente appena percettibile */
+.mainbar{padding:4px 0 10px}
+.mainbar .wrap{
+  min-height:62px;padding-inline:20px 8px;border-radius:20px;gap:2px;
+  background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(246,249,251,.54));
+  backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 0 0 .5px rgba(0,30,42,.06),0 1px 0 rgba(255,255,255,.9) inset,
+    0 10px 30px -20px rgba(0,30,42,.26);
+}
+/* riflesso speculare sul bordo alto: l'unico "bagliore", fermo e sottile */
+.mainbar .wrap::after{content:"";position:absolute;left:24px;right:24px;top:0;height:1px;
+  pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent)}
+.site-header.is-ridotto .mainbar{padding:4px 0 6px}
+.site-header.is-ridotto .mainbar .wrap{min-height:54px;
+  background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(248,250,252,.74));
+  box-shadow:0 0 0 .5px rgba(0,30,42,.07),0 1px 0 #fff inset,0 12px 32px -22px rgba(0,30,42,.3)}
+
+.brand{margin-right:26px}
+.brand img{height:32px}
+.site-header.is-ridotto .brand img{height:28px}
+
+/* Voci: peso medio, inchiostro attenuato; hover = velo tenue, niente pillola lucida */
+.nav-list{gap:0}
+.nav-btn,.nav-flat{font-size:14.5px;font-weight:500;letter-spacing:-.005em;
+  color:var(--hd-ink);padding:9px 14px}
+.nav-btn::before,.nav-flat::before{background:rgba(0,30,42,.045);border:0;box-shadow:none;
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav-btn[aria-expanded="true"]::before{background:rgba(0,30,42,.075)}
+
+/* Freccia: chevron a filo, al posto del triangolo pieno */
+.nav-btn .caret{width:6px;height:6px;border:0;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);opacity:.5;margin-left:3px;
+  transition:transform .2s ease,opacity .2s ease}
+.nav-btn[aria-expanded="true"] .caret{transform:translateY(1px) rotate(225deg);opacity:.85}
+
+/* CTA: resta il rosso Socaf, ma più composto — gradiente minimo, ombra corta */
+.phone-cta{height:44px;padding:0 18px 0 16px;gap:10px;border-radius:14px;font-size:15.5px;
+  background:linear-gradient(180deg,#e8173d,#d10028);border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 6px 16px -10px rgba(120,0,20,.4)}
+.phone-cta:hover{transform:none;background:linear-gradient(180deg,#db0a31,#bd0023);
+  box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 8px 18px -10px rgba(120,0,20,.45)}
+.phone-cta .lbl{font-size:9px;letter-spacing:.12em;color:rgba(255,255,255,.78);
+  padding-right:10px;border-right:1px solid rgba(255,255,255,.28)}
+
+/* Tendine: stesso materiale della capsula, staccate di un respiro */
+.dropdown{top:calc(100% + 16px);min-width:236px;padding:6px;border-radius:16px;
+  background:rgba(255,255,255,.93);backdrop-filter:blur(24px) saturate(170%);
+  -webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 0 0 .5px rgba(0,30,42,.08),0 18px 40px -22px rgba(0,30,42,.32)}
+.dropdown a{font-size:14.5px;padding:9px 12px;border-radius:10px;color:var(--hd-ink)}
+.dropdown a:hover{background:rgba(0,30,42,.05)}
+
+.burger{border-radius:12px;padding:9px 14px;font-size:14px;font-weight:600;
+  background:rgba(0,30,42,.05);border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+@media (max-width:1023px){.mainbar .wrap{min-height:56px;border-radius:18px;padding-inline:16px 8px}
+  .brand img{height:28px}.phone-cta{height:40px;font-size:15px}}
+@media (max-width:420px){.phone-cta{padding:0 12px}}
+
+/* 40.1 Header più generoso e completamente arrotondato: capsula e CTA a pillola */
+.mainbar{padding:6px 0 12px}
+.mainbar .wrap{min-height:74px;border-radius:999px;padding-inline:30px 10px}
+.mainbar .wrap::after{left:40px;right:40px}
+.site-header.is-ridotto .mainbar .wrap{min-height:62px}
+.brand img{height:36px}
+.site-header.is-ridotto .brand img{height:31px}
+.nav-btn,.nav-flat{font-size:15.5px;padding:11px 16px}
+.phone-cta{height:54px;padding:0 26px 0 22px;border-radius:999px;font-size:17px}
+.site-header.is-ridotto .phone-cta{height:46px}
+.dropdown{border-radius:22px;padding:8px}
+.dropdown a{border-radius:14px}
+.burger{border-radius:999px}
+@media (max-width:1023px){.mainbar .wrap{min-height:62px;border-radius:999px;padding-inline:20px 8px}
+  .brand img{height:30px}.phone-cta{height:46px;font-size:15.5px}}
+/* tra 1024 e 1280 px le sei voci e la CTA grande non stanno: si compattano */
+@media (min-width:1024px) and (max-width:1279px){
+  .mainbar .wrap{padding-inline:22px 8px}
+  .brand{margin-right:12px}.brand img{height:32px}
+  .nav-btn,.nav-flat{font-size:14.5px;padding:10px 10px}
+  .phone-cta{padding:0 20px;font-size:16px;height:50px}
+  .phone-cta .lbl{display:none}
+}
+
+/* 40.2 L'header non galleggia più sul contenuto: è una fascia di vetro a tutta
+   larghezza che contiene riga di servizio e capsula. Così la riga di servizio
+   resta leggibile mentre si scorre, e niente resta "appeso".
+   La dimensione non cambia allo scorrimento: lo stato ridotto è neutralizzato. */
+.site-header{
+  background:linear-gradient(180deg,rgba(248,250,252,.86),rgba(242,246,249,.78));
+  backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);
+  border-bottom:1px solid rgba(0,30,42,.07);
+  box-shadow:0 8px 24px -20px rgba(0,30,42,.25);
+}
+.site-header .mainbar .wrap{box-shadow:0 0 0 .5px rgba(0,30,42,.07),0 1px 0 #fff inset,0 4px 14px -10px rgba(0,30,42,.18);
+  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.78))}
+.site-header.is-ridotto .mainbar{padding:6px 0 12px}
+.site-header.is-ridotto .mainbar .wrap{min-height:74px;
+  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.78));
+  box-shadow:0 0 0 .5px rgba(0,30,42,.07),0 1px 0 #fff inset,0 4px 14px -10px rgba(0,30,42,.18)}
+.site-header.is-ridotto .brand img{height:36px}
+.site-header.is-ridotto .phone-cta{height:54px}
+@media (min-width:1024px) and (max-width:1279px){
+  .site-header.is-ridotto .brand img{height:32px}.site-header.is-ridotto .phone-cta{height:50px}}
+@media (max-width:1023px){
+  .site-header.is-ridotto .mainbar .wrap{min-height:62px}
+  .site-header.is-ridotto .brand img{height:30px}.site-header.is-ridotto .phone-cta{height:46px}}
+
+/* 40.3 Noleggio e Prodotti per la pulizia in evidenza: sono le due voci
+   semplici con domanda propria (F4). Pillola di vetro tinta di blu Socaf,
+   sempre visibile, non solo in hover. */
+.nav-flat{color:#00679f;font-weight:600}
+.nav-flat::before{opacity:1;transform:none;
+  background:linear-gradient(180deg,rgba(0,133,207,.13),rgba(0,133,207,.07));
+  border:1px solid rgba(0,133,207,.22)}
+.nav-flat:hover{color:#005282}
+.nav-flat:hover::before{background:linear-gradient(180deg,rgba(0,133,207,.2),rgba(0,133,207,.11));
+  border-color:rgba(0,133,207,.34)}
+.nav-list > li + li:has(> .nav-flat),.nav-list > li:has(> .nav-flat) + li{margin-left:4px}
+
+/* 40.4 Home: l'header sta direttamente sul video della hero.
+   Nessuna fascia chiara dietro: la hero sale sotto l'header e la riempie.
+   La capsula resta bianca smerigliata (leggibile su qualsiasi fondo);
+   la riga di servizio diventa bianca finché sta sopra il video (.su-hero). */
+body[data-pagina="home"] .site-header{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  border-bottom:0;box-shadow:none}
+body[data-pagina="home"] .hero-full{margin-top:calc(-1 * var(--header-h,127px));
+  padding-top:calc(var(--header-h,127px) + clamp(20px,3vh,48px))}
+.site-header.su-hero .topbar a{color:rgba(255,255,255,.9);text-shadow:0 1px 8px rgba(0,30,42,.45)}
+.site-header.su-hero .topbar a:hover{color:#fff}
+.site-header.su-hero .mainbar .wrap{background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.76));
+  border-color:rgba(255,255,255,.6);box-shadow:0 1px 0 #fff inset,0 16px 36px -20px rgba(0,30,42,.45)}
+
+/* 40.5 Voci in evidenza, versione misurata: velo azzurro tenue, senza bordo */
+.nav-flat{color:#00679f;font-weight:600}
+.nav-flat::before{background:rgba(0,133,207,.075);border:0}
+.nav-flat:hover::before{background:rgba(0,133,207,.13);border:0}
+/* la hero ora contiene anche lo spazio dell'header: si compatta in verticale
+   per restare tutta dentro la viewport */
+body[data-pagina="home"] .hero-full{padding-top:calc(var(--header-h,127px) + clamp(12px,2vh,32px));
+  padding-bottom:clamp(14px,2.4vh,36px)}
+body[data-pagina="home"] .hero-cnt{gap:clamp(8px,1.4vh,18px)}
+body[data-pagina="home"] .hero-cnt h1{font-size:clamp(34px,min(6vw,7vh),80px)}
+body[data-pagina="home"] .hero-copy{padding:clamp(14px,2.2vh,28px) clamp(20px,3vw,34px)}
+body[data-pagina="home"] .hero-cnt .hero-stats{margin-top:clamp(6px,1vh,16px);padding-top:clamp(10px,1.4vh,18px)}
+@media (max-height:760px) and (min-width:821px){
+  body[data-pagina="home"] .hero-cnt h1{font-size:clamp(30px,min(5.4vw,6.2vh),64px)}
+  body[data-pagina="home"] .hero-cnt .lede{font-size:15px}
+  body[data-pagina="home"] .hero-cnt .search{padding-block:4px}
+}
+
+/* ================= 42. Header in liquid glass anche scorrendo =================
+   Sopra il video (inizio home) resta trasparente. Appena la pagina scorre
+   oltre la hero, e su tutte le altre pagine, la fascia diventa vetro liquido:
+   trasparente, sfocato, con riflesso sul bordo — ma testi sempre scuri e nitidi. */
+.site-header,
+body[data-pagina="home"] .site-header:not(.su-hero){
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.22));
+  backdrop-filter:blur(26px) saturate(185%);-webkit-backdrop-filter:blur(26px) saturate(185%);
+  border-bottom:1px solid rgba(255,255,255,.55);
+  box-shadow:inset 0 -1px 0 rgba(0,30,42,.05),0 10px 28px -22px rgba(0,30,42,.3);
+}
+body[data-pagina="home"] .site-header.su-hero{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  border-bottom:0;box-shadow:none}
+/* leggibilità sul vetro: riga di servizio più scura e con un filo di luce dietro */
+.site-header:not(.su-hero) .topbar a{color:#33434b;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.site-header:not(.su-hero) .topbar a:hover{color:var(--ink)}
+@media (prefers-reduced-transparency:reduce){
+  .site-header,body[data-pagina="home"] .site-header:not(.su-hero){background:rgba(248,250,252,.96);
+    backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+
+/* ================= 44. Header e nav in liquid / jelly glass =================
+   Un solo strato di vetro alla volta, mai vetro su vetro:
+   · sopra il video (inizio home): la fascia è trasparente, il vetro è la capsula
+   · scorrendo e sulle altre pagine: il vetro è la fascia intera, la capsula
+     diventa solo un bordo di luce dentro di essa.
+   La dimensione non cambia mai. Testi sempre in Jet Black / Socaf Blue su vetro. */
+:root{
+  --j-rim:inset 0 1px 1px rgba(255,255,255,.85),inset 0 -1px 1px rgba(255,255,255,.25);
+  --j-glow:radial-gradient(120% 90% at 50% -20%,rgba(255,255,255,.55),rgba(255,255,255,0) 58%);
+}
+/* capsula: jelly glass */
+.site-header .mainbar .wrap,
+.site-header.is-ridotto .mainbar .wrap,
+.site-header.su-hero .mainbar .wrap{
+  background:rgba(255,255,255,.46) var(--j-glow);
+  backdrop-filter:blur(26px) saturate(190%);-webkit-backdrop-filter:blur(26px) saturate(190%);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:var(--j-rim),0 8px 26px -18px rgba(0,30,42,.32);
+}
+.mainbar .wrap::after{background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent)}
+
+/* fascia: vetro solo quando non si è sopra il video */
+.site-header,body[data-pagina="home"] .site-header:not(.su-hero){
+  background:rgba(255,255,255,.34) var(--j-glow);
+  backdrop-filter:blur(28px) saturate(190%);-webkit-backdrop-filter:blur(28px) saturate(190%);
+  border-bottom:1px solid rgba(255,255,255,.5);
+  box-shadow:inset 0 -1px 0 rgba(255,255,255,.35),0 8px 24px -20px rgba(0,30,42,.3);
+}
+body[data-pagina="home"] .site-header.su-hero{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  border-bottom:0;box-shadow:none}
+/* dentro la fascia di vetro la capsula non aggiunge altro vetro: solo il bordo di luce */
+.site-header:not(.su-hero) .mainbar .wrap{background:rgba(255,255,255,.22);
+  backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:var(--j-rim)}
+
+/* voci: al passaggio una goccia di jelly glass, non un velo grigio */
+.nav-btn::before,.nav-flat::before{
+  background:rgba(255,255,255,.4) var(--j-glow);border:1px solid rgba(255,255,255,.6);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.9),inset 0 -4px 8px -6px rgba(79,189,247,.35);
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav-btn[aria-expanded="true"]::before{background:rgba(255,255,255,.58) var(--j-glow)}
+.nav-flat::before{opacity:0}
+.nav-flat:hover::before{opacity:1;background:rgba(255,255,255,.4) var(--j-glow);border:1px solid rgba(255,255,255,.6)}
+.nav-btn,.nav-flat{color:#001e2a}
+.nav-flat{color:#0085cf}
+.nav-flat:hover{color:#0255b3}
+
+/* tendine: jelly glass, abbastanza dense da leggere sopra qualunque cosa */
+.dropdown{background:rgba(255,255,255,.82) var(--j-glow);
+  backdrop-filter:blur(28px) saturate(190%);-webkit-backdrop-filter:blur(28px) saturate(190%);
+  border:1px solid rgba(255,255,255,.7);box-shadow:var(--j-rim),0 16px 34px -22px rgba(0,30,42,.35)}
+
+/* 46. Scroll fluido: la sfocatura costa, e su un fondo chiaro e fermo non si vede.
+   Resta solo dove c'è qualcosa di vivo dietro: header, tendine, hero sul video.
+   Pulsanti, chip e riquadri nel resto della pagina: stesso aspetto jelly
+   (corpo traslucido, riflesso, bagliore) ma senza backdrop-filter. */
+.btn,.chip,.tile,.search,.liquid-glass,.phone-cta,.burger{backdrop-filter:none;-webkit-backdrop-filter:none}
+.hero-cnt .btn,.hero-cnt .search,.hero-cnt .liquid-glass{
+  backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%)}
+.site-header{transition:background-color .3s ease,box-shadow .3s ease,border-color .3s ease}
+.gruppo,.site-footer{backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* ================= 48. Header: un solo vetro anche scorrendo =================
+   Scorrendo non c'è più la fascia di vetro dietro la capsula: la fascia resta
+   trasparente sempre, e il vetro è solo nelle forme — la capsula del menu e,
+   sopra, una capsula sottile per la riga di servizio. Due forme separate, mai
+   vetro su vetro. */
+.site-header,body[data-pagina="home"] .site-header:not(.su-hero){
+  background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:0;box-shadow:none}
+.site-header .mainbar .wrap,.site-header:not(.su-hero) .mainbar .wrap,.site-header.is-ridotto .mainbar .wrap{
+  background:rgba(255,255,255,.62) var(--j-glow);
+  backdrop-filter:blur(26px) saturate(190%);-webkit-backdrop-filter:blur(26px) saturate(190%);
+  border:1px solid rgba(255,255,255,.65);box-shadow:var(--j-rim),0 10px 26px -18px rgba(0,30,42,.32)}
+.site-header.su-hero .mainbar .wrap{background:rgba(255,255,255,.48) var(--j-glow)}
+/* riga di servizio in capsula sottile, allineata alla capsula del menu */
+.topbar{padding-top:8px}
+.topbar .wrap{min-height:32px;border-radius:999px;padding-inline:22px;
+  background:rgba(255,255,255,.55);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 1px rgba(255,255,255,.8)}
+.site-header:not(.su-hero) .topbar a{color:#33434b;text-shadow:none}
+.site-header.su-hero .topbar .wrap{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);box-shadow:none}
+.mainbar{padding-top:6px}
+
+/* tendine: piene quasi del tutto. Dentro la capsula di vetro una tendina
+   trasparente mostrerebbe il menu sottostante, non la pagina: illeggibile. */
+.dropdown{background:rgba(255,255,255,.97);backdrop-filter:none;-webkit-backdrop-filter:none;
+  border:1px solid rgba(0,30,42,.08);box-shadow:0 18px 40px -20px rgba(0,30,42,.35),0 2px 6px rgba(0,30,42,.06)}
+.dropdown a{color:#001e2a}
+.dropdown a:hover{background:rgba(79,189,247,.14);color:#001e2a}
+
+/* voci: respiro tra una e l'altra, così le gocce in hover non si toccano */
+.nav-list{gap:6px}
+.nav-btn::before,.nav-flat::before{inset:2px 0}
+@media (min-width:1024px) and (max-width:1279px){.nav-list{gap:3px}.nav-btn,.nav-flat{padding:10px 9px}}
+
+/* ================= 49. Header in un'unica forma jelly =================
+   Riga di servizio e menu vivono dentro la stessa capsula (.hdr-shell):
+   un solo vetro, una sola forma, separate da un filo di luce. */
+.site-header{padding:10px var(--pad) 0}
+.hdr-shell{position:relative;max-width:calc(1440px - 2 * var(--pad));margin:0 auto;border-radius:30px;
+  background:rgba(255,255,255,.72) var(--j-glow);
+  backdrop-filter:blur(26px) saturate(190%);-webkit-backdrop-filter:blur(26px) saturate(190%);
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:inset 0 1px 1px #fff,inset 0 -2px 6px rgba(79,189,247,.10),0 12px 30px -20px rgba(0,30,42,.35);
+  transition:background-color .4s ease,box-shadow .4s ease}
+.site-header.su-hero .hdr-shell{background:rgba(255,255,255,.66) var(--j-glow)}
+/* le righe interne non hanno più forma propria */
+.topbar,.mainbar{padding:0;background:none}
+.topbar .wrap,.site-header.su-hero .topbar .wrap,
+.site-header .mainbar .wrap,.site-header:not(.su-hero) .mainbar .wrap,.site-header.is-ridotto .mainbar .wrap,.site-header.su-hero .mainbar .wrap{
+  max-width:none;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border:0;border-radius:0;box-shadow:none}
+.topbar .wrap{min-height:30px;padding:0 26px;border-bottom:1px solid rgba(0,30,42,.07)}
+.mainbar .wrap{padding:0 12px 0 26px}
+.topbar a,.site-header.su-hero .topbar a,.site-header:not(.su-hero) .topbar a{color:#636362;text-shadow:none}
+.topbar a:hover{color:#e4002b}
+/* Noleggio e Prodotti: Electric Blue pieno, leggibile su vetro chiaro (contrasto > 7:1) */
+.nav-flat,.site-header.su-hero .nav-flat{color:#0255b3;font-weight:700}
+.nav-flat:hover{color:#0085cf}
+
+/* ===== Tendine jelly: staccate dalla capsula, si aprono come gelatina ===== */
+.nav-list > li > .dropdown{top:calc(100% + 16px);border-radius:24px;padding:10px;
+  background:rgba(255,255,255,.97);border:1px solid rgba(255,255,255,.9);
+  box-shadow:inset 0 1px 1px #fff,inset 0 -3px 8px rgba(79,189,247,.12),
+    0 22px 44px -22px rgba(0,30,42,.38),0 3px 8px -4px rgba(0,30,42,.08);
+  transform-origin:24px -8px}
+/* ponte invisibile: il mouse attraversa lo spazio senza chiudere la tendina */
+.nav-list > li > .dropdown::before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.dropdown[data-open="true"]{animation:jellyApri .62s cubic-bezier(.22,1.4,.36,1) both}
+@keyframes jellyApri{
+  0%{opacity:0;transform:translateY(-10px) scale(.92,.86);border-radius:40px}
+  45%{opacity:1;transform:translateY(2px) scale(1.025,1.04)}
+  70%{transform:translateY(-1px) scale(.992,.985)}
+  100%{transform:none;border-radius:24px}}
+.dropdown a{border-radius:14px;transition:background-color .25s ease,transform .35s cubic-bezier(.22,1.4,.36,1)}
+.dropdown a:hover{background:rgba(79,189,247,.14);transform:translateX(3px)}
+
+/* pillola di hover delle voci: goccia che si gonfia */
+.nav-btn::before,.nav-flat::before{transform:scale(.8,.6);opacity:0;
+  transition:transform .5s cubic-bezier(.22,1.5,.36,1),opacity .25s ease}
+.nav-btn:hover::before,.nav-flat:hover::before,.nav-btn[aria-expanded="true"]::before{transform:none;opacity:1}
+@media (prefers-reduced-motion:reduce){.dropdown[data-open="true"]{animation:none}
+  .nav-btn::before,.nav-flat::before{transition:none}}
+@media (max-width:1023px){.hdr-shell{border-radius:24px}.topbar{display:none}}
+
+/* ================= 50. Pulsanti · Liquid Glass (riferimento iOS) =================
+   Sostituisce le vecchie sezioni 41, 43, 45 e 47, che sono state eliminate.
+   Come il vetro di iOS: il pulsante non è dipinto, è una lente. Si vede il fondo
+   sfocato attraverso, un filo di luce segue il bordo (più chiaro in alto, più
+   tenue in basso), l'ombra è quasi assente. Niente gradienti vistosi, niente
+   riflessi dipinti. Il colore VI è una tinta del vetro, non una vernice. */
+.btn-primary,.btn-glass,.btn-ghost,.phone-cta,.search button,.burger{
+  position:relative;border:0;border-radius:999px;background-image:none;text-shadow:none;
+  backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);
+  transition:transform .35s cubic-bezier(.3,1.3,.5,1),background-color .25s ease,box-shadow .25s ease}
+.btn-primary::before,.btn-primary::after,.btn-glass::before,.btn-glass::after,
+.btn-ghost::before,.btn-ghost::after,.phone-cta::before,.phone-cta::after{content:none}
+
+/* vetro rosso: Socaf Red in tinta, fondo che traspare appena */
+.btn-primary,.phone-cta{background-color:rgba(228,0,43,.9);color:#fff;
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.55),inset 0 0 0 .5px rgba(255,255,255,.18),
+    inset 0 -.5px 0 rgba(255,255,255,.12),0 4px 14px -8px rgba(228,0,43,.45)}
+.btn-primary:hover,.phone-cta:hover{background-color:rgba(228,0,43,.96);color:#fff}
+
+/* vetro chiaro: bianco traslucido, testo Jet Black */
+.btn-glass,.btn-ghost{background-color:rgba(255,255,255,.5);color:#001e2a;
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.9),inset 0 0 0 .5px rgba(255,255,255,.5),
+    inset 0 -.5px 0 rgba(0,30,42,.06),0 4px 14px -10px rgba(0,30,42,.25)}
+.btn-glass:hover,.btn-ghost:hover{background-color:rgba(255,255,255,.68);color:#001e2a;border:0}
+.btn-ghost{color:#e4002b}.btn-ghost:hover{color:#e4002b}
+
+/* sopra il video: il vetro chiaro diventa quasi trasparente, testo bianco */
+.hero-cnt .btn-glass{background-color:rgba(255,255,255,.16);color:#fff;
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.6),inset 0 0 0 .5px rgba(255,255,255,.28),
+    inset 0 -.5px 0 rgba(255,255,255,.1),0 4px 14px -10px rgba(0,30,42,.3)}
+.hero-cnt .btn-glass:hover{background-color:rgba(255,255,255,.24);color:#fff}
+
+/* ricerca: vetro Jet Black */
+.search button{background-color:rgba(0,30,42,.86);color:#fff;
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.3),inset 0 0 0 .5px rgba(255,255,255,.1)}
+.search button:hover{background-color:rgba(0,30,42,.94)}
+.burger{background-color:rgba(255,255,255,.5);color:#001e2a;
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.9),inset 0 0 0 .5px rgba(0,30,42,.08)}
+
+/* pressione: la lente si comprime, come al tocco su iPhone */
+.btn-primary:active,.btn-glass:active,.btn-ghost:active,.phone-cta:active,.search button:active{
+  transform:scale(.96);transition-duration:.12s}
+@media (prefers-reduced-transparency:reduce){
+  .btn-glass,.btn-ghost,.burger{background-color:#fff}.hero-cnt .btn-glass{background-color:rgba(0,30,42,.6)}}
+
+/* ================= 51. Header fermo, voci uniformi, tendine come i box macchinari ================= */
+/* Allo scroll l'header non cambia: stessa capsula, stesso vetro sopra il video
+   e sopra la pagina, niente transizioni che possano dare scatti. */
+.hdr-shell,.site-header.su-hero .hdr-shell{background:rgba(255,255,255,.72) var(--j-glow);transition:none}
+.site-header{transition:none}
+.topbar .wrap{border-bottom:0}
+/* Noleggio e Prodotti: stesso colore delle altre voci, solo in bold */
+.nav-flat,.site-header.su-hero .nav-flat,.nav-flat:hover{color:#001e2a;font-weight:700}
+
+/* Tendina: compare con una salita morbida, stessa curva dei box .tile */
+.dropdown[data-open="true"]{animation:ddApri .3s cubic-bezier(.2,.8,.3,1) both}
+@keyframes ddApri{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* Voce: come i box macchinari — il vetro si schiarisce, entra il triangolo
+   rosso della VI e il testo scorre di lato */
+.dropdown a{position:relative;display:block;padding:10px 14px 10px 14px;border-radius:14px;
+  background:transparent;transform:none;
+  transition:background-color .3s ease,padding-left .25s cubic-bezier(.2,.8,.3,1)}
+.dropdown a::before{content:"";position:absolute;left:10px;top:50%;margin-top:-5px;width:0;height:0;
+  border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:7px solid #e4002b;
+  opacity:0;transform:translateX(-6px);transition:opacity .2s ease,transform .25s cubic-bezier(.2,.8,.3,1)}
+.dropdown a:hover,.dropdown a:focus-visible{background:rgba(0,30,42,.045);padding-left:26px;transform:none;text-decoration:none}
+.dropdown a:hover::before,.dropdown a:focus-visible::before{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.dropdown a,.dropdown a::before{transition:none}}
+/* niente riga di luce tra riga di servizio e menu */
+.hdr-shell .wrap::after,.hdr-shell .wrap::before{content:none}
+/* capsula piena: estremità completamente arrotondate, contenuti rientrati dalle curve */
+.hdr-shell{border-radius:999px}
+.topbar .wrap{padding:0 56px}
+.mainbar .wrap{padding:0 22px 0 44px}
+@media (max-width:1023px){.hdr-shell{border-radius:999px}.mainbar .wrap{padding:0 12px 0 28px}}
+/* riga di servizio: testo più grande e hover leggibile (Jet Black, sottolineatura sottile) */
+.topbar .wrap{min-height:36px;gap:22px}
+.topbar a,.site-header.su-hero .topbar a,.site-header:not(.su-hero) .topbar a{
+  font-size:14px;font-weight:500;color:#33434b;text-shadow:none;background:none;opacity:1}
+.topbar a:hover,.topbar a:focus-visible,.site-header.su-hero .topbar a:hover,.site-header:not(.su-hero) .topbar a:hover{
+  color:#001e2a;background:none;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;
+  text-decoration-color:#e4002b}
+.topbar a::before,.topbar a::after{content:none}
+
+/* ================= 52. Nav a una riga · servizio fuori dalla capsula =================
+   La capsula contiene solo logo, voci F4, Cerca (icona) e CTA.
+   Pronto intervento e Approfondimenti stanno sopra, fuori dalla forma,
+   allineati a destra come link di servizio, senza sottolineatura. */
+.site-header{padding-top:6px}
+.topbar{padding:0}
+.topbar .wrap,.site-header.su-hero .topbar .wrap{max-width:calc(1440px - 2 * var(--pad));margin:0 auto;
+  min-height:30px;padding:0 44px;justify-content:flex-end;gap:6px;background:none;border:0;box-shadow:none;
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+.topbar a,.site-header.su-hero .topbar a,.site-header:not(.su-hero) .topbar a{
+  font-size:14px;font-weight:500;padding:5px 12px;border-radius:999px;text-decoration:none;
+  color:#33434b;transition:background-color .3s ease,color .3s ease}
+.site-header.su-hero .topbar a{color:#fff;text-shadow:0 1px 6px rgba(0,30,42,.35)}
+.topbar a:hover,.topbar a:focus-visible,.site-header.su-hero .topbar a:hover,.site-header:not(.su-hero) .topbar a:hover{
+  text-decoration:none;color:#001e2a;background:rgba(255,255,255,.72);text-shadow:none}
+.hdr-shell .mainbar .wrap{min-height:74px}
+/* Cerca: icona in vetro, stessa famiglia dei pulsanti */
+.hdr-search{flex:none;display:inline-grid;place-items:center;width:46px;height:46px;margin-left:auto;margin-right:10px;
+  border-radius:50%;color:#001e2a;background:rgba(255,255,255,.5);
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.9),inset 0 0 0 .5px rgba(0,30,42,.08);
+  transition:background-color .3s ease,transform .35s cubic-bezier(.3,1.3,.5,1)}
+.hdr-search:hover{background:rgba(255,255,255,.85)}
+.hdr-search:active{transform:scale(.94)}
+.hdr-search svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.hdr-shell .phone-cta{margin-left:0}
+@media (max-width:1023px){.hdr-search{display:none}}
+@media (min-width:1024px) and (max-width:1279px){
+  .hdr-shell .mainbar .wrap{padding:0 12px 0 30px}.hdr-search{margin-right:6px;width:42px;height:42px}
+  .nav-btn,.nav-flat{padding:10px 7px}.nav-list{gap:0}}
+
+/* ================= 53. Hover delicati =================
+   Voci della nav: solo un velo appena percepibile, niente gonfiaggio.
+   Link di servizio: nessuna forma, cambia solo il colore del testo, e c'è
+   aria tra loro e la capsula. */
+.nav-btn::before,.nav-flat::before{background:rgba(0,30,42,.045);border:0;box-shadow:none;
+  transform:none;opacity:0;transition:opacity .3s ease}
+.nav-btn:hover::before,.nav-flat:hover::before,.nav-btn[aria-expanded="true"]::before{opacity:1;transform:none}
+.nav-btn,.nav-flat{transition:color .3s ease}
+.site-header{padding-top:8px}
+.topbar .wrap,.site-header.su-hero .topbar .wrap{min-height:28px;margin-bottom:6px;gap:20px}
+.topbar a,.site-header.su-hero .topbar a,.site-header:not(.su-hero) .topbar a{padding:2px 0;background:none;transition:color .3s ease,opacity .3s ease}
+.topbar a:hover,.topbar a:focus-visible,.site-header:not(.su-hero) .topbar a:hover{background:none;color:#e4002b}
+.site-header.su-hero .topbar a:hover{background:none;color:#fff;opacity:.72;text-shadow:0 1px 6px rgba(0,30,42,.35)}
+/* tendina che si appoggia sopra la capsula, sovrapponendola di ~10px */
+.nav-list > li > .dropdown{top:calc(100% + 9px);z-index:5}
+.nav-list > li > .dropdown::before{top:-10px;height:10px}
+
+/* ================= 54. Hero: il testo diventa vetro al passaggio del mouse =================
+   A riposo il testo sta libero sul video; in hover sotto di lui si forma,
+   in dissolvenza, una lastra di liquid glass (stessa ricetta dei pulsanti).
+   Il vetro è su uno strato separato (::before), così il testo non sbiadisce.
+   Su touch, dove l'hover non esiste, la lastra resta sempre visibile. */
+.hero-copy{position:relative;isolation:isolate;background:none;border:0;box-shadow:none;
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+.hero-copy::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;
+  background:rgba(255,255,255,.14);
+  backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.6),inset 0 0 0 .5px rgba(255,255,255,.28),
+    inset 0 -.5px 0 rgba(255,255,255,.1),0 20px 44px -30px rgba(0,30,42,.45);
+  opacity:0;transform:scale(.985);
+  transition:opacity .45s ease,transform .6s cubic-bezier(.2,.8,.3,1)}
+.hero-copy:hover::before,.hero-copy:focus-within::before{opacity:1;transform:none}
+.hero-copy h1,.hero-copy .lede,.hero-copy .kicker{text-shadow:0 1px 14px rgba(0,30,42,.28)}
+@media (hover:none){.hero-copy::before{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.hero-copy::before{transition:none}}
+
+/* ================= 55. Hero: ogni parola vista attraverso il liquid glass =================
+   Sostituisce la lastra unica della sez. 54. Il blocco resta libero sul video;
+   in hover su una parola le passa davanti una lente di vetro: fondo smerigliato
+   tenue, filo di luce sul bordo, riflesso morbido in alto. La parola dietro si
+   ingrandisce appena (rifrazione) e si ammorbidisce, come vista attraverso il vetro.
+   Palette pastello muta della VI: bianco e Crystal Blue #4fbdf7 molto diluiti. */
+.hero-copy::before{content:none}
+.hero-copy .parola{position:relative;display:inline-block;
+  transition:transform .5s cubic-bezier(.2,.8,.3,1),filter .5s ease}
+.hero-copy .parola::after{content:"";position:absolute;inset:-.06em -.16em;border-radius:.34em;pointer-events:none;
+  background:radial-gradient(90% 60% at 30% 0%,rgba(255,255,255,.34),rgba(255,255,255,0) 60%),
+    linear-gradient(180deg,rgba(255,255,255,.14),rgba(79,189,247,.08));
+  backdrop-filter:blur(2.5px) saturate(160%);-webkit-backdrop-filter:blur(2.5px) saturate(160%);
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.75),inset 0 0 0 .5px rgba(255,255,255,.35),
+    inset 0 -.5px 0 rgba(255,255,255,.14),0 10px 24px -16px rgba(0,30,42,.4);
+  opacity:0;transform:scale(.9);
+  transition:opacity .35s ease,transform .55s cubic-bezier(.2,.8,.3,1)}
+.hero-copy .parola:hover{transform:scale(1.04)}
+.hero-copy .parola:hover::after{opacity:1;transform:none}
+@media (hover:none){.hero-copy .parola::after{content:none}}
+@media (prefers-reduced-motion:reduce){.hero-copy .parola,.hero-copy .parola::after{transition:none}}
+/* lente più sottile: la parola dietro deve restare nitida e leggibile */
+.hero-copy .parola::after{inset:-.04em -.14em;
+  background:radial-gradient(90% 55% at 30% 0%,rgba(255,255,255,.22),rgba(255,255,255,0) 60%),rgba(255,255,255,.05);
+  backdrop-filter:blur(.6px) saturate(150%);-webkit-backdrop-filter:blur(.6px) saturate(150%)}
+/* niente backdrop-filter sulla lente: dentro lo span trasformato Chrome non
+   ricampiona il testo e la parola sparirebbe. La lente è luce e riflesso;
+   la sensazione "dietro il vetro" la dà la parola leggermente ingrandita e ammorbidita. */
+.hero-copy .parola::after{backdrop-filter:none;-webkit-backdrop-filter:none;
+  background:radial-gradient(90% 55% at 30% 0%,rgba(255,255,255,.3),rgba(255,255,255,0) 62%),
+    linear-gradient(180deg,rgba(255,255,255,.1),rgba(79,189,247,.1))}
+.hero-copy .parola:hover{text-shadow:0 0 1.5px rgba(255,255,255,.55),0 1px 14px rgba(0,30,42,.28)}
+
+/* ================= 56. Hero: claim jelly, ricerca a capsula, numeri in bolle ================= */
+/* il claim non ha più lenti per parola: l'ondeggiamento jelly è in JS (claimJelly) */
+.hero-copy .parola::after{content:none}
+/* in hover le lettere prendono materia di vetro: bianco lattiginoso con un
+   filo di luce, sempre leggibili sul video */
+.hero-copy h1{transition:color .4s ease,text-shadow .4s ease}
+.hero-copy h1:hover{color:rgba(255,255,255,.94);
+  text-shadow:0 1px 0 rgba(255,255,255,.55),0 -1px 0 rgba(0,30,42,.08),0 0 18px rgba(79,189,247,.35),0 10px 28px rgba(0,30,42,.3)}
+
+/* ricerca: capsula piena, pulsante a cerchio con la lente */
+.hero-cnt .search{border-radius:999px;padding:6px 6px 6px 24px;overflow:hidden}
+.hero-cnt .search input{border-radius:999px}
+.hero-cnt .search button{width:48px;height:48px;min-width:48px;padding:0;border-radius:50%;font-size:0;
+  display:grid;place-items:center;flex:none}
+.hero-cnt .search button::after{content:"";width:18px;height:18px;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='M16 16l4.5 4.5'/%3E%3C/svg%3E")}
+
+/* numeri: niente riga; quattro bolle di vetro che galleggiano sfasate */
+.hero-cnt .hero-stats,body[data-pagina="home"] .hero-cnt .hero-stats{border-top:0;padding-top:0;
+  gap:clamp(10px,1.4vw,18px);margin-top:clamp(14px,2.4vh,28px)}
+.hero-cnt .hero-stats > div{display:flex;align-items:baseline;gap:10px;padding:10px 20px 10px 18px;border-radius:999px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(14px) saturate(170%);-webkit-backdrop-filter:blur(14px) saturate(170%);
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.6),inset 0 0 0 .5px rgba(255,255,255,.26),0 10px 26px -18px rgba(0,30,42,.45);
+  animation:galleggia 10s ease-in-out infinite alternate}
+.hero-cnt .hero-stats > div:nth-child(2){animation-duration:12s;animation-delay:-3s}
+.hero-cnt .hero-stats > div:nth-child(3){animation-duration:9s;animation-delay:-6s}
+.hero-cnt .hero-stats > div:nth-child(4){animation-duration:13s;animation-delay:-2s}
+.hero-cnt .hero-stats b{display:inline;font-size:clamp(22px,2.2vw,30px);line-height:1}
+.hero-cnt .hero-stats span{font-size:13px;color:rgba(255,255,255,.85);letter-spacing:.02em}
+@media (max-width:640px){.hero-cnt .hero-stats > div{padding:8px 14px}.hero-cnt .hero-stats span{font-size:12px}}
+@media (prefers-reduced-motion:reduce){.hero-cnt .hero-stats > div{animation:none}}
+
+/* ================= 57. Hero: lede centrata, claim liquido, numeri con la Slice ================= */
+.hero-copy{align-items:center;text-align:center}
+.hero-copy .lede{margin-inline:auto;text-align:center;max-width:52ch}
+/* claim: niente hover a blocco, le lettere rispondono al mouse (claimJelly) */
+.hero-copy h1:hover{color:inherit;text-shadow:0 1px 14px rgba(0,30,42,.28)}
+.hero-copy h1 .parola{display:inline-block;white-space:nowrap}
+.hero-copy h1 .lettera{display:inline-block;--k:0;will-change:transform;
+  color:color-mix(in srgb,#fff calc(100% - var(--k) * 18%),#c9ecff);
+  text-shadow:0 1px 14px rgba(0,30,42,.28),0 0 calc(var(--k) * 22px) rgba(79,189,247,calc(var(--k) * .7)),
+    0 calc(var(--k) * -1px) 0 rgba(255,255,255,calc(var(--k) * .8))}
+
+/* numeri: niente box, niente riga. Una fila unica separata dal taglio
+   diagonale della VI (The Slice, 42°), numero grande e etichetta sotto. */
+.hero-cnt .hero-stats > div{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;
+  animation:none;border-radius:0;padding:0 clamp(18px,2.6vw,40px);display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.hero-cnt .hero-stats,body[data-pagina="home"] .hero-cnt .hero-stats{gap:0;border-top:0;padding-top:0;flex-wrap:nowrap}
+.hero-cnt .hero-stats > div + div::before{content:"";position:absolute;left:0;top:10%;height:80%;width:1px;
+  background:rgba(255,255,255,.45);transform:rotate(42deg);transform:skewX(-48deg);transform-origin:center}
+.hero-cnt .hero-stats b{font-size:clamp(28px,3vw,42px);line-height:1;letter-spacing:-.01em}
+.hero-cnt .hero-stats span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+@media (max-width:640px){.hero-cnt .hero-stats > div{padding:0 12px}.hero-cnt .hero-stats span{font-size:10px}}
+/* la vecchia sfumatura con background-clip:text non regge le lettere separate:
+   colore pieno per lettera. L'em mantiene il suo accento Crystal Blue chiaro. */
+.hero-copy h1,.hero-copy h1 em{background:none;-webkit-background-clip:border-box;background-clip:border-box;
+  -webkit-text-fill-color:currentColor;color:#fff}
+.hero-copy h1 em .lettera{color:color-mix(in srgb,#dff3ff calc(100% - var(--k) * 18%),#9fdcff)}
+
+/* ================= 58. Claim jelly (ripristinato) e ricerca della hero ================= */
+.hero-copy h1{transition:color .5s ease,text-shadow .5s ease}
+.hero-copy h1:hover{color:rgba(255,255,255,.94);
+  text-shadow:0 1px 0 rgba(255,255,255,.55),0 -1px 0 rgba(0,30,42,.08),0 0 18px rgba(79,189,247,.35),0 10px 28px rgba(0,30,42,.3)}
+
+/* ricerca: il campo era quasi invisibile (vetro al 6%) e il testo rientrava due volte */
+.hero-cnt .search{height:60px;padding:6px;align-items:center;
+  background:rgba(255,255,255,.18);
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.7),inset 0 0 0 .5px rgba(255,255,255,.35),0 12px 30px -20px rgba(0,30,42,.45)}
+.hero-cnt .search input{height:48px;padding:0 18px 0 20px;color:#fff;font-size:16px;background:none;border:0;box-shadow:none;outline:0}
+.hero-cnt .search input::placeholder{color:rgba(255,255,255,.82)}
+.hero-cnt .search:focus-within{background:rgba(255,255,255,.26);box-shadow:inset 0 .5px 0 rgba(255,255,255,.8),inset 0 0 0 1px rgba(255,255,255,.55),0 12px 30px -20px rgba(0,30,42,.45)}
+
+/* ================= 59. Fondo che si muove come materia, icona Cerca ================= */
+/* niente più bagliori che seguono il mouse: il puntatore muove solo il liquido del canvas */
+.hero-full .liquid{background-position:0 0 !important}
+.hero-full .liquid,body[data-pagina="home"] .hero-full::before{--mx:50%;--my:50%;--hx:70%;--hy:20%}
+/* icona Cerca: lente centrata otticamente nel cerchio, tratto pari a quello dell'header */
+.hero-cnt .search button::after{width:20px;height:20px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6'/%3E%3Cpath d='M15 15l4.5 4.5'/%3E%3C/svg%3E")}
+.hero-cnt .search button{color:transparent;line-height:0}
+.hero-full .liquid{display:none}
+body[data-pagina="home"] .hero-full{--hx:70% !important;--hy:20% !important}
+/* claim in hover: niente aloni larghi, che il filtro jelly ritaglierebbe a
+   rettangolo; la materia vetro resta nel colore e in un filo di luce stretto */
+.hero-copy h1:hover{text-shadow:0 1px 0 rgba(255,255,255,.5),0 0 6px rgba(79,189,247,.35),0 2px 10px rgba(0,30,42,.22)}
+/* icona Cerca: il testo nascosto "Cerca" occupava una riga della griglia e
+   spingeva la lente in basso; la lente ora è posizionata al centro esatto */
+.hero-cnt .search button{position:relative}
+.hero-cnt .search button::after{position:absolute;left:50%;top:50%;margin:-10px 0 0 -10px}
+/* numeri: stessa materia vetro del claim in hover */
+.hero-cnt .hero-stats > div b,.hero-cnt .hero-stats > div span{transition:color .5s ease,text-shadow .5s ease}
+.hero-cnt .hero-stats > div:hover b{color:rgba(255,255,255,.94);
+  text-shadow:0 1px 0 rgba(255,255,255,.5),0 0 6px rgba(79,189,247,.35),0 2px 10px rgba(0,30,42,.22)}
+.hero-cnt .hero-stats > div:hover span{color:#fff}
+
+/* ================= 60. Macchine · Infinite jelly glass =================
+   Lavagna infinita: le card sono lastre di gelatina di vetro. JS (3bis) le
+   ripete, le fa scorrere piano e le piega con la velocità. Qui la materia. */
+.board.is-jelly{scroll-behavior:auto}
+.board.is-jelly .board-track{padding:40px 0 56px;gap:26px;align-items:flex-start}
+.board.is-jelly .card,.board.is-jelly .card:nth-child(n){margin-top:0;animation:none;will-change:transform;
+  transform-origin:50% 100%;border-radius:28px;overflow:hidden;
+  background:rgba(255,255,255,.28);border:0;
+  backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 0 0 1px rgba(255,255,255,.45),
+    inset 0 -14px 28px -18px rgba(79,189,247,.35),0 24px 48px -30px rgba(0,30,42,.35);
+  transition:box-shadow .4s ease,background-color .4s ease}
+/* riflesso: una lama di luce morbida in alto, come sul bordo di una gelatina */
+.board.is-jelly .card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(120% 60% at 20% -10%,rgba(255,255,255,.55),rgba(255,255,255,0) 55%),
+    radial-gradient(90% 50% at 90% 115%,rgba(243,63,84,.10),rgba(243,63,84,0) 60%)}
+.board.is-jelly .card-media{border-radius:20px;margin:10px 10px 0}
+/* niente sfocatura sulle altre card: disturba l'effetto continuo */
+.board.is-jelly:hover .card{filter:none;opacity:1}
+.board.is-jelly .card:hover{filter:none;background-color:rgba(255,255,255,.44);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6),
+    inset 0 -14px 28px -18px rgba(79,189,247,.45),0 28px 54px -30px rgba(0,133,207,.4)}
+.board.is-jelly{-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+
+/* ================= 61. Macchine · gallery in frosted glass su fondo rosso =================
+   Prompt: gallery interface, pannelli frosted glass, luce morbida, palette fredda,
+   composizione a strati con profondità, gradienti morbidi.
+   VI: il fondo vira al rosso Socaf (Deep Red #a31000 → Socaf Red #e4002b → Soft Red
+   #f33f54). La palette fredda vive nei pannelli: Crystal Blue #4fbdf7 e Socaf Blue
+   #0085cf. Il verde del prompt non è nella VI e non è usato. Niente distorsioni:
+   la gelatina è ridotta a un'inclinazione di pochi gradi. */
+.mood .macchine{background:
+  radial-gradient(900px 620px at 85% 0%,rgba(243,63,84,.9),transparent 62%),
+  radial-gradient(1000px 700px at 0% 100%,rgba(163,16,0,.95),transparent 60%),
+  radial-gradient(700px 500px at 50% 50%,rgba(79,189,247,.10),transparent 70%),
+  linear-gradient(160deg,#c8001f,#e4002b 50%,#b3001a)}
+body.mood-macchine .mood .macchine{opacity:1}
+body.mood-macchine{--glass:rgba(255,255,255,.16);--glass-strong:rgba(255,255,255,.26)}
+
+/* testi della sezione in bianco sul rosso */
+.row[data-mood="macchine"] :is(h2,.small,.small b){transition:color .8s ease}
+body.mood-macchine .row[data-mood="macchine"] :is(h2,.small,.small b){color:#fff}
+.row[data-mood="macchine"] .board-hint{color:rgba(255,255,255,.8)}
+.row[data-mood="macchine"] .board-hint::after{background:linear-gradient(90deg,rgba(255,255,255,.8),transparent)}
+.row[data-mood="macchine"] .small{opacity:.85}
+
+/* gallery: fila centrata con profondità (JS 3bis), pannelli di vetro freddo */
+.board.is-jelly{position:relative}
+.board.is-jelly .board-track{padding:44px 0 70px;gap:22px;align-items:center}
+.board.is-jelly .card,.board.is-jelly .card:nth-child(n){
+  flex:0 0 clamp(250px,24vw,330px);border-radius:30px;color:#fff;
+  background:linear-gradient(160deg,rgba(255,255,255,.26),rgba(79,189,247,.14) 55%,rgba(0,133,207,.10));
+  backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 0 0 1px rgba(255,255,255,.22),
+    inset 0 -18px 30px -24px rgba(79,189,247,.5),0 30px 60px -36px rgba(80,0,10,.55);
+  transition:opacity .3s ease,background .4s ease,box-shadow .4s ease}
+.board.is-jelly .card::after{background:radial-gradient(120% 55% at 20% -12%,rgba(255,255,255,.4),rgba(255,255,255,0) 55%)}
+.board.is-jelly .card::before{content:none}
+/* immagine: finestra di vetro più fredda, dentro il pannello */
+.board.is-jelly .card-media{margin:12px 12px 0;border-radius:22px;border:0;color:rgba(255,255,255,.75);
+  background:linear-gradient(150deg,rgba(79,189,247,.42),rgba(0,133,207,.26) 60%,rgba(255,255,255,.12));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.14)}
+.board.is-jelly .card-body{padding:18px 22px 22px}
+.board.is-jelly .card-name{color:#fff;font-size:20px}
+.board.is-jelly .card-desc{color:rgba(255,255,255,.82)}
+.board.is-jelly .card-meta{color:rgba(255,255,255,.7);letter-spacing:.06em;text-transform:uppercase;font-size:11.5px}
+.board.is-jelly .card-link{color:#fff;display:inline-flex;align-items:center;margin-top:12px;padding:8px 18px;border-radius:999px;
+  background:rgba(255,255,255,.18);box-shadow:inset 0 .5px 0 rgba(255,255,255,.7),inset 0 0 0 .5px rgba(255,255,255,.3);
+  text-decoration:none;transition:background-color .3s ease}
+.board.is-jelly .card:hover{background:linear-gradient(160deg,rgba(255,255,255,.34),rgba(79,189,247,.2) 55%,rgba(0,133,207,.14))}
+.board.is-jelly .card:hover .card-link{background:rgba(255,255,255,.3)}
+.board.is-jelly{-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+/* il link "Vedi" è l'area cliccabile dell'intera card, resta invisibile */
+.board.is-jelly .card a.card-link{display:inline;margin:0;padding:0;background:none;box-shadow:none;font-size:0}
+
+/* ================= 62. Macchine · gallery 3D jelly, tutte le card visibili =================
+   Sostituisce il carosello (sez. 60–61 non più applicate: la classe è .is-gallery).
+   Rosso: pieno e pulito, senza velature. Il vetro semitrasparente sopra il rosso
+   diventava rosa sporco: le card ora sono vetro smerigliato denso (bianco 86%),
+   la trasparenza resta solo nei bordi di luce e nei riflessi. */
+.mood .macchine{background:
+  radial-gradient(1200px 700px at 100% 0%,rgba(243,63,84,.55),transparent 60%),
+  radial-gradient(1100px 760px at 0% 100%,rgba(163,16,0,.7),transparent 62%),
+  linear-gradient(150deg,#d4002a,#e4002b 50%,#c4001f)}
+.row[data-mood="macchine"] .board-hint{display:none}
+
+.board.is-gallery{margin-inline:0;padding:0;overflow:visible;cursor:default;-webkit-mask:none;mask:none;perspective:1400px}
+.board.is-gallery .board-track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px);
+  width:auto;padding:18px 0 28px;transform-style:preserve-3d}
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){flex:none;margin:0;animation:none;opacity:1;filter:none;
+  position:relative;border-radius:28px;overflow:hidden;border:0;color:#001e2a;
+  transform-style:preserve-3d;will-change:transform;transform-origin:50% 50%;
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.7),
+    inset 0 -16px 28px -22px rgba(79,189,247,.45),
+    0 2px 4px rgba(80,0,10,.08),0 26px 50px -30px rgba(80,0,10,.6);
+  transition:box-shadow .5s ease}
+/* riflesso liquid glass che scorre con l'inclinazione (--lx/--ly dal JS) */
+.board.is-gallery .card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+  background:radial-gradient(70% 50% at var(--lx,50%) var(--ly,20%),rgba(255,255,255,.7),rgba(255,255,255,0) 60%);
+  mix-blend-mode:soft-light}
+.board.is-gallery .card::before{content:none}
+.board:hover .card,.board.is-gallery:hover .card{filter:none;opacity:1}
+.board.is-gallery .card:hover{transform:none}
+.board.is-gallery .card:hover{box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.8),
+  inset 0 -16px 28px -22px rgba(79,189,247,.6),0 2px 4px rgba(80,0,10,.08),0 40px 70px -34px rgba(80,0,10,.7)}
+/* immagine: finestra di vetro freddo (palette fredda del prompt, in blu VI) */
+.board.is-gallery .card-media{margin:10px 10px 0;border-radius:20px;border:0;aspect-ratio:16/10;color:rgba(0,30,42,.5);
+  background:linear-gradient(150deg,rgba(79,189,247,.35),rgba(0,133,207,.18) 60%,rgba(255,255,255,.4));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.8),inset 0 0 0 1px rgba(0,133,207,.08);transform:translateZ(18px)}
+.board.is-gallery .card-body{padding:16px 22px 22px;transform:translateZ(26px)}
+.board.is-gallery .card-name{color:#001e2a;font-size:20px}
+.board.is-gallery .card-desc{color:#33434b}
+.board.is-gallery .card-meta{color:#e4002b;letter-spacing:.06em;text-transform:uppercase;font-size:11.5px;font-weight:600}
+@media (max-width:1023px){.board.is-gallery .board-track{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.board.is-gallery .board-track{grid-template-columns:1fr}}
+/* compatta: le sei card devono stare insieme nello schermo */
+.board.is-gallery .card-media{aspect-ratio:auto;height:clamp(96px,14vh,150px);min-height:0}
+.board.is-gallery .card-body{padding:12px 20px 18px}
+.board.is-gallery .card-desc{margin:4px 0 6px;font-size:14px;line-height:1.4}
+
+/* ================= 63. Macchine · rosso solo qui, card in vetro rubino materico ================= */
+/* il rosso è la fascia a tutta larghezza di questa sola sezione (la pagina resta com'è) */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{
+  content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);border:0;
+  background:
+    radial-gradient(1100px 620px at 100% 0%,rgba(243,63,84,.6),transparent 60%),
+    radial-gradient(1000px 700px at 0% 100%,rgba(163,16,0,.75),transparent 62%),
+    linear-gradient(150deg,#d4002a,#e4002b 50%,#c4001f)}
+.row[data-mood="macchine"]{position:relative;isolation:isolate}
+/* niente riquadro: titolo e card direttamente sul rosso */
+.row[data-mood="macchine"] > .block{background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.row[data-mood="macchine"] :is(h2,.small,.small b),body .row[data-mood="macchine"] :is(h2,.small,.small b){color:#fff}
+.row[data-mood="macchine"] .block-id{color:rgba(255,255,255,.7)}
+
+/* card: lastra di vetro spesso, come vetro rubino colato. Il rosso dietro passa
+   attraverso e si scurisce nello spessore; bordo di luce netto in alto e sul lato,
+   riflesso interno in basso (luce che rimbalza dentro la lastra), ombra di contatto. */
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){color:#fff;
+  background:
+    linear-gradient(165deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.08) 38%,rgba(120,0,16,.18) 100%);
+  backdrop-filter:blur(22px) saturate(140%) brightness(.92);-webkit-backdrop-filter:blur(22px) saturate(140%) brightness(.92);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,.75),          /* spigolo alto illuminato */
+    inset 1px 0 0 rgba(255,255,255,.28),             /* spigolo sinistro */
+    inset 0 -1px 0 rgba(255,255,255,.18),            /* spigolo basso */
+    inset 0 -30px 40px -30px rgba(255,190,200,.45),  /* luce che rimbalza nello spessore */
+    inset 0 20px 40px -30px rgba(255,255,255,.35),
+    0 1px 2px rgba(60,0,8,.25),0 28px 50px -28px rgba(60,0,8,.7);
+  transition:opacity .35s ease,filter .35s ease,box-shadow .4s ease}
+.board.is-gallery .card::after{background:
+  radial-gradient(60% 40% at var(--lx,30%) var(--ly,8%),rgba(255,255,255,.55),rgba(255,255,255,0) 70%);mix-blend-mode:normal;opacity:.7}
+.board.is-gallery .card-name{color:#fff}
+.board.is-gallery .card-desc{color:rgba(255,255,255,.86)}
+.board.is-gallery .card-meta{color:#fff;opacity:.75}
+/* finestra immagine: vetro chiaro e freddo incastonato nella lastra */
+.board.is-gallery .card-media{color:rgba(0,30,42,.55);position:relative;
+  background:linear-gradient(150deg,rgba(255,255,255,.92),rgba(219,240,252,.88) 60%,rgba(190,228,250,.85));
+  box-shadow:inset 0 1px 0 #fff,inset 0 -8px 16px -10px rgba(0,133,207,.3),0 6px 14px -8px rgba(60,0,8,.45)}
+
+/* hover: la card in evidenza, le altre in trasparenza (come l'effetto iniziale),
+   il triangolo rosso della VI sbuca nella finestra dell'immagine */
+.board.is-gallery:hover .card{opacity:.4;filter:saturate(.8)}
+.board.is-gallery:hover .card:hover{opacity:1;filter:none}
+.board.is-gallery .card-media::before{content:"";position:absolute;left:16px;top:16px;width:0;height:0;
+  border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:14px solid #e4002b;
+  opacity:0;transform:translateX(-10px);transition:opacity .25s ease,transform .35s cubic-bezier(.2,.8,.3,1)}
+.board.is-gallery .card:hover .card-media::before{opacity:1;transform:none}
+
+/* ================= 64. Macchine · card verticali, sezione unica, effetti calmi ================= */
+/* la sezione rossa è l'unico contenitore: le card occupano tutta la sua larghezza */
+.row[data-mood="macchine"] > .block{max-width:none;padding-inline:var(--pad)}
+/* card verticali: 6 in fila su desktop largo, 3 sotto i 1180px */
+.board.is-gallery .board-track{grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(12px,1.4vw,22px)}
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){display:flex;flex-direction:column;aspect-ratio:3/4;border-radius:26px}
+.board.is-gallery .card-media{height:auto;flex:1 1 auto;min-height:0}
+.board.is-gallery .card-body{flex:none;padding:14px 18px 18px}
+.board.is-gallery .card-name{font-size:18px}
+.board.is-gallery .card-desc{font-size:13px}
+@media (max-width:1179px){.board.is-gallery .board-track{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .board.is-gallery .card,.board.is-gallery .card:nth-child(n){aspect-ratio:1/1}}
+@media (max-width:767px){.board.is-gallery .board-track{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .board.is-gallery .card,.board.is-gallery .card:nth-child(n){aspect-ratio:auto}}
+@media (max-width:480px){.board.is-gallery .board-track{grid-template-columns:1fr}}
+
+/* niente triangolo */
+.board.is-gallery .card-media::before{content:none}
+
+/* acqua gelatinosa: si muove solo questo strato di luce, sotto testo e immagine */
+.board.is-gallery .card{isolation:isolate}
+
+.card-acqua{position:absolute;inset:-12px;z-index:-1;pointer-events:none;opacity:0;transition:opacity .5s ease;
+  background:
+    radial-gradient(40% 26% at 30% 30%,rgba(255,255,255,.38),transparent 70%),
+    radial-gradient(34% 22% at 72% 58%,rgba(255,220,226,.3),transparent 70%),
+    radial-gradient(30% 20% at 40% 82%,rgba(255,255,255,.26),transparent 70%)}
+.board.is-gallery .card:hover .card-acqua{opacity:1}
+
+/* ================= 65. Macchine · card glossy su fondo rosso, immagine grande ================= */
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){color:#001e2a;
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.86) 55%,rgba(240,247,252,.9));
+  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.8),
+    inset 0 -16px 28px -22px rgba(79,189,247,.45),
+    0 2px 4px rgba(80,0,10,.1),0 26px 50px -28px rgba(80,0,10,.6)}
+/* lucido: riflesso ampio in alto che segue l'inclinazione */
+.board.is-gallery .card::after{opacity:1;mix-blend-mode:normal;
+  background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0) 32%),
+    radial-gradient(60% 40% at var(--lx,30%) var(--ly,8%),rgba(255,255,255,.5),rgba(255,255,255,0) 70%)}
+.board.is-gallery .card-name{color:#001e2a}
+.board.is-gallery .card-desc{color:#33434b}
+.board.is-gallery .card-meta{color:#e4002b;opacity:1}
+.card-acqua{background:
+  radial-gradient(40% 26% at 30% 30%,rgba(79,189,247,.22),transparent 70%),
+  radial-gradient(34% 22% at 72% 58%,rgba(255,255,255,.6),transparent 70%),
+  radial-gradient(30% 20% at 40% 82%,rgba(79,189,247,.16),transparent 70%)}
+/* immagine protagonista: circa due terzi della card */
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){aspect-ratio:3/4.4}
+.board.is-gallery .card-media{flex:1 1 66%;margin:8px 8px 0;border-radius:20px}
+.board.is-gallery .card-body{padding:12px 16px 16px}
+.board.is-gallery .card-desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:2px 0 4px}
+@media (max-width:1179px){.board.is-gallery .card,.board.is-gallery .card:nth-child(n){aspect-ratio:4/5}}
+@media (max-width:767px){.board.is-gallery .card,.board.is-gallery .card:nth-child(n){aspect-ratio:3/4}}
+
+/* ================= 66. Macchine · tre livelli: rosso → pannello glossy → card =================
+   1. fondo della sezione: rosso VI (sez. 63)
+   2. contenitore di tutte le card (.board): lastra di vetro glossy sopra il rosso
+   3. card: vetro chiaro lucido dentro la lastra, immagine protagonista */
+.row[data-mood="macchine"] .board.is-gallery{position:relative;border-radius:36px;
+  padding:clamp(16px,2vw,28px);margin-top:10px;
+  background:linear-gradient(180deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.10) 34%,rgba(255,255,255,.06) 70%,rgba(255,255,255,.14) 100%);
+  backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.22),
+    inset 0 -1px 0 rgba(255,255,255,.25),0 30px 60px -36px rgba(60,0,8,.6)}
+/* riflesso glossy della lastra: una fascia di luce morbida nella metà alta */
+.row[data-mood="macchine"] .board.is-gallery::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(120% 50% at 50% -10%,rgba(255,255,255,.28),rgba(255,255,255,0) 60%)}
+.board.is-gallery .board-track{padding:0;position:relative}
+
+/* card adattate alla lastra: più piccole di raggio, ombra corta (sono appoggiate) */
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){border-radius:22px;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.85),
+    0 1px 2px rgba(60,0,8,.12),0 14px 28px -18px rgba(60,0,8,.5);
+  transition:opacity .45s ease,box-shadow .45s ease}
+.board.is-gallery .card-media{border-radius:16px}
+
+/* hover: si attenuano le altre solo quando il mouse è davvero su una card
+   (prima bastava stare nello spazio tra le card e si spegnevano tutte).
+   Niente filtri di colore: solo opacità, così il vetro non sfarfalla. */
+.board.is-gallery:hover .card,.board.is-gallery:hover .card:hover{opacity:1;filter:none}
+.board.is-gallery:has(.card:hover) .card:not(:hover){opacity:.5}
+.board.is-gallery .card:hover{box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px #fff,
+  0 2px 4px rgba(60,0,8,.14),0 26px 44px -22px rgba(60,0,8,.6)}
+/* card: in hover la stessa materia del claim (ondeggiamento jelly da claimJelly),
+   senza lo strato d'acqua: il nome prende la luce di vetro */
+.card-acqua{display:none}
+.board.is-gallery .card .card-name{transition:text-shadow .5s ease}
+.board.is-gallery .card:hover .card-name{text-shadow:0 1px 0 rgba(255,255,255,.9),0 0 8px rgba(79,189,247,.35)}
+
+/* ================= 67. Macchine · livelli corretti =================
+   dietro:  fascia rossa a tutta larghezza, più alta della sezione
+   sopra:   la sezione è una lastra glossy (prima era rossa)
+   dentro:  titolo e card, senza altri contenitori */
+.row[data-mood="macchine"]{padding-block:clamp(36px,7vh,88px)}
+.row[data-mood="macchine"] > .block{max-width:calc(1440px - 2 * var(--pad));margin-inline:auto;
+  padding:clamp(24px,3.4vw,48px);border-radius:40px;
+  background:linear-gradient(180deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.12) 30%,rgba(255,255,255,.07) 70%,rgba(255,255,255,.16) 100%);
+  backdrop-filter:blur(26px) saturate(150%);-webkit-backdrop-filter:blur(26px) saturate(150%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.75),inset 0 0 0 1px rgba(255,255,255,.24),
+    inset 0 -1px 0 rgba(255,255,255,.3),0 34px 70px -40px rgba(60,0,8,.65)}
+.row[data-mood="macchine"] > .block::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:radial-gradient(110% 45% at 50% -8%,rgba(255,255,255,.3),rgba(255,255,255,0) 62%)}
+.row[data-mood="macchine"] > .block{isolation:isolate}
+/* via il contenitore glossy intorno alle card */
+.row[data-mood="macchine"] .board.is-gallery,.row[data-mood="macchine"] .board.is-gallery::before{
+  background:none;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;border-radius:0;padding:0}
+.row[data-mood="macchine"] .board.is-gallery::before{content:none}
+
+/* immagini più grandi: tre quarti della card, testo essenziale sotto */
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){aspect-ratio:3/4.6;transition:opacity .6s ease,box-shadow .6s ease}
+.board.is-gallery .card-media{flex:1 1 76%;margin:6px 6px 0;border-radius:18px}
+.board.is-gallery .card-body{padding:10px 14px 14px}
+.board.is-gallery .card-desc{-webkit-line-clamp:1}
+@media (max-width:1179px){.board.is-gallery .card,.board.is-gallery .card:nth-child(n){aspect-ratio:4/4.6}}
+/* hover: dissolvenza lenta e morbida delle altre card */
+.board.is-gallery:has(.card:hover) .card:not(:hover){opacity:.55}
+/* la fascia rossa parte subito sotto la hero: niente striscia chiara in mezzo */
+body[data-pagina="home"] .row + .row[data-mood="macchine"]{margin-top:0}
+
+/* ================= 68. Macchine · card che contengono tutto, immagine grande ================= */
+.board.is-gallery .board-track{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){aspect-ratio:auto;height:auto;display:flex;flex-direction:column}
+.board.is-gallery .card-media{flex:none;height:auto;aspect-ratio:4/3;margin:8px 8px 0}
+.board.is-gallery .card-body{flex:1 1 auto;padding:16px 20px 20px;display:flex;flex-direction:column;gap:6px}
+.board.is-gallery .card-desc{display:block;-webkit-line-clamp:unset;overflow:visible;font-size:14px;line-height:1.45;margin:0}
+.board.is-gallery .card-name{font-size:21px}
+.board.is-gallery .card-meta{margin-top:auto}
+/* il nome prende la luce di vetro del claim durante l'hover */
+.board.is-gallery .card:hover .card-name{text-shadow:0 1px 0 rgba(255,255,255,.9),0 0 10px rgba(79,189,247,.4)}
+.board.is-gallery .card{transition:opacity .6s ease,box-shadow .6s ease}
+@media (max-width:1023px){.board.is-gallery .board-track{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.board.is-gallery .board-track{grid-template-columns:1fr}}
+.board.is-gallery .card-media{aspect-ratio:1/1}
+
+/* ================= 69. Velo d'acqua lucida (card e pannello della sezione) =================
+   Lo strato genera solo riflessi di luce su una superficie d'acqua (filtro SVG
+   di illuminazione speculare). Fondo nero + fusione "screen": il nero sparisce,
+   restano i riflessi bianchi. Il contenuto sotto non si deforma. */
+.velo-acqua{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:3;
+  background:#000;mix-blend-mode:screen;opacity:0;transition:none}
+.velo-acqua--calmo{z-index:0}
+.row[data-mood="macchine"] > .block{overflow:hidden}
+.row[data-mood="macchine"] > .block > :not(.velo-acqua){position:relative;z-index:1}
+.board.is-gallery .card{overflow:hidden}
+/* la luce speculare ha già la sua trasparenza: niente fondo nero, fusione normale.
+   Sulle card chiare i riflessi sono Crystal Blue (bianco su bianco non si vedrebbe),
+   sul pannello sopra il rosso sono bianchi. */
+.velo-acqua{background:none;mix-blend-mode:normal}
+.board.is-gallery .card-body,.board.is-gallery .card-media{transform:none}
+
+/* ================= 70. Macchine · rosso in gradiente, niente veli di luce ================= */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{background:
+  radial-gradient(900px 520px at 88% 12%,rgba(243,63,84,.55),transparent 65%),
+  linear-gradient(135deg,#a31000 0%,#c8001f 28%,#e4002b 58%,#f33f54 100%)}
+.velo-acqua{display:none}
+
+/* ================= 71. Macchine · gradiente rosso VI → bianco ================= */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{background:
+  linear-gradient(180deg,#e4002b 0%,#e4002b 22%,#ffffff 100%)}
+/* scale ridotte di 1–2% all'interno: la gelatina ha sempre margine nella cornice */
+.board.is-gallery .card-media{margin:10px 10px 0}
+.board.is-gallery .card-body{margin:0 4px 4px}
+
+/* ================= 72. Macchine · gradiente obliquo e bordo di vetro della jelly sheet ================= */
+/* più rosso che bianco: il rosso VI pieno copre oltre metà, poi sfuma al bianco in diagonale */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{background:
+  linear-gradient(135deg,#e4002b 0%,#e4002b 48%,#f0667d 74%,#ffffff 100%)}
+
+.board.is-gallery{cursor:grab;touch-action:pan-y}
+.board.is-gallery:active{cursor:grabbing}
+.board.is-gallery .board-track{will-change:transform}
+/* vetro sul bordo: la refrazione sta sui bordi, il centro resta pulito.
+   --jv (0…1, dalla velocità) accende highlight e una dispersione cromatica
+   minima (rosso da un lato, azzurro dall'altro, spostati di --jx). */
+.board.is-gallery .card{--jv:0;--jx:0}
+.board.is-gallery .card .card-body::after{content:none}
+.board.is-gallery .card::after{
+  background:
+    linear-gradient(90deg,rgba(255,255,255,calc(.25 + var(--jv) * .45)) 0,rgba(255,255,255,0) 14px,rgba(255,255,255,0) calc(100% - 14px),rgba(255,255,255,calc(.25 + var(--jv) * .45)) 100%),
+    linear-gradient(180deg,rgba(255,255,255,calc(.45 + var(--jv) * .4)) 0,rgba(255,255,255,0) 18px,rgba(255,255,255,0) calc(100% - 12px),rgba(255,255,255,calc(.2 + var(--jv) * .3)) 100%);
+  box-shadow:
+    inset calc(1.5px + var(--jx) * 2px) 0 0 rgba(228,0,43,calc(var(--jv) * .22)),
+    inset calc(-1.5px + var(--jx) * 2px) 0 0 rgba(79,189,247,calc(var(--jv) * .3)),
+    inset 0 1px 0 rgba(255,255,255,.9);
+  mix-blend-mode:normal;opacity:1}
+@media (hover:none){.board.is-gallery{cursor:default}}
+
+/* ================= 73. Macchine · stesso fondo della sezione "Il gruppo", in rosso =================
+   Stessa ricetta di .mood .azzurro (due grandi aloni morbidi su una base
+   tenue, fondo fermo mentre la pagina scorre), con i colori VI rossi:
+   Socaf Red #e4002b e Soft Red #f33f54 al posto di Crystal Blue e Socaf Blue. */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{
+  left:calc(50% - 50vw);transform:none;
+  background:
+    radial-gradient(900px 640px at 82% 6%,rgba(228,0,43,.78),transparent 62%),
+    radial-gradient(1000px 700px at 6% 90%,rgba(243,63,84,.62),transparent 60%),
+    linear-gradient(180deg,#fbe3e7,#f8d2d8 55%,#fbe6ea);
+  background-attachment:fixed}
+/* sul fondo chiaro-rosso i testi tornano scuri come nella sezione sotto */
+.row[data-mood="macchine"] :is(h2,.small,.small b),body .row[data-mood="macchine"] :is(h2,.small,.small b){color:#001e2a}
+.row[data-mood="macchine"] .block-id{color:#636362}
+
+/* ================= 74. Macchine · gloss semplificato: una superficie per livello =================
+   Regola: un solo vetro (il pannello). Le card dentro NON sono vetro su vetro:
+   sono lastre lucide quasi piene. Ogni livello ha un fondo, un filo di luce e
+   un'ombra: niente riflessi sovrapposti, niente aloni interni. */
+
+/* pannello: un vetro smerigliato chiaro, un filo di luce in alto, ombra morbida */
+.row[data-mood="macchine"] > .block{
+  background:rgba(255,255,255,.38);
+  backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 30px 60px -40px rgba(120,0,20,.35)}
+.row[data-mood="macchine"] > .block::after{content:none}
+
+/* card: bianco lucido quasi pieno, senza sfocatura propria */
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n){
+  background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;
+  box-shadow:0 1px 0 rgba(255,255,255,1) inset,0 1px 2px rgba(0,30,42,.06),0 16px 30px -22px rgba(0,30,42,.28)}
+.board.is-gallery .card:hover{box-shadow:0 1px 0 #fff inset,0 2px 4px rgba(0,30,42,.08),0 24px 40px -24px rgba(0,30,42,.34)}
+/* un solo gloss: velatura chiara nella parte alta, che si accende appena col movimento (--jv) */
+.board.is-gallery .card::after{box-shadow:none;mix-blend-mode:normal;opacity:1;
+  background:linear-gradient(180deg,rgba(255,255,255,calc(.28 + var(--jv,0) * .2)) 0%,rgba(255,255,255,0) 36%)}
+/* immagine: campitura piena e tenue, nessuna ombra interna */
+.board.is-gallery .card-media{background:#eef4f8;box-shadow:none;border:0}
+.board.is-gallery .card:hover .card-name{text-shadow:none}
+.board.is-gallery:has(.card:hover) .card:not(:hover){opacity:.72}
+
+/* ================= 75. Macchine · lastra separata dal testo, vetro più vivo, fondo più ricco ================= */
+/* la lastra della card è uno strato proprio (.card-fondo): si deforma lei, non il testo */
+.board.is-gallery .card,.board.is-gallery .card:nth-child(n),.board.is-gallery .card:hover{background:transparent;box-shadow:none;overflow:visible;isolation:isolate}
+.card-fondo{position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(180deg,#fff 0%,#fff 55%,#f6f9fb 100%);
+  box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(120,0,20,.08),0 18px 34px -22px rgba(120,0,20,.38)}
+.board.is-gallery .card:hover .card-fondo{box-shadow:inset 0 1px 0 #fff,0 2px 4px rgba(120,0,20,.1),0 26px 44px -24px rgba(120,0,20,.45)}
+
+/* pannello: vetro luminoso, non piatto. Lucido in alto, luce che rientra dal
+   basso, saturazione alta così il rosso dietro arriva vivo */
+.row[data-mood="macchine"] > .block{
+  background:linear-gradient(170deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.30) 26%,rgba(255,255,255,.14) 60%,rgba(255,255,255,.26) 100%);
+  backdrop-filter:blur(22px) saturate(190%) brightness(1.04);-webkit-backdrop-filter:blur(22px) saturate(190%) brightness(1.04);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.45),inset 0 -24px 40px -30px rgba(255,255,255,.7),
+    0 40px 80px -46px rgba(163,16,0,.5)}
+
+/* fondo: rossi VI più pieni e vivi, un punto più profondo e una luce bianca,
+   più il taglio della Slice (48°) come lama di luce appena percepibile */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{
+  background:
+    linear-gradient(48deg,transparent 0 44%,rgba(255,255,255,.22) 44% 46%,transparent 46% 100%),
+    radial-gradient(720px 520px at 84% 8%,rgba(228,0,43,.95),transparent 64%),
+    radial-gradient(900px 640px at 4% 96%,rgba(243,63,84,.85),transparent 62%),
+    radial-gradient(520px 420px at 58% 70%,rgba(163,16,0,.35),transparent 70%),
+    radial-gradient(640px 420px at 30% 18%,rgba(255,255,255,.85),transparent 70%),
+    linear-gradient(180deg,#fde9ec,#f9d4da 55%,#fce6ea);
+  background-attachment:fixed}
+/* fondo pulito: solo due grandi aloni rossi su base chiara, come la sezione "Il gruppo" */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{
+  background:
+    radial-gradient(1000px 700px at 85% 5%,rgba(228,0,43,.92),transparent 65%),
+    radial-gradient(1100px 760px at 5% 95%,rgba(243,63,84,.8),transparent 62%),
+    linear-gradient(180deg,#fde9ec,#f9d4da 55%,#fce6ea);
+  background-attachment:fixed}
+
+/* ================= 76. Il gruppo · anello rosso e vuoto centrale (ref. Shift-Zer0) =================
+   Un grande anello rosso VI, sfocato e inclinato come la Slice (-42°), lascia al
+   centro un vuoto bianco: lì sta il contenuto, dentro una cornice sottile rossa.
+   Il vuoto è la scelta: niente pannelli, niente vetro, niente decorazioni.
+   Profondità: il lato in basso a destra dell'anello scende nel Deep Red. */
+.row-gruppo{position:relative;isolation:isolate;padding-block:clamp(40px,8vh,110px)}
+.row-gruppo::before{content:none !important}
+.gruppo-scena{position:absolute;z-index:-1;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;overflow:hidden;
+  background:#fff;pointer-events:none}
+.gruppo-anello{position:absolute;left:50%;top:50%;width:max(118vw,1300px);height:max(70vw,760px);
+  transform:translate(-50%,-50%) rotate(-42deg);border-radius:50%;
+  border:clamp(90px,13vw,220px) solid #e4002b;
+  box-shadow:
+    inset -60px -80px 140px -20px rgba(80,0,8,.55),   /* il bordo interno scende nel Deep Red */
+    inset 40px 50px 120px -30px rgba(255,255,255,.5),  /* luce sul lato alto */
+    0 0 120px 20px rgba(228,0,43,.35);
+  filter:blur(22px)}
+/* ombra profonda in basso a destra, come nella reference */
+.gruppo-scena::after{content:"";position:absolute;right:-8%;bottom:-18%;width:60%;height:70%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(60,0,6,.75),rgba(163,16,0,.35) 55%,transparent);filter:blur(30px)}
+/* velo bianco al centro: allarga il vuoto e garantisce la lettura */
+.gruppo-scena::before{content:"";position:absolute;left:50%;top:50%;width:70%;height:62%;transform:translate(-50%,-50%) rotate(-42deg);
+  border-radius:50%;background:radial-gradient(closest-side,#fff 55%,rgba(255,255,255,0));z-index:1;filter:blur(10px)}
+
+/* cornice sottile: il contenuto sta nel vuoto */
+.row-gruppo .gruppo{overflow:visible;text-align:left;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  border:1px solid rgba(228,0,43,.55);border-radius:14px;box-shadow:none;
+  max-width:980px;margin:0 auto;padding:clamp(24px,3vw,40px) clamp(22px,3vw,44px);
+  display:grid;grid-template-columns:1fr minmax(0,26ch);grid-template-areas:"kick lede" "num num" "h h" "loghi loghi";
+  column-gap:24px;row-gap:clamp(10px,1.6vh,18px);min-height:clamp(380px,52vh,520px)}
+.row-gruppo .gruppo::before,.row-gruppo .gruppo::after{content:none}
+.row-gruppo .gruppo .kicker{grid-area:kick;color:#e4002b;margin:0;font-size:15px;letter-spacing:.02em;text-transform:none;font-weight:600}
+.row-gruppo .gruppo-lede{grid-area:lede;margin:0;max-width:none;font-size:13px;line-height:1.45;color:#e4002b}
+/* il numero: "tre aziende", come lo 0 della reference */
+.gruppo-num{grid-area:num;justify-self:center;align-self:center;
+  font-family:var(--font-display);font-weight:500;line-height:.9;color:#e4002b;
+  font-size:clamp(120px,16vw,220px);letter-spacing:-.04em}
+.row-gruppo .gruppo-h{grid-area:h;justify-self:center;text-align:center;color:#001e2a;margin:0;
+  font-size:clamp(20px,2.2vw,30px);max-width:30ch}
+.row-gruppo .loghi{grid-area:loghi;justify-content:center;margin-top:clamp(8px,1.4vh,16px)}
+.row-gruppo .logo-item{background:none;box-shadow:none;border:0}
+.row-gruppo .logo-item.is-ph{border:1px dashed rgba(228,0,43,.35);color:#e4002b;background:rgba(255,255,255,.6)}
+.row-gruppo > .block{background:none}
+.row-gruppo .small{position:relative;background:rgba(255,255,255,.82);border-radius:10px;padding:10px 14px;max-width:980px;margin:18px auto 0}
+@media (max-width:767px){
+  .row-gruppo .gruppo{grid-template-columns:1fr;grid-template-areas:"kick" "num" "h" "lede" "loghi";text-align:center}
+  .row-gruppo .gruppo .kicker,.row-gruppo .gruppo-lede{justify-self:center;text-align:center}
+  .gruppo-anello{border-width:70px}}
+/* la sezione ha il suo fondo: niente viraggio azzurro della pagina qui dietro */
+body[data-pagina="home"] .row + .row-gruppo{margin-top:0}
+.gruppo-anello{width:max(120vw,1320px);height:max(86vw,940px);top:52%}
+.gruppo-scena::before{width:86%;height:74%}
+.row-gruppo .gruppo .kicker{color:#fff;font-size:clamp(18px,1.8vw,24px);font-weight:500;text-shadow:0 1px 10px rgba(120,0,16,.35)}
+@media (max-width:767px){.row-gruppo .gruppo .kicker{color:#e4002b;text-shadow:none}}
+
+/* ================= 77. Il gruppo · fondo azzurro, scia liquida, un solo rettangolo glossy =================
+   Sostituisce l'anello rosso (sez. 76): il fondo è quello azzurro della pagina,
+   la scia (canvas WebGL, gruppoScia) attraversa il fondo senza coprirlo, e il
+   solo elemento glossy è il rettangolo del contenuto. Testo e loghi tornano
+   al layout originale (centrati, in colonna). */
+.gruppo-scena{background:none}
+.gruppo-scena::before,.gruppo-scena::after{content:none}
+.gruppo-scena canvas{position:absolute;inset:0;width:100%;height:100%;display:block;
+  -webkit-mask:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);
+          mask:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent)}
+
+/* rettangolo glossy, stesso raggio delle card e dei pannelli (28px) */
+.row-gruppo .gruppo{display:block;text-align:center;min-height:0;max-width:none;
+  padding:clamp(34px,4.5vw,58px) clamp(22px,4vw,48px);border-radius:28px;border:0;
+  background:linear-gradient(170deg,rgba(255,255,255,.66) 0%,rgba(255,255,255,.38) 30%,rgba(255,255,255,.22) 65%,rgba(255,255,255,.34) 100%);
+  backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.5),inset 0 -24px 40px -30px rgba(255,255,255,.75),
+    0 34px 70px -44px rgba(0,85,179,.45)}
+.row-gruppo .gruppo .kicker{color:var(--grey);font-size:inherit;font-weight:inherit;text-shadow:none;margin:0 0 .6em;
+  text-transform:uppercase;letter-spacing:.14em;font-size:12px}
+.row-gruppo .gruppo-h{color:#001e2a;font-size:clamp(23px,2.7vw,36px);max-width:22ch;margin:0 auto .5em;line-height:1.14}
+.row-gruppo .gruppo-lede{color:#33434b;font-size:inherit;margin:0 auto 34px;max-width:56ch}
+.row-gruppo .loghi{margin-top:0}
+.row-gruppo .logo-item.is-ph{border-color:rgba(0,30,42,.18);color:var(--grey);background:rgba(255,255,255,.55)}
+.row-gruppo .small{background:none;padding:0}
+@media (max-width:767px){.row-gruppo .gruppo .kicker{color:var(--grey)}}
+.mood .scia-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* niente righe oblique / linee decorative nelle fasce delle sezioni */
+.row.vi-band:not([data-mood="macchine"])::before{content:none}
+/* noleggio / usato: niente angolo rosso in hover */
+.formula::after,.formula:hover::after,body[data-pagina="home"] .formula::after{content:none}
+/* niente linee oblique bianche nella materia dietro noleggio e settori */
+body[data-pagina="home"] .materia{background:
+  radial-gradient(800px 420px at 20% 0%,rgba(0,133,207,.18),transparent 62%),
+  radial-gradient(700px 520px at 88% 40%,rgba(228,0,43,.10),transparent 60%)}
+.ph-pattern{background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(0,133,207,.07))}
+/* macchine: rosso dominante, il bianco resta solo come respiro al centro-sinistra */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{content:"";
+  background:
+    radial-gradient(1100px 760px at 85% 5%,rgba(228,0,43,1),transparent 70%),
+    radial-gradient(1200px 820px at 5% 95%,rgba(243,63,84,.95),transparent 68%),
+    radial-gradient(600px 420px at 35% 40%,rgba(255,255,255,.55),transparent 70%),
+    linear-gradient(160deg,#e4002b,#f0405a 55%,#e4002b);
+  background-attachment:fixed}
+.row[data-mood="macchine"] :is(h2,.small,.small b),body .row[data-mood="macchine"] :is(h2,.small,.small b){color:#fff}
+.row[data-mood="macchine"] .block-id{color:rgba(255,255,255,.75)}
+
+/* ================= 78. Rifiniture home ================= */
+/* Macchine su rosso: pannello glossy a tinta rossa trasparente (niente velo
+   lattiginoso), titolo bianco con leggera ombra */
+.row[data-mood="macchine"] > .block{
+  background:linear-gradient(170deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.08) 28%,rgba(255,255,255,.03) 65%,rgba(255,255,255,.10) 100%);
+  backdrop-filter:blur(20px) saturate(130%);-webkit-backdrop-filter:blur(20px) saturate(130%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.22),
+    inset 0 -1px 0 rgba(255,255,255,.18),0 40px 80px -46px rgba(90,0,12,.55)}
+.row[data-mood="macchine"] h2{color:#fff;text-shadow:0 1px 18px rgba(120,0,16,.25)}
+.board.is-gallery .card-meta{color:#e4002b}
+
+/* Noleggio / usato: stessa gelatina delle card macchine (JS 3ter). La lastra
+   passa allo strato .card-fondo, così si deforma lei e non il testo */
+.formule .formula,.formule .formula:hover{background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  transform:none;overflow:visible;isolation:isolate;border-radius:26px}
+.formule .formula .card-fondo{background:rgba(255,255,255,.78);
+  backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6),0 18px 34px -24px rgba(0,30,42,.3)}
+.formule .formula:hover .card-fondo{box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.8),0 26px 44px -26px rgba(0,30,42,.38)}
+.formule .formula-art{border-radius:26px 26px 0 0;border-bottom:0}
+/* il triangolo delle CTA noleggio / usato resta fermo: troppi movimenti insieme */
+.formula-go::before,.formula:hover .formula-go::before,a:hover > .formula-go::before{transform:none;transition:none}
+
+/* Per il tuo settore: etichette ferme e senza triangolo in hover */
+.tile,.tile:nth-child(n){animation:none}
+.tile::before,.tile:hover::before,.tile:focus-visible::before{content:none}
+.tile:hover span{transform:none}
+.tile:hover{transform:translateY(-2px)}
+
+/* il testo delle lede non chiude con una parola sola */
+.lede,.formula-p,.card-desc{text-wrap:pretty}
+
+/* ================= 79. Resto del sito · stesse regole della home, fondo rosso =================
+   Livelli, come nella sezione Macchine della home:
+   1. fondo della pagina: rosso VI dominante (fermo mentre si scorre)
+   2. ogni sezione (.row > .block) è una lastra glossy; qui più densa che in home,
+      perché le pagine interne sono ricche di testo, tabelle e form: il testo resta
+      scuro e leggibile
+   3. card, formule, sedi: lastre bianche lucide che si modellano come gelatina (carteJelly)
+   Niente righe oblique, niente triangoli che fluttuano o scivolano negli angoli. */
+body:not([data-pagina="home"]){
+  background:
+    radial-gradient(1100px 760px at 88% 0%,#e4002b,transparent 70%),
+    radial-gradient(1200px 820px at 0% 100%,rgba(243,63,84,.95),transparent 68%),
+    radial-gradient(700px 480px at 30% 35%,rgba(255,255,255,.35),transparent 70%),
+    linear-gradient(160deg,#e4002b,#f0405a 55%,#d8002a);
+  background-attachment:fixed}
+body:not([data-pagina="home"]) .vi-bg{display:none}
+
+/* sezioni: lastre glossy */
+body:not([data-pagina="home"]) .wrap > .row{margin-top:clamp(14px,2.4vh,26px)}
+body:not([data-pagina="home"]) .wrap > .row > .block,
+body:not([data-pagina="home"]) .wrap > .row > .section{
+  position:relative;isolation:isolate;border-radius:28px;
+  padding:clamp(22px,3vw,44px);
+  background:linear-gradient(175deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.88) 40%,rgba(255,255,255,.84) 100%);
+  backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6),0 30px 60px -40px rgba(90,0,12,.55)}
+/* lucido: velatura chiara in alto, un solo strato */
+body:not([data-pagina="home"]) .wrap > .row > .block::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,0) 28%)}
+body:not([data-pagina="home"]) .row.vi-band::before{content:none}
+
+/* riga di servizio dell'header sul rosso */
+body:not([data-pagina="home"]) .site-header .topbar a,
+body:not([data-pagina="home"]) .site-header:not(.su-hero) .topbar a{color:#fff;text-shadow:0 1px 6px rgba(90,0,12,.3)}
+body:not([data-pagina="home"]) .site-header .topbar a:hover{color:#fff;opacity:.75}
+
+/* card ovunque: la lastra è lo strato .card-fondo, così la gelatina non tocca il testo */
+.card:has(> .card-fondo),.sede:has(> .card-fondo),.formula:has(> .card-fondo){
+  background:transparent;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  overflow:visible;isolation:isolate;transform:none}
+.card:has(> .card-fondo):hover,.sede:has(> .card-fondo):hover,.formula:has(> .card-fondo):hover{transform:none;box-shadow:none}
+.card > .card-fondo,.sede > .card-fondo{border-radius:22px}
+.card:has(> .card-fondo){border-radius:22px}
+.card-media{border-radius:16px}
+/* niente angolo rosso che scivola in hover, su tutte le card */
+.card::after,.sede::after,.formula::after,.card:hover::after,.sede:hover::after,.formula:hover::after,.sede.is-main::after{content:none}
+.board.is-gallery .card::after{content:""}
+/* triangoli delle CTA fermi */
+.btn-link::before,.btn-link:hover::before,.formula-go::before{transform:none;transition:none}
+/* etichette e chip fermi, senza triangolo */
+.tile,.tile:nth-child(n),.chip{animation:none}
+.tile::before{content:none}
+/* niente righe oblique nei segnaposto */
+.ph-pattern{background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(0,133,207,.07))}
+/* testi senza parola orfana */
+p,.lede,.card-desc,.formula-p{text-wrap:pretty}
+
+/* footer sul rosso: lastra glossy come le sezioni */
+body:not([data-pagina="home"]) .site-footer{background:rgba(255,255,255,.92);border-radius:28px 28px 0 0}
+/* il fondo chiaro di base (body::before) coprirebbe il rosso */
+body:not([data-pagina="home"])::before{content:none}
+/* sul rosso il bianco semitrasparente vira al rosa: lastre quasi piene */
+body:not([data-pagina="home"]) .wrap > .row > .block,
+body:not([data-pagina="home"]) .wrap > .row > .section{
+  background:linear-gradient(175deg,#fff 0%,rgba(255,255,255,.97) 45%,rgba(252,250,251,.96) 100%);
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+body:not([data-pagina="home"]) .hdr-shell{background:rgba(255,255,255,.94) var(--j-glow)}
+/* briciole di pane sul rosso */
+body:not([data-pagina="home"]) .crumbs,body:not([data-pagina="home"]) .crumbs a,body:not([data-pagina="home"]) .crumbs span{color:#fff}
+
+/* ================= 80. Home · da « I marchi del gruppo » al form: stesso rivestimento =================
+   Zona rossa della home, speculare alla zona azzurra:
+   - fondo: aloni rossi VI su base chiara + scie liquide rosse (gruppoScia('rosso'))
+   - ogni sezione è un rettangolo glossy (stesso vetro del rettangolo del gruppo, 28px)
+   - card bianche lucide che si modellano come gelatina (carteJelly)
+   - form: campi in vetro chiaro, pulsanti coerenti con la hero */
+.mood .rosso{background:
+  radial-gradient(900px 640px at 82% 6%,rgba(228,0,43,.55),transparent 62%),
+  radial-gradient(1000px 700px at 6% 90%,rgba(243,63,84,.40),transparent 60%),
+  linear-gradient(180deg,#fdf0f2,#fbe2e6 55%,#fdf0f2)}
+.mood .rosso .scia-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+.row-vetro{padding-block:clamp(10px,2vh,24px)}
+.row-vetro.vi-band::before{content:none}
+.row-vetro > .block{position:relative;isolation:isolate;border-radius:28px;
+  padding:clamp(26px,3.6vw,52px) clamp(22px,3.6vw,52px);
+  background:linear-gradient(170deg,rgba(255,255,255,.72) 0%,rgba(255,255,255,.46) 30%,rgba(255,255,255,.32) 65%,rgba(255,255,255,.44) 100%);
+  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55),inset 0 -24px 40px -30px rgba(255,255,255,.75),
+    0 34px 70px -44px rgba(163,16,0,.35)}
+.row-vetro h2{color:#001e2a}
+.row-vetro .kicker{color:#e4002b}
+
+/* marchi: due card con immagine grande, stesso linguaggio delle card macchine */
+.row-marchi .grid,.row-marchi [class*="grid"]{gap:clamp(16px,2vw,26px)}
+.row-marchi .card-media{aspect-ratio:16/9;margin:10px 10px 0;border-radius:18px;background:#f3f6f9;box-shadow:none;border:0}
+.row-marchi .card-body{padding:16px 22px 22px}
+.row-marchi .card-name{font-size:21px}
+
+/* sedi: lastre bianche, la principale segnata dal solo testo rosso */
+.row-sedi .sede,.row-sedi .sede.is-main{border-radius:22px}
+.row-sedi .sede > .card-fondo{background:#fff;border-radius:22px;
+  box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(163,16,0,.06),0 16px 30px -22px rgba(163,16,0,.3)}
+.row-sedi .sede.is-main::before{content:none}
+
+/* form: il rettangolo glossy è il modulo; campi in vetro chiaro */
+.row-form .form{background:none;border:0;box-shadow:none;padding:0}
+.row-form .field input,.row-form .field select,.row-form .field textarea{
+  border:0;border-radius:14px;background:rgba(255,255,255,.78);
+  box-shadow:inset 0 1px 2px rgba(0,30,42,.08),inset 0 0 0 1px rgba(0,30,42,.08);
+  transition:box-shadow .25s ease,background-color .25s ease}
+.row-form .field input:focus,.row-form .field select:focus,.row-form .field textarea:focus{
+  outline:0;background:#fff;box-shadow:inset 0 0 0 1.5px rgba(0,133,207,.55),0 0 0 4px rgba(79,189,247,.18)}
+.row-form .field label,.row-form .field > span{color:#33434b}
+.row-form .btn-ghost{background-color:rgba(255,255,255,.6);color:#001e2a}
+.row-vetro > .block{background:linear-gradient(170deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.74) 35%,rgba(255,255,255,.66) 70%,rgba(255,255,255,.76) 100%);backdrop-filter:blur(26px) saturate(120%);-webkit-backdrop-filter:blur(26px) saturate(120%)}
+
+/* ================= 81. Home · allineamento sezioni, CTA, footer ================= */
+
+/* --- Macchine: stesso rettangolo glossy delle altre sezioni; dietro, le scie
+   con la palette della hero (blu → rosa → rosso) che proseguono la sua materia */
+.row[data-mood="macchine"].vi-band::before,.row[data-mood="macchine"]::before{content:none}
+.row[data-mood="macchine"]{padding-block:clamp(10px,2vh,24px)}
+.macchine-scena{position:absolute;z-index:-1;top:-12vh;bottom:0;left:calc(50% - 50vw);width:100vw;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,133,207,.10),transparent 40%)}
+.macchine-scena canvas{position:absolute;inset:0;width:100%;height:100%;display:block;
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 75%,transparent);mask:linear-gradient(180deg,#000 0%,#000 75%,transparent)}
+.row[data-mood="macchine"] > .block{border-radius:28px;
+  background:linear-gradient(170deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.74) 35%,rgba(255,255,255,.66) 70%,rgba(255,255,255,.76) 100%);
+  backdrop-filter:blur(26px) saturate(120%);-webkit-backdrop-filter:blur(26px) saturate(120%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55),inset 0 -24px 40px -30px rgba(255,255,255,.75),0 34px 70px -44px rgba(0,85,179,.3)}
+.row[data-mood="macchine"] h2,body .row[data-mood="macchine"] :is(h2,.small,.small b){color:#001e2a;text-shadow:none}
+.row[data-mood="macchine"] .small{color:#33434b}
+.row[data-mood="macchine"] .block-id{color:#636362}
+
+/* --- Il gruppo e Prodotti: sezioni "speciali", diverse dai rettangoli bianchi */
+/* gruppo: vetro tinto Crystal Blue, più alto e arioso */
+.row-gruppo .gruppo{background:linear-gradient(160deg,rgba(79,189,247,.30),rgba(0,133,207,.14) 55%,rgba(255,255,255,.28));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 0 0 1px rgba(255,255,255,.45),0 40px 80px -44px rgba(0,85,179,.5);
+  padding-block:clamp(48px,6vw,84px)}
+/* prodotti: nessun rettangolo; testo libero sul fondo e immagine grande a vetro */
+.row-prodotti > .block{background:none;box-shadow:none;padding-block:clamp(20px,4vh,48px)}
+.row-prodotti h2{font-size:clamp(28px,3.4vw,46px);line-height:1.08;max-width:14ch}
+.row-prodotti .ph{min-height:clamp(260px,32vw,420px);border-radius:28px;border:0;
+  background:linear-gradient(150deg,rgba(255,255,255,.7),rgba(79,189,247,.22) 60%,rgba(0,133,207,.18));
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.5),0 30px 60px -38px rgba(0,85,179,.45)}
+
+/* --- Angolo rosso in hover solo dove porta a una scelta di catalogo:
+   immagini delle card macchine e marchi. Entra dall'angolo dell'immagine. */
+.board.is-gallery .card-media,.row-marchi .card-media{position:relative;overflow:hidden}
+.board.is-gallery .card-media::after,.row-marchi .card-media::after{content:"";position:absolute;right:0;bottom:0;
+  width:clamp(40px,4.4vw,58px);aspect-ratio:1;background:#e4002b;clip-path:polygon(100% 0,100% 100%,0 100%);
+  transform:translate(101%,101%);transition:transform .45s cubic-bezier(.2,.8,.25,1);pointer-events:none}
+.board.is-gallery .card:hover .card-media::after,.row-marchi .card:hover .card-media::after{transform:none}
+
+/* --- CTA a testo, uguali in tutte le schede: Jet Black, bold, triangolo rosso fermo */
+.btn-link,.formula-go,.formula-usa .formula-go,.row-marchi .card-meta{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:700;font-size:14.5px;
+  color:#001e2a;text-decoration:none;letter-spacing:0;text-transform:none}
+.btn-link::before,.formula-go::before,.row-marchi .card-meta::before{content:"";width:0;height:0;flex:none;
+  border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid #e4002b;transform:none;transition:none}
+.btn-link:hover,.formula:hover .formula-go,.row-marchi .card:hover .card-meta{color:#e4002b;text-decoration:none}
+.formula-go::after,.btn-link::after{content:none}
+
+/* --- Sedi: telefono ed email senza sottolineatura */
+.sede-rec a,.sede a[href^="tel"],.sede a[href^="mailto"]{text-decoration:none;color:#0085cf}
+.sede-rec a:hover{text-decoration:none;color:#0255b3}
+
+/* --- Footer: linee di sfondo nei toni della zona rossa, niente divisori */
+.site-footer{border-top:0}
+.site-footer::before{background:repeating-radial-gradient(ellipse 90% 120% at 100% 0%,transparent 0 28px,rgba(228,0,43,.10) 28px 30px)}
+.site-footer::after{display:none}
+.footer-legal{border-top:0}
+.footer-grid > *{border:0}
+
+/* --- Form: CTA con il numero verde in vetro glossy (non più bianco piatto) */
+.row-form .btn-ghost,.row-form a.btn[href^="tel"]{color:#001e2a;
+  background:linear-gradient(180deg,rgba(255,255,255,.85) 0%,rgba(255,255,255,.35) 50%,rgba(79,189,247,.22) 100%);
+  backdrop-filter:blur(14px) saturate(170%);-webkit-backdrop-filter:blur(14px) saturate(170%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(0,133,207,.18),inset 0 -6px 12px -8px rgba(0,133,207,.35),
+    0 8px 18px -12px rgba(0,85,179,.45)}
+.row-form .btn-ghost:hover,.row-form a.btn[href^="tel"]:hover{color:#001e2a;
+  background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.5) 50%,rgba(79,189,247,.32) 100%)}
+.macchine-scena{top:0}
+
+/* ================= 82. Home · correzioni ================= */
+
+/* --- Macchine: torna ROSSA. Fondo rosso VI dominante, sopra le scie liquide
+   (materia della hero, in rosso) e il pannello di vetro rosso trasparente */
+.macchine-scena{background:
+    radial-gradient(1100px 760px at 85% 5%,#e4002b,transparent 70%),
+    radial-gradient(1200px 820px at 5% 95%,rgba(243,63,84,.95),transparent 68%),
+    radial-gradient(600px 420px at 35% 40%,rgba(255,255,255,.45),transparent 70%),
+    linear-gradient(160deg,#e4002b,#f0405a 55%,#e4002b)}
+.macchine-scena canvas{-webkit-mask:none;mask:none;mix-blend-mode:screen;opacity:.8}
+.row[data-mood="macchine"]{padding-block:clamp(36px,7vh,88px)}
+.row[data-mood="macchine"] > .block{
+  background:linear-gradient(170deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,.08) 28%,rgba(255,255,255,.03) 65%,rgba(255,255,255,.10) 100%);
+  backdrop-filter:blur(20px) saturate(130%);-webkit-backdrop-filter:blur(20px) saturate(130%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.18),0 40px 80px -46px rgba(90,0,12,.55)}
+.row[data-mood="macchine"] h2,body .row[data-mood="macchine"] :is(h2,.small,.small b){color:#fff;text-shadow:0 1px 18px rgba(120,0,16,.25)}
+.row[data-mood="macchine"] .small{color:rgba(255,255,255,.88)}
+.row[data-mood="macchine"] .block-id{color:rgba(255,255,255,.75)}
+
+/* --- Il gruppo: fascia di vetro a tutta larghezza, senza angoli.
+   Non è un rettangolo come le altre: attraversa la pagina da bordo a bordo. */
+.row-gruppo > .block{padding:0}
+.row-gruppo .gruppo{position:relative;border-radius:0;max-width:none;
+  margin-inline:calc(50% - 50vw);width:100vw;padding:clamp(56px,8vw,110px) var(--pad);
+  background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.34) 50%,rgba(255,255,255,.5));
+  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(255,255,255,.8),0 40px 80px -60px rgba(0,85,179,.45)}
+.row-gruppo .gruppo > *{max-width:980px;margin-inline:auto}
+.row-gruppo .gruppo-h{font-size:clamp(28px,3.4vw,46px);max-width:24ch}
+.row-gruppo .loghi{gap:clamp(16px,3vw,40px)}
+.row-gruppo .logo-item,.row-gruppo .logo-item.is-ph{border-radius:999px;padding:14px 28px;min-height:64px;
+  background:rgba(255,255,255,.7);border:0;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6),0 10px 24px -18px rgba(0,85,179,.4)}
+
+/* --- Prodotti: fascia piena Socaf Blue → Electric Blue a tutta larghezza,
+   testo bianco, immagine in vetro chiaro. È l'unica sezione "piena" della home. */
+.row-prodotti{position:relative;isolation:isolate;padding-block:clamp(48px,8vh,100px)}
+.row-prodotti::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;
+  background:radial-gradient(900px 600px at 90% 10%,rgba(79,189,247,.55),transparent 65%),
+    linear-gradient(135deg,#0255b3,#0085cf 60%,#0a6fc2)}
+.row-prodotti > .block{background:none;box-shadow:none;padding:0}
+.row-prodotti h2{color:#fff;font-size:clamp(30px,3.6vw,50px);line-height:1.06;max-width:none}
+.row-prodotti p{color:rgba(255,255,255,.88)}
+.row-prodotti .block-id{color:rgba(255,255,255,.7)}
+.row-prodotti .btn-glass{background-color:rgba(255,255,255,.18);color:#fff;
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.7),inset 0 0 0 .5px rgba(255,255,255,.35)}
+.row-prodotti .btn-glass:hover{background-color:rgba(255,255,255,.28);color:#fff}
+.row-prodotti .ph{color:rgba(255,255,255,.8);
+  background:linear-gradient(150deg,rgba(255,255,255,.28),rgba(255,255,255,.08) 60%,rgba(79,189,247,.2));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 0 0 1px rgba(255,255,255,.22),0 30px 60px -38px rgba(0,20,60,.6)}
+
+/* --- Marchi: stesso raggio delle altre card (22px) e immagine con angoli come le card macchine */
+.row-marchi .card,.row-marchi .card > .card-fondo{border-radius:22px}
+.row-marchi .card .card-media,.row-marchi .card .card-media.ph{margin:10px 10px 0;border-radius:16px;overflow:hidden}
+
+/* --- Form: layout da mockup. Titolo e rassicurazione a sinistra, campi a destra */
+.row-form .form{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);column-gap:clamp(24px,4vw,64px);align-items:start}
+.row-form .form > h3{grid-column:1;font-size:clamp(26px,2.8vw,38px);line-height:1.1;margin:0 0 12px;color:#001e2a}
+.row-form .form > .form-sub{grid-column:1;color:#33434b;font-size:16px;margin:0}
+.row-form .form > .fields{grid-column:2;grid-row:1 / span 3}
+.row-form .form > div[style]{grid-column:2}
+.row-form .form > [data-form-msg]{grid-column:2}
+.row-form .field label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:#636362}
+.row-form .field input,.row-form .field textarea{min-height:52px;padding:14px 16px;font-size:16px}
+.row-form .field textarea{min-height:120px}
+.row-form .consent{font-size:13px;color:#33434b}
+@media (max-width:860px){.row-form .form{grid-template-columns:1fr}
+  .row-form .form > *{grid-column:1 !important;grid-row:auto !important}}
+/* CTA numero verde: outline pulito, niente vetro finto */
+.row-form .btn-ghost,.row-form a.btn[href^="tel"]{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;
+  color:#001e2a;box-shadow:inset 0 0 0 1.5px #001e2a}
+.row-form .btn-ghost:hover,.row-form a.btn[href^="tel"]:hover{background:#001e2a;color:#fff;box-shadow:inset 0 0 0 1.5px #001e2a}
+
+/* --- Footer da mockup: fascia Jet Black, testo bianco, niente linee di nessun tipo */
+.site-footer,body:not([data-pagina="home"]) .site-footer{margin-top:clamp(40px,8vh,90px);padding:clamp(48px,7vh,80px) 0 28px;
+  background:#001e2a;border:0;border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;color:rgba(255,255,255,.72)}
+.site-footer::before,.site-footer::after{content:none;display:none}
+.site-footer *{border:0 !important}
+.site-footer h4{color:#fff;letter-spacing:.12em}
+.site-footer a,.site-footer ul a{color:rgba(255,255,255,.72);text-decoration:none}
+.site-footer a:hover{color:#fff}
+.site-footer .f-tag{color:rgba(255,255,255,.45)}
+.site-footer .small,.site-footer p{color:rgba(255,255,255,.72)}
+.site-footer .small b{color:#fff}
+.footer-brand p{color:#fff;font-size:clamp(18px,1.8vw,24px);line-height:1.3;max-width:34ch;margin-bottom:clamp(28px,4vh,44px)}
+.footer-legal{margin-top:clamp(32px,5vh,56px);color:rgba(255,255,255,.45)}
+.footer-legal a{color:rgba(255,255,255,.55)}
+
+/* ================= 83. Home · gruppo in liquid glass, macchine fuse, form e footer in vetro ================= */
+
+/* --- Il gruppo: stesso layout (centrato), si distingue per la materia.
+   È l'unico vetro davvero trasparente della home: le scie azzurre si vedono
+   attraverso, il bordo è spesso e luminoso come una lastra di vetro liquido. */
+.row-gruppo > .block{padding:0}
+.row-gruppo .gruppo{margin-inline:auto;width:auto;max-width:none;border-radius:28px;
+  padding:clamp(48px,6vw,84px) clamp(22px,4vw,56px);
+  background:linear-gradient(165deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.10) 40%,rgba(255,255,255,.06) 70%,rgba(255,255,255,.18) 100%);
+  backdrop-filter:blur(10px) saturate(180%) brightness(1.06);-webkit-backdrop-filter:blur(10px) saturate(180%) brightness(1.06);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.85),           /* spigolo alto */
+    inset 2px 0 0 rgba(255,255,255,.35),           /* spigolo sinistro */
+    inset -2px 0 0 rgba(255,255,255,.25),          /* spigolo destro */
+    inset 0 -2px 0 rgba(255,255,255,.45),          /* spigolo basso */
+    inset 0 26px 40px -30px rgba(255,255,255,.7),  /* luce che entra dall'alto */
+    inset 0 -30px 50px -34px rgba(0,133,207,.35),  /* spessore in basso */
+    0 40px 80px -50px rgba(0,85,179,.45)}
+.row-gruppo .gruppo > *{max-width:none}
+.row-gruppo .gruppo-h{font-size:clamp(23px,2.7vw,36px);max-width:22ch}
+.row-gruppo .logo-item,.row-gruppo .logo-item.is-ph{border-radius:16px;padding:12px 22px;min-height:0;
+  background:rgba(255,255,255,.55);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.5)}
+
+/* --- Macchine: il rosso entra e esce sfumando, non è più un blocco a sé */
+.macchine-scena{top:-10vh;bottom:-10vh;
+  -webkit-mask:linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%);
+          mask:linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
+
+/* --- Form: la CTA col numero è lo stesso liquid glass dei pulsanti (sez. 50) */
+.row-form a.btn-glass,.row-form a.btn[href^="tel"]{background-color:rgba(255,255,255,.5);background-image:none;color:#001e2a;
+  backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.9),inset 0 0 0 .5px rgba(255,255,255,.5),
+    inset 0 -.5px 0 rgba(0,30,42,.06),0 4px 14px -10px rgba(0,30,42,.25)}
+.row-form a.btn-glass:hover,.row-form a.btn[href^="tel"]:hover{background-color:rgba(255,255,255,.72);color:#001e2a}
+
+/* --- Footer: niente nero. Fascia di vetro chiaro a tutta larghezza, testo scuro */
+.site-footer,body:not([data-pagina="home"]) .site-footer{
+  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.56));
+  backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);
+  box-shadow:inset 0 1px 0 #fff;color:#33434b}
+.site-footer h4{color:#636362}
+.site-footer a,.site-footer ul a{color:#001e2a}
+.site-footer a:hover{color:#e4002b}
+.site-footer .f-tag{color:#636362}
+.site-footer .small,.site-footer p{color:#33434b}
+.site-footer .small b{color:#001e2a}
+.footer-brand p{color:#001e2a;max-width:none;font-size:clamp(18px,1.7vw,23px)}
+.footer-legal,.footer-legal a{color:#636362}
+
+/* ================= 84. Home · colori formule, transizioni morbide, footer con carattere ================= */
+
+/* --- Noleggio = Socaf Blue, Usato = Socaf Red (immagine, sopratitolo, titolo, CTA) */
+.formula-nol .formula-art{background:linear-gradient(150deg,rgba(79,189,247,.55),rgba(0,133,207,.35) 60%,rgba(255,255,255,.4))}
+.formula-usa .formula-art{background:linear-gradient(150deg,rgba(243,63,84,.5),rgba(228,0,43,.32) 60%,rgba(255,255,255,.4))}
+.formula-nol .formula-h,.formula-nol .kicker,.formula-nol .formula-go{color:#0085cf}
+.formula-usa .formula-h,.formula-usa .kicker,.formula-usa .formula-go{color:#e4002b}
+.formula-nol .formula-go::before{border-left-color:#0085cf}
+.formula-usa .formula-go::before{border-left-color:#e4002b}
+.formula-nol:hover .formula-go{color:#0255b3}
+.formula-usa:hover .formula-go{color:#a31000}
+
+/* --- Macchine: sfumature d'ingresso e d'uscita molto più lunghe, così il rosso
+   nasce dalla hero e si scioglie nell'azzurro senza tagli */
+.macchine-scena{top:-28vh;bottom:-30vh;
+  -webkit-mask:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.35) 10%,#000 26%,#000 70%,rgba(0,0,0,.4) 86%,transparent 100%);
+          mask:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.35) 10%,#000 26%,#000 70%,rgba(0,0,0,.4) 86%,transparent 100%)}
+/* la fine della hero sfuma a sua volta, niente bordo netto sotto il video */
+.hero-full{-webkit-mask:linear-gradient(180deg,#000 88%,transparent);mask:linear-gradient(180deg,#000 88%,transparent)}
+.mood span{transition:opacity 1.6s ease}
+
+/* --- Il gruppo: lo stesso blu della sezione Prodotti (Electric Blue → Socaf Blue), in vetro */
+.row-gruppo .gruppo{
+  background:linear-gradient(135deg,rgba(2,85,179,.26),rgba(0,133,207,.18) 60%,rgba(10,111,194,.22));
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.7),inset 2px 0 0 rgba(255,255,255,.28),inset -2px 0 0 rgba(255,255,255,.2),
+    inset 0 -2px 0 rgba(255,255,255,.35),inset 0 26px 40px -30px rgba(255,255,255,.5),0 40px 80px -50px rgba(2,85,179,.55)}
+.row-gruppo .gruppo .kicker{color:#fff;opacity:.85}
+.row-gruppo .gruppo-h{color:#fff;text-shadow:0 1px 16px rgba(2,50,120,.3)}
+.row-gruppo .gruppo-lede{color:rgba(255,255,255,.92)}
+.row-gruppo .logo-item,.row-gruppo .logo-item.is-ph{background:rgba(255,255,255,.82);color:#636362}
+
+/* --- CTA numero nel form: stesso comportamento delle altre CTA in vetro
+   (hover = vetro più pieno, pressione = compressione). Via ogni resto dell'outline. */
+.row-form a.btn-glass,.row-form a.btn-glass:hover,.row-form a.btn-glass:focus-visible{
+  box-shadow:inset 0 .5px 0 rgba(255,255,255,.9),inset 0 0 0 .5px rgba(255,255,255,.5),inset 0 -.5px 0 rgba(0,30,42,.06),0 4px 14px -10px rgba(0,30,42,.25);
+  color:#001e2a;border:0}
+.row-form a.btn-glass{background:rgba(255,255,255,.5)}
+.row-form a.btn-glass:hover{background:rgba(255,255,255,.72)}
+.row-form a.btn-glass:active{transform:scale(.96)}
+
+/* --- Footer con carattere: vetro chiaro sopra i due colori VI (rosso e blu)
+   che si incontrano, frase d'apertura grande, titoli colonna in rosso */
+.site-footer,body:not([data-pagina="home"]) .site-footer{position:relative;isolation:isolate;overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.62))}
+.site-footer::before{content:"" !important;display:block !important;position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 0% 110%,rgba(228,0,43,.30),transparent 62%),
+    radial-gradient(900px 520px at 100% -10%,rgba(0,133,207,.26),transparent 62%)}
+.footer-brand p{font-family:var(--font-display);font-weight:700;letter-spacing:-.015em;
+  font-size:clamp(22px,2.3vw,32px);line-height:1.18;color:#001e2a}
+.site-footer h4{color:#e4002b;font-size:12px;letter-spacing:.14em}
+.site-footer ul{font-size:15px}
+.site-footer li{margin-bottom:10px}
+.site-footer a,.site-footer ul a{color:#001e2a;transition:color .25s ease}
+.site-footer a:hover{color:#e4002b}
+.site-footer .f-tag{color:#636362;background:rgba(255,255,255,.6);border-radius:999px;padding:2px 8px;font-size:11px}
+.footer-legal{font-size:12.5px}
+
+/* --- Card: niente transizioni CSS che frenano la fisica della gelatina */
+.card-fondo,.card-media,.formula-art{will-change:filter}
+.board.is-gallery .card,.formule .formula{transition:opacity .6s ease}
+.macchine-scena{top:-18vh}

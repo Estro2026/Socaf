@@ -105,7 +105,7 @@
     var logo = BASE + 'assets/logo/socaf21-payoff-rgb.svg';
     var h = '<div class="topbar"><div class="wrap">' +
       a('/servizi/pronto-intervento/', 'Pronto intervento') + a('/news/', 'Approfondimenti') +
-      '<a class="pushr" href="' + route('/?s=') + '" data-url="/?s=" title="/?s=">Cerca</a></div></div>';
+      '</div></div><div class="hdr-shell">';
 
     h += '<div class="mainbar"><div class="wrap">' +
       '<a class="brand" href="' + route('/') + '" data-url="/" title="/">' +
@@ -124,8 +124,8 @@
       }
     });
 
-    h += '</ul><a class="phone-cta" href="tel:800480110"><span class="lbl">Numero verde</span>' + NUMERO_VERDE + '</a>' +
-      '<button class="burger" type="button" aria-expanded="false" aria-controls="mobnav">Menu</button></div></div>';
+    h += '</ul><a class="hdr-search" href="' + route('/?s=') + '" data-url="/?s=" title="Cerca · /?s=" aria-label="Cerca"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a><a class="phone-cta" href="tel:800480110"><span class="lbl">Numero verde</span>' + NUMERO_VERDE + '</a>' +
+      '<button class="burger" type="button" aria-expanded="false" aria-controls="mobnav">Menu</button></div></div></div>';
 
     h += '<div class="mobile-panel" id="mobnav" data-open="false"><div class="mobile-sticky">' +
       '<a class="btn btn-ghost" href="' + route('/noleggio/') + '" data-url="/noleggio/">Noleggio</a>' +
@@ -146,9 +146,8 @@
 
   function footer() {
     return '<div class="wrap"><div class="footer-brand">' +
-      '<a class="brand" href="' + route('/') + '" data-url="/" title="/"><img src="' + BASE + 'assets/logo/socaf21-payoff-rgb.svg" alt="Socaf — Soluzioni per il cleaning"></a>' +
-      '<p>Specialista dal 1982 in soluzioni per il cleaning professionale e per la qualità degli ambienti di lavoro.</p>' +
-      '<a class="phone-cta" href="tel:800480110"><span class="lbl">Numero verde</span>' + NUMERO_VERDE + '</a></div>' +
+      '<p>Specialista dal 1982 in soluzioni per il cleaning professionale<br>e per la qualità degli ambienti di lavoro.</p>' +
+      '</div>' +
       '<div class="footer-grid">' +
       '<div><h4>Dove siamo</h4><ul>' +
       SEDI.map(function (s) { return '<li>' + a('/sedi/' + s.slug + '/', s.city + (s.main ? ' <span class="f-tag">sede principale</span>' : '')) + '</li>'; }).join('') +
@@ -816,6 +815,625 @@
      molto tenui, per richiamare la copertina della Visual Identity.
 
 */
+  /* Hero: video in loop + onda liquida che segue il puntatore.
+     Il filtro SVG (turbolenza + spostamento) è quello che dà l'effetto liquido:
+     una sola definizione per pagina, riusata da tutti gli elementi .liquid. */
+  /* GRUPPO · scie liquide. Derivate dalla materia della hero (stessi rumori,
+     palette iridescente blu VI, luce di vetro) ma ridotte a tre scie che
+     attraversano il fondo in diagonale (42°, la Slice): larghe da un lato,
+     si assottigliano fino a sparire dall'altro. Il canvas vive nello strato
+     fisso del fondo azzurro (.mood .azzurro): compare e sparisce con lui, quindi
+     accompagna tutte le sezioni azzurre, dal gruppo fino a « I marchi del gruppo ».
+     Lo scroll le fa scorrere lungo la diagonale, il puntatore le sposta appena.
+     Fuori dalle scie il canvas è trasparente. Movimento ridotto / niente WebGL: nulla. */
+  function gruppoScia(tono, bersaglio) {
+    tono = tono || 'azzurro';   /* 'azzurro' = blu VI (gruppo → noleggio), 'rosso' = rossi VI (marchi → contatti) */
+    /* 'hero' = stessa palette della hero (blu → rosa → rosso), montata dentro un elemento (bersaglio) */
+    var strato = bersaglio || document.querySelector('.mood .' + tono);
+    if (!strato || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cv = document.createElement('canvas');
+    cv.className = 'scia-canvas';
+    var gl = cv.getContext('webgl2', { antialias: false, alpha: true, premultipliedAlpha: true, powerPreference: 'low-power' });
+    if (!gl) return;
+    var VS = '#version 300 es\nin vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+    var FS = [
+      '#version 300 es', 'precision highp float;', 'out vec4 o;',
+      'uniform vec2 R;uniform float T;uniform vec2 M;uniform float S;',
+      'vec2 h2(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.+2.*fract(sin(p)*43758.5453123);}',
+      'float gn(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);',
+      ' return mix(mix(dot(h2(i),f),dot(h2(i+vec2(1,0)),f-vec2(1,0)),u.x),',
+      '            mix(dot(h2(i+vec2(0,1)),f-vec2(0,1)),dot(h2(i+vec2(1,1)),f-vec2(1,1)),u.x),u.y);}',
+      'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<3;i++){v+=a*gn(p);p*=2.;a*=.5;}return v;}',
+      (tono === 'hero'
+        ? 'vec3 iride(float t){vec3 ele=vec3(0.,.522,.812),blu=vec3(.31,.741,.969),cri=vec3(.98,.76,.8),bia=vec3(.894,0.,.169);'
+        : tono === 'rosso'
+        ? 'vec3 iride(float t){vec3 ele=vec3(.639,.063,0.),blu=vec3(.894,0.,.169),cri=vec3(.953,.247,.329),bia=vec3(1.,.95,.96);'
+        : 'vec3 iride(float t){vec3 ele=vec3(.008,.333,.702),blu=vec3(0.,.522,.812),cri=vec3(.31,.741,.969),bia=vec3(.97,.99,1.);'),
+      ' t=clamp(t,0.,1.);vec3 c=mix(ele,blu,smoothstep(0.,.35,t));c=mix(c,cri,smoothstep(.35,.7,t));return mix(c,bia,smoothstep(.72,1.,t));}',
+      /* una scia: asse ondulato, spessore che si assottiglia, sezione a tubo di vetro */
+      'vec4 scia(vec2 q,float off,float wmax,float fase,float t){',
+      ' q.y-=off;',
+      ' float asse=.13*sin(q.x*1.2+t*.5+fase)+.05*sin(q.x*2.7-t*.8+fase*2.)+.12*fbm(vec2(q.x*.7+fase,t*.18))+.035*fbm(vec2(q.x*3.+t*.6,fase));',
+      ' float d=q.y-asse;',
+      ' float coda=smoothstep(-1.6,.6,q.x+.3*sin(fase));',
+      ' float w=mix(.01,wmax,coda)*(1.+.55*fbm(vec2(q.x*1.7,t*.3+fase)));',
+      ' float s=clamp(d/w,-1.,1.);float n=sqrt(max(0.,1.-s*s));',
+      ' float band=1.-smoothstep(.45*w,w,abs(d));',
+      ' float bordo=pow(1.-n,3.)*band;',                       /* luce sui bordi, come vetro */
+      ' float spec=pow(max(0.,1.-abs(s+.5)),16.)*n;',
+      ' vec3 col=iride(.08+.42*n+.18*fbm(q*2.6+t*.08+fase));',
+      ' col=mix(col,' + (tono === 'azzurro' ? 'vec3(.72,.88,.98)' : 'vec3(1.,.86,.89)') + ',bordo*.35)+vec3(1.)*spec*.28;',
+      ' float al=band*(.2+.3*(1.-n)+.12*n)+exp(-abs(d)/(w*2.2+.02))*.08*coda;',
+      ' return vec4(col,clamp(al,0.,1.));}',
+      'void main(){',
+      ' vec2 p=(gl_FragCoord.xy-.5*R)/R.y;',
+      ' float a=.733;mat2 ro=mat2(cos(a),-sin(a),sin(a),cos(a));vec2 q=ro*p;',
+      ' q+=M*.05;q.x+=S;',                                     /* lo scroll le fa scorrere lungo la diagonale */
+      ' float t=T;',
+      ' vec4 a1=scia(q,.05,.34,0.,t);',
+      ' vec4 a2=scia(q*vec2(.9,1.),-.42,.2,2.1,t*.9);',
+      ' vec4 a3=scia(q*vec2(1.1,1.),.5,.14,4.3,t*1.1);',
+      /* composizione "over": la scia principale sopra le altre */
+      ' vec4 c=vec4(a3.rgb*a3.a,a3.a);',
+      ' c=vec4(a2.rgb*a2.a+c.rgb*(1.-a2.a),a2.a+c.a*(1.-a2.a));',
+      ' c=vec4(a1.rgb*a1.a+c.rgb*(1.-a1.a),a1.a+c.a*(1.-a1.a));',
+      ' o=c*.72;}'
+    ].join('\n');
+    function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); return x; }
+    var pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;
+    gl.useProgram(pr);
+    var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    var lp = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
+    var uR = gl.getUniformLocation(pr, 'R'), uT = gl.getUniformLocation(pr, 'T'),
+        uM = gl.getUniformLocation(pr, 'M'), uS = gl.getUniformLocation(pr, 'S');
+    strato.appendChild(cv);
+    function misura() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+      if (bersaglio) { var rb = bersaglio.getBoundingClientRect(); cv.width = Math.round(rb.width * dpr); cv.height = Math.round(rb.height * dpr); }
+      else { cv.width = Math.round(window.innerWidth * dpr); cv.height = Math.round(window.innerHeight * dpr); }
+    }
+    misura(); window.addEventListener('resize', misura);
+    var mx = 0, my = 0, tx = 0, ty = 0, sc = 0, t0 = performance.now();
+    window.addEventListener('pointermove', function (e) {
+      tx = (e.clientX / window.innerWidth - 0.5) * 2; ty = -(e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+    function disegna(ora) {
+      mx += (tx - mx) * 0.03; my += (ty - my) * 0.03;
+      sc += (window.scrollY / window.innerHeight * 0.35 - sc) * 0.08;
+      gl.viewport(0, 0, cv.width, cv.height);
+      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform2f(uR, cv.width, cv.height); gl.uniform1f(uT, (ora - t0) / 1000 * 0.3);
+      gl.uniform2f(uM, mx, my); gl.uniform1f(uS, sc);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    disegna(t0);
+    /* disegna solo mentre il fondo azzurro è attivo */
+    var vista = true;
+    if (bersaglio && 'IntersectionObserver' in window) new IntersectionObserver(function (v) { vista = v[0].isIntersecting; }).observe(bersaglio);
+    (function giro(ora) { requestAnimationFrame(giro); if (bersaglio ? vista : document.body.classList.contains('mood-' + tono)) disegna(ora); })(t0);
+  }
+
+  /* HERO VIVA · la stessa materia del video, ma calcolata in tempo reale:
+     il puntatore spinge e fa ruotare il fluido, quindi le forme si modellano
+     con il mouse. Se WebGL manca, o il movimento è ridotto, resta il video. */
+  function heroFluido() {
+    var hero = document.querySelector('.hero-full');
+    if (!hero) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var cv = document.createElement('canvas');
+    cv.className = 'hero-canvas';
+    cv.setAttribute('aria-hidden', 'true');
+    var gl = cv.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'low-power' });
+    if (!gl) return;
+
+    var VS = '#version 300 es\nin vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+    var FS = [
+      '#version 300 es', 'precision highp float;', 'out vec4 o;',
+      'uniform vec2 R;uniform float T;uniform vec2 M;uniform float MI;',
+      'vec2 h2(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.+2.*fract(sin(p)*43758.5453123);}',
+      'float gn(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*f*(f*(f*6.-15.)+10.);',
+      ' return mix(mix(dot(h2(i),f),dot(h2(i+vec2(1,0)),f-vec2(1,0)),u.x),',
+      '            mix(dot(h2(i+vec2(0,1)),f-vec2(0,1)),dot(h2(i+vec2(1,1)),f-vec2(1,1)),u.x),u.y);}',
+      'float fbm(vec2 p){float v=0.,a=.55;mat2 r=mat2(.8,.6,-.6,.8);',
+      ' for(int i=0;i<3;i++){v+=a*gn(p);p=r*p*1.85;a*=.48;}return v;}',
+      /* la mano del puntatore: spinge il dominio e lo fa girare attorno al punto */
+      'vec2 mano(vec2 p){',
+      ' vec2 d=p-M;float r=length(d);',
+      ' float f=exp(-1.6*r*r)*MI;',
+      ' float a=1.0*f;float c=cos(a),s=sin(a);',
+      ' vec2 ruot=mat2(c,-s,s,c)*d;',
+      ' return M+ruot+d*0.34*f;}',
+      'float altezza(vec2 p,float th){',
+      ' p=mano(p);',
+      ' vec2 d1=0.26*vec2(cos(th),sin(th));vec2 d2=0.20*vec2(cos(th*2.+2.1),sin(th*2.+.7));',
+      ' vec2 q=vec2(fbm(p*0.42+d1),fbm(p*0.42+d1.yx+5.2));',
+      ' vec2 r2=vec2(fbm(p*0.60+1.9*q+d2),fbm(p*0.60+1.9*q.yx+d2.yx+1.7));',
+      ' return 1.35*fbm(p*0.52+2.4*r2);}',
+      'vec3 iride(float t){vec3 blu=vec3(0.,.522,.812),cri=vec3(.31,.741,.969),bia=vec3(.98,.992,1.),',
+      ' ros=vec3(.98,.76,.8),red=vec3(.894,0.,.169);t=clamp(t,0.,1.);',
+      ' vec3 c=mix(blu,cri,smoothstep(0.,.44,t));c=mix(c,bia,smoothstep(.54,.74,t));',
+      ' c=mix(c,ros,smoothstep(.70,.88,t));return mix(c,red,smoothstep(.90,1.,t)*.95);}',
+      'void main(){',
+      ' vec2 uv=gl_FragCoord.xy/R;vec2 p=(gl_FragCoord.xy-.5*R)/R.y*1.15;float th=6.2831853*T;',
+      ' float e=7./R.y;float h=altezza(p,th),hx=altezza(p+vec2(e,0.),th),hy=altezza(p+vec2(0.,e),th);',
+      ' vec3 n=normalize(vec3((h-hx)/e,(h-hy)/e,2.6));',
+      ' vec3 vi=vec3(0,0,1),l1=normalize(vec3(-.45,.75,.85)),l2=normalize(vec3(.65,-.55,.6));',
+      ' float d1=max(dot(n,l1),0.),d2=max(dot(n,l2),0.);',
+      ' float s1=pow(max(dot(normalize(l1+vi),n),0.),42.),s2=pow(max(dot(normalize(l2+vi),n),0.),14.);',
+      ' float fr=pow(1.-max(dot(n,vi),0.),2.6);',
+      ' vec3 col=iride(.42+.72*h+.24*n.x-.12*n.y);',
+      ' col*=.72+.42*d1+.20*d2;col+=vec3(.52,.66,.78)*fr*.45;',
+      ' col+=vec3(1.)*s1*.85;col+=vec3(.9,.96,1.)*s2*.30;',
+      ' float vig=smoothstep(1.45,.15,length(uv-vec2(.5,.52)));col*=.84+.20*vig;',
+      ' o=vec4(clamp(col,0.,1.),1.);}'
+    ].join('\n');
+
+    function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); return x; }
+    var pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS));
+    gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return;   /* niente shader: resta il video */
+    gl.useProgram(pr);
+    var b = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, b);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    var lp = gl.getAttribLocation(pr, 'p');
+    gl.enableVertexAttribArray(lp);
+    gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
+    var uR = gl.getUniformLocation(pr, 'R'), uT = gl.getUniformLocation(pr, 'T'),
+        uM = gl.getUniformLocation(pr, 'M'), uMI = gl.getUniformLocation(pr, 'MI');
+
+    hero.appendChild(cv);
+    hero.classList.add('ha-canvas');
+
+    var mx = 0, my = 0, tx = 0, ty = 0, forza = 0, obiettivo = 0, visibile = true;
+    hero.addEventListener('pointermove', function (e) {
+      var r = hero.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - 0.5) * 2 * (r.width / r.height) * 0.575;
+      ty = -((e.clientY - r.top) / r.height - 0.5) * 2 * 0.575;
+      obiettivo = 1;
+    });
+    hero.addEventListener('pointerleave', function () { obiettivo = 0; });
+
+    function misura() {
+      var r = hero.getBoundingClientRect();
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      cv.width = Math.round(r.width * dpr);
+      cv.height = Math.round(r.height * dpr);
+    }
+    misura();
+    window.addEventListener('resize', misura);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (v) { visibile = v[0].isIntersecting; })
+        .observe(hero);
+    }
+
+    var t0 = performance.now();
+    (function giro(ora) {
+      requestAnimationFrame(giro);
+      if (!visibile) return;
+      mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;      /* la mano insegue, non salta */
+      forza += (obiettivo - forza) * 0.035;
+      var fase = ((ora - t0) / 26000) % 1;                  /* giro lento: 26 secondi */
+      gl.viewport(0, 0, cv.width, cv.height);
+      gl.uniform2f(uR, cv.width, cv.height);
+      gl.uniform1f(uT, fase);
+      gl.uniform2f(uM, mx, my);
+      gl.uniform1f(uMI, forza);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    })(t0);
+  }
+
+
+
+  /* Claim jelly: in hover il titolo diventa vetro lattiginoso e ondeggia come
+     gelatina. L'onda è sincronizzata con il fondo: legge lo stesso cursore con
+     la stessa inerzia del canvas (0.08 / 0.035), quindi il liquido del fondo e
+     quello delle lettere si muovono insieme, nella stessa direzione. */
+  function claimJelly() {
+    var hero = document.querySelector('.hero-full');
+    var bersagli = [].slice.call(document.querySelectorAll('.hero-copy h1, .hero-cnt .hero-stats > div'));
+    if (!bersagli.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
+    var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
+    svg.style.position = 'absolute';
+    /* un filtro per elemento (titolo e ogni numero), stesso rumore: area ampia
+       e fissa, così gli aloni non vengono ritagliati a rettangolo */
+    svg.innerHTML = bersagli.map(function (el, i) {
+      return '<filter id="jelly' + i + '" filterUnits="userSpaceOnUse" x="-120" y="-120" width="1500" height="620" color-interpolation-filters="sRGB">' +
+        '<feTurbulence type="fractalNoise" baseFrequency="0.007 0.016" numOctaves="1" seed="4" result="n"/>' +
+        '<feOffset in="n" dx="0" dy="0" result="m"/>' +
+        '<feDisplacementMap in="SourceGraphic" in2="m" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter>';
+    }).join('');
+    document.body.appendChild(svg);
+    var stati = bersagli.map(function (el, i) {
+      var f = svg.querySelector('#jelly' + i);
+      var st = { el: el, id: 'jelly' + i, disp: f.querySelector('feDisplacementMap'), off: f.querySelector('feOffset'),
+        sopra: 0, forza: 0, t0: 0, carta: el.classList.contains('card'), amp: el.tagName === 'H1' ? 1 : el.classList.contains('card') ? 0.35 : 0.8 };
+      el.addEventListener('mouseenter', function () { st.sopra = 1; st.t0 = performance.now(); });
+      el.addEventListener('mouseleave', function () { st.sopra = 0; });
+      return st;
+    });
+
+    var tx = 0, ty = 0, mx = 0, my = 0, px = 0, py = 0, vel = 0, attivo = false;
+    document.addEventListener('pointermove', function (e) {
+      tx = e.clientX; ty = e.clientY;
+      if (!attivo) { mx = px = tx; my = py = ty; attivo = true; }
+    });
+
+    (function giro(ora) {
+      requestAnimationFrame(giro);
+      if (!attivo) return;
+      mx += (tx - mx) * 0.08; my += (ty - my) * 0.08;        /* stessa inerzia del fondo */
+      var v = Math.hypot(mx - px, my - py); px = mx; py = my;
+      vel += (Math.min(v, 30) - vel) * 0.08;
+      stati.forEach(function (st) {
+        st.forza += (st.sopra - st.forza) * 0.035;
+        if (st.forza < 0.003 && !st.sopra) { if (st.el.style.filter) st.el.style.filter = ''; return; }
+        /* il rumore scorre con il cursore: l'onda segue la mano come il fondo */
+        st.off.setAttribute('dx', (-mx * 0.35).toFixed(1));
+        st.off.setAttribute('dy', (-my * 0.35).toFixed(1));
+        /* oscillazione all'ingresso (gelatina toccata) + onda che cresce col movimento */
+        var p = Math.min((ora - st.t0) / 1400, 1);
+        var tocco = st.sopra && !st.carta ? 7 * Math.sin(p * Math.PI * 3) * (1 - p) : 0;
+        var s = (st.forza * (3 + vel * 0.45) + tocco) * st.amp;
+        st.disp.setAttribute('scale', s.toFixed(2));
+        st.el.style.filter = Math.abs(s) > 0.15 ? 'url(#' + st.id + ')' : '';
+      });
+    })(0);
+  }
+  function heroLiquido() {
+    var fig = document.querySelector('[data-liquid]');
+    if (!fig) return;
+
+    if (!document.getElementById('wf-liquid')) {
+      document.body.insertAdjacentHTML('beforeend',
+        '<svg class="wf-filtri" aria-hidden="true" focusable="false"><filter id="wf-liquid">' +
+        '<feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="7" result="rumore">' +
+        '<animate attributeName="baseFrequency" dur="14s" values="0.012 0.02;0.02 0.01;0.012 0.02" repeatCount="indefinite"/>' +
+        '</feTurbulence>' +
+        '<feDisplacementMap in="SourceGraphic" in2="rumore" scale="46" xChannelSelector="R" yChannelSelector="G"/>' +
+        '</filter></svg>');
+    }
+
+    var onda = fig.querySelector('.liquid');
+    fig.addEventListener('pointermove', function (e) {
+      var r = fig.getBoundingClientRect();
+      onda.style.setProperty('--mx', (((e.clientX - r.left) / r.width) * 100).toFixed(1) + '%');
+      onda.style.setProperty('--my', (((e.clientY - r.top) / r.height) * 100).toFixed(1) + '%');
+    });
+
+    /* La nota « video da fornire » sparisce appena c'è un video vero */
+    var v = fig.querySelector('video');
+    if (v) {
+      v.addEventListener('loadeddata', function () { fig.classList.add('ha-video'); });
+      if (v.readyState >= 2) fig.classList.add('ha-video');
+    }
+  }
+
+  /* HOME · regia visiva: il fondo cambia colore lungo la pagina, la sezione
+     macchine è una lavagna che si trascina, la hero ha il riflesso che segue
+     il puntatore. Tutto solo sulla home: le altre pagine non cambiano. */
+  function homeScena() {
+    if (document.body.dataset.pagina !== 'home') return;
+
+    /* 1 · gli strati di colore del fondo */
+    document.body.insertAdjacentHTML('afterbegin',
+      '<div class="mood" aria-hidden="true"><span class="chiaro"></span><span class="macchine"></span><span class="azzurro"></span><span class="rosso"></span></div>');
+    document.body.classList.add('mood-chiaro');
+
+    var righe = [].slice.call(document.querySelectorAll('.wrap > .row'));
+    function umore(u) {
+      if (document.body.classList.contains('mood-' + u)) return;
+      document.body.classList.remove('mood-chiaro', 'mood-macchine', 'mood-azzurro', 'mood-rosso');
+      document.body.classList.add('mood-' + u);
+    }
+    /* la soglia è il titolo della sezione: dopo « Le macchine » si vira
+       all'azzurro, da « I marchi del gruppo » al rosso */
+    function titolo(r) { var h = r.querySelector('h2'); return h ? h.textContent : ''; }
+    function trova(re) { for (var i = 0; i < righe.length; i++) if (re.test(titolo(righe[i]))) return righe[i]; return null; }
+    var rAzzurro = document.querySelector(".row[data-mood=azzurro]") || trova(/Dalla fusione/);
+    var rRosso = document.querySelector(".row[data-mood=rosso]") || trova(/marchi del gruppo/);
+    var atteso = false;
+    function guarda() {
+      atteso = false;
+      var meta = window.innerHeight * 0.55;
+      var u = 'chiaro';
+      /* l'azzurro parte già con la sezione Macchine: dietro le sue sfumature rosse
+         non deve mai comparire il fondo chiaro (niente "taglio bianco") */
+      var rMac = document.querySelector('.row[data-mood=macchine]');
+      if (rMac && rMac.getBoundingClientRect().top < window.innerHeight) u = 'azzurro';
+      if (rAzzurro && rAzzurro.getBoundingClientRect().top < meta) u = 'azzurro';
+      if (rRosso && rRosso.getBoundingClientRect().top < meta) u = 'rosso';
+      umore(u);
+    }
+    window.addEventListener('scroll', function () {
+      if (!atteso) { atteso = true; requestAnimationFrame(guarda); }
+    }, { passive: true });
+    window.addEventListener('resize', guarda);
+    guarda();
+
+    /* 2 · materia che prosegue verso il basso dietro noleggio e settori */
+    var rMateria = trova(/Non serve per forza/);
+    if (rMateria) {
+      rMateria.style.position = "relative";
+      rMateria.insertAdjacentHTML("afterbegin", "<span class=\"materia\" aria-hidden=\"true\"></span>");
+    }
+
+    /* 3 · lavagna dei prodotti: si trascina con il mouse, scorre con il dito */
+    document.querySelectorAll('[data-board]').forEach(function (b) {
+      var giu = false, x0 = 0, s0 = 0, mosso = 0;
+      b.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'touch') return;
+        giu = true; mosso = 0; x0 = e.clientX; s0 = b.scrollLeft;
+        b.classList.add('is-drag'); b.setPointerCapture(e.pointerId);
+      });
+      b.addEventListener('pointermove', function (e) {
+        if (!giu) return;
+        var d = e.clientX - x0; mosso = Math.abs(d);
+        b.scrollLeft = s0 - d;
+      });
+      ['pointerup', 'pointercancel'].forEach(function (ev) {
+        b.addEventListener(ev, function () { giu = false; b.classList.remove('is-drag'); });
+      });
+      /* un trascinamento non deve aprire la scheda che sta sotto */
+      b.addEventListener('click', function (e) { if (mosso > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+    });
+
+    /* 3bis · gallery "jelly sheet" (reference: Infinite Jelly Glass, reinterpretata in DOM).
+       Catena fisica, niente transition CSS:
+         puntatore → contenitore (molla) → ogni card (molla propria, in ritardo)
+       - drag: il contenitore segue il trascinamento in modo elastico (con
+         resistenza) e al rilascio torna al centro con overshoot;
+       - senza drag il mouse sposta appena il contenitore (parallasse lieve);
+       - ogni card insegue il contenitore con una molla: la differenza tra le due
+         posizioni è la "gelatina". Quella differenza e la velocità producono
+         skew, schiacciamento/allungamento e una piccola rotazione 3D, sempre
+         opposti al movimento. Dopo lo stop la card oscilla e si smorza.
+       - propagazione: le card più lontane dal punto di presa hanno una molla più
+         morbida → rispondono dopo, e l'onda attraversa la griglia;
+       - deformazione ∝ velocità (curva quadratica: quasi nulla a bassa velocità);
+       - --jv (0…1) guida l'intensità del bordo di vetro refrattivo in CSS.
+       Mobile / touch: versione ridotta, reagisce solo alla velocità di scroll. */
+    document.querySelectorAll('[data-board]').forEach(function (b) {
+      if (b.dataset.g3d) return;
+      b.dataset.g3d = '1';
+      b.classList.add('is-gallery');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var track = b.querySelector('.board-track');
+      var carte = [].slice.call(b.querySelectorAll('.card'));
+      var touch = window.matchMedia('(hover: none)').matches;
+      var C = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };           /* contenitore */
+      var S = carte.map(function () { return { x: 0, y: 0, vx: 0, vy: 0 }; });
+      var giu = false, gx = 0, gy = 0, px = 0, py = 0, raf = 0, ultimoScroll = window.scrollY;
+      function avvia() { if (!raf) raf = requestAnimationFrame(passo); }
+
+      if (!touch) {
+        b.addEventListener('pointerdown', function (e) {
+          giu = true; gx = e.clientX - C.tx * 2.2; gy = e.clientY - C.ty * 2.2; px = e.clientX; py = e.clientY; avvia();
+        });
+        window.addEventListener('pointerup', function () { if (giu) { giu = false; C.tx = 0; C.ty = 0; avvia(); } });
+        b.addEventListener('pointermove', function (e) {
+          px = e.clientX; py = e.clientY;
+          if (giu) {
+            /* resistenza elastica: più tiri, meno si sposta (max ~90px) */
+            var dx = (e.clientX - gx) / 2.2, dy = (e.clientY - gy) / 2.2;
+            C.tx = 90 * Math.tanh(dx / 90); C.ty = 40 * Math.tanh(dy / 40);
+          } else {
+            var r = b.getBoundingClientRect();
+            C.tx = 0; /* senza drag il contenitore resta fermo: modella la card (3ter) */
+            C.ty = 0;
+          }
+          avvia();
+        });
+        b.addEventListener('pointerleave', function () { if (!giu) { C.tx = 0; C.ty = 0; avvia(); } });
+      } else {
+        window.addEventListener('scroll', function () {
+          var d = window.scrollY - ultimoScroll; ultimoScroll = window.scrollY;
+          C.vy += Math.max(-30, Math.min(30, d)) * 0.12; avvia();
+        }, { passive: true });
+      }
+
+      function passo() {
+        raf = 0;
+        /* contenitore: molla abbastanza rigida, poco attrito → overshoot controllato */
+        C.vx = (C.vx + (C.tx - C.x) * 0.10) * 0.80; C.x += C.vx;
+        C.vy = (C.vy + (C.ty - C.y) * 0.10) * 0.80; C.y += C.vy;
+        track.style.transform = 'translate3d(' + C.x.toFixed(2) + 'px,' + C.y.toFixed(2) + 'px,0)';
+        var br = b.getBoundingClientRect(), attivo = Math.abs(C.vx) + Math.abs(C.vy) + Math.abs(C.tx - C.x) + Math.abs(C.ty - C.y) > 0.02;
+        for (var i = 0; i < carte.length; i++) {
+          var c = carte[i], s = S[i];
+          /* distanza dal puntatore → molla più morbida per le card lontane (onda) */
+          var cx = br.left + c.offsetLeft + c.offsetWidth / 2, cy = br.top + c.offsetTop + c.offsetHeight / 2;
+          var dist = touch ? 0 : Math.min(Math.hypot(cx - px, cy - py) / 700, 1);
+          var k = 0.16 - dist * 0.07, att = 0.82 + dist * 0.04;
+          s.vx = (s.vx + (C.x - s.x) * k) * att; s.x += s.vx;
+          s.vy = (s.vy + (C.y - s.y) * k) * att; s.y += s.vy;
+          /* ritardo della card rispetto al contenitore (in px) e sua velocità */
+          var lx = s.x - C.x, ly = s.y - C.y;
+          var v = Math.hypot(s.vx, s.vy), e2 = Math.min(1, Math.pow(v / 14, 2));   /* sottile a bassa velocità */
+          var sk = Math.max(-1, Math.min(1, lx / 30)), sy = Math.max(-1, Math.min(1, ly / 30));
+          c.style.transform = 'translate3d(' + lx.toFixed(2) + 'px,' + ly.toFixed(2) + 'px,0) ' +
+            'perspective(1000px) rotateY(' + (sk * 4).toFixed(2) + 'deg) rotateX(' + (-sy * 3).toFixed(2) + 'deg) ' +
+            'skew(' + (sk * 3.2).toFixed(2) + 'deg,' + (sy * 1.6).toFixed(2) + 'deg) ' +
+            'scale(' + (1 + Math.abs(sk) * 0.018 - Math.abs(sy) * 0.012).toFixed(4) + ',' + (1 + Math.abs(sy) * 0.018 - Math.abs(sk) * 0.012).toFixed(4) + ')';
+          c.style.setProperty('--jv', Math.max(e2, Math.min(1, (Math.abs(sk) + Math.abs(sy)) * 0.8)).toFixed(3));
+          c.style.setProperty('--jx', sk.toFixed(3));
+          if (Math.abs(lx) + Math.abs(ly) + v > 0.03) attivo = true;
+        }
+        if (attivo || giu) raf = requestAnimationFrame(passo);
+        else { track.style.transform = ''; carte.forEach(function (c) { c.style.transform = ''; c.style.setProperty('--jv', 0); }); }
+      }
+    });
+
+
+    /* 4 · la hero occupa esattamente lo spazio che resta sotto le barre */
+    var heroFull = document.querySelector('.hero-full');
+    if (heroFull) {
+      var misuraHero = function () {
+        heroFull.style.minHeight = '';
+        var top = heroFull.getBoundingClientRect().top + window.scrollY;
+        heroFull.style.minHeight = Math.max(420, window.innerHeight - top) + 'px';
+      };
+      misuraHero();
+      window.addEventListener('resize', misuraHero);
+      window.addEventListener('load', misuraHero);
+    }
+
+    /* 5 · riflesso della hero che segue il puntatore */
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      hero.addEventListener('pointermove', function (e) {
+        var r = hero.getBoundingClientRect();
+        hero.style.setProperty('--hx', (((e.clientX - r.left) / r.width) * 100).toFixed(1) + '%');
+        hero.style.setProperty('--hy', (((e.clientY - r.top) / r.height) * 100).toFixed(1) + '%');
+      });
+    }
+  }
+
+  /* Il testo guida della ricerca si scrive da solo, come nella reference:
+     una lettera ogni 60 ms, e si ferma appena si clicca dentro. */
+  function ricercaScritta() {
+    var campo = document.querySelector('.hero-cnt .search input');
+    if (!campo) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var frasi = ['Cerca macchine, prodotti, settori', 'Lavapavimenti per capannoni',
+                 'Noleggio spazzatrice', 'Detergente per gres'];
+    var f = 0, i = 0, cancella = false, fermo = false;
+    campo.placeholder = '';
+    function passo() {
+      if (fermo) return;
+      var testo = frasi[f];
+      i += cancella ? -1 : 1;
+      campo.placeholder = testo.slice(0, i);
+      var attesa = cancella ? 28 : 60;
+      if (!cancella && i === testo.length) { cancella = true; attesa = 2200; }
+      else if (cancella && i === 0) { cancella = false; f = (f + 1) % frasi.length; attesa = 320; }
+      setTimeout(passo, attesa);
+    }
+    setTimeout(passo, 900);
+    ['focus', 'pointerdown'].forEach(function (ev) {
+      campo.addEventListener(ev, function () {
+        fermo = true;
+        campo.placeholder = frasi[0];
+      }, { once: true });
+    });
+  }
+
+  /* CARTE JELLY · su tutto il sito (prima solo in home).
+     Card, formule e sedi si modellano come gelatina sotto il mouse. */
+  function carteJelly() {
+    /* 3ter · card modellabili come gelatina liquida.
+       Sotto il puntatore una "mano" invisibile deforma localmente la card (filtro
+       SVG feDisplacementMap con mappe create una volta su canvas):
+       - la mano insegue il mouse con una molla morbida e poco smorzata: la
+         gelatina viene trascinata dal gesto e, a mouse fermo, rientra ondeggiando;
+       - tenendo premuto la superficie si incava attorno al punto e al rilascio
+         rimbalza;
+       - si deformano solo la lastra (strato .card-fondo) e l'immagine: il testo
+         resta nitido e fermo. Le due parti usano la stessa mano, riportata nelle
+         coordinate di ciascuna, così si muovono come un unico corpo.
+       Touch / movimento ridotto: disattivato. */
+    (function () {
+      var carte = [].slice.call(document.querySelectorAll('.card, .formula, .sede'));
+      carte.forEach(function (c) {
+        if (c.querySelector('.card-fondo')) return;
+        var f = document.createElement('span'); f.className = 'card-fondo'; f.setAttribute('aria-hidden', 'true');
+        c.insertBefore(f, c.firstChild);
+      });
+      if (!carte.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
+      var N = 256, D = 320;
+      function mappa(tipo) {
+        var cv = document.createElement('canvas'); cv.width = cv.height = N;
+        var g = cv.getContext('2d'), im = g.createImageData(N, N), d = im.data;
+        for (var yy = 0; yy < N; yy++) for (var xx = 0; xx < N; xx++) {
+          var nx = (xx / (N - 1)) * 2 - 1, ny = (yy / (N - 1)) * 2 - 1, r2 = nx * nx + ny * ny;
+          /* campana larga e morbida, che si annulla dolcemente sul bordo */
+          var gau = r2 < 1 ? Math.exp(-r2 * 2.2) * Math.pow(1 - r2, 2) : 0;
+          var o = (yy * N + xx) * 4, R, G;
+          if (tipo === 'blob') { R = G = 0.5 + 0.5 * gau; }
+          else { R = 0.5 + 0.8 * nx * gau; G = 0.5 + 0.8 * ny * gau; }
+          d[o] = Math.round(Math.max(0, Math.min(1, R)) * 255); d[o + 1] = Math.round(Math.max(0, Math.min(1, G)) * 255);
+          d[o + 2] = 128; d[o + 3] = 255;
+        }
+        g.putImageData(im, 0, 0); return cv.toDataURL();
+      }
+      var BLOB = mappa('blob'), LENTE = mappa('lente'), n = 0;
+      function filtro() {
+        var id = 'modella' + (n++);
+        document.body.insertAdjacentHTML('beforeend', '<svg width="0" height="0" aria-hidden="true" style="position:absolute">' +
+          '<filter id="' + id + '" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">' +
+          '<feFlood flood-color="rgb(128,128,128)" result="neutro"/>' +
+          '<feImage href="' + BLOB + '" x="0" y="0" width="' + D + '" height="' + D + '" preserveAspectRatio="none" result="b"/>' +
+          '<feImage href="' + LENTE + '" x="0" y="0" width="' + D + '" height="' + D + '" preserveAspectRatio="none" result="l"/>' +
+          '<feColorMatrix in="b" type="matrix" values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1 0" result="dir"/>' +
+          '<feComposite in="dir" in2="l" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" result="somma"/>' +
+          '<feGaussianBlur in="somma" stdDeviation="3" result="liscia"/>' +
+          '<feMerge result="m"><feMergeNode in="neutro"/><feMergeNode in="liscia"/></feMerge>' +
+          '<feDisplacementMap in="SourceGraphic" in2="m" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></svg>');
+        var f = document.getElementById(id);
+        return { id: id, imgs: f.querySelectorAll('feImage'), cm: f.querySelector('feColorMatrix'),
+          comp: f.querySelector('feComposite'), disp: f.querySelector('feDisplacementMap') };
+      }
+
+      carte.forEach(function (c) {
+        /* i filtri si creano al primo passaggio: pagine con molte card restano leggere */
+        var parti = null;
+        var media = c.querySelector('.card-media, .formula-art');
+        function prepara() {
+          if (parti) return;
+          parti = [{ el: c.querySelector('.card-fondo'), f: filtro() }];
+          if (media) parti.push({ el: media, f: filtro() });
+        }
+        var Ls = 0, mx = 0, my = 0, hx = 0, hy = 0, vx = 0, vy = 0, ax = 0, ay = 0, forza = 0, sopra = 0, prem = 0, p = 0, pv = 0, raf = 0;
+        function giro() {
+          raf = 0;
+          /* molla morbida: la mano arriva lenta e ondeggia a lungo → liquido */
+          vx = (vx + (mx - hx) * 0.04) * 0.9; hx += vx;
+          vy = (vy + (my - hy) * 0.04) * 0.9; hy += vy;
+          forza += (sopra - forza) * 0.04;
+          pv = (pv + (prem - p) * 0.07) * 0.86; p += pv;
+          var lx = mx - hx, ly = my - hy, L = Math.hypot(lx, ly);
+          /* direzione del trascinamento, a sua volta ammorbidita */
+          ax += (Math.max(-1, Math.min(1, lx / 55)) - ax) * 0.09;
+          ay += (Math.max(-1, Math.min(1, ly / 55)) - ay) * 0.09;
+          var lente = Math.max(-0.2, p) + forza * 0.22;
+          Ls += (L - Ls) * 0.08;                               /* intensità che cresce e cala piano */
+          var sc = forza * (Math.min(Ls, 120) * 0.95 + 20) + Math.abs(p) * 48;
+          var vals = ax.toFixed(3) + ' 0 0 0 ' + (0.5 - 0.5 * ax).toFixed(3) + '  0 ' + ay.toFixed(3) + ' 0 0 ' + (0.5 - 0.5 * ay).toFixed(3) + '  0 0 0 0 .5  0 0 0 1 0';
+          parti.forEach(function (q) {
+            var ox = q.el === media ? media.offsetLeft : 0, oy = q.el === media ? media.offsetTop : 0;
+            q.f.cm.setAttribute('values', vals);
+            q.f.comp.setAttribute('k3', lente.toFixed(3)); q.f.comp.setAttribute('k4', (-0.5 * lente).toFixed(3));
+            for (var k = 0; k < q.f.imgs.length; k++) {
+              q.f.imgs[k].setAttribute('x', (hx - ox - D / 2).toFixed(1)); q.f.imgs[k].setAttribute('y', (hy - oy - D / 2).toFixed(1));
+            }
+            q.f.disp.setAttribute('scale', sc.toFixed(2));
+            var u = (sopra || forza > 0.002) ? 'url(#' + q.f.id + ')' : '';   /* niente scatto on/off */
+            if (q.el.style.filter !== u) q.el.style.filter = u;
+          });
+          if (sopra || forza > 0.004 || L > 0.3 || Math.abs(pv) + Math.abs(p) > 0.003) raf = requestAnimationFrame(giro);
+          else parti.forEach(function (q) { q.el.style.filter = ''; });
+        }
+        function avvia() { if (parti && !raf) raf = requestAnimationFrame(giro); }
+        function locale(e) { var r = c.getBoundingClientRect(); return [(e.clientX - r.left) * c.offsetWidth / r.width, (e.clientY - r.top) * c.offsetHeight / r.height]; }
+        c.addEventListener('pointerenter', function (e) { prepara(); var q = locale(e); mx = hx = q[0]; my = hy = q[1]; vx = vy = 0; sopra = 1; avvia(); });
+        c.addEventListener('pointermove', function (e) { var q = locale(e); mx = q[0]; my = q[1]; avvia(); });
+        c.addEventListener('pointerdown', function () { prem = 0.9; avvia(); });
+        c.addEventListener('pointerup', function () { prem = 0; avvia(); });
+        c.addEventListener('pointerleave', function () { sopra = 0; prem = 0; avvia(); });
+      });
+    })();
+
+  }
+
   function decoraVI() {
     document.body.insertAdjacentHTML('afterbegin', '<div class="vi-bg" aria-hidden="true"><span class="vi-bolla b1"></span><span class="vi-bolla b2"></span></div>');
     var tipi = ['frost', 'contour', 'ribbed'], k = 0;
@@ -860,6 +1478,27 @@
     misuraBarre();
     window.addEventListener('resize', misuraBarre);
 
+    /* Scorrendo, la capsula dell'header si stringe: la barra risponde al
+       movimento invece di restare uguale a sé stessa. */
+    if (hd) {
+      var ultimo = null;
+      var heroSotto = document.querySelector('.hero-full');
+      var guardaHeader = function () {
+        /* sulla home l'header sta sopra il video: finché lo copre, testi chiari */
+        if (heroSotto) {
+          var sopra = heroSotto.getBoundingClientRect().bottom > hd.getBoundingClientRect().bottom;
+          hd.classList.toggle('su-hero', sopra);
+        }
+        var ridotto = window.scrollY > 40;
+        if (ridotto === ultimo) return;
+        ultimo = ridotto;
+        /* forma fissa: lo stato ridotto non cambia più l'header */
+        misuraBarre();
+      };
+      guardaHeader();
+      window.addEventListener('scroll', guardaHeader, { passive: true });
+    }
+
     document.querySelectorAll('[data-sedi]').forEach(function (el) { el.innerHTML = blocoSedi(el.dataset.sedi); });
     document.querySelectorAll('[data-hidden-field]').forEach(function (el) {
       var p = el.dataset.hiddenField.split('|');
@@ -868,6 +1507,15 @@
 
     riempiTesti();
     schedeTesti();
+    heroLiquido();
+    claimJelly();
+    heroFluido();
+    homeScena();
+    gruppoScia('azzurro');
+    gruppoScia('rosso');
+    gruppoScia('rosso', document.querySelector('.macchine-scena'));
+    carteJelly();
+    ricercaScritta();
     decoraVI();
 
     /* Ogni link interno punta al wireframe dell'indirizzo reale, istanza compresa */

@@ -14,8 +14,8 @@ Vedi §Fuori perimetro.
 | # | Area | Template coinvolti | Ore | Complessità |
 | --- | --- | --- | --- | --- |
 | 1 | Fondamenta WordPress, ACF, CPT, tassonomie, permalink | — | **20** | Alta |
-| 2 | D19 + componenti globali: header, footer, menu, breadcrumbs, ricerca, form | D19 | **23** | Media |
-| 3 | Componenti dinamici riutilizzabili: card, listing, FAQ, noleggio, usato, sedi | tutti | **19** | Media |
+| 2 | D19 + componenti globali: header, footer, menu, breadcrumbs, ricerca, form | D19 | **22** | Media |
+| 3 | Componenti dinamici riutilizzabili: card, listing, FAQ, noleggio, usato, sedi | tutti | **18** | Media |
 | 4 | Scheda macchina | D1 | **14** | Alta |
 | 5 | Archivio sottocategoria | D2 | **10** | Media |
 | 6 | Pagina famiglia | D3 | **10** | Media |
@@ -27,14 +27,14 @@ Vedi §Fuori perimetro.
 | 12 | Archivio Approfondimenti | D13 | **6** | Bassa |
 | 13 | Scheda sede | D14 | **6** | Bassa |
 | 14 | Contatti | D15 | **6** | Bassa |
-| 15 | Home | D16 | **9** | Media |
+| 15 | Home | D16 | **7** | Media |
 | 16 | Risultati di ricerca | D17 | **8** | Media |
 | 17 | Pagine istituzionali, servizi, referenze | D18 · D20 | **8** | Bassa |
 | 18 | Responsive, accessibilità, cross-browser, QA | tutti | **20** | Media |
 | 19 | SEO tecnico, redirect, performance, QA tecnico | tutti | **12** | Alta |
-| 20 | Linguaggio visivo VI, pannello testi a schede, stili form | tutti | **6** | Bassa |
+| 20 | Linguaggio visivo VI, pannello testi, video hero, interazioni | tutti | **13** | Media |
 
-**PREVISIONE: 229 h** · **BUFFER: 11 h** · **MASSIMO: 240 h**
+**PREVISIONE: 232 h** · **BUFFER: 8 h** · **MASSIMO: 240 h**
 
 ---
 
@@ -66,7 +66,7 @@ del previsto (il sito oggi non è WordPress: i 184 articoli e le 119 schede vann
 
 ---
 
-### 2 · D19 + componenti globali — 23 h · complessità media
+### 2 · D19 + componenti globali — 22 h · complessità media
 
 **Cosa comprende**
 Header (6 h) · footer (3 h) · riga di servizio (1,5 h) · menu desktop (2 h) · menu mobile (2 h) ·
@@ -88,7 +88,7 @@ e non va introdotto. Un overlay di ricerca animato al posto del link semplice: +
 
 ---
 
-### 3 · Componenti dinamici riutilizzabili — 19 h · complessità media
+### 3 · Componenti dinamici riutilizzabili — 18 h · complessità media
 
 **Cosa comprende**
 Card macchina (2 h: fondo segnaposto e stato hover sono stili globali dell'area 20) · card sottocategoria (1,5 h) · card articolo (1,5 h) · etichette noleggio e usato (1 h) ·
@@ -96,7 +96,7 @@ blocco noleggio e blocco usato (2 h) · blocco sedi (1,5 h) · accordion FAQ (1 
 blocco « garanzia e revisione » (1 h) · blocco « supervalutazione » (0,5 h) ·
 Code Snippets #1–#5 e #8–#9 (5 h) · impostazione della struttura dei Listing Grid JetEngine (2 h).
 
-**Perché vale 19 h e non meno**
+**Perché vale 18 h e non meno**
 Questi componenti compaiono su 15 template. Farli bene una volta è quello che tiene D1–D18
 a 10–14 h l'uno invece di 20. **È l'investimento che rende il budget possibile.**
 
@@ -263,9 +263,9 @@ mappa multi-sede (1,5 h) · form con doppio consenso (1,5 h) · responsive e QA 
 
 ---
 
-### 15 · D16 — Home — 9 h · media
+### 15 · D16 — Home — 7 h · media
 
-Apertura con ricerca (1 h: gradiente, bolla e taglio rosso della hero sono nell'area 20) · le 6 famiglie (1 h) ·
+Apertura con ricerca (0,5 h: il video di sfondo è il widget nativo di Elementor, gradiente, bolle e onda liquida sono nell'area 20) · le 6 famiglie (1 h) ·
 **il gruppo / fusione (1 h)** · noleggio e usato (1 h) · settori (0,5 h) ·
 prodotti (0,5 h) · Aquarial e Caldofacile (0,5 h) · sedi (riusato) · form (riusato) ·
 responsive e QA accurate (3 h) · performance (0,5 h: i Core Web Vitals della home sono già misurati nell'area 19).
@@ -343,22 +343,39 @@ il posizionamento (1 h) · Core Web Vitals su home e D1 (2 h) · QA tecnico fina
 - ⚠ Le due citazioni più autorevoli che Socaf possiede da altri siti puntano a **due articoli**:
   quei due indirizzi non possono rompersi.
 
-### 20 · Linguaggio visivo VI, pannello testi, stili form — 6 h · bassa
+### 20 · Linguaggio visivo VI, pannello testi, video hero, interazioni — 13 h · media
 
 Fondo di pagina e fasce alternate (frost, contorni, vetro rigato) come **classi CSS globali**
 da assegnare alla sezione Elementor (1,5 h) · bolle come **un solo asset SVG** riusato, movimento con
-un keyframe CSS e rispetto di `prefers-reduced-motion` (1 h) · hero con gradiente « fluid energy » e
-taglio rosso (0,5 h) · pannello testi a schede con il **widget Tabs nativo di Elementor Pro**
-(verticale su desktop, orizzontale su mobile), solo stilizzato, nessun JavaScript su misura (2 h) ·
-radio a pillole, consenso, CTA del footer (0,5 h) · card: fondo segnaposto e hover (0,5 h).
+un keyframe CSS e rispetto di `prefers-reduced-motion` (1 h) · pannello testi a schede con il
+**widget Tabs nativo di Elementor Pro** (verticale su desktop, orizzontale su mobile), solo
+stilizzato, nessun JavaScript su misura (2 h) · radio a pillole, consenso, CTA del footer (0,5 h) ·
+vetro più trasparente su tutti i box, con verifica dei contrasti (0,5 h) ·
+**video di apertura in loop** nella hero: widget Video di Elementor come sfondo, `muted/loop/playsinline`,
+poster, `preload=metadata` e versione statica sotto i 768 px (1,5 h) ·
+**onda liquida al passaggio del mouse** sulla hero: un filtro SVG (turbolenza + spostamento) e due
+luci che seguono il puntatore, ~25 righe di JS, spenta su touch e con `prefers-reduced-motion` (1,5 h) ·
+**triangolo rosso come segnale di hover e selezione** su card, sedi, formule e ragioni (0,5 h).
 
-**Regole che tengono il costo a 6 h**
-- Niente librerie di animazione, parallax o canvas: solo gradienti CSS e un SVG.
+**Regia visiva della home (4 h, settembre 2026)**
+Fondo che vira lungo lo scorrimento in tre stati — chiaro, azzurro, rosso — con i box trasparenti
+che lo lasciano vedere (1 h) · sezione macchine come **lavagna orizzontale trascinabile**, schede
+sfalsate che galleggiano e sfocatura di quelle non puntate (1,5 h) · settori come **riquadri liquidi**
+con triangolo al passaggio del mouse (0,5 h) · **tasti materici** con rilievo, luce in alto e
+schiacciamento al passaggio del mouse (1 h).
+**Queste 4 h vengono dal buffer**, che scende da 12 a 8 (scelta condivisa con il cliente).
+
+**Regole che tengono il costo a 13 h**
+- Niente librerie di animazione, parallax o canvas: gradienti CSS, un filtro SVG, un keyframe.
+- Il video è il widget nativo: nessun player su misura, nessun controllo, nessun audio.
 - Le fasce si alternano per classe, non si disegnano pagina per pagina.
 - Il pannello a schede è il widget nativo: se servisse un comportamento diverso, si semplifica la resa.
 
-**Da dove vengono le ore**: nessuna dal buffer. Sono state liberate nelle aree 2, 3, 15 e 17
-(stili spostati qui, performance della home già contata in area 19, template D20 unico).
+**Fuori stima**: la **produzione del video** (ripresa, montaggio, compressione) è lavoro di contenuto,
+come le fotografie. Il file va consegnato pronto: 8–12 secondi, senza audio, sotto i 4 MB.
+
+**Da dove vengono le ore**: nessuna dal buffer. Le 3 h in più di quest'area sono state liberate
+nelle aree 2, 3 e 15 (stili globali spostati qui, hero della home ora è il widget video nativo).
 
 ---
 
@@ -428,7 +445,7 @@ Si riducono personalizzazioni, effetti, codice su misura, varianti e complessit�
 
 ## Il buffer
 
-**12 h.** Serve a coprire imprevisti tecnici: conflitti di rewrite, comportamenti inattesi di
+**8 h.** Serve a coprire imprevisti tecnici: conflitti di rewrite, comportamenti inattesi di
 JetEngine su query annidate, correzioni emerse in QA, un browser che si comporta diversamente.
 
 **Il buffer non va usato per introdurre funzionalità nuove.** Se una richiesta nuova arriva a progetto
@@ -450,6 +467,7 @@ Attività necessarie al lancio che **non sono sviluppo** e non rientrano nelle 2
 | SEO TASK | FAQ di tutte le pagine di catalogo, noleggio, usato, settori, prodotti | ~60 set da 4–5 domande |
 | CONTENT TASK | Fotografia delle 5 sedi | 5 servizi |
 | CONTENT TASK | Fotografia « human style » secondo la Visual Identity | — |
+| CONTENT TASK | **Video di apertura della home**, in loop e senza audio | 8–12 s · < 4 MB · mp4 + webm |
 | CONTENT TASK | Immagini di famiglie, sottocategorie, settori e categorie prodotto | ~55 immagini |
 | CLIENT TASK | 7 selezioni di macchine per settore (8–12 ciascuna) | 7 decisioni |
 | CLIENT TASK | 7 selezioni di categorie prodotto per settore | 7 decisioni |
@@ -475,8 +493,8 @@ non su WordPress. La migrazione dei 184 articoli e delle 119 schede non è un'es
 ## PREVISIONE
 
 ```
-PREVISIONE     229 h
-BUFFER          11 h
+PREVISIONE     232 h
+BUFFER           8 h
 ────────────────────
 MASSIMO        240 h
 ```
