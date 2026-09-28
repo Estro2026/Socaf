@@ -160,9 +160,9 @@ perché resti tracciata la deroga.
 Socaf S.p.A. (Osio Sotto, Castenedolo, Mazzo di Rho), Bottoni S.r.l. (Settimo di Pescantina, VR),
 Tecno Clean S.r.l. (Cordenons, PN) — e il gruppo ha già un articolo dedicato alla fusione.
 Nessun claim è stato inventato.
-**Cosa manca**: <span>CONTENT TASK</span> i **loghi di Bottoni e Tecno Clean** non sono negli asset
-del progetto. Servono in vettoriale, possibilmente monocromatici, per stare su una riga sola.
-Nel wireframe sono due segnaposto dichiarati.
+**Cosa manca**: <span>CONTENT TASK</span> i **loghi di Bottoni e Tecno Clean** sono in `assets/` solo come bitmap bianco (`Bottoni.webp`, `Tecnoclean.webp`):
+nel mockup sono resi monocromatici scuri via CSS. Per il sito servono in vettoriale.
+Nel mockup sono usati i due bitmap.
 **Effetto sul budget**: +1 h su D16 (vedi `dev-estimate.md`). Il testo lungo della fusione **non** va
 duplicato qui: resta su `/azienda/chi-siamo/`, che per alberatura assorbe « Aziende ».
 

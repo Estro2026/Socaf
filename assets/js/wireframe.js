@@ -335,7 +335,7 @@
     set('[data-sub-list]', list.map(cardMacchina).join(''));
     set('[data-sub-count]', list.length + (list.length === 1 ? ' macchina' : ' macchine'));
     set('[data-sub-approf]', 'Come si sceglie: ' + esc(s.h1.toLowerCase()));
-    set('[data-sub-faq-title]', 'Domande frequenti su ' + esc(s.nome.toLowerCase()));
+    set('[data-sub-faq-title]', 'Domande frequenti');
     set('[data-sub-words]', s.lungo ? 'LUNGHEZZA PREVISTA · 400–600 PAROLE — una delle 8 sottocategorie con domanda misurabile'
                                     : 'LUNGHEZZA PREVISTA · 200–300 PAROLE — sottocategoria senza domanda misurabile');
     document.querySelectorAll('[data-sub-skel]').forEach(function (el, i) {
@@ -424,20 +424,27 @@
     setBar(m.url + ' · 1 delle 119 schede');
   }
 
+  /* Rimandi a noleggio e usato: stessa costruzione delle card della home
+     (sezione « Non serve per forza comprarla »): immagine a colori, sopratitolo,
+     titolo nel colore della formula, testo e CTA. Il contenitore prende la classe
+     .formule, così valgono le stesse regole e la stessa gelatina della home. */
   function promo(f, sel) {
     var el = document.querySelector(sel); if (!el) return;
     var h = '';
     if (f.noleggio) {
-      h += '<div class="promo promo-nol"><span class="promo-mark"></span><h3>Si può noleggiare</h3>' +
-        '<p>Formule brevi o pluriennali, assistenza e consegna incluse. Ritiro da tutte e cinque le sedi.</p>' +
-        a('/noleggio/' + keyOf(f) + '/', 'Noleggio ' + f.nome.toLowerCase(), 'btn-link') + '</div>';
+      h += '<div class="formula formula-nol"><span class="formula-art ph ph-volume"></span><span class="formula-body">' +
+        '<span class="kicker">Formula · noleggio</span><span class="formula-h">Si può noleggiare</span>' +
+        '<span class="formula-p">Formule brevi o pluriennali, assistenza e consegna incluse. Ritiro da tutte e cinque le sedi.</span>' +
+        a('/noleggio/' + keyOf(f) + '/', 'Noleggio ' + f.nome.toLowerCase(), 'formula-go') + '</span></div>';
     }
     if (f.usato) {
-      h += '<div class="promo promo-usa"><span class="promo-mark"></span><h3>Esiste anche usata</h3>' +
-        '<p>Ricondizionate e garantite da 3 a 12 mesi, con supervalutazione della macchina che hai già.</p>' +
-        a('/usato/' + f.usato + '/', f.nome + ' usate', 'btn-link') + '</div>';
+      h += '<div class="formula formula-usa"><span class="formula-art ph ph-pattern"></span><span class="formula-body">' +
+        '<span class="kicker">Formula · usato</span><span class="formula-h">Esiste anche usata</span>' +
+        '<span class="formula-p">Ricondizionate e garantite da 3 a 12 mesi, con supervalutazione della macchina che hai già.</span>' +
+        a('/usato/' + f.usato + '/', f.nome + ' usate', 'formula-go') + '</span></div>';
     }
     if (!h) { var w = el.closest('.row') || el; w.remove(); return; }
+    el.classList.add('formule');
     el.innerHTML = h;
   }
   function keyOf(f) {
@@ -865,6 +872,19 @@
       ' col=mix(col,' + (tono === 'azzurro' ? 'vec3(.72,.88,.98)' : 'vec3(1.,.86,.89)') + ',bordo*.35)+vec3(1.)*spec*.28;',
       ' float al=band*(.2+.3*(1.-n)+.12*n)+exp(-abs(d)/(w*2.2+.02))*.08*coda;',
       ' return vec4(col,clamp(al,0.,1.));}',
+      /* goccia di gelatina: contorno che ondeggia, più densa sul bordo, trasparente al centro */
+      'vec4 goccia(vec2 p,vec2 c,float r,float fase,float t){',
+      ' vec2 d=p-c;float a=atan(d.y,d.x);',
+      ' float rr=r*(1.+.16*sin(a*3.+t*.55+fase)+.09*sin(a*5.-t*.8+fase*2.)+.14*fbm(d*1.6+vec2(t*.15,fase)));',
+      ' float dist=length(d)-rr;',
+      ' float s=clamp(-dist/rr,0.,1.);',
+      ' float den=1.-smoothstep(-.012,.012,dist);',
+      ' float bordo=exp(-abs(dist)/(.035*r+.004));',
+      ' float spec=pow(max(0.,1.-length(d/rr-vec2(-.32,.38))*1.6),6.)*den;',
+      ' vec3 col=iride(.12+.45*(1.-s)+.2*fbm(d*3.+t*.1));',
+      ' col=mix(col,vec3(1.),bordo*.25)+vec3(1.)*spec*.35;',
+      ' float al=den*(.10+.34*pow(1.-s,1.6))+bordo*.16;',
+      ' return vec4(col,clamp(al,0.,1.));}',
       'void main(){',
       ' vec2 p=(gl_FragCoord.xy-.5*R)/R.y;',
       ' float a=.733;mat2 ro=mat2(cos(a),-sin(a),sin(a),cos(a));vec2 q=ro*p;',
@@ -877,7 +897,12 @@
       ' vec4 c=vec4(a3.rgb*a3.a,a3.a);',
       ' c=vec4(a2.rgb*a2.a+c.rgb*(1.-a2.a),a2.a+c.a*(1.-a2.a));',
       ' c=vec4(a1.rgb*a1.a+c.rgb*(1.-a1.a),a1.a+c.a*(1.-a1.a));',
-      ' o=c*.72;}'
+      /* due gocce di gelatina che galleggiano lente, spinte dallo scroll */
+      ' vec4 g1=goccia(p,vec2(.55*sin(t*.23)+.35,.25*cos(t*.19)-.1*S+.2),.26,1.,t);',
+      ' vec4 g2=goccia(p,vec2(-.6+.2*cos(t*.17),-.3+.2*sin(t*.21)+.08*S),.2,3.,t*1.1);',
+      ' c=vec4(g2.rgb*g2.a+c.rgb*(1.-g2.a),g2.a+c.a*(1.-g2.a));',
+      ' c=vec4(g1.rgb*g1.a+c.rgb*(1.-g1.a),g1.a+c.a*(1.-g1.a));',
+      ' o=c*.8;}'
     ].join('\n');
     function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); return x; }
     var pr = gl.createProgram();
@@ -920,19 +945,8 @@
   /* HERO VIVA · la stessa materia del video, ma calcolata in tempo reale:
      il puntatore spinge e fa ruotare il fluido, quindi le forme si modellano
      con il mouse. Se WebGL manca, o il movimento è ridotto, resta il video. */
-  function heroFluido() {
-    var hero = document.querySelector('.hero-full');
-    if (!hero) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    var cv = document.createElement('canvas');
-    cv.className = 'hero-canvas';
-    cv.setAttribute('aria-hidden', 'true');
-    var gl = cv.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'low-power' });
-    if (!gl) return;
-
-    var VS = '#version 300 es\nin vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
-    var FS = [
+  /* Materia della hero: shader condiviso da heroFluido e dalle forme laterali */
+  var FLUIDO_FS = [
       '#version 300 es', 'precision highp float;', 'out vec4 o;',
       'uniform vec2 R;uniform float T;uniform vec2 M;uniform float MI;',
       'vec2 h2(vec2 p){p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));return -1.+2.*fract(sin(p)*43758.5453123);}',
@@ -971,7 +985,21 @@
       ' col+=vec3(1.)*s1*.85;col+=vec3(.9,.96,1.)*s2*.30;',
       ' float vig=smoothstep(1.45,.15,length(uv-vec2(.5,.52)));col*=.84+.20*vig;',
       ' o=vec4(clamp(col,0.,1.),1.);}'
-    ].join('\n');
+  ].join('\n');
+
+  function heroFluido() {
+    var hero = document.querySelector('.hero-full');
+    if (!hero) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var cv = document.createElement('canvas');
+    cv.className = 'hero-canvas';
+    cv.setAttribute('aria-hidden', 'true');
+    var gl = cv.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'low-power' });
+    if (!gl) return;
+
+    var VS = '#version 300 es\nin vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+    var FS = FLUIDO_FS;
 
     function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); return x; }
     var pr = gl.createProgram();
@@ -1039,7 +1067,8 @@
      quello delle lettere si muovono insieme, nella stessa direzione. */
   function claimJelly() {
     var hero = document.querySelector('.hero-full');
-    var bersagli = [].slice.call(document.querySelectorAll('.hero-copy h1, .hero-cnt .hero-stats > div'));
+    var bersagli = [].slice.call(document.querySelectorAll(
+      '.hero-copy h1, .hero-cnt .hero-stats > div, .row-prodotti h2, .row-gruppo .gruppo-h, .row-form .form > h3, .row-testata h1, .pagina-interna .form > h3, .pagina-interna .block:has(> .faq) > h2, .pagina-interna .block:has(.t-tabs) > h2'));
     if (!bersagli.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
     var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
     svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
@@ -1056,7 +1085,8 @@
     var stati = bersagli.map(function (el, i) {
       var f = svg.querySelector('#jelly' + i);
       var st = { el: el, id: 'jelly' + i, disp: f.querySelector('feDisplacementMap'), off: f.querySelector('feOffset'),
-        sopra: 0, forza: 0, t0: 0, carta: el.classList.contains('card'), amp: el.tagName === 'H1' ? 1 : el.classList.contains('card') ? 0.35 : 0.8 };
+        sopra: 0, forza: 0, t0: 0, carta: el.classList.contains('card') || el.classList.contains('formula'),
+        amp: /^H[1-3]$/.test(el.tagName) ? 1 : (el.classList.contains('card') || el.classList.contains('formula')) ? 1.6 : 0.8 };
       el.addEventListener('mouseenter', function () { st.sopra = 1; st.t0 = performance.now(); });
       el.addEventListener('mouseleave', function () { st.sopra = 0; });
       return st;
@@ -1082,7 +1112,7 @@
         st.off.setAttribute('dy', (-my * 0.35).toFixed(1));
         /* oscillazione all'ingresso (gelatina toccata) + onda che cresce col movimento */
         var p = Math.min((ora - st.t0) / 1400, 1);
-        var tocco = st.sopra && !st.carta ? 7 * Math.sin(p * Math.PI * 3) * (1 - p) : 0;
+        var tocco = st.sopra ? (st.carta ? 9 : 7) * Math.sin(p * Math.PI * 3) * (1 - p) : 0;
         var s = (st.forza * (3 + vel * 0.45) + tocco) * st.amp;
         st.disp.setAttribute('scale', s.toFixed(2));
         st.el.style.filter = Math.abs(s) > 0.15 ? 'url(#' + st.id + ')' : '';
@@ -1146,10 +1176,10 @@
       atteso = false;
       var meta = window.innerHeight * 0.55;
       var u = 'chiaro';
-      /* l'azzurro parte già con la sezione Macchine: dietro le sue sfumature rosse
-         non deve mai comparire il fondo chiaro (niente "taglio bianco") */
+      /* le macchine accendono il rosso sul fondo della pagina; arrivando al
+         gruppo il rosso si dissolve nell'azzurro (dissolvenza lunga in CSS) */
       var rMac = document.querySelector('.row[data-mood=macchine]');
-      if (rMac && rMac.getBoundingClientRect().top < window.innerHeight) u = 'azzurro';
+      if (rMac && rMac.getBoundingClientRect().top < window.innerHeight * 0.85) u = 'macchine';
       if (rAzzurro && rAzzurro.getBoundingClientRect().top < meta) u = 'azzurro';
       if (rRosso && rRosso.getBoundingClientRect().top < meta) u = 'rosso';
       umore(u);
@@ -1329,7 +1359,185 @@
 
   /* CARTE JELLY · su tutto il sito (prima solo in home).
      Card, formule e sedi si modellano come gelatina sotto il mouse. */
-  function carteJelly() {
+  /* Card: risposta al puntatore SENZA filtri di deformazione.
+     Il filtro SVG produceva bordi frastagliati e lasciava intravedere il fondo:
+     al suo posto la card si inclina verso il puntatore e una luce morbida
+     scorre sulla superficie. Nessun pixel viene spostato, quindi niente difetti. */
+  /* GELATINA DI VETRO (rif. infinite-jelly-glass.shader.se)
+     Là tutta la pagina è una canvas WebGL e le card sono texture dentro lo
+     shader. Qui le card sono HTML, quindi la lente si costruisce con un filtro
+     SVG: una mappa radiale morbida (spinta verso l'esterno + rigonfiamento)
+     che segue il puntatore con una molla poco smorzata. Effetto: la superficie
+     si gonfia sotto il dito, il contenuto attorno si piega come dietro al
+     vetro e, uscendo, rientra ondeggiando.
+     Regole fisse: il testo non entra mai nel filtro, l'area del filtro è
+     proporzionale alla card (niente tagli), sotto c'è sempre una superficie
+     opaca (niente buchi). */
+  function carteGelatina() {
+    /* GELATINA VETTORIALE. La deformazione non sposta più pixel (il filtro SVG
+       dava bordi a scalini e linee che non combaciavano): la superficie della
+       card è un tracciato SVG e il contorno dell'immagine è un clip-path, e
+       tutti e due vengono ricalcolati dalla STESSA funzione di deformazione.
+       Così i bordi restano vettoriali, lisci a qualsiasi intensità, e
+       superficie e immagine si piegano insieme.
+       La funzione: una "mano" che insegue il puntatore con una molla poco
+       smorzata. Vicino alla mano il contorno si gonfia verso l'esterno e viene
+       trascinato nella direzione del gesto; uscendo rientra ondeggiando.
+       Il testo non si deforma mai. */
+    var carte = [].slice.call(document.querySelectorAll('.card, .formula, .sede'));
+    if (!carte.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
+    var NS = 'http://www.w3.org/2000/svg';
+
+    /* contorno di un rettangolo arrotondato campionato in n punti (senso orario) */
+    function contorno(w, h, r, n) {
+      r = Math.min(r, w / 2, h / 2);
+      var lati = [w - 2 * r, h - 2 * r, w - 2 * r, h - 2 * r], arco = Math.PI * r / 2;
+      var tot = 2 * (w + h) - 8 * r + 4 * arco, pts = [];
+      for (var i = 0; i < n; i++) {
+        var s = tot * i / n, k = 0, x, y;
+        var seg = [lati[0], arco, lati[1], arco, lati[2], arco, lati[3], arco];
+        while (s > seg[k]) { s -= seg[k]; k++; }
+        var a = s / r;
+        switch (k) {
+          case 0: x = r + s; y = 0; break;
+          case 1: x = w - r + Math.sin(a) * r; y = r - Math.cos(a) * r; break;
+          case 2: x = w; y = r + s; break;
+          case 3: x = w - r + Math.cos(a) * r; y = h - r + Math.sin(a) * r; break;
+          case 4: x = w - r - s; y = h; break;
+          case 5: x = r - Math.sin(a) * r; y = h - r + Math.cos(a) * r; break;
+          case 6: x = 0; y = h - r - s; break;
+          default: x = r - Math.cos(a) * r; y = r - Math.sin(a) * r;
+        }
+        pts.push([x, y]);
+      }
+      return pts;
+    }
+    /* tracciato liscio (Catmull-Rom → Bézier) da una lista chiusa di punti */
+    function liscio(p, ox, oy) {
+      var n = p.length, d = 'M' + (p[0][0] - ox).toFixed(1) + ' ' + (p[0][1] - oy).toFixed(1);
+      for (var i = 0; i < n; i++) {
+        var p0 = p[(i - 1 + n) % n], p1 = p[i], p2 = p[(i + 1) % n], p3 = p[(i + 2) % n];
+        d += 'C' + (p1[0] + (p2[0] - p0[0]) / 6 - ox).toFixed(1) + ' ' + (p1[1] + (p2[1] - p0[1]) / 6 - oy).toFixed(1) + ' ' +
+          (p2[0] - (p3[0] - p1[0]) / 6 - ox).toFixed(1) + ' ' + (p2[1] - (p3[1] - p1[1]) / 6 - oy).toFixed(1) + ' ' +
+          (p2[0] - ox).toFixed(1) + ' ' + (p2[1] - oy).toFixed(1);
+      }
+      return d + 'Z';
+    }
+
+    carte.forEach(function (c) {
+      var sagoma = document.createElementNS(NS, 'svg');
+      sagoma.setAttribute('class', 'card-sagoma'); sagoma.setAttribute('aria-hidden', 'true');
+      var path = document.createElementNS(NS, 'path'); sagoma.appendChild(path);
+      c.insertBefore(sagoma, c.firstChild);
+      c.classList.add('ha-sagoma');
+      var media = c.querySelector('.card-media, .formula-art');
+      var W, H, R, base, baseM, mo = [0, 0], RM;
+
+      function misura() {
+        W = c.offsetWidth; H = c.offsetHeight;
+        if (W < 2 || H < 2) { base = null; return; }   /* card nascosta: si misura al primo passaggio */
+        R = parseFloat(getComputedStyle(c).borderTopLeftRadius) || 24;
+        sagoma.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        base = contorno(W, H, R, 96);
+        if (media) {
+          mo = [media.offsetLeft, media.offsetTop];
+          RM = 18;   /* il riquadro visibile è 10px dentro il suo box: spazio per gonfiarsi */
+          baseM = contorno(media.offsetWidth - 20, media.offsetHeight - 20, RM, 72).map(function (q) { return [q[0] + mo[0] + 10, q[1] + mo[1] + 10]; });
+        }
+        disegna(0, 0, 0, 0, 0);
+      }
+      /* deformazione di un punto: gonfiore radiale + trascinamento col gesto */
+      function deforma(p, hx, hy, gon, tx, ty, sig) {
+        var dx = p[0] - hx, dy = p[1] - hy, d2 = dx * dx + dy * dy, g = Math.exp(-d2 / (2 * sig * sig));
+        var d = Math.sqrt(d2) || 1;
+        return [p[0] + (dx / d) * gon * g + tx * g, p[1] + (dy / d) * gon * g + ty * g];
+      }
+      function disegna(hx, hy, gon, tx, ty) {
+        if (!base) return;
+        var sig = Math.max(W, H) * 0.32;
+        var P = base.map(function (p) { return deforma(p, hx, hy, gon, tx, ty, sig); });
+        path.setAttribute('d', liscio(P, 0, 0));
+        if (media && baseM) {
+          var M = baseM.map(function (p) { return deforma(p, hx, hy, gon * 0.8, tx * 0.9, ty * 0.9, sig); });
+          media.style.clipPath = 'path("' + liscio(M, mo[0], mo[1]) + '")';
+        }
+      }
+
+      var mx = 0, my = 0, hx = 0, hy = 0, vx = 0, vy = 0, forza = 0, sopra = 0, raf = 0, dxs = 0, dys = 0;
+      function giro() {
+        raf = 0;
+        /* la mano insegue il puntatore: molla morbida, coda lunga */
+        vx = (vx + (mx - hx) * 0.06) * 0.88; hx += vx;
+        vy = (vy + (my - hy) * 0.06) * 0.88; hy += vy;
+        forza += (sopra - forza) * 0.06;
+        /* trascinamento = ritardo della mano, ammorbidito e limitato */
+        dxs += ((mx - hx) - dxs) * 0.2; dys += ((my - hy) - dys) * 0.2;
+        var lim = Math.min(W, H) * 0.08;
+        var tx = Math.max(-lim, Math.min(lim, dxs * 0.35)) * forza, ty = Math.max(-lim, Math.min(lim, dys * 0.35)) * forza;
+        var gon = forza * (6 + Math.min(Math.hypot(dxs, dys), 60) * 0.17);    /* gonfiore: 6px fermi, fino a ~16 */
+        disegna(hx, hy, gon, tx, ty);
+        if (sopra || forza > 0.003 || Math.abs(vx) + Math.abs(vy) > 0.05) raf = requestAnimationFrame(giro);
+        else disegna(0, 0, 0, 0, 0);
+      }
+      function locale(e) {
+        var r = c.getBoundingClientRect();
+        return [(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * H / r.height];
+      }
+      misura();
+      window.addEventListener('resize', misura);
+      window.addEventListener('load', misura);
+      c.addEventListener('pointerenter', function (e) {
+        misura(); var q = locale(e); mx = hx = q[0]; my = hy = q[1]; vx = vy = dxs = dys = 0; sopra = 1;
+        if (!raf) raf = requestAnimationFrame(giro);
+      });
+      c.addEventListener('pointermove', function (e) {
+        var q = locale(e); mx = q[0]; my = q[1];
+        if (!raf) raf = requestAnimationFrame(giro);
+      });
+      c.addEventListener('pointerleave', function () { sopra = 0; if (!raf) raf = requestAnimationFrame(giro); });
+    });
+  }
+
+  function carteTilt() {
+    var carte = [].slice.call(document.querySelectorAll('.card, .formula, .sede'));
+    carte.forEach(function (c) {
+      if (!c.querySelector('.card-fondo')) {
+        var f = document.createElement('span');
+        f.className = 'card-fondo'; f.setAttribute('aria-hidden', 'true');
+        c.insertBefore(f, c.firstChild);
+      }
+    });
+    if (!carte.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
+
+    carte.forEach(function (c) {
+      var rx = 0, ry = 0, tx = 0, ty = 0, gx = 50, gy = 50, dentro = 0, raf = 0;
+      function giro() {
+        raf = 0;
+        rx += (tx - rx) * 0.12; ry += (ty - ry) * 0.12;
+        c.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+        c.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+        c.style.setProperty('--gx', gx.toFixed(1) + '%');
+        c.style.setProperty('--gy', gy.toFixed(1) + '%');
+        if (dentro || Math.abs(rx) + Math.abs(ry) > 0.01) raf = requestAnimationFrame(giro);
+      }
+      function muovi(e) {
+        var r = c.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        gx = px * 100; gy = py * 100;
+        ty = (px - 0.5) * 7;          /* rotazione su Y: massimo 3,5° per lato */
+        tx = (0.5 - py) * 5;          /* rotazione su X: più contenuta */
+        if (!raf) raf = requestAnimationFrame(giro);
+      }
+      c.addEventListener('pointerenter', function (e) { dentro = 1; c.classList.add('is-tilt'); muovi(e); });
+      c.addEventListener('pointermove', muovi);
+      c.addEventListener('pointerleave', function () {
+        dentro = 0; tx = ty = 0; c.classList.remove('is-tilt');
+        if (!raf) raf = requestAnimationFrame(giro);
+      });
+    });
+  }
+
+  function carteJellyDisattivata() {
     /* 3ter · card modellabili come gelatina liquida.
        Sotto il puntatore una "mano" invisibile deforma localmente la card (filtro
        SVG feDisplacementMap con mappe create una volta su canvas):
@@ -1369,13 +1577,13 @@
       function filtro() {
         var id = 'modella' + (n++);
         document.body.insertAdjacentHTML('beforeend', '<svg width="0" height="0" aria-hidden="true" style="position:absolute">' +
-          '<filter id="' + id + '" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">' +
+          '<filter id="' + id + '" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">' +
           '<feFlood flood-color="rgb(128,128,128)" result="neutro"/>' +
           '<feImage href="' + BLOB + '" x="0" y="0" width="' + D + '" height="' + D + '" preserveAspectRatio="none" result="b"/>' +
           '<feImage href="' + LENTE + '" x="0" y="0" width="' + D + '" height="' + D + '" preserveAspectRatio="none" result="l"/>' +
           '<feColorMatrix in="b" type="matrix" values="0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 1 0" result="dir"/>' +
           '<feComposite in="dir" in2="l" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" result="somma"/>' +
-          '<feGaussianBlur in="somma" stdDeviation="3" result="liscia"/>' +
+          '<feGaussianBlur in="somma" stdDeviation="7" result="liscia"/>' +
           '<feMerge result="m"><feMergeNode in="neutro"/><feMergeNode in="liscia"/></feMerge>' +
           '<feDisplacementMap in="SourceGraphic" in2="m" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></svg>');
         var f = document.getElementById(id);
@@ -1383,7 +1591,31 @@
           comp: f.querySelector('feComposite'), disp: f.querySelector('feDisplacementMap') };
       }
 
+      /* Ogni card si deforma secondo quello che contiene: l'acqua delle
+         lavapavimenti ondeggia a lungo, il getto delle idropulitrici è secco,
+         l'aspiratore risucchia, il robot è preciso e quasi meccanico. */
+      function materia(c) {
+        var u = (c.querySelector('[data-url]') || {}).dataset;
+        u = (u && u.url) || c.dataset.url || '';
+        var m = {                       /* molla, smorzamento, ampiezza, lente, pressione */
+          'lavapavimenti':   { k: .030, s: .93, a: 1.15, l:  .26, p: 42 },   /* acqua: onda lunga */
+          'spazzatrici':     { k: .055, s: .86, a:  .95, l:  .16, p: 38 },   /* spazzola: trascina e rientra */
+          'idropulitrici':   { k: .085, s: .80, a: 1.35, l:  .10, p: 56 },   /* getto: colpo secco */
+          'aspiratori':      { k: .040, s: .90, a:  .80, l: -.34, p: 64 },   /* risucchio: si incava */
+          'robot':           { k: .110, s: .74, a:  .62, l:  .12, p: 30 },   /* preciso, poco elastico */
+          'altri-macchinari':{ k: .028, s: .94, a: 1.05, l:  .22, p: 44 },
+          'noleggio':        { k: .045, s: .90, a: 1.10, l:  .24, p: 46 },
+          'usato':           { k: .060, s: .85, a:  .88, l:  .18, p: 40 },
+          'sedi':            { k: .070, s: .84, a:  .55, l:  .14, p: 26 }
+        };
+        for (var chiave in m) if (u.indexOf('/' + chiave) === 0 || u.indexOf(chiave) > -1) return m[chiave];
+        if (c.classList.contains('sede')) return m['sedi'];
+        if (c.classList.contains('formula')) return c.classList.contains('formula-usa') ? m['usato'] : m['noleggio'];
+        return { k: .040, s: .90, a: 1.0, l: .20, p: 48 };
+      }
+
       carte.forEach(function (c) {
+        var M = materia(c);
         /* i filtri si creano al primo passaggio: pagine con molte card restano leggere */
         var parti = null;
         var media = c.querySelector('.card-media, .formula-art');
@@ -1396,17 +1628,17 @@
         function giro() {
           raf = 0;
           /* molla morbida: la mano arriva lenta e ondeggia a lungo → liquido */
-          vx = (vx + (mx - hx) * 0.04) * 0.9; hx += vx;
-          vy = (vy + (my - hy) * 0.04) * 0.9; hy += vy;
+          vx = (vx + (mx - hx) * M.k) * M.s; hx += vx;
+          vy = (vy + (my - hy) * M.k) * M.s; hy += vy;
           forza += (sopra - forza) * 0.04;
           pv = (pv + (prem - p) * 0.07) * 0.86; p += pv;
           var lx = mx - hx, ly = my - hy, L = Math.hypot(lx, ly);
           /* direzione del trascinamento, a sua volta ammorbidita */
           ax += (Math.max(-1, Math.min(1, lx / 55)) - ax) * 0.09;
           ay += (Math.max(-1, Math.min(1, ly / 55)) - ay) * 0.09;
-          var lente = Math.max(-0.2, p) + forza * 0.22;
+          var lente = Math.max(-0.4, p * (M.l < 0 ? 1.3 : 1)) + forza * M.l;
           Ls += (L - Ls) * 0.08;                               /* intensità che cresce e cala piano */
-          var sc = forza * (Math.min(Ls, 120) * 0.95 + 20) + Math.abs(p) * 48;
+          var sc = forza * (Math.min(Ls, 120) * 0.95 + 20) * M.a + Math.abs(p) * M.p;
           var vals = ax.toFixed(3) + ' 0 0 0 ' + (0.5 - 0.5 * ax).toFixed(3) + '  0 ' + ay.toFixed(3) + ' 0 0 ' + (0.5 - 0.5 * ay).toFixed(3) + '  0 0 0 0 .5  0 0 0 1 0';
           parti.forEach(function (q) {
             var ox = q.el === media ? media.offsetLeft : 0, oy = q.el === media ? media.offsetTop : 0;
@@ -1432,6 +1664,277 @@
       });
     })();
 
+  }
+
+  /* HOME · forma di fondo. Una sola forma continua che dal gruppo in giù
+     attraversa la pagina da destra a sinistra e ritorno, legando le sezioni.
+     La materia è VERA: il tubo è riempito con la stessa materia della hero
+     (lo shader FLUIDO_FS, pieghe di raso liquido con luce e riflessi),
+     calcolata una volta e poi ferma; blu VI in alto, rossi VI dai marchi in
+     giù, con passaggio sfumato. Sopra, solo una luce morbida lungo il dorso
+     e un bordo che sfuma nel fondo: niente linee nette.
+     Il percorso passa per punti morbidi (Catmull-Rom), con ampiezze diverse
+     a ogni passaggio, ed entra ed esce fuori dallo schermo: non si vede mai
+     un capo tagliato. */
+  function formeLaterali() {
+    if (window.matchMedia('(max-width: 767px)').matches) return;   /* home e pagine interne */
+    var righe = [].slice.call(document.querySelectorAll('.wrap > .row')).filter(function (r) {
+      return !r.classList.contains('wf-doc') && !r.querySelector('.hero-full') && r.getAttribute('data-mood') !== 'macchine';
+    });
+    if (!righe.length) return;
+
+    /* materia: due tessere (blu e rossa) dallo shader della hero */
+    var cv = document.createElement('canvas'); cv.width = 900; cv.height = 900;
+    var gl = cv.getContext('webgl2', { antialias: false, alpha: false, preserveDrawingBuffer: true });
+    if (!gl) return;
+    var VS = '#version 300 es\nin vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+    var FS_BLU = FLUIDO_FS
+      .replace('vec3 blu=vec3(0.,.522,.812),cri=vec3(.31,.741,.969)', 'vec3 blu=vec3(.008,.333,.702),cri=vec3(0.,.522,.812)')
+      .replace('ros=vec3(.98,.76,.8),red=vec3(.894,0.,.169)', 'ros=vec3(.31,.741,.969),red=vec3(.008,.333,.702)')
+      .replace('c=mix(c,bia,smoothstep(.54,.74,t));', 'c=mix(c,vec3(.31,.741,.969),smoothstep(.40,.62,t));c=mix(c,bia,smoothstep(.62,.80,t));')
+      .replace('float vig=smoothstep(1.45,.15,length(uv-vec2(.5,.52)));col*=.84+.20*vig;', '');
+    var FS_ROSSO = FLUIDO_FS
+      .replace('vec3 blu=vec3(0.,.522,.812),cri=vec3(.31,.741,.969)', 'vec3 blu=vec3(.639,.063,0.),cri=vec3(.894,0.,.169)')
+      .replace('ros=vec3(.98,.76,.8),red=vec3(.894,0.,.169)', 'ros=vec3(.953,.247,.329),red=vec3(.639,.063,0.)')
+      .replace('c=mix(c,bia,smoothstep(.54,.74,t));', 'c=mix(c,vec3(.953,.247,.329),smoothstep(.40,.62,t));c=mix(c,bia,smoothstep(.62,.80,t));')
+      .replace('col+=vec3(.52,.66,.78)*fr*.45;', 'col+=vec3(.95,.55,.6)*fr*.35;')
+      .replace('col+=vec3(.9,.96,1.)*s2*.30;', 'col+=vec3(1.,.93,.94)*s2*.30;')
+      .replace('float vig=smoothstep(1.45,.15,length(uv-vec2(.5,.52)));col*=.84+.20*vig;', '');
+    function tessera(fs, fase) {
+      function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); return x; }
+      var pr = gl.createProgram();
+      gl.attachShader(pr, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(pr);
+      if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) return null;
+      gl.useProgram(pr);
+      var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      var lp = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(lp); gl.vertexAttribPointer(lp, 2, gl.FLOAT, false, 0, 0);
+      gl.viewport(0, 0, cv.width, cv.height);
+      gl.uniform2f(gl.getUniformLocation(pr, 'R'), cv.width, cv.height);
+      gl.uniform1f(gl.getUniformLocation(pr, 'T'), fase);
+      gl.uniform2f(gl.getUniformLocation(pr, 'M'), 0, 0);
+      gl.uniform1f(gl.getUniformLocation(pr, 'MI'), 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      return cv.toDataURL('image/jpeg', 0.9);
+    }
+    var TB = tessera(FS_BLU, 0.31), TR = tessera(FS_ROSSO, 0.63);
+    if (!TB || !TR) return;
+
+    var box = document.createElement('div');
+    box.className = 'forme-laterali'; box.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(box);
+
+    /* Catmull-Rom → Bézier: curve continue, senza spigoli né tratti piatti */
+    function curva(p) {
+      var d = 'M' + p[0][0].toFixed(1) + ' ' + p[0][1].toFixed(1);
+      for (var i = 0; i < p.length - 1; i++) {
+        var p0 = p[Math.max(0, i - 1)], p1 = p[i], p2 = p[i + 1], p3 = p[Math.min(p.length - 1, i + 2)];
+        d += ' C' + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + ' ' + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) + ' ' +
+          (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + ' ' + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) + ' ' +
+          p2[0].toFixed(1) + ' ' + p2[1].toFixed(1);
+      }
+      return d;
+    }
+
+    function posa() {
+      /* fondale STATICO: la forma è composta sulla sola finestra e resta ferma;
+         scorrendo cambia solo il suo colore, insieme al fondo */
+      var W = document.documentElement.clientWidth, Hdoc = window.innerHeight;
+      box.style.height = Hdoc + 'px';
+      var y0 = Hdoc * 0.02;
+      var ult = righe[righe.length - 1], r1 = ult.getBoundingClientRect();
+      var y1 = Hdoc * 0.98;
+      var rosso = righe.filter(function (r) { return r.getAttribute('data-mood') === 'rosso'; })[0];
+      var yR = rosso ? rosso.getBoundingClientRect().top + window.scrollY : y1;
+      var spess = Math.max(300, Math.min(W * 0.36, 560));
+
+      /* punti morbidi: ampiezze diverse a ogni passaggio, capi fuori schermo */
+      var n = 2, amp = [1.1, .95, 1.15, .9];   /* una sola grande U nella finestra */
+      var pts = [[W * 1.35, y0 - spess * 1.6]];
+      for (var i = 0; i <= n; i++) {
+        var y = y0 + (y1 - y0) * (i / n);
+        var a = amp[i % amp.length];
+        /* le svolte cadono fuori schermo: a vista resta solo il tratto morbido */
+        var x = i % 2 === 0 ? W * (0.5 + 0.46 * a) : W * (0.5 - 0.46 * a);   /* le curve a U restano visibili ai lati */
+        pts.push([x, y]);
+      }
+      var last = pts[pts.length - 1];
+      pts.push([last[0] < W / 2 ? -W * 0.35 : W * 1.35, y1 + spess * 1.6]);
+      var d = curva(pts);
+      var sR = Math.max(0, Math.min(1, (yR - y0) / Math.max(1, y1 - y0)));
+      var Y0 = y0 - spess * 2, Y1 = y1 + spess * 2;
+      var fu = 'filterUnits="userSpaceOnUse" x="' + (-W) + '" y="' + (Y0 - 200) + '" width="' + (W * 3) + '" height="' + (Y1 - Y0 + 400) + '"';
+
+      /* Stile della reference (bolla di vetro a U): la forma è quasi tutta
+         trasparente. Si vedono solo
+           - il contorno: due fili di luce sottili lungo i bordi, con un alone;
+           - dentro, alcune fiamme di luce morbide che seguono la curva.
+         Viene disegnata in DUE toni (blu VI e rosso VI) su due tele
+         sovrapposte: il CSS accende quella del colore di fondo attivo, con la
+         stessa dissolvenza del fondo, così forma e fondo cambiano insieme e
+         non c'è mai un tratto del colore sbagliato. */
+      var bordo = Math.max(5, spess * 0.014), fu2 = fu;   /* sul fondo chiaro i fili sono nel colore pieno VI */
+      function tono(t) {
+        var P = t === 'blu'
+          ? { alone: '#4fbdf7', filo: '#0085cf', filo2: '#4fbdf7', corpo: '#4fbdf7', fiamme: ['#4fbdf7', '#0085cf', '#bfe6fb', '#0085cf'] }
+          : { alone: '#f33f54', filo: '#e4002b', filo2: '#f33f54', corpo: '#f33f54', fiamme: ['#f33f54', '#e4002b', '#ffd3d9', '#e4002b'] };
+        var id = 'u' + t;
+        /* contorno ottenuto con una maschera: nastro pieno meno nastro poco più stretto */
+        var maschera = '<mask id="' + id + 'm" maskUnits="userSpaceOnUse" x="' + (-W) + '" y="' + Y0 + '" width="' + (W * 3) + '" height="' + (Y1 - Y0) + '">' +
+          '<path d="' + d + '" fill="none" stroke="#fff" stroke-width="' + spess + '" stroke-linecap="round"/>' +
+          '<path d="' + d + '" fill="none" stroke="#000" stroke-width="' + (spess - bordo * 2) + '" stroke-linecap="round"/></mask>' +
+          '<mask id="' + id + 'm2" maskUnits="userSpaceOnUse" x="' + (-W) + '" y="' + Y0 + '" width="' + (W * 3) + '" height="' + (Y1 - Y0) + '">' +
+          '<path d="' + d + '" transform="translate(' + (spess * .05) + ' ' + (spess * .09) + ')" fill="none" stroke="#fff" stroke-width="' + (spess * .82) + '" stroke-linecap="round"/>' +
+          '<path d="' + d + '" transform="translate(' + (spess * .05) + ' ' + (spess * .09) + ')" fill="none" stroke="#000" stroke-width="' + (spess * .82 - bordo * 1.4) + '" stroke-linecap="round"/></mask>';
+        var f = function (n, s) { return '<filter id="' + id + n + '" ' + fu2 + '><feGaussianBlur stdDeviation="' + s.toFixed(1) + '"/></filter>'; };
+        var rett = function (fill, m, filt, op) {
+          return '<g' + (filt ? ' filter="url(#' + id + filt + ')"' : '') + ' opacity="' + op + '"><rect x="' + (-W) + '" y="' + Y0 + '" width="' + (W * 3) + '" height="' + (Y1 - Y0) +
+            '" fill="' + fill + '" mask="url(#' + id + m + ')"/></g>';
+        };
+        /* fiamme: tratti della curva (tratteggio lungo) spostati verso l'interno e sfocati */
+        var fiamme = P.fiamme.map(function (c, k) {
+          var off = spess * (0.12 + k * 0.08), dash = spess * (0.9 + k * 0.35), gap = spess * (3.2 + k * 1.1);
+          return '<path d="' + d + '" transform="translate(' + (off * .3).toFixed(1) + ' ' + off.toFixed(1) + ')" fill="none" stroke="' + c +
+            '" stroke-opacity="' + (k === 3 ? .5 : .75) + '" stroke-width="' + (spess * (0.07 - k * 0.012)).toFixed(1) + '" stroke-linecap="round"' +
+            ' stroke-dasharray="' + dash.toFixed(0) + ' ' + gap.toFixed(0) + '" stroke-dashoffset="' + (k * spess * 1.3).toFixed(0) + '" filter="url(#' + id + 'f' + ')"/>';
+        }).join('');
+        /* MATERIA: dentro la forma scorre la stessa materia della hero (pieghe di
+           raso liquido), molto trasparente e con i bordi sciolti: dà alla
+           gelatina spessore, rifrazione e luce interna, non solo un contorno */
+        var tex = t === 'blu' ? TB : TR;
+        var materia = '<pattern id="' + id + 'p" patternUnits="userSpaceOnUse" width="' + (W * 1.2).toFixed(0) + '" height="' + (W * 1.2).toFixed(0) + '">' +
+            '<image href="' + tex + '" width="' + (W * 1.2).toFixed(0) + '" height="' + (W * 1.2).toFixed(0) + '" preserveAspectRatio="none"/></pattern>' +
+          '<mask id="' + id + 'mm" maskUnits="userSpaceOnUse" x="' + (-W) + '" y="' + Y0 + '" width="' + (W * 3) + '" height="' + (Y1 - Y0) + '">' +
+            '<path d="' + d + '" fill="none" stroke="#fff" stroke-width="' + (spess * .92).toFixed(1) + '" stroke-linecap="round" filter="url(#' + id + 'c)"/></mask>';
+        var corpoMateria = '<rect x="' + (-W) + '" y="' + Y0 + '" width="' + (W * 3) + '" height="' + (Y1 - Y0) + '" fill="url(#' + id + 'p)" mask="url(#' + id + 'mm)" opacity=".42"/>' +
+          /* luce interna: una banda chiara morbida verso il lato illuminato */
+          '<path d="' + d + '" transform="translate(' + (-spess * .06).toFixed(1) + ' ' + (-spess * .16).toFixed(1) + ')" fill="none" stroke="#fff" stroke-opacity=".30" stroke-width="' + (spess * .22).toFixed(1) + '" stroke-linecap="round" filter="url(#' + id + 'c)"/>';
+        return '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + Hdoc + '" viewBox="0 0 ' + W + ' ' + Hdoc + '">' +
+          '<defs>' + maschera + materia + f('a', spess * .035) + f('g', bordo * 1.6) + f('c', spess * .12) + f('f', spess * .03) + '</defs>' +
+          rett(P.alone, 'm', 'a', .8) +           /* alone del contorno */
+          corpoMateria +
+          '<path d="' + d + '" fill="none" stroke="' + P.corpo + '" stroke-opacity=".16" stroke-width="' + (spess * .9).toFixed(1) + '" stroke-linecap="round" filter="url(#' + id + 'c)"/>' +   /* corpo di gelatina: volume traslucido */
+          rett(P.filo, 'm', 'g', .55) +           /* filo di luce esterno, morbido */
+          rett(P.filo2, 'm2', 'g', .4) +          /* secondo filo, più interno */
+          fiamme +
+          '</svg>';
+      }
+      var sc = 0.5;
+      box.innerHTML = '';
+      ['blu', 'rosso'].forEach(function (t) {
+        var img = new Image(), tela = document.createElement('canvas');
+        tela.className = 'tono-' + t;
+        tela.width = Math.round(W * sc); tela.height = Math.round(Hdoc * sc);
+        tela.style.cssText = 'position:absolute;left:0;top:0;width:' + W + 'px;height:' + Hdoc + 'px';
+        img.onload = function () { var g = tela.getContext('2d'); g.scale(sc, sc); g.drawImage(img, 0, 0); };
+        img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(tono(t));
+        box.appendChild(tela);
+      });
+    }
+    posa();
+    /* fondo quasi fermo: lo strato delle forme scorre al 70% della pagina, così
+       il contenuto sopra sembra muoversi e la forma resta come un fondale.
+       Il disegno viene compresso in altezza dello stesso fattore, quindi a
+       metà pagina la forma è ancora dove deve essere. */
+    var K = 0, attesa = false;   /* 0 = fermo: la pagina scorre sopra un fondale immobile */
+    box.classList.add('is-fondale');
+    function fondale() {
+      attesa = false;
+      var H = document.documentElement.scrollHeight, vh = window.innerHeight;
+      box.style.height = ((H - vh) * K + vh) + 'px';
+      box.style.transform = 'translate3d(0,' + (-window.scrollY * K).toFixed(1) + 'px,0)';
+      [].forEach.call(box.children, function (c) { c.style.height = ((H - vh) * K + vh) + 'px'; });
+    }
+    fondale();
+    window.addEventListener('scroll', function () { if (!attesa) { attesa = true; requestAnimationFrame(fondale); } }, { passive: true });
+    window.addEventListener('load', posa);
+    window.addEventListener('resize', posa);
+    window.addEventListener('load', fondale);
+    window.addEventListener('resize', fondale);
+  }
+
+  /* PAGINE INTERNE · stessa grammatica della home (docs/linguaggio-visivo.md).
+     La prima sezione (titolo e introduzione) è la "testata" su fondo rosso VI;
+     scorrendo, il fondo vira all'azzurro con la stessa dissolvenza della home. */
+  function scenaInterna() {
+    if (document.body.dataset.pagina === 'home' || document.querySelector('.mood')) return;
+    var righe = [].slice.call(document.querySelectorAll('.wrap > .row')).filter(function (r) { return !r.classList.contains('wf-doc'); });
+    if (!righe.length) return;
+    document.body.classList.add('pagina-interna');
+    righe[0].classList.add('row-testata');
+    document.body.insertAdjacentHTML('afterbegin',
+      '<div class="mood" aria-hidden="true"><span class="chiaro"></span><span class="macchine"></span><span class="azzurro"></span><span class="rosso"></span></div>');
+    function umore(u) {
+      if (document.body.classList.contains('mood-' + u)) return;
+      document.body.classList.remove('mood-chiaro', 'mood-macchine', 'mood-azzurro', 'mood-rosso');
+      document.body.classList.add('mood-' + u);
+    }
+    var atteso = false;
+    function guarda() {
+      atteso = false;
+      var fine = righe[0].getBoundingClientRect().bottom;
+      umore(fine > window.innerHeight * 0.45 ? 'macchine' : 'azzurro');
+    }
+    window.addEventListener('scroll', function () { if (!atteso) { atteso = true; requestAnimationFrame(guarda); } }, { passive: true });
+    window.addEventListener('resize', guarda);
+    guarda();
+    window.dispatchEvent(new Event('scroll'));   /* aggiorna subito i colori della riga di servizio */
+  }
+
+  /* INGRESSI · le sezioni entrano quando arrivano nello schermo: salgono di poco
+     e si accendono, con un ritardo sfalsato tra titolo, testo e card. La
+     testata ha il suo ingresso al caricamento. Movimento ridotto: tutto fermo. */
+  function ingressi() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    var righe = [].slice.call(document.querySelectorAll('.wrap > .row')).filter(function (r) {
+      return !r.classList.contains('wf-doc') && !r.querySelector('.hero-full');
+    });
+    /* la riga della hero e la testata non entrano: sono già in scena */
+    document.querySelectorAll('.wrap > .row').forEach(function (r) { if (r.querySelector('.hero-full') || r.classList.contains('wf-doc')) r.classList.add('in-vista'); });
+    document.body.classList.add('ha-ingressi');
+    var io = new IntersectionObserver(function (voci) {
+      voci.forEach(function (v) {
+        if (!v.isIntersecting) return;
+        v.target.classList.add('in-vista');
+        io.unobserve(v.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    righe.forEach(function (r) {
+      /* ritardo sfalsato per i figli principali della sezione */
+      [].slice.call(r.querySelectorAll('.block > *, .card, .sede, .formula')).slice(0, 14).forEach(function (el, i) {
+        el.style.setProperty('--ritardo', (i * 60) + 'ms');
+      });
+      io.observe(r);
+    });
+  }
+
+  /* PERCORSO A TAPPE (« Come funziona »): le tappe diventano selezionabili.
+     Cliccando un numero la tappa si attiva e il suo testo compare, più grande,
+     nel riquadro sotto il percorso. Accessibile: pulsanti con aria-pressed. */
+  function percorsoTappe() {
+    document.querySelectorAll('.steps').forEach(function (box) {
+      var tappe = [].slice.call(box.querySelectorAll('.step'));
+      if (!tappe.length || box.dataset.tappe) return;
+      box.dataset.tappe = '1';
+      box.classList.add('is-interattivo');
+      var dett = document.createElement('div');
+      dett.className = 'steps-dettaglio'; dett.setAttribute('aria-live', 'polite');
+      box.insertAdjacentElement('afterend', dett);
+      function scegli(i) {
+        tappe.forEach(function (t, k) { t.classList.toggle('is-attiva', k === i); t.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+        var h = tappe[i].querySelector('h4'), p = tappe[i].querySelector('p');
+        dett.innerHTML = '<span class="steps-dettaglio-n">' + String(i + 1).padStart(2, '0') + '</span><div><h4>' +
+          (h ? h.textContent : '') + '</h4><p>' + (p ? p.textContent : '') + '</p></div>';
+        dett.classList.remove('entra'); void dett.offsetWidth; dett.classList.add('entra');
+      }
+      tappe.forEach(function (t, i) {
+        t.setAttribute('role', 'button'); t.tabIndex = 0;
+        t.addEventListener('click', function () { scegli(i); });
+        t.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scegli(i); } });
+      });
+      scegli(0);
+    });
   }
 
   function decoraVI() {
@@ -1489,6 +1992,19 @@
           var sopra = heroSotto.getBoundingClientRect().bottom > hd.getBoundingClientRect().bottom;
           hd.classList.toggle('su-hero', sopra);
         }
+        /* riga di servizio: guarda cosa passa sotto le due voci e sceglie il
+           testo chiaro o scuro, così restano leggibili su ogni fondo */
+        var voce = hd.querySelector('.topbar a');
+        if (voce) {
+          var rv = voce.getBoundingClientRect(), scuro = false;
+          var sotto = document.elementsFromPoint(rv.left + rv.width / 2, rv.top + rv.height / 2)
+            .filter(function (el) { return !hd.contains(el) && !el.closest('.devbar'); });
+          var el0 = sotto[0] || document.body;
+          if (el0.closest('.board .card, .card')) scuro = false;          /* sopra le card bianche: nero */
+          else if (el0.closest('.hero-full, .row[data-mood="macchine"], .site-footer, .row-testata')) scuro = true;
+          else if (document.body.classList.contains('mood-macchine') && !el0.closest('.wrap > .row > .block')) scuro = true;
+          hd.classList.toggle('topbar-su-scuro', scuro);
+        }
         var ridotto = window.scrollY > 40;
         if (ridotto === ultimo) return;
         ultimo = ridotto;
@@ -1508,13 +2024,15 @@
     riempiTesti();
     schedeTesti();
     heroLiquido();
-    claimJelly();
     heroFluido();
     homeScena();
-    gruppoScia('azzurro');
-    gruppoScia('rosso');
-    gruppoScia('rosso', document.querySelector('.macchine-scena'));
-    carteJelly();
+    scenaInterna();
+    ingressi();
+    percorsoTappe();
+    formeLaterali();
+    carteTilt();
+    carteGelatina();
+    claimJelly();          /* per ultimo: i bersagli esistono tutti */
     ricercaScritta();
     decoraVI();
 

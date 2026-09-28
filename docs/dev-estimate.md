@@ -288,7 +288,7 @@ l'area 17, dove le pagine istituzionali possono condividere un layout in più.
 - ⚠ **Il rischio principale della home resta l'aggiunta di blocchi.** Ogni sezione in più è 2–4 h
   di sviluppo, QA responsive e manutenzione. Il brief ne prevede otto; con la fusione sono nove.
   Il decimo va discusso, non aggiunto.
-- <span>CONTENT TASK</span> i loghi di Bottoni e Tecno Clean non sono negli asset: servono in vettoriale.
+- <span>CONTENT TASK</span> i loghi di Bottoni e Tecno Clean sono in `assets/` solo in bitmap bianco: servono in vettoriale.
 - OP-07 aperto (peso e posizione del blocco 3): entrambe le alternative valgono circa 1 h.
 
 ---
