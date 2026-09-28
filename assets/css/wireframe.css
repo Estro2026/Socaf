@@ -1687,7 +1687,7 @@ a:hover > .formula-go::before,.btn-link:hover::before,.formula:hover .formula-go
   box-shadow:none;
 }
 .btn-ghost:hover{                 /* guadagna corpo: si riempie */
-  background-color:var(--btn);border-color:var(--btn);color:#fff;
+  background-color:var(--btn);border-color:var(--btn);color:var(--btn-testo,#fff);
   box-shadow:0 12px 22px -16px rgba(0,30,42,.3);
 }
 .btn-ghost:active{background-color:var(--btn-scuro);border-color:var(--btn-scuro);
@@ -1695,7 +1695,7 @@ a:hover > .formula-go::before,.btn-link:hover::before,.formula:hover .formula-go
 
 /* 35.3 Pieno — il più pesante: si può solo scurire */
 .btn-primary{
-  background-color:var(--btn);border-color:var(--btn);color:#fff;
+  background-color:var(--btn);border-color:var(--btn);color:var(--btn-testo,#fff);
   box-shadow:0 1px 0 rgba(255,255,255,.28) inset,0 12px 22px -14px rgba(0,30,42,.32);
 }
 .btn-primary:hover{
@@ -4856,3 +4856,691 @@ table.specs tbody tr > :first-child{border-radius:18px 0 0 18px !important;box-s
 table.specs tbody tr > :last-child{border-radius:0 18px 18px 0 !important;box-shadow:inset 0 1px 0 #fff,inset -1px 0 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(255,255,255,.5)}
 table.specs tbody tr:hover > *{background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.7)) !important}
 table.specs,table.specs thead,table.specs thead tr,table.specs thead th,.table-scroll{background:none !important;box-shadow:none !important;border:0 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+
+/* ================= 91. Pagine interne · intestazione sul colore =================
+   Stesse regole della home, applicate alle pagine ricorrenti (scheda macchina,
+   sottocategoria, famiglia, settore, categoria, servizi e azienda):
+   · l'intestazione vive sul fondo rosso, come la hero vive sul video;
+   · i contenuti stanno su lastre bianche piene (regola del vetro: il vetro è
+     solo per barra e controlli);
+   · pulsanti nelle tre varianti, ma invertiti sul rosso: il pieno è bianco. */
+
+/* --- 91.1 L'intestazione non è più una lastra bianca ------------------- */
+body:not([data-pagina="home"]) .wrap .block.pagina-intro{
+  background:none !important;box-shadow:none !important;border:0;
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  padding:clamp(4px,1vh,12px) 0 clamp(18px,3vh,32px)}
+body:not([data-pagina="home"]) .block.pagina-intro::after{content:none}
+.pagina-intro .block-id{color:rgba(255,255,255,.8)}
+.pagina-intro .kicker{color:rgba(255,255,255,.82)}
+.pagina-intro h1{
+  color:#fff;font-size:clamp(34px,4.6vw,64px);line-height:1.02;letter-spacing:-.03em;
+  background:linear-gradient(180deg,#ffffff 0%,#fff2f4 55%,#ffd7de 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 18px rgba(90,0,12,.4))}
+.pagina-intro .lede,.pagina-intro > p,.pagina-intro .small{color:rgba(255,255,255,.92)}
+.pagina-intro .small b,.pagina-intro .lede b{color:#fff}
+.pagina-intro a:not(.btn):not(.chip):not(.thumb){color:#fff;text-decoration:underline}
+
+/* --- 91.2 I riquadri dentro l'intestazione restano bianchi ------------- */
+.pagina-intro .gallery-main,.pagina-intro .thumb,.pagina-intro .ph{
+  background:#fff;border:0;
+  box-shadow:inset 0 1px 0 #fff,0 24px 44px -30px rgba(90,0,12,.6)}
+.pagina-intro .gallery-main{border-radius:26px}
+.pagina-intro .thumb{border-radius:14px}
+.pagina-intro .skel i{background:rgba(255,255,255,.35)}
+.pagina-intro .tags .tag{background:rgba(255,255,255,.92);border:0;color:#a31000}
+.pagina-intro .tag-nol{color:#0255b3}
+.pagina-intro .chip{background:rgba(255,255,255,.9);color:#001e2a;border:0}
+.pagina-intro .chip[aria-current="true"]{background:#001e2a;color:#fff}
+
+/* --- 91.3 Pulsanti sul colore: vedi 97, cambiano solo le variabili --- */
+
+/* --- 91.4 Briciole di pane e titolo: più aria sopra la pagina ---------- */
+body:not([data-pagina="home"]) .wrap > .crumbs{padding:clamp(10px,2vh,20px) 0 clamp(2px,1vh,10px)}
+body:not([data-pagina="home"]) .wrap > .row:first-of-type{margin-top:0}
+
+/* --- 91.5 Ritmo delle lastre: stesso respiro della home --------------- */
+body:not([data-pagina="home"]) .wrap > .row{margin-top:clamp(16px,3vh,34px)}
+body:not([data-pagina="home"]) .wrap > .row > .block > h2:first-of-type,
+body:not([data-pagina="home"]) .wrap > .row > .block > .grid + h2{margin-top:0}
+
+/* --- 91.6 (assorbita nella 97: i pulsanti sul colore usano le variabili) */
+
+/* --- 91.7 I riquadri « servono informazioni » sul rosso --------------- */
+.pagina-intro .need-info{
+  background:rgba(255,255,255,.9);border:0;color:#a31000;
+  box-shadow:0 18px 34px -26px rgba(90,0,12,.6)}
+.pagina-intro .need-info b{color:#e4002b}
+
+/* --- 91.8 Miniature della galleria: una riga sola --------------------- */
+.pagina-intro .thumbs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:10px}
+.pagina-intro .thumbs::-webkit-scrollbar{display:none}
+.pagina-intro .thumb{flex:0 0 auto;width:82px;height:66px}
+/* i pulsanti sul colore: vedi 97 */
+
+/* ===== 92. Testata pagine interne: via lo spazio vuoto sopra il titolo ===== */
+body.pagina-interna .row-testata{min-height:0 !important;display:block !important}
+body.pagina-interna .wrap > .row.row-testata > .block{
+  padding-block:clamp(10px,1.6vh,22px) clamp(26px,5vh,64px) !important}
+body.pagina-interna .row-testata + .row{padding-top:0}
+/* 92.1 breadcrumb: una riga sola, niente testo che va a capo verticalmente */
+body > .wrap > .crumbs{flex-wrap:nowrap;align-items:center;column-gap:6px;
+  overflow:hidden;padding-block:12px 4px}
+body > .wrap > .crumbs > *{white-space:nowrap;flex:0 0 auto}
+body > .wrap > .crumbs > :last-child{flex:0 1 auto;overflow:hidden;text-overflow:ellipsis}
+
+/* 92.2 testata interna a tutta larghezza (scheda macchina e analoghe) */
+.pagina-intro .intro-testata{display:grid;gap:10px;max-width:none;margin:0 0 clamp(22px,3vw,40px)}
+.pagina-intro .intro-testata h1{font-size:clamp(38px,5.6vw,82px);line-height:.98;letter-spacing:-.035em;
+  max-width:16ch}
+.pagina-intro .intro-testata .lede{max-width:56ch;font-size:clamp(15px,1.25vw,18px);line-height:1.55}
+.pagina-intro .intro-testata .tags{margin-top:2px}
+.pagina-intro .grid-2{align-items:start}
+
+/* 92.3 titolo interno: gradiente meno profondo, resta leggibile anche su 3 righe */
+.pagina-intro h1,.pagina-intro .intro-testata h1{
+  background:linear-gradient(180deg,#ffffff 0%,#fff6f7 60%,#ffe6ea 100%);
+  filter:drop-shadow(0 2px 14px rgba(90,0,12,.32))}
+.pagina-intro h1,.pagina-intro .intro-testata h1{
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* 92.4 testata a due colonne: titolo e lede allineati in alto, niente buco sopra il titolo */
+body.pagina-interna .wrap > .row.row-testata > .block{align-items:start !important;column-gap:clamp(24px,4vw,64px)}
+body.pagina-interna .row-testata > .block > h1 + .lede{align-self:start !important;
+  max-width:46ch;padding-top:.35em}
+
+/* ===== 93. Testata azzurra (mondo macchine e prodotti) ===================== */
+/* 93.1 fondo: stessa ricetta della testata rossa, con i soli blu della VI */
+.mood .blu{background:
+  radial-gradient(900px 620px at 85% 0%,rgba(79,189,247,.85),transparent 62%),
+  radial-gradient(1000px 700px at 0% 100%,rgba(0,30,42,.95),transparent 60%),
+  radial-gradient(700px 500px at 50% 50%,rgba(0,133,207,.35),transparent 70%),
+  linear-gradient(160deg,#00506f,#0085cf 52%,#003a52)}
+body.mood-blu .mood .blu{opacity:1}
+body.mood-blu{--glass:rgba(255,255,255,.16);--glass-strong:rgba(255,255,255,.26)}
+
+/* 93.2 titolo e testi della testata: luce fredda al posto di quella calda */
+body.mood-blu .pagina-intro h1,body.mood-blu .pagina-intro .intro-testata h1{
+  background:linear-gradient(180deg,#ffffff 0%,#f4fbff 60%,#dceffd 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(0,30,42,.38))}
+body.mood-blu .pagina-interna .crumbs,body.mood-blu .crumbs,
+body.mood-blu .crumbs a,body.mood-blu .crumbs span{color:#fff;text-shadow:0 1px 8px rgba(0,30,42,.35)}
+body.mood-blu .pagina-intro .kicker{color:rgba(255,255,255,.82)}
+body.mood-blu .pagina-intro .tag,body.mood-blu .pagina-intro .chip{border-color:rgba(255,255,255,.55)}
+
+/* ===== 95. Macchine correlate: card larghe, stessa materia della home ===== */
+/* nella colonna dello split 4 colonne davano schede da 207px. Due card
+   orizzontali respirano; la superficie resta .card-fondo (o la sagoma di
+   gelatina), così restano la luce al mouse e l'inclinazione della home. */
+[data-m-correlate]{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:18px}
+[data-m-correlate] .card{display:grid;grid-template-columns:150px 1fr;
+  align-items:stretch;min-height:158px;overflow:visible;background:transparent}
+[data-m-correlate] .card-fondo{inset:0}
+[data-m-correlate] .card-media{grid-column:1;margin:0;height:100%;border-radius:18px 0 0 18px;
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:rgba(0,133,207,.06)}
+[data-m-correlate] .card-media img{width:100%;height:100%;object-fit:contain;padding:10px}
+[data-m-correlate] .card-body{grid-column:2;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+[data-m-correlate] .card-name{font-size:17px;line-height:1.2;letter-spacing:-.01em}
+[data-m-correlate] .card-desc{font-size:13.5px;line-height:1.45;margin:0;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+[data-m-correlate] .card-link{margin-top:auto;align-self:flex-start}
+@media (max-width:900px){[data-m-correlate]{grid-template-columns:1fr !important}}
+@media (max-width:560px){[data-m-correlate] .card{grid-template-columns:1fr}
+  [data-m-correlate] .card-media{grid-column:1;min-height:170px;border-radius:18px 18px 0 0}
+  [data-m-correlate] .card-body{grid-column:1}}
+
+/* ===== 96. Mondo azzurro: header, titoli, form e stati come in home ======= */
+
+/* 96.1 header sul blu: vetro vero e voci bianche (sul rosso resta la tendina
+   bianca, qui il fondo è scuro e il bianco è più leggibile) */
+body[data-testata="blu"] .hdr-shell,
+body[data-testata="blu"] .site-header.su-hero .hdr-shell{
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.10)) !important;
+  backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),inset 0 0 0 1px rgba(255,255,255,.22),
+             0 18px 40px -26px rgba(0,30,42,.55) !important}
+body[data-testata="blu"] .nav-btn,body[data-testata="blu"] .nav-btn:link,
+body[data-testata="blu"] .nav-btn:visited,body[data-testata="blu"] .topbar a{color:#fff}
+body[data-testata="blu"] .nav-btn .caret{border-right-color:#fff !important;border-bottom-color:#fff !important}
+body[data-testata="blu"] .nav-btn:hover .caret,
+body[data-testata="blu"] .nav-btn[aria-expanded="true"] .caret{border-color:#4fbdf7 !important}
+body[data-testata="blu"] .nav-btn::before{background-color:rgba(255,255,255,.14)}
+body[data-testata="blu"] .nav-btn:hover{color:#fff}
+body[data-testata="blu"] .hdr-search{background:rgba(255,255,255,.14) !important;color:#fff}
+body[data-testata="blu"] .hdr-search::placeholder{color:rgba(255,255,255,.7)}
+body[data-testata="blu"] .site-header .logo path,
+body[data-testata="blu"] .site-header .logo text{fill:#fff}
+
+/* 96.2 titoli che stanno sul colore: bianchi come in hero */
+body[data-testata="blu"] .pagina-intro .kicker,
+body[data-testata="blu"] .pagina-intro .lede,
+body[data-testata="blu"] .pagina-intro > p,
+body[data-testata="blu"] .pagina-intro .small{color:rgba(255,255,255,.92)}
+body[data-testata="blu"] .crumbs a:hover{color:#4fbdf7}
+
+/* 96.3 form: stessa materia del form in home — lastra glossy, campi in vetro
+   chiaro, testo scuro (contrasto AA), anello di focus azzurro VI */
+/* (la lastra non è più del form ma del blocco che lo contiene: vedi 102b) */
+.sticky-col .field input,.sticky-col .field select,.sticky-col .field textarea{
+  border:0;border-radius:14px;background:rgba(255,255,255,.78);
+  box-shadow:inset 0 1px 2px rgba(0,30,42,.08),inset 0 0 0 1px rgba(0,30,42,.08);
+  transition:box-shadow .25s ease,background-color .25s ease}
+.sticky-col .field input:focus,.sticky-col .field select:focus,.sticky-col .field textarea:focus{
+  outline:0;background:#fff;
+  box-shadow:inset 0 0 0 1.5px rgba(0,133,207,.55),0 0 0 4px rgba(79,189,247,.18)}
+.sticky-col .field label,.sticky-col .field > span{color:#33434b}
+
+/* ===== 97. Pulsanti sul colore: stessi stati della home, altro colore ====
+   Il sistema dei pulsanti (35) ha già vetro → contorno → pieno con hover,
+   pressione e anello di focus. Sulla testata non si riscrivono gli stati:
+   si cambia solo la terna di variabili, così il comportamento resta identico
+   a quello della home ovunque. */
+.pagina-intro{--btn:#fff;--btn-scuro:#ffeef1;--btn-rgb:255,255,255;--btn-testo:#e4002b}
+body[data-testata="blu"] .pagina-intro{--btn:#fff;--btn-scuro:#eaf6fe;--btn-rgb:255,255,255;--btn-testo:#00506f}
+.pagina-intro .btn-glass{color:#fff}
+.pagina-intro .btn-ghost{color:#fff;border-color:rgba(255,255,255,.75)}
+.pagina-intro .btn-primary{box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 14px 28px -16px rgba(0,30,42,.55)}
+.pagina-intro .btn:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.55)}
+
+/* ===== 98. Fondo azzurro delle pagine del mondo macchine ================= */
+body[data-testata="blu"]:not([data-pagina="home"]){
+  background:
+    radial-gradient(1100px 760px at 88% 0%,#0085cf,transparent 70%),
+    radial-gradient(1200px 820px at 0% 100%,rgba(79,189,247,.95),transparent 68%),
+    radial-gradient(700px 480px at 30% 35%,rgba(255,255,255,.35),transparent 70%),
+    linear-gradient(160deg,#00506f,#0085cf 55%,#003a52);
+  background-attachment:fixed}
+body[data-testata="blu"] .pagina-intro h1,
+body[data-testata="blu"] .pagina-intro .intro-testata h1{
+  background:linear-gradient(180deg,#ffffff 0%,#f4fbff 60%,#dceffd 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(0,30,42,.38))}
+body[data-testata="blu"] .crumbs,body[data-testata="blu"] .crumbs a,
+body[data-testata="blu"] .crumbs span{color:#fff;text-shadow:0 1px 8px rgba(0,30,42,.35)}
+
+/* le variabili del pulsante vanno messe sul pulsante: .btn le ridichiara su
+   se stesso, quindi l'ereditarietà dal contenitore non basterebbe */
+.pagina-intro .btn{--btn:#fff;--btn-scuro:#ffeef1;--btn-rgb:255,255,255;--btn-testo:#e4002b}
+body[data-testata="blu"] .pagina-intro .btn{--btn:#fff;--btn-scuro:#eaf6fe;--btn-rgb:255,255,255;--btn-testo:#00506f}
+
+/* ===== 99. Pulsanti della testata: stessa materia della 103, tinta bianca ==
+   La 103 dà ai pulsanti un vetro tinto con !important. Sulla testata il fondo
+   è già il colore del brand, quindi la tinta è il bianco; gli stati (riposo →
+   hover → pressione → focus) restano quelli della home, solo invertiti. */
+.pagina-intro .btn-primary,.pagina-intro a.btn-primary{
+  background:linear-gradient(180deg,#ffffff,#f7fbff 60%,#eaf4fb) !important;
+  color:var(--btn-testo,#e4002b) !important;
+  backdrop-filter:none !important;-webkit-backdrop-filter:none !important;
+  box-shadow:inset 0 1px 0 #fff,0 12px 26px -14px rgba(0,30,42,.55) !important}
+.pagina-intro .btn-primary:hover,.pagina-intro a.btn-primary:hover{
+  background:#ffffff !important;
+  box-shadow:inset 0 1px 0 #fff,0 16px 32px -14px rgba(0,30,42,.6) !important}
+.pagina-intro .btn-primary:active,.pagina-intro a.btn-primary:active{
+  background:linear-gradient(180deg,#eef6fc,#e2eef7) !important;
+  box-shadow:inset 0 3px 8px rgba(0,30,42,.22) !important}
+
+.pagina-intro .btn-glass,.pagina-intro a.btn-glass,
+.pagina-intro .btn-ghost,.pagina-intro a.btn-ghost{
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.10)) !important;
+  color:#fff !important;
+  backdrop-filter:blur(18px) saturate(160%) !important;-webkit-backdrop-filter:blur(18px) saturate(160%) !important;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),inset 0 1px 0 rgba(255,255,255,.55),
+             0 10px 24px -16px rgba(0,30,42,.5) !important}
+.pagina-intro .btn-glass:hover,.pagina-intro a.btn-glass:hover,
+.pagina-intro .btn-ghost:hover,.pagina-intro a.btn-ghost:hover{
+  background:#ffffff !important;color:var(--btn-testo,#e4002b) !important;
+  box-shadow:inset 0 0 0 1.5px #fff,0 14px 28px -16px rgba(0,30,42,.55) !important}
+.pagina-intro .btn-glass:active,.pagina-intro a.btn-glass:active,
+.pagina-intro .btn-ghost:active,.pagina-intro a.btn-ghost:active{
+  background:linear-gradient(180deg,#eef6fc,#e2eef7) !important;
+  box-shadow:inset 0 3px 8px rgba(0,30,42,.2) !important}
+.pagina-intro .btn:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.6) !important}
+
+/* ===== 100. La scena liquida della hero anche sulle testate interne ====== */
+.intro-scena{position:absolute;z-index:-1;left:calc(50% - 50vw);width:100vw;
+  top:calc(-1 * clamp(90px,14vh,150px));bottom:calc(-1 * clamp(40px,8vh,90px));
+  overflow:hidden;pointer-events:auto;touch-action:none;
+  -webkit-mask:linear-gradient(180deg,#000 0,#000 62%,transparent 100%);
+          mask:linear-gradient(180deg,#000 0,#000 62%,transparent 100%)}
+.pagina-intro{position:relative}
+.intro-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;
+  opacity:.9;touch-action:none}
+/* il contenuto della testata resta sopra la scena e conserva i suoi eventi */
+.pagina-intro > *:not(.intro-scena){position:relative;z-index:1}
+@media (prefers-reduced-motion:reduce){.intro-scena{display:none}}
+@media (prefers-reduced-transparency:reduce){.intro-scena{display:none}}
+/* 100.1 la scena accompagna solo l'intestazione, poi lascia il fondo del brand */
+.intro-scena{bottom:auto;height:clamp(380px,48vh,560px);
+  -webkit-mask:linear-gradient(180deg,#000 0,#000 46%,transparent 100%);
+          mask:linear-gradient(180deg,#000 0,#000 46%,transparent 100%)}
+.intro-canvas{opacity:.5;mix-blend-mode:soft-light}
+/* 100.2 sul rosso il fluido è più discreto: il fondo è già molto saturo */
+body:not([data-testata="blu"]) .intro-canvas{opacity:.3}
+
+/* ===== 101. La scena liquida diventa tutto il fondo della pagina ========= */
+/* prima era una fascia dietro la testata e lasciava vuoti in alto e ai lati:
+   ora è fissa a tutto schermo, come il fondo della hero in home */
+.intro-scena{position:fixed;inset:0;top:0;left:0;width:100vw;height:100vh;
+  height:100dvh;z-index:-1;margin:0;
+  -webkit-mask:none !important;mask:none !important}
+.intro-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;
+  opacity:.55;mix-blend-mode:soft-light}
+body:not([data-testata="blu"]) .intro-canvas{opacity:.34}
+.pagina-intro > *:not(.intro-scena){position:static;z-index:auto}
+
+/* 101.1 header e voci: esattamente come in home, niente variante blu */
+body[data-testata="blu"] .hdr-shell,
+body[data-testata="blu"] .site-header.su-hero .hdr-shell{
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.84)) !important;
+  backdrop-filter:var(--vetro-blur);-webkit-backdrop-filter:var(--vetro-blur);
+  box-shadow:var(--vetro-bordo),0 18px 40px -30px rgba(0,30,42,.4) !important}
+body[data-testata="blu"] .nav-btn,body[data-testata="blu"] .nav-btn:link,
+body[data-testata="blu"] .nav-btn:visited{color:#001e2a}
+body[data-testata="blu"] .nav-btn .caret{border-right-color:#001e2a !important;border-bottom-color:#001e2a !important}
+body[data-testata="blu"] .nav-btn:hover .caret,
+body[data-testata="blu"] .nav-btn[aria-expanded="true"] .caret{border-color:#e4002b !important}
+body[data-testata="blu"] .nav-btn::before{background-color:rgba(0,30,42,.055)}
+body[data-testata="blu"] .hdr-search{background:rgba(0,30,42,.06) !important;color:#001e2a}
+body[data-testata="blu"] .hdr-search::placeholder{color:rgba(0,30,42,.55)}
+body[data-testata="blu"] .site-header .logo path,
+body[data-testata="blu"] .site-header .logo text{fill:initial}
+
+/* ===== 102b. Form della colonna laterale: come i form delle altre pagine ==
+   Altrove il modulo non ha un rettangolo suo: la lastra di vetro è il blocco
+   che lo contiene, e i campi sono vetro chiaro. Qui la colonna sticky non
+   riceveva quella lastra, così il form sembrava una scatola bianca a parte. */
+.sticky-col > .block{
+  position:relative;isolation:isolate;border-radius:28px;
+  background:linear-gradient(170deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.80) 38%,
+             rgba(255,255,255,.74) 72%,rgba(255,255,255,.84) 100%) !important;
+  backdrop-filter:blur(30px) saturate(150%) !important;-webkit-backdrop-filter:blur(30px) saturate(150%) !important;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6),
+             0 30px 70px -38px rgba(0,30,42,.6) !important;border:0 !important}
+.sticky-col .form{background:none !important;border:0 !important;box-shadow:none !important;
+  padding:0 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+
+/* ===== 103b. La luce che segue il mouse sulle card, finalmente visibile ===
+   Il bagliore era bianco al 55% sopra una card bianca: c'era ma non si vedeva.
+   Ora il nucleo resta bianco e l'alone prende il colore della zona, così il
+   "vedo e non vedo" si legge davvero senza toccare i testi. */
+.card .card-fondo::after,.formula .card-fondo::after,.sede .card-fondo::after{
+  background:
+    radial-gradient(190px 150px at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.95),transparent 60%),
+    radial-gradient(300px 230px at var(--gx,50%) var(--gy,50%),rgba(79,189,247,.30),transparent 72%);
+  transition:opacity .28s ease}
+body:not([data-testata="blu"]) .card .card-fondo::after,
+body:not([data-testata="blu"]) .formula .card-fondo::after,
+body:not([data-testata="blu"]) .sede .card-fondo::after{
+  background:
+    radial-gradient(190px 150px at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.95),transparent 60%),
+    radial-gradient(300px 230px at var(--gx,50%) var(--gy,50%),rgba(243,63,84,.26),transparent 72%)}
+.card.is-tilt .card-fondo,.formula.is-tilt .card-fondo,.sede.is-tilt .card-fondo{
+  box-shadow:inset 0 1px 0 #fff,0 2px 6px rgba(0,30,42,.10),0 34px 56px -30px rgba(0,30,42,.5)}
+
+/* ===== 104b. Più aria nelle card correlate =============================== */
+[data-m-correlate]{gap:22px}
+[data-m-correlate] .card{grid-template-columns:168px 1fr;min-height:186px}
+[data-m-correlate] .card-media{border-radius:20px 0 0 20px}
+[data-m-correlate] .card-media img{padding:16px}
+[data-m-correlate] .card-body{padding:22px 24px;gap:9px}
+[data-m-correlate] .card-name{font-size:18px}
+[data-m-correlate] .card-desc{font-size:14px;line-height:1.5}
+
+/* ===== 105b. Il fluido si deve vedere muovere ============================
+   Con opacità .5 in soft-light sopra il gradiente del fondo il movimento
+   spariva: la pagina sembrava ferma. Ora il canvas è il fondo (pieno, blend
+   normale) e sopra passa un velo del colore del brand in multiply: il blu
+   resta quello della VI e le onde si vedono scorrere. */
+.intro-canvas{opacity:1 !important;mix-blend-mode:normal !important}
+.intro-scena::after{content:"";position:absolute;inset:0;pointer-events:none;
+  mix-blend-mode:multiply;
+  background:linear-gradient(160deg,rgba(0,80,111,.72),rgba(0,133,207,.5) 52%,rgba(0,58,82,.78))}
+body:not([data-testata="blu"]) .intro-scena::after{
+  background:linear-gradient(160deg,rgba(163,16,0,.62),rgba(228,0,43,.55) 52%,rgba(184,0,29,.72))}
+
+/* ===== 106b. Testata scheda macchina: vetro cannettato come le altre =====
+   Stessa materia della .row-testata delle altre pagine interne (113.2): un
+   fondale sfocato nei colori VI e sopra le canne di vetro. Qui senza
+   backdrop-filter — la lastra è larga quanto la pagina e il filtro sul
+   retro mandava in crisi la composizione: le canne sono disegnate, non
+   campionate, e il risultato a schermo è lo stesso. */
+.pagina-intro.ha-cannette{position:relative}
+.pagina-intro.ha-cannette::before,.pagina-intro.ha-cannette::after{
+  content:"";position:absolute;z-index:-1;left:calc(50% - 50vw);width:100vw;
+  top:calc(-1 * var(--header-h,127px) - 80px);height:calc(100% + var(--header-h,127px) + 80px);
+  pointer-events:none}
+.pagina-intro.ha-cannette::before{
+  filter:blur(22px);opacity:.75;
+  background:
+    radial-gradient(34% 48% at 12% 18%,#9adcff,rgba(79,189,247,.85) 38%,transparent 72%),
+    radial-gradient(40% 60% at 84% 60%,rgba(0,30,42,.85),rgba(0,58,82,.4) 48%,transparent 76%),
+    radial-gradient(28% 42% at 96% 8%,rgba(2,85,179,.75),transparent 70%),
+    radial-gradient(34% 50% at 42% 94%,rgba(0,80,111,.9),transparent 72%),
+    linear-gradient(160deg,#0085cf,#003a52);
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%);
+          mask:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%)}
+.pagina-intro.ha-cannette::after{
+  mix-blend-mode:overlay;opacity:.9;
+  background:repeating-linear-gradient(90deg,
+    rgba(255,255,255,.55) 0,rgba(255,255,255,.18) 1px,
+    rgba(79,189,247,.22) 1.6px,rgba(255,255,255,0) 3px,
+    rgba(255,255,255,0) 4.6px,rgba(0,30,42,.07) 5.6px,
+    rgba(243,63,84,.18) 6.3px,rgba(255,255,255,.55) 7px);
+  -webkit-mask:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 28%,#000 60%,#000 100%),
+               linear-gradient(180deg,#000 0%,#000 66%,transparent 100%);
+  -webkit-mask-composite:source-in;
+          mask:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 28%,#000 60%,#000 100%),
+               linear-gradient(180deg,#000 0%,#000 66%,transparent 100%);
+          mask-composite:intersect}
+/* 106b.1 le canne come nella reference: passo largo, luce morbida, iridescenza
+   appena accennata, e su tutta la larghezza (non solo a destra, dove finivano
+   sotto il form e non si vedevano) */
+.pagina-intro.ha-cannette::after{
+  opacity:1;mix-blend-mode:soft-light;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.00) 0px,rgba(255,255,255,.55) 5px,rgba(255,255,255,.75) 8px,
+      rgba(255,255,255,.20) 12px,rgba(0,30,42,.28) 17px,rgba(0,30,42,.38) 20px,
+      rgba(255,255,255,.00) 24px),
+    repeating-linear-gradient(90deg,
+      rgba(79,189,247,.18) 0px,rgba(255,255,255,0) 7px,
+      rgba(243,63,84,.12) 13px,rgba(255,255,255,0) 24px);
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 58%,transparent 92%);
+          mask:linear-gradient(180deg,#000 0%,#000 58%,transparent 92%);
+  -webkit-mask-composite:source-over;mask-composite:add}
+
+/* ===== 107b. Vetro cannettato come fondo della pagina ====================
+   La reference: un fondale blu sfocato e davanti una lastra di vetro a canne
+   verticali che scompone la luce. Due strati disegnati, senza blend e senza
+   backdrop-filter, così la resa è la stessa su tutti i browser. */
+.intro-vetro{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(38% 48% at 10% 14%,#9adcff,rgba(79,189,247,.9) 40%,transparent 74%),
+    radial-gradient(44% 62% at 86% 58%,rgba(0,30,42,.9),rgba(0,58,82,.45) 48%,transparent 78%),
+    radial-gradient(30% 44% at 98% 6%,rgba(2,85,179,.8),transparent 72%),
+    radial-gradient(36% 52% at 44% 96%,rgba(0,80,111,.95),transparent 74%),
+    linear-gradient(160deg,#0085cf,#003a52)}
+.intro-vetro::before{content:"";position:absolute;inset:-8%;
+  background:inherit;filter:blur(38px);opacity:.9}
+.intro-vetro::after{content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0) 0px,rgba(255,255,255,.22) 5px,rgba(255,255,255,.34) 9px,
+      rgba(255,255,255,.06) 13px,rgba(0,30,42,.16) 18px,rgba(0,30,42,.22) 21px,
+      rgba(255,255,255,0) 26px),
+    repeating-linear-gradient(90deg,
+      rgba(79,189,247,.14) 0px,rgba(255,255,255,0) 8px,
+      rgba(243,63,84,.08) 15px,rgba(255,255,255,0) 26px)}
+/* 102b.1 la lastra aveva preso il posto del form ma non il suo respiro:
+   senza padding orizzontale campi e pulsanti finivano a filo del vetro e
+   sembravano tagliati di lato */
+.sticky-col > .block{padding:clamp(26px,2.4vw,36px) !important}
+.sticky-col > .block > .block-id{margin-bottom:10px}
+/* 107b.1 canne più morbide: nella reference la luce è diffusa, non incisa */
+.intro-vetro::after{
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0) 0px,rgba(255,255,255,.15) 6px,rgba(255,255,255,.26) 10px,
+      rgba(255,255,255,.04) 15px,rgba(0,30,42,.09) 20px,rgba(0,30,42,.14) 24px,
+      rgba(255,255,255,0) 30px),
+    repeating-linear-gradient(90deg,
+      rgba(79,189,247,.10) 0px,rgba(255,255,255,0) 9px,
+      rgba(243,63,84,.06) 17px,rgba(255,255,255,0) 30px)}
+
+/* ===== 117b. Velo sulle altre schede anche fuori da .pagina-interna ======
+   La 115 dava questo comportamento solo a body.pagina-interna: la scheda
+   macchina non ha .row-testata, quindi non riceve quella classe e restava
+   senza. Stessa ricetta, stesso velo di vetro della sezione Macchine. */
+body:not([data-pagina="home"]):not(.pagina-interna)
+  :is(.grid,.sedi,.promo-pair,.formule,.board-track,.thumbs) > :is(.card,.sede,.formula,.promo){position:relative}
+body:not([data-pagina="home"]):not(.pagina-interna)
+  :is(.grid,.sedi,.promo-pair,.formule,.board-track) > :is(.card,.sede,.formula,.promo)::before{
+  content:"" !important;display:block !important;position:absolute;inset:0;z-index:5;
+  pointer-events:none;border-radius:inherit;width:auto;height:auto;border:0;clip-path:none;transform:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.06) 40%,rgba(255,255,255,.04) 100%);
+  backdrop-filter:blur(2px) saturate(115%);-webkit-backdrop-filter:blur(2px) saturate(115%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.3);
+  opacity:0;transition:opacity .45s ease}
+body:not([data-pagina="home"]):not(.pagina-interna)
+  :is(.grid,.sedi,.promo-pair,.formule,.board-track):has(> :is(.card,.sede,.formula,.promo):hover)
+  > :is(.card,.sede,.formula,.promo):not(:hover)::before{opacity:1}
+
+/* ===== 118b. Contenuto della scheda macchina sulle stesse lastre di vetro ==
+   Le altre pagine interne mettono ogni sezione su una lastra (4411). La
+   scheda macchina non ha .row, quindi i suoi blocchi restavano nudi sul
+   colore: titoli e testi scuri su fondo blu, card senza appoggio. */
+body[data-testata] .wrap .block:not(.pagina-intro){
+  position:relative;isolation:isolate;border-radius:28px;
+  background:var(--vetro) !important;
+  backdrop-filter:var(--vetro-blur) !important;-webkit-backdrop-filter:var(--vetro-blur) !important;
+  box-shadow:var(--vetro-bordo),var(--vetro-ombra) !important;border:0 !important;
+  padding:clamp(24px,3vw,44px);margin-top:clamp(16px,2.4vh,28px)}
+body[data-testata] .wrap .block:not(.pagina-intro)::after{content:none}
+body[data-testata] .wrap .block:not(.pagina-intro) :is(p,li,dd,td,.small){color:#2c3a42}
+/* 119b. Correlate: due colonne solo se c'è spazio davvero (il contenitore è
+   la colonna dello split, non la finestra: le media query sulla viewport
+   sbagliavano e le card si schiacciavano a 189px) */
+[data-m-correlate]{grid-template-columns:repeat(auto-fit,minmax(330px,1fr)) !important}
+[data-m-correlate] .card{grid-template-columns:minmax(110px,36%) minmax(0,1fr)}
+[data-m-correlate] .card-media,[data-m-correlate] .card-media.ph{
+  aspect-ratio:auto;min-height:0;height:100%;width:auto}
+@media (max-width:560px){[data-m-correlate] .card{grid-template-columns:1fr}
+  [data-m-correlate] .card-media,[data-m-correlate] .card-media.ph{min-height:170px}}
+/* 107b.2 canne più discrete: luce appena accennata, ombre quasi assenti,
+   il blu del fondo resta il protagonista */
+.intro-vetro::before{opacity:.6}
+.intro-vetro::after{opacity:.5;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0) 0px,rgba(255,255,255,.07) 7px,rgba(255,255,255,.13) 12px,
+      rgba(255,255,255,.02) 18px,rgba(0,30,42,.04) 24px,rgba(0,30,42,.06) 28px,
+      rgba(255,255,255,0) 36px),
+    repeating-linear-gradient(90deg,
+      rgba(79,189,247,.05) 0px,rgba(255,255,255,0) 11px,
+      rgba(243,63,84,.03) 20px,rgba(255,255,255,0) 36px)}
+
+/* ===== 120b. Pulsanti della testata = pulsanti della home ================
+   Niente più inversione in bianco: colori e stati sono quelli della home.
+   Pieno = vetro tinto Socaf Red (103); vetro = la lastra bianca trasparente
+   che in home sta sopra il video (35.4). Gli stati restano quelli di sistema:
+   hover, pressione scale(.96), anello di focus. */
+.pagina-intro .btn{--btn:var(--red);--btn-scuro:#b8001d;--btn-rgb:228,0,43;--btn-testo:#fff}
+.pagina-intro .btn-primary,.pagina-intro a.btn-primary{
+  background:linear-gradient(180deg,rgba(243,63,84,.92),rgba(228,0,43,.88) 55%,rgba(200,0,36,.9)) !important;
+  color:#fff !important;
+  backdrop-filter:blur(20px) saturate(170%) !important;-webkit-backdrop-filter:blur(20px) saturate(170%) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),inset 0 1px 0 rgba(255,255,255,.55),
+             0 10px 24px -14px rgba(163,16,0,.55) !important}
+.pagina-intro .btn-primary:hover,.pagina-intro a.btn-primary:hover{
+  background:linear-gradient(180deg,rgba(245,83,106,.95),rgba(234,10,51,.92) 55%,rgba(210,0,38,.92)) !important;
+  color:#fff !important}
+.pagina-intro .btn-primary:active,.pagina-intro a.btn-primary:active{
+  background:linear-gradient(180deg,rgba(210,0,38,.95),rgba(184,0,29,.95)) !important;
+  box-shadow:inset 0 3px 10px rgba(0,30,42,.3) !important}
+
+.pagina-intro .btn-glass,.pagina-intro a.btn-glass,
+.pagina-intro .btn-ghost,.pagina-intro a.btn-ghost{
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.10)) !important;
+  color:#fff !important;
+  backdrop-filter:saturate(180%) blur(14px) !important;-webkit-backdrop-filter:saturate(180%) blur(14px) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 1px rgba(255,255,255,.35),
+             0 10px 20px -16px rgba(0,30,42,.28) !important}
+.pagina-intro .btn-glass:hover,.pagina-intro a.btn-glass:hover,
+.pagina-intro .btn-ghost:hover,.pagina-intro a.btn-ghost:hover{
+  background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.16)) !important;
+  color:#fff !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 0 0 1px rgba(255,255,255,.55),
+             0 14px 26px -18px rgba(0,30,42,.32) !important}
+.pagina-intro .btn-glass:active,.pagina-intro a.btn-glass:active,
+.pagina-intro .btn-ghost:active,.pagina-intro a.btn-ghost:active{
+  background:rgba(255,255,255,.26) !important;
+  box-shadow:inset 0 2px 6px rgba(0,30,42,.22) !important}
+.pagina-intro .btn:focus-visible{box-shadow:0 0 0 3px rgba(var(--btn-rgb),.35) !important}
+
+/* ===== 121b. Header sulle pagine col fondo di colore ======================
+   1. le due voci sopra la nav stanno sul colore: bianche, come in home
+      sopra il video (il controllo automatico del contrasto non riconosce
+      questo fondo e le lasciava scure) */
+body[data-testata] .topbar a,body[data-testata] .topbar a:link,
+body[data-testata] .topbar a:visited,body[data-testata] .topbar > *{color:#fff}
+body[data-testata] .topbar a:hover{color:#fff;text-decoration-color:rgba(255,255,255,.6)}
+/* 2. voci con tendina: in hover la freccia torna rossa come in home,
+      non azzurra */
+body[data-testata="blu"] .nav-btn:hover .caret,
+body[data-testata="blu"] .nav-btn[aria-expanded="true"] .caret{border-color:#e4002b !important}
+body[data-testata] .nav-btn:hover,body[data-testata] .nav-btn[aria-expanded="true"]{color:#001e2a}
+body[data-testata] .nav-btn:hover::before,
+body[data-testata] .nav-btn[aria-expanded="true"]::before{background-color:rgba(0,30,42,.075)}
+
+/* ===== 122b. Galleria e leggibilità del form ============================= */
+/* 1. le miniature dividono in parti uguali la larghezza della foto grande,
+      mantenendo le proporzioni (prima erano 82px fissi e avanzava spazio) */
+.pagina-intro .thumbs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);
+  gap:clamp(8px,1vw,14px);overflow:visible}
+.pagina-intro .thumb{width:auto;height:auto;aspect-ratio:82/66;flex:none}
+.pagina-intro .thumb img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+
+/* 2. testi del form: sul vetro traslucido i grigi chiari sparivano */
+.sticky-col .form .form-sub{color:#2c3a42}
+.sticky-col .field label,.sticky-col .field > span{color:#22313a}
+.sticky-col .consent,.sticky-col .consent label,.sticky-col .consent span{
+  color:#2c3a42;font-size:13px;line-height:1.45}
+.sticky-col .form .small{color:#2c3a42}
+.sticky-col .form .small b,.sticky-col .form a{color:#001e2a}
+/* 122b.1 consenso: una riga di testo piena, non una colonnina stretta */
+.sticky-col .consent{display:flex;align-items:flex-start;gap:10px;grid-column:1/-1}
+.sticky-col .consent > :last-child{flex:1 1 auto;min-width:0}
+.sticky-col .consent input{flex:none;margin-top:2px}
+/* 122b.2 il testo del consenso è un nodo di testo che comincia già con uno
+   spazio: sommato al gap la casella restava lontana */
+.sticky-col .consent{gap:5px}
+.sticky-col .consent input{margin-top:1px}
+
+/* ===== 123b. Galleria senza foto: dirlo, non lasciare un riquadro vuoto ===
+   Su molte delle 119 schede socaf.it non ha immagini. Finora restava un
+   rettangolo bianco alto quanto una foto, che sembra un contenitore vuoto:
+   diventa un riquadro « servono informazioni », più basso e con la scritta
+   in chiaro. */
+.pagina-intro .gallery-main.ph{
+  aspect-ratio:16/9;max-height:300px;
+  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.58));
+  border:1.5px dashed rgba(0,30,42,.28);border-radius:26px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  color:#2c3a42;font-size:14px;font-weight:600;text-align:center;padding:22px}
+.pagina-intro .gallery-main.ph::before{
+  content:"Servono informazioni";display:block;
+  font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  color:#e4002b}
+.pagina-intro .gallery-main.ph::after{content:none !important}
+.pagina-intro .thumb.ph{aspect-ratio:16/10;background:rgba(255,255,255,.5);
+  border:1.5px dashed rgba(0,30,42,.22);box-shadow:none;
+  color:rgba(0,30,42,.45);font-size:11px;display:flex;align-items:center;justify-content:center}
+/* 119b.1 correlate: immagine più generosa (36% → 44% della card) */
+[data-m-correlate] .card{grid-template-columns:minmax(140px,44%) minmax(0,1fr);min-height:200px}
+[data-m-correlate] .card-media img{padding:12px}
+
+/* 123b.1 il riquadro « servono informazioni » torna delle dimensioni di prima:
+   cambia solo la scritta, non l'ingombro della galleria */
+.pagina-intro .gallery-main.ph{aspect-ratio:1/1;max-height:none;padding:18px}
+/* 122b.3 consenso: casella e testo attaccati (il nodo di testo porta già
+   con sé uno spazio, quindi il gap del flex va azzerato) */
+.sticky-col .consent{gap:0}
+.sticky-col .consent input{margin-right:-1px}
+
+/* 122b.4 miniature: tre per riga, quindi più grandi */
+.pagina-intro .thumbs{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-auto-columns:auto;gap:clamp(10px,1.2vw,16px)}
+/* un blocco nascosto non deve lasciare il suo margine */
+.wrap section.block[hidden]{display:none !important}
+/* la riga mostra tre miniature: la quarta da sola su una seconda riga
+   sbilanciava la colonna (le altre foto restano nella galleria) */
+.pagina-intro .thumbs > :nth-child(n+4){display:none}
+
+/* ===== 124b. Consenso privacy: casella e testo vicini ovunque ============
+   La regola base (382) metteva gap:9px e il testo del consenso porta già
+   con sé uno spazio: fra i due si creava un vuoto evidente. Vale per tutti
+   i form, non solo per la colonna laterale delle schede. */
+.consent,.row-form .consent,.sticky-col .consent{gap:0 !important}
+.consent input{margin-right:-1px !important;flex:0 0 18px}
+
+/* ===== 125b. Testata: via la nuvola scura dietro titolo e testi ==========
+   Il fondale sfocato della testata conteneva due macchie di Jet Black
+   (rgba(0,30,42,.85) e .4) che, sfocate, cadevano proprio dietro le parole:
+   sembrava che i testi avessero un contenitore scuro. Stesso fondale, ma
+   con le sole profondità del rosso VI. */
+body.pagina-interna .row-testata::before{
+  background:
+    radial-gradient(34% 48% at 14% 20%,#ff8a9a,rgba(243,63,84,.9) 35%,transparent 72%),
+    radial-gradient(40% 60% at 82% 62%,rgba(163,16,0,.55),rgba(184,0,29,.3) 45%,transparent 75%),
+    radial-gradient(26% 40% at 94% 10%,rgba(79,189,247,.35),transparent 70%),
+    radial-gradient(34% 50% at 40% 92%,rgba(196,0,31,.8),transparent 72%),
+    radial-gradient(30% 44% at 8% 78%,rgba(228,0,43,.85),transparent 70%),
+    linear-gradient(160deg,#e4002b,#c4001f) !important}
+/* 124b.1 consenso: testo sempre allineato a sinistra, anche quando va a capo,
+   e blocco a filo con i campi del form */
+.consent,.consent *{text-align:left !important}
+.sticky-col .consent{justify-content:flex-start;align-items:flex-start}
+
+/* ===== 126b. Il fondale della testata non deve essere più scuro della pagina
+   Era una lastra opaca al 60% che finiva netta in fondo alla riga: sopra il
+   rosso brillante della pagina risultava un riquadro più scuro attorno al
+   titolo. Ora usa solo rossi pari o più chiari del fondo e sfuma sia in
+   basso sia ai lati, quindi non ha più bordi. */
+body.pagina-interna .row-testata::before{
+  opacity:.42 !important;filter:blur(40px) !important;
+  background:
+    radial-gradient(38% 52% at 12% 16%,rgba(255,138,154,.85),rgba(243,63,84,.5) 42%,transparent 74%),
+    radial-gradient(42% 58% at 84% 58%,rgba(243,63,84,.55),transparent 76%),
+    radial-gradient(28% 40% at 94% 8%,rgba(79,189,247,.28),transparent 72%),
+    radial-gradient(36% 50% at 42% 94%,rgba(255,110,130,.5),transparent 74%) !important;
+  -webkit-mask:radial-gradient(120% 90% at 50% 20%,#000 0%,#000 45%,transparent 85%) !important;
+          mask:radial-gradient(120% 90% at 50% 20%,#000 0%,#000 45%,transparent 85%) !important}
+
+/* ===== 127b. Consenso: griglia esplicita casella + testo =================
+   Una sola misura decide la distanza (column-gap), indipendente da spazi
+   del testo, margini della casella e gap ereditati. */
+.consent,.row-form .consent,.sticky-col .consent{
+  display:grid !important;grid-template-columns:18px minmax(0,1fr) !important;
+  column-gap:7px !important;row-gap:0 !important;align-items:start !important;
+  justify-items:start;padding-left:0 !important;margin-left:0 !important}
+.consent input{grid-column:1;justify-self:start;margin:1px 0 0 !important;
+  width:18px;height:18px;min-width:18px}
+.consent .consent-txt{grid-column:2;text-align:left;line-height:1.45}
+
+/* ===== 128b. Via le ombre scure sotto i testi della testata ==============
+   Il titolo aveva drop-shadow(0 2px 14px rgba(90,0,12,.32)) e i paragrafi
+   text-shadow rossoscuro: sul fondo rosso diventavano un alone sporco
+   attorno alle lettere. Il bianco pieno sul colore VI si legge già bene. */
+.row-testata h1,.pagina-intro h1,.pagina-intro .intro-testata h1{filter:none !important}
+.row-testata > .block > p,.row-testata > .block > .lede,
+.row-testata > .block > .small,.row-testata > .block > ul > li,
+.pagina-intro .lede,.pagina-intro > p,.pagina-intro .small,
+.pagina-interna .crumbs,.pagina-interna .crumbs a,.pagina-interna .crumbs span,
+body[data-testata] .crumbs,body[data-testata] .crumbs a,body[data-testata] .crumbs span{
+  text-shadow:none !important}
+/* senza ombra il testo si appoggia solo sul colore: bianco pieno */
+.row-testata > .block > p,.row-testata > .block > .lede,
+.pagina-intro .lede,.pagina-intro > p{color:#fff !important}
+
+/* ===== 129b. L'indice delle schede resta fermo mentre scorre il testo =====
+   .t-nav era già sticky, ma in griglia gli elementi si allungano: la sua
+   scatola copriva tutta l'altezza della riga, quindi lo sticky non aveva
+   spazio dove scorrere e la lista restava incollata in alto. Con
+   align-self:start la scatola si stringe sul contenuto e l'indice segue
+   davvero la lettura. */
+.t-tabs > .t-nav{align-self:start;max-height:calc(100vh - 170px);overflow-y:auto;
+  scrollbar-width:thin}
+@media (max-width:860px){.t-tabs > .t-nav{align-self:auto;max-height:none;overflow-y:visible}}
+/* 129b.1 il clip orizzontale resta solo sull'elemento radice: messo anche sul
+   body faceva diventare il body il contenitore di scorrimento, e ogni
+   position:sticky della pagina (indice delle schede, colonna del form)
+   smetteva di agganciarsi. Il taglio dell'eccedenza orizzontale lo fa già
+   l'html, quindi non compaiono barre. */
+body{overflow-x:visible !important}
+/* 129b.2 l'indice si agganciava a 150px fissi, cioè sotto l'header quando
+   questo è più alto: stessa formula della colonna del form */
+.t-tabs > .t-nav{top:calc(var(--devbar-h,0px) + var(--header-h,104px) + 18px) !important;
+  max-height:calc(100vh - var(--devbar-h,0px) - var(--header-h,104px) - 40px)}

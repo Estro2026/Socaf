@@ -987,13 +987,16 @@
       ' o=vec4(clamp(col,0.,1.),1.);}'
   ].join('\n');
 
-  function heroFluido() {
-    var hero = document.querySelector('.hero-full');
+  /* Il fluido della hero. Vive su un contenitore qualsiasi: in home è la hero,
+     nelle pagine interne è la scena dietro la testata, così l'effetto e il
+     gesto del mouse sono gli stessi ovunque. */
+  function heroFluido(bersaglio, classe) {
+    var hero = bersaglio || document.querySelector('.hero-full');
     if (!hero) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var cv = document.createElement('canvas');
-    cv.className = 'hero-canvas';
+    cv.className = classe || 'hero-canvas';
     cv.setAttribute('aria-hidden', 'true');
     var gl = cv.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'low-power' });
     if (!gl) return;
@@ -1068,7 +1071,7 @@
   function claimJelly() {
     var hero = document.querySelector('.hero-full');
     var bersagli = [].slice.call(document.querySelectorAll(
-      '.hero-copy h1, .hero-cnt .hero-stats > div, .row-prodotti h2, .row-gruppo .gruppo-h, .row-form .form > h3, .row-testata h1, .pagina-interna .form > h3, .pagina-interna .block:has(> .faq) > h2, .pagina-interna .block:has(.t-tabs) > h2'));
+      '.hero-copy h1, .hero-cnt .hero-stats > div, .row-prodotti h2, .row-gruppo .gruppo-h, .row-form .form > h3, .row-testata h1, .pagina-intro h1, .sticky-col .form > h3, .pagina-interna .form > h3, .pagina-interna .block:has(> .faq) > h2, .pagina-interna .block:has(.t-tabs) > h2'));
     if (!bersagli.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
     var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
     svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
@@ -1864,17 +1867,20 @@
     document.body.classList.add('pagina-interna');
     righe[0].classList.add('row-testata');
     document.body.insertAdjacentHTML('afterbegin',
-      '<div class="mood" aria-hidden="true"><span class="chiaro"></span><span class="macchine"></span><span class="azzurro"></span><span class="rosso"></span></div>');
+      '<div class="mood" aria-hidden="true"><span class="chiaro"></span><span class="macchine"></span><span class="blu"></span><span class="azzurro"></span><span class="rosso"></span></div>');
+    /* la testata è rossa per default; i template del mondo macchine e prodotti
+       dichiarano data-testata="blu" e partono dall'azzurro profondo della VI */
+    var testata = document.body.dataset.testata === 'blu' ? 'blu' : 'macchine';
     function umore(u) {
       if (document.body.classList.contains('mood-' + u)) return;
-      document.body.classList.remove('mood-chiaro', 'mood-macchine', 'mood-azzurro', 'mood-rosso');
+      document.body.classList.remove('mood-chiaro', 'mood-macchine', 'mood-blu', 'mood-azzurro', 'mood-rosso');
       document.body.classList.add('mood-' + u);
     }
     var atteso = false;
     function guarda() {
       atteso = false;
       var fine = righe[0].getBoundingClientRect().bottom;
-      umore(fine > window.innerHeight * 0.45 ? 'macchine' : 'azzurro');
+      umore(fine > window.innerHeight * 0.45 ? testata : 'azzurro');
     }
     window.addEventListener('scroll', function () { if (!atteso) { atteso = true; requestAnimationFrame(guarda); } }, { passive: true });
     window.addEventListener('resize', guarda);
@@ -2003,6 +2009,9 @@
           if (el0.closest('.board .card, .card')) scuro = false;          /* sopra le card bianche: nero */
           else if (el0.closest('.hero-full, .row[data-mood="macchine"], .site-footer, .row-testata')) scuro = true;
           else if (document.body.classList.contains('mood-macchine') && !el0.closest('.wrap > .row > .block')) scuro = true;
+          /* pagine con fondo di colore dichiarato: sopra la nav si sta sempre
+             sul colore, a meno di essere finiti sopra una lastra bianca */
+          else if (document.body.dataset.testata && !el0.closest('.block, .card, .form')) scuro = true;
           hd.classList.toggle('topbar-su-scuro', scuro);
         }
         var ridotto = window.scrollY > 40;
@@ -2030,11 +2039,61 @@
     ingressi();
     percorsoTappe();
     formeLaterali();
+
+    /* Pagine interne: la prima sezione diventa l'intestazione della pagina.
+       Vive sul colore, come la hero della home; tutto il resto sta sulle
+       lastre bianche. Una classe sola, così la regola è una sola nel CSS.
+       Va assegnata prima di carteTilt/claimJelly: quelle funzioni cercano
+       i loro bersagli con selettori che partono da .pagina-intro. */
+    if (body.dataset.pagina !== 'home') {
+      var primo = document.querySelector('.wrap .block');
+      if (primo) {
+        primo.classList.add('pagina-intro');
+        /* Sulle pagine con testata dichiarata il fondo è il vetro cannettato
+           della reference: una lastra fissa dietro tutta la pagina. */
+        if (body.dataset.testata) {
+          var vetro = document.createElement('div');
+          vetro.className = 'intro-vetro';
+          vetro.setAttribute('aria-hidden', 'true');
+          document.body.insertBefore(vetro, document.body.firstChild);
+        }
+      }
+    }
+
+    /* Consenso privacy: il testo è un nodo sciolto accanto alla casella, e
+       la distanza fra i due dipendeva da gap, spazi e margini sparsi. Lo
+       chiudiamo in uno span, così la riga diventa una griglia esplicita
+       "casella + testo" e la distanza è una sola misura. */
+    document.querySelectorAll('.consent').forEach(function (c) {
+      if (c.querySelector('.consent-txt')) return;
+      var span = document.createElement('span');
+      span.className = 'consent-txt';
+      [].slice.call(c.childNodes).forEach(function (n) {
+        if (n.nodeType === 3 || (n.nodeType === 1 && n.tagName !== 'INPUT')) span.appendChild(n);
+      });
+      span.textContent = span.textContent.trim();
+      c.appendChild(span);
+    });
+
+    /* Blocchi rimasti senza contenuto (tutti i pezzi condizionali nascosti:
+       per esempio noleggio e usato su una macchina che non è né a noleggio
+       né usata) non devono restare come lastre vuote. */
+    document.querySelectorAll('.wrap section.block').forEach(function (b) {
+      if (b.classList.contains('pagina-intro')) return;
+      var vivo = [].slice.call(b.children).some(function (e) {
+        if (e.classList.contains('block-id') || e.classList.contains('dn-pin')) return false;
+        if (getComputedStyle(e).display === 'none') return false;
+        return e.getBoundingClientRect().height > 0 || e.textContent.trim() !== '';
+      });
+      if (!vivo) b.hidden = true;
+    });
+
     carteTilt();
     carteGelatina();
     claimJelly();          /* per ultimo: i bersagli esistono tutti */
     ricercaScritta();
     decoraVI();
+
 
     /* Ogni link interno punta al wireframe dell'indirizzo reale, istanza compresa */
     document.querySelectorAll('a[data-url]').forEach(function (el) {
