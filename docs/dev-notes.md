@@ -513,7 +513,7 @@ Non c'è validazione tecnica: è disciplina di data entry.
 | Voce | Contenuto |
 | --- | --- |
 | **Elementor** | Theme Builder → Single `sede` |
-| **ACF** | Gruppo `Sede — recapiti`: `ragione_sociale`, `via`, `cap`, `comune`, `provincia`, `telefono`, `email`, `latitudine`, `longitudine`, `referente`, `sede_principale`. Gruppo `Sede — orari`: Repeater `giorno` + `fascia`. Più `cosa_si_fa` e `foto`. |
+| **ACF** | Gruppo `Sede — recapiti`: `ragione_sociale`, `via`, `cap`, `comune`, `provincia`, `telefono`, `email`, `latitudine`, `longitudine`, `referente`, `sede_principale`. Gruppo `Sede — orari`: Repeater `giorno` + `fascia`. Più `foto`. (Il blocco « Cosa si fa in questa sede » è stato tolto dal template.) |
 | **Regola** | **Campi separati, mai un blocco di testo.** Gli stessi campi alimentano la pagina e i dati strutturati: il recapito non può divergere. |
 | **Condizioni** | Referente (se compilato) · foto (se caricate) |
 | **⚠ `/sedi/`** | **Non è una pagina.** `has_archive = false`: chi apre quell'indirizzo trova un 404. **Da non creare.** |

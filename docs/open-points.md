@@ -209,3 +209,18 @@ ma senza di esse il sito non va online.
 | DATA ENTRY | `disponibile_noleggio` e `disponibile_usata` su 119 schede | 238 flag |
 | DATA ENTRY | Tassonomia settore su 119 schede | 119 assegnazioni |
 | FASE FUTURA | E-commerce | fuori da questo progetto |
+
+## OP-17 · Referenze: le card portano al sito del cliente
+
+**Decisione di revisione**: le card delle referenze (settori e pagina Referenze) non aprono più
+una pagina interna `/azienda/referenze/[cliente]/`, ma il sito del cliente in una scheda nuova.
+**Da confermare con Socaf**: gli indirizzi usati nel mockup sono quelli pubblici noti dei marchi
+(amicachips.it, cisalfasport.it, ilgigante.net, xpo.com) e vanno verificati, insieme
+all'autorizzazione a linkarli. **Mancano** i siti di Lupo S.r.l. e Progect S.r.l.: nel mockup la
+card lo dichiara ("[Sito del cliente da fornire]").
+**Effetto**: se le schede interne delle referenze non servono più come destinazione, si può
+valutare se tenerle (SEO, contenuto esistente su socaf.it) o reindirizzarle.
+
+## OP-18 · Fotografie mancanti per le card di categoria
+Le card usano le foto reali di `assets/STATICHE` (copie web in `assets/images/categorie/`). Mancano fotografie per: famiglie **Aspiratori** (cartella vuota), **Robot**, **Altri macchinari**; sottocategorie **i-mop**, **Spazzatrici stradali**, **Idropulitrici acqua calda / alte prestazioni / impianti fissi / autonome**, **Robot**. Lì resta il segnaposto: servono foto dal cliente.
+- (30/09) Home · « I marchi del gruppo »: i riquadri di Aquarial e Caldofacile restano segnaposto. In `assets/STATICHE` non ci sono foto né loghi dei due marchi: servono dal cliente (logo vettoriale + una foto di prodotto ciascuno).

@@ -102,7 +102,7 @@
      3 · HEADER / FOOTER / BLOCCHI GLOBALI
      ====================================================================== */
   function header() {
-    var logo = BASE + 'assets/logo/socaf21-payoff-rgb.svg';
+    var logo = BASE + 'assets/logo/socaf21-payoff-rgb-white.svg';   /* logo bianco nella barra di navigazione */
     var h = '<div class="topbar"><div class="wrap">' +
       a('/servizi/pronto-intervento/', 'Pronto intervento') + a('/news/', 'Approfondimenti') +
       '</div></div><div class="hdr-shell">';
@@ -367,7 +367,7 @@
     set('[data-fam-h2]', 'Le tipologie di ' + esc(f.nome.toLowerCase()));
     set('[data-fam-subs]', subs.map(function (sk) {
       var s = CAT.SOTTO[sk], n = (CAT.MACCHINE[sk] || []).length;
-      return '<article class="card"><div class="card-media ph ph-wide">Immagine sottocategoria</div>' +
+      return '<article class="card">' + (FOTO_SOTTO[sk] ? '<div class="card-media foto"><img src="' + BASE + 'assets/images/categorie/sub-' + sk.split("/")[1] + '.jpg" alt="' + esc(s.h1) + '" loading="lazy"></div>' : '<div class="card-media ph ph-wide">Immagine sottocategoria</div>') +
         '<div class="card-body"><span class="card-name">' + esc(s.h1) + '</span>' +
         '<span class="card-meta">' + n + (n === 1 ? ' macchina' : ' macchine') + '</span>' +
         '<a class="card-link" href="' + route('/' + sk + '/') + '" data-url="/' + sk + '/">Vedi tutte</a></div></article>';
@@ -428,17 +428,22 @@
      (sezione « Non serve per forza comprarla »): immagine a colori, sopratitolo,
      titolo nel colore della formula, testo e CTA. Il contenitore prende la classe
      .formule, così valgono le stesse regole e la stessa gelatina della home. */
+  /* sottocategorie con una fotografia reale (assets/STATICHE → assets/images/categorie) */
+  var FOTO_SOTTO = { 'lavapavimenti/lavapavimenti-piccole': 1, 'lavapavimenti/lavapavimenti-uomo-terra': 1,
+    'lavapavimenti/lavapavimenti-uomo-bordo': 1, 'lavapavimenti/lavapavimenti-combinate': 1, 'lavapavimenti/i-mop': 1,
+    'spazzatrici/spazzatrici-uomo-terra': 1, 'spazzatrici/spazzatrici-uomo-bordo': 1,
+    'idropulitrici/idropulitrici-ad-acqua-fredda': 1 };
   function promo(f, sel) {
     var el = document.querySelector(sel); if (!el) return;
     var h = '';
     if (f.noleggio) {
-      h += '<div class="formula formula-nol"><span class="formula-art ph ph-volume"></span><span class="formula-body">' +
+      h += '<div class="formula formula-nol"><span class="formula-art foto"><img src="' + BASE + 'assets/images/categorie/formula-noleggio.jpg" alt="Consegna di una macchina Socaf a noleggio" loading="lazy"></span><span class="formula-body">' +
         '<span class="kicker">Formula · noleggio</span><span class="formula-h">Si può noleggiare</span>' +
         '<span class="formula-p">Formule brevi o pluriennali, assistenza e consegna incluse. Ritiro da tutte e cinque le sedi.</span>' +
         a('/noleggio/' + keyOf(f) + '/', 'Noleggio ' + f.nome.toLowerCase(), 'formula-go') + '</span></div>';
     }
     if (f.usato) {
-      h += '<div class="formula formula-usa"><span class="formula-art ph ph-pattern"></span><span class="formula-body">' +
+      h += '<div class="formula formula-usa"><span class="formula-art foto"><img src="' + BASE + 'assets/images/categorie/formula-usato.jpg" alt="Macchine nello showroom Socaf" loading="lazy"></span><span class="formula-body">' +
         '<span class="kicker">Formula · usato</span><span class="formula-h">Esiste anche usata</span>' +
         '<span class="formula-p">Ricondizionate e garantite da 3 a 12 mesi, con supervalutazione della macchina che hai già.</span>' +
         a('/usato/' + f.usato + '/', f.nome + ' usate', 'formula-go') + '</span></div>';
@@ -606,18 +611,23 @@
   SEDI.forEach(function (s) { ISTANZE.sede.lista[s.slug] = { nome: s.city, h1: (s.co === 'Socaf S.p.A.' ? 'Socaf ' : s.co + ', ') + s.city, sede: s }; });
 
   var REFERENZE = {
-    'amica-chips-s-p-a': { nome: 'Amica Chips', settore: 'industria', desc: 'Industria alimentare' },
-    'cisalfa': { nome: 'Cisalfa Sport', settore: 'retail', desc: 'Retail · articoli sportivi' },
-    'il-gigante': { nome: 'Il Gigante', settore: 'retail', desc: 'Grande distribuzione' },
+    'amica-chips-s-p-a': { nome: 'Amica Chips', settore: 'industria', desc: 'Industria alimentare', sito: 'https://www.amicachips.it/' },
+    'cisalfa': { nome: 'Cisalfa Sport', settore: 'retail', desc: 'Retail · articoli sportivi', sito: 'https://www.cisalfasport.it/' },
+    'il-gigante': { nome: 'Il Gigante', settore: 'retail', desc: 'Grande distribuzione', sito: 'https://www.ilgigante.net/' },
     'lupo-srl': { nome: 'Lupo S.r.l.', settore: 'horeca', desc: 'Ristorazione' },
     'progect-srl': { nome: 'Progect S.r.l.', settore: 'imprese-di-pulizia', desc: 'Facility management' },
-    'xpo-logistics': { nome: 'XPO Logistics', settore: 'logistica', desc: 'Logistica' }
+    'xpo-logistics': { nome: 'XPO Logistics', settore: 'logistica', desc: 'Logistica', sito: 'https://www.xpo.com/' }
   };
+  /* Card referenza: porta al sito del cliente, in una scheda nuova (non più a
+     una pagina interna). Gli indirizzi sono da confermare con Socaf (OP-17);
+     dove manca, la card resta senza link e lo dichiara. */
   function cardReferenza(k) {
-    var r = REFERENZE[k], t = TESTI['/referenze/' + k + '/'];
+    var r = REFERENZE[k];
+    var link = r.sito
+      ? '<span class="card-meta">Sito del cliente ↗</span><a class="card-link" href="' + r.sito + '" target="_blank" rel="noopener">Vai al sito di ' + esc(r.nome) + '</a>'
+      : '<span class="card-meta">[Sito del cliente da fornire]</span>';
     return '<article class="card"><div class="card-media ph ph-wide">Logo cliente</div><div class="card-body">' +
-      '<span class="card-name">' + esc(r.nome) + '</span><p class="card-desc">' + esc(r.desc) + '</p>' +
-      a('/azienda/referenze/' + k + '/', 'Vedi', 'card-link') + '</div></article>';
+      '<span class="card-name">' + esc(r.nome) + '</span><p class="card-desc">' + esc(r.desc) + '</p>' + link + '</div></article>';
   }
 
   function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] != null ? v[k] : m; }); }
@@ -720,6 +730,7 @@
     if (!document.body || document.body.dataset.tpl !== 'pagina') return;
     var url = param('p') || '/servizi/pronto-intervento/', P = PAGINE[url];
     if (!P) { url = '/servizi/pronto-intervento/'; P = PAGINE[url]; }
+    document.body.dataset.slug = url;   /* per regole di pagina (es. testata di Referenze) */
     var fonti = [].concat(P.fonte || []), t0 = TESTI[typeof fonti[0] === 'string' ? fonti[0] : ''] || {};
     var h1 = P.h1 || t0.t || '';
     var sezUrl = P.sez === 'Servizi' ? '/servizi/' : '/azienda/';
@@ -993,6 +1004,7 @@
   function heroFluido(bersaglio, classe) {
     var hero = bersaglio || document.querySelector('.hero-full');
     if (!hero) return;
+    if (hero.querySelector('.hero-vimeo')) return;   /* c'è il video Vimeo: la materia WebGL non serve e lo coprirebbe */
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     var cv = document.createElement('canvas');
@@ -1071,7 +1083,7 @@
   function claimJelly() {
     var hero = document.querySelector('.hero-full');
     var bersagli = [].slice.call(document.querySelectorAll(
-      '.hero-copy h1, .hero-cnt .hero-stats > div, .row-prodotti h2, .row-gruppo .gruppo-h, .row-form .form > h3, .row-testata h1, .pagina-intro h1, .sticky-col .form > h3, .pagina-interna .form > h3, .pagina-interna .block:has(> .faq) > h2, .pagina-interna .block:has(.t-tabs) > h2'));
+      '.hero-copy h1, .hero-cnt .hero-stats > div, .row-prodotti h2, .row-gruppo .gruppo-h, .row-form .form > h3, .row-testata h1, body:not([data-pagina="home"]) .wrap h1, .pagina-intro h1, .sticky-col .form > h3, .pagina-interna .form > h3, .pagina-interna .block:has(> .faq) > h2, .pagina-interna .block:has(.t-tabs) > h2'));
     if (!bersagli.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
     var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
     svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
@@ -1162,11 +1174,27 @@
       '<div class="mood" aria-hidden="true"><span class="chiaro"></span><span class="macchine"></span><span class="azzurro"></span><span class="rosso"></span></div>');
     document.body.classList.add('mood-chiaro');
 
+    /* larghezza utile senza barra di scorrimento: serve alle tessere a piena larghezza */
+    function misuraVw() {
+      var vw = document.documentElement.clientWidth;
+      document.body.style.setProperty('--vw', vw + 'px');
+      /* le tessere a piena larghezza escono dalla griglia esattamente fino ai bordi */
+      document.querySelectorAll('.wrap > .row.t-piena').forEach(function (r) {
+        var w = r.parentElement, cs = getComputedStyle(w), q = w.getBoundingClientRect();
+        var sx = q.left + parseFloat(cs.paddingLeft), dx = q.right - parseFloat(cs.paddingRight);
+        r.style.setProperty('margin-left', (-sx) + 'px', 'important');
+        r.style.setProperty('margin-right', (-(vw - dx)) + 'px', 'important');
+      });
+    }
+    misuraVw(); window.addEventListener('resize', misuraVw);
+
     var righe = [].slice.call(document.querySelectorAll('.wrap > .row'));
     function umore(u) {
       if (document.body.classList.contains('mood-' + u)) return;
       document.body.classList.remove('mood-chiaro', 'mood-macchine', 'mood-azzurro', 'mood-rosso');
       document.body.classList.add('mood-' + u);
+      /* il fondo è cambiato: l'header ricalcola subito il colore delle voci di servizio */
+      window.dispatchEvent(new Event('scroll'));
     }
     /* la soglia è il titolo della sezione: dopo « Le macchine » si vira
        all'azzurro, da « I marchi del gruppo » al rosso */
@@ -1183,7 +1211,14 @@
          gruppo il rosso si dissolve nell'azzurro (dissolvenza lunga in CSS) */
       var rMac = document.querySelector('.row[data-mood=macchine]');
       if (rMac && rMac.getBoundingClientRect().top < window.innerHeight * 0.85) u = 'macchine';
-      if (rAzzurro && rAzzurro.getBoundingClientRect().top < meta) u = 'azzurro';
+      /* fusione hero → macchine: il rosso non scatta, sale con lo scroll.
+         --fonde va da 0 (la sezione entra dal basso) a 1 (il titolo è in alto) */
+      if (rMac) {
+        var fonde = (window.innerHeight - rMac.getBoundingClientRect().top) / (window.innerHeight * 1.3);
+        document.body.style.setProperty('--fonde', (function (p) { p = Math.max(0, Math.min(1, p || 0)); return (p * p * (3 - 2 * p)).toFixed(3); })(fonde));
+      }
+      /* il fondale passa al bianco quando « Il gruppo » (tessera bianca a piena larghezza) copre già lo schermo */
+      if (rAzzurro && rAzzurro.getBoundingClientRect().top < 0) u = 'azzurro';
       if (rRosso && rRosso.getBoundingClientRect().top < meta) u = 'rosso';
       umore(u);
     }
@@ -1206,7 +1241,7 @@
       b.addEventListener('pointerdown', function (e) {
         if (e.pointerType === 'touch') return;
         giu = true; mosso = 0; x0 = e.clientX; s0 = b.scrollLeft;
-        b.classList.add('is-drag'); b.setPointerCapture(e.pointerId);
+        b.classList.add('is-drag');   /* niente cattura del puntatore: rubava il clic ai link delle card */
       });
       b.addEventListener('pointermove', function (e) {
         if (!giu) return;
@@ -1218,6 +1253,13 @@
       });
       /* un trascinamento non deve aprire la scheda che sta sotto */
       b.addEventListener('click', function (e) { if (mosso > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
+      /* clic su qualsiasi punto della card: apre la sua pagina (anche se il bersaglio è la superficie o l'immagine) */
+      b.addEventListener('click', function (e) {
+        if (mosso > 6 || e.defaultPrevented) return;
+        var card = e.target.closest && e.target.closest('.card'); if (!card) return;
+        var link = card.querySelector('a.card-link'); if (!link || e.target.closest('a')) return;
+        location.href = link.href;
+      });
     });
 
     /* 3bis · gallery "jelly sheet" (reference: Infinite Jelly Glass, reinterpretata in DOM).
@@ -1243,6 +1285,7 @@
       var track = b.querySelector('.board-track');
       var carte = [].slice.call(b.querySelectorAll('.card'));
       var touch = window.matchMedia('(hover: none)').matches;
+      return;   /* niente più deformazione del contenitore al trascinamento */
       var C = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };           /* contenitore */
       var S = carte.map(function () { return { x: 0, y: 0, vx: 0, vy: 0 }; });
       var giu = false, gx = 0, gy = 0, px = 0, py = 0, raf = 0, ultimoScroll = window.scrollY;
@@ -1377,6 +1420,7 @@
      proporzionale alla card (niente tagli), sotto c'è sempre una superficie
      opaca (niente buchi). */
   function carteGelatina() {
+    var DEFORMA = false;   /* gelatina spenta su tutte le card (richiesta di revisione): resta solo la superficie */
     /* GELATINA VETTORIALE. La deformazione non sposta più pixel (il filtro SVG
        dava bordi a scalini e linee che non combaciavano): la superficie della
        card è un tracciato SVG e il contorno dell'immagine è un clip-path, e
@@ -1444,7 +1488,7 @@
         base = contorno(W, H, R, 96);
         if (media) {
           mo = [media.offsetLeft, media.offsetTop];
-          RM = 18;   /* il riquadro visibile è 10px dentro il suo box: spazio per gonfiarsi */
+          RM = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--raggio')) || 22;   /* stesso raggio di tutto il sito */
           baseM = contorno(media.offsetWidth - 20, media.offsetHeight - 20, RM, 72).map(function (q) { return [q[0] + mo[0] + 10, q[1] + mo[1] + 10]; });
         }
         disegna(0, 0, 0, 0, 0);
@@ -1490,7 +1534,7 @@
       window.addEventListener('resize', misura);
       window.addEventListener('load', misura);
       c.addEventListener('pointerenter', function (e) {
-        misura(); var q = locale(e); mx = hx = q[0]; my = hy = q[1]; vx = vy = dxs = dys = 0; sopra = 1;
+        misura(); var q = locale(e); mx = hx = q[0]; my = hy = q[1]; vx = vy = dxs = dys = 0; sopra = DEFORMA ? 1 : 0;
         if (!raf) raf = requestAnimationFrame(giro);
       });
       c.addEventListener('pointermove', function (e) {
@@ -1862,10 +1906,31 @@
      scorrendo, il fondo vira all'azzurro con la stessa dissolvenza della home. */
   function scenaInterna() {
     if (document.body.dataset.pagina === 'home' || document.querySelector('.mood')) return;
-    var righe = [].slice.call(document.querySelectorAll('.wrap > .row')).filter(function (r) { return !r.classList.contains('wf-doc'); });
+    if (!document.body.dataset.slug) {   /* indirizzo della pagina, per regole di pagina (es. testate in nero) */
+      var db = document.querySelector('[data-devbar]'); if (db && db.dataset.url) document.body.dataset.slug = db.dataset.url.split(' ')[0];
+    }
+    var righe = [].slice.call(document.querySelectorAll('.wrap > .row, .wrap > div:not(.row) > .row')).filter(function (r) { return !r.classList.contains('wf-doc'); });
+    righe.forEach(function (r) { r.classList.add('row-int'); });   /* anche le sezioni dentro i contenitori di stato (ricerca) */
     if (!righe.length) return;
+    /* pagine fatte di una sola sezione (es. ricerca): la testata tiene solo
+       titolo, introduzione e campo di ricerca; il resto passa in una nuova
+       sezione di vetro, così i contenuti non finiscono sul rosso */
+    if (righe.length === 1) {
+      var blocco = righe[0].querySelector(':scope > .block');
+      var primoH2 = blocco && blocco.querySelector(':scope > h2, :scope > .risultati, :scope > [data-results]');
+      if (primoH2) {
+        var nuova = document.createElement('div'); nuova.className = 'row';
+        var sez = document.createElement('section'); sez.className = 'block'; nuova.appendChild(sez);
+        var n = primoH2;
+        while (n) { var dopo = n.nextSibling; sez.appendChild(n); n = dopo; }
+        righe[0].insertAdjacentElement('afterend', nuova);
+        righe.push(nuova);
+      }
+    }
     document.body.classList.add('pagina-interna');
     righe[0].classList.add('row-testata');
+    /* titoli lunghi (oltre ~40 caratteri): su tutta la larghezza, in tre righe equilibrate */
+    var h1t = righe[0].querySelector('h1'); if (h1t && h1t.textContent.trim().length > 40) h1t.classList.add('titolo-lungo');
     document.body.insertAdjacentHTML('afterbegin',
       '<div class="mood" aria-hidden="true"><span class="chiaro"></span><span class="macchine"></span><span class="blu"></span><span class="azzurro"></span><span class="rosso"></span></div>');
     /* la testata è rossa per default; i template del mondo macchine e prodotti
@@ -1875,6 +1940,8 @@
       if (document.body.classList.contains('mood-' + u)) return;
       document.body.classList.remove('mood-chiaro', 'mood-macchine', 'mood-blu', 'mood-azzurro', 'mood-rosso');
       document.body.classList.add('mood-' + u);
+      /* il fondo è cambiato: l'header ricalcola subito il colore delle voci di servizio */
+      window.dispatchEvent(new Event('scroll'));
     }
     var atteso = false;
     function guarda() {
@@ -2009,10 +2076,27 @@
           if (el0.closest('.board .card, .card')) scuro = false;          /* sopra le card bianche: nero */
           else if (el0.closest('.hero-full, .row[data-mood="macchine"], .site-footer, .row-testata')) scuro = true;
           else if (document.body.classList.contains('mood-macchine') && !el0.closest('.wrap > .row > .block')) scuro = true;
+          /* pagine interne: bianco sul rosso, nero sull'azzurro, sempre */
+          if (document.body.classList.contains('pagina-interna')) scuro = document.body.classList.contains('mood-macchine');
+          /* all'atterraggio, prima che la pagina scelga il fondo: le interne partono sul rosso */
+          else if (document.body.dataset.pagina !== 'home' && !document.querySelector('.mood')) scuro = true;
           /* pagine con fondo di colore dichiarato: sopra la nav si sta sempre
              sul colore, a meno di essere finiti sopra una lastra bianca */
           else if (document.body.dataset.testata && !el0.closest('.block, .card, .form')) scuro = true;
           hd.classList.toggle('topbar-su-scuro', scuro);
+        }
+        /* logo: bianco su rosso e video, a colori sul bianco. Guarda cosa passa
+           sotto il centro del logo, come per la riga di servizio */
+        var marchio = hd.querySelector('.brand img');
+        if (marchio) {
+          var rl = marchio.getBoundingClientRect();
+          var sottoL = document.elementsFromPoint(rl.left + rl.width / 2, rl.top + rl.height / 2)
+            .filter(function (el) { return !hd.contains(el) && !el.closest('.devbar'); })[0] || document.body;
+          /* sulla home il fondale è sempre rosso: logo a colori solo sopra le tessere bianche */
+          var suRosso = !sottoL.closest('.t-bianca');
+          if (document.body.dataset.pagina !== 'home') suRosso = true;
+          var voluto = BASE + 'assets/logo/' + (suRosso ? 'socaf21-payoff-rgb-white.svg' : 'socaf21-payoff-rgb.svg');
+          if (marchio.getAttribute('src') !== voluto) marchio.setAttribute('src', voluto);
         }
         var ridotto = window.scrollY > 40;
         if (ridotto === ultimo) return;
@@ -2022,6 +2106,8 @@
       };
       guardaHeader();
       window.addEventListener('scroll', guardaHeader, { passive: true });
+      /* niente dissolvenza di colore finché la pagina non è pronta */
+      setTimeout(function () { hd.classList.add('hdr-pronto'); }, 700);
     }
 
     document.querySelectorAll('[data-sedi]').forEach(function (el) { el.innerHTML = blocoSedi(el.dataset.sedi); });
@@ -2091,7 +2177,7 @@
     carteTilt();
     carteGelatina();
     claimJelly();          /* per ultimo: i bersagli esistono tutti */
-    ricercaScritta();
+    /* ricercaScritta();  tolta: il testo guida della ricerca è fermo */
     decoraVI();
 
 

@@ -5514,7 +5514,8 @@ body.pagina-interna .row-testata::before{
    Il titolo aveva drop-shadow(0 2px 14px rgba(90,0,12,.32)) e i paragrafi
    text-shadow rossoscuro: sul fondo rosso diventavano un alone sporco
    attorno alle lettere. Il bianco pieno sul colore VI si legge già bene. */
-.row-testata h1,.pagina-intro h1,.pagina-intro .intro-testata h1{filter:none !important}
+/* senza !important: toglie le ombre ma lascia applicare il filtro jelly (inline, da claimJelly) */
+.row-testata h1,.pagina-intro h1,.pagina-intro .intro-testata h1{filter:none}
 .row-testata > .block > p,.row-testata > .block > .lede,
 .row-testata > .block > .small,.row-testata > .block > ul > li,
 .pagina-intro .lede,.pagina-intro > p,.pagina-intro .small,
@@ -5544,3 +5545,836 @@ body{overflow-x:visible !important}
    questo è più alto: stessa formula della colonna del form */
 .t-tabs > .t-nav{top:calc(var(--devbar-h,0px) + var(--header-h,104px) + 18px) !important;
   max-height:calc(100vh - var(--devbar-h,0px) - var(--header-h,104px) - 40px)}
+
+/* ================= 118. Paginazione dentro il contenitore dell'elenco ================= */
+nav[aria-label="Paginazione"]{margin-top:clamp(26px,3vw,40px)}
+nav[aria-label="Paginazione"] .chips{justify-content:center;gap:8px}
+nav[aria-label="Paginazione"] .chip{min-width:44px;height:44px;padding:0 16px;display:inline-grid;place-items:center;border-radius:999px;border:0;
+  font-family:var(--font-display);font-weight:700;color:#001e2a;background:var(--vetro);box-shadow:var(--vetro-bordo);text-decoration:none;
+  transition:background .3s ease,color .3s ease}
+nav[aria-label="Paginazione"] a.chip:hover{background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(255,255,255,.52))}
+nav[aria-label="Paginazione"] .chip[aria-current="true"]{background:#e4002b;color:#fff;box-shadow:0 8px 18px -10px rgba(228,0,43,.6)}
+/* Referenze: titolo e introduzione della testata in nero */
+body[data-slug="/azienda/referenze/"] .row-testata h1{background:none;-webkit-text-fill-color:#001e2a;color:#001e2a;filter:none}
+body[data-slug="/azienda/referenze/"] .row-testata > .block > p,
+body[data-slug="/azienda/referenze/"] .row-testata > .block > .lede{color:#001e2a !important;text-shadow:none}
+
+/* ================= 119. Sezioni annidate (pagina ricerca) ================= */
+body.pagina-interna .wrap > div:not(.row) > .row.row-int > .block{
+  background:var(--vetro) !important;
+  backdrop-filter:var(--vetro-blur) !important;-webkit-backdrop-filter:var(--vetro-blur) !important;
+  box-shadow:var(--vetro-bordo),var(--vetro-ombra) !important;border-radius:28px;border:0 !important;padding:clamp(28px,4vw,60px)}
+body.pagina-interna .wrap > div:not(.row) > .row.row-int + .row.row-int{margin-top:clamp(18px,3.6vh,40px)}
+body.pagina-interna .wrap > div:not(.row){margin-top:clamp(18px,3.6vh,40px)}
+body.pagina-interna .wrap > div:not(.row) > .row > .block > h2{font-size:clamp(26px,2.8vw,40px);letter-spacing:-.02em}
+body.pagina-interna .wrap > div:not(.row) > .row > .block > h2 .muted{display:inline-grid;place-items:center;min-width:34px;height:28px;padding:0 10px;
+  margin-left:8px;border-radius:999px;vertical-align:middle;font-size:13px;font-weight:700;color:#fff;background:#e4002b}
+
+/* ================= 120. Pagina Contatti · rivestimento =================
+   Testata: a sinistra il titolo, a destra il numero verde come protagonista;
+   sotto, due lastre: sede principale e scorciatoie. Poi sedi, mappa, modulo. */
+body[data-tpl] .row-testata .grid-2:has(> .promo + .notice),
+.row-testata .grid-2:has(> .promo + .notice){grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) !important;gap:clamp(16px,2vw,26px) !important;margin-top:clamp(28px,4vh,48px) !important}
+
+/* sede principale: lastra chiara piena, il numero verde grande */
+.row-testata .promo:has(+ .notice){position:relative;overflow:hidden;border:0 !important;border-radius:26px;
+  padding:clamp(26px,3vw,40px) !important;min-height:0;display:block;
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.84)) !important;
+  box-shadow:inset 0 1px 0 #fff,0 30px 60px -36px rgba(90,0,12,.55) !important}
+.row-testata .promo:has(+ .notice)::after{content:none !important}
+.row-testata .promo:has(+ .notice) .kicker{color:#e4002b}
+.row-testata .promo:has(+ .notice) h3{font-size:clamp(22px,2.2vw,30px);color:#001e2a;margin:4px 0 10px}
+.row-testata .promo:has(+ .notice) address{color:#2c3a42 !important;font-size:16px}
+.row-testata .promo:has(+ .notice) p a{color:#0085cf;text-decoration:none;font-weight:600}
+.row-testata .promo:has(+ .notice) .btn-primary{margin-top:6px;min-height:58px;padding:0 30px;font-size:18px}
+
+/* scorciatoie: vetro trasparente sul rosso, testo bianco, divisore sottile */
+.row-testata .grid-2 > .notice{border:0 !important;border-radius:26px;padding:clamp(24px,2.6vw,34px) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.10)) !important;
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 0 0 1px rgba(255,255,255,.25) !important}
+.row-testata .grid-2 > .notice :is(h4,p,.small,a,span){color:#fff !important}
+.row-testata .grid-2 > .notice h4{font-size:clamp(19px,1.7vw,23px);margin:0 0 4px}
+.row-testata .grid-2 > .notice .small{opacity:.85}
+.row-testata .grid-2 > .notice .btn-link::before{border-left-color:#fff}
+.row-testata .grid-2 > .notice .hr{height:1px;background:rgba(255,255,255,.3);border:0}
+
+/* le sedi: griglia regolare di card di vetro, la principale segnata dal rosso */
+body.pagina-interna .sedi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,22px)}
+body.pagina-interna .sede{padding:clamp(20px,2.2vw,28px) !important}
+body.pagina-interna .sede .city{font-family:var(--font-display);font-size:clamp(20px,1.8vw,24px);font-weight:700;color:#001e2a}
+body.pagina-interna .sede .main-flag{font-size:11px;letter-spacing:.14em;font-weight:700;color:#e4002b}
+body.pagina-interna .sede .main-flag.alt{color:#5a676e}
+@media (max-width:980px){body.pagina-interna .sedi{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){body.pagina-interna .sedi{grid-template-columns:1fr}
+  .row-testata .grid-2:has(> .promo + .notice){grid-template-columns:1fr !important}}
+
+/* mappa: un grande riquadro di vetro, non un segnaposto grigio */
+body.pagina-interna .row-int .block > .ph{min-height:clamp(300px,40vw,460px);border:0;border-radius:24px;color:#5a676e;
+  background:
+    radial-gradient(60% 70% at 70% 30%,rgba(79,189,247,.25),transparent 70%),
+    radial-gradient(50% 60% at 20% 80%,rgba(228,0,43,.12),transparent 70%),
+    linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.4));
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6)}
+.row-testata .promo:has(+ .notice) p,.row-testata .promo:has(+ .notice) p a{color:#0085cf !important;text-shadow:none !important;text-decoration:none !important}.row-testata .grid-2 > .notice a{text-decoration:none !important}
+.row-testata .promo:has(+ .notice) p.kicker{color:#e4002b !important}
+
+/* ================= 121. Approfondimenti in nero · risultati "Pagine" della ricerca ================= */
+body[data-slug="/news/"] .row-testata h1{background:none;-webkit-text-fill-color:#001e2a;color:#001e2a;filter:none}
+body[data-slug="/news/"] .row-testata > .block > p,
+body[data-slug="/news/"] .row-testata > .block > .lede{color:#001e2a !important;text-shadow:none}
+
+/* conteggio dei gruppi di risultati: pastiglia rossa ovunque */
+body.pagina-interna h2 > .muted{display:inline-grid;place-items:center;min-width:34px;height:28px;padding:0 10px;margin-left:8px;
+  border-radius:999px;vertical-align:middle;font-size:13px;font-weight:700;color:#fff !important;background:#e4002b;opacity:1}
+/* elenco "Pagine": righe di vetro con titolo, percorso leggibile e freccia */
+body.pagina-interna .block > h2 + ul.stack-sm{display:grid;gap:10px;margin:18px 0 0}
+body.pagina-interna .block > h2 + ul.stack-sm > li{position:relative;padding:18px 70px 18px 24px;border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.46));
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6);transition:background .3s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+body.pagina-interna .block > h2 + ul.stack-sm > li:hover{background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.7));transform:translateX(4px)}
+body.pagina-interna .block > h2 + ul.stack-sm > li > a{color:#001e2a;text-decoration:none;font-family:var(--font-display);font-size:clamp(16px,1.4vw,19px)}
+body.pagina-interna .block > h2 + ul.stack-sm > li > a::after{content:"";position:absolute;inset:0}
+body.pagina-interna .block > h2 + ul.stack-sm > li::after{content:"";position:absolute;right:22px;top:50%;width:36px;height:36px;margin-top:-18px;border-radius:50%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23001e2a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E"),var(--vetro);
+  background-repeat:no-repeat;background-position:center;background-size:16px 16px,cover;box-shadow:var(--vetro-bordo)}
+/* il percorso: come un indirizzo nei risultati di un motore di ricerca, non codice */
+body.pagina-interna .block > h2 + ul.stack-sm .mono{font-family:var(--font-text);font-size:12.5px;color:#5a676e;margin-top:4px;letter-spacing:.01em}
+body.pagina-interna .block > h2 + ul.stack-sm .mono::before{content:"socaf.it";color:#0085cf;font-weight:600;margin-right:2px}
+
+/* ================= 122. Pagine Usato · il colore dell'usato è il blu =================
+   In home l'usato è blu (e il noleggio rosso): le pagine /usato/ prendono la
+   testata in blu VI (Electric Blue → Socaf Blue, luce Crystal Blue) con lo
+   stesso vetro cannettato; gli accenti della pagina diventano blu. */
+body[data-slug^="/usato/"] .mood .macchine{background:
+  radial-gradient(1100px 760px at 85% 5%,#0085cf,transparent 70%),
+  radial-gradient(1200px 820px at 5% 95%,rgba(79,189,247,.9),transparent 68%),
+  radial-gradient(600px 420px at 35% 40%,rgba(255,255,255,.3),transparent 70%),
+  linear-gradient(160deg,#0255b3,#0085cf 55%,#0a6fc2)}
+body[data-slug^="/usato/"] .row-testata::before{background:
+  radial-gradient(34% 48% at 14% 20%,#bfe6fb,rgba(79,189,247,.9) 35%,transparent 72%),
+  radial-gradient(40% 60% at 82% 62%,rgba(0,30,42,.8),rgba(0,30,42,.35) 45%,transparent 75%),
+  radial-gradient(26% 40% at 94% 10%,rgba(228,0,43,.45),transparent 70%),
+  radial-gradient(34% 50% at 40% 92%,rgba(2,85,179,.95),transparent 72%),
+  linear-gradient(160deg,#0085cf,#0255b3) !important}
+body[data-slug^="/usato/"] .row-testata h1{filter:drop-shadow(0 2px 16px rgba(0,30,90,.35))}
+body[data-slug^="/usato/"] .row-testata > .block > p{text-shadow:0 1px 10px rgba(0,30,90,.45) !important}
+body[data-slug^="/usato/"] .wrap > .row:not(.row-testata) > .block > h2::before{color:#0085cf}
+body[data-slug^="/usato/"] .forme-laterali .tono-rosso{opacity:0 !important}
+body[data-slug^="/usato/"] .forme-laterali .tono-blu{opacity:1 !important}
+
+/* Garanzia e revisione: tre lastre con il numero grande contornato */
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px);margin-top:22px}
+.why-item{position:relative;overflow:hidden;border:0 !important;border-radius:24px;padding:clamp(24px,2.6vw,34px) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.58)) !important;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.7),0 18px 34px -26px rgba(0,30,42,.35) !important;
+  transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.why-item:hover{transform:translateY(-4px)}
+.why-item::before,.why-item::after{content:none !important}
+.why-num{display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(54px,5.4vw,84px);line-height:.9;letter-spacing:-.04em;
+  color:transparent;-webkit-text-stroke:1.4px rgba(0,133,207,.55);margin-bottom:14px;background:none !important}
+.why-item h3{font-size:clamp(19px,1.7vw,23px);color:#001e2a;margin:0 0 6px}
+.why-item p{color:#2c3a42;margin:0}
+@media (max-width:860px){.why{grid-template-columns:1fr}}
+
+/* Come funziona: testo su due colonne con un filo blu d'apertura */
+body[data-slug^="/usato/"] .block > h3 + .testo,body[data-slug^="/usato/"] .block > .testo{columns:2 32ch;column-gap:44px;color:#2c3a42;
+  border-left:2px solid #0085cf;padding-left:26px}
+
+/* Supervalutazione: banner a tutta larghezza, non una card isolata */
+.wrap > .row > .block > .promo:only-of-type,.wrap > .row > .block:has(> .promo:first-child:last-of-type) > .promo{
+  display:grid !important;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:30px;min-height:0;
+  padding:clamp(28px,3.4vw,48px) clamp(28px,3.4vw,48px) !important;
+  background:radial-gradient(90% 140% at 100% 0%,rgba(79,189,247,.35),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,255,255,.7)) !important}
+.wrap > .row > .block:has(> .promo:first-child:last-of-type) > .promo > *{grid-column:1}
+.wrap > .row > .block:has(> .promo:first-child:last-of-type) > .promo h3{font-size:clamp(26px,2.8vw,40px)}
+.wrap > .row > .block:has(> .promo:first-child:last-of-type) > .promo::after{position:static !important;grid-column:2;grid-row:1 / span 3;
+  width:72px !important;height:72px !important;background-size:24px 24px,cover !important}
+
+/* ================= 122.1 Pagina Sede ================= */
+/* testata: i recapiti diventano quattro lastre informative sul rosso */
+body[data-slug^="/sedi/"] .row-testata .grid-2{grid-template-columns:1fr 1fr !important}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack{display:grid;gap:clamp(14px,1.8vw,20px)}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div{border-radius:22px;padding:clamp(20px,2.2vw,28px);
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.84));
+  box-shadow:inset 0 1px 0 #fff,0 26px 50px -34px rgba(90,0,12,.55)}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div :is(h4,address,p,span,td,th){color:#001e2a !important;text-shadow:none !important}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#e4002b !important;margin:0 0 10px}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div a:not(.btn){color:#0085cf !important;font-weight:600;text-decoration:none}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div address{font-size:18px;line-height:1.5}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div .small{color:#5a676e !important}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div table.specs{border-spacing:0 6px}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div table.specs tbody tr > *{padding:12px 16px;background:rgba(0,30,42,.035) !important;box-shadow:none !important}
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div table.specs tbody th{font-size:15px}
+body[data-slug^="/sedi/"] .row-testata .kicker{color:#fff !important;opacity:.85}
+/* la sede: galleria di fotografie in vetro, non segnaposto grigi */
+body[data-slug^="/sedi/"] .row-int .grid .ph{min-height:clamp(180px,20vw,260px);border:0;border-radius:22px;color:#5a676e;
+  background:radial-gradient(70% 80% at 30% 20%,rgba(79,189,247,.25),transparent 70%),linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.42));
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6)}
+@media (max-width:860px){body[data-slug^="/sedi/"] .row-testata .grid-2{grid-template-columns:1fr !important}}
+body[data-slug^="/usato/"] .wrap > .row > .block > h2::before{color:#0085cf !important}
+body[data-slug^="/sedi/"] .row-testata table.specs tbody tr th::before{content:none}body[data-slug^="/sedi/"] .row-testata table.specs tbody td{font-style:normal;color:#2c3a42 !important}
+/* titoli delle testate: in hover la stessa luce di vetro del claim della hero */
+body:not([data-pagina="home"]) .wrap h1{transition:filter .5s ease}
+body:not([data-pagina="home"]) .wrap h1:hover{filter:drop-shadow(0 0 1px rgba(255,255,255,.8)) drop-shadow(0 0 14px rgba(79,189,247,.45)) drop-shadow(0 2px 16px rgba(90,0,12,.3))}
+
+/* ================= 123. Titoli delle testate: l'ondeggiamento deve vedersi =================
+   La sfumatura dentro le lettere (background-clip:text) impedisce a Chrome di
+   applicare il filtro jelly: come per il claim della home, il titolo diventa
+   bianco pieno. L'ingresso animato non lascia il ritaglio attivo dopo la fine
+   (fill "backwards"), così l'onda può uscire dal riquadro del titolo. */
+.row-testata h1,body:not([data-pagina="home"]) .wrap h1{
+  background:none !important;-webkit-background-clip:border-box !important;background-clip:border-box !important;
+  -webkit-text-fill-color:currentColor !important;
+  text-shadow:0 2px 18px rgba(90,0,12,.28)}
+.row-testata h1{color:#fff}
+body[data-slug="/news/"] .row-testata h1,body[data-slug="/azienda/referenze/"] .row-testata h1{color:#001e2a;text-shadow:none}
+body[data-slug^="/usato/"] .row-testata h1{text-shadow:0 2px 18px rgba(0,30,90,.3)}
+body.ha-ingressi .row-testata h1{animation-fill-mode:backwards !important}
+.row-testata h1,body:not([data-pagina="home"]) .wrap h1{filter:none}
+body:not([data-pagina="home"]) .wrap h1:hover{filter:none}
+.row-testata h1{transition:color .5s ease,text-shadow .5s ease}.row-testata h1:hover{text-shadow:0 1px 0 rgba(255,255,255,.5),0 0 6px rgba(79,189,247,.35),0 2px 10px rgba(0,30,42,.22)}
+/* all'atterraggio le voci di servizio compaiono subito nel colore giusto, senza sfumare */
+.site-header:not(.hdr-pronto) .topbar a{transition:none !important}
+/* titoli lunghi della testata: larghezza piena e tre righe bilanciate
+   (es. « Macchine per la pulizia di officine e metalmeccanica ») */
+body.pagina-interna .row-testata > .block > h1.titolo-lungo{grid-column:1 / -1;max-width:22ch;text-wrap:balance;
+  font-size:clamp(36px,5vw,80px)}
+body.pagina-interna .row-testata > .block > h1.titolo-lungo + p,
+body.pagina-interna .row-testata > .block > h1.titolo-lungo + .lede{grid-column:1 / -1;max-width:60ch;margin-top:18px}
+
+/* ================= 124. Home · card Macchine interamente cliccabili =================
+   Il link « Vedi » copre tutta la card (non solo la parte testo): la card è
+   l'area cliccabile, con il cursore a mano, e resta sopra la superficie di vetro. */
+.board.is-gallery .card{cursor:pointer}
+.board.is-gallery .card .card-body{position:static !important}
+.board.is-gallery .card a.card-link{position:static}
+.board.is-gallery .card a.card-link::after{content:"" !important;position:absolute;inset:0;z-index:6;border-radius:26px}
+.board.is-gallery .card a.card-link:focus-visible::after{outline:2px solid #0085cf;outline-offset:3px}
+
+/* ================= 125. Hero con video Vimeo · logo bianco =================
+   Il video di sfondo è un lettore Vimeo in modalità background: riempie la
+   hero come un "cover" (16:9 ritagliato), non riceve clic. La materia WebGL
+   disegnata sopra è spenta, altrimenti coprirebbe il video. */
+.hero-vimeo{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;background:#001e2a}
+.hero-vimeo iframe{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:0;
+  width:100vw;height:56.25vw;min-height:100%;min-width:177.78vh}
+.hero-full .hero-canvas{display:none !important}
+/* logo bianco nella barra: la capsula sul rosso resta di vetro trasparente, così il bianco si legge */
+body.mood-macchine .hdr-shell,body.mood-macchine .site-header.su-hero .hdr-shell{
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.12)) !important}
+/* il video ora arriva da Vimeo: la nota « video da fornire » non serve più */
+.hero-full .hero-nota{display:none !important}
+/* il video Vimeo è il fondo della hero: sempre visibile, sotto il velo scuro */
+.hero-full .hero-vimeo,.hero-full.ha-canvas .hero-vimeo{display:block !important;opacity:1 !important;z-index:-2}
+
+/* ================= 126. Hero · contenuto di lato, colorazione rossa (prova) =================
+   Il contenuto si sposta a sinistra e lascia libera la parte destra, dove il
+   video si vede pulito. La colorazione sopra il video passa dal blu al Socaf
+   Red: una tinta in fusione "color" e un velo più denso solo a sinistra, dietro
+   al testo, per la leggibilità. */
+.hero-full .hero-cnt{align-items:flex-start !important;text-align:left !important;
+  margin-left:max(var(--pad),calc((100vw - 1440px) / 2 + var(--pad))) !important;margin-right:auto !important;
+  width:min(600px,100% - 2 * var(--pad)) !important;max-width:600px}
+.hero-full .hero-copy{align-items:flex-start !important;text-align:left !important}
+.hero-full .hero-copy h1{max-width:13ch;margin-left:0}
+.hero-full .hero-copy .lede{margin-left:0 !important;text-align:left !important;max-width:44ch}
+.hero-full .hero-cnt .search{width:100%;margin-left:0}
+.hero-full .hero-cta{justify-content:flex-start}
+.hero-full .hero-stats,body[data-pagina="home"] .hero-cnt .hero-stats{justify-content:flex-start !important}
+.hero-full .hero-cnt .hero-stats > div:first-child{padding-left:0}
+/* colorazione: Socaf Red al posto del blu */
+.hero-velo{background:
+  linear-gradient(90deg,rgba(90,0,14,.72) 0%,rgba(163,16,0,.45) 38%,rgba(163,16,0,.08) 70%,rgba(0,0,0,0) 100%),
+  linear-gradient(180deg,rgba(40,0,6,.35) 0%,rgba(0,0,0,0) 30%,rgba(40,0,6,.45) 100%) !important}
+.hero-velo::after{background:#e4002b !important;mix-blend-mode:color;opacity:.5 !important}
+@media (max-width:760px){
+  .hero-full .hero-cnt{margin-left:auto !important;margin-right:auto !important}
+  .hero-velo{background:linear-gradient(180deg,rgba(90,0,14,.55),rgba(163,16,0,.35) 50%,rgba(90,0,14,.6)) !important}}
+/* rosso più trasparente: tinta leggera, velo solo quanto basta al testo */
+.hero-velo::after{opacity:.26 !important}
+.hero-velo{background:
+  linear-gradient(90deg,rgba(90,0,14,.5) 0%,rgba(163,16,0,.26) 38%,rgba(163,16,0,0) 68%),
+  linear-gradient(180deg,rgba(40,0,6,.25) 0%,rgba(0,0,0,0) 30%,rgba(40,0,6,.3) 100%) !important}
+.hero-velo::after{opacity:.12 !important}
+.hero-velo{background:
+  linear-gradient(90deg,rgba(60,0,10,.4) 0%,rgba(120,0,16,.16) 36%,rgba(120,0,16,0) 62%),
+  linear-gradient(180deg,rgba(30,0,4,.18) 0%,rgba(0,0,0,0) 28%,rgba(30,0,4,.22) 100%) !important}
+/* titolo della hero su tre righe: « Macchine e prodotti / per la pulizia / professionale » */
+.hero-full .hero-cnt{width:min(780px,100% - 2 * var(--pad)) !important;max-width:780px}
+.hero-full .hero-copy h1{font-size:clamp(40px,5.2vw,78px) !important;max-width:19.5ch !important;text-wrap:balance;line-height:1.02}
+.hero-full .hero-copy .lede{max-width:48ch}
+.hero-full .hero-cnt .search,.hero-full .hero-cnt .hero-stats{max-width:600px}
+
+/* ================= 127. Un solo raggio per tutto il sito =================
+   Nav, pulsanti, campi, contenitori, card, immagini, tendine, righe e
+   pastiglie usano lo stesso raggio: --raggio (22px). Restano tondi solo gli
+   elementi che sono cerchi per natura (icone, numeri delle tappe, frecce). */
+:root{--raggio:22px}
+.hdr-shell,.dropdown,.mobile-panel,
+.btn,.btn-primary,.btn-glass,.btn-ghost,.phone-cta,.search,.hero-cnt .search,.search input,.hero-cnt .search input,
+.field input,.field select,.field textarea,.chip,.tag,.logo-item,.logo-mono,
+.wrap > .row > .block,.wrap > .row > .section,.wrap > div > .row > .block,.row-gruppo .gruppo,.row-vetro > .block,
+.row[data-mood="macchine"] > .block,.gruppo,.notice,.promo,.why-item,.steps-dettaglio,
+.card,.card > .card-fondo,.formula,.formula > .card-fondo,.sede,.sede > .card-fondo,.board.is-gallery .card,.board.is-gallery .card:nth-child(n),
+.card-media,.card .card-media.ph,.formula-art,.ph,.gallery-main,.thumb,
+.faq details,.t-nav [role=tab],table.specs tbody tr > :first-child,table.specs tbody tr > :last-child,
+.dropdown a,.row-testata .promo:has(+ .notice),.row-testata .grid-2 > .notice,
+body[data-slug^="/sedi/"] .row-testata .grid-2 > .stack > div,.block > h2 + ul.stack-sm > li,.site-footer{
+  border-radius:var(--raggio) !important}
+/* le righe delle formule sono una sola forma: raggio solo alle estremità */
+table.specs tbody tr > :first-child{border-radius:var(--raggio) 0 0 var(--raggio) !important}
+table.specs tbody tr > :last-child{border-radius:0 var(--raggio) var(--raggio) 0 !important}
+/* il velo di vetro sulle card segue lo stesso raggio */
+:is(.card,.sede,.formula,.promo)::before,.board.is-gallery .card::before{border-radius:var(--raggio) !important}
+.board.is-gallery .card a.card-link::after{border-radius:var(--raggio) !important}
+/* il footer resta a tutta larghezza: raggio solo in alto */
+.site-footer{border-radius:var(--raggio) var(--raggio) 0 0 !important}
+/* cerchi per natura */
+.hdr-search,.search button,.hero-cnt .search button,.faq summary::after,.step::before,.promo::after,
+.block > h2 + ul.stack-sm > li::after,nav[aria-label="Paginazione"] .chip,.dn-pin{border-radius:50% !important}
+nav[aria-label="Paginazione"] a.chip:last-child{border-radius:var(--raggio) !important}
+/* barra di navigazione, pulsanti, ricerca e piccoli elementi tornano a pillola;
+   contenitori, card e immagini restano con il raggio comune (--raggio) */
+.hdr-shell,.btn,.btn-primary,.btn-glass,.btn-ghost,.phone-cta,.search,.hero-cnt .search,.search input,.hero-cnt .search input,
+.chip,.tag,.logo-item,.logo-mono,nav[aria-label="Paginazione"] a.chip:last-child{border-radius:999px !important}
+
+/* ================= 128. Card: niente gelatina, triangolo rosso, altre sfocate · raggi al massimo ================= */
+:root{--raggio:40px}
+/* raggio interno delle immagini nelle card: un po' minore del contenitore, così i bordi restano paralleli */
+.card-media,.card .card-media.ph,.formula-art,.board.is-gallery .card-media{border-radius:30px !important}
+
+/* triangolo rosso VI che entra accanto al titolo della card in hover */
+:is(.card .card-name,.formula .formula-h,.sede .city,.promo h3){position:relative;transition:padding-left .35s cubic-bezier(.2,.8,.2,1)}
+:is(.card .card-name,.formula .formula-h,.sede .city,.promo h3)::before{content:"";position:absolute;left:0;top:50%;width:0;height:0;
+  border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:11px solid #e4002b;
+  transform:translate(-8px,-50%);opacity:0;transition:opacity .25s ease,transform .35s cubic-bezier(.2,.8,.2,1)}
+:is(.card,.formula,.sede,.promo):hover :is(.card-name,.formula-h,.city,h3){padding-left:20px}
+:is(.card,.formula,.sede,.promo):hover :is(.card-name,.formula-h,.city,h3)::before{opacity:1;transform:translate(0,-50%)}
+
+/* le card non puntate vanno davvero fuori fuoco */
+:is(.card,.sede,.formula,.promo)::before,.board.is-gallery .card::before,
+body[data-pagina="home"] .formule > .formula::before,
+body[data-pagina="home"] :is(.row-marchi .grid,.sedi) > :is(.card,.sede)::before,
+body.pagina-interna :is(.grid,.sedi,.promo-pair,.formule,.board-track) > :is(.card,.sede,.formula,.promo)::before{
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.26)) !important;
+  backdrop-filter:blur(7px) saturate(110%) !important;-webkit-backdrop-filter:blur(7px) saturate(110%) !important}
+
+/* ================= 129. Numeri hero centrati · triangolo rosso nell'angolo della card ================= */
+.hero-full .hero-cnt .hero-stats > div,body[data-pagina="home"] .hero-cnt .hero-stats > div{align-items:center !important;text-align:center !important}
+.hero-full .hero-cnt .hero-stats > div:first-child{padding-left:clamp(18px,2.6vw,40px)}
+.hero-full .hero-cnt .hero-stats{margin-left:calc(-1 * clamp(18px,2.6vw,40px))}
+
+/* via il triangolo accanto al titolo */
+:is(.card .card-name,.formula .formula-h,.sede .city,.promo h3)::before{content:none !important}
+:is(.card,.formula,.sede,.promo):hover :is(.card-name,.formula-h,.city,h3){padding-left:0 !important}
+/* triangolo nell'angolo in basso a destra: cresce dall'angolo, che segue la curva della card */
+:is(.card,.formula,.sede):not(.promo)::after,.board.is-gallery .card::after{
+  content:"" !important;position:absolute !important;right:0;bottom:0;left:auto;top:auto;z-index:7;pointer-events:none;
+  width:clamp(52px,5vw,72px) !important;height:clamp(52px,5vw,72px) !important;inset:auto 0 0 auto !important;
+  background:#e4002b !important;mix-blend-mode:normal !important;box-shadow:none !important;
+  clip-path:polygon(100% 0,100% 100%,0 100%) !important;border-radius:0 0 var(--raggio) 0 !important;
+  opacity:0 !important;transform:scale(.4) !important;transform-origin:100% 100%;
+  transition:opacity .25s ease,transform .4s cubic-bezier(.2,.8,.2,1) !important}
+:is(.card,.formula,.sede):hover::after,.board.is-gallery .card:hover::after{opacity:1 !important;transform:none !important}
+/* triangolo esattamente aderente: l'angolo curvo è quello della card stessa
+   (ereditato), e il triangolo parte a filo dei due bordi, senza margini */
+:is(.card,.formula,.sede):not(.promo)::after,.board.is-gallery .card::after{
+  border-radius:0 !important;border-bottom-right-radius:inherit !important;
+  right:0 !important;bottom:0 !important;margin:0 !important;
+  width:clamp(64px,6vw,86px) !important;height:clamp(64px,6vw,86px) !important}
+
+/* ================= 130. Fotografie reali nelle card + bordo senza filo bianco =================
+   Le card di famiglia, sottocategoria e formula mostrano una foto reale
+   (assets/images/categorie, ridotte dagli originali in assets/STATICHE).
+   Nessun contorno bianco attorno alle card: il triangolo rosso resta a filo. */
+.card-media.foto,.formula-art.foto{position:relative;padding:0 !important;background:#dbdbdb !important;overflow:hidden !important;
+  aspect-ratio:16/10;min-height:0 !important}
+.card .card-media.foto img,.formula-art.foto img{display:block;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;padding:0;
+  border-radius:inherit;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+:is(.card,.formula):hover :is(.card-media,.formula-art).foto img{transform:scale(1.04)}
+.card-sagoma path{stroke:none !important}
+.card-sagoma{filter:drop-shadow(0 18px 26px rgba(0,30,42,.16)) !important}
+:is(.card,.formula,.sede),:is(.card,.formula,.sede) > .card-fondo{outline:0 !important;border:0 !important}
+:is(.card,.formula,.sede)::before,.board.is-gallery .card::before{box-shadow:none !important}
+:is(.card,.formula,.sede) > .card-fondo,:is(.card,.formula,.sede):hover > .card-fondo{box-shadow:0 22px 40px -26px rgba(0,30,42,.32) !important}
+.board.is-gallery .card,.board.is-gallery .card:hover,.formule .formula,.formule .formula:hover{box-shadow:none !important}
+
+/* ================= 131. Home · via il fondale fisso dopo l'hero; « Le macchine » in vetro cannettato rosso =================
+   La forma a U fissa resta solo nell'hero. La sezione « Le macchine » prende
+   lo stesso fondo delle schede prodotto (.intro-vetro, 107b) ricolorato in
+   rosso VI: fondale Socaf Red / Deep Red sfocato e lastra a canne verticali. */
+body[data-pagina="home"]:not(.mood-chiaro) .forme-laterali{opacity:0 !important;transition:opacity .6s ease}
+body[data-pagina="home"] .macchine-scena,body[data-pagina="home"] .macchine-scena canvas{display:none !important}
+body[data-pagina="home"] .mood .macchine{overflow:hidden;background:
+    radial-gradient(38% 48% at 10% 14%,#f33f54,rgba(243,63,84,.9) 40%,transparent 74%),
+    radial-gradient(44% 62% at 86% 58%,rgba(0,30,42,.85),rgba(163,16,0,.5) 48%,transparent 78%),
+    radial-gradient(30% 44% at 98% 6%,rgba(163,16,0,.85),transparent 72%),
+    radial-gradient(36% 52% at 44% 96%,rgba(163,16,0,.95),transparent 74%),
+    linear-gradient(160deg,#e4002b,#a31000) !important}
+body[data-pagina="home"] .mood .macchine::before{content:"";position:absolute;inset:-8%;background:inherit;filter:blur(38px);opacity:.9}
+body[data-pagina="home"] .mood .macchine::after{content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0) 0px,rgba(255,255,255,.15) 6px,rgba(255,255,255,.26) 10px,
+      rgba(255,255,255,.04) 15px,rgba(0,30,42,.09) 20px,rgba(0,30,42,.14) 24px,
+      rgba(255,255,255,0) 30px),
+    repeating-linear-gradient(90deg,
+      rgba(243,63,84,.12) 0px,rgba(255,255,255,0) 9px,
+      rgba(79,189,247,.06) 16px,rgba(255,255,255,0) 30px)}
+.foto-aspiratori img{object-position:20% 60%}
+
+/* ================= 132. Home · fusione graduale hero → « Le macchine » =================
+   Via la dissolvenza a scatto (classe mood-macchine, 1,1 s): il rosso
+   cannettato sale dal basso seguendo lo scroll (--fonde 0→1, calcolato in JS)
+   come una marea dal bordo morbido; l'hero intanto si spegne e arretra
+   appena, così le due sezioni si fondono invece di tagliarsi. */
+body[data-pagina="home"]:is(.mood-chiaro,.mood-macchine) .mood .macchine{
+  opacity:1 !important;transition:none !important;
+  -webkit-mask:linear-gradient(0deg,#000 calc(var(--fonde,0) * 160% - 60%),transparent calc(var(--fonde,0) * 160%));
+          mask:linear-gradient(0deg,#000 calc(var(--fonde,0) * 160% - 60%),transparent calc(var(--fonde,0) * 160%))}
+body[data-pagina="home"]:is(.mood-chiaro,.mood-macchine) .mood .chiaro{opacity:1 !important;transition:none !important}
+body[data-pagina="home"] .hero-full{
+  -webkit-mask:linear-gradient(180deg,#000 calc(100% - var(--fonde,0) * 70%),transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 calc(100% - var(--fonde,0) * 70%),transparent 100%) !important}
+body[data-pagina="home"] .hero-full .hero-cnt{opacity:calc(1 - var(--fonde,0) * 1.3);transform:translateY(calc(var(--fonde,0) * -40px))}
+@media (prefers-reduced-motion:reduce){body[data-pagina="home"] .hero-full .hero-cnt{transform:none}}
+
+/* 133. « Le macchine »: gradiente rosso/bianco, nessuna nota blu o scura */
+body[data-pagina="home"] .mood .macchine{background:
+    radial-gradient(34% 42% at 12% 14%,rgba(255,255,255,.85),rgba(255,255,255,.35) 45%,transparent 75%),
+    radial-gradient(46% 60% at 85% 60%,#e4002b,rgba(228,0,43,.8) 50%,transparent 80%),
+    radial-gradient(40% 50% at 45% 95%,rgba(243,63,84,.9),transparent 74%),
+    linear-gradient(160deg,#f33f54 0%,#e4002b 45%,#c8001f 100%) !important}
+body[data-pagina="home"] .mood .macchine::after{background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0) 0px,rgba(255,255,255,.16) 6px,rgba(255,255,255,.28) 10px,
+      rgba(255,255,255,.05) 15px,rgba(163,16,0,.08) 20px,rgba(163,16,0,.12) 24px,
+      rgba(255,255,255,0) 30px) !important}
+
+/* 134. Fusione hero → macchine più morbida (sostituisce la 132):
+   niente maschera sull'hero né spostamento dei contenuti; il rosso entra
+   con una dissolvenza lenta e un bordo lungo e sfumato, su 1,3 schermi di scroll */
+body[data-pagina="home"] .hero-full{-webkit-mask:none !important;mask:none !important}
+body[data-pagina="home"] .hero-full .hero-cnt{opacity:1;transform:none}
+body[data-pagina="home"]:is(.mood-chiaro,.mood-macchine) .mood .macchine{
+  opacity:var(--fonde,0) !important;
+  -webkit-mask:linear-gradient(0deg,#000 calc(var(--fonde,0) * 100%),transparent calc(var(--fonde,0) * 100% + 70%));
+          mask:linear-gradient(0deg,#000 calc(var(--fonde,0) * 100%),transparent calc(var(--fonde,0) * 100% + 70%))}
+
+/* 135. Hero → « Le macchine »: il video si fonde direttamente nel rosso
+   (sostituisce 132 e 134). Nessun passaggio dal bianco e nessuna nota blu:
+   dietro l'hero c'è già il fondo rosso, il video sfuma nel rosso dal basso
+   con un bordo lungo, e scorrendo si vela di rosso sempre di più. */
+body[data-pagina="home"] .forme-laterali{display:none !important}
+body[data-pagina="home"] .mood .chiaro{background:linear-gradient(160deg,#f33f54 0%,#e4002b 45%,#c8001f 100%) !important}
+body[data-pagina="home"]:is(.mood-chiaro,.mood-macchine) .mood .macchine{opacity:1 !important;-webkit-mask:none !important;mask:none !important}
+body[data-pagina="home"] .hero-full{-webkit-mask:none !important;mask:none !important}
+body[data-pagina="home"] .hero-vimeo{
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.82) 68%,rgba(0,0,0,.45) 84%,rgba(0,0,0,.15) 94%,transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 0%,#000 52%,rgba(0,0,0,.82) 68%,rgba(0,0,0,.45) 84%,rgba(0,0,0,.15) 94%,transparent 100%) !important}
+body[data-pagina="home"] .hero-vimeo{background:#e4002b}
+body[data-pagina="home"] .hero-vimeo::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(228,0,43,0) 30%,rgba(228,0,43,.55) 100%);
+  opacity:calc(.35 + var(--fonde,0) * .65)}
+/* l'hero aveva un fondo blu → Jet Black che affiorava dove il video sfuma */
+body[data-pagina="home"] .hero-full{background:transparent !important}
+body[data-pagina="home"]{background-color:#e4002b}
+
+/* 137. Hero → « Le macchine »: sovrapposizione senza taglio
+   Il fondo della sezione e il suo contenitore restano quelli di prima.
+   - La sezione sale sotto la fine dell'hero: la parte alta del contenitore
+     (vetro sfocato) si appoggia sul video che sfuma e lo mescola.
+   - La coda del video prende lo stesso tono del contenitore (rosso + il
+     velo bianco del vetro), così dove si sovrappongono non c'è stacco.
+   - Il filo di luce in cima al contenitore, che disegnava la linea del
+     taglio, si spegne. */
+
+body[data-pagina="home"] .hero-vimeo::after{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,0) 45%,rgba(255,255,255,.12) 80%,rgba(255,255,255,.22) 100%),
+    linear-gradient(180deg,rgba(228,0,43,0) 30%,rgba(228,0,43,.55) 100%) !important}
+body[data-pagina="home"] .row[data-mood="macchine"] > .block{
+  box-shadow:inset 1px 0 0 rgba(255,255,255,.4),inset -1px 0 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(255,255,255,.25),0 30px 60px -40px rgba(0,30,42,.35) !important}
+
+/* 138. Fusione hero ↔ fondo principale (sostituisce la coda di 135/137)
+   - il video sfuma con una curva lunga e morbida (ease-in-out a molti passi)
+     che parte dal 40% dell'altezza: nessun gradino percepibile;
+   - la velatura non è più un colore suo: un rosso leggero che si
+     dissolve nel fondo, senza velo bianco;
+   - le canne del fondo risalgono dentro la coda del video e svaniscono
+     verso l'alto, così la texture passa da una parte all'altra senza stacco. */
+body[data-pagina="home"] .hero-vimeo{
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 40%,rgba(0,0,0,.96) 48%,rgba(0,0,0,.86) 56%,rgba(0,0,0,.7) 64%,
+    rgba(0,0,0,.5) 72%,rgba(0,0,0,.3) 80%,rgba(0,0,0,.14) 88%,rgba(0,0,0,.04) 95%,transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 0%,#000 40%,rgba(0,0,0,.96) 48%,rgba(0,0,0,.86) 56%,rgba(0,0,0,.7) 64%,
+    rgba(0,0,0,.5) 72%,rgba(0,0,0,.3) 80%,rgba(0,0,0,.14) 88%,rgba(0,0,0,.04) 95%,transparent 100%) !important}
+body[data-pagina="home"] .hero-vimeo::after{opacity:1 !important;
+  background:linear-gradient(180deg,rgba(228,0,43,0) 35%,rgba(228,0,43,.18) 60%,rgba(228,0,43,.42) 85%,rgba(228,0,43,.55) 100%) !important}
+body[data-pagina="home"] .hero-vimeo::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:repeating-linear-gradient(90deg,
+      rgba(255,255,255,0) 0px,rgba(255,255,255,.16) 6px,rgba(255,255,255,.28) 10px,
+      rgba(255,255,255,.05) 15px,rgba(163,16,0,.08) 20px,rgba(163,16,0,.12) 24px,
+      rgba(255,255,255,0) 30px);
+  -webkit-mask:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.35) 75%,#000 100%);
+          mask:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.35) 75%,#000 100%)}
+
+/* 139. Il triangolo rosso nasce dall'angolo della foto, non della card */
+:is(.card,.formula,.sede):not(.promo)::after,.board.is-gallery .card::after{display:none !important}
+:is(.card,.formula) :is(.card-media,.formula-art){position:relative !important;overflow:hidden !important}
+:is(.card,.formula) :is(.card-media,.formula-art)::after,.ha-sagoma > :is(.card-media,.formula-art)::after,.board.is-gallery .card .card-media::after,.row-marchi .card .card-media::after{
+  content:"" !important;display:block !important;position:absolute !important;right:0;bottom:0;left:auto;top:auto;z-index:3;pointer-events:none;
+  width:clamp(56px,5.4vw,78px);height:clamp(56px,5.4vw,78px);background:#e4002b !important;
+  border-radius:0 0 30px 0 !important;clip-path:polygon(100% 0,100% 100%,0 100%) !important;
+  opacity:0;transform:scale(.4);transform-origin:100% 100%;
+  transition:opacity .25s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
+:is(.card,.formula):hover :is(.card-media,.formula-art)::after,.board.is-gallery .card:hover .card-media::after,.row-marchi .card:hover .card-media::after{opacity:1;transform:none}
+/* la foto della formula ha il raggio solo in alto: il triangolo resta a spigolo vivo */
+.formule .formula-art::after{border-radius:0 !important}
+
+/* 140. Niente riga sul bordo basso dell'hero: il velo rosso (.hero-velo)
+   non era sfumato e finiva netto dove il video si è già dissolto */
+body[data-pagina="home"] .hero-velo{
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 40%,rgba(0,0,0,.86) 56%,rgba(0,0,0,.5) 72%,rgba(0,0,0,.14) 88%,transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 0%,#000 40%,rgba(0,0,0,.86) 56%,rgba(0,0,0,.5) 72%,rgba(0,0,0,.14) 88%,transparent 100%) !important}
+body[data-pagina="home"] .hero-full{box-shadow:none !important}
+
+/* 141. Triangolo della foto più presente: più grande e sopra ogni velo */
+:is(.card,.formula) :is(.card-media,.formula-art),.board.is-gallery .card .card-media,.row-marchi .card .card-media{z-index:6 !important}
+:is(.card,.formula) :is(.card-media,.formula-art)::after,.board.is-gallery .card .card-media::after,.row-marchi .card .card-media::after{
+  z-index:10 !important;width:clamp(84px,8vw,120px) !important;height:clamp(84px,8vw,120px) !important;
+  box-shadow:none;filter:drop-shadow(0 -4px 14px rgba(163,16,0,.35))}
+
+/* 142. Stessa transizione, ma confinata al fondo dell'hero: il video resta
+   pulito fino al 64% dell'altezza, velatura rossa e canne solo nella coda */
+body[data-pagina="home"] .hero-vimeo{
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 64%,rgba(0,0,0,.94) 70%,rgba(0,0,0,.8) 76%,rgba(0,0,0,.6) 82%,
+    rgba(0,0,0,.38) 88%,rgba(0,0,0,.18) 93%,rgba(0,0,0,.05) 97%,transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 0%,#000 64%,rgba(0,0,0,.94) 70%,rgba(0,0,0,.8) 76%,rgba(0,0,0,.6) 82%,
+    rgba(0,0,0,.38) 88%,rgba(0,0,0,.18) 93%,rgba(0,0,0,.05) 97%,transparent 100%) !important}
+body[data-pagina="home"] .hero-vimeo::after{
+  background:linear-gradient(180deg,rgba(228,0,43,0) 62%,rgba(228,0,43,.2) 80%,rgba(228,0,43,.45) 92%,rgba(228,0,43,.55) 100%) !important}
+body[data-pagina="home"] .hero-vimeo::before{
+  -webkit-mask:linear-gradient(180deg,transparent 72%,rgba(0,0,0,.35) 88%,#000 100%) !important;
+          mask:linear-gradient(180deg,transparent 72%,rgba(0,0,0,.35) 88%,#000 100%) !important}
+body[data-pagina="home"] .hero-velo{
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 64%,rgba(0,0,0,.8) 76%,rgba(0,0,0,.45) 86%,rgba(0,0,0,.12) 94%,transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 0%,#000 64%,rgba(0,0,0,.8) 76%,rgba(0,0,0,.45) 86%,rgba(0,0,0,.12) 94%,transparent 100%) !important}
+
+/* 143. Coda dell'hero più delicata: stessa sfumatura, meno intensità.
+   Velatura rossa dimezzata, canne a metà forza, velo scuro più leggero
+   nella parte bassa; il bordo resta comunque del tutto trasparente. */
+body[data-pagina="home"] .hero-vimeo::after{
+  background:linear-gradient(180deg,rgba(228,0,43,0) 62%,rgba(228,0,43,.08) 80%,rgba(228,0,43,.18) 92%,rgba(228,0,43,.26) 100%) !important}
+body[data-pagina="home"] .hero-vimeo::before{opacity:.45}
+body[data-pagina="home"] .hero-velo{
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 58%,rgba(0,0,0,.62) 72%,rgba(0,0,0,.3) 84%,rgba(0,0,0,.08) 93%,transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 0%,#000 58%,rgba(0,0,0,.62) 72%,rgba(0,0,0,.3) 84%,rgba(0,0,0,.08) 93%,transparent 100%) !important}
+
+/* 144. Coda dell'hero senza rosso aggiunto: solo il video che si scioglie
+   - via la velatura rossa sul video e la fascia scura rossastra in basso del velo;
+   - il velo resta solo a sinistra, dove serve al testo;
+   - il video sfuma solo nell'ultimo quinto, lasciando emergere il fondo. */
+body[data-pagina="home"] .hero-vimeo::after{display:none !important}
+body[data-pagina="home"] .hero-vimeo::before{opacity:.3}
+body[data-pagina="home"] .hero-velo{background:
+  linear-gradient(90deg,rgba(90,0,14,.5) 0%,rgba(163,16,0,.26) 38%,rgba(163,16,0,0) 68%),
+  linear-gradient(180deg,rgba(40,0,6,.25) 0%,rgba(0,0,0,0) 30%) !important}
+body[data-pagina="home"] .hero-vimeo{
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,.9) 83%,rgba(0,0,0,.7) 88%,rgba(0,0,0,.45) 92%,
+    rgba(0,0,0,.22) 96%,rgba(0,0,0,.07) 98.5%,transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 0%,#000 78%,rgba(0,0,0,.9) 83%,rgba(0,0,0,.7) 88%,rgba(0,0,0,.45) 92%,
+    rgba(0,0,0,.22) 96%,rgba(0,0,0,.07) 98.5%,transparent 100%) !important}
+
+/* 145. Una scia di colore sotto l'hero, diffusa e non a fascia
+   Il video si scioglie su una curva lunga e molto dolce (dal 45%), e dal
+   basso affiora un alone rosso morbido fatto di tre ellissi sfalsate,
+   come una scia che risale sotto l'immagine; il bordo resta trasparente. */
+body[data-pagina="home"] .hero-vimeo{
+  -webkit-mask:linear-gradient(180deg,#000 0%,#000 45%,rgba(0,0,0,.97) 52%,rgba(0,0,0,.92) 59%,rgba(0,0,0,.84) 66%,
+    rgba(0,0,0,.72) 73%,rgba(0,0,0,.56) 80%,rgba(0,0,0,.38) 86%,rgba(0,0,0,.2) 92%,rgba(0,0,0,.07) 97%,transparent 100%) !important;
+          mask:linear-gradient(180deg,#000 0%,#000 45%,rgba(0,0,0,.97) 52%,rgba(0,0,0,.92) 59%,rgba(0,0,0,.84) 66%,
+    rgba(0,0,0,.72) 73%,rgba(0,0,0,.56) 80%,rgba(0,0,0,.38) 86%,rgba(0,0,0,.2) 92%,rgba(0,0,0,.07) 97%,transparent 100%) !important}
+body[data-pagina="home"] .hero-vimeo::after{display:block !important;content:"" !important;opacity:1 !important;filter:blur(30px);
+  inset:-10% -10% -4% -10% !important;
+  background:
+    radial-gradient(60% 42% at 22% 104%,rgba(228,0,43,.34),transparent 72%),
+    radial-gradient(70% 48% at 62% 108%,rgba(243,63,84,.28),transparent 74%),
+    radial-gradient(50% 36% at 92% 102%,rgba(228,0,43,.26),transparent 70%) !important}
+body[data-pagina="home"] .hero-vimeo::before{opacity:.22}
+
+/* ================= 146. HOME · le sezioni come tessere di un mosaico =================
+   Da « Le macchine » in giù (l'hero resta com'è): un solo fondo per tutta la
+   pagina — il rosso a vetro cannettato di « Le macchine » — e sopra, ogni
+   sezione è una tessera di liquid glass con lo stesso raggio, lo stesso
+   respiro interno e la stessa fuga tra una tessera e l'altra.
+   Un solo linguaggio: vetro, rosso, bianco. Niente azzurro, niente blu,
+   niente fondi o decori propri di una singola sezione. */
+body[data-pagina="home"]{--fuga:clamp(12px,1.4vw,20px);--tessera-pad:clamp(26px,3.4vw,52px)}
+
+/* 146.1 un solo fondo: il rosso cannettato resta acceso per tutta la pagina */
+body[data-pagina="home"]:not(.mood-chiaro) .mood .macchine{opacity:1 !important}
+body[data-pagina="home"] .mood .azzurro,body[data-pagina="home"] .mood .rosso{opacity:0 !important}
+body[data-pagina="home"] .materia,
+body[data-pagina="home"] .wrap > .row:not(:first-child)::before,
+body[data-pagina="home"] .wrap > .row:not(:first-child)::after,
+body[data-pagina="home"] .wrap > .row:not(:first-child) > .block::before,
+body[data-pagina="home"] .wrap > .row:not(:first-child) > .block::after{content:none !important;display:none !important}
+
+/* 146.2 la fuga: stessa distanza tra tutte le tessere */
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc){margin:0 0 var(--fuga) !important;padding:0 !important;background:none !important}
+body[data-pagina="home"] .wrap > .row[data-mood="macchine"]{margin-top:var(--fuga) !important}
+
+/* 146.3 la tessera: vetro bianco pieno (contenuti leggibili, testo scuro) */
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc) > .block{
+  position:relative;overflow:hidden;border:0 !important;border-radius:var(--raggio) !important;
+  padding:var(--tessera-pad) !important;color:#001e2a;
+  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.78)) !important;
+  -webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55),0 30px 60px -40px rgba(90,0,12,.55) !important}
+/* « Le macchine » è la tessera di vetro chiaro: lascia vedere il rosso */
+body[data-pagina="home"] .wrap > .row[data-mood="macchine"] > .block{
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.1) 50%,rgba(255,255,255,.14)) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(170%);backdrop-filter:blur(34px) saturate(170%)}
+
+/* 146.4 tipografia comune alle tessere bianche: titolo scuro, accento rosso */
+body[data-pagina="home"] .wrap > .row:not(:first-child):not([data-mood="macchine"]):not(.wf-doc) > .block :is(h2,h3,.gruppo-h){
+  color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;background:none !important;text-shadow:none !important}
+body[data-pagina="home"] .wrap > .row:not(:first-child):not([data-mood="macchine"]):not(.wf-doc) > .block :is(p,li,address,.lede,.small,.card-desc){
+  color:#2c3a42 !important;text-shadow:none !important}
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc) > .block :is(.kicker,.block-id){color:#e4002b !important}
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc) > .block h2 em{color:#e4002b !important}
+
+/* 146.5 ultimi azzurri dentro le tessere → rosso/bianco/grigi VI */
+body[data-pagina="home"] .formula :is(.formula-h,.formula-go){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body[data-pagina="home"] .formula .formula-go::before{border-color:#e4002b !important;background-color:#e4002b !important}
+body[data-pagina="home"] .formula-usa .formula-art:not(.foto){background:linear-gradient(150deg,rgba(243,63,84,.5),rgba(228,0,43,.32) 60%,rgba(255,255,255,.4)) !important}
+body[data-pagina="home"] .row-gruppo .logo-item{background:rgba(255,255,255,.7) !important;color:#001e2a !important;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(0,30,42,.06) !important;border-color:transparent !important}
+body[data-pagina="home"] .row-marchi .card-media.ph{background:linear-gradient(180deg,#f6f6f6,#dbdbdb) !important;color:#636362 !important;box-shadow:none !important}
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc) > .block a:not(.btn):not(.card-link):not(.chip):not(.formula-go){color:#e4002b}
+
+/* ================= 147. HOME · mosaico v2 (sostituisce 146) =================
+   Il fondo della pagina, da « Il gruppo » in giù, è BIANCO. Il rosso a vetro
+   cannettato non è più il fondale: è la materia di alcune tessere.
+   Tessere:  Le macchine ........ piena larghezza · rosso (resta il fondale fisso, legato all'hero)
+             Il gruppo .......... piena larghezza · vetro bianco
+             Formule 7/12 · rosso      +  Settori 5/12 · vetro bianco
+             Prodotti ........... piena larghezza · rosso, foto in lastra di vetro
+             Marchi ............. contenuta · vetro bianco
+             Sedi 7/12 · rosso         +  Modulo 5/12 · vetro bianco
+   Giunto costante (--fuga) fra tutte le tessere, stesso raggio. */
+body[data-pagina="home"]{
+  --fuga:clamp(12px,1.3vw,18px);--tessera-pad:clamp(26px,3.2vw,50px);
+  --fondo-rosso:
+    repeating-linear-gradient(90deg,rgba(255,255,255,0) 0px,rgba(255,255,255,.16) 6px,rgba(255,255,255,.28) 10px,
+      rgba(255,255,255,.05) 15px,rgba(163,16,0,.08) 20px,rgba(163,16,0,.12) 24px,rgba(255,255,255,0) 30px),
+    radial-gradient(34% 42% at 12% 14%,rgba(255,255,255,.55),rgba(255,255,255,.2) 45%,transparent 75%),
+    radial-gradient(46% 60% at 85% 60%,#e4002b,rgba(228,0,43,.8) 50%,transparent 80%),
+    radial-gradient(40% 50% at 45% 95%,rgba(243,63,84,.9),transparent 74%),
+    linear-gradient(160deg,#f33f54 0%,#e4002b 45%,#c8001f 100%);
+  --lastra:linear-gradient(135deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.28) 42%,rgba(255,255,255,.18) 60%,rgba(255,255,255,.42) 100%);
+  --lastra-bordo:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.35),inset 1px 0 0 rgba(255,255,255,.5),inset -1px 0 0 rgba(255,255,255,.3);
+  background-color:#fff}
+html:has(body[data-pagina="home"]),body[data-pagina="home"]{overflow-x:clip}
+
+/* il fondale: rosso sotto hero e macchine, poi bianco (lo scambio avviene
+   quando « Il gruppo » copre lo schermo, quindi non si vede) */
+body[data-pagina="home"] .mood .azzurro,body[data-pagina="home"] .mood .rosso{background:#fff !important}
+body[data-pagina="home"] .mood .azzurro::before,body[data-pagina="home"] .mood .azzurro::after,
+body[data-pagina="home"] .mood .rosso::before,body[data-pagina="home"] .mood .rosso::after{content:none !important}
+body[data-pagina="home"]:is(.mood-azzurro,.mood-rosso) .mood :is(.azzurro,.rosso){opacity:1 !important}
+body[data-pagina="home"]:is(.mood-azzurro,.mood-rosso) .mood .macchine{opacity:0 !important}
+
+/* la griglia del mosaico */
+body[data-pagina="home"] .wrap:has(> .row[data-mood="macchine"]){
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--fuga);align-items:stretch}
+body[data-pagina="home"] .wrap:has(> .row[data-mood="macchine"]) > *{grid-column:1 / -1;min-width:0}
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc){margin:0 0 var(--fuga) !important;display:flex;flex-direction:column}
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc) > .block{flex:1}
+@media (min-width:980px){
+  body[data-pagina="home"] .wrap > .row.t-7{grid-column:1 / span 7 !important}
+  body[data-pagina="home"] .wrap > .row.t-5{grid-column:8 / span 5 !important}}
+
+/* piena larghezza: la tessera esce dal contenitore fino ai bordi */
+body[data-pagina="home"] .wrap > .row.t-piena:not(:first-child):not(.wf-doc){margin-left:calc(50% - var(--vw,100vw) / 2) !important;margin-right:calc(50% - var(--vw,100vw) / 2) !important}
+body[data-pagina="home"] .wrap > .row.t-piena > .block{
+  padding-left:max(var(--tessera-pad),calc((var(--vw,100vw) - 1440px) / 2 + var(--pad) + var(--tessera-pad))) !important;
+  padding-right:max(var(--tessera-pad),calc((var(--vw,100vw) - 1440px) / 2 + var(--pad) + var(--tessera-pad))) !important}
+
+/* tessera BIANCA: vetro latte, con un riflesso rosso appena accennato su cui il vetro interno rifrange */
+body[data-pagina="home"] .wrap > .row.t-bianca > .block{
+  background:
+    radial-gradient(60% 80% at 100% 0%,rgba(228,0,43,.07),transparent 60%),
+    radial-gradient(50% 70% at 0% 100%,rgba(243,63,84,.05),transparent 65%),
+    linear-gradient(180deg,#ffffff,#f7f7f7) !important;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(0,30,42,.06),0 30px 60px -44px rgba(0,30,42,.35) !important}
+/* tessera ROSSA: la materia di « Le macchine » dentro la tessera */
+body[data-pagina="home"] .wrap > .row.t-rossa > .block{
+  background:var(--fondo-rosso) !important;color:#fff;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 0 0 1px rgba(255,255,255,.18),0 30px 60px -40px rgba(120,0,20,.55) !important}
+body[data-pagina="home"] .wrap > .row.t-rossa > .block > :is(h2,h3,.kicker,.lede,p,.small),
+body[data-pagina="home"] .wrap > .row.t-rossa > .block > .grid > div > :is(h2,p){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;background:none !important;text-shadow:0 1px 12px rgba(120,0,20,.25) !important}
+body[data-pagina="home"] .wrap > .row.t-rossa > .block h2 em{color:#fff !important;opacity:.85}
+body[data-pagina="home"] .wrap > .row.t-rossa .block-id{color:rgba(255,255,255,.8) !important}
+body[data-pagina="home"] .wrap > .row.t-rossa .small code{background:rgba(255,255,255,.18);color:#fff}
+body[data-pagina="home"] .wrap > .row.t-bianca > .block :is(h2,h3,.gruppo-h){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;background:none !important;text-shadow:none !important}
+
+/* ---------- liquid glass: la stessa lastra per tutto ciò che sta dentro le tessere ---------- */
+/* sul rosso: lastre trasparenti che lasciano vedere le canne */
+body[data-pagina="home"] .t-rossa :is(.formula,.sede){
+  background:var(--lastra) !important;color:#fff;
+  -webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:var(--lastra-bordo),0 24px 44px -28px rgba(90,0,12,.55) !important}
+body[data-pagina="home"] .t-rossa :is(.formula,.sede) > .card-fondo,body[data-pagina="home"] .t-rossa .card-sagoma{display:none !important}
+body[data-pagina="home"] .t-rossa :is(.formula,.sede) :is(.formula-h,.formula-p,.kicker,.city,.main-flag,address,p,span,a:not(.btn)){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:none !important}
+body[data-pagina="home"] .t-rossa .formula .formula-go::before{border-color:#fff !important;background-color:#fff !important}
+/* sul bianco: lastre di vetro latte con riflesso speculare */
+body[data-pagina="home"] .t-bianca :is(.tile,.logo-item,.card:not(.formula)){
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.55) 45%,rgba(255,255,255,.8) 100%),
+    radial-gradient(120% 90% at 100% 100%,rgba(228,0,43,.08),transparent 60%) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(0,30,42,.07),0 18px 34px -24px rgba(0,30,42,.32) !important}
+
+/* ---------- Il gruppo: loghi visibili ---------- */
+body[data-pagina="home"] .row-gruppo .gruppo-scena,body[data-pagina="home"] .row-gruppo .gruppo-liquido{display:none !important}
+body[data-pagina="home"] .row-gruppo .gruppo{background:none !important;box-shadow:none !important;padding:0 !important}
+body[data-pagina="home"] .row-gruppo .loghi{display:flex;flex-wrap:wrap;gap:var(--fuga);margin-top:26px}
+body[data-pagina="home"] .row-gruppo .logo-item{flex:1 1 200px;display:grid;place-items:center;min-height:clamp(96px,9vw,130px);
+  border-radius:var(--raggio) !important;padding:22px 30px;opacity:1 !important}
+body[data-pagina="home"] .row-gruppo .logo-item img{max-height:54px;max-width:100%;width:auto;height:auto;opacity:1 !important;filter:none !important}
+/* Bottoni e Tecno Clean esistono solo in bitmap bianco: sul vetro chiaro diventano Jet Black */
+body[data-pagina="home"] .row-gruppo .logo-mono img{filter:brightness(0) !important;opacity:.88 !important}
+
+/* ---------- Per il tuo settore: tessere con icona ---------- */
+body[data-pagina="home"] .row-settori .tiles{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:22px}
+body[data-pagina="home"] .row-settori .tile{display:flex !important;align-items:center;gap:14px;min-height:64px;padding:14px 18px !important;
+  border-radius:calc(var(--raggio) * .6) !important;color:#001e2a !important;text-decoration:none;font-weight:600;aspect-ratio:auto !important;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+body[data-pagina="home"] .row-settori .tile::before,body[data-pagina="home"] .row-settori .tile::after{content:none !important}
+body[data-pagina="home"] .row-settori .tile:hover{transform:translateY(-2px)}
+body[data-pagina="home"] .row-settori .tile-ico{flex:0 0 auto;width:40px;height:40px;padding:9px;border-radius:50%;
+  fill:none;stroke:#e4002b;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+  background:linear-gradient(180deg,#fff,rgba(255,255,255,.6));box-shadow:inset 0 0 0 1px rgba(228,0,43,.18),0 6px 14px -8px rgba(228,0,43,.5);
+  transition:background .3s ease,stroke .3s ease}
+body[data-pagina="home"] .row-settori .tile:hover .tile-ico{background:#e4002b;stroke:#fff}
+body[data-pagina="home"] .row-settori .tile span{line-height:1.25;font-size:15px;color:#001e2a !important}
+@media (max-width:560px){body[data-pagina="home"] .row-settori .tiles{grid-template-columns:1fr}}
+
+/* ---------- Prodotti: foto dentro una lastra di vetro ---------- */
+body[data-pagina="home"] .row-prodotti .prodotti-scena{display:none !important}
+body[data-pagina="home"] .foto-prodotti{position:relative;border-radius:var(--raggio);padding:10px;
+  background:var(--lastra);box-shadow:var(--lastra-bordo),0 30px 50px -30px rgba(90,0,12,.6);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+body[data-pagina="home"] .foto-prodotti img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:calc(var(--raggio) - 10px)}
+
+/* ---------- Sedi sul rosso ---------- */
+body[data-pagina="home"] .t-rossa .sedi{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+@media (max-width:560px){body[data-pagina="home"] .t-rossa .sedi{grid-template-columns:1fr !important}}
+
+/* ================= 148. HOME · mosaico v3 =================
+   - Il fondale resta SEMPRE il rosso a vetro cannettato (nessun passaggio al bianco).
+   - Tessere a piena larghezza: a spigolo vivo, senza raggio.
+   - Tre materie, un solo linguaggio:
+       .t-bianca  lastra bianca piena, testo Jet Black, accenti Socaf Red
+       .t-vetro   lo stesso vetro della nav (latte trasparente + blur), testo bianco
+       .t-outline solo contorno bianco sottile, trasparente, testo bianco
+   - Sedi e modulo non più affiancati: due tessere a tutta la griglia. */
+
+/* 148.1 fondale unico */
+body[data-pagina="home"] .mood .macchine{opacity:1 !important}
+body[data-pagina="home"] .mood :is(.chiaro,.azzurro,.rosso){opacity:0 !important}
+body[data-pagina="home"]{background-color:#e4002b}
+
+/* 148.2 piena larghezza = spigolo vivo */
+body[data-pagina="home"] .wrap > .row.t-piena > .block,
+body[data-pagina="home"] .wrap > .row.t-piena > .block::before,
+body[data-pagina="home"] .wrap > .row.t-piena > .block::after{border-radius:0 !important}
+
+/* 148.3 vetro come la nav */
+body[data-pagina="home"] .wrap > .row.t-vetro > .block{
+  background:linear-gradient(180deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,.16) 45%,rgba(255,255,255,.2) 100%) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(170%) !important;backdrop-filter:blur(34px) saturate(170%) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(255,255,255,.25),0 18px 40px -30px rgba(0,30,42,.4) !important;
+  color:#fff}
+/* 148.4 solo contorno */
+body[data-pagina="home"] .wrap > .row.t-outline > .block{
+  background:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75) !important;color:#fff}
+/* testi bianchi su vetro e contorno */
+body[data-pagina="home"] .wrap > .row:is(.t-vetro,.t-outline) > .block > :is(h2,h3,.kicker,.lede,p,.small),
+body[data-pagina="home"] .wrap > .row:is(.t-vetro,.t-outline) > .block h2 em{
+  color:#fff !important;-webkit-text-fill-color:#fff !important;background:none !important;text-shadow:0 1px 14px rgba(120,0,20,.3) !important}
+body[data-pagina="home"] .wrap > .row:is(.t-vetro,.t-outline) .block-id{color:rgba(255,255,255,.8) !important}
+body[data-pagina="home"] .wrap > .row:is(.t-vetro,.t-outline) .small :is(code,b){color:#fff}
+body[data-pagina="home"] .wrap > .row:is(.t-vetro,.t-outline) .small code{background:rgba(255,255,255,.18)}
+/* 148.5 bianco pieno: testo Jet Black, bottoni e link leggibili */
+body[data-pagina="home"] .wrap > .row.t-bianca > .block{
+  background:#fff !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  box-shadow:0 30px 60px -44px rgba(90,0,12,.55) !important;color:#001e2a}
+body[data-pagina="home"] .wrap > .row.t-bianca > .block :is(h2,h3,.gruppo-h){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;background:none !important;text-shadow:none !important;filter:none !important}
+body[data-pagina="home"] .wrap > .row.t-bianca > .block :is(p,.lede,.small,label,.form-sub){color:#2c3a42 !important;-webkit-text-fill-color:currentColor !important;text-shadow:none !important}
+body[data-pagina="home"] .wrap > .row.t-bianca > .block :is(.kicker,.block-id){color:#e4002b !important}
+body[data-pagina="home"] .wrap > .row.t-bianca .btn-glass{
+  background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important;
+  box-shadow:inset 0 0 0 1.5px #e4002b !important;-webkit-backdrop-filter:none;backdrop-filter:none}
+body[data-pagina="home"] .wrap > .row.t-bianca .btn-glass:hover{background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+
+/* 148.6 Il gruppo: bianco pieno, colori Socaf, loghi piccoli e netti */
+body[data-pagina="home"] .row-gruppo .gruppo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:clamp(30px,5vw,80px);align-items:end}
+body[data-pagina="home"] .row-gruppo .gruppo > .kicker{grid-column:1 / -1;margin-bottom:10px}
+body[data-pagina="home"] .row-gruppo .gruppo-h{grid-column:1;margin:0 !important;font-size:clamp(28px,3.1vw,46px) !important;line-height:1.08 !important}
+body[data-pagina="home"] .row-gruppo .gruppo-h em{font-style:normal;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body[data-pagina="home"] .row-gruppo .gruppo-lede{grid-column:2;margin:0 !important;border-left:3px solid #e4002b;padding-left:22px;font-size:clamp(16px,1.25vw,19px) !important}
+body[data-pagina="home"] .row-gruppo .loghi{grid-column:1 / -1;display:flex !important;flex-wrap:wrap;align-items:center;gap:0 !important;
+  margin-top:clamp(30px,3.6vw,48px) !important;padding-top:clamp(22px,2.6vw,32px);border-top:1px solid #dbdbdb}
+body[data-pagina="home"] .row-gruppo .logo-item{flex:0 0 auto !important;min-height:0 !important;padding:0 clamp(22px,3vw,44px) !important;
+  background:none !important;box-shadow:none !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;border-radius:0 !important;
+  border-left:1px solid #dbdbdb !important}
+body[data-pagina="home"] .row-gruppo .logo-item:first-child{padding-left:0 !important;border-left:0 !important}
+body[data-pagina="home"] .row-gruppo .logo-item img{max-height:30px !important;width:auto}
+body[data-pagina="home"] .row-gruppo .logo-mono img{filter:brightness(0) !important;opacity:1 !important}
+@media (max-width:860px){body[data-pagina="home"] .row-gruppo .gruppo{grid-template-columns:1fr}
+  body[data-pagina="home"] .row-gruppo :is(.gruppo-h,.gruppo-lede){grid-column:1}
+  body[data-pagina="home"] .row-gruppo .gruppo-lede{margin-top:18px !important}}
+
+/* 148.7 Settori su contorno: le voci sono lastre bianche, leggibili */
+body[data-pagina="home"] .t-outline .tile{
+  background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,255,255,.82)) !important;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 #fff,0 14px 28px -20px rgba(90,0,12,.6) !important}
+
+/* 148.8 Prodotti: bianco pieno, la foto in una cornice sottile */
+body[data-pagina="home"] .row-prodotti .foto-prodotti{background:#f4f4f4;box-shadow:inset 0 0 0 1px #dbdbdb;-webkit-backdrop-filter:none;backdrop-filter:none}
+
+/* 148.9 Marchi sul vetro: card di vetro latte, foto in alto */
+body[data-pagina="home"] .t-vetro .row-marchi .card,body[data-pagina="home"] .row-marchi.t-vetro .card{
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.8)) !important}
+body[data-pagina="home"] .row-marchi .card :is(.card-name,.card-desc,.card-meta){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body[data-pagina="home"] .row-marchi .card .card-meta{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+
+/* 148.10 Sedi: tessera a tutta griglia, card di vetro in una riga */
+body[data-pagina="home"] .row-sedi .sedi{grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) !important}
+body[data-pagina="home"] .t-outline .sede{
+  background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.16)) !important;
+  -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),inset 0 1px 0 rgba(255,255,255,.9) !important}
+body[data-pagina="home"] .t-outline .sede > .card-fondo,body[data-pagina="home"] .t-outline .sede .card-sagoma{display:none !important}
+body[data-pagina="home"] .t-outline .sede :is(*){color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:none !important}
+
+/* 148.11 Modulo: tutta la griglia, testo a sinistra e campi a destra */
+@media (min-width:980px){
+  body[data-pagina="home"] .row-form .form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);column-gap:clamp(30px,5vw,80px);align-items:start;
+    background:none !important;box-shadow:none !important;padding:0 !important}
+  body[data-pagina="home"] .row-form .form > :is(h3,.form-sub){grid-column:1}
+  body[data-pagina="home"] .row-form .form > h3{font-size:clamp(28px,3vw,44px) !important;line-height:1.08;margin:0 0 12px}
+  body[data-pagina="home"] .row-form .form > :not(h3):not(.form-sub){grid-column:2}
+  body[data-pagina="home"] .row-form .form > .fields{grid-row:1 / span 3}}
+/* 148.12 correzioni: spigolo vivo con specificità sufficiente, logo Socaf con altezza propria */
+body[data-pagina="home"] .wrap > .row.t-piena:not(:first-child):not(.wf-doc) > .block{border-radius:0 !important}
+body[data-pagina="home"] .row-gruppo .logo-item img{height:30px !important;max-height:none !important}

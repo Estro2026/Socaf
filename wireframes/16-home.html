@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>D16 · Home — Wireframe Socaf</title>
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="../assets/css/wireframe.css">
+<link rel="stylesheet" href="../assets/css/wireframe.css?v=170">
 </head>
 <body data-pagina="home">
 
@@ -21,10 +21,10 @@
       <span class="block-id">BLOCCO 1 · Apertura con ricerca</span>
 
       <section class="hero-full" data-liquid>
-        <video class="hero-bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-          <source src="../assets/video/hero.webm" type="video/webm">
-          <source src="../assets/video/hero.mp4" type="video/mp4">
-        </video>
+        <!-- sfondo: video Vimeo 1231598499 in modalità background (muto, in loop, senza controlli) -->
+        <div class="hero-bg hero-vimeo" aria-hidden="true">
+          <iframe src="https://player.vimeo.com/video/1231598499?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1" title="" tabindex="-1" allow="autoplay; fullscreen; picture-in-picture" frameborder="0"></iframe>
+        </div>
         <span class="hero-velo" aria-hidden="true"></span>
         <span class="liquid" aria-hidden="true"></span>
 
@@ -55,7 +55,7 @@
         </div>
 
         <span class="hero-nota">Video in loop a tutta pagina — « Human style » da Visual Identity
-          <b>da fornire</b> · <code>assets/video/hero.mp4</code></span>
+          <b>Vimeo</b> · <code>1231598499</code> (modalità background)</span>
       </section>
     </section>
     <div class="devnote">
@@ -82,36 +82,36 @@
       <h2>Le macchine</h2>
       <p class="board-hint" aria-hidden="true">Trascina o scorri lateralmente</p>
       <div class="board" data-board><div class="board-track">
-        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-lavapavimenti.jpg" alt="Lavapavimenti Socaf" loading="lazy"></div>
           <div class="card-body"><span class="card-name">Lavapavimenti</span>
             <p class="card-desc">Lavasciuga per ogni superficie: piccole, uomo a terra, uomo a bordo, combinate, i-mop.</p>
             <span class="card-meta">24 macchine</span>
-            <a class="card-link" href="03-famiglia.html" data-url="/lavapavimenti/">Vedi</a></div></article>
-        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+            <a class="card-link" href="03-famiglia.html?fam=lavapavimenti" data-url="/lavapavimenti/">Vedi</a></div></article>
+        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-spazzatrici.jpg" alt="Spazzatrici Socaf" loading="lazy"></div>
           <div class="card-body"><span class="card-name">Spazzatrici</span>
             <p class="card-desc">Uomo a terra, uomo a bordo e stradali.</p>
             <span class="card-meta">19 macchine</span>
-            <a class="card-link" href="03-famiglia.html" data-url="/spazzatrici/">Vedi</a></div></article>
-        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+            <a class="card-link" href="03-famiglia.html?fam=spazzatrici" data-url="/spazzatrici/">Vedi</a></div></article>
+        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-idropulitrici.jpg" alt="Idropulitrici Socaf" loading="lazy"></div>
           <div class="card-body"><span class="card-name">Idropulitrici</span>
             <p class="card-desc">Acqua fredda e calda, alte prestazioni, impianti fissi, autonome.</p>
             <span class="card-meta">17 macchine</span>
-            <a class="card-link" href="03-famiglia.html" data-url="/idropulitrici/">Vedi</a></div></article>
-        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+            <a class="card-link" href="03-famiglia.html?fam=idropulitrici" data-url="/idropulitrici/">Vedi</a></div></article>
+        <article class="card"><div class="card-media foto foto-aspiratori"><img src="../assets/images/categorie/fam-aspiratori.jpg" alt="Aspiratori Socaf nello showroom" loading="lazy"></div>
           <div class="card-body"><span class="card-name">Aspiratori</span>
             <p class="card-desc">Industriali, professionali, ATEX, per olio e trucioli, elettroventilatori.</p>
             <span class="card-meta">25 macchine</span>
-            <a class="card-link" href="03-famiglia.html" data-url="/aspiratori/">Vedi</a></div></article>
-        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+            <a class="card-link" href="03-famiglia.html?fam=aspiratori" data-url="/aspiratori/">Vedi</a></div></article>
+        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-robot.jpg" alt="Insegna Socaf" loading="lazy"></div>
           <div class="card-body"><span class="card-name">Robot</span>
             <p class="card-desc">Robot lavapavimenti e robot spazzatrici.</p>
             <span class="card-meta">4 macchine</span>
-            <a class="card-link" href="03-famiglia.html" data-url="/robot/">Vedi</a></div></article>
-        <article class="card"><div class="card-media ph ph-wide">Immagine famiglia</div>
+            <a class="card-link" href="03-famiglia.html?fam=robot" data-url="/robot/">Vedi</a></div></article>
+        <article class="card"><div class="card-media foto foto-altri-macchinari"><img src="../assets/images/categorie/fam-altri-macchinari.jpg" alt="Altri macchinari Socaf nello showroom" loading="lazy"></div>
           <div class="card-body"><span class="card-name">Altri macchinari</span>
             <p class="card-desc">Vasche lavapezzi, generatori di vapore, monospazzole, lavatappezzeria e altro.</p>
             <span class="card-meta">30 macchine</span>
-            <a class="card-link" href="03-famiglia.html" data-url="/altri-macchinari/">Vedi</a></div></article>
+            <a class="card-link" href="03-famiglia.html?fam=altri-macchinari" data-url="/altri-macchinari/">Vedi</a></div></article>
       </div></div>
       <p class="small" style="margin-top:14px"><b>Non esiste una pagina che contiene le sei famiglie.</b>
         Nel menu sono raccolte sotto la voce Macchine, ma quella voce non è cliccabile: non ci sono ricerche
@@ -132,7 +132,7 @@
   </div>
 
   <!-- BLOCCO 2bis · Il gruppo — aggiunta richiesta da Socaf, fuori dagli 8 blocchi del Brief mockup -->
-  <div class="row row-gruppo" data-mood="azzurro">
+  <div class="row row-gruppo t-piena t-bianca" data-mood="azzurro">
     <div class="gruppo-scena" aria-hidden="true"></div>
     <section class="block">
       <span class="block-id">BLOCCO 2bis · Il gruppo — <span class="cond">aggiunta richiesta da Socaf, non prevista dal Brief mockup</span></span>
@@ -140,7 +140,7 @@
       <div class="gruppo">
         <div class="gruppo-liquido" aria-hidden="true"></div>
         <p class="kicker">Il gruppo</p>
-        <h2 class="gruppo-h">Dalla fusione di tre aziende,<br>il tuo partner affidabile per la pulizia industriale</h2>
+        <h2 class="gruppo-h">Dalla fusione di <em>tre aziende</em>,<br>il tuo partner affidabile per la pulizia industriale</h2>
         <p class="lede gruppo-lede">Socaf, Bottoni e Tecno Clean: tre storie confluite in un unico gruppo.
           Cinque sedi tra Lombardia, Veneto e Friuli, una sola squadra.</p>
 
@@ -186,7 +186,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-formule t-7 t-vetro">
     <section class="block">
       <span class="block-id">BLOCCO 3 · Noleggio e usato — <span class="openpoint">OP-07</span></span>
       <h2>Non serve per forza comprarla</h2>
@@ -195,7 +195,7 @@
 
       <div class="formule">
         <a class="formula formula-nol" href="04-noleggio.html" data-url="/noleggio/">
-          <span class="formula-art ph ph-volume"></span>
+          <span class="formula-art foto"><img src="../assets/images/categorie/formula-noleggio.jpg" alt="Consegna di una macchina Socaf a noleggio" loading="lazy"></span>
           <span class="formula-body">
             <span class="kicker">Formula · la più scelta</span>
             <span class="formula-h">Noleggio</span>
@@ -205,7 +205,7 @@
           </span>
         </a>
         <a class="formula formula-usa" href="06-usato.html" data-url="/usato/">
-          <span class="formula-art ph ph-pattern"></span>
+          <span class="formula-art foto"><img src="../assets/images/categorie/formula-usato.jpg" alt="Macchine nello showroom Socaf" loading="lazy"></span>
           <span class="formula-body">
             <span class="kicker">Formula</span>
             <span class="formula-h">Usato garantito</span>
@@ -235,18 +235,18 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-settori t-5 t-outline">
     <section class="block">
       <span class="block-id">BLOCCO 4 · I settori</span>
       <h2>Per il tuo settore</h2>
       <div class="tiles" data-tiles>
-        <a class="tile" href="09-settore.html" data-url="/settori/industria/"><span>Industria</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/imprese-di-pulizia/"><span>Imprese di pulizia</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/horeca/"><span>Ho.Re.Ca.</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/retail/"><span>Retail</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/logistica/"><span>Logistica</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/officine-metalmeccanica/"><span>Officine e metalmeccanica</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/edilizia-cantieri/"><span>Edilizia e cantieri</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/industria/"><svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V10l6 4V10l6 4V6h6v15z"/><path d="M7 17h2M13 17h2M17 10h2"/></svg><span>Industria</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/imprese-di-pulizia/"><svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10h12l-1.5 11h-9z"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M10 14v3M14 14v3"/></svg><span>Imprese di pulizia</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/horeca/"><svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v8a3 3 0 0 0 6 0V3M8 3v18"/><path d="M17 3c-2 2-2 7 0 9v9"/></svg><span>Ho.Re.Ca.</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/retail/"><svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span>Retail</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/logistica/"><svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg><span>Logistica</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/officine-metalmeccanica/"><svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L3 18l3 3 6.2-6.2a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><span>Officine e metalmeccanica</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/edilizia-cantieri/"><svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18"/><path d="M5 18a7 7 0 0 1 14 0"/><path d="M12 7v4M9.5 8l.7 3.3M14.5 8l-.7 3.3"/></svg><span>Edilizia e cantieri</span></a>
       </div>
       <p class="small" style="margin-top:14px">I sette settori portano <b>direttamente</b> alle loro pagine.
         La pagina che li raccoglie (<code>/settori/</code>) non si raggiunge dalla home.</p>
@@ -263,7 +263,7 @@
     </div>
   </div>
 
-  <div class="row row-prodotti">
+  <div class="row row-prodotti t-piena t-bianca">
     <div class="prodotti-scena" aria-hidden="true"></div>
     <section class="block">
       <span class="block-id">BLOCCO 5 · Prodotti per la pulizia</span>
@@ -274,7 +274,7 @@
             tredici categorie di prodotti professionali, con consulenza sulla scelta.</p>
           <a class="btn btn-glass" href="10-prodotti-pulizia.html" data-url="/prodotti-per-la-pulizia/">Vedi i prodotti</a>
         </div>
-        <div class="ph ph-wide">Immagine prodotti</div>
+        <div class="foto-prodotti"><img src="../assets/images/categorie/prodotti-pulizia.jpg" alt="Scaffali di prodotti per la pulizia professionale nel punto vendita Socaf" loading="lazy"></div>
       </div>
     </section>
     <div class="devnote">
@@ -289,7 +289,7 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-marchi" data-mood="rosso">
+  <div class="row row-vetro row-marchi t-vetro" data-mood="rosso">
     <section class="block">
       <span class="block-id">BLOCCO 6 · Aquarial e Caldofacile</span>
       <h2>I marchi del gruppo</h2>
@@ -326,7 +326,7 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-sedi">
+  <div class="row row-vetro row-sedi t-outline">
     <section class="block">
       <span class="block-id">BLOCCO 7 · Le cinque sedi</span>
       <p class="kicker">Vicini a te</p>
@@ -344,7 +344,7 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-form">
+  <div class="row row-vetro row-form t-bianca">
     <section class="block">
       <span class="block-id">BLOCCO 8 · Richiesta informazioni</span>
       <form class="form" data-demo-form>
@@ -400,8 +400,8 @@
 </div>
 
 <footer data-footer></footer>
-<script src="../assets/js/catalogo.js"></script>
-<script src="../assets/js/testi.js"></script>
-<script src="../assets/js/wireframe.js"></script>
+<script src="../assets/js/catalogo.js?v=123"></script>
+<script src="../assets/js/testi.js?v=123"></script>
+<script src="../assets/js/wireframe.js?v=149"></script>
 </body>
 </html>

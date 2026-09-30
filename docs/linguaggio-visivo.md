@@ -113,3 +113,12 @@ sezione 109 di `wireframe.css`.
   "riduci movimento" attivo.
 - **Grana**: una grana quasi invisibile sui vetri dei contenitori, perché la
   lastra sembri materiale e non plastica.
+
+## Principio guida · le sezioni sono tessere di un mosaico
+(indicazione di progetto, 30/09/2026)
+Ogni sezione è un blocco autonomo, con forma, raggio e fondo propri, che si accosta agli altri come una tessera: insieme compongono un'unica superficie.
+- Nessuna sezione "galleggia" sul fondo pagina: ognuna è una tessera con bordi netti e lo stesso raggio (`--raggio`).
+- Tra le tessere c'è un giunto costante (stessa distanza orizzontale e verticale), come la fuga di un mosaico.
+- Le tessere possono avere larghezze diverse (intera, 2/3 + 1/3, metà + metà) ma sempre sulla stessa griglia.
+- Le tessere NON cambiano colore né regole visive tra loro: un solo linguaggio per tutte, liquid glass + rosso + bianco + il fondo rosso a vetro cannettato di « Le macchine » (sezione 131/133 del CSS).
+- L'hero e la sua transizione verso « Le macchine » restano come sono (approvate): il mosaico parte da « Le macchine » in giù.
