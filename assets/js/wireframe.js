@@ -145,8 +145,19 @@
   }
 
   function footer() {
+    /* testi, recapiti, link legali e social: come il footer di socaf.it (verificato il 01/10/2026) */
+    var SOCIAL = [
+      ['Facebook', 'https://www.facebook.com/socafspa/', '<path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H8v3h2.6V21z"/>'],
+      ['X (Twitter)', 'https://twitter.com/SocafSpa', '<path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.3L5.3 21H2.2l7.2-8.3L2 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.3 4.7H5.5z"/>'],
+      ['Instagram', 'https://www.instagram.com/socaf_spa/', '<path fill-rule="evenodd" d="M7.8 2.5h8.4a5.3 5.3 0 0 1 5.3 5.3v8.4a5.3 5.3 0 0 1-5.3 5.3H7.8a5.3 5.3 0 0 1-5.3-5.3V7.8a5.3 5.3 0 0 1 5.3-5.3zm0 1.9a3.4 3.4 0 0 0-3.4 3.4v8.4a3.4 3.4 0 0 0 3.4 3.4h8.4a3.4 3.4 0 0 0 3.4-3.4V7.8a3.4 3.4 0 0 0-3.4-3.4zM12 7.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm0 1.9a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6zm5-3.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/>'],
+      ['LinkedIn', 'https://it.linkedin.com/company/socaf-s-p-a-', '<path d="M4.4 9.1h3.2V20H4.4zM6 3.8a1.85 1.85 0 1 1 0 3.7 1.85 1.85 0 0 1 0-3.7zM9.8 9.1h3.1v1.5h.1c.4-.8 1.5-1.7 3.1-1.7 3.3 0 3.9 2.2 3.9 5V20h-3.2v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V20H9.8z"/>'],
+      ['YouTube', 'https://www.youtube.com/user/SOCAFspa', '<path fill-rule="evenodd" d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.6 2.6 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15.1V8.9l5.3 3.1z"/>']
+    ];
+    var social = '<div class="f-social"><h4>Seguici su</h4><ul>' + SOCIAL.map(function (s) {
+      return '<li><a href="' + s[1] + '" target="_blank" rel="noopener" aria-label="Socaf su ' + s[0] + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + s[2] + '</svg></a></li>';
+    }).join('') + '</ul></div>';
     return '<div class="wrap"><div class="footer-brand">' +
-      '<p>Specialista dal 1982 in soluzioni per il cleaning professionale<br>e per la qualità degli ambienti di lavoro.</p>' +
+      '<p>Specialista in soluzioni per il cleaning professionale<br>e per la qualità degli ambienti di lavoro.</p>' +
       '</div>' +
       '<div class="footer-grid">' +
       '<div><h4>Dove siamo</h4><ul>' +
@@ -161,14 +172,22 @@
       '<li>' + a('/noleggio/', 'Noleggio') + '</li><li>' + a('/usato/', 'Usato garantito') + '</li>' +
       '<li>' + a('/servizi/', 'Servizi') + '</li><li>' + a('/settori/', 'Settori') + '</li>' +
       '<li>' + a('/azienda/referenze/', 'Referenze') + '</li><li>' + a('/news/', 'Approfondimenti') + '</li>' +
-      '<li>' + a('/contatti/', 'Contatti') + '</li></ul></div>' +
+      '<li>' + a('/contatti/', 'Contatti') + '</li>' +
+      '<li>' + a('/azienda/lavora-con-noi/', 'Lavora con noi · posizioni aperte') + '</li></ul></div>' +
       '<div><h4>I marchi del gruppo</h4><ul>' +
       '<li>' + a('https://www.aquarial.it/', 'Aquarial <span class="f-tag">raffrescamento</span>') + '</li>' +
       '<li>' + a('https://www.caldofacile.it/', 'Caldofacile <span class="f-tag">riscaldamento</span>') + '</li></ul>' +
-      '<h4 style="margin-top:22px">Recapiti</h4><p class="small" style="margin:0">Numero verde <b>' + NUMERO_VERDE + '</b><br>info@socaf.it</p></div>' +
+      '<h4 style="margin-top:22px">Recapiti</h4><p class="small" style="margin:0">Numero verde <b>' + NUMERO_VERDE + '</b><br>info@socaf.it</p>' + social + '</div>' +
       '</div><div class="footer-legal">' +
-      '<span>Socaf S.p.A. · Via Trieste, 14, 24046 Osio Sotto (BG) · P. IVA IT 01331640167</span>' +
-      '<a href="#">Privacy policy</a><a href="#">Cookie policy</a></div></div>';
+      '<div class="f-links">' +
+      '<a href="https://socaf.it/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>' +
+      '<a href="https://socaf.it/cookie-policy/" target="_blank" rel="noopener">Cookie Policy</a>' +
+      '<a href="https://socafspa.wallbreakers.it/" target="_blank" rel="noopener">Whistleblowing</a>' +
+      '<a href="https://www.datocms-assets.com/60899/1715936223-politica-per-la-qualita.pdf" target="_blank" rel="noopener">Politica per la Qualità</a>' +
+      '<a href="https://www.datocms-assets.com/60899/1734692553-socaf-s-p-a.pdf" target="_blank" rel="noopener">ISO 9001</a></div>' +
+      '<p class="f-societa">Socaf S.p.A. – Via Trieste, 14 – 24046 Osio Sotto (BG) – Cap. Soc. € 1.000.000,00 i.v. – REA BG 197182 – Reg. Imp. BG – Cod. Fisc. e Part. IVA IT 01331640167<br>' +
+      'Soggetta alla Direzione e Coordinamento (Art. 2497 bis C.c.) di AMA HOLDING SRL CF 04792850168 – Sede Legale: Via Trieste, 14 – 24046 Osio Sotto (BG)</p>' +
+      '</div></div>';
   }
 
   function blocoSedi(escludi) {
@@ -613,8 +632,8 @@
   var REFERENZE = {
     'amica-chips-s-p-a': { nome: 'Amica Chips', settore: 'industria', desc: 'Industria alimentare', sito: 'https://www.amicachips.it/' },
     'cisalfa': { nome: 'Cisalfa Sport', settore: 'retail', desc: 'Retail · articoli sportivi', sito: 'https://www.cisalfasport.it/' },
-    'il-gigante': { nome: 'Il Gigante', settore: 'retail', desc: 'Grande distribuzione', sito: 'https://www.ilgigante.net/' },
-    'lupo-srl': { nome: 'Lupo S.r.l.', settore: 'horeca', desc: 'Ristorazione' },
+    'il-gigante': { nome: 'Il Gigante', settore: 'retail', desc: 'Grande distribuzione', sito: 'https://ilgigante.net/' },
+    'lupo-srl': { nome: 'Lupo S.r.l.', settore: 'horeca', desc: 'Ristorazione', sito: 'http://www.luporistoranti.it/' },
     'progect-srl': { nome: 'Progect S.r.l.', settore: 'imprese-di-pulizia', desc: 'Facility management' },
     'xpo-logistics': { nome: 'XPO Logistics', settore: 'logistica', desc: 'Logistica', sito: 'https://www.xpo.com/' }
   };
@@ -773,6 +792,26 @@
     if (!P.macchine) drop('macchine');
     if (!P.sedi) drop('sedi');
     if (!P.form) drop('form'); else set('[data-p-form]', esc(P.form));
+    /* Lavora con noi: il modulo è quello di candidatura del sito attuale (campi e testi reali) */
+    if (url === '/azienda/lavora-con-noi/') {
+      var fc = document.querySelector('[data-p-if="form"] .form');
+      if (fc) {
+        set('[data-p-form]', 'Compila la form per inviare la tua candidatura.');
+        var sub = fc.querySelector('.form-sub'); if (sub) sub.remove();
+        fc.querySelector('.fields').innerHTML =
+          '<div class="field"><label for="c-nome">Nome *</label><input id="c-nome" required></div>' +
+          '<div class="field"><label for="c-cognome">Cognome *</label><input id="c-cognome" required></div>' +
+          '<div class="field"><label for="c-mail">Email *</label><input id="c-mail" type="email" required></div>' +
+          '<div class="field"><label for="c-tel">Telefono *</label><input id="c-tel" type="tel" required></div>' +
+          '<div class="field full"><label for="c-cv">Carica il CV *</label><input id="c-cv" type="file" required accept=".pdf,.doc,.docx"></div>' +
+          '<div class="field full"><label for="c-msg">Messaggio</label><textarea id="c-msg"></textarea></div>' +
+          '<div class="field full" data-hidden-field="pagina di provenienza|Lavora con noi"></div>' +
+          '<label class="consent full"><input type="checkbox" required> Acconsento a che i miei dati personali vengano utilizzati in accordo con la <a href="#">Privacy</a> e <a href="#">Cookie Policy</a>. *</label>' +
+          '<label class="consent consent-lungo full"><input type="checkbox"> Acconsento all\'uso dei miei dati personali per essere aggiornato sui nuovi arrivi, prodotti in esclusiva e per le finalità di marketing diretto correlate ai servizi offerti e ricevere proposte in linea con i miei interessi attraverso l\'analisi dei miei precedenti acquisti</label>';
+        var inv = fc.querySelector('button[type=submit]'); if (inv) inv.textContent = 'Invia candidatura';
+        var tel = fc.querySelector('a[href^="tel:"]'); if (tel) tel.remove();
+      }
+    }
     document.querySelectorAll('[data-p-hidden]').forEach(function (e) { e.dataset.hiddenField = 'pagina di provenienza|' + h1; });
 
     var hd = document.querySelector('[data-header]'); if (hd) hd.dataset.header = P.sez;
@@ -1083,7 +1122,7 @@
   function claimJelly() {
     var hero = document.querySelector('.hero-full');
     var bersagli = [].slice.call(document.querySelectorAll(
-      '.hero-copy h1, .hero-cnt .hero-stats > div, .row-prodotti h2, .row-gruppo .gruppo-h, .row-form .form > h3, .row-testata h1, body:not([data-pagina="home"]) .wrap h1, .pagina-intro h1, .sticky-col .form > h3, .pagina-interna .form > h3, .pagina-interna .block:has(> .faq) > h2, .pagina-interna .block:has(.t-tabs) > h2'));
+      '.hero-copy h1, .hero-cnt h1, .row-testata h1, .scheda-mosaico .intro-testata h1, .pagina-intro h1'));
     if (!bersagli.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
     var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg');
     svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
@@ -1184,6 +1223,8 @@
         var sx = q.left + parseFloat(cs.paddingLeft), dx = q.right - parseFloat(cs.paddingRight);
         r.style.setProperty('margin-left', (-sx) + 'px', 'important');
         r.style.setProperty('margin-right', (-(vw - dx)) + 'px', 'important');
+        document.body.style.setProperty('--sx', sx + 'px');
+        document.body.style.setProperty('--dx', (vw - dx) + 'px');
       });
     }
     misuraVw(); window.addEventListener('resize', misuraVw);
@@ -1904,13 +1945,93 @@
   /* PAGINE INTERNE · stessa grammatica della home (docs/linguaggio-visivo.md).
      La prima sezione (titolo e introduzione) è la "testata" su fondo rosso VI;
      scorrendo, il fondo vira all'azzurro con la stessa dissolvenza della home. */
+    var ICONE = {
+      'industria': '<path d="M3 21V10l6 4V10l6 4V6h6v15z"/><path d="M7 17h2M13 17h2M17 10h2"/>',
+      'imprese-di-pulizia': '<path d="M6 10h12l-1.5 11h-9z"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M10 14v3M14 14v3"/>',
+      'horeca': '<path d="M5 3v8a3 3 0 0 0 6 0V3M8 3v18"/><path d="M17 3c-2 2-2 7 0 9v9"/>',
+      'retail': '<path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+      'logistica': '<path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/>',
+      'officine-metalmeccanica': '<path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L3 18l3 3 6.2-6.2a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+      'edilizia-cantieri': '<path d="M3 18h18"/><path d="M5 18a7 7 0 0 1 14 0"/><path d="M12 7v4M9.5 8l.7 3.3M14.5 8l-.7 3.3"/>',
+      'lavapavimenti': '<path d="M8 3v10"/><path d="M5 13h12a3 3 0 0 1 3 3v1H4v-1a3 3 0 0 1 1-3z"/><circle cx="8" cy="20" r="1.5"/><circle cx="16" cy="20" r="1.5"/>',
+      'spazzatrici': '<path d="M15 3l-4 9"/><path d="M6 12h9l2 9H4z"/><path d="M8 16v4M12 16v4"/>',
+      'idropulitrici': '<path d="M3 8h10l3 3v2h-3l-1 7H8l1-7H3z"/><path d="M17 10h3M18.5 6.5l2-1M18.5 13.5l2 1"/>',
+      'aspiratori': '<rect x="5" y="8" width="11" height="11" rx="3"/><path d="M10.5 8V4h6l3 4"/><circle cx="8" cy="21" r="1"/><circle cx="13" cy="21" r="1"/>',
+      'robot': '<rect x="5" y="8" width="14" height="10" rx="3"/><path d="M12 4v4"/><circle cx="12" cy="3" r="1"/><circle cx="9.5" cy="13" r="1"/><circle cx="14.5" cy="13" r="1"/>',
+      'altri-macchinari': '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'
+    };
   function scenaInterna() {
     if (document.body.dataset.pagina === 'home' || document.querySelector('.mood')) return;
     if (!document.body.dataset.slug) {   /* indirizzo della pagina, per regole di pagina (es. testate in nero) */
       var db = document.querySelector('[data-devbar]'); if (db && db.dataset.url) document.body.dataset.slug = db.dataset.url.split(' ')[0];
     }
+    /* APPROFONDIMENTI: ogni card porta al modello d'articolo con il proprio titolo (?t=),
+       così ogni approfondimento ha la sua testata, la sua immagine e lo stesso impaginato */
+    /* il titolo si aggiunge al momento del clic (i link vengono riscritti dopo il caricamento) */
+    document.addEventListener('click', function (e) {
+      var c = e.target.closest && e.target.closest('.card'); if (!c) return;
+      var l = c.querySelector('.card-link'), n = c.querySelector('.card-name');
+      if (!l || !n || !/12-articolo\.html/.test(l.getAttribute('href') || '')) return;
+      l.setAttribute('href', l.getAttribute('href').split('?')[0] + '?t=' + encodeURIComponent(n.textContent.trim()));
+    }, true);
+    var tArt = (location.search.match(/[?&]t=([^&]+)/) || [])[1];
+    if (tArt && /12-articolo\.html/.test(location.pathname)) {
+      tArt = decodeURIComponent(tArt.replace(/\+/g, ' '));
+      var h1a = document.querySelector('.wrap > .row h1'); if (h1a) h1a.textContent = tArt;
+      var cra = document.querySelector('.crumbs [aria-current="page"]'); if (cra) cra.textContent = tArt;
+      document.title = 'D12 · ' + tArt + ' — Wireframe Socaf';
+    }
+
+    /* contenitori di stato visibili (es. risultati della ricerca): le loro sezioni
+       diventano sezioni della pagina, così valgono le stesse regole di tutte le altre */
+    document.querySelectorAll('.wrap > div:not(.row):not([hidden])').forEach(function (c) {
+      [].slice.call(c.querySelectorAll(':scope > .row')).forEach(function (r) { if (c.hasAttribute('data-results-full')) r.setAttribute('data-da-risultati', ''); c.parentNode.insertBefore(r, c); });
+      if (!c.querySelector('.row')) c.style.display = 'none';
+    });
     var righe = [].slice.call(document.querySelectorAll('.wrap > .row, .wrap > div:not(.row) > .row')).filter(function (r) { return !r.classList.contains('wf-doc'); });
     righe.forEach(function (r) { r.classList.add('row-int'); });   /* anche le sezioni dentro i contenitori di stato (ricerca) */
+    /* scheda macchina: colonne (.split) invece di righe. Stesso mosaico: le
+       sezioni a sinistra sono tessere bianche, la colonna del modulo è vetro */
+    if (!righe.length && document.querySelector('.wrap > .split')) {
+      document.body.classList.add('pagina-interna', 'scheda-mosaico', 'mood-macchine');
+  document.body.removeAttribute('data-testata');
+      document.body.insertAdjacentHTML('afterbegin', '<div class="mood" aria-hidden="true"><span class="chiaro"></span><span class="macchine"></span><span class="blu"></span><span class="azzurro"></span><span class="rosso"></span></div>');
+      document.querySelectorAll('.wrap > .split > div:not(.sticky-col) > .block').forEach(function (b) { b.classList.add('t-bianca'); });
+      document.querySelectorAll('.wrap > .split .sticky-col .block, .wrap > .split .sticky-col > .form').forEach(function (b) { b.classList.add('t-vetro'); });
+  immaginiSegnaposto();
+  /* « Dove si usa »: striscia a icone come « Per il tuo settore » */
+  document.querySelectorAll('.wrap > .split .block').forEach(function (b) {
+    var h = b.querySelector('h2'), ch = b.querySelector('.chips');
+    if (!h || !ch || !/Dove si usa|Su quali macchine/i.test(h.textContent)) return;
+    b.classList.add('striscia-scheda');
+    ch.classList.add('tiles', 'tiles-icone');
+    ch.querySelectorAll('a, span.chip').forEach(function (c) {
+      var u = c.getAttribute('data-url') || c.getAttribute('href') || '', k = null;
+      Object.keys(ICONE).forEach(function (x) { if (!k && (u.indexOf('/' + x + '/') > -1 || u.indexOf('=' + x) > -1)) k = x; });
+      var nm = c.textContent.trim();
+      c.className = 'tile';
+      c.innerHTML = '<svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONE[k] || ICONE['altri-macchinari']) + '</svg><span>' + nm + '</span>';
+    });
+  });
+  /* galleria della scheda senza foto: foto del modello se esiste, altrimenti quella della famiglia */
+  var nomeM = ((document.querySelector('[data-m-nome]') || {}).textContent || '').trim();
+  var chiaveM = nomeM.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  var famM = (decodeURIComponent((location.search.match(/[?&]m=([^&]+)/) || [])[1] || '').split('/')[1]) || '';
+  var MOD = ['mini', 'viva', 'la-360-8-b', 'la-410-15-b', 'la-510-40-bt', 'la-560-67-b', 'la-660-110-b', 'la-700-110-r', 'la-1300-280-r', 'sp-1300', 'tk-306', 'tk-706', 'af-k-120-11', 'af-k-200-15'];
+  var fotoM = MOD.indexOf(chiaveM) > -1 ? 'macchine/' + chiaveM : (famM ? 'categorie/fam-' + famM : null);
+  var gm = document.querySelector('.gallery-main.ph');
+  if (gm && gm.offsetParent && fotoM) {
+    gm.className = 'gallery-main foto';
+    gm.innerHTML = '<img src="' + BASE + 'assets/images/' + fotoM + '.jpg" alt="' + nomeM.replace(/"/g, '') + '">';
+    var alt = ['categorie/fam-' + famM, 'categorie/sub-lavapavimenti-uomo-terra', 'categorie/formula-noleggio'];
+    [].forEach.call(document.querySelectorAll('.thumb.ph'), function (t, i) {
+      if (!t.offsetParent) return;
+      t.className = 'thumb foto' + (i === 0 ? ' is-attiva' : '');
+      t.innerHTML = '<img src="' + BASE + 'assets/images/' + (i === 0 ? fotoM : alt[i % alt.length]) + '.jpg" alt="">';
+    });
+  }
+      return;
+    }
     if (!righe.length) return;
     /* pagine fatte di una sola sezione (es. ricerca): la testata tiene solo
        titolo, introduzione e campo di ricerca; il resto passa in una nuova
@@ -1927,6 +2048,41 @@
         righe.push(nuova);
       }
     }
+    /* testate che contengono già il corpo della pagina (es. articolo): la testata
+       tiene titolo e introduzione, il corpo va in una tessera bianca da leggere */
+    var bt = righe[0].querySelector(':scope > .block');
+    if (bt && bt.querySelectorAll(':scope > h2, :scope > .testo').length >= 2) {
+      var primo = bt.querySelector(':scope > .ph, :scope > .testo, :scope > h2, :scope > figure');
+      if (primo) {
+        var riga = document.createElement('div'); riga.className = 'row row-int row-articolo';
+        var sezione = document.createElement('section'); sezione.className = 'block'; riga.appendChild(sezione);
+        var nodo = primo;
+        while (nodo) { var poi = nodo.nextSibling; if (!(nodo.classList && nodo.classList.contains('dn-pin'))) sezione.appendChild(nodo); nodo = poi; }
+        righe[0].insertAdjacentElement('afterend', riga);
+        righe.splice(1, 0, riga);
+        /* immagine in evidenza dell'articolo: segnaposto scelto in base al tema del titolo */
+        var ev = sezione.querySelector(':scope > .ph');
+        if (ev) {
+          var tt = ((righe[0].querySelector('h1') || {}).textContent || '').toLowerCase();
+          var fev = /noleggi/.test(tt) ? 'formula-noleggio' : /usat/.test(tt) ? 'formula-usato' : /spazzatric/.test(tt) ? 'fam-spazzatrici' :
+            /idropul/.test(tt) ? 'fam-idropulitrici' : /aspirat/.test(tt) ? 'fam-aspiratori' : /lavapavim|lavasciuga/.test(tt) ? 'fam-lavapavimenti' : 'sett-industria';
+          ev.className = 'articolo-foto';
+          ev.innerHTML = '<img src="' + BASE + 'assets/images/categorie/' + fev + '.jpg" alt="">';
+        }
+        /* colonna laterale: indice dei paragrafi (dai titoli dell'articolo) e richiesta informazioni */
+        var corpoArt = document.createElement('div'); corpoArt.className = 'articolo-corpo';
+        while (sezione.firstChild) corpoArt.appendChild(sezione.firstChild);
+        var titoli = [].slice.call(corpoArt.querySelectorAll(':scope > h2'));
+        var indice = titoli.map(function (h, i) { h.id = h.id || 'par-' + (i + 1); return '<li><a href="#' + h.id + '">' + h.textContent.trim() + '</a></li>'; }).join('');
+        var lato = document.createElement('aside'); lato.className = 'articolo-lato';
+        lato.innerHTML = (indice ? '<nav class="articolo-indice" aria-label="Indice dell\'articolo"><p class="kicker">In questo articolo</p><ol>' + indice + '</ol></nav>' : '') +
+          '<div class="articolo-cta">' +
+          '<a class="btn btn-primary" href="#richiesta">Richiedi informazioni</a><a class="btn btn-ghost" href="tel:800480110">800 480110</a></div>';
+        sezione.appendChild(corpoArt); sezione.appendChild(lato);
+        var rf = [].slice.call(document.querySelectorAll('.wrap > .row')).filter(function (x) { return x.querySelector('form, .form'); }).pop();
+        if (rf && !document.getElementById('richiesta')) rf.id = 'richiesta';
+      }
+    }
     document.body.classList.add('pagina-interna');
     righe[0].classList.add('row-testata');
     /* titoli lunghi (oltre ~40 caratteri): su tutta la larghezza, in tre righe equilibrate */
@@ -1936,6 +2092,8 @@
     /* la testata è rossa per default; i template del mondo macchine e prodotti
        dichiarano data-testata="blu" e partono dall'azzurro profondo della VI */
     var testata = document.body.dataset.testata === 'blu' ? 'blu' : 'macchine';
+    /* tutte le testate ora sono rosse: l'attributo « blu » non deve più attivare le vecchie regole azzurre */
+    document.body.removeAttribute('data-testata'); testata = 'macchine';
     function umore(u) {
       if (document.body.classList.contains('mood-' + u)) return;
       document.body.classList.remove('mood-chiaro', 'mood-macchine', 'mood-blu', 'mood-azzurro', 'mood-rosso');
@@ -1943,6 +2101,225 @@
       /* il fondo è cambiato: l'header ricalcola subito il colore delle voci di servizio */
       window.dispatchEvent(new Event('scroll'));
     }
+    /* MOSAICO (stesso linguaggio della home): ogni sezione dopo la testata è una
+       tessera. La materia dipende dal contenuto:
+         moduli ............................ vetro (come la nav)
+         griglie di card, sedi, formule .... solo contorno (le card bianche stanno sul rosso)
+         percorsi a tappe, schede a tab .... bianca a piena larghezza
+         tutto il resto (testi, FAQ, tabelle) bianca */
+    /* immagini segnaposto e loghi clienti: usata anche dalla scheda macchina */
+    function immaginiSegnaposto() {
+    /* galleria della sede: fotografie Socaf (sede, showroom, officina) come segnaposto */
+    document.querySelectorAll('.ph').forEach(function (p) {
+      var n = (p.textContent.match(/Foto sede\s*(\d)/i) || [])[1]; if (!n) return;
+      p.className = 'foto-sede'; p.innerHTML = '<img src="' + BASE + 'assets/images/categorie/sede-' + n + '.jpg" alt="Sede Socaf" loading="lazy">';
+    });
+    /* card di famiglia o tipologia ancora a segnaposto: se esiste la fotografia
+       reale (assets/images/categorie) la mettiamo, riconoscendola dal nome */
+    var FOTO = [
+      [/uomo a terra.*spazz|spazzatric.*uomo a terra|motoscop.*terra/i, 'sub-spazzatrici-uomo-terra'],
+      [/uomo a bordo.*spazz|spazzatric.*uomo a bordo|motoscop.*bordo/i, 'sub-spazzatrici-uomo-bordo'],
+      [/lavapavimenti.*piccol|piccole/i, 'sub-lavapavimenti-piccole'],
+      [/lava.*uomo a terra|lavasciuga.*terra/i, 'sub-lavapavimenti-uomo-terra'],
+      [/lava.*uomo a bordo/i, 'sub-lavapavimenti-uomo-bordo'],
+      [/combinat/i, 'sub-lavapavimenti-combinate'], [/i-mop/i, 'sub-i-mop'],
+      [/acqua fredda/i, 'sub-idropulitrici-ad-acqua-fredda'],
+      [/lavapavimenti|lavasciuga/i, 'fam-lavapavimenti'], [/spazzatric/i, 'fam-spazzatrici'],
+      [/idropulitric/i, 'fam-idropulitrici'], [/aspirator/i, 'fam-aspiratori'],
+      [/robot/i, 'fam-robot'], [/altri macchinari/i, 'fam-altri-macchinari'],
+      [/lavamoquette|lavatappezz|monospazzol|vapore|lavapezzi|generator/i, 'fam-altri-macchinari']
+    ];
+    /* modelli con foto reale (assets/images/macchine, ricavate da assets/STATICHE) */
+    var MODELLI = ['mini', 'viva', 'la-360-8-b', 'la-410-15-b', 'la-510-40-bt', 'la-560-67-b', 'la-660-110-b', 'la-700-110-r',
+      'la-1300-280-r', 'sp-1300', 'tk-306', 'tk-706', 'af-k-120-11', 'af-k-200-15'];
+    var FAMIGLIE_FOTO = ['lavapavimenti', 'spazzatrici', 'idropulitrici', 'aspiratori', 'robot', 'altri-macchinari'];
+    var VARIANTI = { 'categorie/fam-aspiratori': ['categorie/fam-aspiratori', 'categorie/asp-1', 'categorie/asp-2', 'categorie/asp-3'],
+      'categorie/fam-lavapavimenti': ['categorie/fam-lavapavimenti', 'categorie/sub-lavapavimenti-uomo-bordo', 'categorie/sub-lavapavimenti-uomo-terra', 'categorie/sub-lavapavimenti-combinate'],
+      'categorie/fam-spazzatrici': ['categorie/fam-spazzatrici', 'categorie/sub-spazzatrici-uomo-bordo', 'categorie/sub-spazzatrici-uomo-terra'],
+      'categorie/fam-idropulitrici': ['categorie/fam-idropulitrici', 'categorie/sub-idropulitrici-ad-acqua-fredda'],
+      'categorie/art': ['categorie/formula-noleggio', 'categorie/sett-industria', 'categorie/fam-spazzatrici', 'categorie/sett-officine-metalmeccanica', 'categorie/formula-usato', 'categorie/sett-logistica'],
+      'categorie/prod-1': ['categorie/prod-1', 'categorie/prod-2', 'categorie/prod-3', 'categorie/prod-4'] };
+    document.querySelectorAll('.card .card-media.ph').forEach(function (m) {
+      var card = m.closest('.card'), nome = (card.querySelector('.card-name') || {}).textContent || '';
+      var chiave = nome.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      var file = MODELLI.indexOf(chiave) > -1 ? 'macchine/' + chiave : null;
+      /* modello senza foto propria: segnaposto con la foto della sua famiglia */
+      /* settori (segnaposto: ambienti Socaf che richiamano il settore) */
+      var SETTORI = [[/industria/i, 'industria'], [/imprese di pulizia/i, 'imprese-di-pulizia'], [/ho\.?re\.?ca/i, 'horeca'],
+        [/retail/i, 'retail'], [/logistica/i, 'logistica'], [/officin|metalmeccan/i, 'officine-metalmeccanica'], [/edilizia|cantier/i, 'edilizia-cantieri']];
+      if (!file && /settore/i.test(m.textContent)) for (var s = 0; s < SETTORI.length; s++) if (SETTORI[s][0].test(nome)) { file = 'categorie/sett-' + SETTORI[s][1]; break; }
+      /* categorie di prodotti per la pulizia: foto degli scaffali, a rotazione */
+      if (!file && /categoria|prodott/i.test(m.textContent)) file = 'categorie/prod-1';
+      /* approfondimenti: immagine in evidenza segnaposto, ambienti e macchine Socaf a rotazione */
+      if (!file && /in evidenza|senza immagine/i.test(m.textContent)) file = 'categorie/art';
+      /* nome riconosciuto (famiglia o tipologia) */
+      if (!file) for (var i = 0; i < FOTO.length; i++) if (FOTO[i][0].test(nome)) { file = 'categorie/' + FOTO[i][1]; break; }
+      /* altrimenti segnaposto con la foto della famiglia della card (o della pagina) */
+      if (!file) {
+        var link = card.querySelector('[data-url]'), url = (link && link.getAttribute('data-url')) || document.body.dataset.slug || '';
+        var fam = url.split('/')[1] === 'noleggio' || url.split('/')[1] === 'usato' ? url.split('/')[2] : url.split('/')[1];
+        fam = (fam || '').replace(/-(usate|usati)$/, '').replace(/^noleggio-/, '');
+        if (FAMIGLIE_FOTO.indexOf(fam) > -1) file = 'categorie/fam-' + fam;
+      }
+      if (!file) return;
+      /* più card della stessa famiglia: foto diverse, a rotazione */
+      var v = VARIANTI[file];
+      if (v) { VARIANTI._n = (VARIANTI._n || 0) + 1; file = v[VARIANTI._n % v.length]; }
+      m.className = 'card-media foto';
+      m.innerHTML = '<img src="' + BASE + 'assets/images/' + file + '.jpg" alt="' + nome.replace(/"/g, '') + '" loading="lazy">';
+    });
+
+    /* come in home: contenuti da leggere (testi, FAQ, tabelle, tappe, tab, sedi)
+       su sezioni bianche a piena larghezza; griglie di card alternano vetro e
+       contorno; i moduli stanno sul vetro */
+    /* CLIENTI: loghi ufficiali (assets/) e collegamento al sito del cliente.
+       Tutta la card porta al sito, in una scheda nuova. */
+    var CLIENTI = [
+      [/amica chips/i, 'amicachips.webp', 'https://www.amicachips.it/'],
+      [/progect|project/i, 'projectsrl.avif', null],
+      [/lupo/i, 'luposrl.avif', 'http://www.luporistoranti.it/'],
+      [/gigante/i, 'ilgigante.svg', 'https://ilgigante.net/'],
+      [/cisalfa/i, 'cisalfa.svg', 'https://www.cisalfasport.it/'],
+      [/xpo/i, 'xpo.svg', 'https://www.xpo.com/']
+    ];
+    document.querySelectorAll('.card').forEach(function (c) {
+      var m = c.querySelector('.card-media.ph'), nome = ((c.querySelector('.card-name') || {}).textContent || '').trim();
+      if (!m || !/logo/i.test(m.textContent)) return;
+      for (var i = 0; i < CLIENTI.length; i++) if (CLIENTI[i][0].test(nome)) {
+        m.className = 'card-media marchio-logo cliente-logo';
+        m.innerHTML = '<img src="' + BASE + 'assets/' + CLIENTI[i][1] + '" alt="' + nome.replace(/"/g, '') + '">';
+        var l = c.querySelector('.card-link');
+        if (l && CLIENTI[i][2]) {
+          l.setAttribute('href', CLIENTI[i][2]); l.setAttribute('target', '_blank'); l.setAttribute('rel', 'noopener');
+          l.removeAttribute('data-url'); l.textContent = 'Vai al sito di ' + nome;
+          var meta = c.querySelector('.card-meta'); if (meta && /sito/i.test(meta.textContent)) meta.textContent = 'Sito del cliente ↗';
+        }
+        break;
+      }
+    });
+
+    }
+    immaginiSegnaposto();
+
+    /* sezioni a schede senza un titolo proprio (pagine di servizi e azienda): il
+       titolo della sezione è il nome della pagina, così nessuna sezione resta senza testata */
+    var nomePagina = ((righe[0].querySelector('h1') || {}).textContent || '').trim();
+    righe.slice(1).forEach(function (r) {
+      var b = r.querySelector(':scope > .block'), tabs = b && b.querySelector('.t-tabs');
+      if (!tabs || !nomePagina) return;
+      var haTitolo = [].some.call(b.querySelectorAll('h2'), function (h) { return !h.closest('.t-tabs'); });
+      if (!haTitolo) tabs.insertAdjacentHTML('beforebegin', '<h2 class="titolo-sezione">' + nomePagina + '</h2>');
+    });
+    /* sezioni nascoste (es. « nessun risultato » della ricerca) fuori dallo schema */
+    var nascoste = righe.filter(function (r) { return r.closest('[hidden]'); });
+    nascoste.forEach(function (r) { r.classList.add('t-bianca', 't-piena'); });
+    righe = righe.filter(function (r) { return nascoste.indexOf(r) < 0; });
+    /* l'ultima sezione tocca il footer: niente striscia di rosso fra le due */
+    righe[righe.length - 1].classList.add('row-ultima');
+
+    /* STRISCE A ICONE (come « Per il tuo settore » in home): gli elenchi di settori
+       e di famiglie diventano una fila di icone con il nome sotto */
+    /* griglie di card che portano solo a famiglie o settori (es. « Su quali macchine si usano »):
+       diventano elenchi da trattare come striscia a icone */
+    righe.slice(1).forEach(function (r) {
+      var g = r.querySelector('.grid'); if (!g || r.querySelector('.chips')) return;
+      var cards = [].slice.call(g.querySelectorAll(':scope > .card'));
+      var RE = /^\/(lavapavimenti|spazzatrici|idropulitrici|aspiratori|robot|altri-macchinari)\/$/;
+      if (cards.length < 2 || !cards.every(function (c) { var l = c.querySelector('.card-link'); return l && RE.test(l.getAttribute('data-url') || ''); })) return;
+      var html = cards.map(function (c) { var l = c.querySelector('.card-link'), n = (c.querySelector('.card-name') || {}).textContent || '';
+        return '<a class="chip" href="' + l.getAttribute('href') + '" data-url="' + l.getAttribute('data-url') + '">' + n.trim() + '</a>'; }).join('');
+      g.outerHTML = '<div class="chips">' + html + '</div>';
+      r.dataset.striscia = '1';
+    });
+    righe.slice(1).forEach(function (r) {
+      var h = r.querySelector('h2'), chips = r.querySelector('.chips');
+      if (!h || !chips || !(r.dataset.striscia || r.querySelector('[data-sub-siblings]') || /Le altre |Dove si usano|Le altre macchine|Gli altri settori|Su quali macchine|Altri settori|Le altre famiglie/i.test(h.textContent))) return;
+      r.classList.add('row-striscia');
+      chips.classList.add('tiles', 'tiles-icone');
+      chips.querySelectorAll('a, span.chip').forEach(function (c) {
+        var url = c.getAttribute('data-url') || c.getAttribute('href') || '', chiave = null;
+        /* tipologie (sottocategorie): icona propria, riconosciuta dall'indirizzo */
+        var SUB = {
+          'piccole': '<rect x="7" y="13" width="10" height="6" rx="2"/><path d="M12 13V4M10 4h4"/><circle cx="9" cy="20.5" r=".8"/><circle cx="15" cy="20.5" r=".8"/>',
+          'uomo-terra': '<path d="M6 4l3 8"/><rect x="8" y="12" width="11" height="6" rx="2"/><circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/>',
+          'uomo-bordo': '<path d="M8 11V7h4l1 4"/><rect x="4" y="11" width="16" height="6" rx="2"/><circle cx="7.5" cy="19.5" r="1.5"/><circle cx="16.5" cy="19.5" r="1.5"/>',
+          'combinate': '<rect x="4" y="9" width="16" height="7" rx="2"/><path d="M6 19h12M8 19l-1 2M12 19v2M16 19l1 2"/><path d="M12 2.5s-2 2.4-2 3.8a2 2 0 0 0 4 0c0-1.4-2-3.8-2-3.8z"/>',
+          'i-mop': '<path d="M12 3v12M10 3h4"/><path d="M6 15h12l1 3H5z"/><path d="M7 21h10"/>',
+          'stradali': '<path d="M8 3L4 21M16 3l4 18M12 5v2M12 11v2M12 17v2"/>',
+          'acqua-fredda': '<path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11z"/>',
+          'acqua-calda': '<path d="M12 3c1 3 4 5 4 9a4 4 0 0 1-8 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 0-8z"/>',
+          'alte-prestazioni': '<path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4-5"/><circle cx="12" cy="16" r="1"/>',
+          'impianti-fissi': '<rect x="4" y="3" width="10" height="18" rx="2"/><path d="M14 10h4v4M18 14l2 2M8 7h2M8 11h2"/>',
+          'autonome': '<path d="M6 21V7l4-4h6a2 2 0 0 1 2 2v16z"/><path d="M10 3v4H6M9 12h6M9 16h6"/>',
+          'robot-': ICONE['robot']
+        };
+        Object.keys(SUB).forEach(function (k) { if (!chiave && url.indexOf(k) > -1) { chiave = 'sub:' + k; ICONE[chiave] = SUB[k]; } });
+        /* voce corrente senza link: riconosciuta dal nome (« Piccole », « Uomo a terra »…) */
+        if (!chiave) {
+          var tx = c.textContent.toLowerCase().replace(/\s+a\s+/g, '-').replace(/\s+/g, '-');
+          Object.keys(SUB).forEach(function (k) { if (!chiave && tx.indexOf(k.replace(/-$/, '')) > -1) { chiave = 'sub:' + k; ICONE[chiave] = SUB[k]; } });
+        }
+        Object.keys(ICONE).forEach(function (k) { if (!chiave && (url.indexOf('/' + k + '/') > -1 || url.indexOf('=' + k) > -1)) chiave = k; });
+        if (!chiave) { var t = c.textContent.toLowerCase(); Object.keys(ICONE).forEach(function (k) { if (!chiave && t.indexOf(k.split('-')[0].slice(0, 6)) > -1) chiave = k; }); }
+        var nome = c.textContent.trim();
+        c.className = 'tile' + (c.getAttribute('aria-current') || c.classList.contains('is-active') ? ' is-corrente' : '');
+        c.innerHTML = '<svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONE[chiave] || ICONE['altri-macchinari']) + '</svg><span>' + nome + '</span>';
+      });
+    });
+
+    /* schema fisso, come in home: bianca a piena larghezza → vetro → contorno → bianca …
+       (il modulo sta sempre sul vetro: se cade altrove, scambia con la precedente) */
+    var SCHEMA = [['t-bianca', 't-piena'], ['t-vetro'], ['t-outline']];
+    /* le strisce a icone sono sempre a contorno: contano come il passo « contorno »
+       dello schema, e dopo di loro si riparte dal bianco */
+    /* tipi fissi: strisce a icone = contorno, moduli = vetro. Le altre seguono lo
+       schema saltando il tipo della sezione prima e di quella fissa subito dopo:
+       due sezioni dello stesso tipo non stanno mai una dietro l'altra */
+    /* mai due strisce a icone una dietro l'altra: la seconda scende sotto la sezione
+       successiva (se non è il modulo), così fra le due c'è sempre un contenuto */
+    for (var si = 2; si < righe.length - 1; si++) {
+      var a1 = righe[si - 1], a2 = righe[si], a3 = righe[si + 1];
+      if (a1.classList.contains('row-striscia') && a2.classList.contains('row-striscia') &&
+          !a3.classList.contains('row-striscia') && !a3.querySelector('form, .form')) {
+        a3.insertAdjacentElement('afterend', a2);
+        righe[si] = a3; righe[si + 1] = a2; si++;
+      } else if (a1.classList.contains('row-striscia') && a2.classList.contains('row-striscia') && si >= 3 &&
+          !righe[si - 2].classList.contains('row-striscia')) {
+        /* dopo c'è il modulo: la prima striscia sale sopra la sezione precedente */
+        righe[si - 2].insertAdjacentElement('beforebegin', a1);
+        var tmp = righe[si - 2]; righe[si - 2] = a1; righe[si - 1] = tmp;
+      }
+    }
+    var corpo = righe.slice(1), passo = 0, prima = -1;
+    var fisso = function (r) { return !r ? -1 : r.classList.contains('row-striscia') ? 2 : r.querySelector('form, .form') ? 1 : -1; };
+    corpo.forEach(function (r, i) {
+      var t = fisso(r);
+      if (t === 2 && prima === 2) t = fisso(corpo[i + 1]) === 1 ? 0 : 1;   /* due strisce di fila: la seconda va sul vetro (o sul bianco, se dopo c'è il modulo) */
+      if (t < 0) {
+        var dopo = fisso(corpo[i + 1]);
+        for (var k = 0; k < 3; k++) { var c = (passo + k) % 3; if (c !== prima && c !== dopo) { t = c; break; } }
+        passo = t + 1;
+      } else passo = t + 1;
+      SCHEMA[t].forEach(function (c) { r.classList.add(c); });
+      prima = t;
+    });
+    righe[0].classList.add('t-piena');
+    /* le tessere a piena larghezza escono dalla griglia fino ai bordi; --sx/--dx
+       allineano il loro contenuto a quello delle altre tessere */
+    function misuraVw() {
+      var vw = document.documentElement.clientWidth;
+      document.body.style.setProperty('--vw', vw + 'px');
+      document.querySelectorAll('.wrap > .row.t-piena').forEach(function (r) {
+        var w = r.parentElement, cs = getComputedStyle(w), q = w.getBoundingClientRect();
+        var sx = q.left + parseFloat(cs.paddingLeft), dx = q.right - parseFloat(cs.paddingRight);
+        r.style.setProperty('margin-left', (-sx) + 'px', 'important');
+        r.style.setProperty('margin-right', (-(vw - dx)) + 'px', 'important');
+        document.body.style.setProperty('--sx', sx + 'px');
+        document.body.style.setProperty('--dx', (vw - dx) + 'px');
+      });
+    }
+    misuraVw(); window.addEventListener('resize', misuraVw);
+
     var atteso = false;
     function guarda() {
       atteso = false;
@@ -2077,12 +2454,14 @@
           else if (el0.closest('.hero-full, .row[data-mood="macchine"], .site-footer, .row-testata')) scuro = true;
           else if (document.body.classList.contains('mood-macchine') && !el0.closest('.wrap > .row > .block')) scuro = true;
           /* pagine interne: bianco sul rosso, nero sull'azzurro, sempre */
-          if (document.body.classList.contains('pagina-interna')) scuro = document.body.classList.contains('mood-macchine');
+          if (document.body.classList.contains('pagina-interna')) scuro = !el0.closest('.t-bianca, .card, .formula, .sede, .form input, .form textarea');   /* fondale sempre rosso: voci scure solo sulle superfici chiare */
           /* all'atterraggio, prima che la pagina scelga il fondo: le interne partono sul rosso */
           else if (document.body.dataset.pagina !== 'home' && !document.querySelector('.mood')) scuro = true;
           /* pagine con fondo di colore dichiarato: sopra la nav si sta sempre
              sul colore, a meno di essere finiti sopra una lastra bianca */
           else if (document.body.dataset.testata && !el0.closest('.block, .card, .form')) scuro = true;
+          /* home: con il fondale bianco le voci sono scure, tranne sopra le tessere rosse */
+          if (document.body.dataset.pagina === 'home' && document.body.classList.contains('fondo-bianco')) scuro = !!el0.closest('.t-rossa, .hero-full');
           hd.classList.toggle('topbar-su-scuro', scuro);
         }
         /* logo: bianco su rosso e video, a colori sul bianco. Guarda cosa passa
@@ -2093,8 +2472,9 @@
           var sottoL = document.elementsFromPoint(rl.left + rl.width / 2, rl.top + rl.height / 2)
             .filter(function (el) { return !hd.contains(el) && !el.closest('.devbar'); })[0] || document.body;
           /* sulla home il fondale è sempre rosso: logo a colori solo sopra le tessere bianche */
-          var suRosso = !sottoL.closest('.t-bianca');
-          if (document.body.dataset.pagina !== 'home') suRosso = true;
+          /* superfici chiare: tessere bianche e tutto ciò che è card o lastra bianca */
+          var chiaro = '.t-bianca, .card, .formula, .tile-ico, .logo-item, .marchio-logo, .foto-prodotti, .form input, .form textarea, .site-header .dropdown';
+          var suRosso = !sottoL.closest(chiaro);
           var voluto = BASE + 'assets/logo/' + (suRosso ? 'socaf21-payoff-rgb-white.svg' : 'socaf21-payoff-rgb.svg');
           if (marchio.getAttribute('src') !== voluto) marchio.setAttribute('src', voluto);
         }
@@ -2280,6 +2660,8 @@
         var vuoto = /^(zzz|xxx|nessun)/i.test(q);
         var full = document.querySelector('[data-results-full]'), empty = document.querySelector('[data-results-empty]');
         if (full && empty) { full.hidden = vuoto; empty.hidden = !vuoto; }
+        document.querySelectorAll('.row[data-da-risultati]').forEach(function (r) { r.hidden = vuoto; });
+        if (vuoto && empty) { [].slice.call(empty.querySelectorAll(':scope > .row')).forEach(function (r) { r.classList.add('row-int', 't-bianca', 't-piena', 'in-vista'); empty.parentNode.insertBefore(r, empty); }); window.dispatchEvent(new Event('resize')); }
       }
     }
   }

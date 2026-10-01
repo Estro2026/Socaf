@@ -122,3 +122,26 @@ Ogni sezione è un blocco autonomo, con forma, raggio e fondo propri, che si acc
 - Le tessere possono avere larghezze diverse (intera, 2/3 + 1/3, metà + metà) ma sempre sulla stessa griglia.
 - Le tessere NON cambiano colore né regole visive tra loro: un solo linguaggio per tutte, liquid glass + rosso + bianco + il fondo rosso a vetro cannettato di « Le macchine » (sezione 131/133 del CSS).
 - L'hero e la sua transizione verso « Le macchine » restano come sono (approvate): il mosaico parte da « Le macchine » in giù.
+
+## Sistema a mosaico (home e pagine interne · 01/10/2026)
+- **Fondale**: sempre il rosso a vetro cannettato, fisso (canne larghe che prendono luce in alto a destra e sfumano). Nessun azzurro, nessun blu, nessuna dissolvenza di colore allo scroll.
+- **Tessere** (classi `t-*`, in home nell'HTML, nelle interne assegnate da `scenaInterna()` secondo il contenuto):
+  - `t-bianca` — superficie bianca pulita, canne solo sul lato destro e sfumate; testo Jet Black, accenti Socaf Red. Per testi, FAQ, tabelle, articoli.
+  - `t-vetro` — lo stesso vetro della nav; testo bianco. Per i moduli.
+  - `t-outline` — solo contorno bianco sottile; testo bianco, card bianche dentro. Per griglie di card, sedi, formule.
+  - `t-piena` — piena larghezza, spigolo vivo, contenuto allineato alla griglia (`--sx`/`--dx`).
+- **Spazi**: `--fuga` fra tessere (16→20px), `--tessera-pad` interno (32→64px), ritmo kicker→titolo→testo→contenuto con `--ritmo-s/m/l`.
+- **Testata delle interne**: direttamente sul rosso, piena larghezza; se contiene il corpo (articolo) il corpo passa in una tessera bianca.
+- **Card**: foto reali dove esistono (riconosciute per nome); hover = le altre card si coprono di vetro smerigliato (blur 7px, foto comprese), triangolo rosso sull'angolo della foto (non nei marchi).
+- **CTA**: pulsante pieno rosso / a contorno; nelle card, link testuale rosso con triangolo che scorre a destra.
+- **Logo nella nav**: bianco sul rosso, a colori sopra qualunque superficie chiara.
+- **Footer**: Jet Black, spigolo vivo.
+
+## Verifica di coerenza (01/10/2026)
+Controllo automatico su 20 pagine (1440px): sequenza delle sezioni, colori fuori palette, contrasto, ombre sui testi, testi ritagliati, segnaposto, immagini rotte, altezza delle card, leggibilità dei pulsanti, giunto con il footer, titoli spezzati.
+Regole confermate:
+- mai due sezioni dello stesso tipo di fila, mai due strisce a icone di fila;
+- nessun azzurro/blu; nessuna ombra sotto i testi (tranne l'hero sopra il video);
+- dentro le lastre bianche (card, sedi, promo, note) testi scuri e link rossi, anche sulle sezioni rosse;
+- card su sezioni rosse: superficie bianca piena;
+- giunto modulo → footer: 20px ovunque.

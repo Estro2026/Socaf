@@ -6125,26 +6125,6 @@ body[data-pagina="home"] .wrap > .row:not(:first-child) > .block::after{content:
 body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc){margin:0 0 var(--fuga) !important;padding:0 !important;background:none !important}
 body[data-pagina="home"] .wrap > .row[data-mood="macchine"]{margin-top:var(--fuga) !important}
 
-/* 146.3 la tessera: vetro bianco pieno (contenuti leggibili, testo scuro) */
-body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc) > .block{
-  position:relative;overflow:hidden;border:0 !important;border-radius:var(--raggio) !important;
-  padding:var(--tessera-pad) !important;color:#001e2a;
-  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.78)) !important;
-  -webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%);
-  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.55),0 30px 60px -40px rgba(90,0,12,.55) !important}
-/* « Le macchine » è la tessera di vetro chiaro: lascia vedere il rosso */
-body[data-pagina="home"] .wrap > .row[data-mood="macchine"] > .block{
-  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.1) 50%,rgba(255,255,255,.14)) !important;
-  -webkit-backdrop-filter:blur(34px) saturate(170%);backdrop-filter:blur(34px) saturate(170%)}
-
-/* 146.4 tipografia comune alle tessere bianche: titolo scuro, accento rosso */
-body[data-pagina="home"] .wrap > .row:not(:first-child):not([data-mood="macchine"]):not(.wf-doc) > .block :is(h2,h3,.gruppo-h){
-  color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;background:none !important;text-shadow:none !important}
-body[data-pagina="home"] .wrap > .row:not(:first-child):not([data-mood="macchine"]):not(.wf-doc) > .block :is(p,li,address,.lede,.small,.card-desc){
-  color:#2c3a42 !important;text-shadow:none !important}
-body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc) > .block :is(.kicker,.block-id){color:#e4002b !important}
-body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc) > .block h2 em{color:#e4002b !important}
-
 /* 146.5 ultimi azzurri dentro le tessere → rosso/bianco/grigi VI */
 body[data-pagina="home"] .formula :is(.formula-h,.formula-go){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
 body[data-pagina="home"] .formula .formula-go::before{border-color:#e4002b !important;background-color:#e4002b !important}
@@ -6378,3 +6358,1475 @@ body[data-pagina="home"] .t-outline .sede :is(*){color:#fff !important;-webkit-t
 /* 148.12 correzioni: spigolo vivo con specificità sufficiente, logo Socaf con altezza propria */
 body[data-pagina="home"] .wrap > .row.t-piena:not(:first-child):not(.wf-doc) > .block{border-radius:0 !important}
 body[data-pagina="home"] .row-gruppo .logo-item img{height:30px !important;max-height:none !important}
+
+/* 149. Tessere bianche = stessa materia delle rosse, in bianco
+   Stesso vetro cannettato (passo, luce e ombra delle canne identici) e stessa
+   composizione di aloni del fondo rosso, tradotti in bianco e Liquid Gray. */
+body[data-pagina="home"]{
+  --fondo-bianco:
+    repeating-linear-gradient(90deg,rgba(255,255,255,0) 0px,rgba(255,255,255,.7) 6px,rgba(255,255,255,1) 10px,
+      rgba(255,255,255,.3) 15px,rgba(0,30,42,.035) 20px,rgba(0,30,42,.055) 24px,rgba(255,255,255,0) 30px),
+    radial-gradient(34% 42% at 12% 14%,#ffffff,rgba(255,255,255,.6) 45%,transparent 75%),
+    radial-gradient(46% 60% at 85% 60%,rgba(219,219,219,.55),rgba(219,219,219,.3) 50%,transparent 80%),
+    radial-gradient(40% 50% at 45% 95%,rgba(219,219,219,.4),transparent 74%),
+    linear-gradient(160deg,#ffffff 0%,#f6f6f6 45%,#ececec 100%)}
+body[data-pagina="home"] .wrap > .row.t-bianca:not(:first-child):not(.wf-doc) > .block{
+  background:var(--fondo-bianco) !important;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.8),0 30px 60px -40px rgba(90,0,12,.5) !important}
+
+/* ================= 150. HOME · layout delle tessere (contenuti invariati) ================= */
+/* 150.0 il fondale resta rosso in ogni stato (la 147 vinceva in mood-azzurro/rosso) */
+body[data-pagina="home"]:is(.mood-chiaro,.mood-macchine,.mood-azzurro,.mood-rosso) .mood .macchine{opacity:1 !important}
+body[data-pagina="home"]:is(.mood-chiaro,.mood-macchine,.mood-azzurro,.mood-rosso) .mood :is(.chiaro,.azzurro,.rosso){opacity:0 !important}
+
+/* 150.1 Le macchine: foto 4:3 invece che quadrate, la tessera si accorcia e le sei famiglie si leggono in un colpo d'occhio */
+body[data-pagina="home"] .row[data-mood="macchine"] .card-media.foto{aspect-ratio:4/3 !important}
+body[data-pagina="home"] .row[data-mood="macchine"] .card-media.foto img{aspect-ratio:auto !important;height:100%}
+
+/* 150.2 Il gruppo: due colonne pulite — a sinistra sopratitolo e titolo,
+   a destra testo e firma dei tre marchi; loghi senza scatole, separati da filetti */
+body[data-pagina="home"] .row-gruppo .gruppo{display:grid !important;text-align:left !important;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"k ." "h l" "h g";
+  column-gap:clamp(36px,6vw,96px);row-gap:clamp(18px,2vw,26px);align-items:start}
+body[data-pagina="home"] .row-gruppo .gruppo > .kicker{grid-area:k;margin:0 !important}
+body[data-pagina="home"] .row-gruppo .gruppo-h{grid-area:h;align-self:start;text-align:left !important}
+body[data-pagina="home"] .row-gruppo .gruppo-lede{grid-area:l;align-self:end;text-align:left !important}
+body[data-pagina="home"] .row-gruppo .loghi{grid-area:g;margin:0 !important;justify-content:flex-start !important}
+body[data-pagina="home"] .row-gruppo .loghi .logo-item.logo-item{background:none !important;box-shadow:none !important;border-radius:0 !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;min-height:0 !important;flex:0 0 auto !important}
+@media (max-width:860px){body[data-pagina="home"] .row-gruppo .gruppo{grid-template-columns:1fr;grid-template-areas:"k" "h" "l" "g"}}
+
+/* 150.3 Per il tuo settore: le voci riempiono la tessera alla stessa altezza
+   della tessera accanto; icona in alto, nome in basso, l'ultima chiude a tutta riga */
+body[data-pagina="home"] .row-settori > .block{display:flex !important;flex-direction:column}
+body[data-pagina="home"] .row-settori .tiles{flex:1;grid-auto-rows:1fr;align-content:stretch}
+body[data-pagina="home"] .row-settori .tile{flex-direction:column !important;align-items:flex-start !important;justify-content:space-between !important;
+  gap:14px !important;min-height:96px !important;padding:16px 18px !important}
+body[data-pagina="home"] .row-settori .tile:last-child:nth-child(odd){grid-column:1 / -1;flex-direction:row !important;align-items:center !important;justify-content:flex-start !important}
+body[data-pagina="home"] .row-settori .block > p.small{margin-top:16px !important}
+
+/* 150.4 Noleggio e usato: le due formule stanno in basso, allineate alla base della tessera accanto */
+body[data-pagina="home"] .row-formule > .block{display:flex !important;flex-direction:column}
+body[data-pagina="home"] .row-formule .formule{margin-top:auto !important}
+
+/* 150.5 I marchi: card orizzontali (immagine a sinistra, testo a destra), la tessera si dimezza in altezza */
+body[data-pagina="home"] .row-marchi .grid-2{gap:var(--fuga) !important}
+body[data-pagina="home"] .row-marchi .card{display:grid !important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;overflow:hidden}
+body[data-pagina="home"] .row-marchi .card .card-media{aspect-ratio:auto !important;min-height:clamp(180px,16vw,240px) !important;height:100%;border-radius:var(--raggio) 0 0 var(--raggio) !important}
+body[data-pagina="home"] .row-marchi .card .card-body{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:clamp(20px,2.4vw,32px) !important}
+body[data-pagina="home"] .row-marchi .card .card-name{font-size:clamp(22px,2vw,28px)}
+@media (max-width:700px){body[data-pagina="home"] .row-marchi .card{grid-template-columns:1fr}
+  body[data-pagina="home"] .row-marchi .card .card-media{border-radius:var(--raggio) var(--raggio) 0 0 !important}}
+
+/* 150.6 Le sedi: intestazione su due colonne (titolo | testo), card più contrastate sul vetro */
+body[data-pagina="home"] .row-sedi > .block{display:grid !important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(36px,6vw,96px);align-items:end}
+body[data-pagina="home"] .row-sedi > .block > :is(.block-id,.kicker,h2){grid-column:1}
+body[data-pagina="home"] .row-sedi > .block > .lede{grid-column:2;grid-row:1 / span 3;margin:0 !important;align-self:end}
+body[data-pagina="home"] .row-sedi > .block > [data-sedi]{grid-column:1 / -1;margin-top:clamp(24px,3vw,40px)}
+body[data-pagina="home"] .row-sedi h2 em{opacity:1 !important;color:#fff !important}
+body[data-pagina="home"] .t-outline .sede{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.08)) !important}
+body[data-pagina="home"] .t-outline .sede .city{font-size:clamp(20px,1.6vw,24px) !important}
+@media (max-width:860px){body[data-pagina="home"] .row-sedi > .block{grid-template-columns:1fr}
+  body[data-pagina="home"] .row-sedi > .block > .lede{grid-column:1;grid-row:auto;margin-top:12px !important}}
+
+/* 150.7 Il modulo: il titolo resta in vista mentre si compilano i campi */
+@media (min-width:980px){body[data-pagina="home"] .row-form .form > :is(h3,.form-sub){position:sticky;top:calc(var(--header-h,120px) + 24px)}
+  body[data-pagina="home"] .row-form .form > .form-sub{top:calc(var(--header-h,120px) + 110px)}}
+body[data-pagina="home"] .row-marchi .card{min-height:clamp(200px,16vw,240px)}
+body[data-pagina="home"] .row-marchi .card .card-media{min-height:0 !important;height:auto !important}
+
+/* ================= 151. HOME · fondale a due grafiche con dissolvenza allo scroll =================
+   Il fondale fisso alterna le due materie della pagina — rosso cannettato e
+   bianco cannettato — secondo la sezione a metà schermo (data-fondo, JS).
+   Le tessere di vetro e a contorno adattano il testo al fondale, così ogni
+   testo resta leggibile su entrambe le grafiche. « Le sedi » è a piena larghezza
+   nella materia rossa. */
+
+/* 151.1 lo strato bianco è la grafica bianca; dissolvenza lenta fra le due */
+body[data-pagina="home"] .mood .chiaro{background:var(--fondo-bianco) !important}
+body[data-pagina="home"]:is(.mood-chiaro,.mood-macchine,.mood-azzurro,.mood-rosso) .mood :is(.chiaro,.macchine){
+  transition:opacity .9s cubic-bezier(.4,0,.2,1) !important}
+body[data-pagina="home"].fondo-bianco:is(.mood-chiaro,.mood-macchine,.mood-azzurro,.mood-rosso) .mood .chiaro{opacity:1 !important}
+body[data-pagina="home"].fondo-bianco:is(.mood-chiaro,.mood-macchine,.mood-azzurro,.mood-rosso) .mood .macchine{opacity:0 !important}
+body[data-pagina="home"].fondo-bianco{background-color:#fff}
+
+/* 151.2 testo leggibile sul rosso: vetro meno lattiginoso, ombra morbida più presente */
+body[data-pagina="home"] .wrap > .row.t-vetro > .block{
+  background:linear-gradient(180deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,.08) 45%,rgba(255,255,255,.12) 100%) !important}
+body[data-pagina="home"] .wrap > .row:is(.t-vetro,.t-outline,.t-rossa) > .block :is(h2,h3,.kicker,.lede,p,.small,.block-id,em,b,code),
+body[data-pagina="home"] .wrap > .row:is(.t-vetro,.t-outline,.t-rossa) > .block > .grid > div > :is(h2,p){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 2px rgba(110,0,18,.35),0 2px 18px rgba(110,0,18,.35) !important;
+  transition:color .6s ease,text-shadow .6s ease}
+/* i testi dentro card bianche restano scuri qualunque sia il fondale */
+body[data-pagina="home"] .wrap > .row > .block :is(.formula,.card:not(.sede),.tile) :is(h2,h3,p,span,.kicker,em,b){text-shadow:none !important}
+body[data-pagina="home"] .wrap > .row > .block .formula :is(.formula-p,p){color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body[data-pagina="home"] .wrap > .row > .block .formula :is(.formula-h,.kicker,.formula-go){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body[data-pagina="home"] .wrap > .row > .block .card:not(.sede) :is(.card-name){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body[data-pagina="home"] .wrap > .row > .block .card:not(.sede) :is(.card-desc){color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body[data-pagina="home"] .wrap > .row > .block .tile span{color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+
+/* 151.3 sul fondale bianco: vetro e contorno passano al testo scuro */
+body[data-pagina="home"].fondo-bianco .wrap > .row:is(.t-vetro,.t-outline) > .block :is(h2,h3,.lede,p,.small,b,code){
+  color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body[data-pagina="home"].fondo-bianco .wrap > .row:is(.t-vetro,.t-outline) > .block :is(.kicker,.block-id,h2 em){
+  color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important}
+body[data-pagina="home"].fondo-bianco .wrap > .row.t-outline > .block{box-shadow:inset 0 0 0 1.5px rgba(0,30,42,.16) !important}
+body[data-pagina="home"].fondo-bianco .wrap > .row.t-vetro > .block{
+  background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.4)) !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.08),inset 0 1px 0 #fff,0 18px 40px -30px rgba(0,30,42,.35) !important}
+
+/* 151.4 Le sedi a piena larghezza, nella materia rossa: card di vetro a contrasto pieno */
+body[data-pagina="home"] .row-sedi.t-rossa > .block{background:var(--fondo-rosso) !important}
+body[data-pagina="home"] .row-sedi .sede{
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.08)) !important;
+  -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),inset 0 1px 0 rgba(255,255,255,.9),0 22px 40px -28px rgba(90,0,12,.6) !important}
+body[data-pagina="home"] .row-sedi .sede > .card-fondo,body[data-pagina="home"] .row-sedi .sede .card-sagoma{display:none !important}
+body[data-pagina="home"] .row-sedi .sede *{color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 10px rgba(110,0,18,.3) !important}
+
+/* 152. Contenuti delle tessere a piena larghezza allineati alla griglia della pagina;
+        sedi senza contenitore bianco */
+/* --sx / --dx: margini reali della griglia, misurati in JS (misuraVw) */
+body[data-pagina="home"] .wrap > .row.t-piena:not(:first-child):not(.wf-doc) > .block{
+  padding-left:calc(var(--sx,24px) + var(--tessera-pad)) !important;
+  padding-right:calc(var(--dx,24px) + var(--tessera-pad)) !important}
+/* sedi: niente lastra né velo, solo il contorno sottile sul rosso */
+body[data-pagina="home"] .row-sedi .sede{background:transparent !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7) !important}
+body[data-pagina="home"] .row-sedi .sede::before{content:none !important}
+body[data-pagina="home"] .row-sedi .sede:hover{box-shadow:inset 0 0 0 1.5px #fff !important}
+/* stesso respiro interno per tutte le tessere: i contenuti partono tutti sulla stessa verticale */
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc):not(.t-piena) > .block{
+  padding:var(--tessera-pad) !important}
+
+/* ================= 153. HOME · revisione (fondale fisso rosso, niente dissolvenza allo scroll) ================= */
+
+/* 153.0 il fondale bianco non entra più in gioco */
+body[data-pagina="home"] .mood .chiaro{opacity:0 !important}
+body[data-pagina="home"] .mood .macchine{opacity:1 !important}
+
+/* 153.1 Il gruppo: niente lastra bianca, testo direttamente sul rosso;
+   niente filetti; loghi bianchi in una riga ariosa con altezze ottiche */
+body[data-pagina="home"] .wrap > .row.t-nuda > .block{background:transparent !important;box-shadow:none !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+body[data-pagina="home"] .wrap > .row.t-nuda > .block :is(h2,h3,.kicker,.lede,p,.small,.block-id,b,code),
+body[data-pagina="home"] .row-gruppo .gruppo :is(.kicker,.gruppo-h,.gruppo-lede){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;background:none !important;
+  text-shadow:0 1px 2px rgba(110,0,18,.35),0 2px 18px rgba(110,0,18,.35) !important}
+body[data-pagina="home"] .row-gruppo .gruppo-h em{color:#fff !important;-webkit-text-fill-color:#fff !important;
+  text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:8px;text-decoration-color:rgba(255,255,255,.55)}
+body[data-pagina="home"] .row-gruppo .gruppo-lede{border-left:0 !important;padding-left:0 !important}
+body[data-pagina="home"] .row-gruppo .loghi{border-top:0 !important;padding-top:0 !important;gap:clamp(36px,4.4vw,64px) !important;align-items:center !important}
+body[data-pagina="home"] .row-gruppo .loghi .logo-item.logo-item{border-left:0 !important;padding:0 !important}
+body[data-pagina="home"] .row-gruppo .logo-item img{filter:brightness(0) invert(1) !important;opacity:1 !important}
+body[data-pagina="home"] .row-gruppo .logo-item:first-child img{height:38px !important}
+body[data-pagina="home"] .row-gruppo .logo-item:nth-child(2) img{height:34px !important}
+body[data-pagina="home"] .row-gruppo .logo-item:nth-child(3) img{height:26px !important}
+
+/* 153.2 Noleggio e usato: card alla stessa altezza, CTA allineate in basso,
+   freccia triangolare come in tutto il sito (non un quadrato) */
+body[data-pagina="home"] .row-formule .formule{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;align-items:stretch !important}
+body[data-pagina="home"] .row-formule .formula{display:flex !important;flex-direction:column !important;height:100%}
+body[data-pagina="home"] .row-formule .formula .formula-art{flex:0 0 auto;aspect-ratio:16/10 !important;min-height:0 !important}
+body[data-pagina="home"] .row-formule .formula .formula-body{display:flex !important;flex-direction:column;flex:1}
+body[data-pagina="home"] .row-formule .formula .formula-go{margin-top:auto !important;padding-top:14px}
+body[data-pagina="home"] .formula .formula-go::before,body[data-pagina="home"] .t-rossa .formula .formula-go::before{
+  background:transparent !important;width:0 !important;height:0 !important;
+  border-style:solid !important;border-width:5px 0 5px 8px !important;
+  border-color:transparent transparent transparent #e4002b !important}
+@media (max-width:640px){body[data-pagina="home"] .row-formule .formule{grid-template-columns:1fr !important}}
+
+/* 153.3 Le sedi in bianco: stessa materia cannettata bianca, testo scuro,
+   card a solo contorno grigio, accenti rossi */
+body[data-pagina="home"] .row-sedi.t-bianca > .block{background:var(--fondo-bianco) !important}
+body[data-pagina="home"] .row-sedi.t-bianca > .block :is(h2,.lede,p){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body[data-pagina="home"] .row-sedi.t-bianca > .block .lede{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body[data-pagina="home"] .row-sedi.t-bianca > .block :is(.kicker,.block-id,h2 em){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important;opacity:1 !important}
+body[data-pagina="home"] .row-sedi.t-bianca .sede{background:rgba(255,255,255,.55) !important;
+  box-shadow:inset 0 0 0 1.5px rgba(0,30,42,.14) !important}
+body[data-pagina="home"] .row-sedi.t-bianca .sede:hover{box-shadow:inset 0 0 0 1.5px #e4002b !important}
+body[data-pagina="home"] .row-sedi.t-bianca .sede.sede *{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important;text-shadow:none !important}
+body[data-pagina="home"] .row-sedi.t-bianca .sede.sede .city{color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body[data-pagina="home"] .row-sedi.t-bianca .sede.sede :is(.main-flag,a){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+
+/* 153.4 Il modulo sul vetro (come le altre tessere di vetro): testi bianchi,
+   campi di vetro latte con testo scuro, pulsanti coerenti con la pagina */
+body[data-pagina="home"] .row-form.t-vetro .form :is(h3,.form-sub,label,.consent,.small,p){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 2px rgba(110,0,18,.3),0 2px 14px rgba(110,0,18,.3) !important}
+body[data-pagina="home"] .row-form.t-vetro .form label{font-weight:700;letter-spacing:.1em}
+body[data-pagina="home"] .row-form.t-vetro .form :is(input:not([type=checkbox]),textarea,select){
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.84)) !important;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;
+  border:0 !important;box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6),0 10px 22px -16px rgba(90,0,12,.6) !important}
+body[data-pagina="home"] .row-form.t-vetro .form :is(input,textarea):focus{outline:0;box-shadow:0 0 0 3px rgba(255,255,255,.65) !important}
+body[data-pagina="home"] .row-form.t-vetro .form input[type=checkbox]{accent-color:#e4002b}
+body[data-pagina="home"] .row-form.t-vetro .form .btn-primary{background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important}
+body[data-pagina="home"] .row-form.t-vetro .form .btn-glass{background:transparent !important;color:#fff !important;-webkit-text-fill-color:#fff !important;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85) !important;text-shadow:none !important}
+body[data-pagina="home"] .row-form.t-vetro .form .btn-glass:hover{background:rgba(255,255,255,.18) !important}
+
+/* 154. Per il tuo settore: tessera più marginale, protagoniste le icone
+   - meno larghezza (4/12 contro 8/12 delle formule);
+   - le voci perdono la lastra bianca: restano l'icona, grande, in un disco
+     di vetro, e sotto il nome, piccolo e bianco. */
+@media (min-width:980px){
+  body[data-pagina="home"] .wrap > .row.row-formule.t-7{grid-column:1 / span 8 !important}
+  body[data-pagina="home"] .wrap > .row.row-settori.t-5{grid-column:9 / span 4 !important}}
+body[data-pagina="home"] .row-settori .tiles{grid-template-columns:repeat(3,minmax(0,1fr)) !important;grid-auto-rows:auto !important;
+  gap:clamp(18px,1.8vw,26px) 10px !important;align-content:center !important}
+body[data-pagina="home"] .row-settori .tile.tile{background:none !important;box-shadow:none !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  flex-direction:column !important;align-items:center !important;justify-content:flex-start !important;text-align:center;
+  gap:10px !important;min-height:0 !important;padding:0 !important;border-radius:0 !important}
+body[data-pagina="home"] .row-settori .tile:last-child:nth-child(odd){grid-column:auto !important;flex-direction:column !important;align-items:center !important}
+body[data-pagina="home"] .row-settori .tile-ico{width:clamp(58px,4.6vw,72px) !important;height:clamp(58px,4.6vw,72px) !important;padding:clamp(15px,1.2vw,19px) !important;
+  stroke-width:1.5 !important;
+  background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,255,255,.72)) !important;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.7),0 14px 26px -16px rgba(90,0,12,.7) !important;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s ease,stroke .3s ease !important}
+body[data-pagina="home"] .row-settori .tile:hover .tile-ico{transform:translateY(-3px) scale(1.05);background:#fff !important;stroke:#e4002b !important;
+  box-shadow:inset 0 0 0 2px #e4002b,0 18px 30px -16px rgba(90,0,12,.8) !important}
+body[data-pagina="home"] .row-settori .tile:hover{transform:none !important}
+body[data-pagina="home"] .row-settori .tile span{font-size:13px !important;line-height:1.25;font-weight:600;
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 8px rgba(110,0,18,.4) !important}
+body[data-pagina="home"] .row-settori > .block > h2{font-size:clamp(22px,1.9vw,28px) !important}
+@media (max-width:979px){body[data-pagina="home"] .row-settori .tiles{grid-template-columns:repeat(4,minmax(0,1fr)) !important}}
+@media (max-width:560px){body[data-pagina="home"] .row-settori .tiles{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+body[data-pagina="home"] .row-settori .tile.tile{border:0 !important;outline:0}
+
+/* 155. Il gruppo come « Prodotti per la pulizia »: tessera a piena larghezza
+   nella materia bianca cannettata, testo Jet Black, « tre aziende » in Socaf Red */
+body[data-pagina="home"] .row-gruppo.t-bianca .gruppo :is(.gruppo-h,.gruppo-lede){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body[data-pagina="home"] .row-gruppo.t-bianca .gruppo .gruppo-lede{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body[data-pagina="home"] .row-gruppo.t-bianca .gruppo .kicker{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important}
+body[data-pagina="home"] .row-gruppo.t-bianca .gruppo-h em{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-decoration:none !important}
+/* loghi sul bianco: Socaf nei suoi colori, Bottoni e Tecno Clean in nero */
+body[data-pagina="home"] .row-gruppo.t-bianca .logo-item img{filter:none !important}
+body[data-pagina="home"] .row-gruppo.t-bianca .logo-mono img{filter:brightness(0) !important}
+
+/* 156. Materia bianca rivista: niente macchia bianca piatta (cancellava le canne
+   sotto i titoli); canne con ombra Liquid Gray leggibile su tutta la superficie */
+body[data-pagina="home"]{
+  --fondo-bianco:
+    repeating-linear-gradient(90deg,rgba(255,255,255,0) 0px,rgba(255,255,255,.75) 6px,#fff 10px,
+      rgba(255,255,255,.35) 15px,rgba(0,30,42,.06) 20px,rgba(0,30,42,.09) 24px,rgba(255,255,255,0) 30px),
+    radial-gradient(40% 60% at 85% 30%,rgba(219,219,219,.5),transparent 75%),
+    radial-gradient(50% 70% at 20% 90%,rgba(219,219,219,.45),transparent 75%),
+    linear-gradient(160deg,#fbfbfb 0%,#f2f2f2 50%,#e9e9e9 100%)}
+
+/* ================= 157. HOME · formule, settori, sedi, footer ================= */
+
+/* 157.1 Noleggio e usato a tutta la griglia; settori diventano una striscia sotto */
+@media (min-width:980px){
+  body[data-pagina="home"] .wrap > .row.row-formule.t-7{grid-column:1 / -1 !important}
+  body[data-pagina="home"] .wrap > .row.row-settori.t-5{grid-column:1 / -1 !important}}
+
+/* 157.2 il noleggio è la formula principale: card grande orizzontale (foto
+   ampia + testo), l'usato le sta accanto più stretto e più quieto */
+body[data-pagina="home"] .row-formule .formule{grid-template-columns:minmax(0,1.85fr) minmax(0,1fr) !important;gap:var(--fuga) !important}
+@media (min-width:980px){
+  body[data-pagina="home"] .row-formule .formula-nol{display:grid !important;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:stretch}
+  body[data-pagina="home"] .row-formule .formula-nol .formula-art{aspect-ratio:auto !important;height:100% !important;min-height:clamp(280px,24vw,360px) !important;border-radius:var(--raggio) 0 0 var(--raggio) !important}
+  body[data-pagina="home"] .row-formule .formula-nol .formula-body{padding:clamp(26px,2.6vw,40px) !important;justify-content:center}}
+body[data-pagina="home"] .row-formule .formula-nol .formula-h{font-size:clamp(34px,3.4vw,52px) !important;line-height:1}
+body[data-pagina="home"] .row-formule .formula-nol .formula-p{font-size:clamp(15px,1.1vw,17px) !important}
+/* CTA del noleggio come un vero pulsante rosso del sito */
+body[data-pagina="home"] .row-formule .formula-nol .formula-go{align-self:flex-start;margin-top:22px !important;padding:14px 24px !important;border-radius:999px;
+  background:#e4002b;color:#fff !important;-webkit-text-fill-color:#fff !important;font-weight:700;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 14px 26px -14px rgba(163,16,0,.8);transition:background .25s ease}
+body[data-pagina="home"] .row-formule .formula-nol .formula-go::before{border-color:transparent transparent transparent #fff !important}
+body[data-pagina="home"] .row-formule .formula-nol:hover .formula-go{background:#a31000}
+/* l'usato: secondario, la stessa card ma più sobria */
+body[data-pagina="home"] .row-formule .formula-usa .formula-h{font-size:clamp(24px,2.1vw,32px) !important}
+@media (max-width:979px){body[data-pagina="home"] .row-formule .formule{grid-template-columns:1fr !important}}
+
+/* 157.3 Per il tuo settore: una striscia sottile — titolo a sinistra, le sette
+   icone in fila; tessera bassa e marginale, protagoniste le icone */
+body[data-pagina="home"] .row-settori > .block{display:grid !important;grid-template-columns:auto minmax(0,1fr);align-items:center;
+  column-gap:clamp(28px,4vw,64px);padding-top:clamp(22px,2.2vw,30px) !important;padding-bottom:clamp(22px,2.2vw,30px) !important}
+body[data-pagina="home"] .row-settori > .block > :is(.block-id,h2,p.small){grid-column:1}
+body[data-pagina="home"] .row-settori > .block > h2{margin:0 !important;max-width:9ch;line-height:1.05}
+body[data-pagina="home"] .row-settori .tiles{grid-column:2;grid-row:1 / span 3;margin:0 !important;
+  grid-template-columns:repeat(7,minmax(0,1fr)) !important;gap:10px !important}
+body[data-pagina="home"] .row-settori > .block > p.small{margin-top:10px !important;max-width:34ch}
+@media (max-width:979px){
+  body[data-pagina="home"] .row-settori > .block{grid-template-columns:1fr}
+  body[data-pagina="home"] .row-settori .tiles{grid-column:1;grid-row:auto;margin-top:20px !important;grid-template-columns:repeat(4,minmax(0,1fr)) !important}}
+
+/* 157.4 Sedi: lo stesso hover delle card del sito — le altre si velano
+   e si sfocano, quella puntata si alza e mostra il triangolo rosso d'angolo */
+body[data-pagina="home"] .row-sedi .sede{position:relative;overflow:hidden;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .35s ease,opacity .35s ease,box-shadow .3s ease !important}
+body[data-pagina="home"] .row-sedi .sedi:has(.sede:hover) .sede:not(:hover){filter:blur(3px);opacity:.55}
+body[data-pagina="home"] .row-sedi .sede:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1.5px rgba(0,30,42,.14),0 26px 44px -30px rgba(0,30,42,.45) !important}
+body[data-pagina="home"] .row-sedi .sede.sede::after{content:"" !important;display:block !important;position:absolute !important;right:0;bottom:0;top:auto;left:auto;
+  width:clamp(56px,5vw,72px);height:clamp(56px,5vw,72px);background:#e4002b !important;
+  clip-path:polygon(100% 0,100% 100%,0 100%) !important;border-radius:0 0 var(--raggio) 0 !important;
+  opacity:0 !important;transform:scale(.4) !important;transform-origin:100% 100%;pointer-events:none;
+  transition:opacity .25s ease,transform .4s cubic-bezier(.2,.8,.2,1) !important}
+body[data-pagina="home"] .row-sedi .sede.sede:hover::after{opacity:1 !important;transform:none !important}
+
+/* 157.5 Footer: spigolo vivo e fondo scuro (Jet Black), testi chiari */
+.site-footer{border-radius:0 !important;background:#001e2a !important;color:rgba(255,255,255,.82)}
+.site-footer::before,.site-footer::after{content:none !important}
+.site-footer :is(h2,h3,h4,h5,strong,b,.footer-h){color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:none !important}
+.site-footer :is(p,li,span,address,small,.small,dd,dt){color:rgba(255,255,255,.75) !important;-webkit-text-fill-color:currentColor !important;text-shadow:none !important}
+.site-footer a{color:#fff !important;-webkit-text-fill-color:#fff !important}
+.site-footer a:hover{color:#f33f54 !important;-webkit-text-fill-color:#f33f54 !important}
+.site-footer img[src*="socaf21-payoff-rgb.svg"]{filter:brightness(0) invert(1)}
+.site-footer :is(hr,.hr){background:rgba(255,255,255,.14) !important;border-color:rgba(255,255,255,.14) !important}
+
+/* 158. Prodotti: niente cornice chiara attorno alla foto (si confondeva col bianco);
+        Sedi: le card lasciano vedere la materia bianca cannettata dietro */
+body[data-pagina="home"] .row-prodotti .foto-prodotti{padding:0 !important;background:none !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  box-shadow:0 30px 50px -28px rgba(0,30,42,.45),0 6px 14px -8px rgba(0,30,42,.2) !important;border-radius:var(--raggio)}
+body[data-pagina="home"] .row-prodotti .foto-prodotti img{border-radius:var(--raggio) !important}
+body[data-pagina="home"] .row-sedi.t-bianca .sede{background:transparent !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  box-shadow:inset 0 0 0 1.5px rgba(0,30,42,.18) !important}
+body[data-pagina="home"] .row-sedi.t-bianca .sede:hover{background:rgba(255,255,255,.35) !important;
+  box-shadow:inset 0 0 0 1.5px rgba(0,30,42,.22),0 26px 44px -30px rgba(0,30,42,.45) !important}
+
+/* ================= 159. HOME · revisione UX/UI complessiva ================= */
+
+/* 159.1 CTA delle formule: una sola grammatica, quella dei link-azione del sito
+   (testo rosso + triangolo, che scorre a destra in hover). Il noleggio resta
+   protagonista per dimensione della card, non per un pulsante diverso. */
+body[data-pagina="home"] .row-formule .formula .formula-go,
+body[data-pagina="home"] .row-formule .formula-nol .formula-go{
+  display:inline-flex !important;align-items:center;gap:10px;align-self:flex-start;
+  margin-top:auto !important;padding:16px 0 0 !important;border-radius:0 !important;background:none !important;box-shadow:none !important;
+  color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;font-weight:700;letter-spacing:.01em;text-shadow:none !important}
+body[data-pagina="home"] .row-formule .formula-nol .formula-go{font-size:17px}
+body[data-pagina="home"] .row-formule .formula .formula-go::before{
+  border-color:transparent transparent transparent #e4002b !important;margin:0 !important;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+body[data-pagina="home"] .row-formule .formula:hover .formula-go::before{transform:translateX(5px)}
+body[data-pagina="home"] .row-formule .formula:hover .formula-go{background:none !important}
+
+/* 159.2 I marchi: il segnaposto non è più un riquadro grigio piatto ma una
+   lastra nella materia bianca, con la dicitura discreta al centro */
+body[data-pagina="home"] .row-marchi .card .card-media.ph{background:var(--fondo-bianco) !important;
+  color:#636362 !important;-webkit-text-fill-color:#636362 !important;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+  box-shadow:inset -1px 0 0 rgba(0,30,42,.06) !important}
+
+/* 159.3 Footer scuro: le etichette (« sede principale », « raffrescamento »…)
+   erano pastiglie bianche con testo bianco: diventano contorni sottili */
+.site-footer .f-tag{background:transparent !important;color:rgba(255,255,255,.75) !important;-webkit-text-fill-color:rgba(255,255,255,.75) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.3) !important;border:0 !important}
+
+/* 159.4 Modulo: il consenso è una frase, non un'etichetta */
+body[data-pagina="home"] .row-form.t-vetro .form .consent{font-weight:400 !important;letter-spacing:0 !important;text-transform:none !important;font-size:14px}
+
+/* ================= 160. HOME · sistema di spazi, materia più raffinata, rifiniture =================
+   SPAZI (un solo sistema, nessuna eccezione):
+     --fuga ............ giunto fra tessere, orizzontale e verticale (16 → 20px)
+     --tessera-pad ..... respiro interno di ogni tessera, su tutti i lati (32 → 64px)
+     --ritmo-s/m/l ..... spazi verticali interni: sopratitolo→titolo, titolo→testo, testo→contenuto
+   MATERIA: il vetro cannettato non è più una carta da parati uniforme. Le canne
+   sono più larghe e prendono la luce da un lato, poi si spengono: sul rosso dall'alto
+   a destra, sul bianco da destra verso sinistra. Le superfici restano pulite
+   dove sta il testo, la texture vive dove c'è respiro. */
+body[data-pagina="home"]{
+  --fuga:clamp(16px,1.4vw,20px);
+  --tessera-pad:clamp(32px,4.2vw,64px);
+  --ritmo-s:10px;--ritmo-m:clamp(14px,1.2vw,18px);--ritmo-l:clamp(28px,3vw,44px);
+  --canne-rosse:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0px,rgba(255,255,255,.14) 9px,rgba(255,255,255,.26) 14px,
+    rgba(255,255,255,.04) 22px,rgba(120,0,16,.10) 31px,rgba(120,0,16,.14) 36px,rgba(255,255,255,0) 42px);
+  --canne-bianche:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0px,rgba(255,255,255,.9) 9px,#fff 14px,
+    rgba(255,255,255,.35) 22px,rgba(0,30,42,.05) 31px,rgba(0,30,42,.08) 36px,rgba(255,255,255,0) 42px);
+  --fondo-bianco:radial-gradient(70% 90% at 100% 0%,#f3f3f3,transparent 70%),linear-gradient(180deg,#ffffff,#f6f6f6)}
+
+/* 160.1 fondale rosso: canne larghe che si accendono in alto a destra e sfumano */
+body[data-pagina="home"] .mood .macchine::after{background:var(--canne-rosse) !important;
+  -webkit-mask:radial-gradient(120% 110% at 100% 0%,#000 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.18) 80%,rgba(0,0,0,.1) 100%) !important;
+          mask:radial-gradient(120% 110% at 100% 0%,#000 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.18) 80%,rgba(0,0,0,.1) 100%) !important}
+body[data-pagina="home"] .hero-vimeo::before{background:var(--canne-rosse) !important}
+
+/* 160.2 tessere bianche: superficie pulita, canne solo sul lato destro, sfumate */
+body[data-pagina="home"] .wrap > .row.t-bianca:not(:first-child):not(.wf-doc) > .block{
+  position:relative;isolation:isolate;background:var(--fondo-bianco) !important}
+body[data-pagina="home"] .wrap > .row.t-bianca:not(:first-child):not(.wf-doc) > .block::before{
+  content:"" !important;display:block !important;position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
+  background:var(--canne-bianche);
+  -webkit-mask:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(0,0,0,.45) 60%,#000 100%);
+          mask:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(0,0,0,.45) 60%,#000 100%)}
+
+/* 160.3 spazi uniformi */
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc){margin:0 0 var(--fuga) !important}
+body[data-pagina="home"] .wrap:has(> .row[data-mood="macchine"]){column-gap:var(--fuga) !important}
+body[data-pagina="home"] .wrap > .row:not(:first-child):not(.wf-doc):not(.t-piena) > .block,
+body[data-pagina="home"] .row-settori > .block{padding:var(--tessera-pad) !important}
+body[data-pagina="home"] .wrap > .row.t-piena:not(:first-child):not(.wf-doc) > .block{
+  padding-top:var(--tessera-pad) !important;padding-bottom:var(--tessera-pad) !important}
+body[data-pagina="home"] .wrap > .row > .block > .kicker{margin:0 0 var(--ritmo-s) !important}
+body[data-pagina="home"] .wrap > .row > .block > h2{margin:0 0 var(--ritmo-m) !important}
+body[data-pagina="home"] .wrap > .row > .block > .lede{margin:0 0 var(--ritmo-l) !important}
+body[data-pagina="home"] .wrap > .row > .block > :last-child{margin-bottom:0 !important}
+body[data-pagina="home"] .row-formule .formule,body[data-pagina="home"] .row-marchi .grid-2,body[data-pagina="home"] .row-sedi .sedi{gap:var(--fuga) !important}
+body[data-pagina="home"] .row[data-mood="macchine"] .board-track{gap:var(--fuga) !important}
+
+/* 160.4 tipografia: niente parole orfane in fondo alle righe */
+body[data-pagina="home"] :is(h1,h2,h3,.formula-h,.card-name,.gruppo-h){text-wrap:balance}
+body[data-pagina="home"] :is(p,.lede,.formula-p,.card-desc,.gruppo-lede){text-wrap:pretty}
+
+/* 160.5 Il gruppo: via il rettangolo uniforme (era un blur del contenitore
+   che appiattiva la materia dietro il testo) */
+body[data-pagina="home"] .row-gruppo .gruppo{-webkit-backdrop-filter:none !important;backdrop-filter:none !important;background:none !important;box-shadow:none !important}
+
+/* 160.6 Per il tuo settore: voci bianche; hover per inversione — il disco
+   bianco diventa vetro trasparente con anello e icona bianchi, e si alza */
+body[data-pagina="home"] .row-settori .tile span,
+body[data-pagina="home"] .wrap > .row > .block .row-settori .tile span,
+body[data-pagina="home"] .row-settori.row-settori .tile.tile span{color:#fff !important;-webkit-text-fill-color:#fff !important;
+  text-shadow:0 1px 2px rgba(110,0,18,.35),0 2px 12px rgba(110,0,18,.3) !important}
+body[data-pagina="home"] .row-settori .tile:hover .tile-ico,
+body[data-pagina="home"] .row-settori .tile:focus-visible .tile-ico{
+  background:rgba(255,255,255,.14) !important;stroke:#fff !important;transform:translateY(-4px) !important;
+  box-shadow:inset 0 0 0 2px #fff,0 18px 30px -16px rgba(90,0,12,.75) !important}
+body[data-pagina="home"] .row-settori .tile:focus-visible{outline:0}
+
+/* 160.7 I marchi: foto a tutta altezza nella metà sinistra della card */
+body[data-pagina="home"] .row-marchi .card .card-media.foto{aspect-ratio:auto !important}
+body[data-pagina="home"] .row-marchi .card .card-media.foto img{width:100%;height:100%;object-fit:cover;aspect-ratio:auto !important;padding:0 !important}
+
+/* 161. I marchi: tessera a contorno (come « Per il tuo settore »);
+   nella metà sinistra della card il logo ufficiale su lastra bianca, cliccabile
+   verso il sito del marchio, come il resto della card */
+body[data-pagina="home"] .row-marchi .card .marchio-logo{display:grid !important;place-items:center;padding:clamp(24px,3vw,44px) !important;
+  background:var(--fondo-bianco) !important;box-shadow:inset -1px 0 0 rgba(0,30,42,.06) !important;position:relative;z-index:3}
+body[data-pagina="home"] .row-marchi .card .marchio-logo img{width:min(78%,240px);height:auto;max-height:72px;object-fit:contain;padding:0 !important;aspect-ratio:auto !important;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+body[data-pagina="home"] .row-marchi .card .marchio-logo img[src*="acquarial"]{filter:brightness(0)}
+body[data-pagina="home"] .row-marchi .card:hover .marchio-logo img{transform:scale(1.04)}
+body[data-pagina="home"] .row-marchi .card .marchio-logo:focus-visible{outline:3px solid #e4002b;outline-offset:-3px}
+
+/* 162. Settori: in hover il disco si alza e ha ombra — la voce non deve ritagliarlo */
+body[data-pagina="home"] .row-settori .tile.tile{overflow:visible !important;padding-top:6px !important}
+
+/* 163. I marchi: sezione compatta come la striscia dei settori
+   (titolo a sinistra, due card basse a destra); il logo sta su una lastra
+   staccata dai bordi della card, con lo stesso respiro su tutti i lati */
+@media (min-width:980px){
+  body[data-pagina="home"] .row-marchi > .block{display:grid !important;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:clamp(28px,4vw,64px)}
+  body[data-pagina="home"] .row-marchi > .block > :is(.block-id,h2,p.small){grid-column:1}
+  body[data-pagina="home"] .row-marchi > .block > h2{max-width:9ch;line-height:1.05;margin:0 !important}
+  body[data-pagina="home"] .row-marchi > .block > .grid-2{grid-column:2;grid-row:1 / span 3}
+  body[data-pagina="home"] .row-marchi > .block > p.small{margin-top:10px !important;max-width:34ch}}
+body[data-pagina="home"] .row-marchi .card{min-height:0 !important;grid-template-columns:minmax(0,.9fr) minmax(0,1fr) !important;padding:10px !important;gap:0}
+body[data-pagina="home"] .row-marchi .card .marchio-logo{border-radius:calc(var(--raggio) - 10px) !important;min-height:clamp(120px,10vw,150px) !important;
+  padding:clamp(18px,2vw,28px) !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.06) !important}
+body[data-pagina="home"] .row-marchi .card .marchio-logo img{max-height:52px;width:min(80%,200px)}
+body[data-pagina="home"] .row-marchi .card .card-body{padding:clamp(14px,1.6vw,22px) clamp(16px,2vw,28px) !important;gap:6px !important}
+body[data-pagina="home"] .row-marchi .card .card-name{font-size:clamp(19px,1.6vw,23px) !important}
+
+/* 164. Marchi: il triangolo rosso non sta sul logo ma nell'angolo della card,
+   accanto al testo (« Sito dedicato »), più piccolo */
+body[data-pagina="home"] .row-marchi .card .marchio-logo::after{content:none !important;display:none !important}
+body[data-pagina="home"] .row-marchi .card{position:relative !important}
+body[data-pagina="home"] .row-marchi .card.card::after{content:"" !important;display:block !important;position:absolute !important;
+  right:0 !important;bottom:0 !important;top:auto !important;left:auto !important;z-index:4;pointer-events:none;
+  width:clamp(44px,3.6vw,56px) !important;height:clamp(44px,3.6vw,56px) !important;background:#e4002b !important;
+  clip-path:polygon(100% 0,100% 100%,0 100%) !important;border-radius:0 0 var(--raggio) 0 !important;
+  opacity:0 !important;transform:scale(.4) !important;transform-origin:100% 100%;
+  transition:opacity .25s ease,transform .4s cubic-bezier(.2,.8,.2,1) !important}
+body[data-pagina="home"] .row-marchi .card.card:hover::after{opacity:1 !important;transform:none !important}
+/* 164.1 la lastra del logo occupa esattamente l'area interna: stesso margine sopra e sotto */
+body[data-pagina="home"] .row-marchi .card .marchio-logo{height:auto !important;align-self:stretch !important;margin:0 !important}
+
+/* 165. Marchi · hover come nel resto del sito (sostituisce 164):
+   - triangolo rosso sull'angolo della lastra-logo, piccolo, lontano dal logo;
+   - le altre card si sfocano per intero, logo compreso. */
+body[data-pagina="home"] .row-marchi .card.card::after{content:none !important;display:none !important}
+body[data-pagina="home"] .row-marchi .card .marchio-logo{overflow:hidden !important}
+body[data-pagina="home"] .row-marchi .card .marchio-logo::after{content:"" !important;display:block !important;position:absolute !important;
+  right:0 !important;bottom:0 !important;top:auto !important;left:auto !important;z-index:2;pointer-events:none;
+  width:clamp(34px,2.8vw,44px) !important;height:clamp(34px,2.8vw,44px) !important;background:#e4002b !important;
+  clip-path:polygon(100% 0,100% 100%,0 100%) !important;border-radius:0 0 calc(var(--raggio) - 10px) 0 !important;
+  opacity:0 !important;transform:scale(.4) !important;transform-origin:100% 100%;
+  transition:opacity .25s ease,transform .4s cubic-bezier(.2,.8,.2,1) !important}
+body[data-pagina="home"] .row-marchi .card:hover .marchio-logo::after{opacity:1 !important;transform:none !important}
+/* velo: un solo sfocato su tutta la card (niente velo parziale che lasciava il logo nitido) */
+body[data-pagina="home"] .row-marchi .grid-2 .card.card::before{content:none !important;display:none !important}
+body[data-pagina="home"] .row-marchi .card{transition:filter .35s ease,opacity .35s ease,transform .45s cubic-bezier(.2,.8,.2,1) !important}
+body[data-pagina="home"] .row-marchi .grid-2:has(.card:hover) .card:not(:hover){filter:blur(3px);opacity:.55}
+
+/* 166. Modulo: consenso su una riga · Formule: le due CTA sulla stessa linea di base */
+body[data-pagina="home"] .row-form .form .consent{grid-column:1 / -1 !important;white-space:nowrap;display:flex !important;align-items:center;gap:10px}
+@media (max-width:640px){body[data-pagina="home"] .row-form .form .consent{white-space:normal}}
+body[data-pagina="home"] .row-formule .formula .formula-body,
+body[data-pagina="home"] .row-formule .formula-nol .formula-body{justify-content:flex-start !important;
+  padding-bottom:clamp(22px,2.2vw,32px) !important}
+body[data-pagina="home"] .row-formule .formula .formula-go{margin-top:auto !important}
+
+/* 167. Il gruppo: nomi dei tre marchi in grassetto nel testo; loghi più
+   presenti e distribuiti su tutta la colonna, allineati sulla stessa linea */
+body[data-pagina="home"] .row-gruppo .gruppo-lede b{font-weight:700;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body[data-pagina="home"] .row-gruppo .loghi{justify-content:space-between !important;align-items:center !important;gap:24px !important;
+  margin-top:clamp(18px,2vw,28px) !important;width:100%}
+body[data-pagina="home"] .row-gruppo .logo-item:first-child img{height:52px !important}
+body[data-pagina="home"] .row-gruppo .logo-item:nth-child(2) img{height:46px !important}
+body[data-pagina="home"] .row-gruppo .logo-item:nth-child(3) img{height:34px !important}
+@media (max-width:560px){body[data-pagina="home"] .row-gruppo .loghi{justify-content:flex-start !important;gap:28px !important}
+  body[data-pagina="home"] .row-gruppo .logo-item:first-child img{height:40px !important}
+  body[data-pagina="home"] .row-gruppo .logo-item:nth-child(2) img{height:36px !important}
+  body[data-pagina="home"] .row-gruppo .logo-item:nth-child(3) img{height:26px !important}}
+
+/* 168. Marchi · hover identico alle card delle macchine (sostituisce 165), senza triangolo:
+   sulle card non puntate scende lo stesso velo di vetro smerigliato (blur 7px),
+   che copre tutta la card, logo compreso */
+body[data-pagina="home"] .row-marchi .card .marchio-logo::after{content:none !important;display:none !important}
+body[data-pagina="home"] .row-marchi .grid-2:has(.card:hover) .card:not(:hover){filter:none !important;opacity:1 !important}
+body[data-pagina="home"] .row-marchi .card .marchio-logo{z-index:auto !important}
+body[data-pagina="home"] .row-marchi .grid-2 .card.card::before{content:"" !important;display:block !important;position:absolute;inset:0;z-index:5;
+  pointer-events:none;border-radius:inherit;border:0;clip-path:none;transform:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.26)) !important;
+  -webkit-backdrop-filter:blur(7px) saturate(110%) !important;backdrop-filter:blur(7px) saturate(110%) !important;
+  box-shadow:none !important;opacity:0 !important;transition:opacity .45s ease !important}
+body[data-pagina="home"] .row-marchi .grid-2:has(.card:hover) .card.card:not(:hover)::before{opacity:1 !important}
+
+/* 169. Logo della nav sempre leggibile: il bianco ha un alone scuro morbido
+   (regge anche sui passaggi fra rosso e chiaro), il cambio di versione è istantaneo */
+.site-header .brand img[src*="rgb-white"]{filter:drop-shadow(0 1px 1px rgba(90,0,12,.35)) drop-shadow(0 2px 10px rgba(90,0,12,.35))}
+.site-header .brand img{transition:none !important}
+
+/* 170. Il velo delle card non puntate copre anche le foto: la foto (e il suo
+   triangolo) stanno sotto il velo (z 5); sulla card puntata il velo non c'è,
+   quindi il triangolo resta visibile */
+:is(.card,.formula) :is(.card-media,.formula-art),.board.is-gallery .card .card-media,.row-marchi .card .card-media{z-index:4 !important}
+
+/* ================= 171. PAGINE INTERNE · lo stesso linguaggio della home =================
+   Fondale fisso rosso a vetro cannettato (mai azzurro, mai blu), testata
+   direttamente sul rosso a piena larghezza, poi tessere a mosaico:
+   bianca / vetro / contorno secondo il contenuto (classi date da scenaInterna).
+   Spazi, raggi, tipografia, CTA e hover come in home. */
+body.pagina-interna{
+  --fuga:clamp(16px,1.4vw,20px);--tessera-pad:clamp(32px,4.2vw,64px);
+  --ritmo-s:10px;--ritmo-m:clamp(14px,1.2vw,18px);--ritmo-l:clamp(28px,3vw,44px);
+  --canne-rosse:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0px,rgba(255,255,255,.14) 9px,rgba(255,255,255,.26) 14px,
+    rgba(255,255,255,.04) 22px,rgba(120,0,16,.10) 31px,rgba(120,0,16,.14) 36px,rgba(255,255,255,0) 42px);
+  --canne-bianche:repeating-linear-gradient(90deg,rgba(255,255,255,0) 0px,rgba(255,255,255,.9) 9px,#fff 14px,
+    rgba(255,255,255,.35) 22px,rgba(0,30,42,.05) 31px,rgba(0,30,42,.08) 36px,rgba(255,255,255,0) 42px);
+  --fondo-bianco:radial-gradient(70% 90% at 100% 0%,#f3f3f3,transparent 70%),linear-gradient(180deg,#ffffff,#f6f6f6);
+  background:#e4002b !important}
+html:has(body.pagina-interna){overflow-x:clip}
+body.pagina-interna{overflow-x:clip}
+
+/* 171.1 fondale: il rosso della home in ogni stato, niente azzurro/blu */
+body.pagina-interna .mood .macchine{opacity:1 !important;overflow:hidden;background:
+    radial-gradient(34% 42% at 12% 14%,rgba(255,255,255,.55),rgba(255,255,255,.2) 45%,transparent 75%),
+    radial-gradient(46% 60% at 85% 60%,#e4002b,rgba(228,0,43,.8) 50%,transparent 80%),
+    radial-gradient(40% 50% at 45% 95%,rgba(243,63,84,.9),transparent 74%),
+    linear-gradient(160deg,#f33f54 0%,#e4002b 45%,#c8001f 100%) !important;transition:none !important}
+body.pagina-interna .mood .macchine::before{content:"";position:absolute;inset:-8%;background:inherit;filter:blur(38px);opacity:.9}
+body.pagina-interna .mood .macchine::after{content:"" !important;position:absolute;inset:0;background:var(--canne-rosse) !important;
+  -webkit-mask:radial-gradient(120% 110% at 100% 0%,#000 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.18) 80%,rgba(0,0,0,.1) 100%) !important;
+          mask:radial-gradient(120% 110% at 100% 0%,#000 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.18) 80%,rgba(0,0,0,.1) 100%) !important}
+body.pagina-interna .mood :is(.chiaro,.blu,.azzurro,.rosso){opacity:0 !important}
+body.pagina-interna .forme-laterali{display:none !important}
+
+/* 171.2 testata: direttamente sul rosso, piena larghezza, spigolo vivo */
+body.pagina-interna .wrap > .row.row-testata::before,
+body.pagina-interna .wrap > .row.row-testata::after,
+body.pagina-interna .wrap > .row.row-testata > .block::before,
+body.pagina-interna .wrap > .row.row-testata > .block::after{content:none !important;display:none !important}
+body.pagina-interna .wrap > .row.row-testata,body.pagina-interna .wrap > .row.row-testata > .block{
+  background:transparent !important;box-shadow:none !important;border:0 !important;border-radius:0 !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+body.pagina-interna .wrap > .row.row-testata > .block{
+  padding:calc(var(--tessera-pad) * .6) calc(var(--dx,24px) + var(--tessera-pad)) var(--tessera-pad) calc(var(--sx,24px) + var(--tessera-pad)) !important}
+body.pagina-interna .row-testata :is(h1,h2,p,.lede,.kicker,.crumbs,.crumbs a,.crumbs span,.small){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 2px rgba(110,0,18,.3),0 2px 18px rgba(110,0,18,.3) !important}
+body.pagina-interna .row-testata h1{background:none !important;filter:none}
+
+/* 171.3 griglia e giunti */
+body.pagina-interna .wrap > .row.row-int:not(.wf-doc){margin:0 0 var(--fuga) !important;padding:0 !important;background:none !important}
+body.pagina-interna .wrap > .row.row-int:not(.row-testata)::before,
+body.pagina-interna .wrap > .row.row-int:not(.row-testata)::after{content:none !important;display:none !important}
+body.pagina-interna .wrap > .row.row-int.t-piena{margin-left:calc(50% - var(--vw,100vw) / 2);margin-right:calc(50% - var(--vw,100vw) / 2)}
+
+/* 171.4 la tessera: base comune */
+body.pagina-interna .wrap > .row.row-int:is(.t-bianca,.t-vetro,.t-outline) > .block{
+  position:relative;isolation:isolate;overflow:hidden;border:0 !important;border-radius:var(--raggio) !important;
+  padding:var(--tessera-pad) !important}
+body.pagina-interna .wrap > .row.row-int.t-piena:not(.row-testata) > .block{border-radius:0 !important;
+  padding-left:calc(var(--sx,24px) + var(--tessera-pad)) !important;padding-right:calc(var(--dx,24px) + var(--tessera-pad)) !important}
+body.pagina-interna .wrap > .row.row-int:not(.row-testata) > .block > :is(.kicker){margin:0 0 var(--ritmo-s) !important}
+body.pagina-interna .wrap > .row.row-int:not(.row-testata) > .block > h2{margin:0 0 var(--ritmo-m) !important}
+body.pagina-interna .wrap > .row.row-int:not(.row-testata) > .block > .lede{margin:0 0 var(--ritmo-l) !important}
+body.pagina-interna .wrap > .row.row-int > .block > :last-child{margin-bottom:0 !important}
+
+/* bianca: superficie pulita, canne solo a destra, sfumate */
+body.pagina-interna .wrap > .row.row-int.t-bianca > .block{background:var(--fondo-bianco) !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;color:#001e2a;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.8),0 30px 60px -40px rgba(90,0,12,.5) !important}
+body.pagina-interna .wrap > .row.row-int.t-bianca > .block::before{
+  content:"" !important;display:block !important;position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
+  background:var(--canne-bianche);
+  -webkit-mask:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(0,0,0,.45) 60%,#000 100%);
+          mask:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(0,0,0,.45) 60%,#000 100%)}
+body.pagina-interna .wrap > .row.row-int.t-bianca > .block::after{content:none !important}
+body.pagina-interna .wrap > .row.row-int.t-bianca > .block > :is(h2,h3){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body.pagina-interna .wrap > .row.row-int.t-bianca > .block > :is(.kicker,.block-id){color:#e4002b !important}
+
+/* vetro come la nav */
+body.pagina-interna .wrap > .row.row-int.t-vetro > .block{
+  background:linear-gradient(180deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,.08) 45%,rgba(255,255,255,.12) 100%) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(170%) !important;backdrop-filter:blur(34px) saturate(170%) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(255,255,255,.25),0 18px 40px -30px rgba(0,30,42,.4) !important}
+/* solo contorno */
+body.pagina-interna .wrap > .row.row-int.t-outline > .block{background:transparent !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75) !important}
+body.pagina-interna .wrap > .row.row-int:is(.t-vetro,.t-outline) > .block::before,
+body.pagina-interna .wrap > .row.row-int:is(.t-vetro,.t-outline) > .block::after{content:none !important}
+/* testi diretti della tessera su vetro/contorno: bianchi */
+body.pagina-interna .wrap > .row.row-int:is(.t-vetro,.t-outline) > .block > :is(h2,h3,.kicker,.lede,p,.small,.block-id),
+body.pagina-interna .wrap > .row.row-int:is(.t-vetro,.t-outline) > .block > :is(h2,p) :is(em,b,a,code){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;background:none !important;
+  text-shadow:0 1px 2px rgba(110,0,18,.35),0 2px 18px rgba(110,0,18,.35) !important}
+body.pagina-interna .wrap > .row.row-int:is(.t-vetro,.t-outline) > .block > .small code{background:rgba(255,255,255,.18) !important}
+
+/* 171.5 modulo sul vetro: come in home */
+body.pagina-interna .t-vetro .form{background:none !important;box-shadow:none !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+body.pagina-interna .t-vetro .form :is(h3,.form-sub,label,.consent,.small,p,legend){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 2px rgba(110,0,18,.3),0 2px 14px rgba(110,0,18,.3) !important}
+body.pagina-interna .t-vetro .form label{font-weight:700;letter-spacing:.1em}
+body.pagina-interna .t-vetro .form .consent{font-weight:400 !important;letter-spacing:0 !important;text-transform:none !important}
+body.pagina-interna .t-vetro .form :is(input:not([type=checkbox]):not([type=radio]),textarea,select){
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.84)) !important;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;
+  border:0 !important;box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.6),0 10px 22px -16px rgba(90,0,12,.6) !important}
+body.pagina-interna .t-vetro .form :is(input,textarea,select):focus{outline:0;box-shadow:0 0 0 3px rgba(255,255,255,.65) !important}
+body.pagina-interna .t-vetro .form input[type=checkbox]{accent-color:#e4002b}
+body.pagina-interna .t-vetro .form .btn-primary{background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important}
+body.pagina-interna .t-vetro .form .btn-glass{background:transparent !important;color:#fff !important;-webkit-text-fill-color:#fff !important;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85) !important;text-shadow:none !important}
+body.pagina-interna .t-vetro .form :is(.chip,.seg button,[role=radio]){color:#001e2a}
+
+/* 171.6 bottoni-contorno sulle tessere bianche: leggibili */
+body.pagina-interna .t-bianca .btn-glass{background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;
+  text-shadow:none !important;box-shadow:inset 0 0 0 1.5px #e4002b !important;-webkit-backdrop-filter:none;backdrop-filter:none}
+body.pagina-interna .t-bianca .btn-glass:hover{background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+
+/* 171.7 tipografia e immagini delle card: come in home */
+body.pagina-interna :is(h1,h2,h3,.formula-h,.card-name){text-wrap:balance}
+body.pagina-interna :is(p,.lede,.formula-p,.card-desc){text-wrap:pretty}
+body.pagina-interna .formula .formula-go::before{background:transparent !important;width:0 !important;height:0 !important;
+  border-style:solid !important;border-width:5px 0 5px 8px !important;border-color:transparent transparent transparent #e4002b !important}
+body.pagina-interna .wrap > .row.row-int .grid,body.pagina-interna .wrap > .row.row-int .sedi,body.pagina-interna .wrap > .row.row-int .formule{gap:var(--fuga) !important}
+
+/* 171.8 usato: la testata non è più blu */
+body.pagina-interna[data-slug^="/usato/"] .wrap > .row:not(.row-testata) > .block > h2::before{color:#e4002b !important}
+body.pagina-interna[data-testata="blu"]{background:#e4002b !important}
+/* 171.9 segnaposto rimasti (senza foto): materia bianca, niente azzurro */
+body.pagina-interna .card .card-media.ph,body.pagina-interna .ph{background:var(--fondo-bianco) !important;color:#636362 !important;
+  -webkit-text-fill-color:#636362 !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.06) !important}
+body.pagina-interna .card .card-media.foto img{width:100%;height:100%;object-fit:cover;padding:0 !important}
+
+/* ================= 172. PAGINE INTERNE · rifiniture dopo la verifica ================= */
+
+/* 172.1 testata: il bianco vale per i testi sul rosso, non per le lastre chiare dentro la testata */
+body.pagina-interna .row-testata :is(.promo:has(+ .notice),.grid-2 > .stack > div,.card,.sede,.formula) :is(h2,h3,h4,p,address,span,td,th,li,.small,.lede){
+  color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important;text-shadow:none !important}
+body.pagina-interna .row-testata :is(.promo:has(+ .notice),.grid-2 > .stack > div,.card,.sede,.formula) :is(h3,.city,.card-name){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body.pagina-interna .row-testata :is(.promo:has(+ .notice),.grid-2 > .stack > div,.card,.sede,.formula) :is(.kicker,h4){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna .row-testata :is(.promo:has(+ .notice),.grid-2 > .stack > div,.card,.sede,.formula) a:not(.btn){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+
+/* 172.2 chip e pastiglie bianche: testo scuro, su qualunque tessera */
+body.pagina-interna :is(.row-testata,.t-outline,.t-vetro) :is(.chip,.tag):not(.is-active):not([aria-current]){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+
+/* 172.3 su vetro e contorno: tutto il testo che non sta dentro una superficie chiara è bianco */
+body.pagina-interna :is(.t-outline,.t-vetro) > .block :is(h2,h3,h4,p,li,address,dt,dd,.small,.lede,.kicker,span:not(.chip):not(.tag)):not(:is(.card,.formula,.sede,.promo,.notice,.form,.tile,.why-item,table,.faq,.t-tabs,.steps,.steps-dettaglio,input,textarea,select,.btn,.chip,.need-info) *){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 2px rgba(110,0,18,.3),0 2px 14px rgba(110,0,18,.3) !important}
+
+/* 172.4 niente azzurro dentro le pagine: link, formule usato, tag, linea delle tappe */
+body.pagina-interna :is(.wrap > .row,.wrap > .split) a:not(.btn):not(.chip):not(.card-link):not(.formula-go):not(.brand):not(.phone-cta){color:#e4002b}
+body.pagina-interna .row-testata > .block a:not(.btn):not(.chip){color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.pagina-interna .formula :is(.formula-h,.kicker,.formula-go){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna .formula-usa .formula-art:not(.foto),body.pagina-interna .promo-usa{
+  background:linear-gradient(150deg,rgba(243,63,84,.5),rgba(228,0,43,.32) 60%,rgba(255,255,255,.4)) !important}
+body.pagina-interna .promo-usa :is(h3,.kicker,a){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna .tag.tag-nol,body.pagina-interna .tag-nol{background:rgba(228,0,43,.1) !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;border-color:transparent !important}
+body.pagina-interna .steps.is-interattivo::before,body.pagina-interna .steps::before{background:linear-gradient(90deg,rgba(228,0,43,.6),rgba(243,63,84,.35)) !important}
+body.pagina-interna .muted.mono::before{color:#e4002b !important;background:none !important}
+body.pagina-interna .t-bianca :is(.muted,.small.muted){color:#636362 !important;-webkit-text-fill-color:#636362 !important}
+
+/* 172.5 scheda macchina (colonne): stesse tessere */
+body.scheda-mosaico .wrap > .crumbs,body.scheda-mosaico .wrap > .crumbs :is(a,span){color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 8px rgba(110,0,18,.35)}
+body.scheda-mosaico .wrap > .split{gap:var(--fuga) !important;align-items:start}
+body.scheda-mosaico .wrap > .split > div:not(.sticky-col){display:flex;flex-direction:column;gap:var(--fuga)}
+body.scheda-mosaico .split .block.t-bianca{position:relative;isolation:isolate;overflow:hidden;margin:0 !important;border:0 !important;
+  border-radius:var(--raggio) !important;padding:var(--tessera-pad) !important;background:var(--fondo-bianco) !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;color:#001e2a;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.8),0 30px 60px -40px rgba(90,0,12,.5) !important}
+body.scheda-mosaico .split .block.t-bianca::before{content:"" !important;display:block !important;position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
+  background:var(--canne-bianche);
+  -webkit-mask:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(0,0,0,.45) 60%,#000 100%);
+          mask:linear-gradient(90deg,transparent 0%,transparent 30%,rgba(0,0,0,.45) 60%,#000 100%)}
+body.scheda-mosaico .split .block.t-bianca::after{content:none !important}
+body.scheda-mosaico .split .block.t-bianca :is(h1,h2,h3){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;background:none !important;text-shadow:none !important}
+body.scheda-mosaico .split .block.t-bianca :is(.kicker,.block-id){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.scheda-mosaico .split .block.t-bianca :is(p,.lede,li){color:#2c3a42;text-shadow:none !important}
+body.scheda-mosaico .sticky-col :is(.block,.form).t-vetro{border:0 !important;border-radius:var(--raggio) !important;padding:var(--tessera-pad) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,.08) 45%,rgba(255,255,255,.12) 100%) !important;
+  -webkit-backdrop-filter:blur(34px) saturate(170%) !important;backdrop-filter:blur(34px) saturate(170%) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),inset 0 1px 0 rgba(255,255,255,.9),0 18px 40px -30px rgba(0,30,42,.4) !important}
+body.scheda-mosaico .sticky-col :is(.block,.form).t-vetro::before,body.scheda-mosaico .sticky-col :is(.block,.form).t-vetro::after{content:none !important}
+body.scheda-mosaico .sticky-col .t-vetro :is(h2,h3,.block-id,.form-sub,label,.consent,.small,p,legend){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 2px rgba(110,0,18,.3),0 2px 14px rgba(110,0,18,.3) !important}
+body.scheda-mosaico .sticky-col .t-vetro .form{background:none !important;box-shadow:none !important;padding:0 !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+body.scheda-mosaico .sticky-col .t-vetro :is(input:not([type=checkbox]):not([type=radio]),textarea,select){
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.84)) !important;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;border:0 !important}
+body.scheda-mosaico .sticky-col .t-vetro .btn-primary{background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.scheda-mosaico .sticky-col .t-vetro .chip{color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body.scheda-mosaico .sticky-col .t-vetro :is(.chip.is-active,[aria-pressed=true],[aria-checked=true]){color:#fff !important;-webkit-text-fill-color:#fff !important}
+/* 172.6 scheda macchina: via il vetro cannettato blu della vecchia testata */
+body.scheda-mosaico .intro-vetro,body.scheda-mosaico .pagina-intro.ha-cannette::before,body.scheda-mosaico .pagina-intro.ha-cannette::after{display:none !important}
+body.scheda-mosaico .pagina-intro{background:none !important}
+/* 172.7 scheda macchina · colonna del modulo: respiro più contenuto, campi su una colonna, titolo proporzionato */
+body.scheda-mosaico .sticky-col :is(.block,.form).t-vetro{padding:clamp(24px,2.4vw,34px) !important}
+body.scheda-mosaico .sticky-col .t-vetro .fields{grid-template-columns:1fr !important}
+body.scheda-mosaico .sticky-col .t-vetro :is(h2,h3){font-size:clamp(22px,1.8vw,28px) !important;line-height:1.1;text-wrap:balance}
+body.scheda-mosaico .sticky-col .t-vetro label{letter-spacing:.08em;white-space:normal}
+body.scheda-mosaico .sticky-col .t-vetro :is(.seg,.chips,[role=radiogroup]){flex-wrap:wrap}
+body.scheda-mosaico .sticky-col .t-vetro .form,body.scheda-mosaico .sticky-col .form.t-vetro{display:block !important}
+body.scheda-mosaico .sticky-col .t-vetro .form > *,body.scheda-mosaico .sticky-col .form.t-vetro > *{grid-column:auto !important;position:static !important}
+
+/* 173. Schede a tab: la colonna delle voci non ritaglia il cerchio che compare in hover */
+@media (min-width:861px){body.pagina-interna .t-tabs .t-nav{overflow:visible !important;padding-left:18px;margin-left:-18px}}
+
+/* 174. Niente numeri d'ordine davanti ai titoli delle sezioni */
+.wrap > .row > .block > h2::before,.wrap > div > .row > .block > h2::before{content:none !important;display:none !important}
+
+/* 175. FAQ su vetro/contorno (quando non può stare sul bianco): domande e risposte in bianco, filetti chiari */
+body.pagina-interna :is(.t-outline,.t-vetro) .faq :is(summary,summary *,p,li,.faq-a,.faq-a *,.testo,.testo *){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 10px rgba(110,0,18,.3) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .faq details{background:transparent !important;box-shadow:none !important;border-color:rgba(255,255,255,.3) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .faq details + details{border-top:1px solid rgba(255,255,255,.3) !important}
+
+/* 176. Componenti di contenuto quando lo schema li porta sul rosso (vetro/contorno) */
+body.pagina-interna :is(.t-outline,.t-vetro) table.specs thead th{color:rgba(255,255,255,.85) !important;-webkit-text-fill-color:rgba(255,255,255,.85) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .steps .step :is(h4,p){color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 10px rgba(110,0,18,.3) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .steps::before{background:rgba(255,255,255,.45) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab]{color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab] *{color:inherit !important;-webkit-text-fill-color:inherit !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [aria-selected=true]{background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-pane :is(h3,p,li,.testo,.testo *){color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 10px rgba(110,0,18,.3) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-pane-num{-webkit-text-stroke-color:rgba(255,255,255,.6) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) :is(.testo,.testo *,ul.strengths li,ol li){color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.pagina-interna :is(.t-outline,.t-vetro) :is(.card,.formula,.sede,.promo,.notice,.why-item,.steps-dettaglio) :is(.testo,.testo *,li){color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .faq details > :not(summary),body.pagina-interna :is(.t-outline,.t-vetro) .faq details > :not(summary) *{
+  color:#fff !important;-webkit-text-fill-color:#fff !important}
+
+/* ================= 177. PAGINE INTERNE · strisce a icone, card su bianco, tab più calme, FAQ ================= */
+
+/* 177.1 « Dove si usano » e « Le altre macchine Socaf »: come « Per il tuo settore » in home —
+   striscia bassa a contorno, titolo a sinistra, icone in fila con il nome sotto */
+body.pagina-interna .row-striscia > .block{display:grid !important;grid-template-columns:auto minmax(0,1fr);align-items:center;
+  column-gap:clamp(28px,4vw,64px);padding:var(--tessera-pad) !important}
+body.pagina-interna .row-striscia > .block > :is(.block-id,h2,p){grid-column:1}
+body.pagina-interna .row-striscia > .block > h2{margin:0 !important;max-width:10ch;line-height:1.05;font-size:clamp(22px,1.9vw,28px) !important}
+body.pagina-interna .row-striscia .tiles-icone{grid-column:2;grid-row:1 / span 3;margin:0 !important;display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:clamp(14px,1.6vw,22px) 10px;align-items:start}
+body.pagina-interna .row-striscia .tile{display:flex !important;flex-direction:column;align-items:center;gap:10px;text-align:center;
+  padding:6px 0 0 !important;background:none !important;border:0 !important;box-shadow:none !important;text-decoration:none;overflow:visible !important}
+body.pagina-interna .row-striscia .tile::before,body.pagina-interna .row-striscia .tile::after{content:none !important}
+body.pagina-interna .row-striscia .tile-ico{width:clamp(58px,4.6vw,72px);height:clamp(58px,4.6vw,72px);padding:clamp(15px,1.2vw,19px);border-radius:50%;
+  fill:none;stroke:#e4002b;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+  background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,255,255,.72));
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.7),0 14px 26px -16px rgba(90,0,12,.7);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s ease,stroke .3s ease,box-shadow .3s ease}
+body.pagina-interna .row-striscia .tile span{font-size:13px;line-height:1.25;font-weight:600;
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 2px rgba(110,0,18,.35),0 2px 12px rgba(110,0,18,.3) !important}
+body.pagina-interna .row-striscia .tile:is(:hover,:focus-visible) .tile-ico{background:rgba(255,255,255,.14);stroke:#fff;transform:translateY(-4px);
+  box-shadow:inset 0 0 0 2px #fff,0 18px 30px -16px rgba(90,0,12,.75)}
+body.pagina-interna .row-striscia .tile:focus-visible{outline:0}
+/* la voce della pagina in cui ci si trova: disco pieno rosso, non cliccabile in apparenza */
+body.pagina-interna .row-striscia .tile.is-corrente .tile-ico{background:#e4002b;stroke:#fff;box-shadow:inset 0 0 0 2px #fff}
+@media (max-width:979px){body.pagina-interna .row-striscia > .block{grid-template-columns:1fr}
+  body.pagina-interna .row-striscia .tiles-icone{grid-column:1;grid-row:auto;margin-top:20px !important;grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* 177.2 card nelle sezioni bianche: non bianco su bianco ma una lastra appena grigia,
+   con filo sottile, così si staccano dalla superficie */
+:is(body.pagina-interna .t-bianca,body[data-pagina="home"] .t-bianca) :is(.card,.formula,.promo,.why-item,.notice):not(.sede){
+  background:linear-gradient(180deg,rgba(0,30,42,.035),rgba(0,30,42,.055)) !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.08),0 16px 30px -24px rgba(0,30,42,.35) !important}
+:is(body.pagina-interna .t-bianca,body[data-pagina="home"] .t-bianca) :is(.card,.formula) > .card-fondo,
+:is(body.pagina-interna .t-bianca,body[data-pagina="home"] .t-bianca) :is(.card,.formula) .card-sagoma{display:none !important}
+:is(body.pagina-interna .t-bianca) table.specs tbody tr{background:linear-gradient(180deg,rgba(0,30,42,.035),rgba(0,30,42,.05)) !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.07) !important}
+:is(body.pagina-interna .t-bianca) .faq details{background:rgba(0,30,42,.035) !important}
+
+/* 177.3 schede a tab sul rosso: più quiete — niente pastiglia bianca piena;
+   la voce attiva ha una barra bianca e il testo pieno, l'hover un velo chiaro ben visibile */
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab]{background:transparent !important;box-shadow:none !important;
+  color:rgba(255,255,255,.78) !important;-webkit-text-fill-color:rgba(255,255,255,.78) !important;border-radius:calc(var(--raggio) * .4) !important;
+  position:relative;transition:background .25s ease,color .25s ease}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab]:hover{background:rgba(255,255,255,.14) !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [aria-selected=true]{background:rgba(255,255,255,.1) !important;
+  color:#fff !important;-webkit-text-fill-color:#fff !important;font-weight:700;box-shadow:inset 3px 0 0 #fff !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab]::before,body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab]::after{
+  background:none !important;box-shadow:none !important;border-color:rgba(255,255,255,.4) !important;color:inherit !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-pane :is(h3){font-size:clamp(22px,2vw,30px) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-pane-num{opacity:.35}
+
+/* 177.4 FAQ: righe pulite separate da un filo, niente contorni sovrapposti o tagliati */
+body.pagina-interna .faq details{border:0 !important;border-radius:0 !important;margin:0 !important;outline:0 !important;
+  box-shadow:none !important;background:transparent !important;overflow:visible !important}
+body.pagina-interna .faq details + details{border-top:1px solid rgba(0,30,42,.12) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .faq details + details{border-top-color:rgba(255,255,255,.28) !important}
+body.pagina-interna .faq summary{padding-left:46px !important;padding-right:52px !important;outline-offset:4px}
+body.pagina-interna .faq summary::before{left:4px !important}
+body.pagina-interna .faq summary::after{flex:0 0 auto}
+
+/* 178. Noleggio · tappe in vetro, numeri delle schede vicini al testo */
+/* il riquadro della tappa scelta e i dischi numerati: vetro (come la nav), non lastre bianche */
+body.pagina-interna .steps-dettaglio{
+  background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,.26)) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(160%) !important;backdrop-filter:blur(20px) saturate(160%) !important;
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.7),0 22px 40px -28px rgba(0,30,42,.35) !important;border:0 !important}
+body.pagina-interna .steps .step::before{
+  background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.3)) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px rgba(255,255,255,.75),0 12px 24px -16px rgba(0,30,42,.35) !important}
+body.pagina-interna .steps .step.is-attiva::before,body.pagina-interna .steps .step:hover::before{background:#e4002b !important;color:#fff !important}
+/* pannello della scheda: il numero grande sta subito a sinistra del testo */
+body.pagina-interna .t-tabs--num .t-pane:not([hidden]){display:grid !important;grid-template-columns:auto minmax(0,1fr) !important;column-gap:clamp(16px,1.6vw,22px) !important;align-items:start}
+body.pagina-interna .t-tabs--num .t-pane-num{position:static !important;grid-column:1 !important;grid-row:1 / span 4 !important;margin:0 !important;line-height:.85}
+body.pagina-interna .t-tabs--num .t-pane > :not(.t-pane-num){grid-column:2 !important}
+
+/* 179. FAQ sul bianco: righe pulite (niente lastre grigie impilate), hover = domanda in rosso */
+body.pagina-interna .t-bianca .faq details,body.pagina-interna .t-bianca .faq details[open]{background:transparent !important;box-shadow:none !important}
+body.pagina-interna .t-bianca .faq summary{transition:color .2s ease}
+body.pagina-interna .t-bianca .faq summary:hover{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;background:none !important}
+body.pagina-interna .faq summary:hover{transform:none !important}
+
+/* 179.1 titoli delle sezioni a schede (« Perché noleggiare invece di acquistare »…) su una riga */
+@media (min-width:980px){
+  body.pagina-interna .wrap > .row > .block:has(.t-tabs) > h2{white-space:nowrap;max-width:none !important;text-wrap:nowrap}}
+
+/* ================= 180. PAGINE INTERNE · revisione generale ================= */
+
+/* 180.1 breadcrumb sempre bianchi */
+body.pagina-interna :is(.row-testata,.wrap) .crumbs,body.pagina-interna :is(.row-testata,.wrap) .crumbs :is(a,span,.sep){
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:0 1px 8px rgba(110,0,18,.35) !important;opacity:1 !important}
+body.pagina-interna .crumbs a:hover{text-decoration:underline;text-underline-offset:3px}
+body.pagina-interna .crumbs [aria-current]{font-weight:700}
+
+/* 180.2 link-azione su una riga (es. « Supervalutazione dell'usato »), anche in hover */
+.btn-link,a.btn-link{white-space:nowrap}
+
+/* 180.3 tutta la card è cliccabile: il link della card si stende sull'intera superficie */
+:is(.card,.formula):has(.card-link){position:relative;cursor:pointer}
+:is(.card,.formula) .card-link::after{content:"" !important;position:absolute !important;inset:0 !important;z-index:7;border-radius:inherit;
+  background:none !important;width:auto !important;height:auto !important;clip-path:none !important;transform:none !important;opacity:1 !important}
+:is(.card,.formula) :is(a:not(.card-link),button){position:relative;z-index:8}
+:is(.card,.formula):has(.card-link):focus-within{outline:3px solid rgba(228,0,43,.5);outline-offset:3px}
+
+/* 180.4 la grafica cannettata solo sulle sezioni a piena larghezza: i contenitori restano puliti */
+body.pagina-interna .wrap > .row.row-int.t-bianca:not(.t-piena) > .block::before,
+body.scheda-mosaico .split .block.t-bianca::before{content:none !important;display:none !important}
+
+/* 180.5 l'ultima sezione tocca il footer: niente striscia rossa in mezzo */
+body.pagina-interna .wrap > .row.row-int.row-ultima{margin-bottom:0 !important}
+body.pagina-interna:has(.row-ultima.t-piena) .wrap{padding-bottom:0 !important;margin-bottom:0 !important}
+body.pagina-interna:has(.row-ultima.t-piena) .site-footer{margin-top:0 !important}
+body.pagina-interna:has(.row-ultima:not(.t-piena)) .site-footer{margin-top:var(--fuga) !important}
+
+/* 180.6 voci delle schede: testo intero, niente taglio a puntini */
+body.pagina-interna .t-tabs .t-nav [role=tab],body.pagina-interna .t-tabs .t-nav [role=tab] *{
+  -webkit-line-clamp:unset !important;line-clamp:unset !important;overflow:visible !important;text-overflow:clip !important;
+  display:revert;white-space:normal !important;max-height:none !important}
+body.pagina-interna .t-tabs .t-nav [role=tab]{display:grid !important}
+body.pagina-interna .t-tabs .t-pane h3{text-wrap:balance}
+body.pagina-interna .block > h2.titolo-sezione{margin:0 0 var(--ritmo-l) !important}
+
+/* 180.7 paginazione (approfondimenti): numeri leggibili su qualunque fondo */
+body.pagina-interna nav[aria-label="Paginazione"] .chip{
+  background:rgba(255,255,255,.92) !important;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.1) !important;text-shadow:none !important;min-width:42px;justify-content:center}
+body.pagina-interna nav[aria-label="Paginazione"] .chip:hover{background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna nav[aria-label="Paginazione"] :is(.chip[aria-current],.chip.is-active){background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important;box-shadow:none !important}
+body.pagina-interna .t-bianca nav[aria-label="Paginazione"] .chip:not([aria-current]):not(.is-active){background:rgba(0,30,42,.05) !important}
+
+/* 180.8 ricerca: campo grande di vetro bianco, pulsante tondo a icona (niente ovale col testo) */
+body.pagina-interna .row-testata form.search{display:flex !important;align-items:center;gap:10px;max-width:760px;padding:8px 8px 8px 24px !important;
+  border-radius:999px !important;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.86)) !important;
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:0 !important;
+  box-shadow:inset 0 1px 0 #fff,0 22px 40px -26px rgba(90,0,12,.7) !important}
+body.pagina-interna .row-testata form.search input{flex:1;min-width:0;height:52px;border:0 !important;background:none !important;box-shadow:none !important;
+  font-size:18px;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;outline:0;padding:0 !important}
+body.pagina-interna .row-testata form.search button[type=submit]{flex:0 0 auto;width:52px;height:52px;padding:0 !important;border-radius:50% !important;border:0 !important;
+  font-size:0 !important;color:transparent !important;background:#e4002b !important;cursor:pointer;box-shadow:0 10px 20px -12px rgba(163,16,0,.8) !important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='M16 16l4.5 4.5'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;background-position:center !important;background-size:22px 22px !important;transition:background-color .2s ease}
+body.pagina-interna .row-testata form.search button[type=submit]:hover{background-color:#a31000 !important}
+body.pagina-interna .row-testata form.search:focus-within{box-shadow:0 0 0 3px rgba(255,255,255,.6),0 22px 40px -26px rgba(90,0,12,.7) !important}
+body[data-tpl="ricerca"] .row-int:not(.row-testata) h2 .small,body.pagina-interna .row-int h2 .muted{font-weight:400;opacity:.7}
+
+/* 180.9 scheda macchina: nell'intestazione (ora su lastra bianca) testi e pulsanti non sono più bianchi */
+body.scheda-mosaico .split .block.t-bianca :is(.lede,.intro-testata p,.intro-testata .small,.claim){color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important;text-shadow:none !important}
+body.scheda-mosaico .split .block.t-bianca .btn-primary{background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:none !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 14px 26px -14px rgba(163,16,0,.7) !important}
+body.scheda-mosaico .split .block.t-bianca :is(.btn-ghost,.btn-glass){background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;
+  text-shadow:none !important;box-shadow:inset 0 0 0 1.5px #e4002b !important;border:0 !important}
+body.scheda-mosaico .split .block.t-bianca :is(.btn-ghost,.btn-glass):hover{background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.scheda-mosaico .split .block.t-bianca .tags :is(.tag,span){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+/* 180.7b paginazione: specificità sufficiente a battere le pastiglie trasparenti */
+body.pagina-interna .wrap nav[aria-label="Paginazione"] :is(a,span).chip.chip:not([aria-current]):not(.is-active){
+  background:rgba(255,255,255,.92) !important;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;opacity:1 !important}
+body.pagina-interna .wrap .t-bianca nav[aria-label="Paginazione"] :is(a,span).chip.chip:not([aria-current]):not(.is-active){background:rgba(0,30,42,.06) !important}
+
+/* ================= 181. Rifiniture: schede, titoli, giunto modulo→footer, loghi clienti ================= */
+
+/* 181.1 voci delle schede: numero nella sua colonna, testo nella colonna larga;
+   indice un po' più largo perché le voci lunghe vadano a capo il giusto */
+body.pagina-interna .t-tabs .t-nav [role=tab]{grid-template-columns:30px minmax(0,1fr) !important;column-gap:10px !important;align-items:start;line-height:1.3}
+body.pagina-interna .t-tabs .t-nav [role=tab] .t-num{grid-column:1 !important;grid-row:1 !important;padding-top:.15em}
+@media (min-width:861px){body.pagina-interna .t-tabs{grid-template-columns:minmax(300px,30%) minmax(0,1fr) !important}}
+
+/* 181.2 titoli di sezione: niente colonne strette che li spezzano su tante righe */
+@media (min-width:980px){
+  body.pagina-interna .wrap > .row.row-int:not(.row-striscia):not(.row-testata) > .block > h2,
+  body[data-pagina="home"] .wrap > .row:not(.row-settori):not(.row-marchi):not(.row-gruppo) > .block > h2{max-width:none !important}
+  body.pagina-interna .wrap > .row.row-int:not(.row-striscia):not(.row-testata) > .block > h2{text-wrap:balance}}
+
+/* 181.3 « Richiedi informazioni » → footer: lo stesso giunto su tutte le pagine */
+.wrap:has(> .row) {padding-bottom:0 !important;margin-bottom:0 !important}
+:is(body.pagina-interna,body[data-pagina="home"]) .wrap > .row:not(.wf-doc):has(.form):last-of-type,
+body.pagina-interna .wrap > .row.row-int.row-ultima{margin-bottom:0 !important}
+body:is(.pagina-interna,[data-pagina="home"]) .site-footer{margin-top:var(--fuga) !important}
+body.pagina-interna:has(.row-ultima.t-piena:not(:has(.form))) .site-footer{margin-top:0 !important}
+body[data-pagina="home"] .wrap > .row.row-form{margin-bottom:0 !important}
+
+/* 181.4 loghi dei clienti nelle card: lastra bianca con il logo centrato */
+.card .cliente-logo{display:grid !important;place-items:center;padding:clamp(20px,2.4vw,32px) !important;aspect-ratio:16/9;
+  background:#fff !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.06) !important}
+.card .cliente-logo img{width:min(70%,220px);height:auto;max-height:70px;object-fit:contain;padding:0 !important;aspect-ratio:auto !important}
+.card .cliente-logo::after{content:none !important}
+/* loghi quadrati (Lupo, Progect): più alti, così hanno lo stesso peso visivo degli orizzontali */
+.card .cliente-logo img:is([src*="luposrl"],[src*="projectsrl"],[src*="amicachips"]){max-height:104px;width:auto;max-width:70%}
+
+/* ================= 182. Coerenza: usato, consensi, menu, CTA per superficie ================= */
+
+/* 182.1 pagine usato: via gli ultimi azzurri delle vecchie regole « usato blu » */
+body.pagina-interna[data-slug^="/usato/"] .block :is(h3 + .testo,.testo){border-left-color:#e4002b !important}
+body.pagina-interna .why-num{-webkit-text-stroke-color:rgba(228,0,43,.55) !important;color:transparent !important}
+body.pagina-interna .why-item{background:linear-gradient(180deg,rgba(0,30,42,.035),rgba(0,30,42,.055)) !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.08),0 16px 30px -24px rgba(0,30,42,.35) !important}
+body.pagina-interna :is(.t-vetro,.t-outline) .why-item{background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.84)) !important}
+body.pagina-interna .wrap > .row > .block > .promo:only-of-type,
+body.pagina-interna .wrap > .row > .block:has(> .promo:first-child:last-of-type) > .promo{
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.84)) !important}
+body.pagina-interna[data-slug^="/usato/"] .row-testata :is(h1,p){filter:none !important}
+
+/* 182.2 consenso privacy su una riga in tutti i moduli (quello di marketing, lungo, va a capo) */
+@media (min-width:700px){
+  .form .consent:not(.consent-lungo){white-space:nowrap;grid-column:1 / -1 !important;display:flex !important;align-items:center;gap:10px}}
+.form .consent-lungo{display:flex !important;align-items:flex-start;gap:10px;line-height:1.45;font-size:13px !important}
+.form .consent :is(input[type=checkbox]){flex:0 0 auto;margin:0}
+.form input[type=file]{padding:12px 14px !important;cursor:pointer}
+
+/* 182.3 menu: le voci delle tendine non vanno a capo, neanche in hover */
+.site-header :is(.dropdown,.dd,.mega) a,.site-header .dropdown li > *{white-space:nowrap}
+
+/* 182.4 CTA: una sola grammatica, decisa dalla superficie su cui stanno
+   - sul rosso (testata, vetro, contorno): pieno bianco con testo rosso / contorno bianco
+   - sul bianco: pieno rosso con testo bianco / contorno rosso */
+body.pagina-interna :is(.row-testata,.t-vetro,.t-outline) > .block :is(.btn-primary):not(.card .btn){
+  background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important;border:0 !important;
+  box-shadow:inset 0 1px 0 #fff,0 14px 26px -14px rgba(90,0,12,.6) !important}
+body.pagina-interna :is(.row-testata,.t-vetro,.t-outline) > .block :is(.btn-primary):not(.card .btn):hover{background:#ffeef1 !important}
+body.pagina-interna :is(.row-testata,.t-vetro,.t-outline) > .block :is(.btn-ghost,.btn-glass):not(.card .btn){
+  background:transparent !important;color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:none !important;border:0 !important;
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85) !important}
+body.pagina-interna :is(.row-testata,.t-vetro,.t-outline) > .block :is(.btn-ghost,.btn-glass):not(.card .btn):hover{background:rgba(255,255,255,.16) !important}
+body.pagina-interna .t-bianca > .block .btn-primary,body.pagina-interna :is(.card,.sede,.promo,.notice,.why-item) .btn-primary{
+  background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:none !important;border:0 !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 14px 26px -14px rgba(163,16,0,.7) !important}
+body.pagina-interna .t-bianca > .block .btn-primary:hover,body.pagina-interna :is(.card,.sede,.promo,.notice,.why-item) .btn-primary:hover{background:#a31000 !important}
+body.pagina-interna .t-bianca > .block :is(.btn-ghost,.btn-glass),body.pagina-interna :is(.card,.sede,.promo,.notice,.why-item) :is(.btn-ghost,.btn-glass){
+  background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important;border:0 !important;
+  box-shadow:inset 0 0 0 1.5px #e4002b !important}
+body.pagina-interna .t-bianca > .block :is(.btn-ghost,.btn-glass):hover,body.pagina-interna :is(.card,.sede,.promo,.notice,.why-item) :is(.btn-ghost,.btn-glass):hover{
+  background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+/* link-azione (triangolo): rosso sul bianco e nelle card, bianco sul rosso */
+body.pagina-interna :is(.row-testata,.t-vetro,.t-outline) > .block > :is(p,div:not(.card):not(.grid):not(.sedi):not(.formule):not([data-sedi]):not(.promo-pair):not(.promo):not(.need-info)) .btn-link{color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.pagina-interna :is(.row-testata,.t-vetro,.t-outline) > .block > :is(p,div:not(.card):not(.grid):not(.sedi):not(.formule):not([data-sedi]):not(.promo-pair):not(.promo):not(.need-info)) .btn-link::before{border-left-color:#fff !important}
+
+/* 182.5 elenchi in fondo a una sezione: respiro prima della sezione seguente */
+body.pagina-interna .wrap > .row.row-int > .block :is(ul,ol):last-child{margin-bottom:0 !important}
+body.pagina-interna .t-tabs .t-pane > :last-child{margin-bottom:0 !important}
+body.pagina-interna .t-tabs{margin-bottom:0}
+.sticky-col .form .consent{white-space:normal !important}
+@media (min-width:861px){body.pagina-interna .t-tabs .t-nav{max-height:none !important}}
+/* 182.6 nessun azzurro residuo: triangoli dei link-azione, accenti di menu e breadcrumb */
+.btn-link::before{border-left-color:#e4002b}
+.site-header .nav-btn:hover .caret,.site-header .nav-btn[aria-expanded="true"] .caret{border-color:#e4002b !important}
+.wrap .btn-link::before,.wrap a.btn-link::before{border-left-color:#e4002b !important}
+body.pagina-interna :is(.row-testata,.t-vetro,.t-outline) > .block > :is(p,div:not(.card):not(.grid):not(.sedi):not(.formule):not([data-sedi]):not(.promo-pair):not(.promo):not(.need-info)) .btn-link::before{border-left-color:#fff !important}
+.site-header .dropdown{box-shadow:inset 0 1px 1px #fff,0 -3px 8px rgba(228,0,43,.08),0 24px 48px -24px rgba(0,30,42,.35) !important}
+.site-header .brand{color:inherit}
+
+/* ================= 183. Articolo, paginazione, scheda macchina ================= */
+
+/* 183.1 ARTICOLO: colonna di lettura, immagine in evidenza ampia, ritmo editoriale */
+body.pagina-interna .row-articolo > .block > *{max-width:760px;margin-left:auto !important;margin-right:auto !important}
+body.pagina-interna .row-articolo > .block > .articolo-foto{max-width:1040px;margin-bottom:clamp(32px,4vw,56px) !important;border-radius:var(--raggio);overflow:hidden;
+  box-shadow:0 30px 60px -36px rgba(0,30,42,.45)}
+body.pagina-interna .row-articolo .articolo-foto img{display:block;width:100%;aspect-ratio:16/8;object-fit:cover}
+body.pagina-interna .row-articolo > .block > .lede{font-size:clamp(19px,1.5vw,23px) !important;line-height:1.5;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;
+  font-weight:500;margin-bottom:clamp(24px,2.6vw,36px) !important}
+body.pagina-interna .row-articolo > .block > h2{font-size:clamp(26px,2.4vw,36px) !important;margin:clamp(36px,4vw,56px) auto 14px !important;max-width:760px !important}
+body.pagina-interna .row-articolo > .block > h3{font-size:clamp(21px,1.7vw,26px) !important;margin:clamp(28px,3vw,40px) auto 10px !important}
+body.pagina-interna .row-articolo > .block > .testo{font-size:17px;line-height:1.7;color:#2c3a42}
+body.pagina-interna .row-articolo > .block > .testo p{margin:0 0 1em}
+body.pagina-interna .row-articolo > .block > ul{padding-left:0;list-style:none;display:grid;gap:10px;margin:18px auto 0 !important}
+body.pagina-interna .row-articolo > .block > ul li{position:relative;padding:14px 18px 14px 44px;border-radius:calc(var(--raggio) * .4);
+  background:rgba(0,30,42,.035);box-shadow:inset 0 0 0 1px rgba(0,30,42,.07);line-height:1.5}
+body.pagina-interna .row-articolo > .block > ul li::before{content:"";position:absolute;left:18px;top:1.25em;width:0;height:0;
+  border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent #e4002b}
+/* il titolo dell'articolo in testata: più ampio, su meno righe */
+body.pagina-interna .row-testata:has(+ .row-articolo) h1{max-width:22ch}
+
+/* 183.2 PAGINAZIONE: numeri in cerchi perfetti, la freccia resta una pillola */
+body.pagina-interna nav[aria-label="Paginazione"] .chip{padding:0 !important;width:44px;min-width:44px !important;height:44px;border-radius:50% !important;
+  display:inline-grid !important;place-items:center;font-variant-numeric:tabular-nums}
+body.pagina-interna nav[aria-label="Paginazione"] .chip:last-child{width:auto;padding:0 22px !important;border-radius:999px !important}
+
+/* 183.3 SCHEDA MACCHINA: galleria con foto, miniature, testi leggibili */
+body.scheda-mosaico .gallery-main.foto{padding:0 !important;overflow:hidden;border-radius:var(--raggio) !important;background:#f4f4f4 !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.06) !important;aspect-ratio:4/3;border:0 !important}
+body.scheda-mosaico .gallery-main.foto img{width:100%;height:100%;object-fit:cover;display:block}
+body.scheda-mosaico .thumb.foto{padding:0 !important;overflow:hidden;border-radius:calc(var(--raggio) * .45) !important;border:0 !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.08) !important;aspect-ratio:1/1;cursor:pointer;opacity:.75;transition:opacity .2s ease}
+body.scheda-mosaico .thumb.foto img{width:100%;height:100%;object-fit:cover;display:block}
+body.scheda-mosaico .thumb.foto.is-attiva,body.scheda-mosaico .thumb.foto:hover{opacity:1;box-shadow:inset 0 0 0 2px #e4002b !important}
+body.scheda-mosaico .split .block.t-bianca{overflow:visible !important}
+body.scheda-mosaico .split .block.t-bianca .need-info{background:rgba(0,30,42,.035) !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.08) !important;
+  border:0 !important;color:#2c3a42 !important;border-radius:calc(var(--raggio) * .5) !important}
+body.scheda-mosaico .split .block.t-bianca .need-info :is(b,strong,.kicker,span:first-child){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.scheda-mosaico .split .block.t-bianca :is(table.specs th,table.specs td){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body.scheda-mosaico .split .block.t-bianca table.specs td{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body.scheda-mosaico .split .block.t-bianca .download{background:rgba(0,30,42,.035) !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.08) !important;border:0 !important;color:#001e2a !important}
+body.scheda-mosaico .split .block.t-bianca .promo{background:linear-gradient(180deg,rgba(0,30,42,.035),rgba(0,30,42,.055)) !important}
+body.scheda-mosaico .split .block.t-bianca .promo :is(h3,p){color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body.scheda-mosaico .split .block.t-bianca .promo p{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body.scheda-mosaico .split .block.t-bianca .promo .kicker{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+
+/* 183.4 MODULO della scheda (vetro sul rosso): opzioni leggibili */
+body.scheda-mosaico .sticky-col .radio-set{display:flex;flex-wrap:wrap;gap:8px}
+body.scheda-mosaico .sticky-col .radio-set label{display:inline-flex !important;align-items:center;gap:6px;padding:10px 14px !important;border-radius:999px;cursor:pointer;
+  background:rgba(255,255,255,.92) !important;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important;
+  font-weight:600 !important;letter-spacing:.02em !important;text-transform:none !important;font-size:14px !important;box-shadow:none !important}
+body.scheda-mosaico .sticky-col .radio-set label:has(input:checked){background:#001e2a !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.scheda-mosaico .sticky-col .radio-set input{accent-color:#e4002b;margin:0}
+body.scheda-mosaico .sticky-col .t-vetro .form-sub + p,body.scheda-mosaico .sticky-col .t-vetro .small b{color:#fff !important}
+body.scheda-mosaico .sticky-col{top:calc(var(--header-h,120px) + 16px)}
+body.scheda-mosaico .sticky-col .t-vetro .form .radio-set label.label,body.scheda-mosaico .sticky-col .t-vetro .radio-set > label:not(:has(input:checked)){
+  color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body.scheda-mosaico .sticky-col .t-vetro .radio-set > label:has(input:checked){color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.scheda-mosaico .gallery-main.foto img{object-fit:contain !important;object-position:center;background:linear-gradient(180deg,#fafafa,#ececec)}
+body.scheda-mosaico .sticky-col{top:calc(var(--devbar-h,0px) + var(--header-h,110px) + 24px) !important}
+
+/* 184. Il gruppo: il sopratitolo ha lo stesso peso degli altri sopratitoli del sito
+   (nel peso sottile « IL » quasi spariva e « GRUPPO » sembrava rientrato) */
+body[data-pagina="home"] .row-gruppo .gruppo > .kicker{font-weight:700 !important;font-size:12px !important;letter-spacing:.14em !important;
+  margin:0 0 4px !important;padding:0 !important;text-indent:0 !important;justify-self:start}
+
+/* 185. Footer: social, link legali, dati societari (come socaf.it) */
+.site-footer .footer-brand{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.site-footer .f-social h4{margin:0 0 10px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
+.site-footer .f-social ul{display:flex;gap:10px;list-style:none;margin:0;padding:0}
+.site-footer .f-social a{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);transition:background .25s ease,box-shadow .25s ease}
+.site-footer .f-social a:hover{background:#e4002b;box-shadow:none}
+.site-footer .f-social svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.site-footer .footer-legal{display:block !important}
+.site-footer .footer-legal .f-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:14px}
+.site-footer .footer-legal .f-links a{font-size:13px;text-decoration:none}
+.site-footer .footer-legal .f-links a:hover{text-decoration:underline;text-underline-offset:3px}
+.site-footer .footer-legal .f-societa{margin:0;font-size:12px !important;line-height:1.6;color:rgba(255,255,255,.55) !important;-webkit-text-fill-color:rgba(255,255,255,.55) !important;max-width:110ch}
+.site-footer .footer-legal .f-societa{max-width:none !important}
+
+/* 184.1 « IL GRUPPO » come etichetta piena: leggibile per intero, bordo sinistro sulla verticale del titolo */
+body[data-pagina="home"] .row-gruppo .gruppo > .kicker{display:inline-flex !important;align-items:center;justify-self:start;
+  padding:7px 14px !important;border-radius:999px;background:#e4002b !important;
+  color:#fff !important;-webkit-text-fill-color:#fff !important;text-shadow:none !important;filter:none !important;
+  font-weight:700 !important;font-size:11.5px !important;letter-spacing:.14em !important;line-height:1 !important;
+  margin:0 0 10px !important;-webkit-mask:none !important;mask:none !important;clip-path:none !important;opacity:1 !important;transform:none !important}
+body[data-pagina="home"] .row-gruppo .gruppo > .kicker::before,body[data-pagina="home"] .row-gruppo .gruppo > .kicker::after{content:none !important}
+body[data-pagina="home"] .row-gruppo.t-bianca .gruppo > .kicker.kicker{color:#fff !important;-webkit-text-fill-color:#fff !important;background:#e4002b !important}
+
+/* 184.2 « IL GRUPPO »: niente fondo sotto l'etichetta, testo a filo del titolo,
+   e il contenitore non ritaglia più il bordo sinistro (era overflow:hidden) */
+body[data-pagina="home"] .row-gruppo .gruppo{overflow:visible !important}
+body[data-pagina="home"] .row-gruppo.t-bianca .gruppo > .kicker.kicker{background:none !important;padding:0 !important;border-radius:0 !important;
+  color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;display:block !important;margin:0 0 10px !important}
+
+/* 185.1 « Seguici su » nella colonna dei marchi (stessa verticale), icone piene */
+.site-footer .footer-grid .f-social{margin-top:22px}
+.site-footer .f-social ul{gap:8px}
+.site-footer .f-social a{width:40px;height:40px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+.site-footer .f-social a:hover{background:#e4002b;box-shadow:none;transform:translateY(-2px)}
+.site-footer .f-social a{transition:background .25s ease,transform .25s ease}
+.site-footer .f-social svg{width:18px;height:18px;fill:#fff !important;stroke:none !important}
+
+/* 186. FAQ: icona « + » disegnata (due tratti uguali, non un carattere), che ruota in « × » all'apertura.
+   Sul bianco: disco grigio chiaro con il segno rosso, aperta = disco rosso e segno bianco.
+   Sul rosso: disco bianco con il segno rosso, aperta = disco trasparente con anello e segno bianchi. */
+.faq summary::after{content:"" !important;width:36px !important;height:36px !important;border-radius:50% !important;font-size:0 !important;
+  top:50% !important;transform:translateY(-50%) rotate(0deg) !important;
+  background:
+    linear-gradient(currentColor,currentColor) center / 14px 2px no-repeat,
+    linear-gradient(currentColor,currentColor) center / 2px 14px no-repeat,
+    rgba(0,30,42,.05) !important;
+  color:#e4002b !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.08) !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),background-color .25s ease,color .25s ease !important}
+.faq details[open] > summary::after{transform:translateY(-50%) rotate(45deg) !important;
+  background:
+    linear-gradient(currentColor,currentColor) center / 14px 2px no-repeat,
+    linear-gradient(currentColor,currentColor) center / 2px 14px no-repeat,
+    #e4002b !important;color:#fff !important;box-shadow:none !important}
+.faq summary:hover::after{box-shadow:inset 0 0 0 1.5px #e4002b !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .faq summary::after{
+  background:
+    linear-gradient(currentColor,currentColor) center / 14px 2px no-repeat,
+    linear-gradient(currentColor,currentColor) center / 2px 14px no-repeat,
+    #fff !important;color:#e4002b !important;box-shadow:0 8px 18px -10px rgba(90,0,12,.6) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .faq details[open] > summary::after{
+  background:
+    linear-gradient(currentColor,currentColor) center / 14px 2px no-repeat,
+    linear-gradient(currentColor,currentColor) center / 2px 14px no-repeat,
+    rgba(255,255,255,.12) !important;color:#fff !important;box-shadow:inset 0 0 0 1.5px #fff !important}
+/* note « Servono informazioni » sulle tessere rosse: lastra bianca e testo scuro */
+body.pagina-interna :is(.t-outline,.t-vetro) .need-info{background:rgba(255,255,255,.94) !important;box-shadow:none !important;border:0 !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .need-info,body.pagina-interna :is(.t-outline,.t-vetro) .need-info *{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important;text-shadow:none !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .need-info :is(b,strong,.ni-h,span:first-child){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+
+/* 187. Card delle sedi nelle pagine interne: stesse superfici delle altre card
+   - sul rosso (vetro/contorno): lastra bianca, testo Jet Black, accenti rossi
+   - sul bianco: lastra grigio chiaro con filo sottile */
+body.pagina-interna :is(.t-outline,.t-vetro) .sedi .sede{
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.88)) !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;border:0 !important;
+  box-shadow:inset 0 1px 0 #fff,0 18px 34px -24px rgba(90,0,12,.55) !important}
+body.pagina-interna .t-bianca .sedi .sede{
+  background:linear-gradient(180deg,rgba(0,30,42,.035),rgba(0,30,42,.055)) !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;border:0 !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.08),0 16px 30px -24px rgba(0,30,42,.35) !important}
+body.pagina-interna .sedi .sede > .card-fondo,body.pagina-interna .sedi .sede .card-sagoma{display:none !important}
+body.pagina-interna .sedi .sede.sede :is(.co,address,p,span,.sede-rec){color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important;text-shadow:none !important}
+body.pagina-interna .sedi .sede.sede .city{color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body.pagina-interna .sedi .sede.sede .main-flag{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important}
+body.pagina-interna .sedi .sede.sede .main-flag.alt{color:#636362 !important;-webkit-text-fill-color:#636362 !important}
+body.pagina-interna .sedi .sede.sede a{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important}
+body.pagina-interna .sedi .sede.sede .btn-link::before{border-left-color:#e4002b !important}
+body.pagina-interna .wrap .sedi .sede.sede a.btn-link,body.pagina-interna .wrap .sedi .sede.sede a{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna .wrap .sedi .sede.sede a.btn-link::before{border-left-color:#e4002b !important}
+
+/* 188. Voci delle schede (es. « Consulenza tecnica »): stesso comportamento ovunque,
+   declinato sul fondo. Riposo → hover (velo leggero) → selezionata (velo + barra a sinistra).
+   Il numero resta testo: niente cerchi che compaiono in hover. */
+body.pagina-interna .t-tabs .t-nav [role=tab]{border-radius:calc(var(--raggio) * .35) !important;padding:12px 14px 12px 16px !important;
+  transition:background-color .2s ease,color .2s ease,box-shadow .2s ease !important;cursor:pointer}
+body.pagina-interna .t-tabs .t-nav [role=tab]::before,body.pagina-interna .t-tabs .t-nav [role=tab] .t-num{
+  background:none !important;box-shadow:none !important;border:0 !important;border-radius:0 !important;width:auto !important;height:auto !important;
+  transform:none !important;font-weight:700;transition:color .2s ease}
+body.pagina-interna .t-tabs .t-nav [role=tab]::after{content:none !important}
+/* sul bianco */
+body.pagina-interna .t-bianca .t-tabs .t-nav [role=tab]{background:transparent !important;box-shadow:none !important;color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body.pagina-interna .t-bianca .t-tabs .t-nav [role=tab]::before,body.pagina-interna .t-bianca .t-tabs .t-nav [role=tab] .t-num{color:#9aa6ad !important;-webkit-text-fill-color:#9aa6ad !important}
+body.pagina-interna .t-bianca .t-tabs .t-nav [role=tab]:hover{background:rgba(0,30,42,.05) !important;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body.pagina-interna .t-bianca .t-tabs .t-nav [role=tab]:is(:hover,[aria-selected=true])::before,
+body.pagina-interna .t-bianca .t-tabs .t-nav [role=tab]:is(:hover,[aria-selected=true]) .t-num{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna .t-bianca .t-tabs .t-nav [aria-selected=true]{background:rgba(228,0,43,.06) !important;box-shadow:inset 3px 0 0 #e4002b !important;
+  color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;font-weight:700}
+/* sul rosso (vetro/contorno) */
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab]::before,body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab] .t-num{
+  color:rgba(255,255,255,.6) !important;-webkit-text-fill-color:rgba(255,255,255,.6) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab]:is(:hover,[aria-selected=true])::before,
+body.pagina-interna :is(.t-outline,.t-vetro) .t-tabs .t-nav [role=tab]:is(:hover,[aria-selected=true]) .t-num{color:#fff !important;-webkit-text-fill-color:#fff !important}
+/* tastiera */
+body.pagina-interna .t-tabs .t-nav [role=tab]:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.form .fields > .consent,.form .fields > .consent-lungo{grid-column:1 / -1 !important}
+
+/* 189. Card nelle griglie: stessa altezza per tutte (immagine sempre 4:3, foto ritagliata)
+        e numero dei risultati accanto al titolo leggibile */
+body.pagina-interna .wrap > .row.row-int .grid > .card{height:100%;display:flex;flex-direction:column}
+body.pagina-interna .wrap > .row.row-int .grid > .card > .card-media{aspect-ratio:4/3 !important;height:auto !important;min-height:0 !important;flex:0 0 auto;overflow:hidden}
+body.pagina-interna .wrap > .row.row-int .grid > .card > .card-media img{width:100% !important;height:100% !important;aspect-ratio:auto !important;object-fit:cover !important;padding:0 !important}
+body.pagina-interna .wrap > .row.row-int .grid > .card > .card-media.cliente-logo{aspect-ratio:16/9 !important}
+body.pagina-interna .wrap > .row.row-int .grid > .card > .card-media.cliente-logo img{width:min(70%,220px) !important;height:auto !important;object-fit:contain !important}
+body.pagina-interna .wrap > .row.row-int .grid > .card > .card-body{flex:1;display:flex;flex-direction:column}
+body.pagina-interna .wrap > .row.row-int .grid > .card > .card-body .card-link{margin-top:auto}
+body.pagina-interna .wrap > .row > .block > h2 :is(.small,.muted){opacity:1 !important;font-size:.55em !important;font-weight:700 !important;vertical-align:middle;
+  display:inline-grid;place-items:center;min-width:2em;padding:.25em .6em;border-radius:999px;margin-left:.3em;letter-spacing:0}
+body.pagina-interna .wrap > .row.t-bianca > .block > h2 :is(.small,.muted){background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+body.pagina-interna .wrap > .row:is(.t-vetro,.t-outline) > .block > h2 :is(.small,.muted){background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;text-shadow:none !important}
+body.pagina-interna .wrap > .row.row-int .grid:has(> .card){grid-auto-rows:1fr}
+
+/* 190. Striscia a icone su sezione bianca: nomi scuri, dischi grigio chiaro, hover rosso */
+body.pagina-interna .row-striscia.t-bianca .tile span{color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+body.pagina-interna .row-striscia.t-bianca .tile-ico{background:linear-gradient(180deg,#fff,#f3f3f3) !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.08),0 12px 22px -16px rgba(0,30,42,.45) !important}
+body.pagina-interna .row-striscia.t-bianca .tile:is(:hover,:focus-visible) .tile-ico{background:#e4002b !important;stroke:#fff !important;box-shadow:0 16px 26px -14px rgba(163,16,0,.6) !important}
+body.pagina-interna .row-striscia.t-bianca > .block > h2{color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;text-shadow:none !important}
+
+/* 191. ARTICOLO · nucleo editoriale
+   - immagine in evidenza larga, poi una sola colonna di lettura (720px) su cui
+     stanno allineati titoli, testi ed elenchi;
+   - il primo paragrafo apre l'articolo (più grande, scuro);
+   - i titoli interni hanno il filo rosso a sinistra, come gli altri accenti del sito */
+body.pagina-interna .row-articolo > .block{padding-top:clamp(36px,4vw,64px) !important;padding-bottom:clamp(48px,5vw,80px) !important}
+body.pagina-interna .row-articolo > .block > :is(h2,h3,.testo,ul,ol,p,.lede,.need-info){max-width:720px !important;margin-left:auto !important;margin-right:auto !important;width:100%}
+body.pagina-interna .row-articolo > .block > .articolo-foto{max-width:1120px !important;width:100%;margin:0 auto clamp(40px,4.4vw,64px) !important;border-radius:var(--raggio)}
+body.pagina-interna .row-articolo .articolo-foto img{aspect-ratio:21/9 !important}
+body.pagina-interna .row-articolo > .block > .lede:empty{display:none !important}
+body.pagina-interna .row-articolo > .block > .articolo-foto + :is(.lede,.testo),
+body.pagina-interna .row-articolo > .block > .articolo-foto + .lede:empty + .testo{font-size:clamp(19px,1.45vw,22px) !important;line-height:1.55 !important;color:#001e2a !important;font-weight:500}
+body.pagina-interna .row-articolo > .block > h2{font-size:clamp(26px,2.2vw,34px) !important;line-height:1.15;margin-top:clamp(44px,4.4vw,64px) !important;margin-bottom:16px !important;
+  padding-left:18px;box-shadow:inset 3px 0 0 #e4002b;text-wrap:balance}
+body.pagina-interna .row-articolo > .block > h3{font-size:clamp(20px,1.6vw,24px) !important;margin-top:clamp(32px,3.4vw,44px) !important;margin-bottom:10px !important;text-wrap:balance}
+body.pagina-interna .row-articolo > .block > .testo{font-size:17.5px;line-height:1.75;color:#2c3a42}
+body.pagina-interna .row-articolo > .block > .testo p:last-child{margin-bottom:0}
+body.pagina-interna .row-articolo > .block > ul{margin-top:20px !important;margin-bottom:8px !important}
+/* testata dell'articolo: titolo su più colonne, niente « muro » di 4 righe strette */
+body.pagina-interna .row-testata:has(+ .row-articolo) h1{max-width:28ch !important;font-size:clamp(36px,4vw,60px) !important;line-height:1.05}
+body.pagina-interna .wrap > .row.row-int.row-articolo:not(.row-striscia):not(.row-testata) > .block > :is(h2,h3){max-width:720px !important;margin-left:auto !important;margin-right:auto !important}
+body.pagina-interna .wrap > .row.row-int.row-articolo > .block > h2{margin-top:clamp(44px,4.4vw,64px) !important;margin-bottom:16px !important}
+body.pagina-interna .wrap > .row.row-int.row-articolo > .block > .articolo-foto ~ .testo:not(.testo ~ .testo){font-size:clamp(19px,1.45vw,22px) !important;line-height:1.55 !important;color:#001e2a !important;font-weight:500}
+/* 191.1 l'immagine in evidenza ha la stessa larghezza della colonna di testo */
+body.pagina-interna .wrap > .row.row-int.row-articolo > .block > .articolo-foto{max-width:720px !important;margin-left:auto !important;margin-right:auto !important}
+body.pagina-interna .row-articolo .articolo-foto img{aspect-ratio:16/9 !important}
+
+/* 192. ARTICOLO a due colonne: corpo (immagine + testo, stessa larghezza) e colonna laterale
+   che accompagna la lettura (indice dei paragrafi + richiesta informazioni) */
+body.pagina-interna .wrap > .row.row-int.row-articolo > .block{display:grid !important;grid-template-columns:minmax(0,1fr) minmax(260px,320px);
+  column-gap:clamp(40px,5vw,88px);align-items:start}
+body.pagina-interna .row-articolo .articolo-corpo{min-width:0;max-width:880px}
+body.pagina-interna .row-articolo .articolo-corpo > *{max-width:none !important;margin-left:0 !important;margin-right:0 !important;width:auto}
+body.pagina-interna .row-articolo .articolo-corpo > .articolo-foto{margin:0 0 clamp(36px,4vw,56px) !important;border-radius:var(--raggio);overflow:hidden;box-shadow:0 30px 60px -36px rgba(0,30,42,.45)}
+body.pagina-interna .row-articolo .articolo-corpo > .articolo-foto img{display:block;width:100%;aspect-ratio:16/9 !important;object-fit:cover}
+body.pagina-interna .row-articolo .articolo-corpo > .lede:empty{display:none}
+body.pagina-interna .row-articolo .articolo-corpo > .articolo-foto ~ .testo:not(.testo ~ .testo){font-size:clamp(19px,1.45vw,22px) !important;line-height:1.55 !important;color:#001e2a !important;font-weight:500}
+body.pagina-interna .row-articolo .articolo-corpo > h2{font-size:clamp(26px,2.2vw,34px) !important;line-height:1.15;margin:clamp(44px,4.4vw,64px) 0 16px !important;
+  padding-left:18px;box-shadow:inset 3px 0 0 #e4002b;text-wrap:balance;max-width:none !important;scroll-margin-top:calc(var(--header-h,110px) + 40px)}
+body.pagina-interna .row-articolo .articolo-corpo > h3{font-size:clamp(20px,1.6vw,24px) !important;margin:clamp(32px,3.4vw,44px) 0 10px !important;text-wrap:balance}
+body.pagina-interna .row-articolo .articolo-corpo > .testo{font-size:17.5px;line-height:1.75;color:#2c3a42;max-width:72ch !important}
+body.pagina-interna .row-articolo .articolo-corpo > ul{display:grid;gap:10px;list-style:none;padding:0;margin:20px 0 8px !important;max-width:72ch !important}
+/* colonna laterale */
+body.pagina-interna .row-articolo .articolo-lato{position:sticky;top:calc(var(--devbar-h,0px) + var(--header-h,110px) + 24px);display:grid;gap:var(--fuga)}
+body.pagina-interna .row-articolo .articolo-indice{padding:22px 24px;border-radius:calc(var(--raggio) * .6);background:rgba(0,30,42,.035);box-shadow:inset 0 0 0 1px rgba(0,30,42,.08)}
+body.pagina-interna .row-articolo .articolo-indice .kicker{margin:0 0 12px !important;color:#e4002b !important}
+body.pagina-interna .row-articolo .articolo-indice ol{list-style:none;margin:0;padding:0;display:grid;gap:4px;counter-reset:ind}
+body.pagina-interna .row-articolo .articolo-indice li{counter-increment:ind}
+body.pagina-interna .row-articolo .articolo-indice a{display:grid;grid-template-columns:26px 1fr;gap:6px;padding:8px 10px;border-radius:10px;text-decoration:none;
+  color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important;font-size:14.5px;line-height:1.35;transition:background .2s ease,color .2s ease}
+body.pagina-interna .row-articolo .articolo-indice a::before{content:counter(ind,decimal-leading-zero);font-weight:700;font-size:12px;color:#9aa6ad;padding-top:2px}
+body.pagina-interna .row-articolo .articolo-indice a:hover{background:rgba(0,30,42,.05);color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body.pagina-interna .row-articolo .articolo-indice a:hover::before{color:#e4002b}
+body.pagina-interna .row-articolo .articolo-cta{display:grid;gap:10px;padding:22px 24px;border-radius:calc(var(--raggio) * .6);background:var(--fondo-rosso);
+  box-shadow:0 22px 40px -28px rgba(120,0,20,.6)}
+body.pagina-interna .row-articolo .articolo-cta .btn{justify-content:center;width:100%}
+body.pagina-interna .row-articolo .articolo-cta .btn-primary{background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna .row-articolo .articolo-cta .btn-ghost{background:transparent !important;color:#fff !important;-webkit-text-fill-color:#fff !important;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85) !important}
+@media (max-width:980px){body.pagina-interna .wrap > .row.row-int.row-articolo > .block{grid-template-columns:1fr}
+  body.pagina-interna .row-articolo .articolo-lato{position:static;margin-top:40px}}
+body.pagina-interna .row-articolo .articolo-indice li::before{content:none !important}
+body.pagina-interna .row-articolo .articolo-indice li{padding:0 !important;background:none !important;box-shadow:none !important}
+body.pagina-interna .row-articolo .articolo-cta{background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,0) 0px,rgba(255,255,255,.14) 9px,rgba(255,255,255,.26) 14px,rgba(255,255,255,.04) 22px,rgba(120,0,16,.10) 31px,rgba(120,0,16,.14) 36px,rgba(255,255,255,0) 42px),
+    linear-gradient(160deg,#f33f54 0%,#e4002b 45%,#c8001f 100%) !important}
+
+/* 192.1 colonna laterale dell'articolo: resta ferma fino alla sezione successiva
+   (la tessera non deve ritagliare, altrimenti « sticky » non funziona) */
+body.pagina-interna .wrap > .row.row-int.row-articolo,body.pagina-interna .wrap > .row.row-int.row-articolo > .block{overflow:visible !important}
+body.pagina-interna .row-articolo .articolo-lato{position:sticky !important;align-self:start}
+/* box della richiesta: stessa lastra dell'indice, pulsanti come sul resto del bianco */
+body.pagina-interna .row-articolo .articolo-cta{background:rgba(0,30,42,.035) !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.08) !important}
+body.pagina-interna .row-articolo .articolo-cta .btn-primary{background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 14px 26px -14px rgba(163,16,0,.7) !important}
+body.pagina-interna .row-articolo .articolo-cta .btn-primary:hover{background:#a31000 !important}
+body.pagina-interna .row-articolo .articolo-cta .btn-ghost{background:#fff !important;color:#e4002b !important;-webkit-text-fill-color:#e4002b !important;box-shadow:inset 0 0 0 1.5px #e4002b !important}
+body.pagina-interna .row-articolo .articolo-cta .btn-ghost:hover{background:#e4002b !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+
+/* 193. Niente aloni scuri sotto i testi: via le ombre dei testi (e i drop-shadow sui titoli)
+        su tutto il sito, tranne l'hero sopra il video */
+body :not(.hero-full):not(.hero-full *):is(h1,h2,h3,h4,h5,h6,p,span,a,li,b,strong,em,small,label,address,dt,dd,button,div,figcaption,.kicker,.lede){
+  text-shadow:none !important}
+/* niente drop-shadow scuri sui titoli: regola normale (non !important), così l'effetto acqua
+   — applicato in linea solo in hover — continua a funzionare */
+html body.pagina-interna .wrap .row-testata h1,html body .wrap :is(h2,h3,.kicker,.gruppo-h){filter:none}
+/* 193.1 rinforzo: :is(#_,*) dà specificità d'ID a una regola che vale per ogni elemento */
+body :is(#_n,*):not(.hero-full):not(.hero-full *){text-shadow:none !important}
+
+/* ================= 194. SCHEDA MACCHINA · rifiniture ================= */
+
+/* 194.1 modulo: « Preferisci parlarne? ▸ 800 480110 » — triangolo e link bianchi sul vetro rosso */
+body.scheda-mosaico .sticky-col .t-vetro :is(.btn-link,a.btn-link){color:#fff !important;-webkit-text-fill-color:#fff !important;font-weight:700}
+body.scheda-mosaico .sticky-col .t-vetro .btn-link::before,body.scheda-mosaico .wrap .sticky-col .t-vetro a.btn-link::before{border-left-color:#fff !important}
+
+/* 194.2 « Dove si usa »: striscia a icone come « Per il tuo settore », versione sul bianco */
+body.scheda-mosaico .split .block.striscia-scheda{display:grid !important;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:clamp(24px,3vw,48px)}
+body.scheda-mosaico .split .block.striscia-scheda > :is(.block-id,h2,p.small){grid-column:1}
+body.scheda-mosaico .split .block.striscia-scheda > h2{margin:0 !important;max-width:9ch;line-height:1.05}
+body.scheda-mosaico .split .block.striscia-scheda .tiles-icone{grid-column:2;grid-row:1 / span 3;margin:0 !important;display:grid !important;
+  grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:16px 10px}
+body.scheda-mosaico .split .block.striscia-scheda .tile{display:flex !important;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:6px 0 0 !important;
+  background:none !important;border:0 !important;box-shadow:none !important;text-decoration:none;overflow:visible !important}
+body.scheda-mosaico .split .block.striscia-scheda .tile-ico{width:62px;height:62px;padding:16px;border-radius:50%;fill:none;stroke:#e4002b;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;
+  background:linear-gradient(180deg,#fff,#f3f3f3);box-shadow:inset 0 0 0 1px rgba(0,30,42,.08),0 12px 22px -16px rgba(0,30,42,.45);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),background .25s ease,stroke .25s ease}
+body.scheda-mosaico .split .block.striscia-scheda .tile span{font-size:13px;font-weight:600;line-height:1.25;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body.scheda-mosaico .split .block.striscia-scheda .tile:is(:hover,:focus-visible) .tile-ico{background:#e4002b;stroke:#fff;transform:translateY(-4px)}
+body.scheda-mosaico .split .block.striscia-scheda > p.small{margin-top:10px !important;max-width:32ch}
+@media (max-width:700px){body.scheda-mosaico .split .block.striscia-scheda{grid-template-columns:1fr}
+  body.scheda-mosaico .split .block.striscia-scheda .tiles-icone{grid-column:1;grid-row:auto;margin-top:18px !important}}
+
+/* 194.3 card delle altre macchine (e delle altre griglie): stessa altezza, immagine 4:3, superficie come sul resto del bianco */
+body.scheda-mosaico .split .block .grid{grid-auto-rows:1fr;gap:var(--fuga) !important}
+body.scheda-mosaico .split .block .grid > .card{height:100%;display:flex;flex-direction:column;overflow:hidden;
+  background:linear-gradient(180deg,rgba(0,30,42,.035),rgba(0,30,42,.055)) !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.08),0 16px 30px -24px rgba(0,30,42,.35) !important}
+body.scheda-mosaico .split .block .grid > .card > .card-fondo,body.scheda-mosaico .split .block .grid > .card .card-sagoma{display:none !important}
+body.scheda-mosaico .split .block .grid > .card > .card-media{aspect-ratio:4/3 !important;height:auto !important;min-height:0 !important;overflow:hidden}
+body.scheda-mosaico .split .block .grid > .card > .card-media img{width:100% !important;height:100% !important;object-fit:cover !important;padding:0 !important;aspect-ratio:auto !important}
+body.scheda-mosaico .split .block .grid > .card > .card-body{flex:1;display:flex;flex-direction:column;gap:6px}
+body.scheda-mosaico .split .block .grid > .card > .card-body .card-link{margin-top:auto}
+body.scheda-mosaico .split .block .grid > .card .card-name{color:#001e2a !important;-webkit-text-fill-color:#001e2a !important}
+body.scheda-mosaico .split .block .grid > .card .card-desc{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* 194.4 caratteristiche tecniche: tabella pulita a due colonne, righe alternate, niente triangoli */
+body.scheda-mosaico table.specs{border-collapse:collapse !important;border-spacing:0 !important;width:100%}
+body.scheda-mosaico table.specs tbody tr{background:none !important;box-shadow:none !important}
+body.scheda-mosaico table.specs tbody tr:nth-child(odd){background:rgba(0,30,42,.035) !important}
+body.scheda-mosaico table.specs tbody tr > *{padding:14px 18px !important;border:0 !important;border-radius:0 !important;font-style:normal !important;vertical-align:middle}
+body.scheda-mosaico table.specs tbody tr > :first-child{border-radius:12px 0 0 12px !important}
+body.scheda-mosaico table.specs tbody tr > :last-child{border-radius:0 12px 12px 0 !important;text-align:right;font-variant-numeric:tabular-nums}
+body.scheda-mosaico table.specs tbody th{font-family:var(--font-display);font-weight:600 !important;font-size:15px !important;color:#001e2a !important;width:55%}
+body.scheda-mosaico table.specs tbody th::before{content:none !important}
+body.scheda-mosaico table.specs tbody td{font-size:15px !important;font-weight:700;color:#001e2a !important}
+body.scheda-mosaico table.specs thead{display:none}
+
+/* 194.5 scheda tecnica PDF: card di download, icona documento + testo + azione */
+body.scheda-mosaico .split .block .download{display:flex !important;align-items:center;gap:16px;padding:18px 22px !important;border-radius:calc(var(--raggio) * .55) !important;
+  border:0 !important;background:rgba(0,30,42,.035) !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.08) !important;
+  color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;font-weight:700;text-decoration:none;transition:background .2s ease,box-shadow .2s ease}
+body.scheda-mosaico .split .block .download .ext{flex:0 0 auto;display:grid;place-items:center;width:48px;height:56px;border-radius:8px;
+  background:#e4002b;color:#fff !important;-webkit-text-fill-color:#fff !important;font-size:12px;letter-spacing:.06em;font-weight:700;
+  clip-path:polygon(0 0,72% 0,100% 22%,100% 100%,0 100%)}
+body.scheda-mosaico .split .block a.download::after{content:"";margin-left:auto;width:40px;height:40px;border-radius:50%;flex:0 0 auto;
+  background:#e4002b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11M7 10l5 5 5-5M5 20h14'/%3E%3C/svg%3E") center/18px no-repeat}
+body.scheda-mosaico .split .block a.download:hover{background:rgba(228,0,43,.06) !important;box-shadow:inset 0 0 0 1.5px #e4002b !important}
+body.scheda-mosaico .split .block span.download{color:#636362 !important;-webkit-text-fill-color:#636362 !important;box-shadow:inset 0 0 0 1.5px rgba(0,30,42,.14) !important;
+  background:repeating-linear-gradient(135deg,rgba(0,30,42,.025) 0 10px,transparent 10px 20px) !important}
+body.scheda-mosaico .split .block span.download .ext{background:#9aa6ad}
+body.scheda-mosaico .split .block .grid:has(> .card){grid-template-columns:repeat(auto-fill,minmax(230px,1fr)) !important}
+
+/* 195. « Tipo di richiesta »: le tre opzioni affiancate su una riga, in tre colonne uguali.
+   Il pallino del radio è nascosto: lo stato lo mostra la pastiglia (piena = scelta). */
+.form .radio-set{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:6px !important}
+.form .radio-set > label{position:relative;display:flex !important;align-items:center;justify-content:center;text-align:center;
+  padding:9px 6px !important;font-size:12.5px !important;line-height:1.2 !important;white-space:normal;min-height:40px;border-radius:999px}
+.form .radio-set > label input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.form .radio-set > label:has(input:focus-visible){outline:2px solid #fff;outline-offset:2px}
+
+/* 196. Caratteristiche tecniche: un solo fondo per riga. Via le lastre di vetro delle celle
+   e i contorni: righe alternate grigio chiaro / trasparente e un filo sottile fra una e l'altra */
+body.scheda-mosaico .split table.specs tbody tr,
+body.scheda-mosaico .split table.specs tbody tr > *{background:none !important;box-shadow:none !important;border:0 !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+body.scheda-mosaico .split table.specs tbody tr:nth-child(odd) > *{background:rgba(0,30,42,.04) !important}
+body.scheda-mosaico .split table.specs tbody tr + tr > *{box-shadow:inset 0 1px 0 rgba(0,30,42,.06) !important}
+body.scheda-mosaico .split table.specs tbody tr:hover > *{background:rgba(228,0,43,.05) !important}
+
+/* 197. Niente lampo blu/azzurro al ricaricamento: prima che lo script monti la pagina
+   (fondale, classi, attributi) il fondo è già il rosso del sito */
+html:has([data-devbar]),html:has([data-devbar]) body{background:#e4002b !important}
+body[data-testata="blu"],body[data-testata="blu"]:not([data-pagina="home"]){background:#e4002b !important}
+html:has([data-devbar]) body:not(.wf-pronto){background:#e4002b !important}
+
+/* ================= 198. Testi tagliati · strisce con poche o troppe voci ================= */
+
+/* 198.1 i pannelli delle schede non ritagliano più il testo (le lettere sul bordo sinistro
+   venivano tagliate di qualche pixel); stesso principio per le colonne di testo */
+body.pagina-interna :is(.t-pane,.t-panes,.testo,.lede){overflow:visible !important}
+body.pagina-interna .t-pane{padding-left:2px}
+
+/* 198.2 POCHE VOCI (fino a 3): niente icone sperdute in una fila vuota.
+   Le voci diventano lastre orizzontali larghe (icona + nome + freccia) che riempiono la riga */
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:not(:has(> :nth-child(4))){
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr)) !important;gap:var(--fuga) !important;align-items:stretch}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:not(:has(> :nth-child(4))) > .tile{
+  flex-direction:row !important;align-items:center !important;justify-content:flex-start !important;text-align:left !important;gap:16px !important;
+  padding:14px 18px !important;border-radius:calc(var(--raggio) * .55) !important;position:relative;
+  background:rgba(255,255,255,.14) !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4) !important;transition:background .25s ease,box-shadow .25s ease}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:not(:has(> :nth-child(4))) > .tile .tile-ico{width:54px !important;height:54px !important;padding:14px !important;flex:0 0 auto}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:not(:has(> :nth-child(4))) > .tile span{font-size:16px !important;font-weight:700 !important}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:not(:has(> :nth-child(4))) > .tile::after{content:"" !important;display:block !important;margin-left:auto;
+  width:0;height:0;border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent currentColor;opacity:.8;transition:transform .3s ease}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:not(:has(> :nth-child(4))) > .tile:hover::after{transform:translateX(4px)}
+/* sul rosso: lastra di vetro, testo e freccia bianchi */
+body.pagina-interna .row-striscia:is(.t-outline,.t-vetro) .tiles-icone:not(:has(> :nth-child(4))) > .tile{color:#fff}
+body.pagina-interna .row-striscia:is(.t-outline,.t-vetro) .tiles-icone:not(:has(> :nth-child(4))) > .tile:hover{background:rgba(255,255,255,.24) !important;box-shadow:inset 0 0 0 1.5px #fff !important}
+/* sul bianco: lastra grigio chiaro, testo scuro, freccia rossa */
+:is(body.pagina-interna .row-striscia.t-bianca,body.scheda-mosaico .striscia-scheda) .tiles-icone:not(:has(> :nth-child(4))) > .tile{
+  background:rgba(0,30,42,.035) !important;box-shadow:inset 0 0 0 1px rgba(0,30,42,.08) !important;color:#e4002b}
+:is(body.pagina-interna .row-striscia.t-bianca,body.scheda-mosaico .striscia-scheda) .tiles-icone:not(:has(> :nth-child(4))) > .tile:hover{
+  background:rgba(228,0,43,.05) !important;box-shadow:inset 0 0 0 1.5px #e4002b !important}
+
+/* 198.3 TROPPE VOCI (9 o più): le icone diventano rumore. Titolo sopra, voci in un elenco
+   compatto a più colonne: piccolo disco con l'icona, nome, nessuna fila infinita di cerchi */
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) > .block:has(.tiles-icone > :nth-child(9)),
+body.scheda-mosaico .split .block.striscia-scheda:has(.tiles-icone > :nth-child(9)){grid-template-columns:1fr !important}
+body.pagina-interna .row-striscia > .block:has(.tiles-icone > :nth-child(9)) > h2{max-width:none !important;margin-bottom:var(--ritmo-l) !important}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:has(> :nth-child(9)){
+  grid-column:1 !important;grid-row:auto !important;grid-template-columns:repeat(auto-fill,minmax(220px,1fr)) !important;gap:8px 12px !important}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:has(> :nth-child(9)) > .tile{
+  flex-direction:row !important;align-items:center !important;justify-content:flex-start !important;text-align:left !important;gap:12px !important;
+  padding:8px 12px 8px 8px !important;border-radius:999px !important;transition:background .2s ease}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:has(> :nth-child(9)) > .tile .tile-ico{
+  width:36px !important;height:36px !important;padding:9px !important;flex:0 0 auto;box-shadow:none !important}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:has(> :nth-child(9)) > .tile:hover .tile-ico{transform:none !important}
+:is(body.pagina-interna .row-striscia,body.scheda-mosaico .striscia-scheda) .tiles-icone:has(> :nth-child(9)) > .tile span{font-size:14px !important;line-height:1.3}
+body.pagina-interna .row-striscia:is(.t-outline,.t-vetro) .tiles-icone:has(> :nth-child(9)) > .tile:hover{background:rgba(255,255,255,.14) !important}
+:is(body.pagina-interna .row-striscia.t-bianca,body.scheda-mosaico .striscia-scheda) .tiles-icone:has(> :nth-child(9)) > .tile:hover{background:rgba(0,30,42,.05) !important}
+/* 197.1 il rosso di partenza sta solo sulla radice: lo sfondo del body (pieno) copriva il
+   fondale cannettato fisso, che vive sotto i contenuti con z-index negativo */
+html:has([data-devbar]){background:#e4002b !important}
+html:has([data-devbar]) body,html:has([data-devbar]) body:not(.wf-pronto),body[data-testata="blu"],body.pagina-interna,body.pagina-interna[data-testata="blu"]{background:transparent !important}
+
+/* 199. Verifica di coerenza · correzioni */
+/* 199.1 hero: divisori dei numeri senza riflesso azzurro (solo bianco e rosso VI) */
+body[data-pagina="home"] .hero-full .hero-stats > div::before{background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.8) 0 .6px,rgba(255,255,255,.15) .6px 1.5px),
+  linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,.45) 50%,rgba(243,63,84,.45)) !important}
+/* 199.2 note « Servono informazioni » dentro le FAQ sul rosso: testo scuro sulla lastra bianca */
+body.pagina-interna :is(.t-outline,.t-vetro) .faq details .need-info,body.pagina-interna :is(.t-outline,.t-vetro) .faq details .need-info *{
+  color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body.pagina-interna :is(.t-outline,.t-vetro) .faq details .need-info :is(b,strong,.ni-h){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+/* 199.3 card sulle sezioni rosse delle pagine interne: superficie bianca piena (come le sedi), non rosata */
+body.pagina-interna :is(.t-outline,.t-vetro) .card-sagoma path{fill:rgba(255,255,255,.96) !important}
+/* 199.4 riquadri promo (noleggio/usato) sul rosso: lastra bianca, titoli rossi leggibili */
+body.pagina-interna :is(.t-outline,.t-vetro) :is(.promo,.promo-usa,.promo-nol){background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.88)) !important;
+  box-shadow:inset 0 1px 0 #fff,0 18px 34px -24px rgba(90,0,12,.55) !important}
+body.pagina-interna :is(.t-outline,.t-vetro) :is(.promo,.promo-usa,.promo-nol) :is(p,li){color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+/* 199.5 numeri delle schede sul bianco: grigio leggibile (Steel Gray), rosso su hover/selezione */
+body.pagina-interna .t-bianca .t-tabs .t-nav [role=tab]:not(:hover):not([aria-selected=true])::before,
+body.pagina-interna .t-bianca .t-tabs .t-nav [role=tab]:not(:hover):not([aria-selected=true]) .t-num{color:#636362 !important;-webkit-text-fill-color:#636362 !important}
+/* 199.6 ricerca: stesso giunto prima del footer */
+body.pagina-interna .wrap > .row[data-da-risultati]:last-of-type,body.pagina-interna .wrap > div[data-results-full]{margin-bottom:0 !important;padding:0 !important}
+body.pagina-interna .wrap > div[data-results-full]:empty,body.pagina-interna .wrap > div[data-results-empty][hidden]{display:none !important}
+/* 199.7 foto della sede: stesse proporzioni e raggio delle altre immagini */
+body.pagina-interna .foto-sede{border-radius:calc(var(--raggio) * .6);overflow:hidden;aspect-ratio:4/3;box-shadow:0 18px 34px -24px rgba(0,30,42,.45)}
+body.pagina-interna .foto-sede img{display:block;width:100%;height:100%;object-fit:cover}
+/* 199.8 dentro le lastre bianche sul rosso (promo, card, sedi, note) link e testi tornano scuri/rossi */
+body.pagina-interna .wrap :is(.t-outline,.t-vetro) :is(.promo,.formula,.card,.sede,.notice) .btn-link,
+body.pagina-interna .wrap :is(.t-outline,.t-vetro) :is(.promo,.formula,.card,.sede,.notice) a.btn-link{color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna .wrap :is(.t-outline,.t-vetro) :is(.promo,.formula,.card,.sede,.notice) .btn-link::before{border-left-color:#e4002b !important}
+body.pagina-interna .wrap .need-info.need-info,body.pagina-interna .wrap .need-info.need-info *{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+body.pagina-interna .wrap .need-info.need-info :is(b,strong,.ni-h){color:#e4002b !important;-webkit-text-fill-color:#e4002b !important}
+body.pagina-interna .wrap :is(.t-outline,.t-vetro) .need-info.need-info{background:rgba(255,255,255,.94) !important}

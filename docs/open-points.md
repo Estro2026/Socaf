@@ -223,4 +223,7 @@ valutare se tenerle (SEO, contenuto esistente su socaf.it) o reindirizzarle.
 
 ## OP-18 · Fotografie mancanti per le card di categoria
 Le card usano le foto reali di `assets/STATICHE` (copie web in `assets/images/categorie/`). Mancano fotografie per: famiglie **Aspiratori** (cartella vuota), **Robot**, **Altri macchinari**; sottocategorie **i-mop**, **Spazzatrici stradali**, **Idropulitrici acqua calda / alte prestazioni / impianti fissi / autonome**, **Robot**. Lì resta il segnaposto: servono foto dal cliente.
-- (30/09) Home · « I marchi del gruppo »: i riquadri di Aquarial e Caldofacile restano segnaposto. In `assets/STATICHE` non ci sono foto né loghi dei due marchi: servono dal cliente (logo vettoriale + una foto di prodotto ciascuno).
+- (01/10) Home · « I marchi del gruppo »: nelle card ora ci sono i loghi ufficiali (`assets/acquarial.svg`, `assets/caldofacile.svg`); il logo Aquarial esiste solo in versione bianca e sul fondo chiaro è reso scuro via CSS.
+- (01/10) Ricerca (D17): rimossa dal mockup la sezione « Pagine » dei risultati su richiesta; restano Macchine e Approfondimenti. Da confermare se le pagine vanno escluse anche dall'indice di ricerca o solo dalla visualizzazione.
+- (01/10) Pagine di servizi e azienda (D20): dove il corpo è un pannello a schede senza titolo proprio, il mockup usa come titolo il nome della pagina. Serve un titolo di sezione dal cliente.
+- (01/10) Pagine sede (D14): le tre foto della galleria sono segnaposto (sede di Osio Sotto, showroom, officina da `assets/STATICHE/Sito`), uguali per tutte le sedi. Servono le foto di ciascuna sede.

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>D16 · Home — Wireframe Socaf</title>
 <meta name="robots" content="noindex">
-<link rel="stylesheet" href="../assets/css/wireframe.css?v=170">
+<link rel="stylesheet" href="../assets/css/wireframe.css?v=267">
 </head>
 <body data-pagina="home">
 
@@ -75,7 +75,7 @@
     </div>
   </div>
 
-  <div class="row" data-mood="macchine">
+  <div class="row" data-mood="macchine" data-fondo="rosso">
     <div class="macchine-scena" aria-hidden="true"></div>
     <section class="block">
       <span class="block-id">BLOCCO 2 · Le sei famiglie</span>
@@ -132,7 +132,7 @@
   </div>
 
   <!-- BLOCCO 2bis · Il gruppo — aggiunta richiesta da Socaf, fuori dagli 8 blocchi del Brief mockup -->
-  <div class="row row-gruppo t-piena t-bianca" data-mood="azzurro">
+  <div class="row row-gruppo t-piena t-bianca" data-fondo="bianco" data-mood="azzurro">
     <div class="gruppo-scena" aria-hidden="true"></div>
     <section class="block">
       <span class="block-id">BLOCCO 2bis · Il gruppo — <span class="cond">aggiunta richiesta da Socaf, non prevista dal Brief mockup</span></span>
@@ -141,7 +141,7 @@
         <div class="gruppo-liquido" aria-hidden="true"></div>
         <p class="kicker">Il gruppo</p>
         <h2 class="gruppo-h">Dalla fusione di <em>tre aziende</em>,<br>il tuo partner affidabile per la pulizia industriale</h2>
-        <p class="lede gruppo-lede">Socaf, Bottoni e Tecno Clean: tre storie confluite in un unico gruppo.
+        <p class="lede gruppo-lede"><b>Socaf</b>, <b>Bottoni</b> e <b>Tecno Clean</b>: tre storie confluite in un unico gruppo.
           Cinque sedi tra Lombardia, Veneto e Friuli, una sola squadra.</p>
 
         <div class="loghi">
@@ -186,12 +186,12 @@
     </div>
   </div>
 
-  <div class="row row-formule t-7 t-vetro">
+  <div class="row row-formule t-7 t-outline" data-fondo="rosso">
     <section class="block">
       <span class="block-id">BLOCCO 3 · Noleggio e usato — <span class="openpoint">OP-07</span></span>
       <h2>Non serve per forza comprarla</h2>
       <p class="lede" style="margin-bottom:28px">Tre modi di avere la macchina che ti serve:
-        nuova, a noleggio o usata e&nbsp;garantita.</p>
+        nuova, a noleggio o&nbsp;usata e&nbsp;garantita.</p>
 
       <div class="formule">
         <a class="formula formula-nol" href="04-noleggio.html" data-url="/noleggio/">
@@ -235,7 +235,7 @@
     </div>
   </div>
 
-  <div class="row row-settori t-5 t-outline">
+  <div class="row row-settori t-5 t-outline" data-fondo="rosso">
     <section class="block">
       <span class="block-id">BLOCCO 4 · I settori</span>
       <h2>Per il tuo settore</h2>
@@ -263,7 +263,7 @@
     </div>
   </div>
 
-  <div class="row row-prodotti t-piena t-bianca">
+  <div class="row row-prodotti t-piena t-bianca" data-fondo="bianco">
     <div class="prodotti-scena" aria-hidden="true"></div>
     <section class="block">
       <span class="block-id">BLOCCO 5 · Prodotti per la pulizia</span>
@@ -289,17 +289,17 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-marchi t-vetro" data-mood="rosso">
+  <div class="row row-vetro row-marchi t-outline" data-fondo="rosso" data-mood="rosso">
     <section class="block">
       <span class="block-id">BLOCCO 6 · Aquarial e Caldofacile</span>
       <h2>I marchi del gruppo</h2>
       <div class="grid grid-2">
-        <article class="card"><div class="card-media ph ph-wide">Logo Aquarial</div>
+        <article class="card"><a class="card-media marchio-logo" href="https://www.aquarial.it/" target="_blank" rel="noopener" aria-label="Aquarial, sito dedicato"><img src="../assets/acquarial.svg" alt="Aquarial"></a>
           <div class="card-body"><span class="card-name">Aquarial</span>
             <p class="card-desc">Raffrescamento evaporativo per ambienti industriali.</p>
             <span class="card-meta">Sito dedicato ↗</span>
             <a class="card-link" href="https://www.aquarial.it/" target="_blank" rel="noopener">Vai al sito</a></div></article>
-        <article class="card"><div class="card-media ph ph-wide">Logo Caldofacile</div>
+        <article class="card"><a class="card-media marchio-logo" href="https://www.caldofacile.it/" target="_blank" rel="noopener" aria-label="Caldofacile, sito dedicato"><img src="../assets/caldofacile.svg" alt="Caldofacile"></a>
           <div class="card-body"><span class="card-name">Caldofacile</span>
             <p class="card-desc">Riscaldamento industriale e generatori d'aria calda.</p>
             <span class="card-meta">Sito dedicato ↗</span>
@@ -326,7 +326,7 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-sedi t-outline">
+  <div class="row row-vetro row-sedi t-piena t-bianca" data-fondo="rosso">
     <section class="block">
       <span class="block-id">BLOCCO 7 · Le cinque sedi</span>
       <p class="kicker">Vicini a te</p>
@@ -344,7 +344,7 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-form t-bianca">
+  <div class="row row-vetro row-form t-vetro" data-fondo="bianco">
     <section class="block">
       <span class="block-id">BLOCCO 8 · Richiesta informazioni</span>
       <form class="form" data-demo-form>
@@ -402,6 +402,6 @@
 <footer data-footer></footer>
 <script src="../assets/js/catalogo.js?v=123"></script>
 <script src="../assets/js/testi.js?v=123"></script>
-<script src="../assets/js/wireframe.js?v=149"></script>
+<script src="../assets/js/wireframe.js?v=192"></script>
 </body>
 </html>
