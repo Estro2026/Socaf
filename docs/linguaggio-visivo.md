@@ -145,3 +145,31 @@ Regole confermate:
 - dentro le lastre bianche (card, sedi, promo, note) testi scuri e link rossi, anche sulle sezioni rosse;
 - card su sezioni rosse: superficie bianca piena;
 - giunto modulo → footer: 20px ovunque.
+
+## Accento azzurro VI (02/10)
+
+L'azzurro va usato solo sulle sezioni a fondo bianco, e con parsimonia:
+- colori: Socaf Blue #0085cf, con Crystal Blue #4fbdf7 per i toni chiari;
+- dove: hover, voce selezionata e numeri delle schede, miniature attive, link nel testo, focus dei campi.
+
+Non va mai sulle sezioni rosse (vetro, contorno, testata).
+
+L'Usato fa eccezione: è caratterizzato dall'azzurro ovunque compaia (schede formula e promo).
+
+## Hover delle card
+
+La card in focus emerge: si solleva di 6px, si ingrandisce dell'1,8% e ha un'ombra più ampia.
+
+Le altre card restano appena velate (sfocatura 1px, velo 2,5px).
+
+Non c'è nessun contorno colorato, tranne sulle sedi: in hover hanno un contorno rosso.
+
+## Titoli
+
+L'effetto acqua sui titoli è rimosso ovunque, hero comprese.
+
+## Aggiornamento 02/10 · azzurro su tutto il bianco
+
+Sulle sezioni bianche (`.t-bianca`) l'azzurro VI #0085cf (hover #0255b3) sostituisce il rosso in tutti i dettagli: testi accent, numeri, icone, indicatori, curvature, FAQ, CTA, stati attivi. Il rosso resta sulle sezioni rosse, sui componenti Noleggio (coppia Noleggio rosso / Usato azzurro) e nel contorno hover delle sedi.
+
+Strisce a icone: colonna titolo 200px + stacco 32px + colonne icona `clamp(100px, (100vw − 380px) / 8.3, 128px)` con gap 12px, il blocco è centrato nel contenitore (`justify-content:center`). Da 8 voci in su il titolo va sopra e le icone sotto, su 6 colonne. Sotto i 1180px il titolo va sopra e le icone si dispongono in `auto-fill, minmax(104px, 1fr)`.

@@ -227,3 +227,5 @@ Le card usano le foto reali di `assets/STATICHE` (copie web in `assets/images/ca
 - (01/10) Ricerca (D17): rimossa dal mockup la sezione « Pagine » dei risultati su richiesta; restano Macchine e Approfondimenti. Da confermare se le pagine vanno escluse anche dall'indice di ricerca o solo dalla visualizzazione.
 - (01/10) Pagine di servizi e azienda (D20): dove il corpo è un pannello a schede senza titolo proprio, il mockup usa come titolo il nome della pagina. Serve un titolo di sezione dal cliente.
 - (01/10) Pagine sede (D14): le tre foto della galleria sono segnaposto (sede di Osio Sotto, showroom, officina da `assets/STATICHE/Sito`), uguali per tutte le sedi. Servono le foto di ciascuna sede.
+- (02/10) Chi siamo · sezione « Le persone »: foto segnaposto ritagliate dagli scatti Socaf in `assets/STATICHE` (operatori al lavoro); nomi e ruoli sono segnaposto `[Nome Cognome]` / `[Ruolo]`. Servono foto ritratto e dati delle persone dal cliente.
+- (02/10) Testate seguite da una sezione a schede: il testo d'apertura è accorciato automaticamente alla frase che chiude entro ~220 caratteri. Da validare con il cliente il testo breve definitivo.

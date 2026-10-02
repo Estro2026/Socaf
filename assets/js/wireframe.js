@@ -792,6 +792,21 @@
     if (!P.macchine) drop('macchine');
     if (!P.sedi) drop('sedi');
     if (!P.form) drop('form'); else set('[data-p-form]', esc(P.form));
+    /* Chi siamo: sezione delle persone (fotografie quadrate, composizione editoriale).
+       Foto segnaposto ritagliate dagli scatti Socaf; nomi e ruoli da fornire (vedi open points) */
+    if (url === '/azienda/chi-siamo/') {
+      var rc = document.querySelector('[data-p-if="corpo"]');
+      if (rc) {
+        var pers = ['p1', 'p2', 'p4', 'p3', 'p6', 'p8'];
+        rc.insertAdjacentHTML('afterend', '<div class="row row-persone"><section class="block">' +
+          '<span class="block-id">BLOCCO · Le persone</span>' +
+          '<h2>Le persone</h2>' +
+          '<div class="persone">' + pers.map(function (p, i) {
+            return '<figure class="persona persona-' + (i + 1) + '"><img src="' + BASE + 'assets/images/persone/' + p + '.jpg" alt="" loading="lazy">' +
+              '<figcaption><b>[Nome Cognome]</b><span>[Ruolo]</span></figcaption></figure>';
+          }).join('') + '</div></section></div>');
+      }
+    }
     /* Lavora con noi: il modulo è quello di candidatura del sito attuale (campi e testi reali) */
     if (url === '/azienda/lavora-con-noi/') {
       var fc = document.querySelector('[data-p-if="form"] .form');
@@ -1586,6 +1601,29 @@
     });
   }
 
+  /* Testate delle pagine interne (non la home): il testo sotto il titolo è largo quanto il titolo.
+     Si misura la riga più lunga del titolo così com'è impaginato e la si usa come larghezza massima del testo. */
+  function testoComeTitolo() {
+    if (document.body.dataset.pagina === 'home') return;
+    var testate = [].slice.call(document.querySelectorAll('.row-testata > .block, .scheda-mosaico .intro-testata, .pagina-intro'));
+    if (!testate.length) return;
+    function misura() {
+      testate.forEach(function (b) {
+        var h = b.querySelector('h1'); if (!h) return;
+        var testi = [].slice.call(b.querySelectorAll(':scope > :is(.lede, p.claim, p:not([class]))'));
+        if (!testi.length) return;
+        testi.forEach(function (t) { t.style.maxWidth = ''; t.style.width = ''; });
+        var rg = document.createRange(); rg.selectNodeContents(h);
+        var w = 0; [].forEach.call(rg.getClientRects(), function (r) { w = Math.max(w, r.right - h.getBoundingClientRect().left); });
+        if (w > 0) testi.forEach(function (t) { var px = Math.max(Math.ceil(w), 380); t.style.setProperty('max-width', 'calc(100vw - 32px)', 'important'); t.style.setProperty('width', px + 'px', 'important'); });
+      });
+    }
+    misura();
+    window.addEventListener('load', misura);
+    window.addEventListener('resize', function () { clearTimeout(misura.t); misura.t = setTimeout(misura, 120); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(misura);
+  }
+
   function carteTilt() {
     var carte = [].slice.call(document.querySelectorAll('.card, .formula, .sede'));
     carte.forEach(function (c) {
@@ -1595,6 +1633,8 @@
         c.insertBefore(f, c.firstChild);
       }
     });
+    /* niente inclinazione 3D: la card in focus resta nitida (solo sollevamento via CSS) */
+    return;
     if (!carte.length || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return;
 
     carte.forEach(function (c) {
@@ -1984,7 +2024,7 @@
 
     /* contenitori di stato visibili (es. risultati della ricerca): le loro sezioni
        diventano sezioni della pagina, così valgono le stesse regole di tutte le altre */
-    document.querySelectorAll('.wrap > div:not(.row):not([hidden])').forEach(function (c) {
+    document.querySelectorAll('.wrap > div:not(.row):not([hidden]):not(.split)').forEach(function (c) {
       [].slice.call(c.querySelectorAll(':scope > .row')).forEach(function (r) { if (c.hasAttribute('data-results-full')) r.setAttribute('data-da-risultati', ''); c.parentNode.insertBefore(r, c); });
       if (!c.querySelector('.row')) c.style.display = 'none';
     });
@@ -2233,7 +2273,7 @@
     });
     righe.slice(1).forEach(function (r) {
       var h = r.querySelector('h2'), chips = r.querySelector('.chips');
-      if (!h || !chips || !(r.dataset.striscia || r.querySelector('[data-sub-siblings]') || /Le altre |Dove si usano|Le altre macchine|Gli altri settori|Su quali macchine|Altri settori|Le altre famiglie/i.test(h.textContent))) return;
+      if (!h || !chips || !(r.dataset.striscia || r.querySelector('[data-sub-siblings], [data-altri]') || /Cos.altro puoi noleggiare|Le altre |Dove si usano|Le altre macchine|Gli altri settori|Su quali macchine|Altri settori|Le altre famiglie/i.test(h.textContent))) return;
       r.classList.add('row-striscia');
       chips.classList.add('tiles', 'tiles-icone');
       chips.querySelectorAll('a, span.chip').forEach(function (c) {
@@ -2269,6 +2309,39 @@
 
     /* schema fisso, come in home: bianca a piena larghezza → vetro → contorno → bianca …
        (il modulo sta sempre sul vetro: se cade altrove, scambia con la precedente) */
+    var slugP = document.body.dataset.slug || '';
+    var testataB = righe[0].querySelector(':scope > .block');
+    /* Pronto intervento: le icone delle macchine entrano nella testata, sotto titolo e testo */
+    if (slugP === '/servizi/pronto-intervento/') {
+      var sI = righe.filter(function (r) { return r.classList.contains('row-striscia'); })[0];
+      if (sI && testataB) {
+        var tl = sI.querySelector('.tiles-icone'); tl.classList.add('testata-icone');
+        var hI = sI.querySelector('h2');
+        var gr = document.createElement('div'); gr.className = 'testata-macchine';
+        gr.innerHTML = '<p class="testata-macchine-label">' + (hI ? hI.textContent.trim() : '') + '</p>';
+        gr.appendChild(tl); testataB.appendChild(gr); sI.remove(); righe = righe.filter(function (r) { return r !== sI; });
+      }
+    }
+    /* testata con video (come l'hero della home) */
+    if (/^\/azienda\/(chi-siamo|lavora-con-noi)\/$/.test(slugP)) {
+      righe[0].classList.add('testata-video');
+      righe[0].insertAdjacentHTML('afterbegin', '<div class="hero-bg hero-vimeo testata-vimeo" aria-hidden="true">' +
+        '<iframe src="https://player.vimeo.com/video/1231598499?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1" title="" tabindex="-1" allow="autoplay; fullscreen; picture-in-picture" frameborder="0"></iframe></div>');
+      /* il video sale fin sotto l'header: la testata si allunga verso l'alto di quanto dista dalla cima della pagina */
+      var tv = righe[0], suTv = function () { tv.style.setProperty('--su', Math.max(0, tv.getBoundingClientRect().top + window.scrollY - (parseFloat(getComputedStyle(tv).marginTop) || 0)) + 'px'); };
+      suTv(); window.addEventListener('load', suTv); window.addEventListener('resize', suTv);
+    }
+    /* sezione a schede subito sotto la testata: testata a una sola colonna (titolo + testo)
+       e testo d'apertura più breve (si ferma alla fine della frase entro ~220 caratteri) */
+    if (righe[1] && righe[1].querySelector('.t-tabs') && testataB) {
+      righe[0].classList.add('testata-breve');
+      var ld = testataB.querySelector(':scope > .lede');
+      if (ld && ld.textContent.length > 240) {
+        var tx = ld.textContent.trim(), frasi = tx.match(/[^.!?]+[.!?]+/g) || [tx], out = '';
+        for (var fi = 0; fi < frasi.length; fi++) { if (out && (out + frasi[fi]).length > 220) break; out += frasi[fi]; }
+        ld.textContent = out.trim();
+      }
+    }
     var SCHEMA = [['t-bianca', 't-piena'], ['t-vetro'], ['t-outline']];
     /* le strisce a icone sono sempre a contorno: contano come il passo « contorno »
        dello schema, e dopo di loro si riparte dal bianco */
@@ -2302,6 +2375,12 @@
       } else passo = t + 1;
       SCHEMA[t].forEach(function (c) { r.classList.add(c); });
       prima = t;
+    });
+    /* sulle sezioni bianche il titoletto che ripete il titolo della testata è superfluo */
+    var h1T = ((righe[0].querySelector('h1') || {}).textContent || '').trim().toLowerCase();
+    righe.slice(1).forEach(function (r) {
+      if (!r.classList.contains('t-bianca') || !h1T) return;
+      r.querySelectorAll(':scope > .block > h2, :scope > .block > .testo-pagina > h2').forEach(function (h) { if (h.textContent.trim().toLowerCase() === h1T) h.remove(); });
     });
     righe[0].classList.add('t-piena');
     /* le tessere a piena larghezza escono dalla griglia fino ai bordi; --sx/--dx
@@ -2555,10 +2634,89 @@
     });
 
     carteTilt();
-    carteGelatina();
-    claimJelly();          /* per ultimo: i bersagli esistono tutti */
+    /* carteGelatina();  tolta: la lente liquida (filtro SVG) sfocava la card in focus */
+    /* effetto acqua sui titoli rimosso da tutto il sito (hero comprese) */
     /* ricercaScritta();  tolta: il testo guida della ricerca è fermo */
     decoraVI();
+    testoComeTitolo();
+    /* liste cliccabili più alte dello schermo (es. « Lavora con noi »): stesso layout a due colonne,
+       ma la lista scorre al suo interno (CSS .t-lunga), così il testo della voce resta sempre accanto.
+       Al clic, se l'inizio del testo non è in vista, la pagina lo porta sotto l'header. */
+    (function listeLunghe() {
+      function marca() {
+        [].forEach.call(document.querySelectorAll('.t-tabs'), function (T) {
+          var nav = T.querySelector('.t-nav'); if (!nav) return;
+          T.classList.remove('t-lunga');
+          var alt = nav.scrollHeight, lim = window.innerHeight - 180;
+          if (alt > lim) T.classList.add('t-lunga');
+        });
+      }
+      marca(); window.addEventListener('resize', function () { clearTimeout(marca.t); marca.t = setTimeout(marca, 150); });
+      document.addEventListener('scroll', function (e) {
+        var n = e.target.closest && e.target.closest('.t-lunga > .t-nav'); if (!n) return;
+        n.parentNode.classList.toggle('a-fondo', n.scrollTop + n.clientHeight >= n.scrollHeight - 4);
+      }, true);
+      document.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('.t-tabs [role=tab]'); if (!b) return;
+        var T = b.closest('.t-tabs'), hd = document.querySelector('.site-header');
+        var lim = (hd ? hd.getBoundingClientRect().bottom : 0) + 16;
+        requestAnimationFrame(function () {
+          var p = document.getElementById(b.getAttribute('aria-controls')); if (!p) return;
+          var t = p.getBoundingClientRect().top;
+          if (t < lim || t > window.innerHeight * 0.6) window.scrollBy({ top: t - lim, behavior: 'smooth' });
+        });
+      });
+    })();
+    document.body.classList.add('scena-pronta');
+    /* liste cliccabili fisse allo scroll: si fermano subito sotto l'header (misurato), così a riposo
+       restano allineate al titoletto del contenuto e scorrendo la sezione rimangono visibili */
+    (function stickyLista() {
+      var hd = document.querySelector('.site-header');
+      function quota() {
+        var b = hd ? Math.max(0, hd.getBoundingClientRect().bottom) : 0;
+        document.documentElement.style.setProperty('--lista-top', Math.round(b + 16) + 'px');
+      }
+      quota(); window.addEventListener('resize', quota); window.addEventListener('load', quota);
+      /* modulo della scheda macchina: sotto l'header se ci sta, altrimenti fermo con il fondo a 16px dal bordo */
+      var col = document.querySelector('.scheda-mosaico .sticky-col');
+      if (col) {
+        var mod = function () {
+          var b = hd ? Math.max(0, hd.getBoundingClientRect().bottom) + 16 : 16;
+          var t = Math.min(b, window.innerHeight - col.offsetHeight - 16);
+          document.documentElement.style.setProperty('--modulo-top', Math.round(t) + 'px');
+        };
+        mod(); window.addEventListener('resize', mod); window.addEventListener('load', mod);
+        if (window.ResizeObserver) new ResizeObserver(mod).observe(col);
+      }
+    })();
+    /* tutta la card è cliccabile (immagine compresa): apre il link della card.
+       I link e i pulsanti interni (telefono, mail, CTA secondarie) mantengono il loro comportamento. */
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button !== 0) return;
+      var c = e.target.closest('.card, .formula, .sede'); if (!c) return;
+      if (e.target.closest('a[href], button, input, select, textarea, label')) return;
+      var l = null; ['a.card-link[href]', 'a.formula-go[href]', 'a.btn-link[href]', '.card-name a[href]', 'a[href]:not([href^="tel:"]):not([href^="mailto:"])'].some(function (s) { return (l = c.querySelector(s)); });
+      if (!l) return;
+      if (e.ctrlKey || e.metaKey) window.open(l.href, '_blank'); else l.click();
+    });
+    document.querySelectorAll('.card, .formula, .sede').forEach(function (c) { if (c.querySelector('a[href]')) c.style.cursor = 'pointer'; });
+    /* testi a due colonne solo quando sono lunghi e c'è spazio: altrimenti una colonna */
+    (function colonne() {
+      var testi = [].slice.call(document.querySelectorAll('.t-pane .testo, body[data-slug^="/usato/"] .block .testo'));
+      function decidi() {
+        /* il testo continua sotto in una colonna; passa alla seconda solo se, su una colonna,
+           diventerebbe molto più alto della lista delle voci accanto (o di 560px se non c'è lista) */
+        testi.forEach(function (t) {
+          t.classList.remove('testo-colonne');
+          var w = t.getBoundingClientRect().width; if (!w) return;
+          var nav = t.closest('.t-tabs') && t.closest('.t-tabs').querySelector('.t-nav');
+          var lim = Math.max(nav ? nav.getBoundingClientRect().height : 0, 560) * 1.25;
+          t.classList.toggle('testo-colonne', w >= 760 && t.getBoundingClientRect().height > lim);
+        });
+      }
+      decidi(); window.addEventListener('resize', function () { clearTimeout(decidi.t); decidi.t = setTimeout(decidi, 150); });
+      document.addEventListener('click', function (e) { if (e.target.closest('[role=tab]')) setTimeout(decidi, 30); });
+    })();
 
 
     /* Ogni link interno punta al wireframe dell'indirizzo reale, istanza compresa */
