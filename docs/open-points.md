@@ -229,3 +229,4 @@ Le card usano le foto reali di `assets/STATICHE` (copie web in `assets/images/ca
 - (01/10) Pagine sede (D14): le tre foto della galleria sono segnaposto (sede di Osio Sotto, showroom, officina da `assets/STATICHE/Sito`), uguali per tutte le sedi. Servono le foto di ciascuna sede.
 - (02/10) Chi siamo · sezione « Le persone »: foto segnaposto ritagliate dagli scatti Socaf in `assets/STATICHE` (operatori al lavoro); nomi e ruoli sono segnaposto `[Nome Cognome]` / `[Ruolo]`. Servono foto ritratto e dati delle persone dal cliente.
 - (02/10) Testate seguite da una sezione a schede: il testo d'apertura è accorciato automaticamente alla frase che chiude entro ~220 caratteri. Da validare con il cliente il testo breve definitivo.
+- (02/10) Lavora con noi · prima voce della lista: il titolo della sezione su socaf.it è una frase lunga (« Chi entra in Socaf trova un ambiente fatto di sguardi… »). Nella lista serve un'etichetta breve da concordare con il cliente.

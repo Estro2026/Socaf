@@ -372,6 +372,93 @@
     setBar('/' + key + '/ · sottocategoria di ' + fam.nome);
   }
 
+  /* COPY UX delle pagine famiglia (documenti « D3 … copy per UX »): sostituisce i testi del wireframe
+     solo dove il documento li cambia. Le schede sono le prime sei sezioni del testo di approfondimento;
+     null = scheda invariata, h = null = titolo invariato. */
+  var COPY_UX = {
+    lavapavimenti: {
+      title: 'Lavapavimenti professionali e lavasciuga industriali | Socaf',
+      meta: 'Lavapavimenti professionali e lavasciuga pavimenti industriali: piccole, uomo a terra, uomo a bordo, combinate e i-mop. Nuove, a noleggio o usate.',
+      intro: 'Le lavapavimenti professionali Socaf lavano e asciugano in una sola passata: aspirano i liquidi e lasciano il pavimento pulito e asciutto. Silenziose e veloci, sono progettate per grandi superfici come magazzini, fabbriche e centri commerciali, in cinque tipologie, dalle piccole alle i-mop.',
+      h2Sub: 'Tipi di lavasciuga pavimenti',
+      h2Approf: 'Qual è la miglior lavapavimenti?',
+      alt: { 'lavapavimenti/lavapavimenti-combinate': 'Lavapavimenti combinate', 'lavapavimenti/i-mop': 'Lavasciuga i-mop Socaf' },
+      schede: [
+        { h: 'Le cinque tipologie di lavapavimenti professionali del catalogo Socaf', b: ['Tra le macchine per la pulizia Socaf trovi le lavapavimenti industriali adatte al tuo ambiente di lavoro. Scopri le lavapavimenti professionali piccole, uomo a terra, uomo a bordo, combinate e la lavasciuga i-mop.'] },
+        { h: null, b: ['Le lavapavimenti professionali piccole puliscono le superfici di piccole dimensioni. Compatte e leggere, si usano nelle abitazioni private e negli spazi commerciali di dimensioni limitate, come uffici, negozi, ristoranti e hotel, per la pulizia quotidiana. Lavano i pavimenti di cucine, bagni, corridoi e altre aree di passaggio, dove la pulizia manuale è faticosa e poco efficiente. Le dimensioni ridotte consentono di manovrarle negli spazi stretti e di raggiungere angoli e zone difficili da pulire con altri strumenti. L\'ambiente resta pulito e accogliente, e lascia a visitatori e clienti un\'impressione positiva.'] },
+        { h: null, b: ['Le lavapavimenti uomo a terra puliscono le ampie superfici, interne ed esterne. Coprono una grande area di pavimento in poco tempo: la potenza e le spazzole cilindriche, o gli accessori specifici, rimuovono lo sporco ostinato, le macchie e i liquidi. Il tempo di pulizia si riduce, le risorse si usano meglio e la produttività complessiva aumenta. Chi le usa lavora con comodità: i comandi sono intuitivi e il sistema di guida ergonomico permette di manovrarle con facilità e con meno affaticamento. Il progetto riduce rumore e vibrazioni e rende più confortevole l\'ambiente di lavoro.'] },
+        { h: null, b: ['Le lavapavimenti uomo a bordo uniscono la potenza di pulizia di una lavapavimenti industriale alla mobilità di un veicolo guidato da un operatore. Servono per il lavaggio e l\'asciugatura quotidiani. La configurazione a bordo copre un\'ampia area in tempi rapidi e riduce al minimo i tempi di pulizia. Alcuni modelli sono equipaggiati con sistemi di spazzamento, aspirazione delle foglie e raccolta dei rifiuti: la pulizia delle aree esterne risulta completa e integrata. Le aree pubbliche restano ordinate e richiedono meno interventi aggiuntivi, con un aspetto complessivo più curato.'] },
+        { h: null, b: ['Le lavapavimenti combinate Socaf spazzano e lavano in un\'unica passata. Le spazzole rotanti e il sistema di erogazione di acqua e detergente rimuovono lo sporco e i residui dalla superficie e lavano il pavimento nello stesso passaggio. Si usano su diversi tipi di pavimentazione e su superfici di dimensioni diverse, dai piccoli spazi interni alle ampie aree esterne.'] },
+        { h: null, b: ['La i-mop unisce la manovrabilità di un mocio alla potenza di pulizia di una lavapavimenti industriale. Leggera e agile, raggiunge gli angoli stretti, le aree di difficile accesso e gli spazi ristretti, anche dove gli strumenti tradizionali non arrivano. Lavora con due spazzole controrotanti, lava e asciuga fino al bordo e pulisce intorno e sotto gli ostacoli senza interruzioni. Il quadrante dei comandi è semplice e intuitivo. La modalità ECO riduce il consumo d\'acqua: nella 36 la riduzione è del 40%. I serbatoi hanno un\'infusione antibatterica nella plastica, che riduce gli odori. Quando non è in funzione, la i-mop occupa poco spazio e si ripone nell\'apposito armadio. La 36 è la più piccola e maneggevole della gamma i-mop, con pista di lavaggio da 36 cm e pressione delle spazzole di 14 kg: serve gli spazi ridotti e le pulizie dinamiche. La XL ha una pista da 46 cm e una pressione di 22,5 kg, e si manovra con una sola mano. La XXL ha una pista da 62 cm e una pressione di 32 kg. La produttività pratica è di 700-900 m²/h nella 36, 1.000-1.300 nella XL e 1.200-1.800 nella XXL.'] }
+      ],
+      promo: { nolAlt: 'Consegna di una lavapavimenti Socaf a noleggio', usaAlt: 'Lavapavimenti usate nello showroom Socaf' }
+    },
+    spazzatrici: {
+      title: 'Spazzatrice professionale e motoscopa | Socaf',
+      meta: 'Spazzatrice e motoscopa per pavimenti interni ed esterni: uomo a terra, uomo a bordo e stradali. Nuove, a noleggio o usate. Richiedi consulenza.',
+      intro: 'La spazzatrice Socaf raccoglie polveri, detriti e rifiuti da superfici interne ed esterne in una sola passata e senza sollevare polvere. Tre tipologie, dalla motoscopa a spinta alle spazzatrici stradali.',
+      schede: [
+        { h: null, b: ['Le nostre spazzatrici e le nostre motoscope trattengono facilmente i residui di sporco e la polvere e velocizzano fino a 40 volte i tempi di pulizia. Rispetto a una spazzatrice domestica sono macchine più vantaggiose.', 'Socaf offre consulenza per identificare la spazzatrice adatta alle esigenze di ogni cliente. Le schede seguenti descrivono le caratteristiche principali delle nostre spazzatrici, per aiutarti a scegliere la macchina giusta per pulire i tuoi pavimenti.'] },
+        { h: 'Quali sono le caratteristiche principali di una motoscopa industriale?', b: ['Le spazzatrici e le motoscope industriali sono macchine essenziali per la pulizia e la manutenzione di aree industriali, commerciali e urbane.', 'Sono progettate per rimuovere detriti, polvere, rifiuti e altre particelle di sporco da pavimenti, strade e altre superfici estese.', 'Dalle loro caratteristiche dipendono l\'efficienza e l\'adattabilità alle diverse esigenze di pulizia.'] },
+        { h: null, b: ['Le spazzatrici hanno dimensioni e design specifici per affrontare ampie superfici e garantire una pulizia efficiente.', 'Le configurazioni sono tre: spazzatrici uomo a terra, spazzatrici uomo a bordo e spazzatrici stradali.', 'Il design facilita la manovra e la copertura dell\'area da pulire.'] },
+        { h: null, b: ['Le spazzatrici sono dotate di un sistema di spazzolatura che varia a seconda del modello.', 'Le spazzole hanno setole dure o morbide, a seconda delle esigenze di pulizia.', 'Ruotano a velocità elevata e spazzano via sporco, detriti e rifiuti dal pavimento.'] },
+        { h: null, b: ['Le spazzatrici sono dotate di un serbatoio di raccolta (raccoglitore) o di una cassetta, che contiene una notevole quantità di sporco e detriti.', 'La capacità varia in base al modello. Una capacità maggiore riduce la frequenza di svuotamento e permette di lavorare più a lungo senza interruzioni.'] },
+        { h: null, b: ['Le spazzatrici sono dotate di un sistema di filtrazione che trattiene le particelle di polvere e le tiene fuori dall\'ambiente.', 'Tra i filtri ci sono quelli a cartuccia e quelli a sacco, scelti in base alle esigenze dell\'applicazione. La TK 706 ET ha un filtro a pannello da 2,9 m², pulito dallo scuotifiltro elettrico.', 'Un\'adeguata filtrazione migliora la qualità dell\'aria nell\'ambiente di lavoro.'] }
+      ],
+      promo: { nolAlt: 'Consegna di una spazzatrice Socaf a noleggio', usaAlt: 'Spazzatrici in showroom Socaf' }
+    },
+    idropulitrici: {
+      title: 'Idropulitrici professionali ad alta pressione | Socaf',
+      meta: 'Idropulitrici professionali Socaf: idropulitrice ad alta pressione a freddo o ad acqua calda, con motore elettrico o a scoppio. Nuove, a noleggio o usate.',
+      intro: 'Le idropulitrici professionali Socaf rimuovono sporco tenace, grasso e incrostazioni da ogni superficie. Sono a freddo o ad acqua calda, elettriche o autonome a scoppio, mobili o a parete.',
+      h2Approf: 'Come scegliere un\'idropulitrice',
+      schede: [
+        { h: null, b: ['Le idropulitrici professionali si dividono in più tipologie.', 'Le schede seguenti ne descrivono le caratteristiche e gli ambiti di utilizzo.'] },
+        { h: null, b: ['L\'idropulitrice professionale ad acqua calda è una macchina versatile e potente, che offre numerosi vantaggi per la pulizia in ambienti industriali, commerciali e domestici. Grazie alla combinazione di acqua calda e alta pressione, queste macchine affrontano lo sporco più ostinato e le macchie difficili da rimuovere.',
+          'Le caratteristiche principali sono cinque: acqua calda ad alta pressione, pressione regolabile, temperatura regolabile, serbatoio di combustibile, robustezza e durata. Un sistema di riscaldamento genera acqua ad alta temperatura, che viene poi spruzzata ad alta pressione: questa combinazione scioglie lo sporco, il grasso e le altre incrostazioni ostinate con maggiore facilità rispetto a un\'idropulitrice a freddo. Un regolatore consente di adattare la pressione dell\'acqua alle esigenze specifiche di pulizia: permette di affrontare diversi tipi di sporco e di proteggere le superfici più delicate dai danni di una pressione eccessiva.',
+          'Anche la temperatura dell\'acqua è regolabile: si imposta il valore adatto alla pulizia da eseguire, e l\'acqua calda sgrassa e rimuove il grasso in modo più efficace dell\'acqua fredda. Poiché l\'acqua viene riscaldata, la macchina ha un serbatoio di gasolio che alimenta il sistema di riscaldamento e mantiene costante la temperatura dell\'acqua durante l\'utilizzo. Le idropulitrici ad acqua calda sono costruite con materiali resistenti, che garantiscono la durata e la resistenza necessarie in ambienti impegnativi: la progettazione per l\'utilizzo professionale assicura prestazioni affidabili e una lunga durata nel tempo.'] },
+        { h: null, b: ['L\'idropulitrice professionale ad acqua calda si usa in moltissimi contesti. Nel settore industriale è ampiamente utilizzata per la pulizia di macchinari pesanti, attrezzature industriali, pavimenti, strutture e aree di lavoro. La capacità di rimuovere lo sporco e il grasso resistenti è particolarmente utile in ambienti come officine meccaniche, industrie alimentari, cantieri e impianti chimici.',
+          'Negli ambienti commerciali, come ristoranti, hotel e strutture sanitarie, l\'idropulitrice rimuove dai pavimenti e da qualsiasi altra superficie i residui di cibo, lo sporco, i batteri e i germi. Nelle autofficine si usa nel lavaggio auto e nel settore dei trasporti: la temperatura elevata dell\'acqua scioglie lo sporco ostinato e il grasso sui veicoli e rende più efficiente la pulizia di autocarri, furgoni, macchine agricole e mezzi pesanti.',
+          'Per l\'uso esterno, cioè la pulizia di facciate, muri, persiane e altre superfici esterne, le idropulitrici professionali ad acqua calda per pulizia esterna sono la soluzione adatta: con la potenza regolabile e gli accessori appositi rimuovono lo sporco più tenace senza danneggiare le superfici. Per l\'uso domestico, l\'idropulitrice professionale ad acqua calda pulisce terrazze, cortili, piscine, pavimenti, barbecue e altre superfici esterne che richiedono una pulizia profonda e accurata.'] },
+        { h: null, b: ['A differenza dell\'idropulitrice professionale ad acqua calda, l\'idropulitrice a freddo utilizza l\'acqua a temperatura ambiente per rimuovere lo sporco e le macchie. Le idropulitrici a freddo sono dotate di un regolatore di pressione, che permette di adattare la pressione dell\'acqua in base alle esigenze specifiche di pulizia.',
+          'Le idropulitrici a freddo sono realizzate con materiali di qualità, resistenti e duraturi: l\'apparecchiatura è in grado di sopportare un utilizzo intenso e prolungato senza subire danni.',
+          'Anche le idropulitrici a freddo si usano in più contesti: il settore domestico, il settore commerciale, il settore industriale e il settore agricolo.'] },
+        { h: null, b: ['Le idropulitrici professionali con motore elettrico offrono facilità d\'uso e manutenzione ridotta. Richiedono una fonte di alimentazione elettrica e sono adatte a utilizzi domestici e commerciali di piccola scala.',
+          'Le idropulitrici professionali con motore a scoppio sono alimentate a benzina o diesel. Si usano dove non è disponibile una fonte di alimentazione elettrica, come in zone rurali o cantieri edili.',
+          'L\'idropulitrice professionale con motore trifase è progettata per lavori intensivi in ambito industriale. Questi modelli offrono una potenza significativa e sono indicati per l\'uso prolungato in ambienti di grande scala.'] },
+        { h: null, b: ['Il costo medio e la durata media di un\'idropulitrice dipendono da più fattori: la qualità del prodotto, la marca, il modello, la frequenza e l\'intensità dell\'uso e la manutenzione regolare.', 'Valutare insieme questi aspetti permette di capire meglio il costo e la durata di un\'idropulitrice.'] }
+      ],
+      /* alt delle immagini noleggio/usato invariati */
+      promo: {}
+    }
+  };
+  /* promo noleggio/usato: il copy UX vale per tutte le famiglie che hanno un documento */
+  var COPY_UX_PROMO = { nolKicker: 'Assistenza inclusa', nolH: 'Anche a noleggio', nolP: 'Noleggio a breve o lungo periodo, con consegna inclusa. Ritiro e consegna da tutte e cinque le sedi.',
+    usaKicker: 'Garanzia 3-12 mesi', usaH: 'Anche usata', usaP: 'Ricondizionate e controllate prima della consegna. Valutiamo e ritiriamo la tua macchina usata.' };
+  function applicaCopyUx(key) {
+    var C = COPY_UX[key]; if (!C) return null;
+    var T = (window.SOCAF_TESTI || {})['/' + key + '/'];
+    if (T && T.s && C.schede) C.schede.forEach(function (sc, i) {
+      if (!sc || !T.s[i]) return;
+      if (sc.h) T.s[i].h = sc.h;
+      if (sc.b) T.s[i].b = sc.b;
+    });
+    /* SEO: nel codice (head) e nelle note DEV */
+    var hd = document.head;
+    [['title', C.title], ['description', C.meta]].forEach(function (m) {
+      var el = hd.querySelector('meta[name="' + m[0] + '"]');
+      if (!el) { el = document.createElement('meta'); el.name = m[0]; hd.appendChild(el); }
+      el.content = m[1];
+    });
+    var primo = document.querySelector('.devnote');
+    if (primo) primo.insertAdjacentHTML('beforebegin', '<div class="devnote"><div class="dn-h">DEV NOTE — SEO della famiglia (copy UX D3)</div><dl>' +
+      '<dt>Title</dt><dd>' + esc(C.title) + '</dd><dt>Meta description</dt><dd>' + esc(C.meta) + '</dd>' +
+      '<dt>Dove</dt><dd>Plugin SEO (Yoast / Rank Math) della pagina di archivio della famiglia. Nel mockup sono anche nell\'<code>&lt;head&gt;</code>, generati dallo script.</dd>' +
+      '<dt>Alt delle immagini</dt><dd>Card delle tipologie: nome della tipologia' + (C.alt ? ' (eccezioni: ' + Object.keys(C.alt).map(function (k) { return '«' + esc(C.alt[k]) + '»'; }).join(', ') + ')' : '') +
+      '. Noleggio: «' + esc(C.promo.nolAlt || 'Consegna di una macchina Socaf a noleggio') + '». Usato: «' + esc(C.promo.usaAlt || 'Macchine nello showroom Socaf') + '».</dd></dl></div>');
+    return C;
+  }
+
   function renderFamiglia() {
     var host = document.querySelector('[data-tpl="famiglia"]');
     if (!host || !CAT) return;
@@ -379,14 +466,15 @@
     var f = CAT.FAMIGLIE[key]; if (!f) { key = 'lavapavimenti'; f = CAT.FAMIGLIE[key]; }
     var subs = CAT.sottoDiFamiglia(key);
     FONTE = '/' + key + '/';
+    var C = applicaCopyUx(key) || {};
 
     set('[data-fam-crumb]', esc(f.nome));
     set('[data-fam-h1]', esc(f.h1));
-    set('[data-fam-intro]', esc(f.intro));
-    set('[data-fam-h2]', 'Le tipologie di ' + esc(f.nome.toLowerCase()));
+    set('[data-fam-intro]', esc(C.intro || f.intro));
+    set('[data-fam-h2]', C.h2Sub ? esc(C.h2Sub) : 'Le tipologie di ' + esc(f.nome.toLowerCase()));
     set('[data-fam-subs]', subs.map(function (sk) {
       var s = CAT.SOTTO[sk], n = (CAT.MACCHINE[sk] || []).length;
-      return '<article class="card">' + (FOTO_SOTTO[sk] ? '<div class="card-media foto"><img src="' + BASE + 'assets/images/categorie/sub-' + sk.split("/")[1] + '.jpg" alt="' + esc(s.h1) + '" loading="lazy"></div>' : '<div class="card-media ph ph-wide">Immagine sottocategoria</div>') +
+      return '<article class="card">' + (FOTO_SOTTO[sk] ? '<div class="card-media foto"><img src="' + BASE + 'assets/images/categorie/sub-' + sk.split("/")[1] + '.jpg" alt="' + esc((C.alt && C.alt[sk]) || s.h1) + '" loading="lazy"></div>' : '<div class="card-media ph ph-wide">Immagine sottocategoria</div>') +
         '<div class="card-body"><span class="card-name">' + esc(s.h1) + '</span>' +
         '<span class="card-meta">' + n + (n === 1 ? ' macchina' : ' macchine') + '</span>' +
         '<a class="card-link" href="' + route('/' + sk + '/') + '" data-url="/' + sk + '/">Vedi tutte</a></div></article>';
@@ -396,13 +484,13 @@
     subs.forEach(function (sk) { tutte = tutte.concat(CAT.MACCHINE[sk] || []); });
     set('[data-fam-top]', tutte.slice(0, 6).map(cardMacchina).join(''));
     set('[data-fam-top-title]', 'Le ' + esc(f.nome.toLowerCase()) + ' più richieste');
-    set('[data-fam-approf]', 'Come scegliere ' + (f.nome === 'Robot' ? 'un robot per la pulizia' : 'una ' + esc(f.nome.toLowerCase().replace(/i$/, 'e'))));
+    set('[data-fam-approf]', C.h2Approf ? esc(C.h2Approf) : 'Come scegliere ' + (f.nome === 'Robot' ? 'un robot per la pulizia' : 'una ' + esc(f.nome.toLowerCase().replace(/i$/, 'e'))));
     set('[data-fam-words]', f.testoLungo ? 'LUNGHEZZA PREVISTA · 800–1200 PAROLE' : 'LUNGHEZZA PREVISTA · 250–350 PAROLE — testo breve, smistamento');
     set('[data-fam-others]', Object.keys(CAT.FAMIGLIE).map(function (k) {
       return k === key ? '<span class="chip" aria-current="true">' + esc(CAT.FAMIGLIE[k].nome) + '</span>'
                        : '<a class="chip" href="' + route('/' + k + '/') + '" data-url="/' + k + '/">' + esc(CAT.FAMIGLIE[k].nome) + '</a>';
     }).join(''));
-    promo(f, '[data-fam-promo]');
+    promo(f, '[data-fam-promo]', C.promo ? C : null);
     document.title = 'D3 · ' + f.h1 + ' — Wireframe Socaf';
     setBar('/' + key + '/ · una delle 6 famiglie');
   }
@@ -452,19 +540,19 @@
     'lavapavimenti/lavapavimenti-uomo-bordo': 1, 'lavapavimenti/lavapavimenti-combinate': 1, 'lavapavimenti/i-mop': 1,
     'spazzatrici/spazzatrici-uomo-terra': 1, 'spazzatrici/spazzatrici-uomo-bordo': 1,
     'idropulitrici/idropulitrici-ad-acqua-fredda': 1 };
-  function promo(f, sel) {
+  function promo(f, sel, C) {
     var el = document.querySelector(sel); if (!el) return;
-    var h = '';
+    var h = '', P = C ? COPY_UX_PROMO : null, X = C ? C.promo : {};
     if (f.noleggio) {
-      h += '<div class="formula formula-nol"><span class="formula-art foto"><img src="' + BASE + 'assets/images/categorie/formula-noleggio.jpg" alt="Consegna di una macchina Socaf a noleggio" loading="lazy"></span><span class="formula-body">' +
-        '<span class="kicker">Formula · noleggio</span><span class="formula-h">Si può noleggiare</span>' +
-        '<span class="formula-p">Formule brevi o pluriennali, assistenza e consegna incluse. Ritiro da tutte e cinque le sedi.</span>' +
+      h += '<div class="formula formula-nol"><span class="formula-art foto"><img src="' + BASE + 'assets/images/categorie/formula-noleggio.jpg" alt="' + esc(X.nolAlt || 'Consegna di una macchina Socaf a noleggio') + '" loading="lazy"></span><span class="formula-body">' +
+        '<span class="kicker">' + (P ? P.nolKicker : 'Formula · noleggio') + '</span><span class="formula-h">' + (P ? P.nolH : 'Si può noleggiare') + '</span>' +
+        '<span class="formula-p">' + (P ? P.nolP : 'Formule brevi o pluriennali, assistenza e consegna incluse. Ritiro da tutte e cinque le sedi.') + '</span>' +
         a('/noleggio/' + keyOf(f) + '/', 'Noleggio ' + f.nome.toLowerCase(), 'formula-go') + '</span></div>';
     }
     if (f.usato) {
-      h += '<div class="formula formula-usa"><span class="formula-art foto"><img src="' + BASE + 'assets/images/categorie/formula-usato.jpg" alt="Macchine nello showroom Socaf" loading="lazy"></span><span class="formula-body">' +
-        '<span class="kicker">Formula · usato</span><span class="formula-h">Esiste anche usata</span>' +
-        '<span class="formula-p">Ricondizionate e garantite da 3 a 12 mesi, con supervalutazione della macchina che hai già.</span>' +
+      h += '<div class="formula formula-usa"><span class="formula-art foto"><img src="' + BASE + 'assets/images/categorie/formula-usato.jpg" alt="' + esc(X.usaAlt || 'Macchine nello showroom Socaf') + '" loading="lazy"></span><span class="formula-body">' +
+        '<span class="kicker">' + (P ? P.usaKicker : 'Formula · usato') + '</span><span class="formula-h">' + (P ? P.usaH : 'Esiste anche usata') + '</span>' +
+        '<span class="formula-p">' + (P ? P.usaP : 'Ricondizionate e garantite da 3 a 12 mesi, con supervalutazione della macchina che hai già.') + '</span>' +
         a('/usato/' + f.usato + '/', f.nome + ' usate', 'formula-go') + '</span></div>';
     }
     if (!h) { var w = el.closest('.row') || el; w.remove(); return; }
@@ -1257,7 +1345,7 @@
     function titolo(r) { var h = r.querySelector('h2'); return h ? h.textContent : ''; }
     function trova(re) { for (var i = 0; i < righe.length; i++) if (re.test(titolo(righe[i]))) return righe[i]; return null; }
     var rAzzurro = document.querySelector(".row[data-mood=azzurro]") || trova(/Dalla fusione/);
-    var rRosso = document.querySelector(".row[data-mood=rosso]") || trova(/marchi del gruppo/);
+    var rRosso = document.querySelector(".row[data-mood=rosso]") || trova(/I nostri marchi|marchi del gruppo/);
     var atteso = false;
     function guarda() {
       atteso = false;
@@ -1285,7 +1373,7 @@
     guarda();
 
     /* 2 · materia che prosegue verso il basso dietro noleggio e settori */
-    var rMateria = trova(/Non serve per forza/);
+    var rMateria = trova(/Noleggio e usato garantito|Non serve per forza/);
     if (rMateria) {
       rMateria.style.position = "relative";
       rMateria.insertAdjacentHTML("afterbegin", "<span class=\"materia\" aria-hidden=\"true\"></span>");
@@ -2666,6 +2754,38 @@
           if (t < lim || t > window.innerHeight * 0.6) window.scrollBy({ top: t - lim, behavior: 'smooth' });
         });
       });
+    })();
+    /* niente parola sola sull'ultima riga, in ogni browser: le ultime due parole di titoli e testi
+       sono unite da uno spazio indivisibile; i trattini dell'ultima parola (« i-mop ») non spezzano */
+    (function nienteVedove() {
+      document.querySelectorAll('h1, h2, h3, h4, p, li, dd, .card-desc, .formula-p, .card-name, .formula-h').forEach(function (el) {
+        if (el.closest('.devnote, script, style, [contenteditable], .row-striscia, .row-settori, .striscia-scheda')) return;
+        var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), n, last = null;
+        while ((n = w.nextNode())) if (n.nodeValue.trim()) last = n;
+        if (!last) return;
+        var v = last.nodeValue.replace(/\s+$/, ''), coda = last.nodeValue.slice(v.length);
+        var i = v.lastIndexOf(' ');
+        if (i < 0 || el.textContent.trim().split(/\s+/).length < 3) return;
+        var parola = v.slice(i + 1).replace(/-/g, '‑');
+        last.nodeValue = v.slice(0, i) + ' ' + parola + coda;
+      });
+    })();
+    /* strisce a icone: il titolo su più righe si stringe alla sua riga più lunga,
+       così lo stacco dalle icone è sempre quello previsto (40px) e non resta un vuoto */
+    (function titoliStrisce() {
+      var hs = [].slice.call(document.querySelectorAll('.row-striscia > .block > h2, .row-settori > .block > h2'));
+      function stringi() {
+        hs.forEach(function (h) {
+          h.style.removeProperty('width');
+          var rg = document.createRange(); rg.selectNodeContents(h);
+          var x0 = h.getBoundingClientRect().left, w = 0;
+          [].forEach.call(rg.getClientRects(), function (r) { w = Math.max(w, r.right - x0); });
+          if (w > 0) h.style.setProperty('width', Math.ceil(w) + 'px', 'important');
+        });
+      }
+      stringi(); window.addEventListener('load', stringi);
+      window.addEventListener('resize', function () { clearTimeout(stringi.t); stringi.t = setTimeout(stringi, 120); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(stringi);
     })();
     document.body.classList.add('scena-pronta');
     /* liste cliccabili fisse allo scroll: si fermano subito sotto l'header (misurato), così a riposo

@@ -8351,3 +8351,36 @@ body.scheda-mosaico .split .block.striscia-scheda:is(#_m,*):is(#_m2,*) .tile{fle
   body.scheda-mosaico:is(#_f,*) .sticky-col .form :is(input:not([type=checkbox]):not([type=radio]),select){height:44px !important;padding-top:0 !important;padding-bottom:0 !important}
   body.scheda-mosaico:is(#_f,*) .sticky-col .form textarea{min-height:84px !important;height:84px !important}
   body.scheda-mosaico:is(#_f,*) .sticky-col .form .field label{margin-bottom:4px !important}}
+
+/* contatori della hero: il valore (es. « Dal 1982 ») non va mai a capo */
+body[data-pagina="home"] .hero-stats > div > b{white-space:nowrap !important}
+/* etichette dei contatori su due righe (« macchine a / catalogo »), mai su una sola */
+body[data-pagina="home"] .hero-stats > div > span{display:block;max-width:none;white-space:nowrap}
+
+/* ================= 216. Niente parole sole sull'ultima riga (vedove/orfane), su tutto il sito =================
+   titoli: righe bilanciate; testi: impaginazione « pretty », che evita l'ultima parola isolata */
+:is(h1,h2,h3,h4,.kicker,.card-name,.formula-h,.city,.tile > span,[role=tab]){text-wrap:balance}
+:is(p,li,dd,.lede,.card-desc,.formula-p,.testo,figcaption,.need-info span,label.consent){text-wrap:pretty}
+
+/* ================= 217. Strisce: il titolo non invade le icone =================
+   colonna del titolo larga quanto serve (fino a 260px), stacco fisso dalle icone, titolo su righe bilanciate */
+@media (min-width:1181px){
+  :is(#_s,.row-settori,.row-striscia):is(#_s6,*) > .block{grid-template-columns:fit-content(260px) auto !important;column-gap:clamp(40px,4vw,64px) !important}
+  :is(#_s,.row-settori,.row-striscia):is(#_s6,*) > .block > h2{max-width:260px !important;width:max-content !important;text-wrap:balance !important;overflow-wrap:normal;hyphens:none}}
+/* titolo che riempie la sua colonna (niente vuoti dovuti al bilanciamento), stacco 40px, icone un po' più strette così 7 voci entrano */
+:root{--str-col:clamp(96px,calc((100vw - 460px) / 8.3),124px)}
+@media (min-width:1181px){
+  :is(#_s,.row-settori,.row-striscia):is(#_s6,*):is(#_s7,*) > .block{column-gap:40px !important}
+  :is(#_s,.row-settori,.row-striscia):is(#_s6,*):is(#_s7,*) > .block > h2{width:auto !important;text-wrap:wrap !important}}
+
+/* ================= 218. Card Noleggio/Nuova (rossa) e Usato (azzurra): stessi colori ovunque, anche su fondo rosso
+   superficie bianca-grigia opaca come nella scheda prodotto, pulsante tondo colorato con freccia bianca ================= */
+:is(#_n,.promo-nol,.promo-usa):is(#_n2,*):is(#_n4,*){background:linear-gradient(180deg,#f7f8f8,#eff1f2) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+:is(#_n,.promo-nol,.promo-usa):is(#_n2,*):is(#_n4,*) p{color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+:is(#_n,.promo-usa):is(#_n2,*):is(#_n4,*)::after{content:"" !important;background-color:#0085cf !important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;background-position:center !important;background-size:18px !important;box-shadow:0 10px 20px -12px rgba(2,85,179,.7) !important}
+:is(#_n,.promo-usa):is(#_n2,*):is(#_n4,*):hover::after{background-color:#0255b3 !important}
+
+/* voci delle liste cliccabili: non si comprimono mai (nella lista scorrevole si sovrapponevano) */
+:is(#_t2,body) .t-tabs > .t-nav > [role=tab]{flex-shrink:0 !important;height:auto !important;min-height:56px}
