@@ -452,6 +452,27 @@
       ],
       /* solo il blocco usato (niente noleggio per gli aspiratori); alt invariato */
       promo: {}
+    },
+    robot: {
+      title: 'Robot pulizia pavimenti e pulizia industriale | Socaf',
+      meta: 'Robot pulizia pavimenti Socaf: lavano, aspirano e spazzano in autonomia. Per industria, logistica, retail e ospedali. Richiedi una consulenza.',
+      intro: 'Robot pulizia pavimenti Socaf: lavano o spazzano senza operatore a bordo, programmabili e integrabili nei processi di pulizia industriale.',
+      topTitle: 'I robot più richiesti',
+      schede: [
+        { h: null, b: ['I robot Socaf automatizzano la pulizia dei pavimenti e portano tre vantaggi: più tecnologia in azienda, più spazio per le attività strategiche, più prestigio e marketing.',
+          'La pulizia robotizzata serve sia alle aziende manifatturiere sia alle imprese di servizi: in modalità automatica il robot lavora senza operatore a bordo.'] },
+        { h: null, b: ['La pulizia degli ambienti non è direttamente legata alla produzione.', 'Affidarla ai robot libera la forza lavoro, che può dedicarsi ad altre attività.'] },
+        { h: null, b: ['Le soluzioni robotiche automatizzano la pulizia industriale convenzionale e aumentano il valore di innovazione e l\'immagine dell\'azienda. Il ritorno d\'immagine nasce da livelli di pulizia industriale elevati e costanti.',
+          'Il parco macchine Socaf comprende gli ECOBOT, lavasciuga robot che aspirano, lavano e asciugano. Adatti a molteplici applicazioni, sono ideali dove si pulisce di frequente e con alto traffico pedonale: industria, ospedali, logistica, scuole e istituti, aeroporti, retail, centri commerciali.'] },
+        { h: null, b: ['La programmazione è facile e intuitiva e si fa direttamente a bordo macchina. L\'utilizzo è duplice, automatico o manuale, e si regolano tutti i parametri di pulizia: pressione e rotazione delle spazzole, quantità d\'acqua, velocità di avanzamento.',
+          'Il riciclo dell\'acqua permette di coprire aree più estese e riduce l\'utilizzo. I cicli di lavaggio si programmano anche da remoto.',
+          'Ogni robot rileva gli ostacoli lungo il percorso con sensori laser e telecamere di profondità.'] },
+        { h: null, b: ['Phantas integra 4 modalità di pulizia dei pavimenti in un unico robot all-in-one.'] },
+        { h: null, b: ['Phantas è un robot agile e dal design compatto: pulisce in spazi stretti, in punti difficili da raggiungere e lungo i bordi.',
+          'Con la tecnologia "deep learning" identifica i tipi di pavimento e riconosce gli ostacoli lungo il percorso. La funzione "spot cleaning" rileva in autonomia le macchie di sporco.',
+          'Con workstation e IoT l\'intervento umano si riduce al minimo.'] }
+      ],
+      promo: {}
     }
   };
   /* promo noleggio/usato: il copy UX vale per tutte le famiglie che hanno un documento */
