@@ -430,6 +430,28 @@
       ],
       /* alt delle immagini noleggio/usato invariati */
       promo: {}
+    },
+    aspiratori: {
+      title: 'Aspirapolvere industriale e aspiraliquidi | Socaf',
+      meta: 'Aspirapolvere industriale e aspiraliquidi Socaf per polveri, liquidi, olio e trucioli, fino alle versioni ATEX. Nuovi o usati. Richiedi consulenza.',
+      intro: 'Aspirapolvere industriale e aspiraliquidi Socaf: aspirano polveri, liquidi, olio e trucioli. Le versioni certificate ATEX servono per aree a rischio esplosione.',
+      h2Approf: 'Come scegliere un aspiratore',
+      topTitle: 'Gli aspiratori più richiesti',
+      schede: [
+        { h: null, b: ['Le schede seguenti descrivono le caratteristiche e gli ambiti di utilizzo dell\'aspirapolvere industriale.'] },
+        { h: null, b: ['L\'aspirapolvere industriale viene utilizzato in moltissimi ambiti. Nel settore industriale è ampiamente utilizzato per la pulizia di fabbriche, officine, magazzini e siti di produzione. Queste macchine rimuovono polvere, detriti, liquidi e altri materiali presenti in ambienti ad alta intensità di lavoro.',
+          'Nelle attività commerciali, come ristoranti, hotel, negozi e uffici, l\'aspirapolvere industriale serve a mantenere pulito l\'ambiente: rimuove sporco, residui di cibo, peli e polvere da pavimenti, tappeti, sedie, divani e altre superfici. Nel settore sanitario viene utilizzato in ospedali, cliniche e strutture sanitarie, per la pulizia delle stanze dei pazienti e di altre aree.',
+          'L\'aspirapolvere industriale è impiegato anche nel settore dell\'automotive, per la pulizia interna di veicoli come automobili, camion, autobus e treni: rimuove sporco, briciole, polvere e peli dagli interni dei veicoli, inclusi tappeti, sedili, pannelli e vani di stivaggio. Nel settore edile, nell\'ambito delle attività di costruzione e ristrutturazione, rimuove la polvere di cantiere e i detriti derivanti dai lavori e mantiene pulito l\'ambiente di lavoro durante il processo di costruzione.'] },
+        { h: null, b: ['Prima di acquistare un aspirapolvere industriale è importante valutare due aspetti.', 'Sono il prezzo e la durata media dell\'apparecchio.'] },
+        { h: null, b: ['Il prezzo di un aspirapolvere industriale varia in base al marchio, alle caratteristiche specifiche del modello e alle dimensioni dell\'apparecchio. Gli aspiratori di fascia alta sono progettati per utilizzi intensi e per ambienti industriali impegnativi.',
+          'Il prezzo medio non è l\'unico fattore decisivo. Per determinare il valore effettivo dell\'investimento bisogna valutare la qualità, la potenza, la capacità di raccolta e la durata dell\'apparecchio, oltre alle esigenze specifiche dell\'applicazione.'] },
+        { h: null, b: ['La durata media di un aspirapolvere industriale dipende da diversi fattori, tra cui la qualità del prodotto, la manutenzione regolare e l\'intensità dell\'uso.',
+          'La durata dipende anche dal tipo di ambiente in cui l\'apparecchio viene utilizzato: negli ambienti industriali impegnativi, con particelle abrasive o sostanze corrosive, una durata più lunga richiede una maggiore attenzione alla manutenzione.',
+          'È importante seguire le istruzioni del produttore per la manutenzione regolare dell\'aspirapolvere, come la pulizia dei filtri e la sostituzione delle parti usurabili. Effettuare interventi di manutenzione preventiva e risolvere tempestivamente eventuali problemi contribuisce a estendere la durata dell\'apparecchio.'] },
+        { h: null, b: ['L\'aspirapolvere industriale e quello domestico servono entrambi alla pulizia, ma differiscono in modo significativo per caratteristiche e prestazioni.', 'Il confronto riguarda i vantaggi dell\'aspirapolvere industriale rispetto a quello domestico.'] }
+      ],
+      /* solo il blocco usato (niente noleggio per gli aspiratori); alt invariato */
+      promo: {}
     }
   };
   /* promo noleggio/usato: il copy UX vale per tutte le famiglie che hanno un documento */
@@ -483,7 +505,7 @@
     var tutte = [];
     subs.forEach(function (sk) { tutte = tutte.concat(CAT.MACCHINE[sk] || []); });
     set('[data-fam-top]', tutte.slice(0, 6).map(cardMacchina).join(''));
-    set('[data-fam-top-title]', 'Le ' + esc(f.nome.toLowerCase()) + ' più richieste');
+    set('[data-fam-top-title]', C.topTitle ? esc(C.topTitle) : 'Le ' + esc(f.nome.toLowerCase()) + ' più richieste');
     set('[data-fam-approf]', C.h2Approf ? esc(C.h2Approf) : 'Come scegliere ' + (f.nome === 'Robot' ? 'un robot per la pulizia' : 'una ' + esc(f.nome.toLowerCase().replace(/i$/, 'e'))));
     set('[data-fam-words]', f.testoLungo ? 'LUNGHEZZA PREVISTA · 800–1200 PAROLE' : 'LUNGHEZZA PREVISTA · 250–350 PAROLE — testo breve, smistamento');
     set('[data-fam-others]', Object.keys(CAT.FAMIGLIE).map(function (k) {
