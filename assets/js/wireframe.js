@@ -473,6 +473,29 @@
           'Con workstation e IoT l\'intervento umano si riduce al minimo.'] }
       ],
       promo: {}
+    },
+    'altri-macchinari': {
+      title: 'Attrezzature per pulizie professionali | Socaf',
+      meta: 'Attrezzature per pulizie professionali Socaf: monospazzole, macchine per moquette, a vapore e per il lavaggio dei pezzi. Richiedi una consulenza.',
+      intro: 'Attrezzature per pulizie professionali Socaf: macchine per il lavaggio dei pezzi, a vapore, per moquette, monospazzole e purificatori d\'aria.',
+      h2Approf: 'Come scegliere il macchinario adatto',
+      topTitle: 'Gli altri macchinari più richiesti',
+      schede: [
+        { h: null, b: ['Le monospazzole Socaf trattano materiali diversi come cotto, pietra, gres, marmo e klinker: stuccano, lucidano, cristallizzano o puliscono la superficie. Si impiegano anche sui tessili.',
+          'Socaf propone le monospazzole anche usate. Per informazioni, rivolgiti a un consulente.'] },
+        { h: null, b: ['La vasca di lavaggio ad alta pressione contiene pezzi di dimensioni diverse e li lava con processi differenti. Trova impiego nelle officine, ad esempio per lavare i prodotti prima della consegna al cliente.',
+          'Il processo di lavaggio si sceglie dopo un\'analisi con i consulenti Socaf, in base alle tue esigenze. I processi comprendono il lavaggio con acqua calda e detergenti o con acqua fredda, in modo meccanico o manuale.',
+          'Scopri tutti i modelli di vasche lavapezzi.'] },
+        { h: null, b: ['Le macchine di questa categoria puliscono la moquette con una duplice funzione: raccolgono lo sporco per estrazione e lavano i tessuti con la spazzolatura.',
+          'Trovano applicazione su ampie superfici e negli autolavaggi, per la pulizia degli interni auto.',
+          'Scopri tutti i modelli per moquette, tessuti e interni auto.'] },
+        { h: null, b: ['Le monospazzole Socaf sono macchine per uso professionale: servono al trattamento, alla manutenzione e alla pulizia di pavimenti e superfici di vario tipo.'] },
+        { h: null, b: ['I pannelli fotovoltaici convertono l\'energia del sole in elettricità. Per conservare la resa nel tempo richiedono una pulizia periodica.',
+          'Le macchine Socaf per la pulizia dei pannelli solari lavano con acqua demineralizzata.'] },
+        { h: null, b: ['Le vasche Socaf lavano pezzi di settori merceologici diversi.', 'La consulenza Socaf aiuta a individuare la vasca adatta alle esigenze di ogni cliente.'] }
+      ],
+      /* solo il blocco usato; alt invariato, CTA corretta al maschile */
+      promo: { usaCta: 'Altri macchinari usati' }
     }
   };
   /* promo noleggio/usato: il copy UX vale per tutte le famiglie che hanno un documento */
@@ -596,7 +619,7 @@
       h += '<div class="formula formula-usa"><span class="formula-art foto"><img src="' + BASE + 'assets/images/categorie/formula-usato.jpg" alt="' + esc(X.usaAlt || 'Macchine nello showroom Socaf') + '" loading="lazy"></span><span class="formula-body">' +
         '<span class="kicker">' + (P ? P.usaKicker : 'Formula · usato') + '</span><span class="formula-h">' + (P ? P.usaH : 'Esiste anche usata') + '</span>' +
         '<span class="formula-p">' + (P ? P.usaP : 'Ricondizionate e garantite da 3 a 12 mesi, con supervalutazione della macchina che hai già.') + '</span>' +
-        a('/usato/' + f.usato + '/', f.nome + ' usate', 'formula-go') + '</span></div>';
+        a('/usato/' + f.usato + '/', X.usaCta || (f.nome + ' usate'), 'formula-go') + '</span></div>';
     }
     if (!h) { var w = el.closest('.row') || el; w.remove(); return; }
     el.classList.add('formule');
@@ -621,6 +644,70 @@
      socaf.it corrispondente. Dove socaf.it non ha testo: « Servono informazioni ».
      ====================================================================== */
   var TESTI = window.SOCAF_TESTI || {};
+  /* COPY UX delle pagine che leggono i testi da socaf.it (documenti « D4 … copy per UX »):
+     sostituisce titolo (h) e testo (b) delle sezioni indicate, per indice; le altre restano quelle estratte */
+  var COPY_UX_FONTE = {
+    '/servizi/noleggio-macchine/': {
+      0: { h: 'Noleggio macchine per pulizia: il servizio Socaf', b: ['Una macchina in più serve quando l\'azienda affronta un\'attività straordinaria o quando quella in uso non basta. Socaf si occupa di vendita e noleggio di macchine per la pulizia industriale e propone il noleggio in tre formule: breve, stagionale e a lungo termine. Le famiglie di macchine a noleggio sono nella sezione più sotto. Per un preventivo usa il modulo in fondo alla pagina o chiama il numero verde 800 480110.', ['Noleggiare o comprare: i vantaggi del noleggio per la pulizia industriale']] },
+      1: { b: ['Le esigenze di pulizia cambiano con il tipo di lavoro, con le stagioni e con gli imprevisti. Una macchina acquistata resta quella scelta il giorno dell\'acquisto, anche quando l\'esigenza cambia.', 'Con il noleggio scegli tipo e capacità della macchina in base all\'esigenza del momento. La stessa azienda usa modelli diversi in periodi diversi, senza investire nell\'acquisto di attrezzature diverse.', 'Dalla macchina per un\'attività straordinaria a quella per un picco stagionale, la scelta segue il lavoro da fare.'] },
+      2: { b: ['Acquistare una macchina per la pulizia industriale richiede un investimento iniziale: la macchina stessa, l\'addestramento del personale e la manutenzione.', 'Il noleggio non richiede di immobilizzare questo capitale: la macchina si usa senza acquistarla e l\'investimento iniziale si riduce.'] },
+      3: { b: ['Il noleggio si paga con un canone costante. Conosci in anticipo la spesa periodica e la inserisci nel budget come costo ricorrente.', 'Un canone costante semplifica la pianificazione finanziaria e mantiene sotto controllo le spese dell\'azienda.'] },
+      5: { h: '5. No ammortamenti in bilancio', b: ['Quando si acquista una macchina, l\'ammortamento entra nel bilancio aziendale.', 'Il noleggio elimina questa complessità contabile: i canoni di noleggio non richiedono ammortamenti.'] },
+      6: { h: '6. Manutenzione e assistenza incluse', b: ['Manutenzione e assistenza sono incluse nel contratto di noleggio. La manutenzione regolare mantiene efficiente la macchina e riduce i fermi, a vantaggio della continuità del lavoro.', 'L\'assistenza accompagna la macchina per tutta la durata del noleggio e il pronto intervento è compreso. Con una macchina di proprietà, riparazioni e sostituzione di parti restano a carico dell\'azienda.'] },
+      7: { b: ['Le tecnologie per la pulizia industriale evolvono e i modelli cambiano nel tempo. Chi acquista una macchina la usa con la tecnologia disponibile il giorno dell\'acquisto.', 'Con il noleggio scegli, a ogni nuovo contratto, il modello che risponde alle esigenze di quel periodo, senza investire in macchine nuove. Vale soprattutto per le aziende che vogliono migliorare efficienza e sostenibilità delle operazioni di pulizia.'] }
+    }
+  };
+  /* servizi (copy UX D20) e usato per famiglia (copy UX D7): stesse regole; un array dentro b = elenco puntato */
+  COPY_UX_FONTE['/servizi/consulenza-tecnica/'] = {
+    0: { h: 'Una consulenza costruita sulle tue esigenze', b: ['La consulenza Socaf è personalizzata: ti confronti con uno staff specializzato e preparato, che ascolta le tue richieste e propone soluzioni per la pulizia industriale costruite sul tuo caso. Ogni proposta tiene conto delle esigenze del cliente, che cambiano da un\'azienda all\'altra.'] },
+    1: { h: 'Lavapavimenti, spazzatrici, aspiratori e idropulitrici: le macchine su cui siamo specializzati', b: ['I nostri professionisti consigliano a ogni cliente le macchine per la pulizia e i prodotti più adatti ed efficaci, per rispondere a esigenze molto diverse tra loro. Le famiglie di macchine sono cinque:',
+      ['lavapavimenti combinate, uomo a terra o uomo a bordo, che in una sola passata lavano, aspirano e asciugano;', 'spazzatrici a spinta, uomo a terra o uomo a bordo, a batteria o a motore, a benzina o diesel, per pulire ogni giorno superfici interne ed esterne grandi, medie e piccole;', 'idropulitrici ad acqua calda o fredda, per lavare, sgrassare e togliere lo sporco da qualsiasi superficie;', 'aspiratori industriali che entrano nei processi produttivi di molte aziende manifatturiere e raccolgono polveri, detriti solidi e liquidi;', 'robot spazzatrici e robot lavapavimenti, che lavano e rimuovono lo sporco in modo automatizzato.']] },
+    2: { h: 'Dall\'analisi alla macchina adatta', b: ['La consulenza tecnica sulle macchine per la pulizia va oltre la proposta del prodotto o della macchina più adatta al singolo caso. Prima della scelta seguiamo quattro passaggi:',
+      ['analizziamo nel dettaglio quanto è estesa l\'area da lavare, perché a spazi ridotti o ampi corrispondono modelli diversi di spazzatrici e idropulitrici;', 'valutiamo che tipo di sporco c\'è e in quali condizioni si trova l\'ambiente da pulire: residui di lavorazione, polvere o liquidi richiedono ciascuno una soluzione specifica;', 'stimiamo quanto sporco va rimosso e per quanto tempo si userà la macchina: quanto lavoro c\'è da svolgere, quanto durano aspirazione e lavaggio, se serve la massima rapidità. Potenza e caratteristiche cambiano da un modello all\'altro, sia nelle idropulitrici sia nei robot spazzatrici;', 'scegliamo il processo più efficiente e la macchina più adatta; una volta individuata la macchina, definiamo le modalità di lavoro più coerenti con l\'ambiente in cui opererà.'],
+      'La consulenza comprende anche la scelta del detergente più efficace e delle attrezzature o degli accessori di pulizia con le prestazioni migliori per quel lavoro e per quell\'ambiente.'] },
+    3: { h: 'Test della soluzione sul posto', b: ['La soluzione più adatta al cliente prende forma in tre momenti. Con un\'intervista telefonica ipotizziamo fin dall\'inizio la soluzione. Con un sopralluogo preventivo verifichiamo gli ambienti del cliente. Con una prova della soluzione proposta, svolta in quegli stessi ambienti, ne confermiamo la scelta.',
+      'Il test risponde a domande concrete. Le idropulitrici o le spazzatrici scelte soddisfano l\'esigenza particolare del cliente? Nell\'ambiente di lavoro, i robot lavapavimenti o spazzatrici si inseriscono senza difficoltà? Il personale incaricato di usarli rispetta la sequenza di lavoro corretta? La prova riguarda quindi sia le macchine sia il modo in cui il personale le usa.',
+      'Il nostro team operativo segue con attenzione e responsabilità le esigenze di pulizia di aziende piccole, medie e grandi. Durante il test in loco macchine e prodotti si provano direttamente in azienda, sullo sporco reale del cliente. È un servizio che offriamo a ogni cliente che sceglie di investire sul lavoro e sull\'esperienza di Socaf.'] }
+  };
+  COPY_UX_FONTE['/servizi/pronto-intervento/'] = {
+    0: { h: 'Quando una macchina si guasta serve un intervento tecnico tempestivo: un\'assistenza che arriva nel minore tempo possibile, con l\'obiettivo di rimettere in funzione la macchina.', b: ['Siamo disponibili per interventi rapidi e per prevenire i difetti in grado di compromettere il funzionamento delle idropulitrici, spazzatrici e lavapavimenti Socaf, le macchine impiegate per pulire, lavare e igienizzare aree commerciali e industriali. Il pronto intervento, se necessario, è garantito sulla chiamata del cliente dalla squadra dei nostri tecnici specializzati.'] },
+    1: { h: 'Assistenza tecnica sul posto', b: ['La pronta assistenza Socaf parte dalla chiamata del cliente e arriva fino all\'intervento sul posto. La centrale operativa resta in contatto costante con le nostre officine mobili, che si appoggiano a un magazzino di ricambi originali sempre rifornito e a loro disposizione. Il magazzino è affidato a tecnici esperti, e sono loro ad assicurare la rapidità dell\'intervento presso il cliente.',
+      'Raccogliamo le esigenze e le richieste di ogni cliente e a ciascuna diamo una risposta puntuale ed efficace, ogni volta. Rapidità e flessibilità sono i punti di forza del servizio di pronto intervento: la garanzia che offriamo alle aziende clienti è disporre di macchine efficienti e sempre funzionanti.',
+      'Il pronto intervento copre l\'intera gamma di prodotti e macchinari Socaf: dalle macchine per la pulizia fino alle attrezzature che offriamo ai clienti.'] },
+    2: { h: 'Lavapavimenti e idropulitrici: la manutenzione programmata', b: ['La manutenzione periodica è indispensabile all\'efficienza di lavapavimenti e idropulitrici e delle soluzioni automatizzate, cioè robot lavapavimenti e robot spazzatrici. Sono interventi importanti per la tua azienda e spesso vengono trascurati, rinviati, eseguiti di fretta o dimenticati. La manutenzione programmata nasce per avere ogni macchina per la pulizia professionale efficiente e curata nel tempo.',
+      'Con questo servizio programmi e fissi gli interventi di manutenzione lungo tutto l\'anno, secondo una cadenza periodica che resta invariata nel tempo. Il servizio si svolge in quattro passaggi:',
+      ['stabiliamo insieme a te quanti interventi annui servono alla macchina, valutando la modalità d\'uso e la frequenza di utilizzo;', 'nel giorno fissato insieme un nostro tecnico specializzato raggiunge direttamente la tua azienda e controlla tutte le funzioni della macchina, così che sia pronta per la pulizia;', 'durante l\'intervento lo stesso tecnico mostra al tuo operatore come usare correttamente la macchina e quale manutenzione ordinaria eseguire in autonomia;', 'a ogni intervento il tecnico prepara un rendiconto scritto e dettagliato dei controlli eseguiti e te lo consegna quando i lavori di manutenzione sono conclusi.'],
+      'Chi aderisce alla manutenzione programmata ha diritto anche a un canale preferenziale per le urgenze: un riferimento diretto a cui rivolgerti per emergenze, difetti e problemi da risolvere, ogni volta che si presentano. Il pronto intervento è disponibile su qualsiasi modello di lavapavimenti, spazzatrici, idropulitrici e aspiratori Socaf. Tra te e i nostri tecnici non c\'è alcun passaggio, rimando o intermediario: ogni problema lo gestiamo noi, direttamente.'] }
+  };
+  COPY_UX_FONTE['/servizi/soluzioni-finanziarie/'] = {
+    0: { h: 'Pagamento flessibile e soluzioni di finanziamento su misura per acquistare le macchine che ti servono', b: ['Socaf propone soluzioni di finanziamento e di pagamento per l\'acquisto delle macchine per la pulizia, definite sulle esigenze di ciascun cliente. Valgono per l\'intera gamma: lavapavimenti, spazzatrici, idropulitrici, aspiratori, robot lavapavimenti, robot spazzatrici e ogni altro prodotto destinato alla pulizia professionale e industriale.'] },
+    1: { h: 'Le soluzioni di pagamento Socaf, definite cliente per cliente', b: ['Socaf definisce la tipologia di pagamento dopo una valutazione del cliente, in modo che corrisponda alle sue esigenze.',
+      'Tra le soluzioni possibili ci sono il finanziamento a lungo termine per l\'acquisto di una lavapavimenti, la formula leasing per l\'acquisto di spazzatrici e il finanziamento a canone fisso e senza sorprese. Sono solo alcune delle soluzioni che Socaf mette a disposizione dei clienti.',
+      ['Socaf prevede pagamenti a lungo termine, di cui si concordano i tempi con il cliente, ed extra sconti per chi paga in pronta cassa alla consegna della merce in azienda.', 'Chi ha una macchina usata può farla valutare da Socaf all\'acquisto di una macchina nuova.', 'Se non sei ancora pronto ad acquistare una macchina nuova, Socaf propone il noleggio operativo: un canone fisso, senza occuparti della gestione del parco macchine. Socaf fa da intermediario con istituti di credito specializzati.', 'Socaf noleggia anche le proprie macchine: scegli la durata del noleggio in base a quanto le utilizzi.']] }
+  };
+  COPY_UX_FONTE['/usato/lavapavimenti-usate/'] = {
+    0: { h: 'Prestazioni nel tempo', b: ['Una lavapavimenti usata è in grado di conservare prestazioni elevate nel tempo.', 'Con controllo e manutenzione adeguati, le lavapavimenti usate Socaf offrono un livello di pulizia in grado di rispondere alle esigenze dei clienti.', 'Socaf lavora nel settore del cleaning dal 1982.'] },
+    1: { h: 'Le caratteristiche tecniche da valutare in una lavapavimenti industriale usata', b: ['Quando cerchi una lavapavimenti industriale ricondizionata, alcune caratteristiche tecniche vanno valutate con attenzione.', 'Incidono sull\'efficienza, sulla durata e sul rendimento complessivo della macchina, che deve adattarsi all\'ambiente industriale in cui lavorerà.',
+      ['Dimensioni e capacità: le dimensioni della macchina vanno rapportate alle aree da pulire. Anche i serbatoi dell\'acqua sporca e pulita devono avere una capacità adatta al volume di lavoro, così da ridurre le interruzioni per riempimento e svuotamento.', 'Larghezza di lavoro: è la misura della spazzola o del rullo a stabilire quanta superficie si pulisce in un solo passaggio. Una larghezza adeguata può incidere sulla velocità di pulizia e sull\'efficienza del processo.', 'Tipo di alimentazione: l\'energia può arrivare da batteria, rete elettrica, gasolio o altre fonti, in base all\'ambiente di lavoro e alla disponibilità. Le macchine a batteria danno flessibilità; quelle a gasolio sono indicate per gli ambienti esterni o privi di presa elettrica.', 'Sistema di aspirazione: un sistema efficace raccoglie l\'acqua sporca e il pavimento resta asciutto a lavaggio concluso. Limita il rischio di scivolamenti e favorisce la sicurezza dell\'ambiente di lavoro.', 'Tecnologie aggiuntive: su alcune lavapavimenti industriali usate si trovano programmi di pulizia personalizzati, regolazione della velocità e controllo automatico della pressione. Sono funzioni che possono migliorare efficienza operativa e qualità della pulizia.', 'Condizioni generali e manutenzione: prima dell\'acquisto va esaminato lo stato della macchina. Spazzole, rulli, sistemi di aspirazione e parti meccaniche devono risultare ben tenuti e pronti all\'uso.', 'Assistenza e supporto: un fornitore che offre assistenza tecnica, ricambi e manutenzione può incidere sulla durata e sull\'affidabilità della macchina, soprattutto nel lungo periodo.']] },
+    2: { h: 'I vantaggi dell\'acquisto di una lavapavimenti industriale usata', b: ['Una lavasciuga pavimenti professionale usata è indicata a chi cerca macchine efficienti ed economiche. Socaf affianca chi acquista nella ricerca della macchina usata più adatta alle sue esigenze.', '[DA DEFINIRE CON SOCAF: i vantaggi concreti dell\'acquisto di una macchina usata, che la fonte cita senza elencarli]'] }
+  };
+  /* titolo, testo d'apertura e SEO delle pagine D20 (copy UX) */
+  var COPY_UX_PAG = {
+    '/servizi/consulenza-tecnica/': { h1: 'Consulenza tecnica sulle macchine per la pulizia', lede: 'La consulenza tecnica sulle macchine per la pulizia Socaf si svolge in prima persona, direttamente nella tua sede. I nostri professionisti fanno sopralluoghi nei tuoi ambienti di lavoro e provano macchine e prodotti sul tuo sporco, così da verificarne l\'efficacia nelle condizioni reali in cui lavori.',
+      title: 'Consulenza tecnica macchine pulizia | Socaf', meta: 'Consulenza tecnica macchine pulizia: sopralluoghi negli ambienti di lavoro e soluzioni personalizzate per la pulizia industriale. Richiedi una consulenza.' },
+    '/servizi/pronto-intervento/': { h1: 'Pronto intervento macchine per la pulizia', lede: 'Il pronto intervento sulle macchine per la pulizia è il servizio Socaf per i problemi tecnici, i guasti e i malfunzionamenti di lavapavimenti, aspiratori, idropulitrici e spazzatrici professionali.',
+      title: 'Pronto intervento macchine pulizia | Socaf', meta: 'Pronto intervento macchine pulizia: tecnici specializzati, officine mobili e ricambi originali. Richiedi un intervento o chiama il numero verde 800 480110.' },
+    '/servizi/soluzioni-finanziarie/': { h1: 'Soluzioni di finanziamento per le macchine per la pulizia', lede: 'Per l\'acquisto di lavapavimenti, idropulitrici e altre macchine per la pulizia, Socaf propone formule di finanziamento e di pagamento su misura.',
+      title: 'Finanziamento macchine pulizia: soluzioni su misura | Socaf', meta: 'Finanziamento macchine pulizia: Socaf propone soluzioni di pagamento su misura per l\'acquisto di lavapavimenti e idropulitrici. Chiedi informazioni.' }
+  };
+  Object.keys(COPY_UX_FONTE).forEach(function (k) {
+    var T = TESTI[k]; if (!T || !T.s) return;
+    Object.keys(COPY_UX_FONTE[k]).forEach(function (i) {
+      var c = COPY_UX_FONTE[k][i], s = T.s[+i]; if (!s) return;
+      if (c.h) s.h = c.h;
+      if (c.b) s.b = c.b;
+    });
+  });
   var FONTE = null;           /* indirizzo socaf.it da cui vengono i testi della pagina */
 
   function testoHtml(b) {
@@ -735,7 +822,7 @@
         subs: ['altri-macchinari/lavatappezzeria'] }
     }},
     usato: { param: 'u', base: '/usato/', def: 'lavapavimenti-usate', lista: {
-      'lavapavimenti-usate': { nome: 'Lavapavimenti usate', h1: 'Lavapavimenti usate e lavasciuga industriali usate', sing: 'una lavapavimenti', famcat: 'lavapavimenti' },
+      'lavapavimenti-usate': { nome: 'Lavapavimenti usate', h1: 'Lavapavimenti industriali usate e lavasciuga usate', sing: 'una lavapavimenti', famcat: 'lavapavimenti' },
       'idropulitrici-usate': { nome: 'Idropulitrici usate', h1: 'Idropulitrici usate', sing: "un'idropulitrice", famcat: 'idropulitrici' },
       'spazzatrici-usate': { nome: 'Spazzatrici usate', h1: 'Spazzatrici usate', sing: 'una spazzatrice', famcat: 'spazzatrici' },
       'aspiratori-usati': { nome: 'Aspiratori usati', h1: 'Aspiratori usati', sing: 'un aspiratore', famcat: 'aspiratori' },
@@ -819,6 +906,138 @@
     document.querySelectorAll('[data-solo]').forEach(function (e) {
       if (e.dataset.solo !== key) e.outerHTML = serveInfo(e.dataset.soloInfo || 'Contenuto da fornire.');
     });
+    /* COPY UX del noleggio per famiglia (documenti « D5 … copy per UX »).
+       Paragrafi = elementi dell'array; « [DA DEFINIRE …] » = segnaposto evidenziato. Famiglie senza documento: « Servono informazioni ». */
+    var NOL_COPY = {
+      lavapavimenti: {
+        title: 'Noleggio lavapavimenti e lavasciuga pavimenti | Socaf',
+        meta: 'Noleggio lavapavimenti e lavasciuga pavimenti Socaf: ritiro e consegna dalle cinque sedi. Richiedi un preventivo o chiama il numero verde 800 480110.',
+        formule: ['Il noleggio di macchinari per la pulizia dei pavimenti si articola in tre formule: breve, stagionale e a lungo termine. Il noleggio breve è disponibile anche per pochi giorni. Il noleggio a lungo termine è il Full Rent, da 24 a 60 mesi con assistenza tecnica inclusa. La durata del noleggio può essere giornaliera, settimanale o mensile e il canone segue la durata effettiva.',
+          'In ogni formula il canone è costante, senza sorprese, e comprende assistenza e manutenzione. Non c\'è obbligo d\'acquisto: a fine lavoro restituisci la macchina.',
+          '[DA DEFINIRE CON SOCAF: durata della formula stagionale e dettaglio di ciò che comprende ciascuna formula per le lavapavimenti]'],
+        q: [['Il noleggio di una lavapavimenti conviene quando il picco di lavoro è temporaneo: un cantiere, una stagione intensa, un periodo in cui la macchina in uso non basta. Restituisci la macchina quando il lavoro è finito, senza impegno d\'acquisto.',
+            'Conviene anche quando non vuoi sostenere i costi di acquisto e la manutenzione nel tempo. Il costo segue la durata effettiva del noleggio, giornaliero, settimanale o mensile: paghi il periodo in cui usi la macchina.',
+            'L\'acquisto è la scelta più adatta a chi ha un\'esigenza di pulizia costante e vuole il pieno controllo della macchina: più sotto trovi le macchine nuove e usate.'],
+          ['La scelta parte dalla superficie. Per le ampie superfici, interne ed esterne, la lavapavimenti uomo a terra copre molta area in poco tempo. Si alimenta a batteria, che permette di spostarsi tra le aree senza limiti di distanza e di prese elettriche, oppure a cavo, adatto ai lavori di pulizia prolungati.',
+            'Per angoli stretti, aree difficili da raggiungere e spazi ristretti la scelta è la i-mop, che unisce la manovrabilità di un mocio alla potenza di una lavapavimenti industriale.',
+            'Indica a Socaf superficie, ambiente e durata del noleggio: ti proponiamo il modello adatto.'],
+          ['Il canone di noleggio è costante e comprende l\'assistenza tecnica e la manutenzione della macchina, con riparazione o sostituzione delle parti. Per tutta la durata del noleggio ricevi assistenza e pronto intervento.',
+            'Nel Full Rent, la formula a lungo termine da 24 a 60 mesi, l\'assistenza tecnica è inclusa.',
+            '[DA DEFINIRE CON SOCAF: batterie e caricabatterie, detergente e formazione degli operatori]']],
+        usaH: 'Anche usata, con garanzia', usaP: 'Ricondizionate e garantite da 3 a 12 mesi. Socaf supervaluta la macchina che hai già.'
+      },
+      idropulitrici: {
+        title: 'Noleggio idropulitrici ad acqua calda e fredda | Socaf',
+        meta: 'Noleggio idropulitrici Socaf: ad acqua fredda, ad acqua calda e autonome, con ritiro e consegna dalle cinque sedi. Chiama il numero verde 800 480110.',
+        lede: 'Con il noleggio di idropulitrici Socaf hai la macchina adatta al lavoro: ad acqua fredda o ad acqua calda, con motore elettrico o autonoma, per un lavoro breve o per un periodo lungo. Assistenza per tutta la durata del noleggio e, in genere, manutenzione compresa. Ritiro e consegna da tutte e cinque le sedi.',
+        formule: ['Il noleggio di idropulitrici si articola in tre formule: breve, stagionale e a lungo termine. Il noleggio breve va da pochi giorni a qualche mese. Di solito le macchine a noleggio sono già quelle più potenti presenti sul mercato.',
+          'Durante il noleggio hai assistenza per tutta la durata e pronto intervento. In genere la manutenzione è compresa. Il canone è costante, senza sorprese. Con il noleggio non diventi proprietario della macchina.',
+          '[DA DEFINIRE CON SOCAF: durata minima di ogni formula, durata della formula stagionale e dettaglio di ciò che comprende ciascuna formula per le idropulitrici]'],
+        q: [['Il noleggio di un\'idropulitrice professionale conviene quando le esigenze di pulizia cambiano da uno spazio all\'altro: l\'acquisto di una macchina non è sempre la scelta ideale. Scegli la macchina adatta a ogni lavoro invece di acquistarne una sola per tutte le situazioni.',
+            'Per officine, capannoni e altri ambienti industriali o commerciali noleggi la macchina solo per i periodi in cui serve.',
+            'Se usi l\'idropulitrice con frequenza, una macchina usata può costare meno di un noleggio prolungato. Più sotto trovi le idropulitrici nuove e usate.'],
+          ['La scelta parte dallo sporco da rimuovere. Il modello ad acqua fredda usa acqua a temperatura ambiente e ha un regolatore di pressione per adattare il getto al lavoro. Il noleggio di un\'idropulitrice ad acqua calda è la scelta per lo sporco ostinato, il grasso e le incrostazioni: la temperatura dell\'acqua si regola, oltre alla pressione.',
+            'Il motore dipende dal luogo di lavoro. Il motore elettrico richiede una presa di corrente, ha manutenzione ridotta ed è adatto ai lavori di piccola scala. Il motore trifase è progettato per i lavori intensivi in ambito industriale. L\'idropulitrice autonoma, alimentata a benzina o diesel, lavora dove non c\'è la corrente elettrica, come nei cantieri edili.',
+            'Indicaci superficie, tipo di sporco e luogo di lavoro: ti proponiamo il modello adatto.'],
+          ['Il canone di noleggio è costante, senza sorprese. Per tutta la durata del noleggio ricevi assistenza e pronto intervento.',
+            'In genere la manutenzione dell\'idropulitrice è compresa nel noleggio. La riparazione o la sostituzione delle parti sono generalmente incluse.',
+            '[DA DEFINIRE CON SOCAF: accessori, detergenti, carburante per le macchine autonome e formazione degli operatori]']]
+      },
+      spazzatrici: {
+        title: 'Noleggio spazzatrici industriali | Socaf',
+        meta: 'Noleggio spazzatrici Socaf: uomo a terra, uomo a bordo e stradali, per pochissimi giorni o per un periodo più lungo. Ritiro e consegna dalle cinque sedi.',
+        lede: 'Con il noleggio di spazzatrici Socaf hai la macchina per spazzare pavimenti interni ed esterni: uomo a terra, uomo a bordo o stradale, per pochissimi giorni o per un periodo più lungo. L\'assistenza dura quanto il noleggio e la manutenzione è generalmente compresa. Ritiro e consegna da tutte e cinque le sedi.',
+        formule: ['Per il noleggio di spazzatrici le formule sono tre: breve, stagionale e a lungo termine. Il noleggio breve va da pochi giorni a qualche mese.',
+          'Assistenza e pronto intervento sono attivi per tutta la durata del noleggio. La manutenzione è generalmente compresa e il canone è costante, senza sorprese.',
+          '[DA DEFINIRE CON SOCAF: durata minima di ogni formula, durata della formula stagionale e cosa comprende ciascuna formula per le spazzatrici]'],
+        q: [['Il noleggio di una spazzatrice conviene quando le esigenze di pulizia sono occasionali o stagionali: il noleggio a breve termine è un\'opzione flessibile e permette di gestire i picchi di lavoro senza l\'impegno a lungo termine.',
+            'Le spazzatrici lavorano su ogni tipo di pavimentazione, interna ed esterna, e in tutti gli ambienti produttivi.',
+            'Se preferisci acquistare, più sotto trovi le spazzatrici nuove e usate.'],
+          ['La scelta parte dal pavimento da pulire e dall\'ambiente. Le spazzatrici uomo a terra, motoscopa a spinta compresa, servono alla pulizia giornaliera di superfici medio-piccole, interne ed esterne. Le spazzatrici uomo a bordo sono ideali sia in aree interne che esterne. Il noleggio di spazzatrici stradali offre macchine versatili e multiuso.',
+            'Conta anche l\'alimentazione. Le spazzatrici a batteria offrono una maggiore autonomia di lavoro e permettono di pulire grandi aree senza collegarsi a una presa di corrente. Esistono anche modelli elettrici, a benzina o diesel a seconda delle esigenze specifiche di lavoro.',
+            'Indicaci superficie, tipo di pavimento e ambiente di lavoro: ti proponiamo il modello adatto.'],
+          ['Il canone è costante, senza sorprese, e copre assistenza e pronto intervento per tutta la durata del noleggio.',
+            'La manutenzione e la riparazione o sostituzione delle parti sono generalmente incluse nel contratto di noleggio.',
+            '[DA DEFINIRE CON SOCAF: batterie e caricabatterie per le macchine a batteria, carburante per le macchine a benzina o diesel, accessori e formazione degli operatori]']]
+      },
+      lavamoquette: {
+        sospesa: 'PAGINA SOSPESA: da non pubblicare finché Socaf conferma noleggio, slug e perimetro.',
+        h1: 'Noleggio lavamoquette e lavatappeti',
+        title: 'Noleggio lavamoquette e lavatappeti | Socaf',
+        meta: 'Noleggio lavamoquette Socaf: macchine per pulire moquette, tappeti e tessuti, con assistenza per tutta la durata. Ritiro e consegna dalle cinque sedi.',
+        lede: 'Con il noleggio di lavamoquette Socaf hai una macchina per la pulizia profonda di moquette, tappeti e tessuti per il tempo che ti serve. Assistenza e pronto intervento durano quanto il noleggio. Ritiro e consegna da tutte e cinque le sedi.',
+        formule: ['Il noleggio Socaf si articola in tre formule: breve, stagionale e a lungo termine.',
+          'Assistenza e pronto intervento restano attivi finché la macchina è a noleggio.',
+          '[DA DEFINIRE CON SOCAF: durata di ciascuna formula per le lavamoquette, compresa la stagionale, e servizi inclusi in ogni formula]'],
+        q: [['Una lavamoquette a noleggio pulisce a fondo moquette, tappeti e altri rivestimenti in tessuto.',
+            '[DA DEFINIRE CON SOCAF: situazioni in cui conviene noleggiare una lavamoquette invece di acquistarla]',
+            'Per acquistare la macchina, più sotto trovi i rimandi al catalogo e all\'usato.'],
+          ['La scelta dipende dal rivestimento da pulire. La lavamoquette lava per iniezione ed estrazione: il getto di acqua e detergente penetra tra le fibre e l\'aspirazione porta via lo sporco, così la superficie asciuga più in fretta. Lavatappeti e lavatessuti sono macchine con la stessa funzione.',
+            '[DA DEFINIRE CON SOCAF: modelli di lavamoquette disponibili a noleggio]',
+            'Indicaci superficie, tipo di rivestimento e ambiente di lavoro: ti proponiamo il modello adatto.'],
+          ['Assistenza e pronto intervento sono compresi finché la macchina resta a noleggio. Il contratto prevede generalmente anche la manutenzione della macchina.',
+            '[DA DEFINIRE CON SOCAF: importo e periodicità del canone, riparazione o sostituzione delle parti, detergente e accessori inclusi nel noleggio della lavamoquette]']]
+      }
+    };
+    var NC = tipo === 'noleggio' ? NOL_COPY[key] : null;
+    if (tipo === 'noleggio') {
+      var parag = function (arr) {
+        return arr.map(function (t) {
+          return /^\[DA DEFINIRE/.test(t) ? '<p><span class="todo">' + esc(t) + '</span></p>' : '<p>' + esc(t) + '</p>';
+        }).join('');
+      };
+      var nd = function (sel) { return document.querySelector('[data-nolc="' + sel + '"]'); };
+      var fo = nd('formule');
+      if (fo) fo.outerHTML = NC && NC.formule ? '<div data-nolc="formule">' + parag(NC.formule) + '</div>' : serveInfo('Formule e durate per questa famiglia: testo da definire con Socaf.');
+      [0, 1, 2].forEach(function (i) {
+        var el = nd('q' + i); if (!el) return;
+        if (NC && NC.q && NC.q[i]) el.innerHTML = parag(NC.q[i]);
+        else el.outerHTML = serveInfo('Testo da redigere per questa famiglia.');
+      });
+      if (NC && NC.usaH) { var uh = nd('usaH'); if (uh) uh.textContent = NC.usaH; }
+      if (NC && NC.usaP) { var up = nd('usaP'); if (up) up.textContent = NC.usaP; }
+      if (NC && NC.h1) {
+        var h1n = document.querySelector('h1'); if (h1n) h1n.textContent = NC.h1;
+        document.title = document.title.replace(v.h1, NC.h1);
+        document.querySelectorAll('[data-hidden-field]').forEach(function (e) { e.dataset.hiddenField = e.dataset.hiddenField.split('|')[0] + '|' + NC.h1; });
+      }
+      if (NC && NC.lede) {
+        var ld = document.querySelector('.row-testata .lede, .lede') || document.querySelector('.need-info');
+        var hh = document.querySelector('h1');
+        var nuova = '<p class="lede">' + esc(NC.lede) + '</p>';
+        if (ld && ld.classList.contains('lede')) ld.textContent = NC.lede;
+        else if (hh) { var vec = hh.parentNode.querySelector(':scope > .need-info'); if (vec) vec.outerHTML = nuova; else hh.insertAdjacentHTML('afterend', nuova); }
+      }
+      if (NC && NC.sospesa) {
+        var dns = document.querySelector('.devnote');
+        if (dns) dns.insertAdjacentHTML('beforebegin', '<div class="devnote"><div class="dn-h">DEV NOTE — Pagina sospesa</div><dl><dt>Stato</dt><dd><b>' + esc(NC.sospesa) + '</b></dd></dl></div>');
+        setBar(I.base + key + '/ · SOSPESA');
+      }
+    }
+    /* SEO dei documenti copy UX per istanza (nel codice e nelle note DEV) */
+    var SEO_IST = NC && NC.title ? { doc: 'D5', title: NC.title, meta: NC.meta } : null;
+    /* usato per famiglia (copy UX D7): solo le famiglie con documento */
+    var USA_COPY = tipo === 'usato' ? {
+      'lavapavimenti-usate': { doc: 'D7', title: 'Lavapavimenti industriale usata: usato garantito | Socaf',
+        meta: 'Lavapavimenti industriale usata Socaf in formula usato garantito, con garanzia da 3 a 12 mesi. Richiedi la disponibilità dei modelli.',
+        approf: 'Comprare una lavapavimenti industriale usata' }
+    }[key] : null;
+    if (USA_COPY) {
+      var ha = [].slice.call(document.querySelectorAll('h2[data-t]')).filter(function (h) { return /Conviene comprare/.test(h.dataset.t); })[0];
+      if (ha) ha.textContent = USA_COPY.approf;
+      SEO_IST = USA_COPY;
+    }
+    if (SEO_IST) {
+      [['title', SEO_IST.title], ['description', SEO_IST.meta]].forEach(function (m) {
+        var el = document.head.querySelector('meta[name="' + m[0] + '"]');
+        if (!el) { el = document.createElement('meta'); el.name = m[0]; document.head.appendChild(el); }
+        el.content = m[1];
+      });
+      var dn0 = document.querySelector('.devnote');
+      if (dn0) dn0.insertAdjacentHTML('beforebegin', '<div class="devnote"><div class="dn-h">DEV NOTE — SEO della pagina (copy UX ' + SEO_IST.doc + ')</div><dl>' +
+        '<dt>Title</dt><dd>' + esc(SEO_IST.title) + '</dd><dt>Meta description</dt><dd>' + esc(SEO_IST.meta) + '</dd>' +
+        '<dt>Dove</dt><dd>Plugin SEO (Yoast / Rank Math) della pagina. Nel mockup sono anche nell\'<code>&lt;head&gt;</code>, generati dallo script.</dd></dl></div>');
+    }
 
     /* macchine */
     var grid = document.querySelector('[data-grid]');
@@ -882,8 +1101,20 @@
     if (!P) { url = '/servizi/pronto-intervento/'; P = PAGINE[url]; }
     document.body.dataset.slug = url;   /* per regole di pagina (es. testata di Referenze) */
     var fonti = [].concat(P.fonte || []), t0 = TESTI[typeof fonti[0] === 'string' ? fonti[0] : ''] || {};
-    var h1 = P.h1 || t0.t || '';
+    var CU = COPY_UX_PAG[url] || {};
+    var h1 = CU.h1 || P.h1 || t0.t || '';
     var sezUrl = P.sez === 'Servizi' ? '/servizi/' : '/azienda/';
+    if (CU.title) {
+      [['title', CU.title], ['description', CU.meta]].forEach(function (m) {
+        var el = document.head.querySelector('meta[name="' + m[0] + '"]');
+        if (!el) { el = document.createElement('meta'); el.name = m[0]; document.head.appendChild(el); }
+        el.content = m[1];
+      });
+      var dnp = document.querySelector('.devnote');
+      if (dnp) dnp.insertAdjacentHTML('beforebegin', '<div class="devnote"><div class="dn-h">DEV NOTE — SEO della pagina (copy UX D20)</div><dl>' +
+        '<dt>Title</dt><dd>' + esc(CU.title) + '</dd><dt>Meta description</dt><dd>' + esc(CU.meta) + '</dd>' +
+        '<dt>Dove</dt><dd>Plugin SEO (Yoast / Rank Math) della pagina. Nel mockup sono anche nell\'<code>&lt;head&gt;</code>, generati dallo script.</dd></dl></div>');
+    }
 
     /* breadcrumbs */
     var cr = a('/', 'Home') + '<span class="sep">/</span>';
@@ -891,7 +1122,7 @@
     if (P.ref) cr += a('/azienda/referenze/', 'Referenze') + '<span class="sep">/</span>';
     set('[data-p-crumbs]', cr + '<span aria-current="page">' + esc(h1) + '</span>');
     set('[data-p-h1]', esc(h1));
-    var lede = P.lede || t0.sub;
+    var lede = CU.lede || P.lede || t0.sub;
     var ld = document.querySelector('[data-p-lede]');
     if (ld && t0.claim && !P.lede) ld.insertAdjacentHTML('beforebegin', '<p class="claim">' + esc(t0.claim) + '</p>');
     if (ld) { if (lede) ld.textContent = lede; else ld.outerHTML = serveInfo('Testo introduttivo: da fornire.'); }
@@ -970,6 +1201,247 @@
      contenuto alla volta a destra. Su mobile l'indice è una fila di pillole.
      Si applica a ogni blocco con almeno due sezioni (titolo + testo). */
   var nTabs = 0;
+  /* COPY UX delle pagine settore (documenti « D9 … copy per UX »).
+     h2: { numero blocco: titolo }; tab: le sei voci del testo di approfondimento, null = invariata,
+     { h: titolo, b: [paragrafi] } (« [DA …] » = segnaposto evidenziato); faq: le quattro domande;
+     altProd / altRef: alt delle immagini dei prodotti e dei loghi ('' = decorativa). */
+  var COPY_SETT = {
+    'industria': {
+      title: 'Macchine per la pulizia industriale | Socaf',
+      meta: 'Macchine per la pulizia industriale Socaf: lavapavimenti, spazzatrici, aspiratori, idropulitrici e robot per le pulizie industriali. Chiedi una consulenza.',
+      lede: 'Nell\'industria igiene e pulizia incidono sul rendimento degli impianti e sulla salute degli operatori. Dal 1982 Socaf affianca le aziende manifatturiere e alimentari con macchine per la pulizia industriale e con consulenza tecnica sulle macchine e sulla detergenza.',
+      h2: { 6: 'Pulizie industriali Socaf' },
+      altProd: ['', '', '', ''], altRef: ['Logo Amica Chips', 'Logo Lupo S.r.l.'],
+      tab: [
+        { h: 'Dal 1982 al fianco dell\'industria', b: ['Dal 1982 Socaf lavora con le aziende industriali, dal comparto manifatturiero a quello alimentare. Ogni cliente ha esigenze proprie e un modo proprio di lavorare: Socaf le interpreta una per una e risponde con la soluzione più adatta tra le macchine per la pulizia industriale a catalogo.'] },
+        { h: 'Quali macchine per la pulizia industriale scegliere?', b: ['Ogni ambiente di lavoro ha un\'esigenza di pulizia propria, e la scelta della macchina parte da qui: si stabilisce quale risultato ottenere e quale scopo raggiungere, poi si confrontano le macchine a disposizione. Che si tratti di lavapavimenti, spazzatrici o aspiratori, conta usarle nel modo più efficace e conoscere tutti gli accessori disponibili. Il valore aggiunto sta in questo: ottenere il massimo da uno strumento che è efficace, potente e sicuro.', 'Le macchine dedicate all\'industria sono pensate per lavorare per ore in continuità e offrono vantaggi che si personalizzano su ogni cliente. Il luogo, le condizioni e gli operatori cambiano da un cliente all\'altro, e le macchine si adattano a ogni situazione mantenendo standard di pulizia elevati.'] },
+        { h: 'Soluzioni diverse per ogni esigenza di pulizia industriale', b: ['Nell\'industria alimentare non basta curare la produzione: contano anche le richieste del cliente finale, in un quadro di normative rigide. Socaf offre una consulenza tecnica a 360°, sulle macchine per la pulizia e sui prodotti di detergenza, per rispettare le regole e ottimizzare il lavoro degli operatori in modo efficace.', 'Gli impianti sofisticati dell\'industria manifatturiera richiedono macchine per la pulizia specifiche, come i sistemi di lavaggio ad alta pressione e gli aspiratori industriali. La gamma Socaf copre applicazioni diverse e si adegua ai cambiamenti delle esigenze di ogni cliente.', 'Nell\'industria pesante lo sporco è voluminoso e le polveri sono fini. Socaf risponde con macchine robuste e versatili, in grado di servire anche i clienti con le richieste più elevate nelle situazioni più complesse, e le accompagna con affidabilità nel tempo e con un servizio post vendita rapido ed efficace.'] },
+        { b: ['Amica Chips pulisce i propri ambienti industriali con lavapavimenti uomo a terra, lavapavimenti uomo a bordo, aspiratori industriali e impianti fissi di lavaggio. Le macchine lavorano insieme a più tipi di detergenti e di attrezzature.'] },
+        { b: ['[DA DEFINIRE CON SOCAF: testo su igiene e sanificazione nell\'industria alimentare]'] },
+        { b: ['[DA DEFINIRE CON SOCAF: testo su come si dimensiona il parco macchine in un\'azienda industriale]'] }
+      ]
+    },
+    'imprese-di-pulizia': {
+      title: 'Forniture imprese di pulizia: macchine e servizi | Socaf',
+      meta: 'Forniture imprese di pulizia: lavapavimenti, spazzatrici e monospazzole, noleggio, formazione e assistenza sul campo. Richiedi informazioni.',
+      h1: 'Forniture per imprese di pulizia: flotta e servizi',
+      lede: 'Le forniture per imprese di pulizia devono seguire appalti diversi per ambienti, durata e margini. Socaf, attiva dal 1982, ti affianca nella scelta delle macchine e completa la fornitura con noleggio, formazione, assistenza sul campo e consulenza personalizzata. Lavapavimenti, spazzatrici e monospazzole sono la base della gamma per chi gestisce le pulizie per conto terzi.',
+      h2: { 6: 'Servizi e noleggio per le imprese di pulizia' },
+      tab: [
+        { h: 'Appalti diversi, una flotta flessibile', b: ['Un\'impresa di pulizia lavora su commesse in contesti molto diversi: industria, grande distribuzione, logistica, enti pubblici. Per questo cerca macchine semplici da usare per gli operatori e adattabili a ogni cantiere.', 'Gli appalti, piccoli o grandi, hanno committenti più esigenti e margini più ridotti. Conta scegliere la macchina giusta al primo acquisto, e Socaf ti indica quale attrezzatura serve in base agli spazi da pulire e ai tempi disponibili.'] },
+        { h: 'Lavapavimenti uomo a terra e compatte', b: ['Le lavapavimenti uomo a terra sono la base della flotta. La LA 410-15 B si muove con facilità anche in curva e tra gli spazi ingombrati, mentre la LA 430-30 - LA 500-30 è la lavapavimenti industriale della stessa famiglia.', 'Per i cantieri più piccoli, la VIVA si trasporta senza fatica grazie al manico pieghevole e la MINI, pensata per l\'uso commerciale, tiene separati i due serbatoi per garantire l\'igiene.'] },
+        { h: 'Spazzatrici e monospazzole', b: ['Le spazzatrici uomo a terra TK 306 e TK 506 sono compatte: la prima punta sulla massima efficienza, la seconda su efficacia e resistenza.', 'Per lavare e lucidare i pavimenti c\'è la monospazzola professionale SB 143 L. La HG 17 KR GRINDER è una monospazzola monofase che svolge anche la funzione di levigatrice.'] },
+        { h: 'Noleggio a lungo termine per ogni appalto', b: ['Il noleggio a lungo termine si calibra sulla durata effettiva dell\'appalto, da 24 a 60 mesi.', 'Per le monospazzole c\'è l\'usato garantito, con garanzia da 3 a 12 mesi. Socaf propone inoltre soluzioni finanziarie personalizzate, con più modalità di pagamento.'] },
+        { h: 'Formazione, assistenza sul campo e consulenza', b: ['La formazione dedicata prepara gli operatori che usano le macchine e i prodotti di detergenza. L\'assistenza sul campo riduce al minimo i fermi macchina.', 'La consulenza personalizzata ti porta alla soluzione più adatta alle esigenze di ogni commessa.'] },
+        { h: 'Come dimensionare la flotta di macchine', b: ['Progect ha scelto lavapavimenti uomo a bordo e spazzatrici dello stesso tipo, alimentate a batterie al litio e con la flotta geolocalizzata, per pulire sia le aree produttive sia gli uffici dei propri clienti.', '[DA SCRIVERE CON SOCAF: criteri per dimensionare la flotta di un\'impresa di pulizia in base al numero e al tipo di commesse]'] }
+      ],
+      faq: ['Quale macchina serve per un appalto di pulizia?', 'Quanto dura il noleggio a lungo termine?', 'Come si forma il personale sulle macchine?', 'Che assistenza è prevista in caso di fermo macchina?']
+    },
+    'horeca': {
+      title: 'Pulizie in hotel: macchine per l\'Ho.Re.Ca. | Socaf',
+      meta: 'Pulizie in hotel, ristoranti e bar: lavapavimenti, spazzatrici, idropulitrici e noleggio Socaf. Chiedi consulenza ai nostri tecnici.',
+      h1: 'Pulizie in hotel, ristoranti e bar con Socaf',
+      lede: ['In qualsiasi settore e ambiente di lavoro igiene e pulizia sono un requisito, e nell\'Horeca lo sono ancora di più. Il comparto riunisce aziende di catering, bar, ristoranti e hotel: per le pulizie in hotel, come negli altri locali, servono macchine e prodotti adatti agli spazi, alle superfici e al tipo di sporco da trattare.', 'Chi lavora a contatto con il pubblico deve accogliere i clienti e convincerli, curando ogni aspetto dell\'immagine del locale. Per chi entra, ordine, igiene e pulizia sono il primo indizio di un ambiente rassicurante, dove cenare con amici, gustare un piatto o dormire fuori casa. Il cliente che si sente sicuro e soddisfatto della scelta fatta torna più volentieri nello stesso locale.'],
+      tab: [
+        { h: 'Macchine e prodotti Socaf per chi possiede o gestisce hotel, ristoranti e bar', b: ['Per le pulizie in hotel, ristoranti e bar Socaf offre macchine, attrezzature horeca e prodotti chimici con cui pulire e igienizzare ogni giorno qualsiasi superficie: lavapavimenti, spazzatrici, idropulitrici e robot lavapavimenti. Il catalogo comprende anche lavatappezzeria per le superfici tessili e generatori di vapore per igienizzare. Formule e tecnologie sono sviluppate da Socaf per far risparmiare tempo e risorse ai professionisti del cleaning. Dal 1982 la gamma punta su semplicità d\'uso e su soluzioni calibrate sull\'ambiente di lavoro, per strutture dedicate a benessere, relax e ristoro, dove la pulizia incide sul giudizio dell\'ospite più esigente.'] },
+        { h: 'Pulizia di fondo anche in cucina, con Socaf', b: ['Nelle cucine lo sporco è intenso: serve una pulizia di fondo, oltre a quella quotidiana, per mantenere il livello di igiene che i clienti si aspettano. I tecnici specializzati di Socaf possono consigliarti e accompagnarti nella scelta del prodotto adatto, a seconda delle caratteristiche della tua attività e delle esigenze che hai, così con la macchina giusta ottieni un buon risultato di pulizia con meno fatica.'] },
+        { h: 'Una soluzione per ogni area', b: ['Nelle aree ad alto passaggio la polvere si accumula di continuo, quindi la pulizia deve essere profonda e frequente. La gamma Socaf di lavapavimenti, spazzatrici, idropulitrici e robot lavapavimenti copre il lavaggio e l\'igienizzazione di ambienti diversi: per ogni area trovi la macchina più adatta alle superfici e al livello di igiene richiesto.'] },
+        { b: ['Oltre all\'acquisto puoi noleggiare le macchine per la pulizia professionale e scegliere tra il noleggio a breve termine e il noleggio a lungo termine. Il noleggio a lungo termine ti dà un canone costante, nessun ammortamento, canoni interamente deducibili e un importo legato all\'effettivo tempo di utilizzo. Il noleggio riguarda lavapavimenti, spazzatrici e idropulitrici. Richiedi un preventivo per la formula più adatta alla tua attività.'] },
+        { b: ['Hai un ristorante, un hotel o un\'azienda di catering e cerchi un supporto concreto per la pulizia e l\'igienizzazione? L\'esperienza di Lupo Srl mostra come lavora chi sceglie Socaf nella ristorazione.', 'Lupo Srl, azienda partner di Socaf, usa i detergenti, gli accessori e le attrezzature Socaf, tra cui le lavapavimenti, per curare l\'immagine dei propri ristoranti. Punta così su qualità e stile nel servizio offerto ai clienti, con macchine e prodotti scelti appositamente per questo scopo.'] },
+        null
+      ]
+    },
+    'retail': {
+      title: 'Pulizia supermercati: macchine per il retail | Socaf',
+      meta: 'Pulizia supermercati e pulizie negozio: lavapavimenti, spazzatrici e robot lavapavimenti Socaf per aree di vendita affollate e tempi di intervento ridotti.',
+      h1: 'Pulizia supermercati: macchine per il retail',
+      lede: 'Pulizia supermercati, ipermercati e gallerie commerciali: Socaf propone al retail lavapavimenti, spazzatrici e robot lavapavimenti, con assistenza tecnica in loco.',
+      h2: { 4: 'Le macchine per i punti vendita', 6: 'Pulizia di supermercati e punti vendita' },
+      tab: [
+        { h: 'Nei supermercati e nelle gallerie commerciali la pulizia ha spazi affollati e tempi ridotti', b: ['Le aree di vendita di supermercati, ipermercati e gallerie commerciali sono affollate e il tempo per pulirle è poco. Contano produttività, velocità d\'esecuzione e affidabilità di lavapavimenti, spazzatrici e robot lavapavimenti: il lavoro resta di qualità, in sicurezza e senza rallentare il punto vendita.'] },
+        { h: 'Macchine e assistenza per i punti vendita', b: ['Socaf lavora con le principali catene della distribuzione, direttamente o attraverso imprese di servizio e cooperative. La gamma è tecnologicamente avanzata e l\'assistenza tecnica in loco limita i fermi macchina: in un punto vendita la rapidità di intervento conta quanto la produttività.', 'Le lavapavimenti uomo a terra puliscono le superfici di media dimensione ad alta frequentazione. Le spazzatrici uomo a terra, facilmente manovrabili e silenziose, servono la pulizia giornaliera di superfici medio-piccole, interne ed esterne. I robot lavapavimenti, dotati di sensori, lavorano senza guida dell\'operatore anche in ambienti trafficati.', 'Le macchine sono progettate tenendo conto di impatto ambientale, rumorosità e requisiti di sicurezza, e sono dotate di accessori per le diverse esigenze di pulizia.'] },
+        { h: 'L\'esperienza di Socaf nel cleaning', b: ['Socaf, Bottoni e Tecno Clean lavorano nel cleaning professionale dal 1982, dal 1983 e dal 1992 e oggi sono un\'unica azienda. Alle macchine si affiancano servizi accessori, attrezzature specifiche e prodotti complementari alla pulizia.', 'Lavapavimenti e spazzatrici sono disponibili a noleggio. Per la macchina che sostituisci c\'è la supervalutazione dell\'usato, e per l\'acquisto ci sono soluzioni finanziarie personalizzate, valide per tutta la gamma. I tecnici intervengono entro 48 ore dalla chiamata e prendono in carico anche richieste più urgenti.'] },
+        { b: ['Se gestisci una catena, un supermercato o un negozio e valuti nuove soluzioni di pulizia e sanificazione delle aree di vendita, Socaf ti propone lavapavimenti, spazzatrici e robot lavapavimenti da acquistare. Lavapavimenti e spazzatrici sono disponibili anche a noleggio.', 'Il Gigante, azienda della grande distribuzione presente dal 1972 in Lombardia, Piemonte ed Emilia Romagna con supermercati cittadini, centri commerciali e grandi superfici, ha scelto le lavapavimenti Socaf, fornite direttamente o tramite i suoi partner. Le macchine puliscono il pavimento e le altre superfici orizzontali dei punti vendita. Dal 2015 Socaf segue anche l\'assistenza tecnica di gran parte dei punti vendita, con interventi rapidi e macchine sostitutive quando servono.'] },
+        null, null
+      ]
+    },
+    'logistica': {
+      title: 'Attrezzature per la logistica: pulizia magazzini | Socaf',
+      meta: 'Attrezzature per la logistica: lavapavimenti, spazzatrici e robot per la pulizia di magazzini e capannoni. Chiedi una consulenza a Socaf.',
+      h1: 'Attrezzature per la logistica: pulire i magazzini',
+      lede: 'Nella logistica contano produttività, precisione e sicurezza: ogni attività di magazzino si svolge con rapidità e con il minimo di errori, e la pulizia deve inserirsi in questo ritmo senza rallentarlo. Le attrezzature per la logistica di Socaf comprendono lavapavimenti uomo a bordo per lavare le superfici, spazzatrici uomo a bordo per raccogliere polvere e residui e robot spazzatrici, macchine autonome per lo spazzamento. Il cliente sceglie le macchine in base agli spazi e ai flussi di lavoro, con la consulenza di Socaf. Una pulizia professionale mantiene gli spazi ordinati, sanificati e sicuri per chi ci lavora, e crea le condizioni per svolgere ogni mansione al meglio e aumentare la produttività.',
+      h2: { 6: 'Pulizia di magazzini e capannoni' },
+      tab: [
+        { h: 'La pulizia professionale rende gli spazi più sicuri', b: ['La pulizia di un capannone o di un magazzino si imposta su tre scelte: macchine adatte agli spazi, detergenti adatti allo sporco, assistenza dopo l\'acquisto. Socaf copre le tre aree con consulenza, macchine e prodotti di detergenza.'] },
+        { h: 'Socaf dal 1982: macchine robuste per situazioni difficili', b: ['Dal 1982 Socaf opera nel cleaning professionale e industriale con macchine di tecnologia avanzata, robuste, efficienti e adatte a lavorare anche in condizioni molto difficili. La consulenza e l\'assistenza post vendita si svolgono direttamente presso il cliente e riducono le ore in cui la macchina resta ferma, così il lavoro in magazzini e capannoni prosegue con meno interruzioni.'] },
+        { h: 'Noleggio Full Rent con assistenza', b: ['Lavapavimenti e spazzatrici si noleggiano in formula Full Rent, con durata breve o lunga. Il cliente usa la macchina per tutto il tempo che gli serve e ha la garanzia inclusa. Nel servizio rientra tutta l\'assistenza tecnica sulla macchina. Full Rent è la formula per chi vuole un canone costante nel tempo, senza imprevisti di spesa e senza doversi occupare della gestione del macchinario. Il canone fisso comprende uso, garanzia e assistenza insieme, in un\'unica voce.'] },
+        { b: ['Socaf affianca la fornitura delle macchine con altri servizi, riservati a tutta la clientela. La supervalutazione dell\'usato si applica all\'acquisto di una macchina nuova per la pulizia di magazzini e capannoni. Il pronto intervento è a disposizione del cliente. La consulenza aiuta a scegliere tra acquisto e noleggio e a individuare la macchina più indicata per le sue esigenze. I finanziamenti sono personalizzati e prevedono modalità di pagamento diverse.'] },
+        { b: ['XPO Logistics è un gruppo internazionale con sedi in tutta Europa: offre servizi logistici, di trasporto e di assistenza per la gestione della catena di approvvigionamento e lavora con clienti di ogni settore in tutto il mondo. Per pulire magazzini e capannoni ha scelto Socaf come partner: usa spazzatrici uomo a bordo e lavapavimenti uomo a bordo, in formula Full Rent, insieme ai prodotti di detergenza che Socaf ha selezionato per le sue esigenze. I detergenti sono scelti ad hoc per risolvere problemi di pulizia specifici, e l\'insieme di macchine e prodotti serve a sanificare gli spazi ogni giorno e a pulire a fondo, in modo completo, magazzini e capannoni, con efficienza e sicurezza per chi ci lavora.'] },
+        { b: ['[DA DEFINIRE CON SOCAF: testo su come si dimensiona il parco macchine in un\'azienda logistica]'] }
+      ]
+    },
+    'officine-metalmeccanica': {
+      title: 'Aspiratore da officina e metalmeccanica | Socaf',
+      meta: 'Aspiratore da officina Socaf: aspiratori per olio e trucioli, vasche lavapezzi e idropulitrici ad acqua calda per la metalmeccanica. Chiedi una consulenza.',
+      h1: 'Aspiratore da officina e macchine per la metalmeccanica',
+      lede: 'Un aspiratore da officina raccoglie polveri e residui di lavorazione e, nei modelli per olio e trucioli, anche oli ed emulsioni. Socaf, attiva dal 1982, completa la gamma per le officine e la metalmeccanica con vasche lavapezzi e idropulitrici ad acqua calda, e ti affianca nella scelta con una consulenza tecnica.',
+      h2: { 6: 'Pulizia in officina: dall\'aspirazione al lavaggio' },
+      tab: [
+        { h: 'Le esigenze di pulizia di un\'officina', b: ['In un\'officina lo sporco ha forme diverse: polveri, scarti solidi di lavorazione, oli, refrigeranti, emulsioni, trucioli, grasso su motori e componenti delle macchine. La scelta della macchina parte dal tipo di sporco da rimuovere.', 'Socaf risponde con tre famiglie di prodotto: aspiratori per olio e trucioli, vasche lavapezzi e idropulitrici ad acqua calda. Ognuna ha un compito preciso, descritto nelle sezioni che seguono.'] },
+        { h: 'Il lavaggio dei pezzi nelle vasche', b: ['Le vasche lavapezzi Socaf lavano pezzi di dimensioni diverse con processi di lavaggio diversi e sono disponibili in versione a caldo, a freddo o manuale. Un cestello rotante e ugelli ad alta pressione puliscono a fondo anche lo sporco ostinato.', 'La vasca accorcia i tempi di pulizia e riduce la fatica dell\'operatore. Il consumo d\'acqua è inferiore rispetto al lavaggio con acqua corrente, e puoi riscaldare sia l\'acqua sia i detergenti.'] },
+        { h: 'Aspiratore officina: oli e trucioli', b: ['Gli aspiratori Tecnoil, per uso continuo, raccolgono trucioli e liquidi di lavorazione: oli, refrigeranti ed emulsioni. Filtrano i liquidi e li rimettono nella macchina utensile.', 'Raccolgono anche polveri e scarti solidi, oltre ai liquidi misti a fango. Riducono il fermo macchina e permettono il riutilizzo dell\'olio refrigerante.'] },
+        { h: 'L\'acqua calda contro il grasso', b: ['Le idropulitrici ad acqua calda Socaf rimuovono sporco grasso e residui oleosi da motori e componenti delle macchine. La temperatura del getto sgrassa a fondo e riduce i tempi di pulizia.', 'Pressione dell\'acqua e calore della serpentina agiscono insieme, anche sulle superfici di grandi dimensioni, da lavare e asciugare rapidamente.'] },
+        { h: 'Come scegliere la macchina per l\'officina', b: ['La scelta dipende da tre elementi: il tipo di sporco, la dimensione dei pezzi da trattare e il processo di lavaggio. Per liquidi e trucioli di lavorazione servono gli aspiratori Tecnoil, per i pezzi le vasche lavapezzi, per il grasso su motori e superfici le idropulitrici ad acqua calda.', 'Per le vasche lavapezzi Socaf offre una consulenza che individua il modello adatto alle esigenze di ogni cliente.'] },
+        { b: ['[DA DEFINIRE CON SOCAF: testo su come si dimensiona il parco macchine in un\'officina]'] }
+      ],
+      faq: ['Quale aspiratore serve per oli, emulsioni e trucioli?', 'Come funziona una vasca lavapezzi?', 'A cosa serve l\'idropulitrice ad acqua calda?', 'Come scelgo la macchina giusta per la mia officina?']
+    },
+    'edilizia-cantieri': {
+      title: 'Aspirapolvere cantiere: polveri e detriti | Socaf',
+      meta: 'Aspirapolvere cantiere Socaf: aspiratori per polvere e detriti dei lavori edili, più idropulitrici e spazzatrici per l\'edilizia. Chiedi una consulenza.',
+      h1: 'Aspirapolvere cantiere e pulizia in edilizia',
+      lede: 'In edilizia l\'aspirapolvere da cantiere rimuove la polvere e i detriti che i lavori di costruzione e di ristrutturazione lasciano nelle aree di lavoro. Socaf lo affianca a idropulitrici autonome e spazzatrici stradali.',
+      h2: { 4: 'Le macchine per l\'edilizia e i cantieri', 9: 'Approfondimenti sulla pulizia in cantiere' }
+    }
+  };
+  /* COPY UX delle categorie di prodotto (documenti « D11 … copy per UX »).
+     Per ogni categoria con documento: title e meta, H1 (se cambia), testo introduttivo,
+     testo di approfondimento (blocco 6) eliminato, domande frequenti da definire con Socaf. */
+  var COPY_CAT = {
+    'attrezzature': { title: 'Attrezzature per imprese di pulizia | Socaf', meta: 'Attrezzature per imprese di pulizia e ambienti industriali: Socaf offre prodotti per la pulizia professionale e la consulenza per sceglierli.',
+      h1: 'Attrezzature per imprese di pulizia', lede: 'Socaf offre attrezzature per imprese di pulizia e per gli ambienti di lavoro che richiedono una pulizia professionale. La consulenza Socaf individua le attrezzature adatte alle caratteristiche di ogni cliente.' },
+    'carrelli-per-pulizie': { title: 'Carrelli per pulizie professionali | Socaf', meta: 'Carrelli per pulizie per trasportare gli accessori di lavoro. Chiedi a un consulente Socaf il carrello adatto alle tue esigenze.',
+      lede: 'I carrelli per pulizie professionali Socaf servono a trasportare gli accessori di lavoro durante le operazioni di pulizia.' },
+    'carta-e-dispenser': { title: 'Dispenser carta asciugamani e sapone | Socaf', meta: 'Dispenser carta asciugamani, sapone e carta igienica, più carta e TNT per la pulizia professionale. Chiedi un preventivo a Socaf.',
+      h1: 'Dispenser carta asciugamani, carta e TNT', lede: 'Socaf offre dispenser carta asciugamani, dispenser per il sapone e per la carta igienica, oltre a carta e TNT per la pulizia degli ambienti.' },
+    'detergenti-disinfettanti': { title: 'Detergenti disinfettanti e igienizzanti | Socaf', meta: 'Detergenti disinfettanti e igienizzanti Socaf: chiedi a un consulente quale prodotto usare in base all\'ambiente e alle superfici da trattare.',
+      lede: ['I detergenti disinfettanti e igienizzanti Socaf servono alla pulizia professionale di ambienti e superfici di lavoro.', '[DA DEFINIRE CON SOCAF: ambienti, superfici e funzioni d\'uso dei prodotti]'] },
+    'detergenti-enzimatici': { title: 'Detergenti enzimatici e detersivi enzimatici | Socaf', meta: 'Detergenti enzimatici e detersivi agli enzimi per la pulizia professionale. La consulenza Socaf indica il prodotto adatto a ogni cliente.',
+      lede: ['Socaf offre detergenti enzimatici e detersivi agli enzimi per la pulizia professionale. La consulenza Socaf individua i prodotti adatti alle caratteristiche di ogni cliente.', '[DA DEFINIRE CON SOCAF: che cosa sono i detergenti enzimatici della gamma, a che cosa servono e su quali superfici, pavimenti compresi]'] },
+    'detergenti-multiuso-sgrassanti': { title: 'Detergente multiuso e detergenti sgrassanti | Socaf', meta: 'Detergente multiuso e detergenti sgrassanti Socaf per la pulizia professionale, con consulenza per individuare il prodotto adatto.',
+      h1: 'Detergente multiuso e detergenti sgrassanti', lede: 'Il detergente multiuso e i detergenti sgrassanti Socaf servono alla pulizia professionale di superfici e ambienti di lavoro, anche in presenza di sporco grasso. Il servizio di consulenza Socaf aiuta a identificare il prodotto adatto a ogni cliente.' },
+    'detersivi-lavanderia-industriale': { title: 'Detersivi per lavatrici industriali | Socaf', meta: 'Detersivi per lavatrici industriali e detergenti per indumenti, liquidi e in polvere. Socaf affianca la scelta con un servizio di consulenza.',
+      h1: 'Detersivi per lavatrici industriali', lede: 'Socaf offre detersivi per lavatrici industriali e altri detergenti per il lavaggio degli indumenti. La consulenza Socaf individua il detersivo industriale per lavatrici adatto alle caratteristiche di ogni cliente.' },
+    'dispositivi-di-protezione-individuale': { title: 'Dispositivi di protezione individuale | Socaf', meta: 'Dispositivi di protezione individuale per la pulizia professionale: guanti, tute e mascherine. Chiedi a un consulente Socaf quelli adatti.',
+      lede: 'Socaf offre dispositivi di protezione individuale per la pulizia professionale: guanti, tute e mascherine in materiali e taglie diverse.' },
+    'ecolabel': { title: 'Detersivo Ecolabel: detergenti certificati | Socaf', meta: 'Detersivo Ecolabel e detergenti con certificazione Ecolabel per la pulizia professionale. Socaf affianca la scelta con un servizio di consulenza.',
+      h1: 'Detersivo Ecolabel e detergenti certificati', lede: 'Socaf offre il detersivo Ecolabel e altri detergenti con certificazione Ecolabel per la pulizia professionale.' },
+    'igiene-mani': { title: 'Pasta lavamani e sapone mani professionali | Socaf', meta: 'Pasta lavamani e sapone per le mani negli ambienti di lavoro: Socaf offre saponi in crema e in pasta e la consulenza per sceglierli.',
+      h1: 'Pasta lavamani e sapone per le mani', lede: 'Pasta lavamani e sapone per le mani: Socaf offre saponi in crema e in pasta per l\'igiene delle mani negli ambienti di lavoro.' },
+    'panni-stracci-microfibra': { title: 'Stracci per pavimenti e panni in microfibra | Socaf', meta: 'Stracci per pavimenti e panni in microfibra professionali: Socaf offre anche panni in camoscio sintetico e la consulenza per sceglierli.',
+      h1: 'Stracci per pavimenti, panni e microfibra', lede: 'Socaf offre stracci per pavimenti e panni in microfibra professionali, insieme a panni in camoscio sintetico. Per scegliere stracci e panni adatti a ogni cliente, Socaf offre un servizio di consulenza.' },
+    'sacchi': { title: 'Sacchi per rifiuti professionali | Socaf', meta: 'Sacchi per rifiuti in rotolo per pattumiere e raccolta nei luoghi di lavoro. Chiedi a un consulente Socaf quelli adatti alle tue esigenze.',
+      h1: 'Sacchi per rifiuti', lede: 'Socaf offre sacchi per rifiuti in rotolo per le pattumiere e la raccolta nei luoghi di lavoro.' }
+  };
+  function copyCategoria() {
+    if (document.body.dataset.istanza !== 'categoria') return;
+    var key = param('c') || 'detergenti-pavimenti-parquet', C = COPY_CAT[key];
+    var blocco = function (n) {
+      var id = [].slice.call(document.querySelectorAll('section.block > .block-id')).filter(function (s) { return new RegExp('^BLOCCO ' + n + '\\b').test(s.textContent.trim()); })[0];
+      return id ? id.parentNode : null;
+    };
+    /* blocco 6 su tutte le categorie: niente « Come si sceglie » a schede, ma una sezione statica
+       e breve che descrive i prodotti. Testo: i primi paragrafi reali da socaf.it, se ci sono;
+       altrimenti il segnaposto da compilare con Socaf. */
+    var b6d = blocco(6);
+    if (b6d) {
+      var par = [].slice.call(b6d.querySelectorAll('.testo p')).map(function (p) { return p.textContent.trim(); }).filter(Boolean).slice(0, 2);
+      var h2d = b6d.querySelector(':scope > h2');
+      [].slice.call(b6d.children).forEach(function (e) { if (e !== h2d && !e.classList.contains('block-id') && !e.classList.contains('dn-pin')) e.remove(); });
+      if (h2d) { h2d.removeAttribute('data-t'); h2d.textContent = 'Panoramica della categoria'; }
+      b6d.insertAdjacentHTML('beforeend', par.length
+        ? '<div class="testo descr-breve">' + par.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') + '</div>'
+        : serveInfo('[DA DEFINIRE CON SOCAF: descrizione breve dei prodotti della categoria]'));
+      var bid = b6d.querySelector('.block-id'); if (bid) bid.textContent = 'BLOCCO 6 · Descrizione breve dei prodotti — statica';
+    }
+    if (!C) return;
+    var h1 = document.querySelector('h1');
+    if (C.h1 && h1) {
+      document.title = document.title.replace(h1.textContent, C.h1);
+      document.querySelectorAll('.hidden-field').forEach(function (e) { e.innerHTML = e.innerHTML.split(h1.textContent).join(esc(C.h1)); });
+      h1.textContent = C.h1;
+    }
+    if (C.lede && h1) {
+      var ld = h1.parentNode.querySelector(':scope > .lede, :scope > .need-info');
+      var html = [].concat(C.lede).map(function (t) { return /^\[DA /.test(t) ? '<p class="lede"><span class="todo">' + esc(t) + '</span></p>' : '<p class="lede">' + esc(t) + '</p>'; }).join('');
+      if (ld) ld.outerHTML = html; else h1.insertAdjacentHTML('afterend', html);
+    }
+    /* domande frequenti: da definire con Socaf */
+    var b7 = blocco(7), fq = b7 && b7.querySelector('.faq');
+    if (fq) fq.outerHTML = serveInfo('[DA DEFINIRE CON SOCAF: domande frequenti sulla categoria]');
+    [['title', C.title], ['description', C.meta]].forEach(function (m) {
+      var el = document.head.querySelector('meta[name="' + m[0] + '"]');
+      if (!el) { el = document.createElement('meta'); el.name = m[0]; document.head.appendChild(el); }
+      el.content = m[1];
+    });
+    var dn0 = document.querySelector('.devnote');
+    if (dn0) dn0.insertAdjacentHTML('beforebegin', '<div class="devnote"><div class="dn-h">DEV NOTE — SEO della categoria (copy UX D11)</div><dl>' +
+      '<dt>Title</dt><dd>' + esc(C.title) + '</dd><dt>Meta description</dt><dd>' + esc(C.meta) + '</dd>' +
+      '<dt>Dove</dt><dd>Plugin SEO (Yoast / Rank Math) della pagina di categoria. Nel mockup sono anche nell\'<code>&lt;head&gt;</code>, generati dallo script.</dd>' +
+      '<dt>Testo di approfondimento</dt><dd>« Come si sceglie » tolto: al suo posto una descrizione breve e statica dei prodotti.</dd></dl></div>');
+  }
+
+  function copySettore() {
+    if (document.body.dataset.istanza !== 'settore') return;
+    var key = param('s') || 'industria', C = COPY_SETT[key]; if (!C) return;
+    var parag = function (arr) {
+      return [].concat(arr).map(function (t) {
+        return /^\[DA /.test(t) ? '<p><span class="todo">' + esc(t) + '</span></p>' : '<p>' + esc(t) + '</p>';
+      }).join('');
+    };
+    var blocco = function (n) {
+      var id = [].slice.call(document.querySelectorAll('section.block > .block-id')).filter(function (s) { return new RegExp('^BLOCCO ' + n + '\\b').test(s.textContent.trim()); })[0];
+      return id ? id.parentNode : null;
+    };
+    var h1 = document.querySelector('h1');
+    if (C.h1 && h1) {
+      document.title = document.title.replace(h1.textContent, C.h1);
+      document.querySelectorAll('.hidden-field').forEach(function (e) { e.innerHTML = e.innerHTML.split(h1.textContent).join(esc(C.h1)); });
+      h1.textContent = C.h1;
+    }
+    if (C.lede && h1) {
+      var ld = h1.parentNode.querySelector(':scope > .lede, :scope > .need-info');
+      var html = [].concat(C.lede).map(function (t) { return '<p class="lede">' + esc(t) + '</p>'; }).join('');
+      if (ld) { var nx; while ((nx = ld.nextElementSibling) && nx.classList.contains('lede')) nx.remove(); ld.outerHTML = html; }
+      else h1.insertAdjacentHTML('afterend', html);
+    }
+    Object.keys(C.h2 || {}).forEach(function (n) {
+      var b = blocco(n), h = b && b.querySelector(':scope > h2'); if (h) h.textContent = C.h2[n];
+    });
+    if (C.tab) {
+      var b6 = blocco(6);
+      var pezzi = b6 ? [].slice.call(b6.querySelectorAll(':scope > .testo, :scope > .need-info')) : [];
+      C.tab.forEach(function (t, i) {
+        var el = pezzi[i]; if (!t || !el) return;
+        var h = el.previousElementSibling;
+        if (t.h) { if (h && /^H[23]$/.test(h.tagName)) h.textContent = t.h; else el.insertAdjacentHTML('beforebegin', '<h3>' + esc(t.h) + '</h3>'); }
+        if (t.b) el.outerHTML = '<div class="testo">' + parag(t.b) + '</div>';
+      });
+    }
+    if (C.faq) {
+      var b7 = blocco(7);
+      if (b7) [].slice.call(b7.querySelectorAll('.faq summary')).forEach(function (s, i) { if (C.faq[i]) s.textContent = C.faq[i]; });
+    }
+    var segnaAlt = function (n, alts, sel) {
+      var b = blocco(n); if (!b || !alts) return;
+      [].slice.call(b.querySelectorAll(sel)).forEach(function (m, i) { if (i < alts.length) m.setAttribute('data-alt', alts[i]); });
+    };
+    segnaAlt(5, C.altProd, '.card-media');
+    segnaAlt(8, C.altRef, '.card-media');
+    /* SEO: nel codice e nelle note DEV */
+    [['title', C.title], ['description', C.meta]].forEach(function (m) {
+      var el = document.head.querySelector('meta[name="' + m[0] + '"]');
+      if (!el) { el = document.createElement('meta'); el.name = m[0]; document.head.appendChild(el); }
+      el.content = m[1];
+    });
+    var dn0 = document.querySelector('.devnote');
+    if (dn0) dn0.insertAdjacentHTML('beforebegin', '<div class="devnote"><div class="dn-h">DEV NOTE — SEO del settore (copy UX D9)</div><dl>' +
+      '<dt>Title</dt><dd>' + esc(C.title) + '</dd><dt>Meta description</dt><dd>' + esc(C.meta) + '</dd>' +
+      '<dt>Dove</dt><dd>Plugin SEO (Yoast / Rank Math) della pagina del settore. Nel mockup sono anche nell\'<code>&lt;head&gt;</code>, generati dallo script.</dd>' +
+      (C.altRef ? '<dt>Alt dei loghi</dt><dd>' + C.altRef.map(function (a) { return '«' + esc(a) + '»'; }).join(', ') + '</dd>' : '') +
+      (C.altProd ? '<dt>Alt dei prodotti</dt><dd>immagini decorative: alt vuoto</dd>' : '') + '</dl></div>');
+  }
+
   function schedeTesti() {
     document.querySelectorAll('section.block').forEach(function (blk) {
       var pezzi = [].slice.call(blk.querySelectorAll('.testo, .need-info')).filter(function (el) {
@@ -2337,7 +2809,7 @@
       var v = VARIANTI[file];
       if (v) { VARIANTI._n = (VARIANTI._n || 0) + 1; file = v[VARIANTI._n % v.length]; }
       m.className = 'card-media foto';
-      m.innerHTML = '<img src="' + BASE + 'assets/images/' + file + '.jpg" alt="' + nome.replace(/"/g, '') + '" loading="lazy">';
+      m.innerHTML = '<img src="' + BASE + 'assets/images/' + file + '.jpg" alt="' + (m.hasAttribute('data-alt') ? m.dataset.alt : nome).replace(/"/g, '') + '" loading="lazy">';
     });
 
     /* come in home: contenuti da leggere (testi, FAQ, tabelle, tappe, tab, sedi)
@@ -2358,7 +2830,7 @@
       if (!m || !/logo/i.test(m.textContent)) return;
       for (var i = 0; i < CLIENTI.length; i++) if (CLIENTI[i][0].test(nome)) {
         m.className = 'card-media marchio-logo cliente-logo';
-        m.innerHTML = '<img src="' + BASE + 'assets/' + CLIENTI[i][1] + '" alt="' + nome.replace(/"/g, '') + '">';
+        m.innerHTML = '<img src="' + BASE + 'assets/' + CLIENTI[i][1] + '" alt="' + (m.hasAttribute('data-alt') ? m.dataset.alt : nome).replace(/"/g, '') + '">';
         var l = c.querySelector('.card-link');
         if (l && CLIENTI[i][2]) {
           l.setAttribute('href', CLIENTI[i][2]); l.setAttribute('target', '_blank'); l.setAttribute('rel', 'noopener');
@@ -2467,7 +2939,7 @@
     if (righe[1] && righe[1].querySelector('.t-tabs') && testataB) {
       righe[0].classList.add('testata-breve');
       var ld = testataB.querySelector(':scope > .lede');
-      if (ld && ld.textContent.length > 240) {
+      if (ld && ld.textContent.length > 240 && slugP.indexOf('/azienda/') === 0) {   /* i testi d'apertura dei documenti copy UX non si accorciano */
         var tx = ld.textContent.trim(), frasi = tx.match(/[^.!?]+[.!?]+/g) || [tx], out = '';
         for (var fi = 0; fi < frasi.length; fi++) { if (out && (out + frasi[fi]).length > 220) break; out += frasi[fi]; }
         ld.textContent = out.trim();
@@ -2707,6 +3179,8 @@
     });
 
     riempiTesti();
+    copySettore();
+    copyCategoria();
     schedeTesti();
     heroLiquido();
     heroFluido();
