@@ -230,3 +230,13 @@ Le card usano le foto reali di `assets/STATICHE` (copie web in `assets/images/ca
 - (02/10) Chi siamo · sezione « Le persone »: foto segnaposto ritagliate dagli scatti Socaf in `assets/STATICHE` (operatori al lavoro); nomi e ruoli sono segnaposto `[Nome Cognome]` / `[Ruolo]`. Servono foto ritratto e dati delle persone dal cliente.
 - (02/10) Testate seguite da una sezione a schede: il testo d'apertura è accorciato automaticamente alla frase che chiude entro ~220 caratteri. Da validare con il cliente il testo breve definitivo.
 - (02/10) Lavora con noi · prima voce della lista: il titolo della sezione su socaf.it è una frase lunga (« Chi entra in Socaf trova un ambiente fatto di sguardi… »). Nella lista serve un'etichetta breve da concordare con il cliente.
+
+## OP-19 · Nuove famiglie Cucina e Lavanderia (13/10)
+**Richiesta CLIENTE**: sotto Macchine si aggiungono due famiglie.
+- **Cucina** → Lavabicchieri (2 prodotti), Lavapiatti (6), Addolcitori / Osmosi (2).
+- **Lavanderia** → Lavatrici, Essiccatoi (numero prodotti non indicato).
+
+**Fatto nel mockup**: dati in `assets/js/catalogo.js` (prodotti segnaposto `"ph":true`, nomi « Lavapiatti 1… »), menu Macchine, footer, home (blocco 2), stato vuoto della ricerca. Ordine: dopo Robot, prima di Altri macchinari.
+**INFERENZA da confermare**: indirizzi `/cucina/…` e `/lavanderia/…` e h1 delle pagine (nessun dato di ricerca); ordine nel menu; significato dell'asterisco su « Cucina* » nella tabella ricevuta.
+**Mancano**: contenuti delle schede prodotto (attesi la settimana del 19/10), numero di lavatrici ed essiccatoi, testi famiglia/sottocategoria, foto, flag noleggio/usato, settori collegati (Ho.Re.Ca. è il candidato ovvio, da confermare).
+**Documenti di input non aggiornati**: alberatura v02, menu F4 e Brief mockup parlano ancora di sei famiglie e 119 schede.

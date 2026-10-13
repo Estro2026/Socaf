@@ -7,7 +7,7 @@ Aggiorna `dev-estimate.md` (v1, 232 h + 8 h di buffer). Due cambiamenti di perim
    (bianco / vetro / contorno, azzurro sul bianco, varianti Noleggio rossa e Usato azzurra), le card cliccabili per intero
    e il copy UX di circa 50 pagine.
 2. **La migrazione rientra nelle 240 h**: import di 184 articoli, 119 schede macchina, ~30 pagine, media e PDF
-   dall'attuale sito Ghost (contenuti da headless CMS), più la compilazione dei dati delle schede.
+   dall'attuale sito (DatoCMS headless + front-end Gatsby), più la compilazione dei dati delle schede.
 
 Stack invariato: WordPress · ACF Pro · Elementor Pro · JetEngine · The SEO Framework · Code Snippets.
 
@@ -67,7 +67,7 @@ Le ore si recuperano così, senza togliere pagine, contenuti obbligatori, relazi
 | Componenti e template comprimibili di 1–2 h ciascuno grazie al mockup già validato | −7 | Meno giri di revisione con il cliente |
 
 **Condizioni del caso base** (se una salta, si scivola verso il caso peggiore):
-- Ghost fornisce un **export JSON completo** (post, tag, autori, immagini) e i 184 articoli non contengono shortcode o embed da riscrivere.
+- Socaf fornisce un **token API in sola lettura** di DatoCMS (lo genera un amministratore in Impostazioni → API tokens: DatoCMS non ha un tasto di esportazione, i contenuti si leggono via API). I modelli di contenuto sono ordinati e i 184 articoli non contengono blocchi modulari o embed da riscrivere.
 - Le specifiche tecniche delle 119 schede arrivano in **un foglio di calcolo** (o si possono leggere in modo affidabile dal sito attuale).
 - Immagini, PDF e cataloghi arrivano **pronti e nominati**; nessun ritocco o conversione manuale.
 - Le **decisioni di Socaf** (selezioni per settore, "le più richieste", formule del noleggio, open point) arrivano prima dell'area 7.
@@ -103,7 +103,7 @@ testi, H1, title e meta, alt. Gran parte arriva con l'import; le ore servono a r
 
 | Voce | Base | Peggiore | Rischio principale |
 | --- | ---: | ---: | --- |
-| Script di import (Ghost JSON / API → WordPress, media, slug invariati) | 8 | 12 | Contenuti dall'headless CMS non presenti nell'export |
+| Script di import (API DatoCMS → WordPress: lettura dei modelli, conversione dei campi « testo strutturato » in HTML, media, slug invariati) | 8 | 12 | Blocchi modulari e campi strutturati da convertire uno per uno |
 | 184 articoli: import, immagini, autori, date, verifica degli indirizzi | 6 | 14 | HTML sporco, embed, shortcode, immagini con nomi casuali |
 | 119 schede: CPT + ACF (specifiche, galleria, PDF, famiglia, settore, flag noleggio/usato) | 12 | 22 | Specifiche non strutturate: tabelle da ricomporre a mano |
 | ~30 pagine istituzionali e di servizio | 2 | 4 | — |
@@ -119,7 +119,7 @@ ma la scelta resta redazionale.
 
 | Causa | Ore in più | Probabilità | Come si previene |
 | --- | ---: | --- | --- |
-| Migrazione da Ghost/headless più sporca del previsto | +28 | **alta** | Chiedere subito export di prova e un campione di 10 schede |
+| Migrazione da DatoCMS più complessa del previsto (blocchi modulari, link interni, media) | +28 | **alta** | Ottenere subito il token API e leggere un campione di 10 schede e 10 articoli |
 | Comportamenti del mockup non nativi in Elementor (liste sticky, larghezze, strisce) | +8 | media | Prototipo tecnico su D1–D3 prima di estendere |
 | QA allargata: stati condizionali, schede "povere", 4 breakpoint | +8 | media | Checklist dal mockup, test su schede reali già nell'area 4 |
 | Conflitti di rewrite (tassonomia a base vuota contro le pagine) | +7 | media | Test in staging prima di popolare |
@@ -135,7 +135,7 @@ ma la scelta resta redazionale.
 ## Lettura per decidere
 
 - **240 h si tengono** solo alle condizioni del caso base: export pulito, dati delle schede in tabella, decisioni nei tempi, nessuna funzionalità nuova.
-- **Il rischio vero è la migrazione**: da sola vale fino a 28 h di scostamento. Un'**analisi preliminare dell'export Ghost (2–3 h, prima di firmare)** dice in quale scenario siamo.
+- **Il rischio vero è la migrazione**: da sola vale fino a 28 h di scostamento. Un'**analisi preliminare dei modelli DatoCMS via API (2–3 h, prima di firmare)** dice in quale scenario siamo.
 - Se il caso peggiore si avvicina, si **semplifica la resa**, non il perimetro: liste a schede non sticky, testate con immagine al posto del video, meno varianti visive. Ogni scelta vale 1–4 h.
 
 ---

@@ -27,7 +27,8 @@
     { label: 'Macchine', type: 'drop', note: 'Nessuna pagina propria', items: [
       ['Lavapavimenti', '/lavapavimenti/'], ['Spazzatrici', '/spazzatrici/'],
       ['Idropulitrici', '/idropulitrici/'], ['Aspiratori', '/aspiratori/'],
-      ['Robot', '/robot/'], ['Altri macchinari', '/altri-macchinari/']
+      ['Robot', '/robot/'], ['Cucina', '/cucina/'], ['Lavanderia', '/lavanderia/'],
+      ['Altri macchinari', '/altri-macchinari/']
     ]},
     { label: 'Noleggio', type: 'flat', href: '/noleggio/' },
     { label: 'Settori', type: 'drop', note: 'Nessuna pagina nel menu', items: [
@@ -164,7 +165,7 @@
       SEDI.map(function (s) { return '<li>' + a('/sedi/' + s.slug + '/', s.city + (s.main ? ' <span class="f-tag">sede principale</span>' : '')) + '</li>'; }).join('') +
       '</ul></div>' +
       '<div><h4>Catalogo</h4><ul>' +
-      ['lavapavimenti','spazzatrici','idropulitrici','aspiratori','robot','altri-macchinari'].map(function (f) {
+      ['lavapavimenti','spazzatrici','idropulitrici','aspiratori','robot','cucina','lavanderia','altri-macchinari'].map(function (f) {
         return '<li>' + a('/' + f + '/', CAT && CAT.FAMIGLIE[f] ? CAT.FAMIGLIE[f].nome : f) + '</li>';
       }).join('') +
       '<li>' + a('/prodotti-per-la-pulizia/', 'Prodotti per la pulizia') + '</li></ul></div>' +
@@ -347,12 +348,12 @@
     FONTE = '/' + key + '/';
 
     set('[data-sub-crumb-fam]', a('/' + s.fam + '/', fam.nome));
-    set('[data-sub-crumb]', esc(fam.nome + ' ' + s.nome.toLowerCase()));
+    set('[data-sub-crumb]', esc(fam.nuova ? s.nome : fam.nome + ' ' + s.nome.toLowerCase()));
     set('[data-sub-h1]', esc(s.h1));
     set('[data-sub-intro]', esc(fam.intro));
-    set('[data-sub-h2]', 'Le ' + esc(fam.nome.toLowerCase()) + ' ' + esc(s.nome.toLowerCase()));
+    set('[data-sub-h2]', fam.nuova ? esc(s.h1) : 'Le ' + esc(fam.nome.toLowerCase()) + ' ' + esc(s.nome.toLowerCase()));
     set('[data-sub-list]', list.map(cardMacchina).join(''));
-    set('[data-sub-count]', list.length + (list.length === 1 ? ' macchina' : ' macchine'));
+    set('[data-sub-count]', list.length ? list.length + (list.length === 1 ? ' macchina' : ' macchine') : 'Prodotti da definire');
     set('[data-sub-approf]', 'Come si sceglie: ' + esc(s.h1.toLowerCase()));
     set('[data-sub-faq-title]', 'Domande frequenti');
     set('[data-sub-words]', s.lungo ? 'LUNGHEZZA PREVISTA · 400–600 PAROLE — una delle 8 sottocategorie con domanda misurabile'
@@ -366,7 +367,7 @@
       return f === key ? '<span class="chip" aria-current="true">' + esc(t.nome) + '</span>'
                        : '<a class="chip" href="' + route('/' + f + '/') + '" data-url="/' + f + '/">' + esc(t.nome) + '</a>';
     }).join(''));
-    set('[data-sub-siblings-title]', 'Le altre ' + esc(fam.nome.toLowerCase()));
+    set('[data-sub-siblings-title]', 'Le altre ' + esc(fam.plur || fam.nome.toLowerCase()));
     promo(fam, '[data-sub-promo]');
     document.title = 'D2 · ' + s.h1 + ' — Wireframe Socaf';
     setBar('/' + key + '/ · sottocategoria di ' + fam.nome);
@@ -537,20 +538,20 @@
     set('[data-fam-crumb]', esc(f.nome));
     set('[data-fam-h1]', esc(f.h1));
     set('[data-fam-intro]', esc(C.intro || f.intro));
-    set('[data-fam-h2]', C.h2Sub ? esc(C.h2Sub) : 'Le tipologie di ' + esc(f.nome.toLowerCase()));
+    set('[data-fam-h2]', C.h2Sub ? esc(C.h2Sub) : 'Le tipologie di ' + esc(f.plur || f.nome.toLowerCase()));
     set('[data-fam-subs]', subs.map(function (sk) {
       var s = CAT.SOTTO[sk], n = (CAT.MACCHINE[sk] || []).length;
       return '<article class="card">' + (FOTO_SOTTO[sk] ? '<div class="card-media foto"><img src="' + BASE + 'assets/images/categorie/sub-' + sk.split("/")[1] + '.jpg" alt="' + esc((C.alt && C.alt[sk]) || s.h1) + '" loading="lazy"></div>' : '<div class="card-media ph ph-wide">Immagine sottocategoria</div>') +
         '<div class="card-body"><span class="card-name">' + esc(s.h1) + '</span>' +
-        '<span class="card-meta">' + n + (n === 1 ? ' macchina' : ' macchine') + '</span>' +
+        '<span class="card-meta">' + (n ? n + (n === 1 ? ' macchina' : ' macchine') : 'Prodotti da definire') + '</span>' +
         '<a class="card-link" href="' + route('/' + sk + '/') + '" data-url="/' + sk + '/">Vedi tutte</a></div></article>';
     }).join(''));
     /* Le più richieste: selezione commerciale Socaf — qui le prime della famiglia */
     var tutte = [];
     subs.forEach(function (sk) { tutte = tutte.concat(CAT.MACCHINE[sk] || []); });
     set('[data-fam-top]', tutte.slice(0, 6).map(cardMacchina).join(''));
-    set('[data-fam-top-title]', C.topTitle ? esc(C.topTitle) : 'Le ' + esc(f.nome.toLowerCase()) + ' più richieste');
-    set('[data-fam-approf]', C.h2Approf ? esc(C.h2Approf) : 'Come scegliere ' + (f.nome === 'Robot' ? 'un robot per la pulizia' : 'una ' + esc(f.nome.toLowerCase().replace(/i$/, 'e'))));
+    set('[data-fam-top-title]', C.topTitle ? esc(C.topTitle) : 'Le ' + esc(f.plur || f.nome.toLowerCase()) + ' più richieste');
+    set('[data-fam-approf]', C.h2Approf ? esc(C.h2Approf) : f.nuova ? 'Come scegliere: ' + esc(f.h1.toLowerCase()) : 'Come scegliere ' + (f.nome === 'Robot' ? 'un robot per la pulizia' : 'una ' + esc(f.nome.toLowerCase().replace(/i$/, 'e'))));
     set('[data-fam-words]', f.testoLungo ? 'LUNGHEZZA PREVISTA · 800–1200 PAROLE' : 'LUNGHEZZA PREVISTA · 250–350 PAROLE — testo breve, smistamento');
     set('[data-fam-others]', Object.keys(CAT.FAMIGLIE).map(function (k) {
       return k === key ? '<span class="chip" aria-current="true">' + esc(CAT.FAMIGLIE[k].nome) + '</span>'
@@ -558,7 +559,7 @@
     }).join(''));
     promo(f, '[data-fam-promo]', C.promo ? C : null);
     document.title = 'D3 · ' + f.h1 + ' — Wireframe Socaf';
-    setBar('/' + key + '/ · una delle 6 famiglie');
+    setBar('/' + key + '/ · una delle ' + Object.keys(CAT.FAMIGLIE).length + ' famiglie' + (f.nuova ? ' · famiglia nuova, contenuti in arrivo' : ''));
   }
 
   function renderScheda() {
@@ -576,7 +577,7 @@
     set('[data-m-crumb]', esc(m.nome));
     set('[data-m-nome]', esc(m.nome));
     set('[data-m-desc]', esc(m.desc || ''));
-    set('[data-m-correlate-title]', 'Altre ' + esc(f.nome.toLowerCase()) + ' ' + esc(s.nome.toLowerCase()));
+    set('[data-m-correlate-title]', f.nuova ? 'Altri modelli di ' + esc(s.nome.toLowerCase()) : 'Altre ' + esc(f.nome.toLowerCase()) + ' ' + esc(s.nome.toLowerCase()));
     set('[data-m-correlate]', correlate.map(cardMacchina).join(''));
     set('[data-m-tags]',
       (m.noleggio ? '<span class="tag tag-nol">Disponibile a noleggio</span>' : '') +
@@ -2601,6 +2602,8 @@
       'idropulitrici': '<path d="M3 8h10l3 3v2h-3l-1 7H8l1-7H3z"/><path d="M17 10h3M18.5 6.5l2-1M18.5 13.5l2 1"/>',
       'aspiratori': '<rect x="5" y="8" width="11" height="11" rx="3"/><path d="M10.5 8V4h6l3 4"/><circle cx="8" cy="21" r="1"/><circle cx="13" cy="21" r="1"/>',
       'robot': '<rect x="5" y="8" width="14" height="10" rx="3"/><path d="M12 4v4"/><circle cx="12" cy="3" r="1"/><circle cx="9.5" cy="13" r="1"/><circle cx="14.5" cy="13" r="1"/>',
+      'cucina': '<path d="M4 10h16v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M3 10h18M9 6c0-1 1-1 1-2M13 6c0-1 1-1 1-2"/>',
+      'lavanderia': '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 7h16M7 5h1"/><circle cx="12" cy="14" r="4"/>',
       'altri-macchinari': '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'
     };
   function scenaInterna() {
@@ -2867,7 +2870,7 @@
     righe.slice(1).forEach(function (r) {
       var g = r.querySelector('.grid'); if (!g || r.querySelector('.chips')) return;
       var cards = [].slice.call(g.querySelectorAll(':scope > .card'));
-      var RE = /^\/(lavapavimenti|spazzatrici|idropulitrici|aspiratori|robot|altri-macchinari)\/$/;
+      var RE = /^\/(lavapavimenti|spazzatrici|idropulitrici|aspiratori|robot|cucina|lavanderia|altri-macchinari)\/$/;
       if (cards.length < 2 || !cards.every(function (c) { var l = c.querySelector('.card-link'); return l && RE.test(l.getAttribute('data-url') || ''); })) return;
       var html = cards.map(function (c) { var l = c.querySelector('.card-link'), n = (c.querySelector('.card-name') || {}).textContent || '';
         return '<a class="chip" href="' + l.getAttribute('href') + '" data-url="' + l.getAttribute('data-url') + '">' + n.trim() + '</a>'; }).join('');
