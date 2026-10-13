@@ -8391,3 +8391,9 @@ body[data-pagina="home"] .hero-stats > div > span{display:block;max-width:none;w
   background:#fff !important;box-shadow:0 10px 22px -14px rgba(90,0,12,.55),inset 0 0 0 1px rgba(255,255,255,.9) !important;filter:none !important}
 :is(#_s,.row-settori,.row-striscia):is(#_s5,*):is(#_s8,*) .tile:is(:hover,:focus-visible) .tile-img{background:#fff !important;transform:translateY(-4px) scale(1.04);
   box-shadow:0 16px 28px -14px rgba(90,0,12,.6) !important}
+
+/* ================= 220. Scheda macchina · « Dove si usa »: icone settore illustrate, versione azzurra (cartella « icone settori V01/azzurre ») =================
+   stessa resa della home: illustrazione piena nel cerchio bianco, senza il padding del disegno a linea */
+:is(#_s,.striscia-scheda):is(#_s5,*):is(#_s8,*) .tile .tile-img{width:72px !important;height:72px !important;padding:4px !important;object-fit:contain;
+  background:#fff !important;box-shadow:0 10px 22px -14px rgba(2,85,179,.45),inset 0 0 0 1px rgba(0,133,207,.18) !important;filter:none !important}
+:is(#_s,.striscia-scheda):is(#_s5,*):is(#_s8,*) .tile:is(:hover,:focus-visible) .tile-img{transform:translateY(-4px) scale(1.04)}

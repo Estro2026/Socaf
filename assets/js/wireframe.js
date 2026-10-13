@@ -2606,6 +2606,15 @@
       'lavanderia': '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 7h16M7 5h1"/><circle cx="12" cy="14" r="4"/>',
       'altri-macchinari': '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'
     };
+    /* settori: icone illustrate della cartella « icone settori V01 » al posto del disegno a linea,
+       come in home (« Soluzioni per ogni settore »); nella scheda macchina la versione azzurra */
+    var ICONE_SETT = { 'industria': 'industriaV01', 'imprese-di-pulizia': 'imppulizieV01', 'horeca': 'HORECAV01', 'retail': 'retailV01',
+      'logistica': 'logisticaV01', 'officine-metalmeccanica': 'officinaV01', 'edilizia-cantieri': 'ediliziaV01' };
+    function icoTile(k, azzurra) {
+      if (ICONE_SETT[k]) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/settori/' +
+        (azzurra ? 'azzurre/' + ICONE_SETT[k] + 'azz' : ICONE_SETT[k]) + '.webp" alt="" aria-hidden="true">';
+      return '<svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONE[k] || ICONE['altri-macchinari']) + '</svg>';
+    }
   function scenaInterna() {
     if (document.body.dataset.pagina === 'home' || document.querySelector('.mood')) return;
     if (!document.body.dataset.slug) {   /* indirizzo della pagina, per regole di pagina (es. testate in nero) */
@@ -2656,7 +2665,7 @@
       Object.keys(ICONE).forEach(function (x) { if (!k && (u.indexOf('/' + x + '/') > -1 || u.indexOf('=' + x) > -1)) k = x; });
       var nm = c.textContent.trim();
       c.className = 'tile';
-      c.innerHTML = '<svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONE[k] || ICONE['altri-macchinari']) + '</svg><span>' + nm + '</span>';
+      c.innerHTML = icoTile(k, true) + '<span>' + nm + '</span>';
     });
   });
   /* galleria della scheda senza foto: foto del modello se esiste, altrimenti quella della famiglia */
@@ -2909,7 +2918,7 @@
         if (!chiave) { var t = c.textContent.toLowerCase(); Object.keys(ICONE).forEach(function (k) { if (!chiave && t.indexOf(k.split('-')[0].slice(0, 6)) > -1) chiave = k; }); }
         var nome = c.textContent.trim();
         c.className = 'tile' + (c.getAttribute('aria-current') || c.classList.contains('is-active') ? ' is-corrente' : '');
-        c.innerHTML = '<svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONE[chiave] || ICONE['altri-macchinari']) + '</svg><span>' + nome + '</span>';
+        c.innerHTML = icoTile(chiave, false) + '<span>' + nome + '</span>';
       });
     });
 
