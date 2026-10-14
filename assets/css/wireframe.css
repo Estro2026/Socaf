@@ -8397,3 +8397,79 @@ body[data-pagina="home"] .hero-stats > div > span{display:block;max-width:none;w
 :is(#_s,.striscia-scheda):is(#_s5,*):is(#_s8,*) .tile .tile-img{width:72px !important;height:72px !important;padding:4px !important;object-fit:contain;
   background:#fff !important;box-shadow:0 10px 22px -14px rgba(2,85,179,.45),inset 0 0 0 1px rgba(0,133,207,.18) !important;filter:none !important}
 :is(#_s,.striscia-scheda):is(#_s5,*):is(#_s8,*) .tile:is(:hover,:focus-visible) .tile-img{transform:translateY(-4px) scale(1.04)}
+
+/* ================= 221. Scheda macchina · primo contenitore tutto in viewport (desktop) =================
+   galleria a sinistra, nome · etichette · descrizione · CTA a destra; la foto si adatta all'altezza
+   disponibile sotto header e briciole, le miniature stanno su una riga sola, tre per riga */
+@media (min-width:1024px){
+  .scheda-mosaico .block.pagina-intro{display:grid !important;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+    grid-template-rows:auto 1fr;column-gap:36px;row-gap:14px;align-items:start;padding:32px 36px !important}
+  .scheda-mosaico .pagina-intro > .block-id,.scheda-mosaico .pagina-intro > .small{grid-column:1 / -1}
+  .scheda-mosaico .pagina-intro > .grid-2{display:contents}
+  .scheda-mosaico .pagina-intro [data-gallery]{grid-column:1;grid-row:1 / span 2}
+  .scheda-mosaico .pagina-intro .intro-testata{grid-column:2;grid-row:1}
+  .scheda-mosaico .pagina-intro .stack{grid-column:2;grid-row:2;max-width:none !important;width:auto !important}
+  .scheda-mosaico .pagina-intro .gallery-main{aspect-ratio:auto !important;height:clamp(220px, calc(100svh - 470px), 520px) !important}
+  .scheda-mosaico .pagina-intro .gallery-main img{width:100%;height:100%;object-fit:contain}
+  .scheda-mosaico .pagina-intro .thumbs{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px !important;margin-top:12px;max-width:330px}
+  .scheda-mosaico .pagina-intro .thumbs .thumb{width:auto !important;height:auto !important;aspect-ratio:1}
+}
+@media (min-width:1024px){
+  /* titolo dimensionato sulla colonna (non sulla pagina): « LA 511-40 BT » resta su una riga */
+  :is(#_i,.scheda-mosaico) .pagina-intro .intro-testata h1{font-size:clamp(36px,3.6vw,60px) !important}
+  :is(#_pi,.scheda-mosaico):is(#_pi2,*):is(#_pi3,*):is(#_pi4,*) .block.pagina-intro{padding:30px 34px !important}
+  :is(#_pi,.scheda-mosaico):is(#_pi2,*):is(#_pi3,*) .pagina-intro .intro-testata{gap:10px !important;row-gap:10px !important}
+  /* descrizione lunga: 3 righe, poi « Leggi tutto » (wireframe.js) */
+  .scheda-mosaico .stack > p.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .scheda-mosaico .leggi-tutto{background:none;border:0;padding:0;margin-top:-6px;font:inherit;font-weight:600;
+    color:#0255b3;text-decoration:underline;cursor:pointer;justify-self:start;align-self:flex-start}
+  :is(#_pi,.scheda-mosaico):is(#_pi2,*):is(#_pi3,*) .pagina-intro .intro-testata{grid-template-columns:minmax(0,1fr) !important}
+  :is(#_pi,.scheda-mosaico):is(#_pi2,*):is(#_pi3,*) .pagina-intro .intro-testata > *{min-width:0;max-width:100% !important;width:auto !important}
+  .scheda-mosaico .pagina-intro .stack .btn{white-space:nowrap}
+  .scheda-mosaico .pagina-intro .stack > div[style*="flex"]{gap:10px !important}
+}
+@media (max-width:1023px){.scheda-mosaico .leggi-tutto{display:none}}
+
+/* ================= 222. Home · card Noleggio: la foto resta dentro la card, angoli come le altre card =================
+   la foto ha un margine di 10px sopra e a sinistra ma non sotto: con height:100% usciva in basso;
+   ora riempie la cella della griglia (stretch) e ha gli stessi angoli tondi di « Usato garantito » */
+@media (min-width:980px){
+  :is(#_f,body)[data-pagina="home"] .row-formule .formula-nol .formula-art{height:auto !important;align-self:stretch;margin:10px !important;border-radius:30px !important}
+}
+
+/* ================= 224. Contatti · link « Pronto intervento » / « Lavora con noi » sulla testata rossa =================
+   il triangolo del link è rosso VI: sul rosso della testata spariva. Qui diventa bianco come il testo */
+:is(#_c,.pagina-intro):is(#_c2,*) .notice .btn-link::before{border-left-color:#fff !important}
+
+
+/* ================= 225. Contatti · « Dove siamo »: Google Maps dell'Italia + cinque marcatori (wireframe.js · renderMappaSedi) =================
+   la mappa è ferma (pointer-events:none) perché i marcatori sono calcolati su centro e zoom fissi */
+.mappa-sedi{position:relative;height:clamp(300px,calc(100svh - 360px),480px);border-radius:30px;overflow:hidden;background:#e9eff3;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.08)}
+.mappa-sedi iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;pointer-events:none}
+.mappa-pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:6px;
+  text-decoration:none !important;color:#001e2a;z-index:2}
+.mappa-pin:is(:hover,:focus-visible){z-index:4}
+.mappa-pin .mappa-punto{order:2;width:20px;height:20px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#e4002b;
+  box-shadow:0 0 0 3px #fff,0 8px 16px -6px rgba(163,16,0,.6);transition:transform .25s ease}
+.mappa-pin.is-main .mappa-punto{width:26px;height:26px}
+/* le sedi sono vicine: il nome compare al passaggio (sempre visibile solo per la sede principale) */
+:is(#_m,.mappa-sedi):is(#_m2,*):is(#_m3,*) .mappa-pin .mappa-nome{color:#001e2a !important}
+.mappa-pin .mappa-nome{order:1;background:#fff;color:#001e2a !important;-webkit-text-fill-color:currentColor !important;border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px;white-space:nowrap;
+  box-shadow:0 8px 20px -12px rgba(0,30,42,.45);opacity:0;transform:translateY(4px);transition:opacity .2s ease,transform .2s ease;pointer-events:none}
+.mappa-pin.is-main .mappa-nome,.mappa-pin:is(:hover,:focus-visible) .mappa-nome{opacity:1;transform:none}
+:is(#_m,.mappa-sedi):is(#_m2,*):is(#_m3,*) .mappa-pin:is(:hover,:focus-visible) .mappa-nome{background:#e4002b;color:#fff !important}
+:is(#_m,.mappa-sedi):is(#_m2,*):is(#_m3,*):is(#_m4,*) .mappa-pin:is(:hover,:focus-visible) .mappa-nome small{color:#fff !important}
+.mappa-sedi:has(.mappa-pin:not(.is-main):is(:hover,:focus-visible)) .mappa-pin.is-main .mappa-nome{opacity:0}
+:is(#_m,.mappa-sedi):is(#_m2,*):is(#_m3,*) .mappa-pin .mappa-nome small{font-weight:500;color:#e4002b !important;margin-left:4px}
+.mappa-pin:is(:hover,:focus-visible) .mappa-punto{transform:rotate(-45deg) scale(1.18)}
+@media (max-width:640px){.mappa-sedi{height:clamp(260px,60svh,420px)}}
+
+/* ================= 226. Scheda sede · « Come arrivare »: Google Maps sull'indirizzo della sede ================= */
+.mappa-sede{position:relative;height:clamp(240px,calc(100svh - 380px),520px);border-radius:30px;overflow:hidden;background:#e9eff3;box-shadow:inset 0 0 0 1px rgba(0,30,42,.08)}
+/* la mappa esce di 180px per lato: il riquadro di Google in alto a sinistra (« Apri in Maps ») e i comandi
+   restano fuori vista; il segnaposto sull indirizzo resta al centro. Non cliccabile: nessun rimando a Maps */
+.mappa-sede iframe{position:absolute;top:-180px;left:-180px;width:calc(100% + 360px);height:calc(100% + 360px);border:0;display:block;pointer-events:none}
+@media (max-width:640px){.mappa-sede{height:clamp(220px,55svh,360px)}}
+
+.mappa-indirizzo{margin:14px 0 0;font-size:15px}

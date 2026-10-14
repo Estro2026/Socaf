@@ -337,6 +337,68 @@
   /* ======================================================================
      5 · TEMPLATE DI CATALOGO alimentati dai dati reali
      ====================================================================== */
+  /* MAPPA DELLE SEDI (Contatti · « Dove siamo »): Google Maps dell'Italia (embed senza chiave API)
+     con sopra i cinque marcatori. L'embed è fermo (niente trascinamento): i marcatori sono
+     posizionati con la proiezione di Google (Web Mercator) sul centro e sullo zoom della mappa,
+     e restano allineati. Nel sito vero: widget Google Maps con marcatori multipli (DEV NOTE 112). */
+  var COORD_SEDI = { 'osio-sotto': [45.6386, 9.6012], 'brescia': [45.4703, 10.3009], 'milano': [45.5146, 9.0543],
+    'verona': [45.4947, 10.8558], 'pordenone': [45.9808, 12.7013] };
+  function renderMappaSedi() {
+    /* scheda sede · « Come arrivare »: Google Maps sull'indirizzo della sede (embed senza chiave API) */
+    var phSede = document.querySelector('.ph-map[data-mappa-sede]');
+    if (phSede) {
+      var sd = SEDI.filter(function (s) { return s.slug === (param('sede') || 'osio-sotto'); })[0] || SEDI[0];
+      var q = encodeURIComponent(sd.co + ', ' + sd.addr);
+      var mp = document.createElement('div');
+      mp.className = 'mappa-sede';
+      mp.innerHTML = '<iframe title="Mappa Google: ' + esc(sd.co + ', ' + sd.addr) + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ' +
+        'src="https://maps.google.com/maps?q=' + q + '&z=15&hl=it&output=embed" tabindex="-1"></iframe>';
+      phSede.replaceWith(mp);
+      var nota = document.createElement('p'); nota.className = 'mappa-indirizzo';
+      nota.textContent = sd.co + ' · ' + sd.addr;   /* solo l'indirizzo: nessun rimando a Google Maps fuori dalla mappa */
+      mp.insertAdjacentElement('afterend', nota);
+    }
+    var ph = document.querySelector('.ph-map[data-mappa-sedi]');
+    if (!ph) return;
+    var CENTRO = [42.1, 12.6];   /* centro dell'Italia, così entra tutta la penisola */
+    var box = document.createElement('div');
+    box.className = 'mappa-sedi';
+    box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'Mappa delle cinque sedi Socaf');
+    ph.replaceWith(box);
+    function merc(lat, lon, z) {
+      var s = 256 * Math.pow(2, z), r = lat * Math.PI / 180;
+      return [s * (lon + 180) / 360, s * (0.5 - Math.log(Math.tan(Math.PI / 4 + r / 2)) / (2 * Math.PI))];
+    }
+    var zoomFatto = null;
+    function disegna() {
+      var w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+      /* zoom più alto che contiene tutta l'Italia (lat 36.6–47.1, lon 6.6–18.6) */
+      var z = 7;
+      while (z > 3) {
+        var a = merc(47.1, 6.6, z), b = merc(36.6, 18.6, z);
+        if (b[0] - a[0] <= w * 1.02 && b[1] - a[1] <= h * 1.02) break;
+        z--;
+      }
+      if (z !== zoomFatto) {
+        zoomFatto = z;
+        box.innerHTML = '<iframe title="Mappa Google dell\'Italia con le sedi Socaf" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1" ' +
+          'src="https://maps.google.com/maps?ll=' + CENTRO[0] + ',' + CENTRO[1] + '&z=' + z + '&t=m&hl=it&output=embed"></iframe>' +
+          SEDI.map(function (s) {
+            return COORD_SEDI[s.slug] ? '<a class="mappa-pin' + (s.main ? ' is-main' : '') + '" data-sede="' + s.slug + '" href="' + route('/sedi/' + s.slug + '/') + '" data-url="/sedi/' + s.slug + '/" aria-label="Sede di ' + esc(s.city) + '">' +
+              '<span class="mappa-punto" aria-hidden="true"></span><span class="mappa-nome">' + esc(s.city) + (s.main ? ' <small>sede principale</small>' : '') + '</span></a>' : '';
+          }).join('');
+      }
+      var c = merc(CENTRO[0], CENTRO[1], z);
+      box.querySelectorAll('.mappa-pin').forEach(function (p) {
+        var k = COORD_SEDI[p.dataset.sede], m = merc(k[0], k[1], z);
+        p.style.left = (w / 2 + m[0] - c[0]) + 'px';
+        p.style.top = (h / 2 + m[1] - c[1]) + 'px';
+      });
+    }
+    disegna();
+    var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(disegna, 150); });
+  }
+
   function renderSottocategoria() {
     var host = document.querySelector('[data-tpl="sottocategoria"]');
     if (!host || !CAT) return;
@@ -606,7 +668,9 @@
   var FOTO_SOTTO = { 'lavapavimenti/lavapavimenti-piccole': 1, 'lavapavimenti/lavapavimenti-uomo-terra': 1,
     'lavapavimenti/lavapavimenti-uomo-bordo': 1, 'lavapavimenti/lavapavimenti-combinate': 1, 'lavapavimenti/i-mop': 1,
     'spazzatrici/spazzatrici-uomo-terra': 1, 'spazzatrici/spazzatrici-uomo-bordo': 1,
-    'idropulitrici/idropulitrici-ad-acqua-fredda': 1 };
+    'idropulitrici/idropulitrici-ad-acqua-fredda': 1,
+    /* Cucina e Lavanderia: foto Socaf generiche (scaffali prodotti), SEGNAPOSTO in attesa di foto delle macchine */
+    'cucina/lavabicchieri': 1, 'cucina/lavapiatti': 1, 'cucina/addolcitori-osmosi': 1, 'lavanderia/lavatrici': 1, 'lavanderia/essiccatoi': 1 };
   function promo(f, sel, C) {
     var el = document.querySelector(sel); if (!el) return;
     var h = '', P = C ? COPY_UX_PROMO : null, X = C ? C.promo : {};
@@ -2219,7 +2283,7 @@
         testi.forEach(function (t) { t.style.maxWidth = ''; t.style.width = ''; });
         var rg = document.createRange(); rg.selectNodeContents(h);
         var w = 0; [].forEach.call(rg.getClientRects(), function (r) { w = Math.max(w, r.right - h.getBoundingClientRect().left); });
-        if (w > 0) testi.forEach(function (t) { var px = Math.max(Math.ceil(w), 380); t.style.setProperty('max-width', 'calc(100vw - 32px)', 'important'); t.style.setProperty('width', px + 'px', 'important'); });
+        if (w > 0) testi.forEach(function (t) { var px = Math.min(Math.max(Math.ceil(w), 380), b.clientWidth || Infinity); /* mai più largo del contenitore */ t.style.setProperty('max-width', 'calc(100vw - 32px)', 'important'); t.style.setProperty('width', px + 'px', 'important'); });
       });
     }
     misura();
@@ -2668,6 +2732,19 @@
       c.innerHTML = icoTile(k, true) + '<span>' + nm + '</span>';
     });
   });
+  /* primo contenitore in viewport: la descrizione lunga si ferma a 3 righe, « Leggi tutto » la apre */
+  document.querySelectorAll('.scheda-mosaico [data-gallery] ~ .stack > p').forEach(function (p) {
+    if (!p.offsetParent) return;
+    p.classList.add('clamp');
+    if (p.scrollHeight <= p.clientHeight + 2) { p.classList.remove('clamp'); return; }
+    var bt = document.createElement('button');
+    bt.type = 'button'; bt.className = 'leggi-tutto'; bt.textContent = 'Leggi tutto'; bt.setAttribute('aria-expanded', 'false');
+    bt.addEventListener('click', function () {
+      var aperto = p.classList.toggle('clamp') === false;
+      bt.textContent = aperto ? 'Mostra meno' : 'Leggi tutto'; bt.setAttribute('aria-expanded', String(aperto));
+    });
+    p.insertAdjacentElement('afterend', bt);
+  });
   /* galleria della scheda senza foto: foto del modello se esiste, altrimenti quella della famiglia */
   var nomeM = ((document.querySelector('[data-m-nome]') || {}).textContent || '').trim();
   var chiaveM = nomeM.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -2681,7 +2758,10 @@
     var alt = ['categorie/fam-' + famM, 'categorie/sub-lavapavimenti-uomo-terra', 'categorie/formula-noleggio'];
     [].forEach.call(document.querySelectorAll('.thumb.ph'), function (t, i) {
       if (!t.offsetParent) return;
-      t.className = 'thumb foto' + (i === 0 ? ' is-attiva' : '');
+      /* miniatura cliccabile: diventa un pulsante, come quelle delle schede con foto reali */
+      var bt = document.createElement('button'); bt.type = 'button';
+      bt.className = 'thumb foto' + (i === 0 ? ' is-attiva' : ''); bt.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      t.replaceWith(bt); t = bt;
       t.innerHTML = '<img src="' + BASE + 'assets/images/' + (i === 0 ? fotoM : alt[i % alt.length]) + '.jpg" alt="">';
     });
   }
@@ -2782,12 +2862,13 @@
       [/lavapavimenti|lavasciuga/i, 'fam-lavapavimenti'], [/spazzatric/i, 'fam-spazzatrici'],
       [/idropulitric/i, 'fam-idropulitrici'], [/aspirator/i, 'fam-aspiratori'],
       [/robot/i, 'fam-robot'], [/altri macchinari/i, 'fam-altri-macchinari'],
+      [/cucina|lavabicchier|lavapiatt|addolcitor|osmosi/i, 'fam-cucina'], [/lavanderia|lavatric|essiccato/i, 'fam-lavanderia'],
       [/lavamoquette|lavatappezz|monospazzol|vapore|lavapezzi|generator/i, 'fam-altri-macchinari']
     ];
     /* modelli con foto reale (assets/images/macchine, ricavate da assets/STATICHE) */
     var MODELLI = ['mini', 'viva', 'la-360-8-b', 'la-410-15-b', 'la-510-40-bt', 'la-560-67-b', 'la-660-110-b', 'la-700-110-r',
       'la-1300-280-r', 'sp-1300', 'tk-306', 'tk-706', 'af-k-120-11', 'af-k-200-15'];
-    var FAMIGLIE_FOTO = ['lavapavimenti', 'spazzatrici', 'idropulitrici', 'aspiratori', 'robot', 'altri-macchinari'];
+    var FAMIGLIE_FOTO = ['lavapavimenti', 'spazzatrici', 'idropulitrici', 'aspiratori', 'robot', 'cucina', 'lavanderia', 'altri-macchinari'];
     var VARIANTI = { 'categorie/fam-aspiratori': ['categorie/fam-aspiratori', 'categorie/asp-1', 'categorie/asp-2', 'categorie/asp-3'],
       'categorie/fam-lavapavimenti': ['categorie/fam-lavapavimenti', 'categorie/sub-lavapavimenti-uomo-bordo', 'categorie/sub-lavapavimenti-uomo-terra', 'categorie/sub-lavapavimenti-combinate'],
       'categorie/fam-spazzatrici': ['categorie/fam-spazzatrici', 'categorie/sub-spazzatrici-uomo-bordo', 'categorie/sub-spazzatrici-uomo-terra'],
@@ -2831,8 +2912,8 @@
        Tutta la card porta al sito, in una scheda nuova. */
     var CLIENTI = [
       [/amica chips/i, 'amicachips.webp', 'https://www.amicachips.it/'],
-      [/progect|project/i, 'projectsrl.avif', null],
-      [/lupo/i, 'luposrl.avif', 'http://www.luporistoranti.it/'],
+      [/progect|project/i, 'projectsrl.png', null],   /* ritagliato e senza fondo grigio dall'avif originale */
+      [/lupo/i, 'luposrl.png', 'http://www.luporistoranti.it/'],
       [/gigante/i, 'ilgigante.svg', 'https://ilgigante.net/'],
       [/cisalfa/i, 'cisalfa.svg', 'https://www.cisalfasport.it/'],
       [/xpo/i, 'xpo.svg', 'https://www.xpo.com/']
@@ -3111,6 +3192,7 @@
     renderSottocategoria();
     renderFamiglia();
     renderScheda();
+    renderMappaSedi();
 
     var hd = document.querySelector('[data-header]');
     if (hd) { hd.className = 'site-header'; hd.innerHTML = header(); }
@@ -3421,9 +3503,10 @@
       var th = t.closest && t.closest('.thumb');
       if (th && th.tagName === 'BUTTON') {
         var g = th.closest('[data-gallery]');
-        g.querySelectorAll('.thumb').forEach(function (x) { x.setAttribute('aria-selected', 'false'); });
-        th.setAttribute('aria-selected', 'true');
-        var main = g.querySelector('.gallery-main img'), src = th.querySelector('img');
+        g.querySelectorAll('.thumb').forEach(function (x) { x.setAttribute('aria-selected', 'false'); x.classList.remove('is-attiva'); });
+        th.setAttribute('aria-selected', 'true'); th.classList.add('is-attiva');
+        /* la foto grande visibile (le schede segnaposto nascondono quella reale) */
+        var main = [].filter.call(g.querySelectorAll('.gallery-main img'), function (i) { return i.offsetParent; })[0], src = th.querySelector('img');
         if (main && src) { main.src = src.src; main.alt = src.alt; }
       }
     });
