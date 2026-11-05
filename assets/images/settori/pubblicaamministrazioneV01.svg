@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 708.66 708.66" role="img" aria-hidden="true">
+  <!-- SEGNAPOSTO: icona di lavoro nello stile V01, non è un file dell'agenzia -->
+  <defs><linearGradient id="g-pubblicaamministrazione" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff"/><stop offset=".85" stop-color="#e40523"/></linearGradient></defs>
+  <rect x="514" y="338" width="44" height="132" rx="8" fill="url(#g-pubblicaamministrazione)" opacity=".5"/>
+  <polygon points="354,186 548,290 160,290" fill="#e40523" stroke="#e40523" stroke-width="14" stroke-linejoin="round"/>
+  <rect x="180" y="304" width="348" height="24" rx="8" fill="#e40523"/>
+  <rect x="196" y="342" width="46" height="128" rx="8" fill="#e40523"/>
+  <rect x="286.67" y="342" width="46" height="128" rx="8" fill="#e40523"/>
+  <rect x="377.34000000000003" y="342" width="46" height="128" rx="8" fill="#e40523"/>
+  <rect x="468.01" y="342" width="46" height="128" rx="8" fill="#e40523"/>
+  <rect x="180" y="484" width="348" height="24" rx="8" fill="#e40523"/>
+  <rect x="150" y="520" width="408" height="26" rx="8" fill="#e40523" opacity=".5"/>
+</svg>

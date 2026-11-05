@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 708.66 708.66" role="img" aria-hidden="true">
+  <!-- SEGNAPOSTO: icona di lavoro nello stile V01, non è un file dell'agenzia -->
+  <defs><linearGradient id="g-assistenzasociosanitaria" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff"/><stop offset=".85" stop-color="#008acd"/></linearGradient></defs>
+  <rect x="440" y="309" width="104" height="90" rx="20" fill="url(#g-assistenzasociosanitaria)" opacity=".5"/>
+  <rect x="204" y="309" width="300" height="90" rx="22" fill="#008acd"/>
+  <rect x="309" y="204" width="90" height="300" rx="22" fill="#008acd"/>
+</svg>

@@ -287,3 +287,22 @@ Crystal Blue `#4fbdf7`) sono registrati ma **non usati**: il wireframe resta bia
 | Nessuna scheda di singola macchina usata | ✓ |
 | Font dalla cartella locale, nessun Google Font | ✓ |
 | Stima entro 240 h | ✓ 228 + 12 buffer |
+
+---
+
+## 6 · Aggiornamento 03/11/2026 — « modifiche sito 2.0 » (fonti: CLIENTE)
+
+Nuove fonti, **sopra** alberatura e menu v02 dove li contraddicono (richieste del cliente, non ancora APPROVATE):
+`modifiche sito 2.0` (testo girato da Sara), `ISSO 9001.pdf` (certificato → `assets/certificazioni/`), `PRODOTTI B.CLEAN.xlsx` (→ `assets/js/bclean.js`, solo nome e confezioni), elenco macchine nuove (→ `assets/js/catalogo.js`). Vecchio sito di riferimento: socaf.it.
+
+| Entità | Prima (ALB/F4 v02) | Ora (mockup) | Nota |
+| --- | --- | --- | --- |
+| Famiglie | 6 | **11** | + Lavastoviglie, Macchine del ghiaccio, Trattamento acqua, Lavatrici, Essiccatoi (OP-19) |
+| Sottocategorie | 28 | **38** | + 10 (4 + 2 + 2 + 2) |
+| Schede macchina | 119 | **143** con nome (116 reali + 27 nuove) · 146 dichiarate (119 + 27) | le 27 nuove senza descrizione |
+| Settori primo livello | 7 | **7** in ordine alfabetico | + Assistenza sociosanitaria, + Pubblica Amministrazione; Officine ed Edilizia dentro Industria (OP-20) |
+| Categorie prodotto | 13 | **13 confermate** | OP-14 chiuso; + voce BClean (non è una categoria) |
+| Pagine nuove | — | Certificazioni, BClean | `/azienda/certificazioni/`, `/prodotti-per-la-pulizia/bclean/` |
+| Etichetta « Prodotti per la pulizia » | — | « Detergenti, attrezzature e consumabili » | URL invariato (OP-22) |
+
+Documenti di input **non aggiornati** (restano come ricevuti): `socaf_alberatura_nuovo_sito_v02.html`, `socaf_F4_menu_nuovo_sito_v02.html`, `Brief mockup.md`.

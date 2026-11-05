@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 708.66 708.66">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #008acd;
+      }
+
+      .st1 {
+        fill: url(#Sfumatura_senza_nome_2);
+      }
+
+      .st1, .st2 {
+        isolation: isolate;
+      }
+
+      .st1, .st2, .st3 {
+        opacity: .5;
+      }
+
+      .st2 {
+        fill: url(#Sfumatura_senza_nome);
+      }
+
+      .st4 {
+        fill: #fff;
+      }
+
+      .st5 {
+        stroke: #fff;
+        stroke-width: 6px;
+      }
+    </style>
+    <linearGradient id="Sfumatura_senza_nome" data-name="Sfumatura senza nome" x1="271.64" y1="775.57" x2="273.67" y2="773.54" gradientTransform="translate(-44640 158372.55) scale(165 -204)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".85" stop-color="#008acd"/>
+    </linearGradient>
+    <linearGradient id="Sfumatura_senza_nome_2" data-name="Sfumatura senza nome 2" x1="317.43" y1="662.32" x2="427.33" y2="662.32" gradientTransform="translate(0 -268)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".85" stop-color="#008acd"/>
+    </linearGradient>
+  </defs>
+  <g id="lavanderia">
+    <path class="st2" d="M519.33,190.53v358.8c0,4.97-4.03,9-9,9H198.33c-4.97,0-9-4.03-9-9V159.33c0-4.97,4.03-9,9-9"/>
+    <path class="st0" d="M189.33,218.33v-50c0-9.94,8.06-18,18-18h294c9.94,0,18,8.06,18,18v50"/>
+    <path class="st5" d="M189.33,218.33h330"/>
+    <circle class="st0" cx="355.33" cy="394.33" r="92.8"/>
+    <circle class="st4" cx="355.33" cy="394.33" r="72"/>
+    <path class="st1" d="M317.43,455.55c69.55-59.79,6.19-125.89,6.19-125.89,9.57-4.7,20.33-7.34,31.71-7.34,39.76,0,72,32.24,72,72s-32.24,71.34-72,72c-20.57.34-37.9-10.77-37.9-10.77Z"/>
+    <g class="st3">
+      <circle class="st4" cx="227.33" cy="184.33" r="12"/>
+      <circle class="st4" cx="269.33" cy="184.33" r="12"/>
+      <circle class="st4" cx="311.33" cy="184.33" r="12"/>
+    </g>
+  </g>
+  <path class="st0" d="M519.33,221.5v327.73c0,5.03-4.07,9.1-9.1,9.1h-46.79l55.89-336.83Z"/>
+</svg>

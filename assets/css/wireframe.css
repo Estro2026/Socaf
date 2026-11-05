@@ -8473,3 +8473,1058 @@ body[data-pagina="home"] .hero-stats > div > span{display:block;max-width:none;w
 @media (max-width:640px){.mappa-sede{height:clamp(220px,55svh,360px)}}
 
 .mappa-indirizzo{margin:14px 0 0;font-size:15px}
+
+/* ================= 228. Menu · voci annidate (Settori → Industria → Officine, Edilizia) ================= */
+.dropdown li.dd-sub a{padding-left:34px;font-size:14px;position:relative}
+.dropdown li.dd-sub a::before{content:"";position:absolute;left:18px;top:50%;width:7px;height:7px;border-left:1.5px solid currentColor;border-bottom:1.5px solid currentColor;opacity:.45;transform:translateY(-70%)}
+.mobile-panel .acc-body a.acc-sub{padding-left:34px;font-size:.92em}
+
+/* ================= 229. Pulsanti · Numero Verde in verde e WhatsApp con il suo logo (richiesta Socaf, novembre 2026) =================
+   verde pieno con testo bianco (contrasto 5:1); WhatsApp bianco con il logo nel verde del marchio, leggibile su video, rosso e bianco */
+.btn-verde{--btn:#15803d;--btn-scuro:#0f6a31;--btn-rgb:21,128,61;
+  background-color:var(--btn);border-color:var(--btn);color:#fff;
+  box-shadow:0 1px 0 rgba(255,255,255,.28) inset,0 12px 22px -14px rgba(0,30,42,.32)}
+.btn-verde:hover{background-color:var(--btn-scuro);border-color:var(--btn-scuro);color:#fff}
+.btn-verde .nv-lab{font-weight:600;font-size:.82em;letter-spacing:.01em;opacity:.92}
+.btn-whatsapp{background-color:#fff;border-color:#25d366;color:var(--ink);gap:10px;
+  box-shadow:0 10px 20px -16px rgba(0,30,42,.35)}
+.btn-whatsapp svg{width:22px;height:22px;flex:0 0 auto;fill:#25d366}
+.btn-whatsapp:hover{background-color:#f1fff6;border-color:#128c4a;color:var(--ink)}
+
+/* ================= 230. Home · CTA intermedie verso il modulo (richiesta Socaf, novembre 2026) ================= */
+.cta-inline{display:flex;align-items:center;justify-content:space-between;gap:12px 28px;flex-wrap:wrap;
+  margin-top:clamp(22px,2.6vw,34px);padding:clamp(16px,1.6vw,22px) clamp(18px,2vw,28px);border-radius:26px;
+  background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.34);color:#fff}
+.cta-inline p{margin:0;flex:1 1 320px;font-size:clamp(16px,1.25vw,19px);line-height:1.35;color:inherit !important}
+.cta-inline p b{font-weight:700}
+.cta-inline .btn{flex:0 0 auto}
+:is(.t-bianca,.t-vetro) .cta-inline{background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink)}
+
+/* ================= 231. Home · fiducia e vantaggi dell'integrazione (richiesta Socaf, novembre 2026) ================= */
+.fiducia{margin:clamp(22px,2.4vw,34px) 0 0}
+.fiducia-dato{margin:0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.fiducia-dato b{font-family:var(--font-display);font-weight:800;font-size:clamp(40px,5vw,72px);line-height:1;letter-spacing:-.035em;color:var(--red)}
+.fiducia-dato span{font-size:clamp(17px,1.4vw,22px);font-weight:600;color:var(--ink)}
+.gruppo-sub{margin:clamp(24px,2.6vw,36px) 0 14px;font-size:clamp(18px,1.5vw,22px)}
+.vantaggi{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.vantaggi li{position:relative;display:flex;flex-direction:column;gap:6px;padding:16px 16px 18px;border-radius:22px;
+  background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);font-size:14.5px;line-height:1.4;color:var(--ink)}
+.vantaggi li b{font-size:15.5px;line-height:1.25}
+.vantaggi .v-n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--red);color:#fff;font-weight:800;font-size:13px}
+.vantaggi-esteso{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.vantaggi-esteso li{font-size:16px;padding:20px 20px 22px}
+.vantaggi-esteso li b{font-size:17.5px}
+.gruppo-cta{margin:clamp(20px,2.2vw,30px) 0 0}
+
+/* ================= 232. Prodotti consigliati e BClean ================= */
+.consigliati-home{margin-top:clamp(26px,3vw,40px)}
+.consigliati-home h3,.consigliati-hub h2,.row-consigliati h2{margin-bottom:14px}
+.card-consigliato .card-media{aspect-ratio:4/3}
+.card-consigliato .card-name{font-size:15.5px;line-height:1.25;overflow-wrap:anywhere}
+.card-consigliato .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.tag-bclean{background:var(--ink) !important;color:#fff !important}
+.tag-eco{background:#e8f6ee !important;color:#0f6a31 !important;box-shadow:inset 0 0 0 1px #9bd3b1}
+.bclean-hub{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,3vw,48px);align-items:center;
+  padding:clamp(22px,3vw,40px);border-radius:32px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.bclean-hub h2{margin:4px 0 10px;font-size:clamp(34px,4vw,56px);line-height:1}
+.bclean-hub-linee{display:flex;flex-wrap:wrap;gap:8px}
+.bclean-hub-linee span{padding:8px 14px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);font-size:14px;font-weight:600;color:var(--ink)}
+.bclean-hub-linee span.eco{background:#e8f6ee;box-shadow:inset 0 0 0 1px #9bd3b1;color:#0f6a31}
+@media (max-width:820px){.bclean-hub{grid-template-columns:1fr}}
+.bclean-indice{margin:6px 0 clamp(18px,2vw,28px)}
+.bclean-linee{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(14px,1.6vw,22px);align-items:start}
+.bclean-linea{padding:clamp(16px,1.8vw,24px);border-radius:26px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);scroll-margin-top:190px}
+.bclean-linea.is-eco{background:#f3fbf6;box-shadow:inset 0 0 0 1.5px #9bd3b1}
+.bclean-linea h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 10px;font-size:clamp(18px,1.5vw,22px)}
+.bclean-n{margin-left:auto;font-size:13px;font-weight:600;color:var(--grey)}
+.bclean-elenco{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column}
+.bclean-elenco li{display:flex;justify-content:space-between;gap:6px 18px;flex-wrap:wrap;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px;line-height:1.35}
+.bclean-elenco li:first-child{border-top:0}
+.bc-n{font-weight:700;color:var(--ink);overflow-wrap:anywhere}
+.bc-c{color:var(--grey);font-size:13.5px;text-align:right}
+
+/* ================= 233. Certificazioni (richiesta Socaf, novembre 2026) ================= */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:clamp(16px,1.8vw,26px);align-items:start}
+.cert-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(14px,1.8vw,24px);padding:clamp(18px,2vw,28px);border-radius:30px;
+  background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);scroll-margin-top:190px}
+.cert-card:target{box-shadow:inset 0 0 0 2px var(--red)}
+.cert-badge{width:92px;height:92px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:#fff;box-shadow:inset 0 0 0 2px var(--red),0 10px 20px -14px rgba(163,16,0,.5);color:var(--red);font-family:var(--font-display);line-height:1.05}
+.cert-badge span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.cert-badge b{font-size:21px;font-weight:800;letter-spacing:-.02em}
+.cert-badge:not(:has(b)) span{font-size:20px;font-weight:800;letter-spacing:0}
+.cert-corpo h2{margin:0 0 2px;font-size:clamp(22px,1.9vw,28px)}
+.cert-sub{margin:0 0 10px;font-size:13.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--grey)}
+.cert-corpo p{margin:0 0 10px}
+.cert-dati{margin:14px 0;display:grid;gap:8px}
+.cert-dati>div{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr);gap:4px 14px;padding-top:8px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.4}
+.cert-dati dt{font-weight:700;color:var(--ink)}
+.cert-dati dd{margin:0;color:var(--grey)}
+.cert-azioni{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:12px !important}
+.cert-link{font-weight:700}
+.cert-mini .card-body{gap:8px}
+@media (max-width:560px){.cert-card{grid-template-columns:1fr}.cert-badge{width:76px;height:76px}.cert-dati>div{grid-template-columns:1fr}}
+
+/* ================= 234. Chi siamo · integrazione e video-intervista ================= */
+.loghi-int{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(20px,3vw,44px);margin:clamp(14px,1.6vw,22px) 0}
+.loghi-int img{height:clamp(34px,3.4vw,52px);width:auto;object-fit:contain}
+.loghi-int img.logo-mono{filter:brightness(0) opacity(.78)}
+.row-integrazione h3{margin:clamp(20px,2.2vw,30px) 0 14px}
+.video-card{position:relative;display:flex;align-items:center;gap:clamp(16px,2vw,28px);padding:clamp(22px,3vw,44px);min-height:220px;border-radius:30px;
+  background:linear-gradient(135deg,#a31000 0%,#e4002b 100%);color:#fff;box-shadow:0 24px 40px -28px rgba(163,16,0,.7)}
+.video-play{flex:0 0 auto;width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.95);position:relative}
+.video-play::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-38%,-50%);border-left:24px solid var(--red);border-top:15px solid transparent;border-bottom:15px solid transparent}
+.video-nota{font-size:clamp(16px,1.4vw,20px);font-weight:600;line-height:1.4}
+.video-card .todo{display:inline-block;margin-top:4px;background:rgba(255,255,255,.2);color:#fff;border-radius:8px;padding:2px 8px}
+
+/* ================= 235. Hero · rifiniture dei pulsanti sul telefono ================= */
+.hero-cnt .hero-cta{gap:12px}
+@media (max-width:560px){.hero-cnt .hero-cta .btn{flex:1 1 100%}}
+
+/* ================= 236. Home · titolo hero più lungo (richiesta Socaf, novembre 2026) =================
+   « Macchine, detergenti, attrezzature e consumabili professionali » su tre righe, senza spingere ricerca, pulsanti e cifre fuori dalla prima schermata */
+.hero-full .hero-copy h1{font-size:clamp(32px,min(4vw,6.2vh),60px) !important;max-width:none !important;text-wrap:balance}
+
+/* 229.1 i due pulsanti vincono sulle regole dei contenitori (vetro, contorno): restano verde e bianco ovunque */
+:is(#_b,body) .btn.btn-verde{background-color:#15803d !important;border-color:#15803d !important;color:#fff !important;-webkit-text-fill-color:#fff !important;backdrop-filter:none !important}
+:is(#_b,body) .btn.btn-verde:hover{background-color:#0f6a31 !important;border-color:#0f6a31 !important}
+:is(#_b,body) .btn.btn-whatsapp{background-color:#fff !important;border-color:#25d366 !important;color:#001e2a !important;-webkit-text-fill-color:#001e2a !important;backdrop-filter:none !important}
+:is(#_b,body) .btn.btn-whatsapp:hover{background-color:#f1fff6 !important;border-color:#128c4a !important}
+:is(#_b,body) .btn.btn-whatsapp svg{fill:#25d366 !important}
+
+/* ================= 237. Home · il gruppo: fiducia, vantaggi e collegamento sotto le due colonne (richiesta Socaf, novembre 2026) ================= */
+body[data-pagina="home"] .row-gruppo .gruppo{grid-template-areas:"k ." "h l" "h g" "f f" "s s" "v v" "c c"}
+body[data-pagina="home"] .row-gruppo .gruppo > .fiducia{grid-area:f;margin:clamp(10px,1.4vw,20px) 0 0}
+body[data-pagina="home"] .row-gruppo .gruppo > .gruppo-sub{grid-area:s;margin:0 !important;text-align:left}
+body[data-pagina="home"] .row-gruppo .gruppo > [data-vantaggi]{grid-area:v}
+body[data-pagina="home"] .row-gruppo .gruppo > .gruppo-cta{grid-area:c;margin:0}
+@media (max-width:860px){body[data-pagina="home"] .row-gruppo .gruppo{grid-template-areas:"k" "h" "l" "g" "f" "s" "v" "c"}}
+body[data-pagina="home"] .row-gruppo .gruppo > [data-vantaggi]{justify-self:stretch !important;width:100% !important;max-width:none !important;margin:0 !important}
+body[data-pagina="home"] .row-gruppo .gruppo .vantaggi{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media (max-width:1100px){body[data-pagina="home"] .row-gruppo .gruppo .vantaggi{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}
+body[data-pagina="home"] .row-settori .block > .cta-inline{grid-column:1 / -1}
+
+/* ================= 238. Novità · componenti chiari dentro le tessere rosse e di vetro =================
+   le pagine interne alternano tessere bianche, di vetro e a contorno rosso, e nelle ultime due rendono bianchi tutti i testi.
+   Le schede chiare (vantaggi, certificazioni, linee BClean) restano chiare con testo scuro, come le card sul rosso;
+   i loghi dell'integrazione stanno su una pastiglia bianca. Il prefisso con id dà la precedenza sulle regole dei contenitori. */
+:is(#_k,body) :is(.cert-card,.vantaggi li,.bclean-linea,.bclean-hub,.cert-mini) :is(h2,h3,h4,p,li,dt,dd,span,b,strong,small,div,a){color:var(--ink) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_k,body) :is(.cert-sub,.cert-dati dd,.bc-c,.bclean-n){color:var(--grey) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_k,body) :is(.cert-badge,.cert-badge span,.cert-badge b){color:var(--red) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_k,body) .vantaggi .v-n{color:#fff !important;-webkit-text-fill-color:#fff !important}
+:is(#_k,body) .tag-bclean{color:#fff !important;-webkit-text-fill-color:#fff !important}
+:is(#_k,body) .tag-eco{color:#0f6a31 !important;-webkit-text-fill-color:#0f6a31 !important}
+:is(#_k,body) :is(.cert-link,.bclean-linea a,.cert-card a:not(.btn)){color:var(--red) !important;-webkit-text-fill-color:currentColor !important;text-decoration:underline}
+:is(#_k,body) .cert-card .btn{color:var(--ink) !important}
+.loghi-int{display:inline-flex;padding:14px clamp(18px,2.4vw,34px);border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.loghi-int img.logo-mono{filter:brightness(0) opacity(.72) !important}
+
+/* 238.1 Ecolabel · richiamo alla certificazione nella testata della categoria */
+.cert-nota{margin-top:clamp(16px,1.8vw,24px);max-width:72ch;padding:16px 20px;border-radius:22px;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.42);color:#fff}
+.cert-nota p{margin:0 0 8px;color:inherit !important}
+.cert-nota a{color:inherit !important;font-weight:700;text-decoration:underline}
+:is(.t-bianca,.t-vetro) .cert-nota{background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);color:var(--ink)}
+
+/* ================= 239. Numero Verde della barra in verde (richiesta Socaf, 04/11/2026) ================= */
+:is(#_p,body) .site-header .phone-cta,:is(#_p,body) .mobile-sticky .btn-primary{background:#15803d !important;border-color:#15803d !important;color:#fff !important;-webkit-text-fill-color:#fff !important}
+:is(#_p,body) .site-header .phone-cta:hover,:is(#_p,body) .mobile-sticky .btn-primary:hover{background:#0f6a31 !important;border-color:#0f6a31 !important}
+:is(#_p,body) .site-header .phone-cta .lbl{color:rgba(255,255,255,.88) !important;-webkit-text-fill-color:rgba(255,255,255,.88) !important}
+
+/* ================= 240. Home · prodotti consigliati: sezione a parte ================= */
+.row-consigliati-home .consigliati-link{margin:clamp(18px,2vw,28px) 0 0}
+.row-consigliati-home .lede{margin:0 0 clamp(16px,2vw,26px)}
+
+/* ================= 241. « Fusione » · home e Chi siamo (04/11/2026) =================
+   tre cerchi nei colori VI si avvicinano e si sovrappongono; contatori; cinque vantaggi a cascata. Testi scuri su pannello chiaro in ogni tessera. */
+.fusione{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-areas:"t s" "d d" "h h" "v v";
+  gap:clamp(18px,2.4vw,34px) clamp(24px,5vw,72px);align-items:center;padding:clamp(24px,4vw,56px);border-radius:38px;overflow:hidden;color:var(--ink);
+  background:radial-gradient(90% 80% at 100% 0%,rgba(228,0,43,.09),transparent 60%),radial-gradient(80% 70% at 0% 100%,rgba(79,189,247,.16),transparent 62%),#fff;
+  box-shadow:inset 0 0 0 1px var(--line),0 40px 70px -56px rgba(0,30,42,.5)}
+.fusione-testo{grid-area:t}.fusione-stage{grid-area:s}.fusione-dati{grid-area:d}.fusione-sub{grid-area:h}.fusione-vantaggi{grid-area:v}
+:is(#_f,body) .fusione :is(h2,h3,p,li,span,b,small,em,a:not(.btn)){-webkit-text-fill-color:currentColor !important}
+:is(#_f,body) .fusione .kicker{color:var(--red) !important;margin:0 0 10px;font-size:clamp(15px,1.3vw,18px);font-weight:700;letter-spacing:.02em;text-transform:none}
+:is(#_f,body) .fusione .fusione-h{color:var(--ink) !important;margin:0 0 16px;font-size:clamp(30px,3.6vw,54px);line-height:1.04;letter-spacing:-.03em;text-align:left;background:none !important}
+:is(#_f,body) .fusione .fusione-h em{font-style:normal;color:var(--red) !important;background:none !important}
+:is(#_f,body) .fusione .lede{color:var(--ink) !important;max-width:46ch;margin:0 0 18px;font-size:clamp(16px,1.25vw,19px)}
+.fusione-stage{position:relative;width:100%;max-width:480px;aspect-ratio:1/1;justify-self:center}
+.fc{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;opacity:0;transition:transform 1.7s cubic-bezier(.2,.8,.2,1),opacity 1.1s ease}
+.fc img{position:absolute;width:40%;height:auto;max-height:22%;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+.fc-1{left:0;top:2%;background:rgba(228,0,43,.84);transform:translate(-34%,-22%) scale(.55)}
+.fc-1 img{left:14%;top:30%}
+.fc-2{right:0;top:2%;background:rgba(2,85,179,.8);transform:translate(34%,-22%) scale(.55)}
+.fc-2 img{right:14%;top:30%}
+.fc-3{left:19%;bottom:0;background:rgba(0,133,207,.84);transform:translate(0,38%) scale(.55)}
+.fc-3 img{left:30%;bottom:15%}
+.fc-core{position:absolute;left:50%;top:47%;width:27%;aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:#fff;box-shadow:0 14px 30px -14px rgba(0,30,42,.55);transform:translate(-50%,-50%) scale(.2);opacity:0;transition:transform 1s cubic-bezier(.2,1.2,.3,1) 1.2s,opacity .6s ease 1.2s}
+.fc-core b{font-family:var(--font-display);font-size:clamp(30px,4vw,52px);line-height:.9;color:var(--red) !important}
+.fc-core small{font-size:clamp(8px,.8vw,11px);font-weight:700;line-height:1.15;color:var(--ink) !important;margin-top:3px}
+.fusione.in .fc{opacity:.94;transform:none}
+.fusione.in .fc-core{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@keyframes fusione-1{50%{translate:3% 4%}}@keyframes fusione-2{50%{translate:-4% 3%}}@keyframes fusione-3{50%{translate:2% -4%}}
+.fusione.in .fc-1{animation:fusione-1 9s ease-in-out 1.8s infinite}
+.fusione.in .fc-2{animation:fusione-2 11s ease-in-out 1.8s infinite}
+.fusione.in .fc-3{animation:fusione-3 10s ease-in-out 1.8s infinite}
+.fusione-dati{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,2vw,28px);padding:clamp(14px,2vw,26px) 0;border-block:1px solid var(--line)}
+.fusione-dati .dato{margin:0;display:flex;flex-direction:column;gap:2px}
+.fusione-dati .dato b{font-family:var(--font-display);font-weight:800;font-size:clamp(40px,5.2vw,80px);line-height:1;letter-spacing:-.04em;color:var(--red) !important;font-variant-numeric:tabular-nums}
+.fusione-dati .dato small{font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey) !important}
+.fusione-dati .dato span{font-size:clamp(14px,1.2vw,17px);font-weight:600;line-height:1.25;color:var(--ink) !important}
+.fusione-dati .dato-nota{grid-column:1 / -1;margin:0}
+:is(#_f,body) .fusione .fusione-sub{margin:clamp(6px,1vw,14px) 0 0;font-size:clamp(20px,1.8vw,26px);color:var(--ink) !important;text-align:left}
+.fusione-vantaggi{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(10px,1.4vw,18px)}
+.fusione-vantaggi li{display:flex;flex-direction:column;gap:8px;padding:18px 16px 20px;border-radius:24px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);
+  font-size:14.5px;line-height:1.4;opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .25s ease;transition-delay:calc(.5s + var(--i) * .12s)}
+.fusione.in .fusione-vantaggi li{opacity:1;transform:none}
+.fusione.in .fusione-vantaggi li:hover{transform:translateY(-6px);transition-delay:0s;box-shadow:inset 0 0 0 1.5px var(--red),0 22px 34px -24px rgba(163,16,0,.55)}
+.fusione-vantaggi b{font-size:16px;line-height:1.2;color:var(--ink) !important}
+.fusione-vantaggi li>span:not(.fv-ico){color:var(--ink) !important}
+.fv-ico{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--red),#ff476a);box-shadow:0 10px 18px -12px rgba(163,16,0,.8)}
+.fv-ico svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:1100px){.fusione-vantaggi{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}}
+@media (max-width:860px){.fusione{grid-template-columns:1fr;grid-template-areas:"t" "s" "d" "h" "v"}.fusione-dati{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.fusione-dati{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.fc,.fc-core,.fusione-vantaggi li{transition:none !important;animation:none !important;opacity:1;transform:none}.fc-core{transform:translate(-50%,-50%)}}
+
+/* ================= 242. Certificazioni · sigilli, ISO 9001 in evidenza, gruppi (04/11/2026) ================= */
+.cert-sigilli{display:flex;flex-wrap:wrap;justify-content:center;gap:14px clamp(14px,2.4vw,34px);margin:0 0 clamp(26px,3.4vw,46px)}
+.cert-sigillo{display:flex;flex-direction:column;align-items:center;gap:9px;text-decoration:none !important;font-weight:700;font-size:14px;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.cert-sigillo:hover{transform:translateY(-5px)}
+:is(#_c,body) .cert-sigillo span:not(.cert-badge){color:var(--ink) !important}
+.cert-sigillo .cert-badge{width:84px;height:84px;transition:box-shadow .3s ease}
+.cert-sigillo:hover .cert-badge{box-shadow:inset 0 0 0 2px var(--red),0 18px 26px -14px rgba(163,16,0,.65)}
+.cert-badge-xl{width:124px !important;height:124px !important}
+.cert-badge-xl span{font-size:15px}.cert-badge-xl b{font-size:30px}
+.cert-card.cert-feature{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:start;gap:clamp(20px,3vw,48px);padding:clamp(22px,3.2vw,44px);border-radius:36px;
+  background:radial-gradient(90% 90% at 0% 0%,rgba(228,0,43,.09),transparent 62%),#fff;box-shadow:inset 0 0 0 1px var(--line),0 40px 70px -56px rgba(163,16,0,.6)}
+.cert-feature-testo{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.cert-feature-testo h2{margin:6px 0 0;font-size:clamp(30px,3.2vw,46px);line-height:1}
+.cert-stato{display:inline-block;margin:10px 0 0 !important;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:700;line-height:1.3}
+.cert-ok{background:#e8f6ee;color:#0f6a31 !important;box-shadow:inset 0 0 0 1px #9bd3b1}
+.cert-da{background:#fff4d6;color:#7a5200 !important;box-shadow:inset 0 0 0 1px #ecc96c}
+.cert-documento{position:relative;padding:clamp(18px,2.2vw,28px);border-radius:22px;background:#fff;border-top:6px solid var(--red);
+  box-shadow:0 26px 50px -30px rgba(0,30,42,.5),inset 0 0 0 1px var(--line)}
+.cert-doc-t{margin:0 0 6px !important;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--red) !important}
+.cert-validita{margin:16px 0 4px;display:flex;flex-direction:column;gap:8px}
+.cert-barra{display:block;height:10px;border-radius:999px;background:#e9ecef;overflow:hidden}
+.cert-barra i{display:block;height:100%;width:var(--p);border-radius:inherit;background:linear-gradient(90deg,#e4002b,#ff476a);transform-origin:left;animation:cert-barra 1.4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes cert-barra{from{transform:scaleX(0)}}
+.cert-validita-t{font-size:13.5px;font-weight:600;color:var(--grey) !important}
+.cert-gruppo{display:flex;align-items:center;gap:14px;margin:clamp(30px,3.6vw,52px) 0 16px;font-size:clamp(20px,1.8vw,26px)}
+.cert-gruppo::after{content:"";flex:1;height:1px;background:var(--line)}
+.cert-grid{display:grid;gap:clamp(14px,1.6vw,22px);grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr))}
+.cert-grid .cert-card{grid-template-columns:auto minmax(0,1fr);align-items:start;border-radius:28px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+.cert-grid .cert-card:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1.5px var(--red),0 24px 36px -28px rgba(163,16,0,.55)}
+.cert-grid .cert-badge{width:76px;height:76px}
+.cert-grid .cert-corpo h3{margin:0 0 2px;font-size:clamp(20px,1.7vw,26px)}
+@media (max-width:860px){.cert-card.cert-feature{grid-template-columns:1fr}}
+:is(#_c,body) :is(.cert-feature-testo,.cert-documento) :is(h2,p,dt,dd,span,b,div):not(.cert-stato):not(.cert-badge *){color:var(--ink) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_c,body) .cert-feature-testo .cert-sub,:is(#_c,body) .cert-documento dd,:is(#_c,body) .cert-validita-t{color:var(--grey) !important}
+:is(#_c,body) .cert-doc-t{color:var(--red) !important}
+:is(#_c,body) .cert-stato.cert-ok{color:#0f6a31 !important}
+:is(#_c,body) .cert-stato.cert-da{color:#7a5200 !important}
+:is(#_c,body) .cert-card .btn-primary{color:#fff !important;-webkit-text-fill-color:#fff !important}
+
+/* ================= 243. « Fusione » · niente pannello bianco dentro il contenitore (04/11/2026) =================
+   la scena sta direttamente nel contenitore della tessera, senza secondo riquadro. Sulle tessere rosse e di vetro i testi sono bianchi. */
+.fusione{background:none !important;box-shadow:none !important;padding:0 !important;border-radius:0;overflow:visible}
+:is(#_f,body) :is(.t-outline,.t-vetro) .fusione :is(.kicker,.fusione-h,.fusione-h em,.lede,.lede b,.fusione-sub,.dato b,.dato small,.dato span,p){color:#fff !important}
+:is(#_f,body) :is(.t-outline,.t-vetro) .fusione .fusione-h em{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:rgba(255,255,255,.55)}
+:is(#_f,body) :is(.t-outline,.t-vetro) .fusione .dato small{opacity:.85}
+:is(#_f,body) :is(.t-outline,.t-vetro) .fusione .todo{background:rgba(255,255,255,.2);color:#fff !important;border-radius:8px;padding:2px 8px}
+:is(.t-outline,.t-vetro) .fusione-dati{border-block-color:rgba(255,255,255,.4)}
+:is(.t-outline,.t-vetro) .fc{box-shadow:0 0 0 2px rgba(255,255,255,.6)}
+:is(#_f,body) :is(.t-outline,.t-vetro) .fusione-vantaggi li{background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+:is(#_f,body) :is(.t-outline,.t-vetro) .fusione-vantaggi li :is(b,span:not(.fv-ico)){color:#fff !important}
+:is(#_f,body) :is(.t-outline,.t-vetro) .fusione .fv-ico{background:#fff;box-shadow:none}
+:is(.t-outline,.t-vetro) .fusione .fv-ico svg{stroke:var(--red)}
+:is(#_f,body) :is(.t-outline,.t-vetro) .fusione-vantaggi li:hover{box-shadow:inset 0 0 0 1.5px #fff,0 22px 34px -24px rgba(0,0,0,.45)}
+
+/* ================= 244. Chi siamo · « Cosa cambia » come sezione a parte ================= */
+.fusione.fusione-solo{grid-template-columns:1fr;grid-template-areas:"h" "v"}
+.fusione-solo .fusione-sub{margin:0 0 clamp(10px,1.4vw,18px)}
+
+/* 245 · BClean (04/11/2026): le linee non sono più contenitori chiari con elenco, ma gruppi di card prodotto come nel resto del sito */
+.bclean-linee{grid-template-columns:1fr;gap:clamp(28px,3.2vw,48px)}
+.bclean-linea,.bclean-linea.is-eco{padding:0;background:none;box-shadow:none;border-radius:0}
+:is(#_k,body):is(#_q,body) .bclean-linea :is(h3,p,small,b,.card-name,.card-meta,.card-body > a,.bclean-n){color:#fff !important;-webkit-text-fill-color:currentColor !important}
+:is(#_k,body):is(#_q,body) .bclean-linea .bclean-n{opacity:.8}
+.bclean-linea .bclean-cards{margin-top:clamp(12px,1.4vw,18px)}
+
+/* 246 · Banner BClean nell'hub (04/11/2026): niente contenitore dentro il contenitore; marchio grande, numeri, linee cliccabili */
+.bclean-hub{padding:0;border-radius:0;background:none;box-shadow:none;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,5vw,80px)}
+.bclean-hub h2{margin:2px 0 14px;font-size:clamp(64px,10vw,150px);line-height:.88;letter-spacing:-.04em;font-weight:800}
+.bclean-hub h2 .bc-b{display:inline-grid;place-items:center;margin-right:.04em;padding:0 .14em;border-radius:.2em;background:var(--red);transform:rotate(-4deg)}
+.bclean-hub-lede{max-width:46ch;font-size:clamp(16px,1.3vw,19px);line-height:1.5}
+.bclean-hub-num{display:flex;gap:clamp(18px,3vw,40px);margin:18px 0 22px}
+.bclean-hub-num span{font-size:14px;text-transform:uppercase;letter-spacing:.08em}
+.bclean-hub-num b{display:block;font-size:clamp(34px,3.6vw,52px);line-height:1;letter-spacing:-.02em}
+.bclean-hub-linee{gap:10px;align-content:center}
+.bclean-hub-t{flex:0 0 100%;font-size:13px;text-transform:uppercase;letter-spacing:.1em;opacity:.8}
+.bclean-hub-linee a{padding:10px 18px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);font-size:15px;font-weight:600;text-decoration:none;transition:background .25s,color .25s,transform .25s}
+.bclean-hub-linee a:hover,.bclean-hub-linee a:focus-visible{background:var(--ink);transform:translateY(-2px)}
+.bclean-hub-linee a.eco{box-shadow:inset 0 0 0 1.5px #9bd3b1}
+:is(#_h,body):is(#_q,body) .row-bclean-hub :is(.kicker,h2,p,b,.bclean-hub-num span,.bclean-hub-t,.bclean-hub-linee a){color:var(--ink) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_h,body):is(#_q,body) .row-bclean-hub .bclean-hub h2 .bc-b{color:#fff !important}
+:is(#_h,body):is(#_q,body) .row-bclean-hub .bclean-hub-linee a:is(:hover,:focus-visible){color:#fff !important}
+:is(#_h,body):is(#_q,body) .row-bclean-hub .bclean-hub-linee a.eco{color:#0f6a31 !important}
+.bclean-hub-linee span.bclean-hub-t{padding:0;border-radius:0;background:none;box-shadow:none}
+@media (max-width:820px){.bclean-hub{grid-template-columns:1fr}.bclean-hub h2{font-size:clamp(64px,22vw,110px)}}
+
+/* 247 · BClean (04/11/2026): una linea per volta; testi delle card scuri sul bianco; chip come schede */
+.bclean-linea[hidden]{display:none}
+.bclean-indice{gap:8px;margin-bottom:clamp(22px,2.4vw,34px)}
+.bclean-indice .chip{padding:10px 18px;border-radius:999px;font-weight:600;font-size:15px;transition:background .25s,color .25s}
+:is(#_k,body):is(#_q,body) .bclean-indice .chip.is-on{background:#fff !important;color:var(--red) !important;-webkit-text-fill-color:currentColor !important;box-shadow:0 8px 22px rgba(0,0,0,.18)}
+.bclean-linea h3{font-size:clamp(22px,2.2vw,32px)}
+.bclean-linea>.small{max-width:70ch;margin:0 0 14px}
+
+/* 248 · (04/11/2026) Banner BClean: linee a griglia · Acquisti verdi PA · strisce con icone («Le categorie…») ridisegnate */
+.bclean-hub-linee{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-content:center}
+.bclean-hub-linee .bclean-hub-t{grid-column:1 / -1}
+.bclean-hub-linee a{display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:78px;padding:14px 16px;border-radius:20px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);position:relative}
+.bclean-hub-linee a b{font-size:15.5px;line-height:1.2}
+.bclean-hub-linee a small{font-size:12.5px;opacity:.7}
+.bclean-hub-linee a::after{content:"→";position:absolute;right:14px;top:12px;font-size:15px;opacity:.35;transition:transform .25s,opacity .25s}
+.bclean-hub-linee a:is(:hover,:focus-visible)::after{transform:translateX(3px);opacity:1}
+.bclean-hub-linee a.eco{background:#f3fbf6}
+:is(#_h,body):is(#_q,body) .row-bclean-hub .bclean-hub-linee a :is(b,small){color:inherit !important;-webkit-text-fill-color:currentColor !important}
+@media (max-width:1100px){.bclean-hub-linee{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Acquisti verdi PA */
+.pa-grid{gap:clamp(16px,2vw,28px)}
+:is(#_p,body):is(#_q,body) .pa-card.card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:center;padding:clamp(22px,2.4vw,34px);border-radius:30px;background:#fff;box-shadow:0 22px 44px -26px rgba(0,0,0,.45),inset 5px 0 0 #2f9e5b}
+.pa-card .cert-badge{margin:0}
+.pa-card .card-body{padding:0;gap:6px}
+.pa-kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0f6a31}
+.pa-card .card-name{font-size:clamp(22px,2vw,28px);line-height:1.1}
+.pa-card .card-desc{font-size:15.5px;line-height:1.5}
+.pa-card .card-link{margin-top:8px;align-self:flex-start}
+:is(#_p,body):is(#_q,body) .pa-card .pa-kicker{color:#0f6a31 !important;-webkit-text-fill-color:currentColor !important}
+@media (max-width:560px){:is(#_p,body):is(#_q,body) .pa-card.card{grid-template-columns:1fr}}
+
+/* Strisce con icone: una sola regola per tutte («Dove si usano», «Le altre macchine», categorie…) */
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone{display:grid !important;grid-template-columns:repeat(auto-fit,minmax(clamp(120px,12vw,168px),1fr)) !important;gap:clamp(10px,1.2vw,16px) !important;width:100%;max-width:1100px;margin:clamp(18px,2vw,28px) auto 0 !important;padding:0 !important}
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile{display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:flex-start;gap:12px !important;min-height:0;padding:clamp(16px,1.6vw,22px) 10px clamp(14px,1.4vw,18px) !important;border-radius:24px !important;text-align:center;text-decoration:none;background:rgba(255,255,255,.14) !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.32) !important;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s,box-shadow .3s}
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile::before{content:none !important}
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile::after{content:none !important;display:none !important}
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile .tile-ico{width:clamp(54px,4.6vw,68px) !important;height:clamp(54px,4.6vw,68px) !important;padding:clamp(13px,1.1vw,16px) !important;border-radius:50% !important;background:#fff !important;stroke:var(--red);box-shadow:0 10px 20px -12px rgba(0,0,0,.5) !important;flex:0 0 auto;transform:none !important}
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile span{font-size:14px !important;line-height:1.25 !important;font-weight:700 !important;color:#fff !important;-webkit-text-fill-color:currentColor !important;text-shadow:none !important;overflow-wrap:anywhere}
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile:is(:hover,:focus-visible){transform:translateY(-5px);background:rgba(255,255,255,.26) !important;box-shadow:inset 0 0 0 1.5px #fff,0 18px 28px -18px rgba(0,0,0,.5) !important;outline:0}
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile.is-corrente{background:#fff !important}
+:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile.is-corrente span{color:var(--red) !important}
+/* su riga bianca */
+:is(#_s,body):is(#_t,body) .row-striscia.t-bianca .tiles-icone > .tile{background:#f5f6f7 !important;box-shadow:inset 0 0 0 1px var(--line) !important}
+:is(#_s,body):is(#_t,body) .row-striscia.t-bianca .tiles-icone > .tile span{color:var(--ink) !important}
+:is(#_s,body):is(#_t,body) .row-striscia.t-bianca .tiles-icone > .tile .tile-ico{box-shadow:inset 0 0 0 1px var(--line) !important}
+:is(#_s,body):is(#_t,body) .row-striscia.t-bianca .tiles-icone > .tile:is(:hover,:focus-visible){background:#fff !important;box-shadow:inset 0 0 0 1.5px var(--red),0 18px 28px -18px rgba(163,16,0,.5) !important}
+@media (max-width:640px){:is(#_s,body):is(#_t,body) :is(.row-striscia,.striscia-scheda) .tiles-icone{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+@media (prefers-reduced-motion:reduce){:is(#_s,body):is(#_t,body) .tiles-icone > .tile{transition:none}}
+:is(#_p,body):is(#_q,body) .pa-card a.card-link{color:var(--red) !important;-webkit-text-fill-color:currentColor !important;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* 249 · Scheda prodotto BClean (04/11/2026) */
+.bcp{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:start}
+.bcp-foto{margin:0;border-radius:30px;overflow:hidden;position:relative;aspect-ratio:4/3;background:#e9ecee}
+.bcp-foto img{width:100%;height:100%;object-fit:cover;display:block}
+.bcp-foto figcaption{position:absolute;left:14px;bottom:14px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.92);font-size:12px;font-weight:700;color:var(--ink)}
+.bcp-dati h2{margin:20px 0 10px;font-size:clamp(18px,1.6vw,22px)}
+.bcp-linea{margin:12px 0 0;font-size:15px}
+.bcp-conf{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.bcp-conf li{padding:9px 16px;border-radius:999px;font-weight:700;font-size:15px;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.bcp-doc{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.bcp-doc .download{border-style:dashed}
+.bcp-cta{margin:24px 0 0}
+.bcp-altri{margin:clamp(36px,4vw,60px) 0 clamp(14px,1.6vw,22px)}
+:is(#_b,body):is(#_q,body) .bcp-conf li{color:var(--ink) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_b,body):is(#_q,body) .bcp-doc .download,:is(#_b,body):is(#_q,body) .bcp-doc .download *{color:var(--ink) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_b,body):is(#_q,body) .bcp-doc .download{background:#fff}
+@media (max-width:820px){.bcp{grid-template-columns:1fr}}
+
+/* 250 · frecce delle linee come le altre («›») · strisce con icone su fondo chiaro (scheda macchina) */
+.bclean-hub-linee a::after{content:"›";font-size:22px;line-height:1;top:10px;opacity:.5}
+:is(#_s,body):is(#_t,body) .striscia-scheda .tiles-icone > .tile{background:#f5f6f7 !important;box-shadow:inset 0 0 0 1px var(--line) !important}
+:is(#_s,body):is(#_t,body) .striscia-scheda .tiles-icone > .tile span{color:var(--ink) !important}
+:is(#_s,body):is(#_t,body) .striscia-scheda .tiles-icone > .tile .tile-ico{box-shadow:inset 0 0 0 1px var(--line) !important}
+:is(#_s,body):is(#_t,body) .striscia-scheda .tiles-icone > .tile:is(:hover,:focus-visible){background:#fff !important;box-shadow:inset 0 0 0 1.5px var(--red),0 18px 28px -18px rgba(163,16,0,.5) !important}
+
+/* 251 · leggibilità (controllo 04/11/2026): card consigliati sempre bianche con testo scuro; segnaposto dei cataloghi leggibili */
+:is(#_d,body):is(#_q,body) .row:is(.t-vetro,.t-outline) .download[style*="dashed"]{color:#fff !important;-webkit-text-fill-color:currentColor !important;border-color:rgba(255,255,255,.6) !important}
+
+/* 252 · «Cosa cambia per chi lavora con noi» (04/11/2026): percorso a cinque tappe — linea continua, nodi con icona, numero, titolo, testo */
+:is(#_v,body):is(#_q,body) .fusione-vantaggi{grid-template-columns:repeat(5,minmax(0,1fr));gap:0 clamp(16px,2vw,32px);counter-reset:fv;position:relative}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi li{position:relative;display:flex;flex-direction:column;gap:6px;padding:0 !important;background:none !important;box-shadow:none !important;border-radius:0 !important;transform:none}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi li::before{content:"";position:absolute;left:0;right:calc(-1 * clamp(16px,2vw,32px));top:31px;height:2px;background:rgba(255,255,255,.45);transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i) * .16s)}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi li:last-child::before{right:50%}
+:is(#_v,body):is(#_q,body) .fusione.in .fusione-vantaggi li::before{transform:scaleX(1)}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi .fv-ico{position:relative;z-index:1;width:64px;height:64px;border-radius:50%;margin-bottom:10px;background:#fff !important;box-shadow:0 14px 26px -14px rgba(0,0,0,.55) !important;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi .fv-ico svg{width:28px;height:28px;stroke:var(--red);stroke-width:1.7}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi li:hover .fv-ico{transform:translateY(-5px) scale(1.06)}
+.fv-n{font-style:normal;font-size:13px;font-weight:700;letter-spacing:.14em;opacity:.7}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi b{font-size:clamp(17px,1.45vw,20px);line-height:1.15;color:#fff !important;-webkit-text-fill-color:currentColor !important}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi .fv-t,:is(#_v,body):is(#_q,body) .fusione-vantaggi .fv-n{color:#fff !important;-webkit-text-fill-color:currentColor !important}
+:is(#_v,body):is(#_q,body) .fusione-vantaggi .fv-t{font-size:15px;line-height:1.5;opacity:.92}
+:is(#_v,body):is(#_q,body) .fusione-sub{font-size:clamp(26px,2.8vw,40px);line-height:1.05;letter-spacing:-.02em;margin:0 0 clamp(26px,3vw,44px);color:#fff !important}
+/* fondo chiaro */
+:is(#_v,body):is(#_q,body) .row.t-bianca .fusione-vantaggi li::before{background:var(--line)}
+:is(#_v,body):is(#_q,body) .row.t-bianca .fusione-vantaggi .fv-ico{background:var(--red) !important}
+:is(#_v,body):is(#_q,body) .row.t-bianca .fusione-vantaggi .fv-ico svg{stroke:#fff}
+:is(#_v,body):is(#_q,body) .row.t-bianca :is(.fusione-vantaggi b,.fusione-vantaggi .fv-t,.fusione-vantaggi .fv-n,.fusione-sub){color:var(--ink) !important}
+@media (max-width:1100px){
+  :is(#_v,body):is(#_q,body) .fusione-vantaggi{grid-template-columns:1fr;gap:0}
+  :is(#_v,body):is(#_q,body) .fusione-vantaggi li{padding:0 0 clamp(22px,4vw,30px) 84px !important;min-height:64px}
+  :is(#_v,body):is(#_q,body) .fusione-vantaggi li .fv-ico{position:absolute;left:0;top:0;margin:0}
+  :is(#_v,body):is(#_q,body) .fusione-vantaggi li::before{left:31px;right:auto;top:0;bottom:0;width:2px;height:auto;transform-origin:top;transform:scaleY(0)}
+  :is(#_v,body):is(#_q,body) .fusione.in .fusione-vantaggi li::before{transform:scaleY(1)}
+  :is(#_v,body):is(#_q,body) .fusione-vantaggi li:last-child::before{right:auto;bottom:auto;height:0}
+}
+@media (prefers-reduced-motion:reduce){:is(#_v,body):is(#_q,body) .fusione-vantaggi li::before{transition:none;transform:none}}
+
+/* 253 · Liquid glass (04/11/2026): vetro con sfocatura, riflesso sul bordo alto e luce che scorre al passaggio.
+   Stesso trattamento per tessere con icone, linee BClean, nodi del percorso, chip. Blu dove prevale il blu. */
+:root{--lg-blu:#0085cf;--lg-spec:inset 0 1.5px 0 rgba(255,255,255,.75),inset 0 -14px 22px -14px rgba(255,255,255,.28),inset 0 0 0 1px rgba(255,255,255,.38)}
+:is(#_s,body):is(#_t,body):is(#_g,body) .row-striscia:not(.t-bianca) .tiles-icone > .tile{background:linear-gradient(145deg,rgba(255,255,255,.30),rgba(255,255,255,.07) 55%,rgba(255,255,255,.18)) !important;-webkit-backdrop-filter:blur(16px) saturate(1.7);backdrop-filter:blur(16px) saturate(1.7);box-shadow:var(--lg-spec),0 22px 34px -22px rgba(90,0,12,.55) !important;position:relative;overflow:hidden}
+:is(#_s,body):is(#_t,body):is(#_g,body) .row-striscia:not(.t-bianca) .tiles-icone > .tile::after{content:"" !important;display:block !important;position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);transition:transform .9s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+:is(#_s,body):is(#_t,body):is(#_g,body) .row-striscia:not(.t-bianca) .tiles-icone > .tile:is(:hover,:focus-visible)::after{transform:translateX(120%)}
+:is(#_s,body):is(#_t,body):is(#_g,body) .row-striscia:not(.t-bianca) .tiles-icone > .tile .tile-ico{background:linear-gradient(160deg,#fff,rgba(255,255,255,.82)) !important;box-shadow:inset 0 2px 0 #fff,0 12px 22px -12px rgba(90,0,12,.6) !important}
+/* fondo chiaro: vetro azzurrato, bordo e luce blu */
+:is(#_s,body):is(#_t,body):is(#_g,body) :is(.row-striscia.t-bianca,.striscia-scheda) .tiles-icone > .tile{background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(214,236,250,.55)) !important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 1.5px 0 #fff,inset 0 -12px 20px -14px rgba(0,133,207,.25),inset 0 0 0 1px rgba(0,133,207,.18),0 16px 26px -20px rgba(0,80,130,.35) !important}
+:is(#_s,body):is(#_t,body):is(#_g,body) :is(.row-striscia.t-bianca,.striscia-scheda) .tiles-icone > .tile:is(:hover,:focus-visible){background:linear-gradient(150deg,#fff,rgba(190,225,247,.7)) !important;box-shadow:inset 0 1.5px 0 #fff,inset 0 0 0 2px var(--lg-blu),0 22px 32px -18px rgba(0,100,170,.5) !important}
+/* tessere con icone rosse su fondo chiaro (strisce di pagina interna): bordo rosso resta */
+:is(#_s,body):is(#_t,body):is(#_g,body) .row-striscia.t-bianca:not(:has(img[src*="azzurre"])):not(:has(img[src*="settori/azzurre"])) .tiles-icone > .tile:is(:hover,:focus-visible){box-shadow:inset 0 1.5px 0 #fff,inset 0 0 0 2px var(--red),0 22px 32px -18px rgba(163,16,0,.5) !important}
+/* linee BClean e chip */
+:is(#_h,body):is(#_q,body):is(#_g,body) .bclean-hub-linee a{background:linear-gradient(150deg,rgba(255,255,255,.96),rgba(255,226,230,.55)) !important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:inset 0 1.5px 0 #fff,inset 0 -12px 20px -14px rgba(228,0,43,.22),inset 0 0 0 1px rgba(228,0,43,.16),0 16px 26px -20px rgba(120,0,20,.4)}
+:is(#_h,body):is(#_q,body):is(#_g,body) .bclean-hub-linee a.eco{background:linear-gradient(150deg,#f6fff9,rgba(190,235,208,.6)) !important}
+/* nodi del percorso: sfera di vetro */
+:is(#_v,body):is(#_q,body):is(#_g,body) .row:not(.t-bianca) .fusione-vantaggi .fv-ico{background:linear-gradient(160deg,rgba(255,255,255,.95),rgba(255,255,255,.55)) !important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 2px 0 #fff,inset 0 -10px 16px -10px rgba(228,0,43,.35),0 16px 28px -14px rgba(90,0,12,.6) !important}
+/* hover blu dove prevale il blu (usato, sezioni azzurre) */
+:is(#_u,body):is(#_q,body) .formula-nol:is(:hover,:focus-within){box-shadow:inset 0 0 0 2px var(--lg-blu),0 24px 40px -24px rgba(0,100,170,.55) !important}
+@media (prefers-reduced-motion:reduce){.tiles-icone > .tile::after{transition:none !important}}
+
+/* 254 · Strisce con icone: un solo layout per tutte — titolo sopra, tessere sotto a tutta larghezza (poche o molte) */
+:is(#_s,body):is(#_t,body):is(#_g,body) .row-striscia > .block{display:flex !important;flex-direction:column !important;align-items:stretch !important;text-align:left !important}
+:is(#_s,body):is(#_t,body):is(#_g,body) .row-striscia > .block > :is(h2,p,.block-id,.small){margin-left:0 !important;margin-right:0 !important;text-align:left !important;max-width:none !important}
+:is(#_s,body):is(#_t,body):is(#_g,body) :is(.row-striscia,.striscia-scheda) .tiles-icone{grid-template-columns:repeat(auto-fill,minmax(clamp(128px,11vw,160px),1fr)) !important;max-width:none !important;margin:clamp(16px,1.8vw,26px) 0 0 !important;justify-content:start !important;width:100%}
+:is(#_s,body):is(#_t,body):is(#_g,body) .striscia-scheda{display:flex;flex-direction:column}
+@media (max-width:640px){:is(#_s,body):is(#_t,body):is(#_g,body) :is(.row-striscia,.striscia-scheda) .tiles-icone{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+
+/* 255 · Tag BClean leggibile */
+:is(#_b,body):is(#_q,body):is(#_g,body) .tag.tag-bclean{background:var(--ink) !important;color:#fff !important;-webkit-text-fill-color:#fff !important;border:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+:is(#_b,body):is(#_q,body):is(#_g,body) .tag.tag-eco{color:#0f6a31 !important;-webkit-text-fill-color:#0f6a31 !important}
+
+/* 256 · Liquid glass in movimento: ingressi che si «condensano» (sfocatura → nitido), CTA con gel e luce che scorre */
+@keyframes lg-gel{0%{transform:scale(1)}40%{transform:scale(1.045,.955)}70%{transform:scale(.985,1.02)}100%{transform:scale(1)}}
+body.ha-ingressi .wrap > .row:not(.row-testata):not(.in-vista) > .block{filter:blur(14px) saturate(1.4)}
+body.ha-ingressi .wrap > .row:not(.row-testata) > .block{transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1),filter 1.1s cubic-bezier(.2,.8,.2,1)}
+body.ha-ingressi .wrap > .row:not(.row-testata):not(.in-vista) :is(h2,.lede,.kicker,.btn){opacity:0;filter:blur(10px);transform:translateY(14px)}
+body.ha-ingressi .wrap > .row:not(.row-testata) :is(h2,.lede,.kicker,.btn){transition:opacity .8s ease,filter .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+body.ha-ingressi .wrap > .row:not(.row-testata) h2{transition-delay:.08s}
+body.ha-ingressi .wrap > .row:not(.row-testata) .lede{transition-delay:.18s}
+body.ha-ingressi .wrap > .row:not(.row-testata) .btn{transition-delay:.3s}
+.btn{position:relative;overflow:hidden}
+.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-130%);transition:transform .8s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.btn:is(:hover,:focus-visible)::before{transform:translateX(130%)}
+.btn:is(:hover,:focus-visible){animation:lg-gel .6s cubic-bezier(.3,1.4,.5,1)}
+.btn-glass{-webkit-backdrop-filter:blur(14px) saturate(1.6);backdrop-filter:blur(14px) saturate(1.6);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.4)}
+@media (prefers-reduced-motion:reduce){
+  body.ha-ingressi .wrap > .row .block,body.ha-ingressi .wrap > .row :is(h2,.lede,.kicker,.btn){filter:none !important}
+  .btn::before{display:none}.btn:is(:hover,:focus-visible){animation:none}}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone{width:100% !important;min-width:0 !important;max-width:none !important;justify-self:stretch !important;align-self:stretch !important;grid-auto-flow:row !important;grid-template-columns:repeat(auto-fill,minmax(clamp(128px,11vw,160px),1fr)) !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body) .row-settori > .block{display:flex !important;flex-direction:column !important;align-items:stretch !important;text-align:left !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body) .row-settori > .block > :is(h2,p,.block-id,.small){margin-left:0 !important;text-align:left !important;max-width:none !important}
+
+/* 257 · Hero della home (04/11/2026): kicker, titolo, testo, CTA e indicatori sulla stessa linea di sinistra */
+:is(#_a,body):is(#_q,body) body[data-pagina="home"] .hero-full .hero-copy,
+:is(#_a,body):is(#_q,body)[data-pagina="home"] .hero-full .hero-copy{padding-left:0 !important;padding-right:0 !important}
+:is(#_a,body):is(#_q,body)[data-pagina="home"] .hero-full .hero-cnt .hero-stats{margin-left:0 !important;padding-left:0 !important}
+:is(#_a,body):is(#_q,body)[data-pagina="home"] .hero-full .hero-cnt .hero-stats > div:first-child{padding-left:0 !important}
+:is(#_a,body):is(#_q,body)[data-pagina="home"] .hero-full :is(.hero-copy,.hero-cta,.hero-stats){width:100%;justify-content:flex-start !important;align-items:flex-start}
+:is(#_a,body):is(#_q,body)[data-pagina="home"] .hero-full .hero-stats > div{align-items:flex-start !important;text-align:left !important}
+
+/* 258 · Card prodotto BClean: corpo bianco, testi scuri (sul rosso il corpo della card è chiaro) */
+:is(#_k,body):is(#_q,body):is(#_g,body) .card.card-bc .card-body{background:#fff !important}
+:is(#_k,body):is(#_q,body):is(#_g,body) .card.card-bc :is(.card-name,.card-desc){color:var(--ink) !important;-webkit-text-fill-color:currentColor !important;text-shadow:none !important}
+:is(#_k,body):is(#_q,body):is(#_g,body) .card.card-bc .card-desc{color:var(--grey) !important}
+:is(#_k,body):is(#_q,body):is(#_g,body) .card.card-bc a.card-link{color:var(--red) !important;-webkit-text-fill-color:currentColor !important;font-weight:700;text-shadow:none !important}
+
+/* 259 · Strisce con icone: hover più sobrio (niente riflesso che scorre), titoli su una riga · Card BClean con angoli arrotondati */
+:is(#_s,body):is(#_t,body):is(#_g,body) .row-striscia:not(.t-bianca) .tiles-icone > .tile::after{content:none !important;display:none !important}
+:is(#_s,body):is(#_t,body):is(#_g,body) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile:is(:hover,:focus-visible){transform:translateY(-3px)}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body) :is(.row-striscia,.row-settori) > .block > h2,
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body) .striscia-scheda > h2{max-width:none !important;white-space:nowrap}
+@media (max-width:560px){:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body) :is(.row-striscia,.row-settori) > .block > h2,:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body) .striscia-scheda > h2{white-space:normal}}
+.card.card-bc{overflow:hidden}
+.card.card-bc .card-body{border-radius:0}
+
+/* 260 · «Le linee» (hub detergenti): in hover restano chiare e leggibili */
+:is(#_h,body):is(#_q,body):is(#_g,body) .bclean-hub-linee a:is(:hover,:focus-visible){background:linear-gradient(150deg,#fff,rgba(255,214,220,.75)) !important;box-shadow:inset 0 1.5px 0 #fff,inset 0 0 0 2px var(--red),0 18px 28px -18px rgba(163,16,0,.5) !important;transform:translateY(-3px)}
+:is(#_h,body):is(#_q,body):is(#_g,body) .bclean-hub-linee a.eco:is(:hover,:focus-visible){background:linear-gradient(150deg,#fff,rgba(170,226,195,.8)) !important;box-shadow:inset 0 1.5px 0 #fff,inset 0 0 0 2px #2f9e5b,0 18px 28px -18px rgba(15,106,49,.5) !important}
+:is(#_h,body):is(#_q,body):is(#_g,body) .row-bclean-hub .bclean-hub-linee a:is(:hover,:focus-visible) :is(b,small){color:var(--ink) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_h,body):is(#_q,body):is(#_g,body) .row-bclean-hub .bclean-hub-linee a.eco:is(:hover,:focus-visible) :is(b,small){color:#0f6a31 !important}
+:is(#_h,body):is(#_q,body):is(#_g,body) .row-bclean-hub .bclean-hub-linee a:is(:hover,:focus-visible)::after{opacity:1;color:var(--red)}
+
+/* 261 · Transizioni tra sezioni più discrete (04/11/2026): meno sfocatura, meno spostamento, tempi più dolci */
+body.ha-ingressi .wrap > .row:not(.row-testata):not(.in-vista) > .block{filter:blur(3px);opacity:0;transform:translateY(14px) scale(.997)}
+body.ha-ingressi .wrap > .row:not(.row-testata) > .block{transition:opacity .9s ease,transform 1s cubic-bezier(.25,.7,.3,1),filter .9s ease}
+body[data-pagina="home"].ha-ingressi .wrap > .row:not(.in-vista) > .block{transform:translateY(14px)}
+body.ha-ingressi .wrap > .row:not(.row-testata):not(.in-vista) :is(h2,.lede,.kicker,.btn){filter:blur(2px);transform:translateY(6px)}
+body.ha-ingressi .wrap > .row:not(.row-testata):not(.in-vista) :is(.card,.sede,.formula){transform:translateY(10px)}
+body.ha-ingressi .wrap > .row:not(.row-testata) :is(.card,.sede,.formula){transition:opacity .9s ease var(--ritardo,0ms),transform 1s cubic-bezier(.25,.7,.3,1) var(--ritardo,0ms)}
+body.ha-ingressi .wrap > .row:not(.row-testata) h2{transition-delay:.04s}
+body.ha-ingressi .wrap > .row:not(.row-testata) .lede{transition-delay:.1s}
+body.ha-ingressi .wrap > .row:not(.row-testata) .btn{transition-delay:.16s}
+.btn:is(:hover,:focus-visible){animation-duration:.45s}
+
+/* 262 · Sezioni bianche: le CTA (link «Vedi», frecce, rimandi) sono blu, non rosse */
+:root{--cta-blu:#0085cf;--cta-blu-scuro:#006aa5}
+:is(#_c,body):is(#_q,body):is(#_g,body) :is(.row.t-bianca,.block.t-bianca,.striscia-scheda) :is(.btn-link,.card-link,.formula-go,.cert-link,.row-marchi .card-meta){color:var(--cta-blu-scuro) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_c,body):is(#_q,body):is(#_g,body) :is(.row.t-bianca,.block.t-bianca,.striscia-scheda) :is(.btn-link,.card-link,.formula-go,.cert-link):is(:hover,:focus-visible),
+:is(#_c,body):is(#_q,body):is(#_g,body) .row-marchi .card:hover .card-meta{color:var(--cta-blu) !important}
+:is(#_c,body):is(#_q,body):is(#_g,body) .card.card-bc a.card-link,
+:is(#_c,body):is(#_q,body):is(#_g,body) .pa-card a.card-link{color:var(--cta-blu-scuro) !important}
+:is(#_c,body):is(#_q,body):is(#_g,body) :is(.row.t-bianca,.block.t-bianca) .btn-primary{--btn:var(--cta-blu);--btn-scuro:var(--cta-blu-scuro);--btn-rgb:0,133,207}
+
+/* 263 · Strisce con icone (settori, categorie, «dove si usano»…): stessa forma della home — titolo centrato, cerchi bianchi con l'icona, nome sotto, nessuna scatola per tessera */
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori) > .block,
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) .striscia-scheda{display:flex !important;flex-direction:column !important;align-items:center !important;text-align:center !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori) > .block > :is(h2,p,.block-id,.small),
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) .striscia-scheda > :is(h2,p,.small){text-align:center !important;margin-left:auto !important;margin-right:auto !important;max-width:none !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone{display:flex !important;flex-wrap:wrap;justify-content:center !important;align-items:flex-start;gap:clamp(22px,2.6vw,40px) clamp(14px,2vw,32px) !important;margin:clamp(18px,2vw,28px) auto 0 !important;width:100% !important;max-width:1100px !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile{width:clamp(108px,11vw,136px);padding:0 !important;background:none !important;box-shadow:none !important;border-radius:0 !important;-webkit-backdrop-filter:none;backdrop-filter:none;overflow:visible;gap:12px !important;transform:none}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile .tile-ico{width:clamp(64px,5.4vw,76px) !important;height:clamp(64px,5.4vw,76px) !important;background:#fff !important;box-shadow:0 14px 26px -16px rgba(60,0,10,.55) !important;transition:transform .35s cubic-bezier(.25,.7,.3,1),box-shadow .35s}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile span{font-size:13.5px !important;font-weight:700 !important;line-height:1.25 !important;color:#fff !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile:is(:hover,:focus-visible){background:none !important;box-shadow:none !important;transform:none}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile:is(:hover,:focus-visible) .tile-ico{transform:translateY(-4px);box-shadow:0 0 0 3px rgba(255,255,255,.55),0 18px 28px -16px rgba(60,0,10,.6) !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile.is-corrente{background:none !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile.is-corrente .tile-ico{box-shadow:0 0 0 3px #fff,0 14px 26px -16px rgba(60,0,10,.55) !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile.is-corrente span{color:#fff !important}
+/* fondo chiaro: nome scuro, cerchio con filo, hover blu (icone azzurre) */
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia.t-bianca,.striscia-scheda) .tiles-icone > .tile span,
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia.t-bianca,.striscia-scheda) .tiles-icone > .tile.is-corrente span{color:var(--ink) !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia.t-bianca,.striscia-scheda) .tiles-icone > .tile .tile-ico{box-shadow:inset 0 0 0 1px var(--line),0 14px 24px -18px rgba(0,60,100,.45) !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia.t-bianca,.striscia-scheda) .tiles-icone > .tile:is(:hover,:focus-visible) .tile-ico,
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia.t-bianca,.striscia-scheda) .tiles-icone > .tile.is-corrente .tile-ico{box-shadow:inset 0 0 0 2px var(--cta-blu),0 18px 28px -16px rgba(0,100,170,.5) !important}
+@media (max-width:640px){:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile{width:calc(33% - 12px)}}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori,.striscia-scheda) .tiles-icone > .tile{flex:0 0 clamp(108px,11vw,136px) !important;width:clamp(108px,11vw,136px) !important;min-width:0}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori) > .block > h2,
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) .striscia-scheda > h2{white-space:nowrap !important}
+@media (max-width:560px){:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) :is(.row-striscia,.row-settori) > .block > h2,:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):not([data-pagina="home"]) .striscia-scheda > h2{white-space:normal !important}}
+
+/* 264 · Hover delle sedi (e card affiancate): niente sfocatura delle altre, niente riempimento rosso né piega d'angolo — solo contorno pieno e un leggero sollevamento */
+:is(#_e,body):is(#_q,body):is(#_g,body) :is(.grid,.formule,.sedi):has(> :is(.card,.formula,.sede):hover) > :is(.card,.formula,.sede):not(:hover),
+:is(#_e,body):is(#_q,body):is(#_g,body)[data-pagina="home"] .row-sedi .sedi:has(.sede:hover) .sede:not(:hover),
+:is(#_e,body):is(#_q,body):is(#_g,body)[data-pagina="home"] .row-marchi .grid-2:has(.card:hover) .card:not(:hover){filter:none !important;opacity:1 !important}
+:is(#_e,body):is(#_q,body):is(#_g,body) .sede:is(:hover,:focus-within)::after,:is(#_e,body):is(#_q,body):is(#_g,body) .sede.is-main::after{content:none !important;display:none !important}
+:is(#_e,body):is(#_q,body):is(#_g,body) .row-sedi.t-outline .sede{transition:transform .35s cubic-bezier(.25,.7,.3,1),background-color .3s,box-shadow .3s}
+:is(#_e,body):is(#_q,body):is(#_g,body) .row-sedi.t-outline .sede:is(:hover,:focus-within){transform:translateY(-4px);background:rgba(255,255,255,.12) !important;box-shadow:inset 0 0 0 2px #fff,0 24px 38px -26px rgba(90,0,12,.6) !important}
+:is(#_e,body):is(#_q,body):is(#_g,body) .row-sedi.t-outline .sede.is-main{background:rgba(255,255,255,.08) !important}
+:is(#_e,body):is(#_q,body):is(#_g,body) .row-sedi .sede:is(:hover,:focus-within) *{color:#fff !important;-webkit-text-fill-color:#fff !important;filter:none !important}
+
+/* 265 · Nuovo fondale (04/11/2026) — «Lame di luce a 42°»: al posto delle righe verticali, due lastre diagonali traslucide
+   (il taglio a 42° è il segno del logotipo, «The Slice»), un solo filo di luce sul bordo e l'ombra Deep Red sull'altro lato.
+   Sotto il testo il rosso resta quasi pieno (#e4002b → #c8001f): contrasto del bianco ≥ 4,5:1. Niente ripetizioni. */
+body,body[data-pagina="home"],body.pagina-interna{
+  --fetta:132deg;
+  --fondo-rosso:
+    linear-gradient(var(--fetta),transparent 0 52%,rgba(163,16,0,.34) 52% calc(52% + 2px),rgba(163,16,0,.16) calc(52% + 2px) 74%,transparent 74%),
+    linear-gradient(var(--fetta),transparent 0 18%,rgba(255,255,255,.40) 18% calc(18% + 2px),rgba(255,255,255,.10) calc(18% + 2px) 34%,rgba(255,255,255,0) 40%),
+    radial-gradient(50% 60% at 88% 8%,rgba(243,63,84,.55),transparent 70%),
+    linear-gradient(160deg,#e4002b,#c8001f) !important;
+  --fondo-bianco:
+    linear-gradient(var(--fetta),transparent 0 46%,rgba(0,133,207,.16) 46% calc(46% + 2px),rgba(0,133,207,.08) calc(46% + 2px) 70%,transparent 70%),
+    linear-gradient(var(--fetta),transparent 0 14%,#fff 14% calc(14% + 1px),rgba(219,219,219,.35) calc(14% + 1px) 32%,transparent 38%),
+    linear-gradient(180deg,#fff,#f4f6f8) !important;
+  --canne-rosse:
+    linear-gradient(var(--fetta),transparent 0 52%,rgba(163,16,0,.22) 52% calc(52% + 1px),rgba(163,16,0,.10) calc(52% + 1px) 74%,transparent 74%),
+    linear-gradient(var(--fetta),transparent 0 18%,rgba(255,255,255,.45) 18% calc(18% + 1px),rgba(255,255,255,.08) calc(18% + 1px) 34%,rgba(255,255,255,0) 40%) !important;
+  --canne-bianche:
+    linear-gradient(var(--fetta),transparent 0 46%,rgba(0,133,207,.14) 46% calc(46% + 2px),rgba(0,133,207,.07) calc(46% + 2px) 70%,transparent 70%) !important}
+/* le testate non ripetono più le righe: una lastra smerigliata ritagliata a 42°, ferma */
+:is(#_n,body):is(#_q,body):is(#_g,body) .row-testata::after{background:linear-gradient(var(--fetta),rgba(255,255,255,.18),rgba(255,255,255,.05) 60%) !important;background-image:linear-gradient(var(--fetta),rgba(255,255,255,.18),rgba(255,255,255,.05) 60%) !important;-webkit-backdrop-filter:none;backdrop-filter:none;clip-path:polygon(38% 0,100% 0,100% 100%,0 100%,0 62%);box-shadow:inset 1px 1px 0 rgba(255,255,255,.6) !important;-webkit-mask:linear-gradient(180deg,#000 70%,transparent) !important;mask:linear-gradient(180deg,#000 70%,transparent) !important;animation:none !important;transform:none !important;opacity:1 !important}
+@media (max-width:700px){:is(#_n,body):is(#_q,body):is(#_g,body) .row-testata::after{clip-path:polygon(0 18%,100% 0,100% 100%,0 100%)}}
+
+
+/* 266 · Sfondi «Vetro scanalato a 42° + fasci Slice» (05/11/2026) — direzione scelta dai 6 esempi di Sara:
+   dal n.1 i fasci di linee nette sul taglio a 42° (The Slice), dal n.2 il vetro scanalato diagonale in una sola fascia,
+   dal n.6 il riflesso liquido lungo la fascia. Una sola fascia per schermata, coperta ai bordi: niente righe su tutta la pagina.
+   Sostituisce il blocco 265. */
+body,body[data-pagina="home"],body.pagina-interna{
+  --fetta:132deg;
+  --canne-rosse:
+    linear-gradient(var(--fetta),transparent 0,transparent 3%,rgba(255,255,255,.30) 3%,rgba(255,255,255,.30) calc(3% + 3px),transparent calc(3% + 3px),transparent 5.2%,rgba(255,255,255,.30) 5.2%,rgba(255,255,255,.30) calc(5.2% + 1.5px),transparent calc(5.2% + 1.5px),transparent 6.6%,rgba(255,255,255,.30) 6.6%,rgba(255,255,255,.30) calc(6.6% + 4px),transparent calc(6.6% + 4px),transparent 9.4%,rgba(255,255,255,.30) 9.4%,rgba(255,255,255,.30) calc(9.4% + 1.5px),transparent calc(9.4% + 1.5px),transparent 10.6%,rgba(255,255,255,.30) 10.6%,rgba(255,255,255,.30) calc(10.6% + 2px),transparent calc(10.6% + 2px),transparent 13.8%,rgba(255,255,255,.30) 13.8%,rgba(255,255,255,.30) calc(13.8% + 1px),transparent calc(13.8% + 1px),transparent 100%),
+    linear-gradient(var(--fetta),transparent 0,transparent 83%,rgba(255,255,255,.30) 83%,rgba(255,255,255,.30) calc(83% + 1.5px),transparent calc(83% + 1.5px),transparent 85.2%,rgba(255,255,255,.30) 85.2%,rgba(255,255,255,.30) calc(85.2% + 4px),transparent calc(85.2% + 4px),transparent 88.4%,rgba(255,255,255,.30) 88.4%,rgba(255,255,255,.30) calc(88.4% + 1.5px),transparent calc(88.4% + 1.5px),transparent 89.6%,rgba(255,255,255,.30) 89.6%,rgba(255,255,255,.30) calc(89.6% + 2.5px),transparent calc(89.6% + 2.5px),transparent 92.6%,rgba(255,255,255,.30) 92.6%,rgba(255,255,255,.30) calc(92.6% + 5px),transparent calc(92.6% + 5px),transparent 96%,rgba(255,255,255,.30) 96%,rgba(255,255,255,.30) calc(96% + 1.5px),transparent calc(96% + 1.5px),transparent 100%),
+    linear-gradient(var(--fetta),transparent 41%,rgba(255,255,255,.08) 47%,rgba(255,255,255,.04) 50%,transparent 54%),
+    linear-gradient(var(--fetta),#e4002b 0 22%,rgba(228,0,43,0) 36% 64%,#cf0022 78% 100%),
+    repeating-linear-gradient(var(--fetta),rgba(255,255,255,0) 0px,rgba(255,255,255,.12) 9px,rgba(255,255,255,.03) 17px,rgba(120,0,16,.09) 27px,rgba(120,0,16,0) 34px),
+    radial-gradient(42% 55% at 62% 42%,rgba(255,92,120,.35),transparent 70%) !important;
+  --fondo-rosso:
+    linear-gradient(var(--fetta),transparent 0,transparent 3%,rgba(255,255,255,.30) 3%,rgba(255,255,255,.30) calc(3% + 3px),transparent calc(3% + 3px),transparent 5.2%,rgba(255,255,255,.30) 5.2%,rgba(255,255,255,.30) calc(5.2% + 1.5px),transparent calc(5.2% + 1.5px),transparent 6.6%,rgba(255,255,255,.30) 6.6%,rgba(255,255,255,.30) calc(6.6% + 4px),transparent calc(6.6% + 4px),transparent 9.4%,rgba(255,255,255,.30) 9.4%,rgba(255,255,255,.30) calc(9.4% + 1.5px),transparent calc(9.4% + 1.5px),transparent 10.6%,rgba(255,255,255,.30) 10.6%,rgba(255,255,255,.30) calc(10.6% + 2px),transparent calc(10.6% + 2px),transparent 13.8%,rgba(255,255,255,.30) 13.8%,rgba(255,255,255,.30) calc(13.8% + 1px),transparent calc(13.8% + 1px),transparent 100%),
+    linear-gradient(var(--fetta),transparent 0,transparent 83%,rgba(255,255,255,.30) 83%,rgba(255,255,255,.30) calc(83% + 1.5px),transparent calc(83% + 1.5px),transparent 85.2%,rgba(255,255,255,.30) 85.2%,rgba(255,255,255,.30) calc(85.2% + 4px),transparent calc(85.2% + 4px),transparent 88.4%,rgba(255,255,255,.30) 88.4%,rgba(255,255,255,.30) calc(88.4% + 1.5px),transparent calc(88.4% + 1.5px),transparent 89.6%,rgba(255,255,255,.30) 89.6%,rgba(255,255,255,.30) calc(89.6% + 2.5px),transparent calc(89.6% + 2.5px),transparent 92.6%,rgba(255,255,255,.30) 92.6%,rgba(255,255,255,.30) calc(92.6% + 5px),transparent calc(92.6% + 5px),transparent 96%,rgba(255,255,255,.30) 96%,rgba(255,255,255,.30) calc(96% + 1.5px),transparent calc(96% + 1.5px),transparent 100%),
+    linear-gradient(var(--fetta),transparent 41%,rgba(255,255,255,.08) 47%,rgba(255,255,255,.04) 50%,transparent 54%),
+    linear-gradient(var(--fetta),#e4002b 0 22%,rgba(228,0,43,0) 36% 64%,#cf0022 78% 100%),
+    repeating-linear-gradient(var(--fetta),rgba(255,255,255,0) 0px,rgba(255,255,255,.12) 9px,rgba(255,255,255,.03) 17px,rgba(120,0,16,.09) 27px,rgba(120,0,16,0) 34px),
+    radial-gradient(42% 55% at 62% 42%,rgba(255,92,120,.35),transparent 70%),
+    linear-gradient(160deg,#e9112f,#e4002b 45%,#c8001f) !important;
+  --canne-bianche:
+    linear-gradient(var(--fetta),transparent 0,transparent 78%,rgba(0,133,207,.30) 78%,rgba(0,133,207,.30) calc(78% + 1.5px),transparent calc(78% + 1.5px),transparent 80.4%,rgba(0,133,207,.30) 80.4%,rgba(0,133,207,.30) calc(80.4% + 3px),transparent calc(80.4% + 3px),transparent 83.2%,rgba(0,133,207,.30) 83.2%,rgba(0,133,207,.30) calc(83.2% + 1px),transparent calc(83.2% + 1px),transparent 86%,rgba(0,133,207,.30) 86%,rgba(0,133,207,.30) calc(86% + 2px),transparent calc(86% + 2px),transparent 90.5%,rgba(0,133,207,.30) 90.5%,rgba(0,133,207,.30) calc(90.5% + 4px),transparent calc(90.5% + 4px),transparent 95%,rgba(0,133,207,.30) 95%,rgba(0,133,207,.30) calc(95% + 1px),transparent calc(95% + 1px),transparent 100%),
+    linear-gradient(var(--fetta),transparent 46%,rgba(255,255,255,.9) 52%,transparent 58%),
+    linear-gradient(var(--fetta),#fff 0 30%,rgba(255,255,255,0) 44% 70%,#f4f8fb 84% 100%),
+    repeating-linear-gradient(var(--fetta),rgba(0,133,207,0) 0px,rgba(0,133,207,.10) 9px,rgba(255,255,255,.95) 15px,rgba(0,133,207,.05) 25px,rgba(0,133,207,0) 32px) !important;
+  --fondo-bianco:
+    linear-gradient(var(--fetta),transparent 0,transparent 86%,rgba(0,133,207,.16) 86%,rgba(0,133,207,.16) calc(86% + 1px),transparent calc(86% + 1px),transparent 88.5%,rgba(0,133,207,.16) 88.5%,rgba(0,133,207,.16) calc(88.5% + 2.5px),transparent calc(88.5% + 2.5px),transparent 92%,rgba(0,133,207,.16) 92%,rgba(0,133,207,.16) calc(92% + 1px),transparent calc(92% + 1px),transparent 95.5%,rgba(0,133,207,.16) 95.5%,rgba(0,133,207,.16) calc(95.5% + 3px),transparent calc(95.5% + 3px),transparent 100%),
+    radial-gradient(60% 80% at 100% 0%,rgba(0,133,207,.06),transparent 65%),
+    linear-gradient(180deg,#fff,#f5f8fa) !important}
+/* il fondale rosso a tutto schermo: la composizione è già misurata, niente maschera radiale */
+:is(#_z,body):is(#_q,body) .mood .macchine::after{-webkit-mask:none !important;mask:none !important;opacity:1 !important}
+/* tessere bianche: il vetro azzurrato resta sul lato destro, sfumato verso il testo */
+:is(#_z,body):is(#_q,body) .wrap > .row.t-bianca > .block::before{
+  -webkit-mask:linear-gradient(90deg,transparent 0%,transparent 35%,rgba(0,0,0,.6) 65%,#000 100%) !important;
+          mask:linear-gradient(90deg,transparent 0%,transparent 35%,rgba(0,0,0,.6) 65%,#000 100%) !important}
+@media (max-width:700px){body,body[data-pagina="home"],body.pagina-interna{--fetta:150deg}}
+
+
+/* 267 · Elementi visivi dai 5 esempi di Sara (05/11/2026): vetro con bordo cromatico rosso→bianco→azzurro.
+   1 sfera di vetro nelle testate · 2 pulsanti «pillola» di vetro con bordo cromatico · 3 frecce tonde di vetro nei link delle card.
+   Niente effetti finti o pesanti: gradienti CSS e un SVG inline per la freccia. */
+
+/* 1 · Sfera di vetro (esempio 1): fluttua piano a destra della testata, con il riflesso colorato sotto */
+:is(#_y,body):is(#_q,body):is(#_g,body) .row-testata{position:relative;overflow:hidden}
+.orb{position:absolute;right:clamp(24px,7vw,120px);top:50%;width:clamp(150px,16vw,250px);aspect-ratio:1;border-radius:50%;pointer-events:none;z-index:0;
+  transform:translateY(-55%);
+  background:
+    radial-gradient(circle at 30% 24%,rgba(255,255,255,.95) 0 5%,rgba(255,255,255,0) 16%),
+    radial-gradient(circle at 74% 80%,rgba(255,255,255,.35) 0 4%,rgba(255,255,255,0) 14%),
+    radial-gradient(circle at 50% 50%,rgba(255,255,255,.04) 0 58%,rgba(255,255,255,.22) 70%,rgba(255,255,255,.06) 73%),
+    radial-gradient(circle at 50% 60%,rgba(255,255,255,.10),rgba(255,255,255,.02) 70%);
+  -webkit-backdrop-filter:blur(3px) saturate(1.5);backdrop-filter:blur(3px) saturate(1.5);
+  box-shadow:inset 14px -18px 34px rgba(0,133,207,.55),inset -16px 14px 30px rgba(255,45,85,.6),inset 0 0 0 1px rgba(255,255,255,.55),0 50px 70px -40px rgba(70,0,10,.55);
+  animation:orb-galleggia 9s ease-in-out infinite alternate}
+.orb::before{content:"";position:absolute;inset:0;border-radius:50%;padding:2px;
+  background:conic-gradient(from 210deg,#ff2d55,#e4002b 18%,rgba(255,255,255,.95) 38%,#7fd0ff 55%,#0085cf 70%,rgba(255,255,255,.7) 86%,#ff2d55);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.orb i{position:absolute;left:-30%;right:-30%;bottom:-34%;height:12%;border-radius:50%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55) 30%,rgba(255,255,255,.9) 50%,rgba(127,208,255,.75) 68%,transparent);filter:blur(12px);opacity:.8}
+@keyframes orb-galleggia{to{transform:translateY(-49%) rotate(8deg)}}
+:is(#_y,body):is(#_q,body):is(#_g,body) .row-testata > .block{position:relative;z-index:1}
+@media (max-width:900px){.orb{width:120px;right:-30px;top:30%;opacity:.7}}
+@media (max-width:560px){.orb{display:none}}
+@media (prefers-reduced-motion:reduce){.orb{animation:none}}
+
+/* 2 · Pulsante «pillola» di vetro (esempio 4): lastra chiara con bordo cromatico e riflesso alto */
+:is(#_y,body):is(#_q,body):is(#_g,body) .btn-glass{position:relative;isolation:isolate;
+  background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.10) 55%,rgba(255,255,255,.18)) !important;
+  border-color:transparent !important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.7);backdrop-filter:blur(16px) saturate(1.7);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.85),inset 0 -8px 16px -10px rgba(255,255,255,.5),0 14px 28px -18px rgba(60,0,10,.55) !important}
+:is(#_y,body):is(#_q,body):is(#_g,body) .btn-glass::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:-1;
+  background:linear-gradient(100deg,rgba(255,80,110,.95),rgba(255,255,255,.95) 45%,rgba(127,208,255,.95));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+:is(#_y,body):is(#_q,body):is(#_g,body) .btn-glass:is(:hover,:focus-visible){background:linear-gradient(180deg,rgba(255,255,255,.46),rgba(255,255,255,.18) 55%,rgba(255,255,255,.26)) !important}
+/* pulsante pieno: un velo di vetro sopra il colore, non un blocco piatto */
+:is(#_y,body):is(#_q,body):is(#_g,body) .btn-primary{background-image:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,0) 48%,rgba(0,0,0,.06)) !important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.55),inset 0 -2px 0 rgba(0,0,0,.08),0 14px 26px -16px rgba(0,30,42,.45) !important}
+
+/* 3 · Freccia tonda di vetro (esempio 5) nei link delle card: bianca sul rosso, azzurra sul bianco */
+:is(#_y,body):is(#_q,body):is(#_g,body) .card a.card-link{display:inline-flex !important;align-items:center;min-height:34px;padding-right:44px !important;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.34' cy='.28' r='.85'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.98'/%3E%3Cstop offset='.5' stop-color='%23fff' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='.22'/%3E%3C/radialGradient%3E%3ClinearGradient id='r' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff2d55'/%3E%3Cstop offset='.5' stop-color='%23fff'/%3E%3Cstop offset='1' stop-color='%234fc3ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='18' cy='18' r='16.6' fill='url(%23g)' stroke='url(%23r)' stroke-width='1.4'/%3E%3Cellipse cx='13' cy='9.5' rx='6' ry='2.6' fill='%23fff' opacity='.75'/%3E%3Cpath d='M15.5 11.5l6.5 6.5-6.5 6.5' fill='none' stroke='%23e4002b' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right center / 34px 34px !important;transition:background-position .3s cubic-bezier(.25,.7,.3,1)}
+:is(#_y,body):is(#_q,body):is(#_g,body) :is(.row.t-bianca,.block.t-bianca,.striscia-scheda,.card-bc,.pa-card,.row-marchi) .card a.card-link,
+:is(#_y,body):is(#_q,body):is(#_g,body) .card.card-bc a.card-link,:is(#_y,body):is(#_q,body):is(#_g,body) .pa-card a.card-link{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.34' cy='.28' r='.9'%3E%3Cstop offset='0' stop-color='%238fd3ff'/%3E%3Cstop offset='.55' stop-color='%232f9fe0'/%3E%3Cstop offset='1' stop-color='%230071b3'/%3E%3C/radialGradient%3E%3ClinearGradient id='r' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.9'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='.2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='18' cy='18' r='16.6' fill='url(%23g)' stroke='url(%23r)' stroke-width='1.4'/%3E%3Cellipse cx='13' cy='9.5' rx='6' ry='2.6' fill='%23fff' opacity='.55'/%3E%3Cpath d='M15.5 11.5l6.5 6.5-6.5 6.5' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important}
+:is(#_y,body):is(#_q,body):is(#_g,body) .card:hover a.card-link,:is(#_y,body):is(#_q,body):is(#_g,body) .card a.card-link:focus-visible{background-position:calc(100% + 3px) center !important}
+@media (prefers-reduced-motion:reduce){:is(#_y,body):is(#_q,body):is(#_g,body) .card a.card-link{transition:none}}
+@media (min-width:901px){:is(#_y,body):is(#_q,body):is(#_g,body) .row-testata:has(.orb) > .block > :is(h1,.lede,p,.claim){max-width:min(100%,calc(100% - clamp(150px,16vw,250px) - clamp(24px,7vw,120px) - 24px)) !important}}
+
+
+/* 268 · Titoli: via la sfocatura d'ingresso (sostituita dall'effetto acqua in JS) · WhatsApp di vetro, non più pulsante bianco con bordo verde */
+body.ha-ingressi .wrap > .row:not(.row-testata):not(.in-vista) :is(h2,.lede,.kicker){filter:none !important}
+:is(#_b,body):is(#_q,body):is(#_g,body) .btn.btn-whatsapp{position:relative;isolation:isolate;gap:12px;padding-left:8px !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.08) 55%,rgba(255,255,255,.16)) !important;
+  border-color:transparent !important;color:#fff !important;-webkit-text-fill-color:#fff !important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.7) !important;backdrop-filter:blur(16px) saturate(1.7) !important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.8),inset 0 -8px 16px -10px rgba(255,255,255,.45),0 14px 28px -18px rgba(0,40,20,.5) !important}
+:is(#_b,body):is(#_q,body):is(#_g,body) .btn.btn-whatsapp::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;z-index:-1;
+  background:linear-gradient(100deg,rgba(255,255,255,.95),rgba(170,240,200,.9) 55%,rgba(255,255,255,.6));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+:is(#_b,body):is(#_q,body):is(#_g,body) .btn.btn-whatsapp svg{box-sizing:content-box;width:18px !important;height:18px !important;padding:7px;border-radius:50%;
+  fill:#fff !important;background:radial-gradient(circle at 34% 28%,#7cf0a8,#25d366 55%,#128c4a);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),0 6px 12px -6px rgba(0,60,25,.6)}
+:is(#_b,body):is(#_q,body):is(#_g,body) .btn.btn-whatsapp:is(:hover,:focus-visible){background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.16) 55%,rgba(255,255,255,.24)) !important}
+/* su fondo bianco: stesso vetro, testo scuro */
+:is(#_b,body):is(#_q,body):is(#_g,body) :is(.row.t-bianca,.block.t-bianca) .btn.btn-whatsapp{color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important;
+  background:linear-gradient(180deg,#fff,#f2f6f8) !important;box-shadow:inset 0 1.5px 0 #fff,inset 0 0 0 1px rgba(0,30,42,.10),0 12px 24px -18px rgba(0,30,42,.4) !important}
+
+/* 269 · CTA della hero (05/11/2026): solo WhatsApp e Noleggio (il Numero Verde è nella barra).
+   Due stili distinti, stessa altezza: WhatsApp = vetro pieno chiaro, testo scuro; Noleggio = vetro trasparente con bordo cromatico */
+:is(#_h,body):is(#_q,body):is(#_g,body)[data-pagina="home"] .hero-cta .btn{height:54px !important;min-height:54px !important;padding-top:0 !important;padding-bottom:0 !important;box-sizing:border-box;align-items:center}
+:is(#_h,body):is(#_q,body):is(#_g,body)[data-pagina="home"] .hero-cta .btn.btn-whatsapp{padding-left:9px !important;padding-right:26px !important;
+  background:linear-gradient(180deg,#fff,rgba(255,255,255,.86)) !important;color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important;
+  box-shadow:inset 0 1.5px 0 #fff,inset 0 -6px 14px -10px rgba(0,30,42,.25),0 16px 30px -18px rgba(60,0,10,.6) !important}
+:is(#_h,body):is(#_q,body):is(#_g,body)[data-pagina="home"] .hero-cta .btn.btn-whatsapp::after{background:linear-gradient(100deg,rgba(37,211,102,.7),rgba(255,255,255,.9) 50%,rgba(37,211,102,.5))}
+:is(#_h,body):is(#_q,body):is(#_g,body)[data-pagina="home"] .hero-cta .btn.btn-whatsapp:is(:hover,:focus-visible){background:#fff !important;transform:translateY(-2px)}
+:is(#_h,body):is(#_q,body):is(#_g,body)[data-pagina="home"] .hero-cta .btn.btn-glass{padding-left:28px !important;padding-right:28px !important}
+
+
+/* 270 · «Dalla fusione di tre aziende» (05/11/2026): i tre cerchi diventano sfere di vetro che si fondono,
+   gli indicatori gocce di vetro sospese (niente linee sopra e sotto) */
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati{border:0 !important;border-block:0 !important;padding:clamp(10px,1.4vw,18px) 0 0 !important;
+  display:flex !important;flex-wrap:wrap;align-items:flex-end;justify-content:flex-start;gap:clamp(14px,2vw,28px) !important}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato{position:relative;isolation:isolate;width:clamp(138px,12.5vw,178px);aspect-ratio:1;border-radius:50%;
+  align-items:center;justify-content:center;text-align:center;gap:4px !important;padding:12px;
+  background:radial-gradient(circle at 30% 24%,rgba(255,255,255,.9) 0 5%,rgba(255,255,255,0) 15%),radial-gradient(circle at 50% 50%,rgba(255,255,255,.08) 0 60%,rgba(255,255,255,.24) 74%,rgba(255,255,255,.06) 76%);
+  -webkit-backdrop-filter:blur(10px) saturate(1.5);backdrop-filter:blur(10px) saturate(1.5);
+  box-shadow:inset 12px -14px 28px rgba(0,133,207,.45),inset -12px 12px 26px rgba(255,45,85,.5),inset 0 0 0 1px rgba(255,255,255,.55),0 34px 50px -30px rgba(70,0,10,.6);
+  animation:goccia 7s ease-in-out infinite alternate}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato::before{content:"";position:absolute;inset:0;border-radius:50%;padding:1.5px;z-index:-1;pointer-events:none;
+  background:conic-gradient(from 210deg,#ff2d55,rgba(255,255,255,.95) 35%,#7fd0ff 55%,#0085cf 70%,rgba(255,255,255,.7) 86%,#ff2d55);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato:nth-child(1){width:clamp(164px,15vw,212px);animation-duration:8s}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato:nth-child(2){margin-bottom:clamp(18px,2.4vw,34px);animation-delay:-2.5s}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato:nth-child(3){animation-delay:-5s}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato b{font-size:clamp(30px,3.2vw,46px) !important}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato:nth-child(1) b{font-size:clamp(32px,3.4vw,50px) !important}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato span{font-size:12.5px !important;line-height:1.2}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato small{font-size:11px !important}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato-nota{flex-basis:100%}
+@keyframes goccia{to{transform:translateY(-10px)}}
+/* le tre aziende: sfere di vetro colorate con bordo cromatico e riflesso, non dischi piatti */
+:is(#_f,body):is(#_q,body):is(#_g,body) .fc{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.65),inset 18px -22px 40px rgba(0,0,0,.18),inset -14px 16px 30px rgba(255,255,255,.35),0 40px 60px -36px rgba(40,0,10,.6) !important;
+  background-image:radial-gradient(circle at 30% 24%,rgba(255,255,255,.75) 0 5%,rgba(255,255,255,0) 16%) !important;
+  -webkit-backdrop-filter:blur(6px) saturate(1.5);backdrop-filter:blur(6px) saturate(1.5);mix-blend-mode:normal}
+:is(#_f,body):is(#_q,body):is(#_g,body) .fc-core{box-shadow:inset 0 2px 0 #fff,0 0 0 6px rgba(255,255,255,.25),0 26px 44px -20px rgba(60,0,10,.6) !important}
+@media (max-width:520px){:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati{justify-content:center}}
+@media (prefers-reduced-motion:reduce){:is(#_f,body):is(#_q,body):is(#_g,body) .fusione-dati .dato{animation:none}}
+
+/* 271 · Icone delle strisce («Soluzioni per ogni settore» e tutte le strisce uguali): niente cerchio bianco.
+   Cerchio di vetro trasparente con filo chiaro; sul rosso l'icona diventa bianca, sul bianco resta a colori */
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):is(#_v,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .tile-ico{
+  background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.28) 0 8%,rgba(255,255,255,0) 30%),rgba(255,255,255,.06) !important;
+  -webkit-backdrop-filter:blur(8px) saturate(1.4);backdrop-filter:blur(8px) saturate(1.4);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),inset 0 2px 0 rgba(255,255,255,.5),0 16px 28px -18px rgba(60,0,10,.55) !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):is(#_v,body) :is(.row-settori,.row-striscia):not(.t-bianca) :is(.tiles-icone,.tiles) > .tile img.tile-ico{filter:url(#icona-bianca) drop-shadow(0 2px 6px rgba(90,0,12,.35)) !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):is(#_v,body) :is(.row-settori,.row-striscia):not(.t-bianca) :is(.tiles-icone,.tiles) > .tile svg.tile-ico{stroke:#fff !important}
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):is(#_v,body) :is(.row-settori,.row-striscia):not(.t-bianca) :is(.tiles-icone,.tiles) > .tile:is(:hover,:focus-visible) .tile-ico{background:rgba(255,255,255,.16) !important;box-shadow:inset 0 0 0 2px #fff,inset 0 2px 0 rgba(255,255,255,.7),0 18px 30px -16px rgba(60,0,10,.6) !important}
+/* su fondo chiaro: cerchio trasparente con filo azzurro, icona a colori */
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):is(#_v,body) :is(.row-striscia.t-bianca,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .tile-ico{background:rgba(255,255,255,0) !important;box-shadow:inset 0 0 0 1.5px rgba(0,133,207,.35),0 12px 22px -18px rgba(0,60,100,.4) !important}
+
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):is(#_v,body) :is(.row-striscia.t-bianca,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile img.tile-ico{filter:url(#icona-trasparente) !important}
+/* il filtro che toglie il bianco agisce anche su fondo e ombra dell'immagine: le immagini restano nude, il cerchio di vetro lo disegna la tessera */
+:is(#_s,body):is(#_t,body):is(#_g,body):is(#_w,body):is(#_u,body):is(#_v,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile img.tile-ico{background:none !important;box-shadow:none !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;padding:0 !important;transform:scale(1.3);transform-origin:center}
+
+
+/* 272 · Giro di rifinitura (05/11/2026) */
+/* pulsanti di vetro: testo bianco. In hero WhatsApp si distingue con il vetro verde, Noleggio resta vetro chiaro */
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .btn.btn-glass{color:#fff !important;-webkit-text-fill-color:#fff !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body)[data-pagina="home"] .hero-cta .btn.btn-whatsapp{color:#fff !important;-webkit-text-fill-color:#fff !important;
+  background:linear-gradient(180deg,rgba(60,220,130,.55),rgba(37,211,102,.28) 55%,rgba(18,140,74,.42)) !important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.75),inset 0 -8px 16px -10px rgba(255,255,255,.35),0 16px 30px -18px rgba(0,50,20,.55) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body)[data-pagina="home"] .hero-cta .btn.btn-whatsapp:is(:hover,:focus-visible){background:linear-gradient(180deg,rgba(60,220,130,.68),rgba(37,211,102,.4) 55%,rgba(18,140,74,.52)) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) :is(.row.t-bianca,.block.t-bianca) .btn.btn-whatsapp{color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important}
+
+/* frecce delle card: lo standard è quello de « Le macchine » in home (triangolo rosso nell'angolo della foto); via i dischi di vetro */
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .card a.card-link{background:none !important;padding-right:0 !important;min-height:0 !important}
+
+/* « I nostri marchi »: il triangolo accanto a « Sito dedicato » prende il colore della scritta */
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .row-marchi .card-meta::before{border-left-color:currentColor !important;border-color:transparent transparent transparent currentColor !important;background:none !important}
+
+/* « L'azienda »: le sfere restano solo alle tre aziende; gli indicatori diventano lastre di vetro (esempio 4), non bolle */
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .fusione-dati{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;align-items:stretch !important;gap:clamp(10px,1.4vw,18px) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .fusione-dati .dato{width:auto !important;aspect-ratio:auto !important;border-radius:22px !important;margin:0 !important;animation:none !important;
+  align-items:flex-start !important;justify-content:flex-end !important;text-align:left !important;padding:clamp(16px,1.6vw,22px) clamp(18px,1.8vw,26px) !important;
+  background:linear-gradient(160deg,rgba(255,255,255,.7),rgba(255,255,255,.35)) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);
+  box-shadow:inset 0 1.5px 0 #fff,inset 0 0 0 1px rgba(0,30,42,.06),0 18px 34px -26px rgba(0,30,42,.45) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .fusione-dati .dato::before{border-radius:22px !important;padding:1px !important;opacity:.7;
+  background:linear-gradient(110deg,rgba(228,0,43,.7),rgba(255,255,255,0) 35%,rgba(255,255,255,0) 65%,rgba(0,133,207,.7)) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .fusione-dati .dato b{font-size:clamp(36px,3.8vw,58px) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .fusione-dati .dato:nth-child(1) b{font-size:clamp(36px,3.8vw,58px) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .fusione-dati .dato span{font-size:14px !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) :is(.t-outline,.t-vetro) .fusione-dati .dato{background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.08)) !important;box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.3) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .fusione-dati .dato-nota{grid-column:1 / -1}
+@media (max-width:520px){:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .fusione-dati{grid-template-columns:1fr !important}}
+
+/* « Cinque sedi »: in hover il contorno è bianco pieno, mai rosso */
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .row-sedi .sede:is(:hover,:focus-within){border-color:#fff !important;outline:0 !important;box-shadow:inset 0 0 0 2px #fff,0 24px 38px -26px rgba(90,0,12,.6) !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .row-sedi .sede:is(:hover,:focus-within) .card-fondo{border-color:#fff !important;box-shadow:none !important}
+
+/* modulo « Richiedi informazioni » e piè di pagina attaccati */
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body)[data-pagina="home"] :is(footer,.site-footer){margin-top:0 !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body)[data-pagina="home"] .row-form{margin-bottom:0 !important;padding-bottom:0 !important}
+
+/* sfondi rossi: linee più calme, allo stesso grado di quelle sulle sezioni bianche */
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .mood .macchine::after{opacity:.75 !important}
+:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .wrap > .row.t-rossa > .block,:is(#_a1,body):is(#_a2,body):is(#_a3,body):is(#_a4,body) .row-articolo .articolo-cta{background-blend-mode:normal}
+
+/* 273 · Strisce con icone (05/11/2026): il contenitore è il cerchio, non la tessera.
+   Cerchio di vetro come la barra di navigazione (bianco semitrasparente, sfocatura, filo luminoso);
+   sopra il vetro chiaro l'icona torna a colori (rossa/azzurra, bianco tolto dal filtro) così resta ben leggibile.
+   Selezione e focus: solo il cerchio (anello pieno), mai l'area quadrata. */
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile{
+  --ico:clamp(64px,5.4vw,76px);position:relative;background:none !important;box-shadow:none !important;outline:0 !important;-webkit-tap-highlight-color:transparent}
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile::before{
+  content:"" !important;display:block !important;position:absolute !important;top:0;left:50%;width:var(--ico);height:var(--ico);margin-left:calc(var(--ico) / -2);border-radius:50%;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.74) 0%,rgba(255,255,255,.6) 45%,rgba(255,255,255,.66) 100%) !important;
+  -webkit-backdrop-filter:blur(24px) saturate(1.7);backdrop-filter:blur(24px) saturate(1.7);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),inset 0 1px 0 rgba(255,255,255,.95),0 14px 26px -16px rgba(60,0,10,.5) !important;
+  transition:transform .35s cubic-bezier(.25,.7,.3,1),box-shadow .3s,background .3s;opacity:1 !important;transform:none !important;clip-path:none !important}
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile::after{content:none !important;display:none !important}
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .tile-ico{
+  position:relative;z-index:1;width:var(--ico) !important;height:var(--ico) !important;padding:0 !important;transform:scale(1.12) !important;
+  background:none !important;box-shadow:none !important;outline:0 !important;filter:url(#icona-trasparente) !important;transition:transform .35s cubic-bezier(.25,.7,.3,1)}
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile svg.tile-ico{filter:none !important;stroke:var(--red) !important;padding:20% !important}
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile span{position:relative;z-index:1}
+/* hover, focus da tastiera e voce corrente: si accende solo il cerchio */
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:is(:hover,:focus-visible,.is-corrente)::before{
+  transform:translateY(-4px) !important;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.76)) !important;
+  box-shadow:0 0 0 3px rgba(255,255,255,.95),inset 0 1px 0 #fff,0 20px 32px -16px rgba(60,0,10,.6) !important}
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:is(:hover,:focus-visible,.is-corrente) .tile-ico{transform:translateY(-4px) scale(1.12) !important}
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:focus-visible span{text-decoration:underline;text-underline-offset:4px}
+/* su fondo chiaro: vetro azzurrato e anello azzurro */
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-striscia.t-bianca,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile::before{
+  background:linear-gradient(180deg,rgba(235,245,252,.9),rgba(214,234,248,.7)) !important;box-shadow:inset 0 0 0 1px rgba(0,133,207,.22),inset 0 1px 0 #fff,0 12px 22px -16px rgba(0,60,100,.4) !important}
+:is(#_i1,body):is(#_i2,body):is(#_i3,body):is(#_i4,body):is(#_i5,body):is(#_i6,body):is(#_i7,body) :is(.row-striscia.t-bianca,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:is(:hover,:focus-visible,.is-corrente)::before{
+  background:#fff !important;box-shadow:0 0 0 2.5px var(--cta-blu),0 18px 28px -16px rgba(0,100,170,.45) !important}
+@media (prefers-reduced-motion:reduce){:is(.tiles-icone,.tiles) > .tile::before,:is(.tiles-icone,.tiles) > .tile .tile-ico{transition:none !important}}
+
+
+/* 274 · CTA accanto al titolo (sezioni con elenco di card) · pulsante di vetro leggibile sulle sezioni bianche */
+:is(#_c1,body):is(#_c2,body):is(#_c3,body):is(#_c4,body) .testa-cta{display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(16px,3vw,48px);margin-bottom:clamp(18px,2.2vw,30px)}
+:is(#_c1,body):is(#_c2,body):is(#_c3,body):is(#_c4,body) .testa-cta-testo > :last-child{margin-bottom:0 !important}
+:is(#_c1,body):is(#_c2,body):is(#_c3,body):is(#_c4,body) .testa-cta .testa-cta-azioni{margin:0 !important;flex:0 0 auto;display:flex;gap:12px}
+@media (max-width:760px){:is(#_c1,body):is(#_c2,body):is(#_c3,body):is(#_c4,body) .testa-cta{flex-direction:column;align-items:flex-start}}
+/* sulle sezioni bianche il vetro è azzurro (regola: CTA blu sul bianco), testo bianco leggibile */
+:is(#_c1,body):is(#_c2,body):is(#_c3,body):is(#_c4,body) :is(.row.t-bianca,.row[data-fondo="bianco"],.block.t-bianca) .btn.btn-glass{
+  background:linear-gradient(180deg,rgba(40,160,230,.95),rgba(0,133,207,.92) 55%,rgba(0,106,165,.95)) !important;
+  color:#fff !important;-webkit-text-fill-color:#fff !important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.6),inset 0 -6px 14px -8px rgba(0,40,80,.35),0 14px 26px -16px rgba(0,80,140,.55) !important}
+:is(#_c1,body):is(#_c2,body):is(#_c3,body):is(#_c4,body) :is(.row.t-bianca,.row[data-fondo="bianco"],.block.t-bianca) .btn.btn-glass::after{background:linear-gradient(100deg,rgba(255,255,255,.8),rgba(127,208,255,.6) 50%,rgba(255,255,255,.5)) !important}
+:is(#_c1,body):is(#_c2,body):is(#_c3,body):is(#_c4,body) :is(.row.t-bianca,.row[data-fondo="bianco"],.block.t-bianca) .btn.btn-glass:is(:hover,:focus-visible){background:linear-gradient(180deg,rgba(60,175,240,.98),rgba(0,133,207,.98) 55%,rgba(0,96,150,.98)) !important}
+
+
+/* 275 · Icone delle strisce: cerchio di vetro come elemento proprio, icona sempre centrata e ben leggibile (sostituisce il cerchio del 273) */
+:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile::before{content:none !important;display:none !important}
+:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro{position:relative;display:block;overflow:visible;flex:0 0 auto;width:clamp(68px,5.6vw,80px);height:clamp(68px,5.6vw,80px);border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.8) 50%,rgba(255,255,255,.86) 100%);
+  -webkit-backdrop-filter:blur(24px) saturate(1.7);backdrop-filter:blur(24px) saturate(1.7);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),inset 0 -6px 12px -8px rgba(228,0,43,.18),0 14px 26px -16px rgba(60,0,10,.5);
+  transition:transform .35s cubic-bezier(.25,.7,.3,1),box-shadow .3s}
+:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro .tile-ico{position:absolute !important;left:50% !important;top:50% !important;display:block;width:150% !important;height:150% !important;max-width:none !important;flex:none !important;margin:0 !important;padding:0 !important;transform:translate(-50%,-50%) !important;
+  object-fit:contain;background:none !important;box-shadow:none !important;outline:0 !important;filter:url(#icona-trasparente) !important}
+:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro svg.tile-ico{width:46% !important;height:46% !important;filter:none !important;stroke:var(--red) !important}
+:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:is(:hover,:focus-visible,.is-corrente) .ico-vetro{transform:translateY(-4px);background:#fff;
+  box-shadow:0 0 0 3px #fff,0 0 0 5px rgba(255,255,255,.35),0 20px 32px -16px rgba(60,0,10,.6)}
+:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:is(:hover,:focus-visible,.is-corrente) .tile-ico{transform:translate(-50%,-50%) !important}
+/* fondo chiaro: vetro azzurrato, anello azzurro */
+:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-striscia.t-bianca,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro{background:linear-gradient(180deg,rgba(240,248,253,.95),rgba(220,238,250,.85));box-shadow:inset 0 0 0 1px rgba(0,133,207,.22),0 12px 22px -16px rgba(0,60,100,.4)}
+:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-striscia.t-bianca,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:is(:hover,:focus-visible,.is-corrente) .ico-vetro{background:#fff;box-shadow:0 0 0 2.5px var(--cta-blu),0 18px 28px -16px rgba(0,100,170,.45)}
+@media (prefers-reduced-motion:reduce){:is(#_j1,body):is(#_j2,body):is(#_j3,body):is(#_j4,body):is(#_j5,body):is(#_j6,body):is(#_j7,body):is(#_j8,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro{transition:none}}
+
+/* 276 · Icone delle strisce: il simbolo resta dentro il cerchio (ritagliato dal cerchio) e mantiene i suoi colori pieni:
+   niente filtro di trasparenza, il bianco del file si fonde con il vetro (moltiplica) */
+:is(#_k1,body):is(#_k2,body):is(#_k3,body):is(#_k4,body):is(#_k5,body):is(#_k6,body):is(#_k7,body):is(#_k8,body):is(#_k9,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro{overflow:hidden;isolation:isolate}
+:is(#_k1,body):is(#_k2,body):is(#_k3,body):is(#_k4,body):is(#_k5,body):is(#_k6,body):is(#_k7,body):is(#_k8,body):is(#_k9,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro img.tile-ico{
+  width:112% !important;height:112% !important;filter:none !important;mix-blend-mode:multiply}
+/* home, « Soluzioni per ogni settore »: sotto i 1200 px le voci vanno a capo centrate, mai in colonna singola */
+@media (max-width:1200px){:is(#_k1,body):is(#_k2,body):is(#_k3,body):is(#_k4,body)[data-pagina="home"] .row-settori > .block > .tiles{display:flex !important;flex-wrap:wrap !important;justify-content:center !important;align-self:stretch !important;margin-inline:auto !important;gap:24px 18px !important;width:100% !important;grid-template-columns:none !important}
+  :is(#_k1,body):is(#_k2,body):is(#_k3,body):is(#_k4,body)[data-pagina="home"] .row-settori > .block > .tiles > .tile{flex:0 0 clamp(104px,14vw,136px)}}
+
+
+/* 277 · Rifiniture strisce e modulo (05/11/2026) */
+/* stato selezionato più evidente: cerchio pieno più grande, doppio anello, nome sottolineato da una barretta */
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:is(.is-corrente,:hover,:focus-visible) .ico-vetro{transform:translateY(-5px) scale(1.08);background:#fff;
+  box-shadow:0 0 0 3px #fff,0 0 0 9px rgba(255,255,255,.28),0 22px 36px -14px rgba(60,0,10,.65)}
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile.is-corrente span{position:relative}
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile.is-corrente span::after{content:"";position:absolute;left:50%;bottom:-8px;width:22px;height:3px;margin-left:-11px;border-radius:3px;background:currentColor}
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body) :is(.row-striscia.t-bianca,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:is(.is-corrente,:hover,:focus-visible) .ico-vetro{box-shadow:0 0 0 2.5px var(--cta-blu),0 0 0 8px rgba(0,133,207,.14),0 20px 32px -16px rgba(0,100,170,.5)}
+
+/* quando le voci non stanno su una riga: niente secondo rigo spezzato, un nastro che scorre di lato
+   (scorrimento con trackpad/dito, aggancio a ogni voce, bordi che sfumano) */
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone{flex-wrap:nowrap !important;justify-content:safe center !important;overflow-x:auto;overflow-y:visible;
+  scroll-snap-type:x proximity;scrollbar-width:none;padding:12px 4px 18px !important;margin-top:clamp(10px,1.4vw,20px) !important;
+  -webkit-mask:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%);mask:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%)}
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone::-webkit-scrollbar{display:none}
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile{scroll-snap-align:center;flex:0 0 clamp(96px,8.2vw,120px) !important;width:clamp(96px,8.2vw,120px) !important}
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone{gap:20px 8px !important}
+
+/* modulo finale delle pagine interne: sezione bianca separata dalla striscia rossa */
+:is(#_m1,body):is(#_m2,body):is(#_m3,body):is(#_m4,body):is(#_m5,body):is(#_m6,body):is(#_m7,body):is(#_m8,body):is(#_m9,body):is(#_m0,body) .wrap > .row.row-modulo{margin-top:clamp(20px,2.4vw,36px) !important}
+
+
+/* 278 · Strisce con icone, versione definitiva (05/11/2026):
+   - nessuno scorrimento: le voci stanno su una riga e si stringono in proporzione (flex 1 1 0); sotto 640 px griglia da 3;
+   - l'icona non viene mai tagliata: niente ritaglio sul cerchio, l'immagine sta nel cerchio al 100%;
+   - selezione: solo il cerchio (bianco pieno, doppio anello, leggero sollevamento); nessuna sottolineatura sul nome. */
+:is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone{flex-wrap:nowrap !important;justify-content:center !important;overflow:visible !important;
+  -webkit-mask:none !important;mask:none !important;scroll-snap-type:none !important;padding:10px 0 6px !important;gap:20px clamp(6px,1vw,14px) !important}
+:is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile{flex:1 1 0 !important;width:auto !important;min-width:0 !important;max-width:140px}
+:is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro{overflow:visible !important;width:clamp(56px,5.4vw,78px) !important;height:clamp(56px,5.4vw,78px) !important;max-width:100%;aspect-ratio:1}
+:is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro img.tile-ico{width:100% !important;height:100% !important;border-radius:50%}
+:is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile span{overflow-wrap:anywhere;hyphens:auto}
+:is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile.is-corrente span::after{content:none !important;display:none !important}
+:is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:focus-visible span{text-decoration:none !important}
+:is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile:focus-visible .ico-vetro{outline:2px solid #fff;outline-offset:6px}
+@media (max-width:640px){
+  :is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:22px 10px !important}
+  :is(#_n1,body):is(#_n2,body):is(#_n3,body):is(#_n4,body):is(#_n5,body):is(#_n6,body):is(#_n7,body):is(#_n8,body):is(#_n9,body):is(#_n0,body):is(#_na,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile{max-width:none}}
+
+/* 279 · Modulo « Richiedi informazioni » delle pagine interne: sezione a tutta larghezza come in home, non un contenitore dentro la pagina */
+:is(#_o1,body):is(#_o2,body):is(#_o3,body):is(#_o4,body).pagina-interna .wrap > .row.row-modulo{
+  margin-left:calc(50% - var(--vw,100vw) / 2) !important;margin-right:calc(50% - var(--vw,100vw) / 2) !important;width:auto !important;max-width:none !important;border-radius:0 !important}
+:is(#_o1,body):is(#_o2,body):is(#_o3,body):is(#_o4,body).pagina-interna .wrap > .row.row-modulo > .block{border-radius:0 !important;margin:0 !important;border:0 !important;inset:auto !important;max-width:none !important;width:auto !important}
+
+/* 280 · Pulsanti del modulo identici ovunque (home e pagine interne): stessa altezza, stesso raggio, stessi colori per tipo */
+:is(#_p1,body):is(#_p2,body):is(#_p3,body):is(#_p4,body):is(#_p5,body):is(#_p6,body) .form .btn{height:54px !important;min-height:54px !important;padding:0 26px !important;box-sizing:border-box !important;
+  border:0 !important;border-radius:999px !important;font-size:15.5px !important;line-height:1 !important;align-items:center !important;animation:none}
+:is(#_p1,body):is(#_p2,body):is(#_p3,body):is(#_p4,body):is(#_p5,body):is(#_p6,body) .form .btn.btn-verde{background:#15803d !important;background-image:none !important;color:#fff !important;-webkit-text-fill-color:#fff !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -2px 0 rgba(0,0,0,.08),0 14px 26px -16px rgba(0,50,20,.45) !important}
+:is(#_p1,body):is(#_p2,body):is(#_p3,body):is(#_p4,body):is(#_p5,body):is(#_p6,body) .form .btn.btn-verde:is(:hover,:focus-visible){background:#116a32 !important}
+:is(#_p1,body):is(#_p2,body):is(#_p3,body):is(#_p4,body):is(#_p5,body):is(#_p6,body) .form .btn.btn-whatsapp{padding:0 24px 0 11px !important;gap:10px !important;
+  background:#fff !important;background-image:none !important;color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important;
+  -webkit-backdrop-filter:none !important;backdrop-filter:none !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.12),0 14px 26px -16px rgba(0,30,42,.35) !important}
+:is(#_p1,body):is(#_p2,body):is(#_p3,body):is(#_p4,body):is(#_p5,body):is(#_p6,body) .form .btn.btn-whatsapp::after{content:none !important}
+:is(#_p1,body):is(#_p2,body):is(#_p3,body):is(#_p4,body):is(#_p5,body):is(#_p6,body) .form .btn.btn-whatsapp svg{width:18px !important;height:18px !important;padding:7px !important}
+:is(#_p1,body):is(#_p2,body):is(#_p3,body):is(#_p4,body):is(#_p5,body):is(#_p6,body) .form .btn.btn-whatsapp:is(:hover,:focus-visible){box-shadow:inset 0 0 0 1.5px #25d366,0 14px 26px -16px rgba(0,30,42,.35) !important}
+
+/* 281 · Modulo delle pagine interne = modulo della home (stesse regole del 148.11 e dei campi della home) */
+@media (min-width:980px){
+  :is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo .form{display:grid !important;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr) !important;column-gap:clamp(30px,5vw,80px) !important;align-items:start;background:none !important;box-shadow:none !important;padding:0 !important}
+  :is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo .form > :is(h3,.form-sub){grid-column:1 !important}
+  :is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo .form > :not(h3):not(.form-sub){grid-column:2 !important}
+  :is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo .form > .fields{grid-row:1 / span 3}}
+:is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo .form > h3{font-size:clamp(28px,3vw,44px) !important;line-height:1.08 !important;margin:0 0 12px !important;letter-spacing:-.02em}
+:is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo .field :is(input,textarea,select){background-color:rgba(255,255,255,.78) !important;box-shadow:inset 0 1px 2px rgba(0,30,42,.08),inset 0 0 0 1px rgba(0,30,42,.08) !important}
+:is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo .field textarea{min-height:120px !important}
+:is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo :is(.field label,.consent){color:#2c3a42 !important;-webkit-text-fill-color:#2c3a42 !important}
+:is(#_q1,body):is(#_q2,body):is(#_q3,body):is(#_q4,body).pagina-interna .row-modulo .form > div:not(.fields){margin-top:16px !important}
+
+/* 282 · Scheda macchina: nella card Noleggio « Vai al noleggio » è rosso (richiesta Sara 05/11/2026; eccezione alla regola CTA blu sul bianco) */
+:is(#_r1,body):is(#_r2,body):is(#_r3,body):is(#_r4,body) .promo.promo-nol .btn-link{color:var(--red) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_r1,body):is(#_r2,body):is(#_r3,body):is(#_r4,body) .promo.promo-nol .btn-link:is(:hover,:focus-visible){color:#b8001d !important}
+
+
+/* 283 · Modulo come sezione ROSSA a tutta larghezza quando la sezione che lo precede è bianca (alternanza delle sezioni).
+   Stessa impaginazione del modulo bianco; colori per il fondo rosso. */
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso > .block{background:var(--fondo-rosso) !important;box-shadow:none !important}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso .block::before{content:none !important}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso :is(h3,.form-sub,.field label,.consent,.small,p){color:#fff !important;-webkit-text-fill-color:#fff !important}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso .field :is(input,textarea,select){background-color:rgba(255,255,255,.92) !important;color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important;
+  box-shadow:inset 0 1px 2px rgba(0,30,42,.08),0 0 0 1px rgba(255,255,255,.6) !important}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso .consent input{accent-color:#fff}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso .form .btn.btn-primary{--btn:#fff;background:#fff !important;background-image:none !important;color:var(--red) !important;-webkit-text-fill-color:var(--red) !important;
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,.06),0 14px 26px -16px rgba(60,0,10,.6) !important}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso .form .btn.btn-primary:is(:hover,:focus-visible){background:#fff5f6 !important}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso .form .btn.btn-whatsapp{box-shadow:0 14px 26px -16px rgba(60,0,10,.5) !important}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body).pagina-interna .wrap > .row.row-modulo-rosso :is(a:not(.btn)){color:#fff !important;text-decoration:underline}
+/* modulo rosso: attaccato alla sezione bianca sopra (niente fascia di fondo pagina in mezzo) e senza la banda decorativa */
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body):is(#_s8,body).pagina-interna .wrap > .row.row-modulo-rosso{margin-top:0 !important}
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body):is(#_s8,body).pagina-interna .wrap > .row.row-modulo-rosso::before,
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body):is(#_s8,body).pagina-interna .wrap > .row.row-modulo-rosso::after,
+:is(#_s1,body):is(#_s2,body):is(#_s3,body):is(#_s4,body):is(#_s5,body):is(#_s6,body):is(#_s7,body):is(#_s8,body).pagina-interna .wrap > .row.row-modulo-rosso > .block::after{content:none !important;display:none !important}
+:is(#_t1,body):is(#_t2,body):is(#_t3,body):is(#_t4,body):is(#_t5,body):is(#_t6,body):is(#_t7,body):is(#_t8,body):is(#_t9,body):is(#_t0,body):is(#_ta,body):is(#_tb,body).pagina-interna .wrap > .row.row-modulo.row-modulo-rosso{margin-top:0 !important}
+
+/* 284 · Card « Formula · noleggio » (Si può noleggiare): la CTA « Noleggio … » è rossa ovunque (richiesta Sara 05/11/2026) */
+:is(#_u1,body):is(#_u2,body):is(#_u3,body):is(#_u4,body):is(#_u5,body):is(#_u6,body) .formula.formula-nol .formula-go{color:var(--red) !important;-webkit-text-fill-color:currentColor !important}
+:is(#_u1,body):is(#_u2,body):is(#_u3,body):is(#_u4,body):is(#_u5,body):is(#_u6,body) .formula.formula-nol:hover .formula-go,
+:is(#_u1,body):is(#_u2,body):is(#_u3,body):is(#_u4,body):is(#_u5,body):is(#_u6,body) .formula.formula-nol .formula-go:focus-visible{color:#b8001d !important}
+/* e la CTA della card Usato uguale ovunque (azzurro della home) */
+:is(#_u1,body):is(#_u2,body):is(#_u3,body):is(#_u4,body):is(#_u5,body):is(#_u6,body) .formula.formula-usa .formula-go{color:#0085cf !important;-webkit-text-fill-color:currentColor !important}
+
+
+/* 285 · Sezioni finali alternate a tutta larghezza (famiglie con Prodotti consigliati): bianca / rossa, attaccate tra loro */
+:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione{margin-left:calc(50% - var(--vw,100vw) / 2) !important;margin-right:calc(50% - var(--vw,100vw) / 2) !important;width:auto !important;max-width:none !important;margin-bottom:0 !important;border-radius:0 !important}
+:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione + .row:is(.row-sezione,.row-modulo){margin-top:0 !important}
+:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione > .block{border-radius:0 !important;border:0 !important;margin:0 !important;max-width:none !important;width:auto !important}
+:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione.row-sezione-rossa > .block{background:var(--fondo-rosso) !important;box-shadow:none !important}
+:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione.row-sezione-rossa > .block::before,:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione.row-sezione-rossa > .block::after,:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione::before,:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione::after{content:none !important;display:none !important}
+:is(#_w1,body):is(#_w2,body):is(#_w3,body):is(#_w4,body):is(#_w5,body):is(#_w6,body):is(#_w7,body):is(#_w8,body).pagina-interna .wrap > .row.row-sezione.row-sezione-rossa > .block > :is(h2,.lede,.kicker,p){color:#fff !important;-webkit-text-fill-color:#fff !important}
+
+
+/* 286 · Sezioni bianche con striscia di icone: la sezione è bianca a tutta larghezza, il CONTENITORE resta com'era
+   (stessa larghezza e forma degli altri contenitori), solo con il filo scuro adatto al bianco */
+:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body).pagina-interna .wrap > .row.row-sezione.row-striscia{background:var(--fondo-bianco) !important;padding:clamp(28px,3vw,44px) calc(var(--vw,100vw) / 2 - 50%) !important;box-sizing:border-box}
+:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body).pagina-interna .wrap > .row.row-sezione.row-striscia > .block{border-radius:var(--raggio,40px) !important;background:linear-gradient(180deg,#fff,#f6f9fb) !important;
+  box-shadow:inset 0 0 0 1px rgba(0,30,42,.12),0 24px 44px -34px rgba(0,30,42,.35) !important;margin:0 !important;width:100% !important;max-width:none !important;box-sizing:border-box !important}
+:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body).pagina-interna .wrap > .row.row-sezione.row-striscia > .block > :is(h2,.lede,.kicker,p){color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important}
+:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body).pagina-interna .wrap > .row.row-sezione.row-striscia .tiles-icone > .tile span{color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important}
+
+/* 287 · Icone mai deformate: il cerchio resta un cerchio anche quando la voce si stringe (lato = il minore tra misura e larghezza disponibile) */
+:is(#_y1,body):is(#_y2,body):is(#_y3,body):is(#_y4,body):is(#_y5,body):is(#_y6,body):is(#_y7,body):is(#_y8,body):is(#_y9,body):is(#_y0,body):is(#_ya,body):is(#_yb,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro{
+  width:min(clamp(56px,5.4vw,78px),100%) !important;height:auto !important;aspect-ratio:1 / 1 !important;max-width:none !important}
+:is(#_y1,body):is(#_y2,body):is(#_y3,body):is(#_y4,body):is(#_y5,body):is(#_y6,body):is(#_y7,body):is(#_y8,body):is(#_y9,body):is(#_y0,body):is(#_ya,body):is(#_yb,body) :is(.row-settori,.row-striscia,.striscia-scheda) :is(.tiles-icone,.tiles) > .tile .ico-vetro img.tile-ico{object-fit:contain !important;aspect-ratio:1 / 1}
+
+/* 288 · Contenitori nelle sezioni bianche: nessuno sfondo, solo trasparenza e filo, come i contenitori analoghi sul rosso */
+:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body):is(#_x0,body).pagina-interna .wrap > .row.row-sezione.row-striscia > .block{
+  background:transparent !important;background-image:none !important;box-shadow:inset 0 0 0 1.5px rgba(0,133,207,.28) !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+
+/* 289 · Strisce: spaziatura standard tra le voci (come « Dove si usano » sul rosso): voci di larghezza fissa, centrate,
+   che si stringono solo se lo spazio non basta; nessun allargamento per riempire la riga */
+:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone{gap:20px clamp(14px,2.2vw,34px) !important;justify-content:center !important}
+:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile{flex:0 1 clamp(104px,9.6vw,124px) !important;max-width:124px !important}
+/* sezione bianca con striscia: lo sfondo è quello delle altre sezioni bianche (sulla sezione), il contenitore è solo filo */
+:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body):is(#_x0,body):is(#_xa,body).pagina-interna .wrap > .row.row-sezione.row-striscia{background:var(--fondo-bianco) !important}
+/* nomi delle voci: mai spezzati a metà parola; con molte voci il testo è un po' più piccolo */
+:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body) :is(.row-striscia,.striscia-scheda,.row-settori) :is(.tiles-icone,.tiles) > .tile span{overflow-wrap:normal !important;word-break:normal !important;hyphens:manual !important}
+:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone:has(> :nth-child(8)) > .tile span{font-size:12.5px !important}
+:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone:has(> :nth-child(8)){column-gap:clamp(12px,1.8vw,24px) !important}
+:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone:has(> :nth-child(8)) > .tile{flex:0 1 100px !important;min-width:min(100px,100%) !important}
+/* molte voci e poco spazio (sotto 1200 px): griglia ordinata e centrata a 5 colonne, stessa spaziatura; mai voci che escono dal contenitore */
+:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body):is(#_zc,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone:has(> :nth-child(8)){min-width:0 !important}
+@media (max-width:1240px) and (min-width:641px){
+  :is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body):is(#_zc,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone:has(> :nth-child(8)){
+    display:grid !important;grid-template-columns:repeat(5,104px) !important;justify-content:center !important;gap:24px clamp(16px,2.4vw,34px) !important}
+  :is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body):is(#_zc,body):not([data-pagina="home"]) :is(.row-striscia,.striscia-scheda) .tiles-icone:has(> :nth-child(8)) > .tile{width:104px !important;max-width:none !important;min-width:0 !important}}
+@media (max-width:640px){:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body):is(#_zc,body):is(#_zd,body) :is(.row-striscia,.striscia-scheda,.row-settori) :is(.tiles-icone,.tiles) > .tile span{font-size:11.5px !important;letter-spacing:-.01em}}
+@media (max-width:640px){:is(#_z1,body):is(#_z2,body):is(#_z3,body):is(#_z4,body):is(#_z5,body):is(#_z6,body):is(#_z7,body):is(#_z8,body):is(#_z9,body):is(#_z0,body):is(#_za,body):is(#_zb,body):is(#_zc,body):is(#_zd,body):is(#_ze,body) :is(.row-striscia,.striscia-scheda) .tiles-icone > .tile span{font-size:10.5px !important;letter-spacing:-.02em}}
+@media (max-width:640px){:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body):is(#_x0,body):is(#_xa,body):is(#_xb,body).pagina-interna .wrap > .row.row-sezione.row-striscia > .block{padding-left:16px !important;padding-right:16px !important}}
+/* contenitore trasparente davvero: niente velo decorativo dentro (lo sfondo resta solo quello della sezione) */
+:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body):is(#_x0,body):is(#_xa,body):is(#_xb,body):is(#_xc,body).pagina-interna .wrap > .row.row-sezione > .block::before,
+:is(#_x1,body):is(#_x2,body):is(#_x3,body):is(#_x4,body):is(#_x5,body):is(#_x6,body):is(#_x7,body):is(#_x8,body):is(#_x9,body):is(#_x0,body):is(#_xa,body):is(#_xb,body):is(#_xc,body).pagina-interna .wrap > .row.row-sezione > .block::after{content:none !important;display:none !important}
+
+
+/* 290 · Modulo finale: solo « Invia richiesta » e WhatsApp, due stili distinti, stessa altezza (54 px).
+   Invia = pieno (blu sul bianco, bianco con testo rosso sul rosso) · WhatsApp = contorno, con disco verde */
+:is(#_v1,body):is(#_v2,body):is(#_v3,body):is(#_v4,body):is(#_v5,body):is(#_v6,body):is(#_v7,body):is(#_v8,body):is(#_v9,body) :is(.row-form,.row-modulo) .form a.btn[href^="tel:"]{display:none !important}
+:is(#_v1,body):is(#_v2,body):is(#_v3,body):is(#_v4,body):is(#_v5,body):is(#_v6,body):is(#_v7,body):is(#_v8,body):is(#_v9,body) :is(.row-form,.row-modulo) .form .btn.btn-whatsapp{background:transparent !important;color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important;
+  box-shadow:inset 0 0 0 1.5px rgba(0,30,42,.35) !important}
+:is(#_v1,body):is(#_v2,body):is(#_v3,body):is(#_v4,body):is(#_v5,body):is(#_v6,body):is(#_v7,body):is(#_v8,body):is(#_v9,body) :is(.row-form,.row-modulo) .form .btn.btn-whatsapp:is(:hover,:focus-visible){box-shadow:inset 0 0 0 2px #25d366 !important;background:rgba(37,211,102,.06) !important}
+:is(#_v1,body):is(#_v2,body):is(#_v3,body):is(#_v4,body):is(#_v5,body):is(#_v6,body):is(#_v7,body):is(#_v8,body):is(#_v9,body) .row-modulo-rosso .form .btn.btn-whatsapp{color:#fff !important;-webkit-text-fill-color:#fff !important;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8) !important}
+:is(#_v1,body):is(#_v2,body):is(#_v3,body):is(#_v4,body):is(#_v5,body):is(#_v6,body):is(#_v7,body):is(#_v8,body):is(#_v9,body) .row-modulo-rosso .form .btn.btn-whatsapp:is(:hover,:focus-visible){background:rgba(255,255,255,.12) !important;box-shadow:inset 0 0 0 2px #fff !important}
+
+/* stesso stile WhatsApp « contorno » anche nei moduli fuori dalle sezioni finali (es. scheda macchina) */
+:is(#_v1,body):is(#_v2,body):is(#_v3,body):is(#_v4,body):is(#_v5,body):is(#_v6,body):is(#_v7,body):is(#_v8,body):is(#_v9,body) .form .btn.btn-whatsapp{background:transparent !important;color:var(--ink) !important;-webkit-text-fill-color:var(--ink) !important;box-shadow:inset 0 0 0 1.5px rgba(0,30,42,.35) !important}
+:is(#_v1,body):is(#_v2,body):is(#_v3,body):is(#_v4,body):is(#_v5,body):is(#_v6,body):is(#_v7,body):is(#_v8,body):is(#_v9,body) .row-modulo-rosso .form .btn.btn-whatsapp,:is(#_v1,body):is(#_v2,body):is(#_v3,body):is(#_v4,body):is(#_v5,body):is(#_v6,body):is(#_v7,body):is(#_v8,body):is(#_v9,body) :is(.t-outline,.t-vetro):not(.t-bianca) .form .btn.btn-whatsapp{color:#fff !important;-webkit-text-fill-color:#fff !important;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8) !important}
+
+/* 291 · Sezioni finali a tutta larghezza: stesso disegno di fondo delle altre sezioni (vetro scanalato + fasci di linee), non solo il colore */
+:is(#_g1,body):is(#_g2,body):is(#_g3,body):is(#_g4,body):is(#_g5,body):is(#_g6,body):is(#_g7,body):is(#_g8,body):is(#_g9,body):is(#_g0,body):is(#_ga,body):is(#_gb,body):is(#_gc,body):is(#_gd,body).pagina-interna .wrap > .row.row-sezione.t-bianca.row-striscia{background:var(--canne-bianche),var(--fondo-bianco) !important}
+:is(#_g1,body):is(#_g2,body):is(#_g3,body):is(#_g4,body):is(#_g5,body):is(#_g6,body):is(#_g7,body):is(#_g8,body):is(#_g9,body):is(#_g0,body):is(#_ga,body):is(#_gb,body):is(#_gc,body):is(#_gd,body).pagina-interna .wrap > .row.row-sezione.t-bianca:not(.row-striscia) > .block{background:var(--canne-bianche),var(--fondo-bianco) !important}
+:is(#_g1,body):is(#_g2,body):is(#_g3,body):is(#_g4,body):is(#_g5,body):is(#_g6,body):is(#_g7,body):is(#_g8,body):is(#_g9,body):is(#_g0,body):is(#_ga,body):is(#_gb,body):is(#_gc,body):is(#_gd,body).pagina-interna .wrap > .row:is(.row-sezione-rossa,.row-modulo-rosso) > .block{background:var(--canne-rosse),var(--fondo-rosso) !important}
+
+/* 292 · Schede delle lavastoviglie: niente bagliore bianco sul fondo rosso (richiesta Sara 05/11/2026) */
+:is(#_h1,body):is(#_h2,body):is(#_h3,body)[data-fam="lavastoviglie"] .mood .macchine,
+:is(#_h1,body):is(#_h2,body):is(#_h3,body)[data-fam="lavastoviglie"] .mood .macchine::before{background:linear-gradient(160deg,#e9112f 0%,#e4002b 45%,#c8001f 100%) !important;filter:none !important}
+
+/* 295 · Schede prodotto: via lo strato trasparente sopra le tessere di sinistra
+   (richiesta Sara 05/11/2026 — sostituisce e annulla 293 e 294)
+   Le linee di fondo delle sezioni bianche restano come sono, al pari delle rosse:
+   la 293 e la 294 le avevano tolte per errore ed è stato ripristinato tutto.
+   Qui sparisce solo il pseudo-elemento appoggiato sopra le tessere della colonna
+   di sinistra della scheda prodotto: un velo di vetro che non apparteneva al
+   contenuto e si leggeva come una pellicola sopra titolo e galleria. */
+body.scheda-mosaico .split > div:not(.sticky-col) .block.t-bianca::before{content:none !important}
+
+/* 296 · Titoli lunghi nelle testate: le parole non devono uscire dalla colonna
+   (richiesta Sara 05/11/2026 — « Carta igienica Maxi Jumbo 320 mt DISINCHIOSTRATA »)
+   Una parola sola più larga della colonna (DISINCHIOSTRATA a 52 px) sbordava di 51 px
+   anche a 1440. Prima si prova la sillabazione italiana, poi, se non basta, si spezza. */
+.intro-testata h1,.pagina-intro h1,.row-testata h1{
+  hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere}
+.intro-testata .lede,.pagina-intro .lede{overflow-wrap:break-word}
+
+/* 297 · Icone delle macchine nella testata di Pronto intervento: più grandi
+   (richiesta Sara 05/11/2026). Da 58 a 78 px, la stessa misura delle strisce
+   « Le altre macchine usate » e « Dove si usano », così la scala è una sola in
+   tutto il sito. Le colonne si allargano di conseguenza. */
+body.pagina-interna .row-testata .testata-icone .tile-ico{
+  width:78px;height:78px;padding:17px}
+body.pagina-interna .row-testata .tiles-icone.testata-icone{
+  grid-template-columns:repeat(auto-fill,minmax(124px,1fr))}

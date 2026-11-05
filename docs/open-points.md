@@ -184,6 +184,7 @@ perché determina quante schede vanno migrate e quindi il volume di data entry.
 **Documenti**: ALB intestazione « da 8 a 13 categorie » (descrive la transizione), elenco ALB = 13,
 BM §D11 = 13.
 **Soluzione adottata**: **13**. L'"8" è lo stato attuale, non un'alternativa.
+**Confermato dal cliente il 03/11/2026**: « vanno bene le 13 categorie che ci sono nel mockup ». Chiude la domanda aperta del 02/11 (nomi e numero definitivi).
 
 ---
 
@@ -231,13 +232,47 @@ Le card usano le foto reali di `assets/STATICHE` (copie web in `assets/images/ca
 - (02/10) Testate seguite da una sezione a schede: il testo d'apertura è accorciato automaticamente alla frase che chiude entro ~220 caratteri. Da validare con il cliente il testo breve definitivo.
 - (02/10) Lavora con noi · prima voce della lista: il titolo della sezione su socaf.it è una frase lunga (« Chi entra in Socaf trova un ambiente fatto di sguardi… »). Nella lista serve un'etichetta breve da concordare con il cliente.
 
-## OP-19 · Nuove famiglie Cucina e Lavanderia (13/10)
-**Richiesta CLIENTE**: sotto Macchine si aggiungono due famiglie.
-- **Cucina** → Lavabicchieri (2 prodotti), Lavapiatti (6), Addolcitori / Osmosi (2).
-- **Lavanderia** → Lavatrici, Essiccatoi (numero prodotti non indicato).
+## OP-19 · Famiglie di macchine nuove: Lavastoviglie, Macchine del ghiaccio, Trattamento acqua, Lavatrici, Essiccatoi (03/11)
+**Richiesta CLIENTE** (sostituisce la voce del 13/10 su Cucina e Lavanderia): al posto di Cucina e Lavanderia, cinque famiglie; sotto Lavastoviglie: lavabicchieri, lavapiatti, lavaoggetti. Elenco prodotti ricevuto il 02/11.
+**Fatto nel mockup**: 11 famiglie, 38 sottocategorie, 143 schede con nome (27 nuove, descrizioni in arrivo: `"ph":true` in `assets/js/catalogo.js`); menu, footer, home, ricerca, famiglie, sottocategorie, schede. Cucina e Lavanderia non esistono più.
+**Letture mie (INFERENZA) da confermare**
+- « Lavatrici, Essicatoi » = **due famiglie** a sé (non una famiglia « Lavanderia »). Ortografia usata: **Essiccatoi** (il cliente scrive « Essicatoi »).
+- **Lavastoviglie**: le tre sottocategorie indicate + **Lavastoviglie a traino** (1 prodotto, in elenco sotto la stessa voce).
+- **Trattamento acqua**: nessuna sottocategoria indicata → divisa per **marca** (Walo 3, Brita 2), unico dato certo dell'elenco.
+- **Lavatrici**: FX (105, 135, 180) e Lavacentrifughe (GVH80). **Essiccatoi**: GD450, GDZ 275/350/600 sotto « Professionali » (nome mio) e **Small Pro** (GDC201, GH10): l'elenco non dice se Small Pro è una linea di lavatrici o di essiccatoi.
+- **Macchine del ghiaccio**: nessun prodotto nell'elenco → pagina con stato vuoto dichiarato.
+- Errori di battitura corretti: « Dhir » → **Dihr**; **Meico** è il nome giusto (Sara, 04/11: non Meiko). Sigle lasciate come nel file (M-ICLEAN, FX, GD…).
+- Indirizzi: `/lavastoviglie/`, `/macchine-del-ghiaccio/`, `/trattamento-acqua/`, `/lavatrici/`, `/essiccatoi/` (nessun dato di ricerca).
+**Conteggio**: hero « 146 macchine » = 119 dichiarate dal brief + 27 nuove (le 3 schede non raggiungibili di OP-15 restano contate).
+**Mancano**: descrizioni e schede (promesse per la settimana del 19/10), testi di famiglia e sottocategoria, foto vere (oggi scatti Socaf generici: segnaposto), icone per lavaoggetti, lavastoviglie a traino e macchine del ghiaccio (le altre usano le icone illustrate dell'agenzia), flag noleggio/usato, settori collegati.
+**Documenti di input non aggiornati**: alberatura v02, menu F4, Brief mockup (sei famiglie, 119 schede).
 
-**Fatto nel mockup**: dati in `assets/js/catalogo.js` (prodotti segnaposto `"ph":true`, nomi « Lavapiatti 1… »), menu Macchine, footer, home (blocco 2), stato vuoto della ricerca. Ordine: dopo Robot, prima di Altri macchinari.
-**INFERENZA da confermare**: indirizzi `/cucina/…` e `/lavanderia/…` e h1 delle pagine (nessun dato di ricerca); ordine nel menu; significato dell'asterisco su « Cucina* » nella tabella ricevuta.
-**Mancano**: contenuti delle schede prodotto (attesi la settimana del 19/10), numero di lavatrici ed essiccatoi, testi famiglia/sottocategoria, foto, flag noleggio/usato, settori collegati (Ho.Re.Ca. è il candidato ovvio, da confermare).
-**Documenti di input non aggiornati**: alberatura v02, menu F4 e Brief mockup parlano ancora di sei famiglie e 119 schede.
-- (14/10) Cucina e Lavanderia · foto: in assenza di foto delle macchine, famiglie e sottocategorie usano scatti Socaf generici degli scaffali prodotti (`assets/STATICHE/Sito` DSCF0368/0370/0373/0376/0383 → `assets/images/categorie/fam-cucina`, `fam-lavanderia`, `sub-*`). SEGNAPOSTO: servono foto reali di lavabicchieri, lavapiatti, osmosi, lavatrici, essiccatoi.
+## OP-20 · Settori: due nuovi, ordine alfabetico, macrosettore Industria (03/11)
+**Richiesta CLIENTE**: aggiungere *Assistenza sociosanitaria* e *Pubblica Amministrazione* (home e pagina Settori); Officine meccaniche ed Edilizia e cantieri dentro Industria; ordine alfabetico.
+**Fatto**: 7 settori di primo livello in ordine alfabetico in home, pagina Settori, menu e elenchi « Dove si usa »; Officine ed Edilizia annidate sotto Industria (menu, card « Dentro l'industria », briciole). **Gli indirizzi non cambiano** (`/settori/officine-metalmeccanica/`, `/settori/edilizia-cantieri/`): la gerarchia è di navigazione, non di URL → da confermare (alternativa: `/settori/industria/officine…/` con redirect).
+**Da confermare**: nome « Officine meccaniche » (il cliente) contro « Officine e metalmeccanica » (mockup: lasciato). Selezione delle macchine dei due settori nuovi = PROPOSTA mia (nomi di sottocategorie reali). Testi: da fornire. Icone: **segnaposto** nello stile V01 (croce, edificio con colonne): servono quelle dell'agenzia. Foto dei due settori: mancano. Per la PA ho aggiunto un blocco « Acquisti verdi » con CAM ed Ecolabel (testi del cliente): proposta mia.
+
+## OP-21 · Homepage: titolo, ricerca, CTA, Numero Verde e WhatsApp (03/11)
+**Fatto**: titolo « Macchine, detergenti, attrezzature e consumabili professionali » (ridotto di corpo per stare in 4 righe senza spingere fuori la prima schermata); « Cerca la soluzione che ti serve » al posto di « Cerca la macchina che ti serve » (quella frase stava nel sottotitolo sopra la barra: il segnaposto del campo, « Cerca macchine, prodotti, settori », è rimasto); **una sola barra di ricerca** in home, la ricerca resta nell'icona della barra sticky; quattro CTA intermedie (famiglie, noleggio e usato, settori, detergenti) verso il modulo (`#richiesta`), oltre a hero e modulo finale; Numero Verde in **verde** nel corpo della home (hero e modulo) + pulsante **WhatsApp** con il logo.
+**Da fornire / confermare**: il **numero WhatsApp** (il link è `https://wa.me/` senza numero: un numero verde 800 non riceve WhatsApp); il Numero Verde nella barra in alto resta rosso (è globale: se va verde anche lì lo cambio); testi delle CTA = proposta.
+
+## OP-22 · « Prodotti per la pulizia » → « Detergenti, attrezzature e consumabili » (03/11)
+**Fatto**: titolo, voce di menu, piè di pagina, briciole, titolo/meta della pagina. **L'indirizzo `/prodotti-per-la-pulizia/` non cambia.** **Rischio SEO**: l'hub raccoglie ~4.500 ricerche/mese sulla dicitura precedente (cluster 36.460): l'espressione « prodotti per la pulizia professionale » resta nel testo introduttivo e nella meta description. Le **13 categorie sono confermate** (chiude OP-14). L'etichetta lunga sta in una riga nel menu da 1100px in su.
+
+## OP-23 · « Oltre 40.000 clienti attivi » (03/11)
+Dato fornito dal cliente nella sezione di affidabilità (blocco « Il gruppo » in home). Fonte, data di riferimento e aggiornamento da definire: non è verificabile da qui.
+
+## OP-24 · Integrazione Socaf · Bottoni · Tecno Clean e video-intervista (03/11)
+**Fatto**: in **Chi siamo** un blocco « L'integrazione » con i cinque vantaggi (ampliamento dell'offerta, copertura territoriale, competenze complementari, capacità di assistenza, nuovi prodotti e servizi) (il blocco « Il video-intervista » è stato **tolto il 04/11**: il video andrà come sfondo della hero); in **home** (blocco « Il gruppo ») i cinque vantaggi in forma breve e un collegamento a Chi siamo.
+**Da fornire**: il **file o link del video-intervista** per la hero (sfondo, muto e in loop come il video della home; da decidere se sulla hero di Chi siamo o di un'altra pagina); le **tappe e le date** del percorso di integrazione. I testi dei vantaggi sono **PROPOSTA**: ricavati da fatti dei documenti (Tecno Clean esperta di consumabili e detergenti; Bottoni forte sulle imprese di servizi e a est; Tecno Clean sull'Ho.Re.Ca.; cinque sedi) e da validare.
+
+## OP-25 · Pagina Certificazioni (03/11)
+**Fatto**: pagina `/azienda/certificazioni/` nel menu Azienda, prima di Contatti: ISO 9001, Ecolabel UE, ISO 14001, ISO 45001, CAM, EPD, con i testi del cliente (non riscritti; « ISOO » → ISO). ISO 9001 documentata dal PDF: Bureau Veritas, certificato IT335877, norma ISO 9001:2015, **scade il 17/09/2027**, campo di applicazione (vendita, noleggio e assistenza di macchine per la pulizia industriale; raffrescamento industriale). Il PDF è in `assets/certificazioni/` e scaricabile. Ecolabel anche come card tra le categorie (già una delle 13) con richiamo alla certificazione.
+**Da chiarire con il cliente**: il certificato riguarda **solo Socaf S.p.A., sede di Osio Sotto**: dopo la fusione si estende a Bottoni e Tecno Clean? Per **ISO 14001, ISO 45001, CAM, EPD ed Ecolabel** non c'è documento: servono estremi (ente, numero, scadenza, perimetro) prima di pubblicare, altrimenti si afferma un possesso non verificato. Altre certificazioni (politica qualità: PDF già nel piè di pagina). **Loghi ufficiali** dei marchi: oggi sigle tipografiche.
+
+## OP-26 · BClean e « Prodotti consigliati » (03/11)
+**BClean**: voce dedicata in « Detergenti, attrezzature e consumabili » (banner in cima all'hub, pagina `/prodotti-per-la-pulizia/bclean/`) con il testo del cliente e l'elenco dal file xlsx, per linea. **Discrepanze**: il file ha **45 detergenti** (8 linee) e **5 articoli in carta**, il brief diceva « circa venti » e « tre o quattro ». Le righe della « Linea Lavanderia » sono doppie (3 unite) e i nomi non uniformi (« BCLEAN VORTEX » / « B-CLEAN … »): lasciati come nel file. Codici articolo, barcode e **fornitori** (LU&MI, IRCA, MADAL, Cartiere Carrara) **non sono pubblicati**. Descrizioni dei singoli prodotti: da fornire.
+**Ecolabel e riciclato**: la linea « Ecolabel » (GREEN CLEAN, 10 prodotti) è marcata Ecolabel UE; **quali prodotti abbiano flaconi e imballaggi in materiali riciclati non è indicato** (segnaposto visibile).
+**Prodotti consigliati**: dove vada la sezione non è detto: l'ho messa in **home** (blocco detergenti), nell'**hub** dei prodotti e nelle famiglie **Lavastoviglie, Lavatrici, Essiccatoi** (abbinando i detergenti BClean per lavastoviglie e lavanderia: INFERENZA). La selezione dei prodotti è un segnaposto: la sceglie Socaf. Se la intendevi solo in un punto, lo tolgo dagli altri.
+
+- **OP-27 · Schede prodotto BClean (04/11/2026)** — Sara chiede una scheda per ognuno dei 50 prodotti BClean. Cambia il perimetro (prima: solo elenco, nessuna scheda singola) e la stima (CPT + import CSV: 6–8 h al posto di 4 h, PROPOSTA). Da confermare con Socaf; da fornire: descrizioni, foto, schede tecniche e di sicurezza.

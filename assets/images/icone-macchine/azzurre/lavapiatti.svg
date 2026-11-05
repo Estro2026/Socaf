@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 708.66 708.66">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        fill: #008acd;
+      }
+
+      .st2 {
+        fill: url(#Sfumatura_senza_nome_5);
+      }
+
+      .st2, .st1, .st3 {
+        isolation: isolate;
+        opacity: .5;
+      }
+
+      .st3 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="Sfumatura_senza_nome_5" data-name="Sfumatura senza nome 5" x1="167.79" y1="774.18" x2="168.95" y2="773.01" gradientTransform="translate(-67777 263366.53) scale(405 -340)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".07" stop-color="#f7fbfd"/>
+      <stop offset=".19" stop-color="#e1f1f9"/>
+      <stop offset=".32" stop-color="#bee1f2"/>
+      <stop offset=".48" stop-color="#8ecbe8"/>
+      <stop offset=".65" stop-color="#4faedc"/>
+      <stop offset=".84" stop-color="#048ccd"/>
+      <stop offset=".85" stop-color="#008acd"/>
+    </linearGradient>
+  </defs>
+  <rect class="st2" x="208.99" y="118.57" width="406.49" height="447.47" rx="14" ry="14"/>
+  <path class="st1" d="M615.48,237.75v314.06c0,7.87-6.38,14.26-14.26,14.26h-94.74l109-328.32Z"/>
+  <path class="st0" d="M208.99,138.92c0-13.56,4.68-20.35,14.05-20.35h378.38c9.37,0,14.05,6.78,14.05,20.35v98.83H208.99v-98.83Z"/>
+  <rect class="st3" x="249.69" y="157.81" width="145.34" height="42.15" rx="5" ry="5"/>
+  <circle class="st3" cx="560.98" cy="179.61" r="17.44"/>
+  <circle class="st0" cx="210.64" cy="478.54" r="117.46"/>
+  <circle class="st3" cx="210.64" cy="478.54" r="70.15"/>
+  <circle class="st0" cx="350.94" cy="478.54" r="117.46"/>
+  <circle class="st3" cx="350.94" cy="478.54" r="70.15"/>
+</svg>

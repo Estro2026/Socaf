@@ -8,7 +8,7 @@
 <!-- SEO (copy UX D16): title definitivo della pagina -->
 <meta name="title" content="Macchine per pulizia professionale, noleggio e usato | Socaf">
 <meta name="description" content="Lavapavimenti, spazzatrici, idropulitrici e aspiratori: macchine per pulizia professionale, nuove, a noleggio o usate garantite. Chiama 800 480110.">
-<link rel="stylesheet" href="../assets/css/wireframe.css?v=326">
+<link rel="stylesheet" href="../assets/css/wireframe.css?v=421">
 </head>
 <body data-pagina="home">
 
@@ -34,23 +34,20 @@
         <div class="hero-cnt">
           <div class="hero-copy">
             <p class="kicker">Soluzioni per il cleaning</p>
-            <h1>Macchine e prodotti per la <em>pulizia professionale</em></h1>
-            <p class="lede">Per industria, imprese di pulizia, logistica e Ho.Re.Ca. Cerca la macchina che ti serve o chiama: ti risponde un consulente.</p>
+            <h1>Macchine, detergenti, attrezzature e consumabili <em>professionali</em></h1>
+            <p class="lede">Per industria, imprese di pulizia, logistica e Ho.Re.Ca. Chiama il Numero Verde o scrivici su WhatsApp: ti risponde un consulente.</p>
           </div>
 
-          <form class="search liquid-glass" data-search role="search">
-            <input type="search" placeholder="Cerca macchine, prodotti, settori" aria-label="Cerca nel sito">
-            <button type="submit">Cerca</button>
-          </form>
-
           <div class="hero-cta">
-            <a class="btn btn-primary" href="tel:800480110">Chiama 800 480110</a>
+            <a class="btn btn-whatsapp" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp, numero da fornire (si apre in una nuova scheda)">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              WhatsApp</a>
             <a class="btn btn-glass" href="04-noleggio.html" data-url="/noleggio/">Scopri il noleggio</a>
           </div>
 
           <div class="hero-stats">
-            <div><b>119</b><span>macchine<br>a catalogo</span></div>
-            <div><b>8</b><span>famiglie</span></div>
+            <div><b>146</b><span>macchine<br>a catalogo</span></div>
+            <div><b>9</b><span>famiglie</span></div>
             <div><b>5</b><span>sedi</span></div>
             <div><b>Dal 1982</b><span>specialisti<br>nel cleaning</span></div>
           </div>
@@ -61,6 +58,17 @@
       </section>
     </section>
     <div class="devnote">
+      <div class="dn-h">DEV NOTE 144 — Modifiche sito 2.0: hero, CTA, Numero Verde e WhatsApp</div>
+      <dl>
+        <dt>Titolo</dt><dd>« Macchine, detergenti, attrezzature e consumabili professionali » (richiesta Socaf, novembre 2026). Corpo ridotto per tenere tutto nella prima schermata.</dd>
+        <dt>Ricerca</dt><dd><b>Nessuna barra in hero</b> (richiesta Socaf, 04/11/2026): la ricerca resta nell'icona della barra sticky, in ogni pagina. Il sottotitolo ora invita a chiamare o scrivere su WhatsApp.</dd>
+        <dt>CTA intermedie</dt><dd>Tre bande (dopo famiglie, noleggio e usato, detergenti) con un pulsante verso il modulo in fondo (<code>#richiesta</code>). Widget Button + ancora interna; stesse bande in tutte le sezioni.</dd>
+        <dt>Numero Verde</dt><dd>Pulsante verde (<code>#15803d</code>, testo bianco, contrasto 5:1) in hero e nel modulo. Nella barra in alto resta rosso: è globale.</dd>
+        <dt>WhatsApp</dt><dd>Pulsante con il logo del marchio. <b>Numero da fornire</b>: il link è <code>https://wa.me/</code> senza numero (un 800 non riceve WhatsApp). <span class="openpoint">OP-21</span></dd>
+      </dl>
+      <div class="est">Stima 2 h (proposta)</div>
+    </div>
+    <div class="devnote">
       <div class="dn-h">DEV NOTE 114a — SEO della home (copy UX D16)</div>
       <dl>
         <dt>Title</dt><dd>Macchine per pulizia professionale, noleggio e usato | Socaf</dd>
@@ -68,7 +76,7 @@
         <dt>Dove</dt><dd>Plugin SEO (Yoast / Rank Math) della pagina impostata come home. Nel mockup sono già nell'<code>&lt;head&gt;</code> di <code>16-home.html</code>.</dd>
         <dt>Alt delle immagini</dt><dd>
           Video di sfondo: nessun alt (decorativo).<br>
-          Famiglie: «Lavapavimenti Socaf», «Spazzatrici Socaf», «Idropulitrici Socaf», «Aspiratori Socaf nello showroom», «Insegna Socaf», «Altri macchinari Socaf nello showroom».<br>
+          Famiglie: «Lavapavimenti Socaf», «Spazzatrici Socaf», «Idropulitrici Socaf», «Aspiratori Socaf nello showroom», «Insegna Socaf», le cinque nuove famiglie (foto segnaposto: alt da scrivere con le foto vere), «Altri macchinari Socaf nello showroom».<br>
           Il gruppo: «Socaf — Soluzioni per il cleaning», «Bottoni», «Tecno Clean».<br>
           Noleggio e usato: «Consegna di una macchina Socaf a noleggio», «Macchine nello showroom Socaf».<br>
           Prodotti: «Scaffali di prodotti per la pulizia professionale nel punto vendita Socaf».<br>
@@ -95,7 +103,7 @@
   <div class="row" data-mood="macchine" data-fondo="rosso">
     <div class="macchine-scena" aria-hidden="true"></div>
     <section class="block">
-      <span class="block-id">BLOCCO 2 · Le otto famiglie</span>
+      <span class="block-id">BLOCCO 2 · Le nove famiglie</span>
       <h2>Le macchine</h2>
       <p class="board-hint" aria-hidden="true">Trascina o scorri lateralmente</p>
       <div class="board" data-board><div class="board-track">
@@ -122,30 +130,39 @@
         <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-robot.jpg" alt="Insegna Socaf" loading="lazy"></div>
           <div class="card-body"><span class="card-name">Robot</span>
             <p class="card-desc">Per la pulizia autonoma: robot lavapavimenti e robot spazzatrici.</p>
-            <span class="card-meta">4 macchine</span>
-            <a class="card-link" href="03-famiglia.html?fam=robot" data-url="/robot/">Vedi</a></div></article>
-        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-cucina.jpg" alt="Prodotti per la cucina professionale nello showroom Socaf" loading="lazy"></div>
-          <div class="card-body"><span class="card-name">Cucina</span>
-            <p class="card-desc">Lavabicchieri, lavapiatti, addolcitori e osmosi.</p>
             <span class="card-meta">10 macchine</span>
-            <a class="card-link" href="03-famiglia.html?fam=cucina" data-url="/cucina/">Vedi</a></div></article>
-        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-lavanderia.jpg" alt="Prodotti per la lavanderia nello showroom Socaf" loading="lazy"></div>
-          <div class="card-body"><span class="card-name">Lavanderia</span>
-            <p class="card-desc">Lavatrici ed essiccatoi.</p>
+            <a class="card-link" href="03-famiglia.html?fam=robot" data-url="/robot/">Vedi</a></div></article>
+        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-lavastoviglie.jpg" alt="Prodotti Socaf nello showroom (immagine segnaposto)" loading="lazy"></div>
+          <div class="card-body"><span class="card-name">Lavastoviglie</span>
+            <p class="card-desc">Lavabicchieri, lavapiatti, lavaoggetti e lavastoviglie a traino.</p>
+            <span class="card-meta">12 macchine</span>
+            <a class="card-link" href="03-famiglia.html?fam=lavastoviglie" data-url="/lavastoviglie/">Vedi</a></div></article>
+        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-macchine-del-ghiaccio.jpg" alt="Prodotti Socaf nello showroom (immagine segnaposto)" loading="lazy"></div>
+          <div class="card-body"><span class="card-name">Macchine del ghiaccio</span>
+            <p class="card-desc">Macchine del ghiaccio professionali.</p>
             <span class="card-meta">Prodotti da definire</span>
-            <a class="card-link" href="03-famiglia.html?fam=lavanderia" data-url="/lavanderia/">Vedi</a></div></article>
+            <a class="card-link" href="03-famiglia.html?fam=macchine-del-ghiaccio" data-url="/macchine-del-ghiaccio/">Vedi</a></div></article>
+        <article class="card"><div class="card-media foto"><img src="../assets/images/categorie/fam-lavatrici.jpg" alt="Prodotti Socaf nello showroom (immagine segnaposto)" loading="lazy"></div>
+          <div class="card-body"><span class="card-name">Lavatrici</span>
+            <p class="card-desc">Lavatrici, lavacentrifughe ed essiccatoi professionali, anche della linea Small Pro.</p>
+            <span class="card-meta">4 macchine</span>
+            <a class="card-link" href="03-famiglia.html?fam=lavatrici" data-url="/lavatrici/">Vedi</a></div></article>
         <article class="card"><div class="card-media foto foto-altri-macchinari"><img src="../assets/images/categorie/fam-altri-macchinari.jpg" alt="Altri macchinari Socaf nello showroom" loading="lazy"></div>
           <div class="card-body"><span class="card-name">Altri macchinari</span>
             <p class="card-desc">Per esigenze specifiche: monospazzole, vasche lavapezzi, generatori di vapore e altro.</p>
             <span class="card-meta">30 macchine</span>
             <a class="card-link" href="03-famiglia.html?fam=altri-macchinari" data-url="/altri-macchinari/">Vedi</a></div></article>
       </div></div>
-      <p class="small" style="margin-top:14px"><b>Non esiste una pagina che contiene le otto famiglie.</b>
+      <div class="cta-inline">
+        <p><b>Non trovi la macchina che cerchi?</b> Un consulente ti aiuta a scegliere.</p>
+        <a class="btn btn-glass" href="#richiesta">Parla con un consulente</a>
+      </div>
+      <p class="small" style="margin-top:14px"><b>Non esiste una pagina che contiene le nove famiglie.</b>
         Nel menu sono raccolte sotto la voce Macchine, ma quella voce non è cliccabile: non ci sono ricerche
         che giustifichino una pagina in più prima di arrivare alla macchina.</p>
     </section>
     <div class="devnote">
-      <div class="dn-h">DEV NOTE 115 — Le otto famiglie</div>
+      <div class="dn-h">DEV NOTE 115 — Le nove famiglie</div>
       <dl>
         <dt>Origine</dt><dd>Termini di primo livello della tassonomia <code>famiglia</code></dd>
         <dt>Query</dt><dd>Listing Grid su termini, <code>parent = 0</code>, ordine manuale</dd>
@@ -164,37 +181,25 @@
     <section class="block">
       <span class="block-id">BLOCCO 2bis · Il gruppo — <span class="cond">aggiunta richiesta da Socaf, non prevista dal Brief mockup</span></span>
 
-      <div class="gruppo">
-        <div class="gruppo-liquido" aria-hidden="true"></div>
-        <p class="kicker">L'azienda</p>
-        <h2 class="gruppo-h">Dalla fusione di <em>tre aziende</em>,<br>il tuo partner affidabile per la pulizia industriale</h2>
-        <p class="lede gruppo-lede">Dal 1° gennaio 2027 <b>Socaf</b>, <b>Bottoni</b> e <b>Tecno Clean</b> sono un'unica azienda: tre storie, cinque sedi tra Lombardia, Veneto e Friuli.</p>
-
-        <div class="loghi">
-          <div class="logo-item">
-            <img src="../assets/logo/socaf21-payoff-rgb.svg" alt="Socaf — Soluzioni per il cleaning">
-          </div>
-          <div class="logo-item logo-mono"><img src="../assets/Bottoni.webp" alt="Bottoni"></div>
-          <div class="logo-item logo-mono"><img src="../assets/Tecnoclean.webp" alt="Tecno Clean"></div>
-        </div>
-      </div>
+      <div data-fusione="home"></div>
 
       <p class="small"><span class="taskflag t-content">Content task</span>
-        Il logo Socaf è quello ufficiale del progetto. <b>I loghi di Bottoni e Tecno Clean sono in <code>assets/</code> in bitmap bianco (webp)</b>:
+        Dal 4 novembre 2026 il blocco è una scena animata (tre cerchi che si sovrappongono, contatore, vantaggi). Il logo Socaf è quello ufficiale del progetto. <b>I loghi di Bottoni e Tecno Clean sono in <code>assets/</code> in bitmap bianco (webp)</b>:
         nel mockup sono resi monocromatici scuri via CSS; per il sito servono in vettoriale. Stanno su una
-        riga sola senza rumore. Il testo lungo della fusione resta su <code>/azienda/chi-siamo/</code>:
-        qui non c'è nemmeno un collegamento, il blocco dichiara e basta.</p>
+        riga sola senza rumore. Dal novembre 2026 il blocco porta anche la cifra di fiducia (oltre 40.000 clienti attivi),
+        i cinque vantaggi dell'integrazione e un collegamento a <code>/azienda/chi-siamo/</code>.</p>
     </section>
     <div class="devnote">
       <div class="dn-h">DEV NOTE 115bis — Il gruppo (blocco aggiunto)</div>
       <dl>
         <dt>Origine</dt><dd>Blocco statico. Nessun ACF, nessuna query.</dd>
         <dt>Condizione</dt><dd>Sempre</dd>
-        <dt>Posizione</dt><dd>Dopo le otto famiglie, <b>prima</b> del blocco noleggio/usato,
+        <dt>Posizione</dt><dd>Dopo le nove famiglie, <b>prima</b> del blocco noleggio/usato,
           come richiesto da Socaf.</dd>
-        <dt>Link</dt><dd><b>Nessuno.</b> Il blocco non porta da nessuna parte: è una dichiarazione di
-          identità, non un percorso. La storia del gruppo resta su <code>/azienda/chi-siamo/</code>,
-          raggiungibile dal menu Azienda e dal piè di pagina.</dd>
+        <dt>Link</dt><dd>Un solo collegamento: <b>Scopri il percorso di integrazione</b> → <code>/azienda/chi-siamo/#integrazione</code>
+          (richiesta Socaf, novembre 2026: prima il blocco non portava da nessuna parte).</dd>
+        <dt>Fiducia</dt><dd><b>Oltre 40.000 clienti attivi</b>: dato del cliente (Selene), da confermare e da tenere aggiornato.
+          <span class="openpoint">OP-23</span></dd>
         <dt>Implementazione</dt><dd>Sezione Elementor con widget Image ×3 in una riga.
           I loghi vanno allineati otticamente, non per bounding box: proporzioni e pesi visivi sono diversi.
           Altezza di riferimento comune, non larghezza.</dd>
@@ -239,9 +244,15 @@
         </a>
       </div>
 
+
+      <div class="cta-inline">
+        <p><b>Acquisto, noleggio o usato?</b> Ti proponiamo la formula giusta per il tuo lavoro.</p>
+        <a class="btn btn-glass" href="#richiesta">Richiedi un'offerta</a>
+      </div>
+
       <p class="small"><span class="openpoint">OP-07</span>
         <b>Due decisioni aperte</b>: il peso relativo di noleggio e usato (qui il noleggio è più largo)
-        e se il blocco vada <b>prima</b> o <b>dopo</b> le otto famiglie (qui dopo).
+        e se il blocco vada <b>prima</b> o <b>dopo</b> le nove famiglie (qui dopo).
         Entrambe le alternative valgono circa un'ora di lavoro.</p>
     </section>
     <div class="devnote">
@@ -263,15 +274,16 @@
       <span class="block-id">BLOCCO 4 · I settori</span>
       <h2>Soluzioni per ogni settore</h2>
       <div class="tiles" data-tiles>
-        <a class="tile" href="09-settore.html" data-url="/settori/industria/"><img class="tile-ico tile-img" src="../assets/images/settori/industriaV01.webp" alt="" aria-hidden="true"><span>Industria</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/imprese-di-pulizia/"><img class="tile-ico tile-img" src="../assets/images/settori/imppulizieV01.webp" alt="" aria-hidden="true"><span>Imprese di pulizia</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/horeca/"><img class="tile-ico tile-img" src="../assets/images/settori/HORECAV01.webp" alt="" aria-hidden="true"><span>Ho.Re.Ca.</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/retail/"><img class="tile-ico tile-img" src="../assets/images/settori/retailV01.webp" alt="" aria-hidden="true"><span>Retail</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/logistica/"><img class="tile-ico tile-img" src="../assets/images/settori/logisticaV01.webp" alt="" aria-hidden="true"><span>Logistica</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/officine-metalmeccanica/"><img class="tile-ico tile-img" src="../assets/images/settori/officinaV01.webp" alt="" aria-hidden="true"><span>Officine e metalmeccanica</span></a>
-        <a class="tile" href="09-settore.html" data-url="/settori/edilizia-cantieri/"><img class="tile-ico tile-img" src="../assets/images/settori/ediliziaV01.webp" alt="" aria-hidden="true"><span>Edilizia e cantieri</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/assistenza-sociosanitaria/"><img class="tile-ico tile-img" src="../assets/images/settori/assistenzasociosanitariaV01.webp?v=2" alt="" aria-hidden="true"><span>Assistenza sociosanitaria</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/horeca/"><img class="tile-ico tile-img" src="../assets/images/settori/HORECAV01.webp?v=2" alt="" aria-hidden="true"><span>Ho.Re.Ca.</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/imprese-di-pulizia/"><img class="tile-ico tile-img" src="../assets/images/settori/imppulizieV01.webp?v=2" alt="" aria-hidden="true"><span>Imprese di pulizia</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/industria/"><img class="tile-ico tile-img" src="../assets/images/settori/industriaV01.webp?v=2" alt="" aria-hidden="true"><span>Industria</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/logistica/"><img class="tile-ico tile-img" src="../assets/images/settori/logisticaV01.webp?v=2" alt="" aria-hidden="true"><span>Logistica</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/pubblica-amministrazione/"><img class="tile-ico tile-img" src="../assets/images/settori/pubblicaamministrazioneV01.webp?v=2" alt="" aria-hidden="true"><span>Pubblica Amministrazione</span></a>
+        <a class="tile" href="09-settore.html" data-url="/settori/retail/"><img class="tile-ico tile-img" src="../assets/images/settori/retailV01.webp?v=2" alt="" aria-hidden="true"><span>Retail</span></a>
       </div>
-      <p class="small" style="margin-top:14px">I sette settori portano <b>direttamente</b> alle loro pagine.
+
+      <p class="small" style="margin-top:14px">I sette settori, in ordine alfabetico, portano <b>direttamente</b> alle loro pagine. Officine e metalmeccanica ed Edilizia e cantieri sono dentro Industria.
         La pagina che li raccoglie (<code>/settori/</code>) non si raggiunge dalla home.</p>
     </section>
     <div class="devnote">
@@ -289,7 +301,7 @@
   <div class="row row-prodotti t-piena t-bianca" data-fondo="bianco">
     <div class="prodotti-scena" aria-hidden="true"></div>
     <section class="block">
-      <span class="block-id">BLOCCO 5 · Prodotti per la pulizia</span>
+      <span class="block-id">BLOCCO 5 · Detergenti, attrezzature e consumabili</span>
       <div class="grid grid-2" style="gap:26px;align-items:center">
         <div>
           <h2>Detergenti, attrezzature e consumabili</h2>
@@ -298,6 +310,10 @@
           <a class="btn btn-glass" href="10-prodotti-pulizia.html" data-url="/prodotti-per-la-pulizia/">Vedi i prodotti</a>
         </div>
         <div class="foto-prodotti"><img src="../assets/images/categorie/prodotti-pulizia.jpg" alt="Scaffali di prodotti per la pulizia professionale nel punto vendita Socaf" loading="lazy"></div>
+      </div>
+      <div class="cta-inline">
+        <p><b>Ti serve un'offerta su detergenti e consumabili?</b> Scrivici cosa usi oggi.</p>
+        <a class="btn btn-primary" href="#richiesta">Richiedi un'offerta</a>
       </div>
     </section>
     <div class="devnote">
@@ -312,7 +328,19 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-marchi t-outline" data-fondo="rosso" data-mood="rosso">
+  <!-- BLOCCO 5bis · Prodotti consigliati — sezione a parte (richiesta Socaf, 04/11/2026) -->
+  <div class="row row-vetro row-consigliati-home t-outline" data-fondo="rosso">
+    <section class="block">
+      <span class="block-id">BLOCCO 5bis · Prodotti consigliati — <span class="cond">richiesta Socaf, novembre 2026</span></span>
+      <p class="kicker">BClean · la selezione</p>
+      <h2>Prodotti consigliati</h2>
+      <p class="lede">Detergenti e carta della linea BClean scelti dai nostri consulenti.</p>
+      <div class="grid grid-4" data-consigliati="hub"></div>
+      <p class="consigliati-link"><a class="btn btn-glass" href="10-prodotti-pulizia.html" data-url="/prodotti-per-la-pulizia/">Vedi tutti i prodotti</a></p>
+    </section>
+  </div>
+
+  <div class="row row-vetro row-marchi t-piena t-bianca" data-fondo="bianco" data-mood="azzurro">
     <section class="block">
       <span class="block-id">BLOCCO 6 · Aquarial e Caldofacile</span>
       <h2>I nostri marchi</h2>
@@ -349,7 +377,7 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-sedi t-piena t-bianca" data-fondo="rosso">
+  <div class="row row-vetro row-sedi t-outline" data-fondo="rosso">
     <section class="block">
       <span class="block-id">BLOCCO 7 · Le cinque sedi</span>
       <p class="kicker">Assistenza</p>
@@ -367,7 +395,7 @@
     </div>
   </div>
 
-  <div class="row row-vetro row-form t-vetro" data-fondo="bianco">
+  <div class="row row-vetro row-form t-piena t-bianca" data-fondo="bianco" id="richiesta">
     <section class="block">
       <span class="block-id">BLOCCO 8 · Richiesta informazioni</span>
       <form class="form" data-demo-form>
@@ -384,7 +412,8 @@
         </div>
         <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:16px">
           <button class="btn btn-primary" type="submit">Invia richiesta</button>
-          <a class="btn btn-glass" href="tel:800480110">800 480110</a>
+          <a class="btn btn-whatsapp" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Scrivici su WhatsApp, numero da fornire (si apre in una nuova scheda)">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> WhatsApp</a>
         </div>
         <p class="small" data-form-msg style="margin:10px 0 0"></p>
       </form>
@@ -414,7 +443,7 @@
         <dt>Regola</dt><dd>La home contiene <b>esattamente</b> gli 8 blocchi del brief. Ogni blocco in più
           è tempo di sviluppo, QA responsive e manutenzione che il budget non prevede.</dd>
         <dt>Performance</dt><dd>Home senza slider e senza mappa: è la pagina più visitata e deve essere
-          la più leggera. Le immagini delle 8 famiglie in <code>loading="lazy"</code> tranne le prime tre.</dd>
+          la più leggera. Le immagini delle 9 famiglie in <code>loading="lazy"</code> tranne le prime tre.</dd>
       </dl>
       <div class="est">—</div>
     </div>
@@ -423,8 +452,9 @@
 </div>
 
 <footer data-footer></footer>
-<script src="../assets/js/catalogo.js?v=123"></script>
+<script src="../assets/js/catalogo.js?v=126"></script>
 <script src="../assets/js/testi.js?v=123"></script>
-<script src="../assets/js/wireframe.js?v=232"></script>
+<script src="../assets/js/bclean.js?v=1"></script>
+<script src="../assets/js/wireframe.js?v=281"></script>
 </body>
 </html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 708.66 708.66">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#Sfumatura_senza_nome_41);
+      }
+
+      .st0, .st1, .st2 {
+        opacity: .5;
+      }
+
+      .st3 {
+        fill: #e40523;
+      }
+
+      .st2 {
+        fill: url(#Sfumatura_senza_nome_411);
+      }
+    </style>
+    <linearGradient id="Sfumatura_senza_nome_41" data-name="Sfumatura senza nome 41" x1="232.7" y1="228.34" x2="416.65" y2="228.34" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".85" stop-color="#e40523"/>
+    </linearGradient>
+    <linearGradient id="Sfumatura_senza_nome_411" data-name="Sfumatura senza nome 41" x1="354.33" y1="532.25" x2="395.62" y2="532.25" xlink:href="#Sfumatura_senza_nome_41"/>
+  </defs>
+  <g id="filtro-unico" class="st1">
+    <path class="st3" d="M93.81,404.62l263.46-42.04,257.58,42.04-260.52,54.58-260.52-54.58Z"/>
+  </g>
+  <g id="goccia-ingresso">
+    <path class="st3" d="M347.82,102.58c-42.55,57.56-115.13,136.4-115.13,216.49,0,68.82,51.31,117.63,115.13,117.63s115.13-48.8,115.13-117.63c0-80.09-72.58-158.92-115.13-216.49Z"/>
+    <path class="st0" d="M347.82,102.58c-42.55,57.56-115.13,136.4-115.13,216.49,0,12.51,1.25,25.03,5.01,35.04,72.58-12.51,146.41-83.84,178.94-152.67-23.78-38.79-48.8-72.58-68.82-98.86Z"/>
+  </g>
+  <g id="goccia-filtrata">
+    <path class="st3" d="M354.33,477.19c-25.03,36.29-41.29,60.07-41.29,86.34,0,23.78,18.77,42.55,41.29,42.55s41.29-18.77,41.29-42.55c0-26.28-16.27-50.05-41.29-86.34Z"/>
+    <path class="st2" d="M354.33,477.19c25.03,36.29,41.29,60.07,41.29,86.34,0,8.76-2.5,17.52-7.51,23.78-23.78-17.52-32.54-58.81-33.79-110.12Z"/>
+  </g>
+</svg>

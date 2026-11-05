@@ -27,17 +27,20 @@
     { label: 'Macchine', type: 'drop', note: 'Nessuna pagina propria', items: [
       ['Lavapavimenti', '/lavapavimenti/'], ['Spazzatrici', '/spazzatrici/'],
       ['Idropulitrici', '/idropulitrici/'], ['Aspiratori', '/aspiratori/'],
-      ['Robot', '/robot/'], ['Cucina', '/cucina/'], ['Lavanderia', '/lavanderia/'],
+      ['Robot', '/robot/'], ['Lavastoviglie', '/lavastoviglie/'], ['Macchine del ghiaccio', '/macchine-del-ghiaccio/'],
+      ['Lavatrici', '/lavatrici/'],
       ['Altri macchinari', '/altri-macchinari/']
     ]},
     { label: 'Noleggio', type: 'flat', href: '/noleggio/' },
+    /* settori in ordine alfabetico; Officine e Edilizia sono dentro il macrosettore Industria (richiesta Socaf, novembre 2026) */
     { label: 'Settori', type: 'drop', note: 'Nessuna pagina nel menu', items: [
-      ['Industria', '/settori/industria/'], ['Imprese di pulizia', '/settori/imprese-di-pulizia/'],
-      ['Ho.Re.Ca.', '/settori/horeca/'], ['Retail', '/settori/retail/'],
-      ['Logistica', '/settori/logistica/'], ['Officine e metalmeccanica', '/settori/officine-metalmeccanica/'],
-      ['Edilizia e cantieri', '/settori/edilizia-cantieri/']
+      ['Assistenza sociosanitaria', '/settori/assistenza-sociosanitaria/'], ['Ho.Re.Ca.', '/settori/horeca/'],
+      ['Imprese di pulizia', '/settori/imprese-di-pulizia/'], ['Industria', '/settori/industria/'],
+      ['Officine e metalmeccanica', '/settori/officine-metalmeccanica/', 1], ['Edilizia e cantieri', '/settori/edilizia-cantieri/', 1],
+      ['Logistica', '/settori/logistica/'], ['Pubblica Amministrazione', '/settori/pubblica-amministrazione/'],
+      ['Retail', '/settori/retail/']
     ]},
-    { label: 'Prodotti per la pulizia', type: 'flat', href: '/prodotti-per-la-pulizia/' },
+    { label: 'Detergenti, attrezzature e consumabili', type: 'flat', href: '/prodotti-per-la-pulizia/' },
     { label: 'Servizi', type: 'drop', note: 'Nessuna pagina propria', items: [
       ['Pronto intervento', '/servizi/pronto-intervento/'], ['Consulenza tecnica', '/servizi/consulenza-tecnica/'],
       ['Soluzioni finanziarie', '/servizi/soluzioni-finanziarie/'], ['Usato', '/usato/'],
@@ -45,7 +48,7 @@
     ]},
     { label: 'Azienda', type: 'drop', note: 'Nessuna pagina propria', items: [
       ['Chi siamo', '/azienda/chi-siamo/'], ['Innovazione tecnologica', '/azienda/innovazione-tecnologica/'],
-      ['Il nostro impegno', '/azienda/il-nostro-impegno/'], ['Referenze', '/azienda/referenze/'],
+      ['Il nostro impegno', '/azienda/il-nostro-impegno/'], ['Referenze', '/azienda/referenze/'], ['Certificazioni', '/azienda/certificazioni/'],
       ['Lavora con noi', '/azienda/lavora-con-noi/'], ['Contatti', '/contatti/']
     ]}
   ];
@@ -62,7 +65,12 @@
      2 · ROUTING — indirizzo reale → file di wireframe (+ istanza)
      Gli slug non sono modificati: l'indirizzo vero resta nel tooltip.
      ====================================================================== */
+  /* i collegamenti con ancora (#…) passano dal percorso senza ancora e la riaggiungono */
   function route(path) {
+    var hi = String(path).indexOf('#');
+    return hi > -1 ? routeBase(path.slice(0, hi)) + path.slice(hi) : routeBase(path);
+  }
+  function routeBase(path) {
     var p = path.replace(/^https?:\/\/[^/]+/, '');
     if (p === '/') return BASE + 'wireframes/16-home.html';
     if (p.indexOf('/?s=') === 0) return BASE + 'wireframes/17-risultati-ricerca.html';
@@ -73,6 +81,8 @@
     if (/^\/settori\/$/.test(p)) return BASE + 'wireframes/08-settori.html';
     if (/^\/settori\/[^/]+\/$/.test(p)) return BASE + 'wireframes/09-settore.html?s=' + p.split('/')[2];
     if (/^\/prodotti-per-la-pulizia\/$/.test(p)) return BASE + 'wireframes/10-prodotti-pulizia.html';
+    if (/^\/prodotti-per-la-pulizia\/bclean\/$/.test(p)) return BASE + 'wireframes/20-pagina.html?p=' + p;
+    if (/^\/prodotti-per-la-pulizia\/bclean\/[^/]+\/[^/]+\/$/.test(p)) return BASE + 'wireframes/01-scheda-macchina.html?m=' + encodeURIComponent(p);
     if (/^\/prodotti-per-la-pulizia\/[^/]+\/$/.test(p)) return BASE + 'wireframes/11-categoria-prodotto.html?c=' + p.split('/')[2];
     if (/^\/news\/$/.test(p)) return BASE + 'wireframes/13-approfondimenti.html';
     if (/^\/news\/[^/]+\/$/.test(p)) return BASE + 'wireframes/12-articolo.html';
@@ -97,7 +107,7 @@
     var m = location.search.match(new RegExp('[?&]' + n + '=([^&]*)'));
     return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
   }
-  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
 
   /* ======================================================================
      3 · HEADER / FOOTER / BLOCCHI GLOBALI
@@ -120,7 +130,7 @@
         h += '<li><button class="nav-btn" type="button" aria-expanded="false" aria-controls="' + id + '" data-dd="' + id + '">' +
           m.label + '<span class="caret" aria-hidden="true"></span></button>' +
           '<div class="dropdown" id="' + id + '" data-open="false"><div class="dd-note">' + m.note + '</div><ul>' +
-          m.items.map(function (it) { return '<li>' + a(it[1], it[0]) + '</li>'; }).join('') +
+          m.items.map(function (it) { return '<li' + (it[2] ? ' class="dd-sub"' : '') + '>' + a(it[1], it[0]) + '</li>'; }).join('') +
           '</ul></div></li>';
       }
     });
@@ -136,7 +146,7 @@
       else {
         h += '<div class="acc"><button type="button" data-acc="macc' + i + '" aria-expanded="false">' + m.label + '<span class="caret" aria-hidden="true"></span></button>' +
           '<div class="acc-body" id="macc' + i + '" data-open="false">' +
-          m.items.map(function (it) { return a(it[1], it[0]); }).join('') + '</div></div>';
+          m.items.map(function (it) { return a(it[1], it[0], it[2] ? 'acc-sub' : ''); }).join('') + '</div></div>';
       }
     });
     h += '<div class="acc">' + a('/servizi/pronto-intervento/', 'Pronto intervento') + '</div>' +
@@ -165,14 +175,14 @@
       SEDI.map(function (s) { return '<li>' + a('/sedi/' + s.slug + '/', s.city + (s.main ? ' <span class="f-tag">sede principale</span>' : '')) + '</li>'; }).join('') +
       '</ul></div>' +
       '<div><h4>Catalogo</h4><ul>' +
-      ['lavapavimenti','spazzatrici','idropulitrici','aspiratori','robot','cucina','lavanderia','altri-macchinari'].map(function (f) {
+      (CAT ? Object.keys(CAT.FAMIGLIE) : ['lavapavimenti','spazzatrici','idropulitrici','aspiratori','robot','lavastoviglie','macchine-del-ghiaccio','lavatrici','altri-macchinari']).map(function (f) {
         return '<li>' + a('/' + f + '/', CAT && CAT.FAMIGLIE[f] ? CAT.FAMIGLIE[f].nome : f) + '</li>';
       }).join('') +
-      '<li>' + a('/prodotti-per-la-pulizia/', 'Prodotti per la pulizia') + '</li></ul></div>' +
+      '<li>' + a('/prodotti-per-la-pulizia/', 'Detergenti, attrezzature e consumabili') + '</li></ul></div>' +
       '<div><h4>Formule e servizi</h4><ul>' +
       '<li>' + a('/noleggio/', 'Noleggio') + '</li><li>' + a('/usato/', 'Usato garantito') + '</li>' +
       '<li>' + a('/servizi/', 'Servizi') + '</li><li>' + a('/settori/', 'Settori') + '</li>' +
-      '<li>' + a('/azienda/referenze/', 'Referenze') + '</li><li>' + a('/news/', 'Approfondimenti') + '</li>' +
+      '<li>' + a('/azienda/referenze/', 'Referenze') + '</li><li>' + a('/azienda/certificazioni/', 'Certificazioni') + '</li><li>' + a('/news/', 'Approfondimenti') + '</li>' +
       '<li>' + a('/contatti/', 'Contatti') + '</li>' +
       '<li>' + a('/azienda/lavora-con-noi/', 'Lavora con noi · posizioni aperte') + '</li></ul></div>' +
       '<div><h4>I marchi del gruppo</h4><ul>' +
@@ -399,6 +409,339 @@
     var t; window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(disegna, 150); });
   }
 
+  /* ======================================================================
+     NOVITÀ · « modifiche sito 2.0 » (novembre 2026)
+     Prodotti consigliati · BClean · Certificazioni · integrazione Socaf/Bottoni/Tecno Clean ·
+     macrosettore Industria · acquisti verdi PA. Fonte: CLIENTE (Selene, via Basecamp) salvo dove indicato PROPOSTA.
+     ====================================================================== */
+  var BCLEAN = window.SOCAF_BCLEAN || null;
+  function slugify(t) { return String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+  function bcleanTrova(nome) {
+    var out = null;
+    if (BCLEAN) BCLEAN.linee.forEach(function (l) { l.prodotti.forEach(function (p) { if (!out && p.nome === nome) out = { linea: l.linea, macro: l.macro, nome: p.nome, conf: p.conf }; }); });
+    return out;
+  }
+  var BCLEAN_URL = '/prodotti-per-la-pulizia/bclean/';
+  /* scheda di ogni prodotto BClean (richiesta Socaf 04/11/2026): /prodotti-per-la-pulizia/bclean/<linea>/<prodotto>/ */
+  var BCLEAN_SCHEDE = {}, BCLEAN_PER_URL = {};
+  function bcleanSchedaUrl(linea, nome) { return (BCLEAN_SCHEDE[linea + '|' + nome] || {}).url || BCLEAN_URL + '#linea-' + slugify(linea); }
+  if (BCLEAN) BCLEAN.linee.forEach(function (l) {
+    var usati = {};
+    l.prodotti.forEach(function (p, i) {
+      var sl = slugify(p.nome) || 'prodotto', n = usati[sl] = (usati[sl] || 0) + 1;
+      if (n > 1) sl += '-' + n;
+      BCLEAN_SCHEDE[l.linea + '|' + p.nome] = { url: BCLEAN_URL + slugify(l.linea) + '/' + sl + '/', linea: l, p: p, i: i };
+      BCLEAN_PER_URL[BCLEAN_SCHEDE[l.linea + '|' + p.nome].url] = BCLEAN_SCHEDE[l.linea + '|' + p.nome];
+    });
+  });
+  function bcleanCard(p, linea, i, eco, conLinea) {
+    var desc = (conLinea ? linea + (p.conf.length ? ' · ' : '') : '') + p.conf.join(' · ');
+    return '<article class="card card-bc"><div class="card-media foto"><img src="' + BASE + 'assets/images/categorie/prod-' + (i % 4 + 1) + '.jpg" alt="" loading="lazy"></div>' +
+      '<div class="card-body"><span class="card-name">' + esc(p.nome) + '</span>' +
+      (desc ? '<p class="card-desc">' + esc(desc) + '</p>' : '') +
+      '<div class="tags"><span class="tag tag-bclean">BClean</span>' + (eco ? '<span class="tag tag-eco">Ecolabel UE</span>' : '') + '</div>' +
+      '<a class="card-link" href="' + route(bcleanSchedaUrl(linea, p.nome)) + '" data-url="' + bcleanSchedaUrl(linea, p.nome) + '">Vedi</a></div></article>';
+  }
+  /* nota per lo sviluppo, stesso formato delle altre (le stime sono PROPOSTA, non sostituiscono dev-estimate-v2) */
+  function devNote(num, titolo, righe, stima) {
+    return '<div class="devnote"><div class="dn-h">DEV NOTE ' + num + ' — ' + esc(titolo) + '</div><dl>' +
+      righe.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl><div class="est">' + stima + '</div></div>';
+  }
+
+  /* Prodotti consigliati — SEGNAPOSTO: la selezione è una scelta commerciale di Socaf.
+     I nomi sono prodotti BClean reali dell'elenco del cliente; l'abbinamento con le famiglie è INFERENZA. */
+  var CONSIGLIATI = {
+    hub: ['GREEN CLEAN PAVIMENTI AGRUMI', 'PAVITEC (3538 Muschio Bianco)', 'CID BAGNO SOFT MANDARINO', 'Carta igienica Maxi Jumbo 320 mt DISINCHIOSTRATA'],
+    lavastoviglie: ['GREEN CLEAN LAVASTOVIGLIE', 'GREEN CLEAN BRILLANTANTE', 'NEW TEC BRIL H', 'NEW TEC EXTRA'],
+    lavanderia: ['BCLEAN VORTEX', 'B-CLEAN FIBRA', 'B-CLEAN CLORACTIVE', 'B-CLEAN TEXTIL']
+  };
+  var CONSIGLIATI_FAMIGLIA = { 'lavastoviglie': 'lavastoviglie', 'lavatrici': 'lavanderia' };
+  function consigliatiCards(chiave) {
+    return (CONSIGLIATI[chiave] || []).map(function (nome, i) {
+      var p = bcleanTrova(nome); if (!p) return '';
+      return bcleanCard({ nome: p.nome, conf: p.conf.slice(0, 2) }, p.linea, i, p.linea === 'Ecolabel', true);
+    }).join('');
+  }
+  /* banner BClean nell'hub: le linee con il numero di prodotti, dal file del cliente */
+  function riempiBcleanHub() {
+    var nav = document.querySelector('.bclean-hub-linee'); if (!nav || !BCLEAN) return;
+    nav.innerHTML = '<span class="bclean-hub-t">Le linee</span>' + BCLEAN.linee.map(function (l) {
+      var eco = l.linea === 'Ecolabel';
+      return '<a' + (eco ? ' class="eco"' : '') + ' href="' + route(BCLEAN_URL) + '#linea-' + slugify(l.linea) + '" data-url="' + BCLEAN_URL + '#linea-' + slugify(l.linea) + '"><b>' + esc(l.linea) + '</b><small>' + l.prodotti.length + (l.prodotti.length === 1 ? ' prodotto' : ' prodotti') + '</small></a>';
+    }).join('');
+  }
+  function riempiConsigliati() {
+    document.querySelectorAll('[data-consigliati]').forEach(function (e) { e.innerHTML = consigliatiCards(e.dataset.consigliati); });
+  }
+  function rigaConsigliati(chiave, lede) {
+    return '<div class="row row-consigliati"><section class="block">' +
+      '<span class="block-id">BLOCCO · Prodotti consigliati — <span class="cond">richiesta Socaf, novembre 2026</span></span>' +
+      '<h2>Prodotti consigliati</h2><p class="lede">' + esc(lede) + '</p>' +
+      '<div class="grid grid-4" data-consigliati="' + chiave + '"></div>' +
+      '</section>' + devNote(136, 'Prodotti consigliati', [
+        ['Origine', 'Selezione manuale di Socaf: ACF Relationship verso i prodotti BClean (o le pagine categoria) sul termine famiglia, sulla pagina hub e sulla home.'],
+        ['Condizione', '<span class="cond">Solo se almeno un prodotto è scelto</span>. Famiglie con detergenti abbinati: Lavastoviglie, Lavatrici, Essiccatoi (INFERENZA).'],
+        ['Implementazione', 'Listing Grid a 4 colonne, stessa card in tre punti: home, hub, famiglie. Nessuna scheda prodotto sotto: la card porta alla linea BClean.'],
+        ['Open point', '<span class="openpoint">OP-26</span> Dove debba comparire la sezione non è stato detto: tre punti proposti.']], 'Stima 1,5 h (proposta)') + '</div>';
+  }
+
+  /* Certificazioni — testi forniti dal cliente (02/11/2026), non riscritti. Documentato solo ISO 9001 (certificato PDF). */
+  var CERT = [
+    { id: 'iso-9001', sigla: ['ISO', '9001'], nome: 'ISO 9001', sub: 'Gestione per la qualità',
+      testo: 'La certificazione ISO 9001 garantisce che i nostri processi aziendali siano gestiti secondo rigorosi standard di qualità. Un riconoscimento che conferma il nostro impegno nel miglioramento continuo, nell\'affidabilità dei servizi e nella soddisfazione dei clienti.',
+      dati: [['Ente di certificazione', 'Bureau Veritas Italia S.p.A.'], ['Norma', 'ISO 9001:2015'], ['Certificato n.', 'IT335877 · versione 1 · emesso il 18 settembre 2024'],
+        ['Valido fino al', '17 settembre 2027'], ['Estensione al gruppo', '[DA CONFERMARE: Bottoni e Tecno Clean dal 2027]'], ['Sede certificata', 'Socaf S.p.A. · Via Trieste 14 · 24046 Osio Sotto (BG)'],
+        ['Campo di applicazione', 'Commercializzazione, noleggio e assistenza di macchine per la pulizia ad uso industriale. Vendita e montaggio di apparecchi di raffrescamento industriali.']],
+      pdf: 'assets/certificazioni/iso-9001-socaf-it335877.pdf' },
+    { id: 'ecolabel', sigla: ['Eco', 'label UE'], nome: 'Ecolabel UE', sub: 'Marchio europeo di qualità ecologica',
+      testo: 'L\'Ecolabel UE è il marchio europeo di qualità ecologica che identifica prodotti e servizi a ridotto impatto ambientale durante l\'intero ciclo di vita. Questa certificazione garantisce il rispetto di rigorosi criteri ambientali, favorendo un utilizzo responsabile delle risorse naturali e standard elevati di sostenibilità.',
+      link: [['I prodotti Ecolabel', '/prodotti-per-la-pulizia/ecolabel/'], ['La linea Ecolabel di BClean', BCLEAN_URL + '#linea-ecolabel']] },
+    { id: 'iso-14001', sigla: ['ISO', '14001'], nome: 'ISO 14001', sub: 'Gestione ambientale',
+      testo: 'La certificazione ISO 14001 garantisce che le nostre attività siano gestite secondo criteri di sostenibilità e responsabilità ambientale. Un impegno concreto volto a ridurre gli impatti ambientali, ottimizzare l\'utilizzo delle risorse e migliorare continuamente le nostre performance.' },
+    { id: 'iso-45001', sigla: ['ISO', '45001'], nome: 'ISO 45001', sub: 'Salute e sicurezza sul lavoro',
+      testo: 'ISO 45001 è la certificazione internazionale per i sistemi di gestione della salute e sicurezza sul lavoro. Attesta che un\'azienda adotta procedure e controlli per prevenire infortuni, ridurre i rischi professionali e garantire un ambiente di lavoro sicuro e conforme alle normative vigenti.' },
+    { id: 'cam', sigla: ['CAM'], nome: 'CAM', sub: 'Criteri Ambientali Minimi',
+      testo: 'La conformità ai CAM garantisce il rispetto dei requisiti ambientali previsti dalla normativa italiana per gli acquisti verdi della Pubblica Amministrazione. Un riconoscimento che conferma la nostra attenzione verso sostenibilità, qualità e tutela dell\'ambiente.',
+      link: [['Settore Pubblica Amministrazione', '/settori/pubblica-amministrazione/']] },
+    { id: 'epd', sigla: ['EPD'], nome: 'EPD', sub: 'Dichiarazione ambientale di prodotto',
+      testo: 'Dichiarazione ambientale di prodotto verificata da ente terzo che comunica in modo trasparente gli impatti ambientali di un prodotto lungo l\'intero ciclo di vita, dalla produzione allo smaltimento, secondo standard internazionali.' }
+  ];
+  /* Pagina Certificazioni (revisione 04/11/2026): sigilli in alto, ISO 9001 in evidenza con il certificato,
+     poi tre gruppi. Solo per ISO 9001 c'è un documento: le altre voci dichiarano che gli estremi vanno confermati. */
+  var CERT_GRUPPI = [
+    { t: 'Ambiente e sicurezza', ids: ['iso-14001', 'iso-45001'] },
+    { t: 'Prodotti', ids: ['ecolabel', 'epd'] },
+    { t: 'Pubblica Amministrazione', ids: ['cam'] }
+  ];
+  function certSigillo(c, grande) {
+    return '<span class="cert-badge' + (grande ? ' cert-badge-xl' : '') + '" aria-hidden="true">' + c.sigla.map(function (r, i) { return i ? '<b>' + esc(r) + '</b>' : '<span>' + esc(r) + '</span>'; }).join('') + '</span>';
+  }
+  function certMesiAScadenza(iso) {
+    var d = new Date(iso), n = new Date(), m = (d.getFullYear() - n.getFullYear()) * 12 + d.getMonth() - n.getMonth();
+    return m;
+  }
+  function certFeature(c) {
+    var ini = new Date('2024-09-18').getTime(), fine = new Date('2027-09-17').getTime(), ora = Math.min(Math.max(Date.now(), ini), fine);
+    var perc = Math.round((ora - ini) / (fine - ini) * 100), mesi = certMesiAScadenza('2027-09-17');
+    return '<article class="cert-feature cert-card" id="' + c.id + '">' +
+      '<div class="cert-feature-testo">' + certSigillo(c, true) +
+      '<p class="cert-stato cert-ok">Certificato disponibile</p>' +
+      '<h2>' + esc(c.nome) + '</h2><p class="cert-sub">' + esc(c.sub) + '</p><p>' + esc(c.testo) + '</p></div>' +
+      '<div class="cert-documento"><p class="cert-doc-t">Certificato n. IT335877</p>' +
+      '<dl class="cert-dati">' + c.dati.map(function (d) { return '<div><dt>' + esc(d[0]) + '</dt><dd>' + esc(d[1]) + '</dd></div>'; }).join('') + '</dl>' +
+      '<div class="cert-validita" role="img" aria-label="Validità del certificato: ' + perc + '% del periodo trascorso"><span class="cert-barra"><i style="--p:' + perc + '%"></i></span>' +
+      '<span class="cert-validita-t">18/09/2024 → 17/09/2027 · ' + (mesi > 0 ? 'ancora circa ' + mesi + ' mesi' : 'scaduto') + '</span></div>' +
+      '<p class="cert-azioni"><a class="btn btn-primary" href="' + BASE + c.pdf + '" target="_blank" rel="noopener">Scarica il certificato (PDF)</a></p></div></article>';
+  }
+  function certCard(c) {
+    var az = (c.link || []).map(function (l) { return a(l[1], l[0], 'cert-link'); });
+    return '<article class="cert-card" id="' + c.id + '">' + certSigillo(c) +
+      '<div class="cert-corpo"><h3>' + esc(c.nome) + '</h3><p class="cert-sub">' + esc(c.sub) + '</p><p>' + esc(c.testo) + '</p>' +
+      '<p class="cert-stato cert-da">[DA CONFERMARE: estremi e certificato]</p>' +
+      (az.length ? '<p class="cert-azioni">' + az.join('') + '</p>' : '') + '</div></article>';
+  }
+  function righeCertificazioni() {
+    var per = function (id) { return CERT.filter(function (c) { return c.id === id; })[0]; };
+    return '<div class="row row-cert"><section class="block">' +
+      '<span class="block-id">BLOCCO · Le certificazioni — <span class="cond">richiesta Socaf, novembre 2026</span></span>' +
+      '<nav class="cert-sigilli" aria-label="Le certificazioni">' + CERT.map(function (c) {
+        return '<a class="cert-sigillo" href="#' + c.id + '">' + certSigillo(c) + '<span>' + esc(c.nome) + '</span></a>';
+      }).join('') + '</nav>' +
+      certFeature(per('iso-9001')) +
+      CERT_GRUPPI.map(function (g) {
+        return '<h3 class="cert-gruppo">' + esc(g.t) + '</h3><div class="cert-grid cert-grid-' + g.ids.length + '">' + g.ids.map(function (id) { return certCard(per(id)); }).join('') + '</div>';
+      }).join('') +
+      '<p class="small"><span class="taskflag t-client">Client task</span> I testi sono quelli forniti dal cliente. Per ISO 9001 c\'è il certificato (Socaf S.p.A., sede di Osio Sotto); per le altre voci servono estremi e documenti, ' +
+      'e va verificato se ne esistono altre (es. la politica qualità: <a href="https://www.datocms-assets.com/60899/1715936223-politica-per-la-qualita.pdf" target="_blank" rel="noopener">documento già nel piè di pagina</a>). I loghi ufficiali dei marchi vanno forniti: qui sono sigle tipografiche.</p>' +
+      '</section>' + devNote(137, 'Certificazioni', [
+        ['Origine', 'Pagina WordPress <code>/azienda/certificazioni/</code> con un Repeater ACF: sigla, nome, sottotitolo, testo, gruppo, dati (facoltativi), PDF (facoltativo), collegamenti.'],
+        ['Struttura', 'Fila di sigilli con ancore · ISO 9001 in evidenza con il certificato e la barra di validità (calcolata sulle date) · tre gruppi: ambiente e sicurezza, prodotti, Pubblica Amministrazione.'],
+        ['Dati', 'Solo ISO 9001 ha un documento: Bureau Veritas, certificato IT335877, valido fino al 17/09/2027, sede di Osio Sotto. Per le altre voci servono estremi: <span class="openpoint">OP-25</span>.'],
+        ['Collegamenti', 'Ecolabel → categoria Ecolabel e linea BClean; CAM → settore Pubblica Amministrazione.']], 'Stima 3 h (proposta)') + '</div>';
+  }
+
+  /* Integrazione Socaf · Bottoni · Tecno Clean — testi PROPOSTA ricavati da fatti del cliente e dell'agenzia: da validare */
+  var VANTAGGI = [
+    { t: 'Ampliamento dell\'offerta', b: 'Macchine, detergenti, carta, attrezzature e consumabili in un unico fornitore.',
+      e: 'Alle macchine Socaf si aggiungono i detergenti, la carta e i consumabili in cui Tecno Clean è specializzata, e nuove famiglie di macchine, dalle lavastoviglie alle lavatrici.' },
+    { t: 'Maggiore copertura territoriale', b: 'Cinque sedi tra Lombardia, Veneto e Friuli.',
+      e: 'Cinque sedi tra Lombardia, Veneto e Friuli: Osio Sotto, Castenedolo, Mazzo di Rho, Settimo di Pescantina e Cordenons.' },
+    { t: 'Competenze complementari', b: 'Tre esperienze diverse, dalle imprese di servizi all\'Ho.Re.Ca.',
+      e: 'Tre realtà con esperienze diverse: Socaf sulle macchine, Bottoni sulle imprese di servizi, Tecno Clean sull\'Ho.Re.Ca. e sui consumabili.' },
+    { t: 'Maggiore capacità di assistenza', b: 'Pronto intervento e assistenza tecnica da cinque sedi.',
+      e: 'Pronto intervento e assistenza tecnica con officine mobili e un magazzino di ricambi originali. [DA CONFERMARE: da quali sedi]' },
+    { t: 'Nuovi prodotti e servizi', b: 'Nuove famiglie di prodotti e la linea BClean.',
+      e: 'Nuove famiglie di prodotti — lavastoviglie, macchine del ghiaccio, trattamento acqua, lavatrici ed essiccatoi — e BClean, la nuova linea di detergenti e prodotti in carta.' }
+  ];
+  function vantaggiHtml(esteso) {
+    return '<ul class="vantaggi' + (esteso ? ' vantaggi-esteso' : '') + '">' + VANTAGGI.map(function (v, i) {
+      return '<li><span class="v-n" aria-hidden="true">' + (i + 1) + '</span><b>' + esc(v.t) + '</b><span>' + esc(esteso ? v.e : v.b) + '</span></li>';
+    }).join('') + '</ul>';
+  }
+  function riempiVantaggi() {
+    document.querySelectorAll('[data-vantaggi]').forEach(function (e) { e.innerHTML = vantaggiHtml(e.dataset.vantaggi === 'esteso'); });
+  }
+  /* « Fusione » (04/11/2026): scena animata per home e Chi siamo — tre cerchi nei colori VI che si avvicinano e si sovrappongono,
+     contatori, cinque vantaggi. Si anima all'ingresso (IntersectionObserver); con prefers-reduced-motion resta fermo. */
+  var ICONE_VANTAGGI = [
+    '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M17.5 14v7M14 17.5h7"/>',
+    '<path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>',
+    '<circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/>',
+    '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>',
+    '<path d="M12 3l7 4v10l-7 4-7-4V7z"/><path d="M12 3v18M5 7l7 4 7-4"/>'
+  ];
+  function fusioneHtml(v) {
+    var home = v === 'home';
+    var testo = home
+      ? '<p class="kicker">L\'azienda</p><h2 class="fusione-h">Dalla fusione di <em>tre aziende</em>, il tuo partner affidabile per la pulizia industriale</h2>'
+      : '<p class="kicker">Il gruppo</p><h2 class="fusione-h">Socaf, Bottoni e Tecno Clean: <em>un\'unica azienda</em></h2>';
+    return '<div class="fusione" data-anim>' +
+      '<div class="fusione-testo">' + testo +
+      '<p class="lede">Dal 1° gennaio 2027 <b>Socaf</b>, <b>Bottoni</b> e <b>Tecno Clean</b> sono un\'unica azienda: tre storie, cinque sedi tra Lombardia, Veneto e Friuli.</p>' +
+      (home ? '<p class="fusione-cta"><a class="btn btn-primary" href="' + route('/azienda/chi-siamo/') + '#integrazione" data-url="/azienda/chi-siamo/#integrazione">Scopri il percorso di integrazione</a></p>'
+            : '<p><span class="todo">[DA FORNIRE: come procede il percorso di integrazione — tappe e date]</span></p>') +
+      '</div>' +
+      '<div class="fusione-stage" role="img" aria-label="Socaf, Bottoni e Tecno Clean si uniscono in un\'unica azienda">' +
+      '<span class="fc fc-1"><img src="' + BASE + 'assets/logo/socaf21-payoff-rgb-white.svg" alt=""></span>' +
+      '<span class="fc fc-2"><img src="' + BASE + 'assets/Bottoni.webp" alt=""></span>' +
+      '<span class="fc fc-3"><img src="' + BASE + 'assets/Tecnoclean.webp" alt=""></span>' +
+      '<span class="fc-core"><b>1</b><small>azienda dal<br>1° gennaio 2027</small></span></div>' +
+      '<div class="fusione-dati">' +
+      '<p class="dato"><small>Oltre</small><b data-count="40000">40.000</b><span>clienti attivi</span></p>' +
+      '<p class="dato"><b data-count="5">5</b><span>sedi in Lombardia,<br>Veneto e Friuli</span></p>' +
+      '<p class="dato"><b data-count="3">3</b><span>realtà in<br>un\'unica azienda</span></p>' +
+      (home ? '<p class="dato-nota"><span class="todo">[DA CONFERMARE: 40.000 riferito a Socaf o al gruppo]</span></p>' : '') + '</div>' +
+      (home ? vantaggiScena(home) : '') + '</div>';
+  }
+  function vantaggiScena(home) {
+    return '<h3 class="fusione-sub">Cosa cambia per chi lavora con noi</h3>' +
+      '<ul class="fusione-vantaggi">' + VANTAGGI.map(function (x, i) {
+        return '<li style="--i:' + i + '"><span class="fv-ico" aria-hidden="true"><svg viewBox="0 0 24 24">' + ICONE_VANTAGGI[i] + '</svg></span><i class="fv-n" aria-hidden="true">0' + (i + 1) + '</i><b>' + esc(x.t) + '</b><span class="fv-t">' + esc(home ? x.b : x.e) + '</span></li>';
+      }).join('') + '</ul>';
+  }
+  function riempiFusione() {
+    document.querySelectorAll('[data-fusione]').forEach(function (e) { e.innerHTML = fusioneHtml(e.dataset.fusione); });
+  }
+  function animaFusione() {
+    var scene = [].slice.call(document.querySelectorAll('.fusione[data-anim]'));
+    if (!scene.length) return;
+    var fermo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function conta(el) {
+      var fine = parseInt(el.dataset.count, 10), t0 = null, nf = new Intl.NumberFormat('it-IT');
+      if (fermo) { el.textContent = nf.format(fine); return; }
+      function passo(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min((t - t0) / 1600, 1), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = nf.format(Math.round(fine * e));
+        if (p < 1) requestAnimationFrame(passo);
+      }
+      el.textContent = '0'; requestAnimationFrame(passo);
+    }
+    function entra(sc) { if (sc.classList.contains('in')) return; sc.classList.add('in'); sc.querySelectorAll('[data-count]').forEach(conta); }
+    if (!('IntersectionObserver' in window) || fermo) { scene.forEach(entra); return; }
+    var io = new IntersectionObserver(function (voci) {
+      voci.forEach(function (v) { if (v.isIntersecting) { entra(v.target); io.unobserve(v.target); } });
+    }, { threshold: 0.25 });
+    scene.forEach(function (sc) { io.observe(sc); });
+  }
+  function righeIntegrazione() {
+    return '<div class="row row-integrazione" id="integrazione"><section class="block">' +
+      '<span class="block-id">BLOCCO · L\'integrazione — <span class="cond">richiesta Socaf, novembre 2026</span></span>' +
+      fusioneHtml('chi') +
+      '</section>' + devNote(138, 'L\'integrazione', [
+        ['Origine', 'Blocco statico in <code>/azienda/chi-siamo/</code>; stesso componente della home (« fusione »). I cinque vantaggi sono un Repeater ACF con testo breve (home) ed esteso (Chi siamo): una sola sorgente.'],
+        ['Movimento', 'Tre cerchi che si avvicinano e si sovrappongono, contatori (40.000 · 5 · 3) e vantaggi a cascata all\'ingresso nella schermata. Con « riduci movimento » tutto resta fermo. Solo CSS e un piccolo script: nessuna libreria.'],
+        ['Contenuto', 'Testi in PROPOSTA, ricavati dai documenti del cliente e dell\'agenzia: da validare. Tappe e date del percorso: <span class="todo">da fornire</span>.'],
+        ['Video', 'Il video-intervista non sta più in questa pagina: andrà come video di sfondo nella hero (link da fornire). <span class="openpoint">OP-24</span>']], 'Stima 3 h (proposta)') + '</div>' +
+      '<div class="row row-vantaggi-chi"><section class="block"><span class="block-id">BLOCCO · Cosa cambia — <span class="cond">sezione a parte, richiesta Socaf 04/11/2026</span></span>' +
+      '<div class="fusione fusione-solo" data-anim>' + vantaggiScena(false) + '</div></section></div>';
+  }
+
+  /* BClean — pagina dedicata: testo del cliente + elenco prodotti dal file xlsx */
+  var BCLEAN_TESTO = [
+    'Da questo importante percorso di integrazione tra Socaf, Bottoni e Tecno Clean nasce anche BClean, il nuovo marchio che segna un’evoluzione significativa nel mondo della pulizia professionale. BClean non è soltanto un nome, ma il risultato concreto dell’unione tra le competenze tecniche, la solidità commerciale e l’esperienza maturata nel tempo dalle tre aziende. Tre realtà complementari che, mettendo a fattor comune know‑how, visione e capacità operative, danno vita a un progetto più ampio, moderno e orientato al futuro.',
+    'Con BClean prende forma un’offerta completa e coordinata di prodotti in carta, detergenti professionali e soluzioni chimiche sviluppate per garantire standard elevati di qualità, affidabilità costante e una gestione più semplice, razionale e uniforme delle forniture. L’obiettivo è creare un punto di riferimento unico per tutti i professionisti del settore, capace di semplificare i processi di acquisto, ottimizzare la continuità delle forniture e assicurare un livello di servizio sempre più integrato.',
+    'BClean nasce quindi come un marchio che unisce tradizione e innovazione, mettendo al centro la volontà di offrire ai clienti un’esperienza più fluida, coerente e orientata alla crescita. Un passo avanti importante, che consolida la collaborazione tra le tre aziende e apre la strada a nuove opportunità di sviluppo, ampliando la gamma e rafforzando la presenza sul mercato con un’identità chiara, riconoscibile e affidabile.'
+  ];
+  function lineaBclean(l) {
+    var eco = l.linea === 'Ecolabel';
+    return '<section class="bclean-linea' + (eco ? ' is-eco' : '') + '" id="linea-' + slugify(l.linea) + '">' +
+      '<h3>' + esc(l.linea) + (eco ? ' <span class="tag tag-eco">Ecolabel UE</span>' : '') + ' <span class="bclean-n">' + l.prodotti.length + (l.prodotti.length === 1 ? ' prodotto' : ' prodotti') + '</span></h3>' +
+      (eco ? '<p class="small">Prodotti a marchio Ecolabel UE. <span class="todo">[DA CONFERMARE: quali prodotti BClean hanno flaconi e imballaggi in materiali riciclati]</span> ' + a('/azienda/certificazioni/#ecolabel', 'Cos\'è l\'Ecolabel UE') + '</p>' : '') +
+      '<div class="grid grid-4 bclean-cards">' + l.prodotti.map(function (p, i) { return bcleanCard(p, l.linea, i, eco); }).join('') + '</div></section>';
+  }
+  /* Linee BClean a schede: una linea per volta, scelta dai chip o dall'ancora #linea-… */
+  function bcleanTab() {
+    var chips = [].slice.call(document.querySelectorAll('.bclean-indice .chip')), linee = [].slice.call(document.querySelectorAll('.bclean-linea'));
+    if (!chips.length || !linee.length) return;
+    function mostra(id, sposta) {
+      var ok = linee.some(function (l) { return l.id === id; }); if (!ok) id = linee[0].id;
+      linee.forEach(function (l) { l.hidden = l.id !== id; });
+      chips.forEach(function (c) { var on = c.getAttribute('href') === '#' + id; c.classList.toggle('is-on', on); c.setAttribute('aria-current', on ? 'true' : 'false'); });
+      if (sposta) { var t = document.getElementById(id); if (t) t.scrollIntoView({ block: 'start' }); }
+    }
+    chips.forEach(function (c) { c.addEventListener('click', function (e) { e.preventDefault(); mostra(c.getAttribute('href').slice(1), false); history.replaceState(null, '', c.getAttribute('href')); }); });
+    mostra((location.hash || '').slice(1), !!location.hash);
+  }
+  function righeBclean() {
+    if (!BCLEAN) return '<div class="row"><section class="block">' + serveInfo('Elenco prodotti BClean non caricato.') + '</section></div>';
+    var carta = BCLEAN.linee.filter(function (l) { return l.macro === 'carta'; }), chim = BCLEAN.linee.filter(function (l) { return l.macro !== 'carta'; });
+    var nC = 0, nD = 0; carta.forEach(function (l) { nC += l.prodotti.length; }); chim.forEach(function (l) { nD += l.prodotti.length; });
+    return '<div class="row row-bclean-testo"><section class="block">' +
+      '<span class="block-id">BLOCCO · La linea BClean — <span class="cond">testo del cliente</span></span>' +
+      '<div class="testo-pagina"><div class="testo">' + BCLEAN_TESTO.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') + '</div></div>' +
+      '</section>' + devNote(140, 'BClean — testo', [
+        ['Origine', 'Pagina WordPress figlia di <code>/prodotti-per-la-pulizia/</code> con il testo fornito dal cliente (3 paragrafi), non riscritto.'],
+        ['Posizione', 'Voce dedicata nell\'area detergenti, consumabili e attrezzature: banner in cima all\'hub, non una delle 13 categorie.'],
+        ['Attenzione', 'Non esiste ancora una pagina pubblica del marchio. Logo BClean: da fornire.']], 'Stima 1 h (proposta)') + '</div>' +
+      '<div class="row row-bclean-prodotti"><section class="block">' +
+      '<span class="block-id">BLOCCO · I prodotti BClean — <span class="cond">elenco dal file del cliente</span></span>' +
+      '<h2>I prodotti BClean</h2>' +
+      '<p class="lede">Detergenti professionali e prodotti in carta: ' + nD + ' detergenti in ' + chim.length + ' linee e ' + nC + ' articoli in carta.</p>' +
+      '<div class="chips bclean-indice">' + BCLEAN.linee.map(function (l) { return '<a class="chip" href="#linea-' + slugify(l.linea) + '">' + esc(l.linea) + '</a>'; }).join('') + '</div>' +
+      '<div class="bclean-linee">' + BCLEAN.linee.map(lineaBclean).join('') + '</div>' +
+      '<p class="small"><span class="taskflag t-client">Client task</span> Elenco ricevuto il 02/11/2026: nome e confezioni; codici, barcode e fornitori restano fuori dal sito. ' +
+      'Descrizioni dei singoli prodotti: [DA FORNIRE dal cliente]. L\'elenco prodotti è già stato ricevuto.</p>' +
+      '</section>' + devNote(141, 'BClean — elenco prodotti', [
+        ['Origine', 'File <code>PRODOTTI B.CLEAN.xlsx</code> del cliente (02/11/2026): 50 articoli in 9 linee, nome e confezioni. Codici, barcode e fornitori non si pubblicano.'],
+        ['Implementazione', 'Repeater ACF per linea (nome, confezioni) sulla pagina BClean; ogni prodotto ha la propria scheda (CPT, vedi DEV NOTE 146, richiesta 04/11).'],
+        ['Dati da sistemare', 'Righe doppie nella Linea Lavanderia (3 unite); nomi non uniformi (BCLEAN / B-CLEAN); 45 detergenti e 5 articoli in carta contro « circa venti » e « tre o quattro » del brief: <span class="openpoint">OP-26</span>.'],
+        ['Ecolabel', 'La linea Ecolabel (GREEN CLEAN) porta il badge; i prodotti con flaconi e imballaggi in materiali riciclati vanno indicati dal cliente.']], 'Stima 4 h (proposta)') + '</div>';
+  }
+
+  /* Macrosettore Industria: Officine e Edilizia stanno dentro (richiesta Socaf) */
+  function righeMacroIndustria(I) {
+    var figli = Object.keys(I.lista).filter(function (k) { return I.lista[k].padre === 'industria'; });
+    return '<div class="row row-macrosettore"><section class="block">' +
+      '<span class="block-id">BLOCCO 4bis · Dentro l\'industria — <span class="cond">richiesta Socaf, novembre 2026</span></span>' +
+      '<h2>Due specializzazioni dentro l\'industria</h2>' +
+      '<div class="grid grid-2">' + figli.map(function (k) {
+        var v = I.lista[k], nomi = (v.subs || []).slice(0, 3).map(function (sk) { return CAT && CAT.SOTTO[sk] ? CAT.SOTTO[sk].nome.toLowerCase() : ''; }).filter(Boolean);
+        return '<article class="card"><div class="card-media foto"><img src="' + BASE + 'assets/images/categorie/sett-' + k + '.jpg" alt="' + esc(v.nome) + '" loading="lazy"></div>' +
+          '<div class="card-body"><span class="card-name">' + esc(v.nome) + '</span>' +
+          (nomi.length ? '<span class="card-meta">Macchine: ' + esc(nomi.join(', ')) + '</span>' : '') +
+          a(I.base + k + '/', 'Vedi', 'card-link') + '</div></article>';
+      }).join('') + '</div>' +
+      '<p class="small">Officine e metalmeccanica ed Edilizia e cantieri sono dentro il macrosettore Industria: non compaiono più tra i settori di primo livello. Gli indirizzi restano quelli di oggi.</p>' +
+      '</section>' + devNote(142, 'Macrosettore Industria', [
+        ['Origine', 'ACF Relationship « specializzazioni » sulla pagina Industria verso Officine e metalmeccanica ed Edilizia e cantieri.'],
+        ['URL', '<b>Non cambiano</b>: la gerarchia è di navigazione (menu annidato, briciole), non di indirizzo. <span class="openpoint">OP-20</span>'],
+        ['Menu', 'Voci annidate sotto Industria nella tendina Settori; nei settori di primo livello restano sette voci in ordine alfabetico.']], 'Stima 1,5 h (proposta)') + '</div>';
+  }
+  /* Pubblica Amministrazione: acquisti verdi → CAM ed Ecolabel (testi del cliente) */
+  function righePAVerdi() {
+    var pick = function (id) { return CERT.filter(function (c) { return c.id === id; })[0]; };
+    return '<div class="row row-pa-verdi"><section class="block">' +
+      '<span class="block-id">BLOCCO · Acquisti verdi — <span class="cond">proposta per il nuovo settore</span></span>' +
+      '<h2>Acquisti verdi nella Pubblica Amministrazione</h2>' +
+      '<div class="grid grid-2 pa-grid">' + ['cam', 'ecolabel'].map(function (id) {
+        var c = pick(id);
+        return '<article class="card cert-mini pa-card">' + certSigillo(c, true) + '<div class="card-body"><span class="pa-kicker">' + (id === 'cam' ? 'Criteri ambientali minimi' : 'Marchio di qualità ecologica') + '</span><h3 class="card-name">' + esc(c.nome) + '</h3><p class="card-desc">' + esc(c.testo) + '</p>' + a('/azienda/certificazioni/#' + id, 'Vai alla certificazione', 'card-link') + '</div></article>';
+      }).join('') + '</div></section>' + devNote(143, 'Acquisti verdi (Pubblica Amministrazione)', [
+        ['Origine', 'Blocco statico con due card dalla pagina Certificazioni (CAM, Ecolabel UE); testi del cliente.'],
+        ['Stato', 'Proposta per il settore nuovo: non richiesta esplicitamente. <span class="openpoint">OP-20</span>']], 'Stima 0,5 h (proposta)') + '</div>';
+  }
+
   function renderSottocategoria() {
     var host = document.querySelector('[data-tpl="sottocategoria"]');
     if (!host || !CAT) return;
@@ -429,7 +772,9 @@
       return f === key ? '<span class="chip" aria-current="true">' + esc(t.nome) + '</span>'
                        : '<a class="chip" href="' + route('/' + f + '/') + '" data-url="/' + f + '/">' + esc(t.nome) + '</a>';
     }).join(''));
-    set('[data-sub-siblings-title]', 'Le altre ' + esc(fam.plur || fam.nome.toLowerCase()));
+    set('[data-sub-siblings-title]', fam.titoli ? esc(fam.titoli.altre) : 'Le altre ' + esc(fam.plur || fam.nome.toLowerCase()));
+    /* niente « Le altre … » nelle sottocategorie di nessuna famiglia (richiesta Sara 05/11/2026) */
+    document.querySelectorAll('[data-sub-siblings]').forEach(function (e) { var r = e.closest('.row'); if (r) r.remove(); });
     promo(fam, '[data-sub-promo]');
     document.title = 'D2 · ' + s.h1 + ' — Wireframe Socaf';
     setBar('/' + key + '/ · sottocategoria di ' + fam.nome);
@@ -600,7 +945,7 @@
     set('[data-fam-crumb]', esc(f.nome));
     set('[data-fam-h1]', esc(f.h1));
     set('[data-fam-intro]', esc(C.intro || f.intro));
-    set('[data-fam-h2]', C.h2Sub ? esc(C.h2Sub) : 'Le tipologie di ' + esc(f.plur || f.nome.toLowerCase()));
+    set('[data-fam-h2]', C.h2Sub ? esc(C.h2Sub) : f.titoli ? esc(f.titoli.tip) : 'Le tipologie di ' + esc(f.plur || f.nome.toLowerCase()));
     set('[data-fam-subs]', subs.map(function (sk) {
       var s = CAT.SOTTO[sk], n = (CAT.MACCHINE[sk] || []).length;
       return '<article class="card">' + (FOTO_SOTTO[sk] ? '<div class="card-media foto"><img src="' + BASE + 'assets/images/categorie/sub-' + sk.split("/")[1] + '.jpg" alt="' + esc((C.alt && C.alt[sk]) || s.h1) + '" loading="lazy"></div>' : '<div class="card-media ph ph-wide">Immagine sottocategoria</div>') +
@@ -608,29 +953,95 @@
         '<span class="card-meta">' + (n ? n + (n === 1 ? ' macchina' : ' macchine') : 'Prodotti da definire') + '</span>' +
         '<a class="card-link" href="' + route('/' + sk + '/') + '" data-url="/' + sk + '/">Vedi tutte</a></div></article>';
     }).join(''));
+    /* famiglia senza prodotti (es. macchine del ghiaccio): stato vuoto dichiarato, niente elenco « più richieste » */
+    if (!subs.length) {
+      var gs = document.querySelector('[data-fam-subs]');
+      if (gs) { gs.className = ''; gs.innerHTML = serveInfo('Elenco dei prodotti di questa famiglia: da fornire.'); }
+      var rtop = document.querySelector('[data-fam-top]'); if (rtop && rtop.closest('.row')) rtop.closest('.row').remove();
+    }
     /* Le più richieste: selezione commerciale Socaf — qui le prime della famiglia */
     var tutte = [];
     subs.forEach(function (sk) { tutte = tutte.concat(CAT.MACCHINE[sk] || []); });
     set('[data-fam-top]', tutte.slice(0, 6).map(cardMacchina).join(''));
-    set('[data-fam-top-title]', C.topTitle ? esc(C.topTitle) : 'Le ' + esc(f.plur || f.nome.toLowerCase()) + ' più richieste');
-    set('[data-fam-approf]', C.h2Approf ? esc(C.h2Approf) : f.nuova ? 'Come scegliere: ' + esc(f.h1.toLowerCase()) : 'Come scegliere ' + (f.nome === 'Robot' ? 'un robot per la pulizia' : 'una ' + esc(f.nome.toLowerCase().replace(/i$/, 'e'))));
+    set('[data-fam-top-title]', C.topTitle ? esc(C.topTitle) : f.titoli ? esc(f.titoli.top) : 'Le ' + esc(f.plur || f.nome.toLowerCase()) + ' più richieste');
+    set('[data-fam-approf]', C.h2Approf ? esc(C.h2Approf) : f.titoli ? esc(f.titoli.scegli) : 'Come scegliere ' + (f.nome === 'Robot' ? 'un robot per la pulizia' : 'una ' + esc(f.nome.toLowerCase().replace(/i$/, 'e'))));
     set('[data-fam-words]', f.testoLungo ? 'LUNGHEZZA PREVISTA · 800–1200 PAROLE' : 'LUNGHEZZA PREVISTA · 250–350 PAROLE — testo breve, smistamento');
     set('[data-fam-others]', Object.keys(CAT.FAMIGLIE).map(function (k) {
       return k === key ? '<span class="chip" aria-current="true">' + esc(CAT.FAMIGLIE[k].nome) + '</span>'
                        : '<a class="chip" href="' + route('/' + k + '/') + '" data-url="/' + k + '/">' + esc(CAT.FAMIGLIE[k].nome) + '</a>';
     }).join(''));
+    /* prodotti consigliati (richiesta Socaf): per le famiglie con detergenti collegati */
+    if (CONSIGLIATI_FAMIGLIA[key]) {
+      var rAnc = (document.querySelector('[data-fam-top]') || {}).closest ? document.querySelector('[data-fam-top]').closest('.row') : null;
+      if (!rAnc) rAnc = document.querySelector('[data-fam-subs]').closest('.row');
+      rAnc.insertAdjacentHTML('afterend', rigaConsigliati(CONSIGLIATI_FAMIGLIA[key], key === 'lavastoviglie'
+        ? 'Detergenti e brillantanti BClean per le lavastoviglie professionali.' : 'I detersivi BClean della linea lavanderia, per lavatrici ed essiccatoi.'));
+    }
     promo(f, '[data-fam-promo]', C.promo ? C : null);
     document.title = 'D3 · ' + f.h1 + ' — Wireframe Socaf';
     setBar('/' + key + '/ · una delle ' + Object.keys(CAT.FAMIGLIE).length + ' famiglie' + (f.nuova ? ' · famiglia nuova, contenuti in arrivo' : ''));
   }
 
+  /* Scheda prodotto BClean: stesso modello della scheda macchina (testata, galleria, specifiche, scheda PDF, correlati, modulo).
+     Dati del cliente: nome, linea, confezioni. Il resto è segnaposto dichiarato. */
+  function renderSchedaBclean(sc) {
+    var l = sc.linea, p = sc.p, eco = l.linea === 'Ecolabel';
+    var altri = l.prodotti.filter(function (x) { return x !== p; }).slice(0, 4);
+    set('[data-m-crumb-fam]', a(BCLEAN_URL, 'BClean'));
+    set('[data-m-crumb-sub]', a(BCLEAN_URL + '#linea-' + slugify(l.linea), l.linea));
+    set('[data-m-crumb]', esc(p.nome));
+    set('[data-m-nome]', esc(p.nome));
+    set('[data-m-tags]', '<span class="tag tag-bclean">BClean</span>' + (eco ? '<span class="tag tag-eco">Ecolabel UE</span>' : ''));
+    /* il kicker dice già « BClean · linea <nome> »: nel sottotitolo si mettono solo le
+       confezioni, e se non ci sono il sottotitolo sparisce invece di ripetere la linea */
+    var desc = document.querySelector('[data-m-desc]');
+    if (desc) {
+      if (p.conf.length) desc.innerHTML = esc(p.conf.join(' · '));
+      else desc.remove();
+    }
+    var kick = document.querySelector('.intro-testata .kicker'); if (kick) kick.textContent = 'BClean · linea ' + l.linea;
+    set('[data-m-correlate-title]', 'Altri prodotti della linea ' + esc(l.linea));
+    set('[data-m-correlate]', altri.map(function (x) { return bcleanCard(x, l.linea, l.prodotti.indexOf(x), eco); }).join(''));
+    set('[data-m-modello]', esc(p.nome));
+    /* galleria: foto segnaposto */
+    var gm = document.querySelector('.gallery-main[data-m-generico]');
+    if (gm) { gm.classList.remove('ph'); gm.innerHTML = '<img src="' + BASE + 'assets/images/categorie/prod-' + (sc.i % 4 + 1) + '.jpg" alt="">'; }
+    var sk = document.querySelector('.skel[data-m-generico]');
+    if (sk) sk.outerHTML = '<p style="margin:0"><span class="todo">[DESCRIZIONE DA FORNIRE dal cliente: impieghi e modalità d\'uso]</span></p>';
+    /* specifiche: i dati che abbiamo */
+    var tb = document.querySelector('.table-scroll[data-m-generico] tbody');
+    if (tb) tb.innerHTML = '<tr><th>Marchio</th><td>BClean</td></tr><tr><th>Linea</th><td>' + esc(l.linea) + '</td></tr>' +
+      '<tr><th>Confezioni</th><td>' + (p.conf.length ? esc(p.conf.join(' · ')) : '<span class="todo">[DA FORNIRE]</span>') + '</td></tr>' +
+      (eco ? '<tr><th>Certificazione</th><td>Ecolabel UE <span class="todo">[DA CONFERMARE: estremi]</span></td></tr>' : '') +
+      '<tr><th>Composizione e dati tecnici</th><td><span class="todo">[DA FORNIRE]</span></td></tr>';
+    var dl = document.querySelector('.download[data-m-generico]');
+    if (dl) dl.innerHTML = '<span class="ext">PDF</span> Scheda tecnica e scheda di sicurezza <span class="todo">[DA FORNIRE]</span>';
+    document.querySelectorAll('[data-m-reale]').forEach(function (e) { e.remove(); });
+    document.querySelectorAll('[data-m-generico]').forEach(function (e) { e.removeAttribute('data-m-generico'); });
+    /* blocchi che non valgono per un prodotto di consumo */
+    document.querySelectorAll('[data-m-if-nol],[data-m-if-usa]').forEach(function (e) { var r = e.closest('.row') || e; r.remove(); });
+    [].slice.call(document.querySelectorAll('.block-id')).forEach(function (b) {
+      if (!/^BLOCCO (8|11|12|13|14|15) /.test(b.textContent)) return;
+      var bl = b.closest('.block'), r = bl && bl.closest('.row');
+      if (r && r.querySelectorAll('.block').length === 1) r.remove(); else if (bl) bl.remove();
+    });
+    var lastBlock = document.querySelector('[data-m-correlate]'); var rowC = lastBlock && lastBlock.closest('.row');
+    if (rowC) rowC.insertAdjacentHTML('beforeend', devNote(146, 'BClean — scheda prodotto', [
+      ['Origine', 'Stesso modello della scheda macchina, alimentato da un tipo di contenuto « Prodotto BClean » (50 prodotti, import CSV dal file del cliente). Dati del cliente: nome, linea, confezioni.'],
+      ['Cambio di perimetro', 'Prima BClean era una pagina con elenco e nessuna scheda singola (4 h). Con le schede: <span class="openpoint">OP-27</span>, da confermare con Socaf. Non è e-commerce.'],
+      ['Da fornire', 'Descrizioni, foto, schede tecniche e di sicurezza, composizione: <span class="todo">da fornire</span>.']], 'Stima 6–8 h (proposta, sostituisce le 4 h dell\'elenco)'));
+    document.title = 'D1 · ' + p.nome + ' — Wireframe Socaf';
+    setBar(sc.url + ' · scheda prodotto BClean');
+  }
   function renderScheda() {
     var host = document.querySelector('[data-tpl="macchina"]');
     if (!host || !CAT) return;
     var url = param('m') || '/lavapavimenti/lavapavimenti-uomo-terra/lavapavimenti-socaf-la-511-40-bt/';
+    if (BCLEAN_PER_URL[url]) return renderSchedaBclean(BCLEAN_PER_URL[url]);
     var m = CAT.macchinaDaUrl(url);
     if (!m) return;
     var s = CAT.SOTTO[m.sub], f = CAT.FAMIGLIE[m.fam];
+    document.body.dataset.fam = m.fam;   /* regole per famiglia (es. lavastoviglie senza bagliore) */
     var correlate = (CAT.MACCHINE[m.sub] || []).filter(function (x) { return x.url !== m.url; }).slice(0, 4);
     var reale = m.img ? true : false;
 
@@ -639,8 +1050,17 @@
     set('[data-m-crumb]', esc(m.nome));
     set('[data-m-nome]', esc(m.nome));
     set('[data-m-desc]', esc(m.desc || ''));
-    set('[data-m-correlate-title]', f.nuova ? 'Altri modelli di ' + esc(s.nome.toLowerCase()) : 'Altre ' + esc(f.nome.toLowerCase()) + ' ' + esc(s.nome.toLowerCase()));
+    /* titolo senza ripetizioni (« Altre robot robot … », « Altre altri macchinari … ») */
+    var famMin = f.nome.toLowerCase(), subMin = s.nome.toLowerCase();
+    set('[data-m-correlate-title]', (f.nuova || m.fam === 'altri-macchinari') ? 'Altri modelli in ' + esc(s.nome)
+      : subMin.indexOf(famMin) === 0 ? 'Altri ' + esc(subMin)
+      : ({ aspiratori: 'Altri ', robot: 'Altri ' }[m.fam] || 'Altre ') + esc(famMin) + ' ' + esc(subMin).replace(/\batex\b/, 'ATEX'));
     set('[data-m-correlate]', correlate.map(cardMacchina).join(''));
+    /* nessun altro modello nella stessa tipologia: il contenitore non compare */
+    if (!correlate.length) document.querySelectorAll('[data-m-correlate]').forEach(function (e) {
+      var b = e.closest('.block'), r = b && b.closest('.row');
+      if (r && r.querySelectorAll('.block').length === 1) r.remove(); else if (b) { var dn = b.nextElementSibling; if (dn && dn.classList.contains('devnote')) dn.remove(); b.remove(); }
+    });
     set('[data-m-tags]',
       (m.noleggio ? '<span class="tag tag-nol">Disponibile a noleggio</span>' : '') +
       (m.usata ? '<span class="tag tag-usa">Disponibile usata</span>' : ''));
@@ -669,8 +1089,10 @@
     'lavapavimenti/lavapavimenti-uomo-bordo': 1, 'lavapavimenti/lavapavimenti-combinate': 1, 'lavapavimenti/i-mop': 1,
     'spazzatrici/spazzatrici-uomo-terra': 1, 'spazzatrici/spazzatrici-uomo-bordo': 1,
     'idropulitrici/idropulitrici-ad-acqua-fredda': 1,
-    /* Cucina e Lavanderia: foto Socaf generiche (scaffali prodotti), SEGNAPOSTO in attesa di foto delle macchine */
-    'cucina/lavabicchieri': 1, 'cucina/lavapiatti': 1, 'cucina/addolcitori-osmosi': 1, 'lavanderia/lavatrici': 1, 'lavanderia/essiccatoi': 1 };
+    /* Famiglie nuove: foto Socaf generiche (scaffali prodotti), SEGNAPOSTO in attesa di foto delle macchine */
+    'lavastoviglie/lavabicchieri': 1, 'lavastoviglie/lavapiatti': 1, 'lavastoviglie/lavaoggetti': 1, 'lavastoviglie/lavastoviglie-a-traino': 1,
+    'lavastoviglie/trattamento-acqua': 1, 'lavatrici/fx': 1, 'lavatrici/lavacentrifughe': 1,
+    'lavatrici/essiccatoi': 1, 'lavatrici/small-pro': 1 };
   function promo(f, sel, C) {
     var el = document.querySelector(sel); if (!el) return;
     var h = '', P = C ? COPY_UX_PROMO : null, X = C ? C.promo : {};
@@ -852,31 +1274,39 @@
   /* Istanze dei template D5, D7, D9, D11, D14: stesso impianto, contenuti propri */
   var ISTANZE = {
     settore: { param: 's', base: '/settori/', def: 'industria', lista: {
-      'industria': { nome: 'Industria', h1: 'Macchine per la pulizia industriale', per: "l'industria", in: "nell'industria",
-        approf: 'La pulizia nell\'industria', fonte: '/settore/macchine-per-la-pulizia-dedicate-all-industria/',
-        subs: ['lavapavimenti/lavapavimenti-uomo-bordo', 'aspiratori/aspiratori-industriali', 'idropulitrici/idropulitrici-ad-acqua-calda', 'aspiratori/aspiratori-certificati-atex'],
-        ref: ['amica-chips-s-p-a'] },
-      'imprese-di-pulizia': { nome: 'Imprese di pulizia', h1: 'Macchine per la pulizia per imprese di pulizia', per: 'le imprese di pulizia', in: 'tra le imprese di pulizia',
-        approf: 'Prodotti e servizi per le imprese di pulizia', fonte: '/settore/macchine-per-la-pulizia-dedicate-imprese-di-pulizia/',
-        subs: ['lavapavimenti/lavapavimenti-uomo-terra', 'lavapavimenti/lavapavimenti-piccole', 'spazzatrici/spazzatrici-uomo-terra', 'altri-macchinari/monospazzole'],
-        ref: ['progect-srl'] },
+      /* Settore nuovo (richiesta Socaf, novembre 2026). Selezione di macchine = PROPOSTA, da confermare con Socaf; testi da fornire. */
+      'assistenza-sociosanitaria': { nome: 'Assistenza sociosanitaria', h1: "Macchine per la pulizia nell'assistenza sociosanitaria", per: "l'assistenza sociosanitaria", in: "nell'assistenza sociosanitaria",
+        approf: 'La pulizia nelle strutture sociosanitarie', fonte: null, nuovo: true,
+        subs: ['lavatrici/fx', 'lavatrici/essiccatoi', 'lavapavimenti/lavapavimenti-uomo-terra', 'aspiratori/aspiratori-professionali', 'lavastoviglie/lavapiatti'], ref: [] },
       'horeca': { nome: 'Ho.Re.Ca.', h1: 'Macchine per la pulizia nel settore Ho.Re.Ca.', per: "hotel, ristoranti e bar", in: "nell'Ho.Re.Ca.",
         approf: 'La pulizia di hotel, ristoranti e bar', fonte: '/settore/macchine-per-la-pulizia-dedicate-al-settore-horeca/',
         subs: ['lavapavimenti/lavapavimenti-piccole', 'lavapavimenti/i-mop', 'altri-macchinari/lavatappezzeria', 'altri-macchinari/generatori-di-vapore'],
         ref: ['lupo-srl'] },
-      'retail': { nome: 'Retail', h1: 'Macchine per la pulizia nel settore retail', per: 'il retail e la GDO', in: 'nel retail',
-        approf: 'La pulizia delle superfici di vendita', fonte: '/settore/macchine-per-la-pulizia-dedicate-al-settore-retail/',
-        subs: ['lavapavimenti/lavapavimenti-uomo-terra', 'lavapavimenti/i-mop', 'robot/robot-lavapavimenti', 'spazzatrici/spazzatrici-uomo-terra'],
-        ref: ['il-gigante', 'cisalfa'] },
+      'imprese-di-pulizia': { nome: 'Imprese di pulizia', h1: 'Macchine per la pulizia per imprese di pulizia', per: 'le imprese di pulizia', in: 'tra le imprese di pulizia',
+        approf: 'Prodotti e servizi per le imprese di pulizia', fonte: '/settore/macchine-per-la-pulizia-dedicate-imprese-di-pulizia/',
+        subs: ['lavapavimenti/lavapavimenti-uomo-terra', 'lavapavimenti/lavapavimenti-piccole', 'spazzatrici/spazzatrici-uomo-terra', 'altri-macchinari/monospazzole'],
+        ref: ['progect-srl'] },
+      'industria': { nome: 'Industria', h1: 'Macchine per la pulizia industriale', per: "l'industria", in: "nell'industria",
+        approf: 'La pulizia nell\'industria', fonte: '/settore/macchine-per-la-pulizia-dedicate-all-industria/',
+        subs: ['lavapavimenti/lavapavimenti-uomo-bordo', 'aspiratori/aspiratori-industriali', 'idropulitrici/idropulitrici-ad-acqua-calda', 'aspiratori/aspiratori-certificati-atex'],
+        ref: ['amica-chips-s-p-a'] },
       'logistica': { nome: 'Logistica', h1: 'Macchine per la pulizia nel settore logistica', per: 'la logistica', in: 'nella logistica',
         approf: 'La pulizia di capannoni e magazzini', fonte: '/settore/macchine-per-la-pulizia-dedicate-alla-logistica/',
         subs: ['lavapavimenti/lavapavimenti-uomo-bordo', 'spazzatrici/spazzatrici-uomo-bordo', 'robot/robot-spazzatrici', 'spazzatrici/spazzatrici-stradali'],
         ref: ['xpo-logistics'] },
+      /* Settore nuovo (richiesta Socaf, novembre 2026). Selezione di macchine = PROPOSTA, da confermare con Socaf; testi da fornire. */
+      'pubblica-amministrazione': { nome: 'Pubblica Amministrazione', h1: 'Macchine per la pulizia nella Pubblica Amministrazione', per: 'la Pubblica Amministrazione', in: 'nella Pubblica Amministrazione',
+        approf: 'La pulizia negli enti pubblici', fonte: null, nuovo: true,
+        subs: ['lavapavimenti/lavapavimenti-uomo-terra', 'spazzatrici/spazzatrici-uomo-terra', 'spazzatrici/spazzatrici-stradali', 'aspiratori/aspiratori-professionali', 'robot/robot-lavapavimenti'], ref: [] },
+      'retail': { nome: 'Retail', h1: 'Macchine per la pulizia nel settore retail', per: 'il retail e la GDO', in: 'nel retail',
+        approf: 'La pulizia delle superfici di vendita', fonte: '/settore/macchine-per-la-pulizia-dedicate-al-settore-retail/',
+        subs: ['lavapavimenti/lavapavimenti-uomo-terra', 'lavapavimenti/i-mop', 'robot/robot-lavapavimenti', 'spazzatrici/spazzatrici-uomo-terra'],
+        ref: ['il-gigante', 'cisalfa'] },
       'officine-metalmeccanica': { nome: 'Officine e metalmeccanica', h1: 'Macchine per la pulizia di officine e metalmeccanica', per: 'officine e metalmeccanica', in: 'in officina',
-        approf: 'La pulizia in officina', fonte: null, nuovo: true,
+        approf: 'La pulizia in officina', fonte: null, nuovo: true, padre: 'industria',
         subs: ['altri-macchinari/vasche-lavapezzi', 'aspiratori/aspiratori-per-olio-e-trucioli', 'idropulitrici/idropulitrici-ad-acqua-calda'], ref: [] },
       'edilizia-cantieri': { nome: 'Edilizia e cantieri', h1: 'Macchine per la pulizia in edilizia e cantieri', per: 'edilizia e cantieri', in: 'in cantiere',
-        approf: 'La pulizia in cantiere', fonte: null, nuovo: true,
+        approf: 'La pulizia in cantiere', fonte: null, nuovo: true, padre: 'industria',
         subs: ['aspiratori/aspiratori-industriali', 'idropulitrici/idropulitrici-autonome', 'spazzatrici/spazzatrici-stradali'], ref: [] }
     }},
     noleggio: { param: 'fam', base: '/noleggio/', def: 'lavapavimenti', lista: {
@@ -950,6 +1380,7 @@
     /* intestazione */
     var h1 = document.querySelector('h1'); if (h1) h1.textContent = v.h1;
     var cr = document.querySelector('.crumbs [aria-current]'); if (cr) cr.textContent = tipo === 'noleggio' ? 'Noleggio ' + v.plur : v.nome;
+    if (cr && tipo === 'settore' && v.padre) cr.insertAdjacentHTML('beforebegin', a(I.base + v.padre + '/', I.lista[v.padre].nome) + '<span class="sep">/</span>');
     document.title = document.title.replace(/^(D\d+) · .*? — /, '$1 · ' + v.h1 + ' — ');
     setBar(I.base + key + '/');
     document.querySelectorAll('[data-hidden-field]').forEach(function (e) {
@@ -1112,6 +1543,12 @@
       if (tipo === 'noleggio' || tipo === 'usato') { list = []; subs.forEach(function (sk) { list = list.concat(CAT.MACCHINE[sk] || []); }); }
       grid.innerHTML = list.slice(0, 8).map(cardMacchina).join('');
     }
+    /* macrosettore Industria e acquisti verdi PA (richiesta Socaf, novembre 2026) */
+    if (tipo === 'settore' && grid) {
+      var rowG = grid.closest('.row');
+      if (rowG && key === 'industria') rowG.insertAdjacentHTML('afterend', righeMacroIndustria(I));
+      if (rowG && key === 'pubblica-amministrazione') rowG.insertAdjacentHTML('afterend', righePAVerdi());
+    }
     /* referenze del settore */
     var rg = document.querySelector('[data-referenze]');
     if (rg) {
@@ -1122,7 +1559,7 @@
     var ch = document.querySelector('[data-altri]');
     if (ch) {
       var extra = [].slice.call(ch.querySelectorAll('.is-open')).map(function (e) { return e.outerHTML; }).join('');
-      ch.innerHTML = Object.keys(I.lista).map(function (k) {
+      ch.innerHTML = Object.keys(I.lista).filter(function (k) { return !I.lista[k].padre; }).map(function (k) {
         return k === key ? '<span class="chip" aria-current="true">' + esc(I.lista[k].nome) + '</span>'
                          : '<a class="chip" href="' + route(I.base + k + '/') + '" data-url="' + I.base + k + '/">' + esc(I.lista[k].nome) + '</a>';
       }).join('') + extra;
@@ -1148,10 +1585,14 @@
     '/servizi/soluzioni-finanziarie/': { fonte: '/servizi/soluzioni-finanziarie/', sez: 'Servizi', form: 'Richiedi maggiori informazioni' },
     '/servizi/supervalutazione-dell-usato/': { h1: "Supervalutazione dell'usato", fonte: '/servizi/supervalutazione-dell-usato/', sez: 'Servizi', form: 'Richiedi la supervalutazione del tuo usato' },
     '/azienda/': { h1: 'Azienda', sez: 'Azienda', corpo: false, lede: 'Chi siamo, come lavoriamo, per chi lavoriamo.',
-      figli: ['/azienda/chi-siamo/', '/azienda/innovazione-tecnologica/', '/azienda/il-nostro-impegno/', '/azienda/referenze/', '/azienda/lavora-con-noi/'] },
-    '/azienda/chi-siamo/': { h1: 'Chi siamo', fonte: ['/socaf/', { fonte: '/aziende/', h: 'Socaf, Bottoni e Tecno Clean' }], sez: 'Azienda', sedi: true, form: 'Richiedi maggiori informazioni' },
+      figli: ['/azienda/chi-siamo/', '/azienda/innovazione-tecnologica/', '/azienda/il-nostro-impegno/', '/azienda/referenze/', '/azienda/certificazioni/', '/azienda/lavora-con-noi/'] },
+    '/azienda/chi-siamo/': { h1: 'Chi siamo', fonte: ['/socaf/', { fonte: '/aziende/', h: 'Socaf, Bottoni e Tecno Clean' }], sez: 'Azienda', sedi: true, form: 'Richiedi maggiori informazioni', integrazione: true },
     '/azienda/innovazione-tecnologica/': { fonte: '/servizi/innovazione-tecnologica/', sez: 'Azienda', form: 'Richiedi maggiori informazioni' },
     '/azienda/il-nostro-impegno/': { fonte: '/il-nostro-impegno/', sez: 'Azienda' },
+    '/azienda/certificazioni/': { h1: 'Certificazioni', sez: 'Azienda', corpo: false, certificazioni: true, form: 'Richiedi maggiori informazioni',
+      lede: 'Gli standard di qualità, ambiente e sicurezza e i marchi che attestano il nostro modo di lavorare.' },
+    '/prodotti-per-la-pulizia/bclean/': { h1: 'BClean', sez: 'Prodotti', sezNome: 'Detergenti, attrezzature e consumabili', corpo: false, bclean: true, form: 'Richiedi informazioni sulla linea BClean',
+      lede: 'BClean è il nuovo marchio di detergenti e prodotti in carta nato dall\'integrazione tra Socaf, Bottoni e Tecno Clean.' },
     '/azienda/lavora-con-noi/': { h1: 'Lavora con noi', fonte: ['/careers/', { fonte: '/lavora-con-noi/', h: 'Candidati' }], sez: 'Azienda', form: 'Invia la tua candidatura' },
     '/azienda/referenze/': { h1: 'Referenze', sez: 'Azienda', corpo: false, referenze: true,
       lede: 'Alcune delle aziende che hanno scelto Socaf per le macchine, i prodotti e l\'assistenza.' }
@@ -1168,7 +1609,7 @@
     var fonti = [].concat(P.fonte || []), t0 = TESTI[typeof fonti[0] === 'string' ? fonti[0] : ''] || {};
     var CU = COPY_UX_PAG[url] || {};
     var h1 = CU.h1 || P.h1 || t0.t || '';
-    var sezUrl = P.sez === 'Servizi' ? '/servizi/' : '/azienda/';
+    var sezUrl = P.sez === 'Servizi' ? '/servizi/' : P.sez === 'Prodotti' ? '/prodotti-per-la-pulizia/' : '/azienda/';
     if (CU.title) {
       [['title', CU.title], ['description', CU.meta]].forEach(function (m) {
         var el = document.head.querySelector('meta[name="' + m[0] + '"]');
@@ -1183,7 +1624,7 @@
 
     /* breadcrumbs */
     var cr = a('/', 'Home') + '<span class="sep">/</span>';
-    if (url !== sezUrl) cr += a(sezUrl, P.sez) + '<span class="sep">/</span>';
+    if (url !== sezUrl) cr += a(sezUrl, P.sezNome || P.sez) + '<span class="sep">/</span>';
     if (P.ref) cr += a('/azienda/referenze/', 'Referenze') + '<span class="sep">/</span>';
     set('[data-p-crumbs]', cr + '<span aria-current="page">' + esc(h1) + '</span>');
     set('[data-p-h1]', esc(h1));
@@ -1253,6 +1694,13 @@
         var inv = fc.querySelector('button[type=submit]'); if (inv) inv.textContent = 'Invia candidatura';
         var tel = fc.querySelector('a[href^="tel:"]'); if (tel) tel.remove();
       }
+    }
+    /* novità novembre 2026: integrazione e video in Chi siamo · pagina Certificazioni · pagina BClean */
+    var ancoraNovita = document.querySelector('[data-p-if="corpo"]') || document.querySelector('.wrap > .row');
+    if (ancoraNovita) {
+      if (P.integrazione) ancoraNovita.insertAdjacentHTML('afterend', righeIntegrazione());
+      if (P.certificazioni) ancoraNovita.insertAdjacentHTML('afterend', righeCertificazioni());
+      if (P.bclean) { ancoraNovita.insertAdjacentHTML('afterend', righeBclean()); bcleanTab(); }
     }
     document.querySelectorAll('[data-p-hidden]').forEach(function (e) { e.dataset.hiddenField = 'pagina di provenienza|' + h1; });
 
@@ -1430,6 +1878,12 @@
       var ld = h1.parentNode.querySelector(':scope > .lede, :scope > .need-info');
       var html = [].concat(C.lede).map(function (t) { return /^\[DA /.test(t) ? '<p class="lede"><span class="todo">' + esc(t) + '</span></p>' : '<p class="lede">' + esc(t) + '</p>'; }).join('');
       if (ld) ld.outerHTML = html; else h1.insertAdjacentHTML('afterend', html);
+    }
+    /* Ecolabel: richiamo alla certificazione e alla linea BClean (richiesta Socaf, novembre 2026) */
+    if (key === 'ecolabel' && h1) {
+      var ldE = h1.parentNode.querySelector(':scope > .lede, :scope > .need-info'), cE = CERT.filter(function (c) { return c.id === 'ecolabel'; })[0];
+      (ldE || h1).insertAdjacentHTML('afterend', '<div class="cert-nota"><p><b>Certificazione Ecolabel UE.</b> ' + esc(cE.testo) + '</p><p class="mb0 small">' +
+        a('/azienda/certificazioni/#ecolabel', 'Le nostre certificazioni') + ' · ' + a(BCLEAN_URL + '#linea-ecolabel', 'La linea Ecolabel di BClean') + '</p></div>');
     }
     /* domande frequenti: da definire con Socaf */
     var b7 = blocco(7), fq = b7 && b7.querySelector('.faq');
@@ -2275,15 +2729,38 @@
     if (document.body.dataset.pagina === 'home') return;
     var testate = [].slice.call(document.querySelectorAll('.row-testata > .block, .scheda-mosaico .intro-testata, .pagina-intro'));
     if (!testate.length) return;
+    /* Nomi prodotto con una parola lunghissima (DISINCHIOSTRATA) non entrano nella
+       colonna: invece di spezzarla a metà si rimpicciolisce il titolo quanto basta,
+       con un limite sotto il quale non si scende. */
+    function titoloCheEntra(h) {
+      h.style.fontSize = '';
+      var base = parseFloat(getComputedStyle(h).fontSize), disp = h.clientWidth;
+      if (!disp || !base) return;
+      /* misura con un gemello nascosto dentro lo stesso titolo: così eredita font,
+         crenatura e maiuscolo, che il calcolo su canvas non vedeva */
+      var g = document.createElement('span');
+      g.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none';
+      h.appendChild(g);
+      var largo = 0;
+      h.textContent.split(/\s+/).forEach(function (p) {
+        if (!p) return;
+        g.textContent = p;
+        largo = Math.max(largo, g.getBoundingClientRect().width);
+      });
+      g.remove();
+      if (largo > disp) h.style.fontSize = Math.max(base * 0.62, base * (disp / largo)) + 'px';
+    }
+
     function misura() {
       testate.forEach(function (b) {
         var h = b.querySelector('h1'); if (!h) return;
+        titoloCheEntra(h);
         var testi = [].slice.call(b.querySelectorAll(':scope > :is(.lede, p.claim, p:not([class]))'));
         if (!testi.length) return;
         testi.forEach(function (t) { t.style.maxWidth = ''; t.style.width = ''; });
         var rg = document.createRange(); rg.selectNodeContents(h);
         var w = 0; [].forEach.call(rg.getClientRects(), function (r) { w = Math.max(w, r.right - h.getBoundingClientRect().left); });
-        if (w > 0) testi.forEach(function (t) { var px = Math.min(Math.max(Math.ceil(w), 380), b.clientWidth || Infinity); /* mai più largo del contenitore */ t.style.setProperty('max-width', 'calc(100vw - 32px)', 'important'); t.style.setProperty('width', px + 'px', 'important'); });
+        if (w > 0) testi.forEach(function (t) { var cs = getComputedStyle(b), disp = b.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight), px = Math.min(Math.max(Math.ceil(w), 380), disp > 0 ? disp : Infinity); /* mai più largo dello spazio utile del contenitore (anche su telefono) */ t.style.setProperty('max-width', 'calc(100vw - 32px)', 'important'); t.style.setProperty('width', px + 'px', 'important'); });
       });
     }
     misura();
@@ -2666,17 +3143,32 @@
       'idropulitrici': '<path d="M3 8h10l3 3v2h-3l-1 7H8l1-7H3z"/><path d="M17 10h3M18.5 6.5l2-1M18.5 13.5l2 1"/>',
       'aspiratori': '<rect x="5" y="8" width="11" height="11" rx="3"/><path d="M10.5 8V4h6l3 4"/><circle cx="8" cy="21" r="1"/><circle cx="13" cy="21" r="1"/>',
       'robot': '<rect x="5" y="8" width="14" height="10" rx="3"/><path d="M12 4v4"/><circle cx="12" cy="3" r="1"/><circle cx="9.5" cy="13" r="1"/><circle cx="14.5" cy="13" r="1"/>',
-      'cucina': '<path d="M4 10h16v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M3 10h18M9 6c0-1 1-1 1-2M13 6c0-1 1-1 1-2"/>',
-      'lavanderia': '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 7h16M7 5h1"/><circle cx="12" cy="14" r="4"/>',
+      'lavastoviglie': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 13v4M12 13v4M16 13v4"/>',
+      'macchine-del-ghiaccio': '<path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9"/><path d="M9.5 4.5L12 6.5l2.5-2M9.5 19.5L12 17.5l2.5 2"/>',
+      'trattamento-acqua': '<path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11z"/><path d="M9 15a3 3 0 0 0 3 3"/>',
+      'lavatrici': '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 7h16M7 5h.01M10 5h.01"/><circle cx="12" cy="14" r="4"/>',
+      'essiccatoi': '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 7h16M7 5h.01M10 5h.01"/><circle cx="12" cy="14" r="4"/><path d="M10 14c.7-1 1.3 1 2 0s1.3 1 2 0"/>',
       'altri-macchinari': '<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'
     };
     /* settori: icone illustrate della cartella « icone settori V01 » al posto del disegno a linea,
        come in home (« Soluzioni per ogni settore »); nella scheda macchina la versione azzurra */
-    var ICONE_SETT = { 'industria': 'industriaV01', 'imprese-di-pulizia': 'imppulizieV01', 'horeca': 'HORECAV01', 'retail': 'retailV01',
-      'logistica': 'logisticaV01', 'officine-metalmeccanica': 'officinaV01', 'edilizia-cantieri': 'ediliziaV01' };
+    var ICONE_SETT = { 'industria': ['industriaV01', 'webp'], 'imprese-di-pulizia': ['imppulizieV01', 'webp'], 'horeca': ['HORECAV01', 'webp'], 'retail': ['retailV01', 'webp'],
+      'logistica': ['logisticaV01', 'webp'], 'officine-metalmeccanica': ['officinaV01', 'webp'], 'edilizia-cantieri': ['ediliziaV01', 'webp'],
+      'assistenza-sociosanitaria': ['assistenzasociosanitariaV01', 'webp'], 'pubblica-amministrazione': ['pubblicaamministrazioneV01', 'webp'] };
+    /* icone illustrate dell'agenzia (cartella assets/icone): famiglie di macchine e categorie di prodotti */
+    var FAM_IMG = { 'lavapavimenti': 'lavapavimenti', 'spazzatrici': 'spazzatrici', 'idropulitrici': 'idropulitrici', 'aspiratori': 'aspiratori', 'robot': 'robot', 'altri-macchinari': 'altri-macchinari', 'lavatrici': 'lavanderia', 'lavastoviglie': 'cucina', 'sub:robot-': 'robot' };
+    var CAT_IMG = { 'detergenti-pavimenti-parquet': 'webp', 'detergenti-enzimatici': 'webp', 'detergenti-disinfettanti': 'webp', 'detergenti-multiuso-sgrassanti': 'webp', 'detersivi-lavanderia-industriale': 'webp', 'igiene-mani': 'webp', 'carrelli-per-pulizie': 'webp', 'attrezzature': 'webp', 'panni-stracci-microfibra': 'webp', 'carta-e-dispenser': 'webp', 'sacchi': 'webp', 'dispositivi-di-protezione-individuale': 'webp', 'ecolabel': 'svg' };
+    /* sottocategorie delle famiglie nuove: icone illustrate dell'agenzia (lavabicchieri, lavapiatti, osmosi, lavatrici, essicatoi);
+       dove una sottocategoria non ha l'icona propria si usa quella della famiglia */
+    var ICONA_FAM_MAC = { 'lavastoviglie': 'lavapiatti', 'lavatrici': 'lavatrici' };
+    var ICONA_SUB_MAC = { 'lavabicchieri': 'lavabicchieri', 'lavapiatti': 'lavapiatti', 'trattamento-acqua': 'addolcitori-osmosi', 'essiccatoi': 'essicatoi', 'small-pro': 'essicatoi' };
     function icoTile(k, azzurra) {
-      if (ICONE_SETT[k]) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/settori/' +
-        (azzurra ? 'azzurre/' + ICONE_SETT[k] + 'azz' : ICONE_SETT[k]) + '.webp" alt="" aria-hidden="true">';
+      var S = ICONE_SETT[k];
+      if (S) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/settori/' +
+        (azzurra ? 'azzurre/' + S[0] + 'azz' : S[0]) + '.' + S[1] + '?v=2" alt="" aria-hidden="true">';
+      if (FAM_IMG[k]) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-macchine/' + (azzurra ? 'azzurre' : 'rosse') + '/' + FAM_IMG[k] + '.webp" alt="" aria-hidden="true">';
+      if (/^cat:/.test(k)) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-categorie/' + (azzurra ? 'azzurre' : 'rosse') + '/' + k.slice(4) + '.' + CAT_IMG[k.slice(4)] + '" alt="" aria-hidden="true">';
+      if (/^mac:/.test(k)) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-macchine/' + (azzurra ? 'azzurre' : 'rosse') + '/' + k.slice(4) + '.svg" alt="" aria-hidden="true">';
       return '<svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONE[k] || ICONE['altri-macchinari']) + '</svg>';
     }
   function scenaInterna() {
@@ -2727,6 +3219,7 @@
     ch.querySelectorAll('a, span.chip').forEach(function (c) {
       var u = c.getAttribute('data-url') || c.getAttribute('href') || '', k = null;
       Object.keys(ICONE).forEach(function (x) { if (!k && (u.indexOf('/' + x + '/') > -1 || u.indexOf('=' + x) > -1)) k = x; });
+      Object.keys(ICONE_SETT).forEach(function (x) { if (!k && (u.indexOf('/' + x + '/') > -1 || u.indexOf('=' + x) > -1)) k = x; });
       var nm = c.textContent.trim();
       c.className = 'tile';
       c.innerHTML = icoTile(k, true) + '<span>' + nm + '</span>';
@@ -2862,13 +3355,14 @@
       [/lavapavimenti|lavasciuga/i, 'fam-lavapavimenti'], [/spazzatric/i, 'fam-spazzatrici'],
       [/idropulitric/i, 'fam-idropulitrici'], [/aspirator/i, 'fam-aspiratori'],
       [/robot/i, 'fam-robot'], [/altri macchinari/i, 'fam-altri-macchinari'],
-      [/cucina|lavabicchier|lavapiatt|addolcitor|osmosi/i, 'fam-cucina'], [/lavanderia|lavatric|essiccato/i, 'fam-lavanderia'],
+      [/lavastoviglie|lavabicchier|lavapiatt|lavaoggett|a traino/i, 'fam-lavastoviglie'], [/ghiaccio/i, 'fam-macchine-del-ghiaccio'],
+      [/trattamento acqua|addolcitor|osmosi|walo|brita/i, 'fam-trattamento-acqua'], [/lavatric|lavacentrifug/i, 'fam-lavatrici'], [/essiccato|small pro/i, 'fam-essiccatoi'],
       [/lavamoquette|lavatappezz|monospazzol|vapore|lavapezzi|generator/i, 'fam-altri-macchinari']
     ];
     /* modelli con foto reale (assets/images/macchine, ricavate da assets/STATICHE) */
     var MODELLI = ['mini', 'viva', 'la-360-8-b', 'la-410-15-b', 'la-510-40-bt', 'la-560-67-b', 'la-660-110-b', 'la-700-110-r',
       'la-1300-280-r', 'sp-1300', 'tk-306', 'tk-706', 'af-k-120-11', 'af-k-200-15'];
-    var FAMIGLIE_FOTO = ['lavapavimenti', 'spazzatrici', 'idropulitrici', 'aspiratori', 'robot', 'cucina', 'lavanderia', 'altri-macchinari'];
+    var FAMIGLIE_FOTO = ['lavapavimenti', 'spazzatrici', 'idropulitrici', 'aspiratori', 'robot', 'lavastoviglie', 'macchine-del-ghiaccio', 'lavatrici', 'altri-macchinari'];
     var VARIANTI = { 'categorie/fam-aspiratori': ['categorie/fam-aspiratori', 'categorie/asp-1', 'categorie/asp-2', 'categorie/asp-3'],
       'categorie/fam-lavapavimenti': ['categorie/fam-lavapavimenti', 'categorie/sub-lavapavimenti-uomo-bordo', 'categorie/sub-lavapavimenti-uomo-terra', 'categorie/sub-lavapavimenti-combinate'],
       'categorie/fam-spazzatrici': ['categorie/fam-spazzatrici', 'categorie/sub-spazzatrici-uomo-bordo', 'categorie/sub-spazzatrici-uomo-terra'],
@@ -2960,7 +3454,7 @@
     righe.slice(1).forEach(function (r) {
       var g = r.querySelector('.grid'); if (!g || r.querySelector('.chips')) return;
       var cards = [].slice.call(g.querySelectorAll(':scope > .card'));
-      var RE = /^\/(lavapavimenti|spazzatrici|idropulitrici|aspiratori|robot|cucina|lavanderia|altri-macchinari)\/$/;
+      var RE = /^\/(lavapavimenti|spazzatrici|idropulitrici|aspiratori|robot|lavastoviglie|macchine-del-ghiaccio|lavatrici|altri-macchinari)\/$/;
       if (cards.length < 2 || !cards.every(function (c) { var l = c.querySelector('.card-link'); return l && RE.test(l.getAttribute('data-url') || ''); })) return;
       var html = cards.map(function (c) { var l = c.querySelector('.card-link'), n = (c.querySelector('.card-name') || {}).textContent || '';
         return '<a class="chip" href="' + l.getAttribute('href') + '" data-url="' + l.getAttribute('data-url') + '">' + n.trim() + '</a>'; }).join('');
@@ -2974,6 +3468,17 @@
       chips.classList.add('tiles', 'tiles-icone');
       chips.querySelectorAll('a, span.chip').forEach(function (c) {
         var url = c.getAttribute('data-url') || c.getAttribute('href') || '', chiave = null;
+        (function () {
+          var seg = url.replace(/[?#].*$/, '').split('/').filter(Boolean);
+          if (seg.length === 2 && ICONA_FAM_MAC[seg[0]]) chiave = 'mac:' + (ICONA_SUB_MAC[seg[1]] || ICONA_FAM_MAC[seg[0]]);
+          else if (!url && CAT) {   /* voce corrente: nome → sottocategoria di una famiglia nuova */
+            var nm = c.textContent.trim().toLowerCase();
+            Object.keys(CAT.SOTTO).forEach(function (sk) {
+              var p = sk.split('/');
+              if (!chiave && ICONA_FAM_MAC[p[0]] && CAT.SOTTO[sk].nome.toLowerCase() === nm) chiave = 'mac:' + (ICONA_SUB_MAC[p[1]] || ICONA_FAM_MAC[p[0]]);
+            });
+          }
+        })();
         /* tipologie (sottocategorie): icona propria, riconosciuta dall'indirizzo */
         var SUB = {
           'piccole': '<rect x="7" y="13" width="10" height="6" rx="2"/><path d="M12 13V4M10 4h4"/><circle cx="9" cy="20.5" r=".8"/><circle cx="15" cy="20.5" r=".8"/>',
@@ -2995,7 +3500,49 @@
           var tx = c.textContent.toLowerCase().replace(/\s+a\s+/g, '-').replace(/\s+/g, '-');
           Object.keys(SUB).forEach(function (k) { if (!chiave && tx.indexOf(k.replace(/-$/, '')) > -1) { chiave = 'sub:' + k; ICONE[chiave] = SUB[k]; } });
         }
+        var mcat = url.match(/\/prodotti-per-la-pulizia\/([^/]+)\//); if (!chiave && mcat && CAT_IMG[mcat[1]]) chiave = 'cat:' + mcat[1];
         Object.keys(ICONE).forEach(function (k) { if (!chiave && (url.indexOf('/' + k + '/') > -1 || url.indexOf('=' + k) > -1)) chiave = k; });
+        Object.keys(ICONE_SETT).forEach(function (k) { if (!chiave && (url.indexOf('/' + k + '/') > -1 || url.indexOf('=' + k) > -1)) chiave = k; });
+        if (!chiave) {
+          /* La voce corrente non è un link, quindi la chiave si ricava dal nome. Il nome
+             però non sempre combacia con la chiave: « Ho.Re.Ca. » dà ho-re-ca invece di
+             horeca, « Detergenti multiuso e sgrassanti » dà …-e-sgrassanti invece di
+             …-sgrassanti. Si provano in ordine la forma piena, quella senza congiunzioni
+             e quella compatta: vince la prima che esiste davvero, così i nomi che la
+             congiunzione ce l'hanno per davvero (« Carta e dispenser ») restano intatti. */
+          var sg = slugify(c.textContent);
+          var forme = [sg, sg.replace(/-(e|ed|di|del|della|per|con|da|in|il|la|le|i|gli)(?=-)/g, ''), sg.replace(/-/g, '')];
+          forme.forEach(function (f) {
+            if (chiave || !f) return;
+            if (CAT_IMG[f]) chiave = 'cat:' + f;
+            else if (ICONE_SETT[f]) chiave = f;
+          });
+          /* ultimo tentativo: il nome esteso comincia con la chiave
+             (« Detergenti disinfettanti e igienizzanti » → detergenti-disinfettanti).
+             Si prende la chiave più lunga che combacia, così non si scambia una
+             categoria con un'altra che ne condivide l'inizio. */
+          if (!chiave) {
+            var best = '';
+            Object.keys(CAT_IMG).forEach(function (k) { if (sg.indexOf(k) === 0 && k.length > best.length) best = k; });
+            if (best) chiave = 'cat:' + best;
+            else {
+              Object.keys(ICONE_SETT).forEach(function (k) { if (sg.indexOf(k) === 0 && k.length > best.length) best = k; });
+              if (best) chiave = best;
+            }
+          }
+        }
+        /* usato e noleggio: lo slug porta il suffisso della formula
+           (/usato/altri-macchinari-usati/), quindi va tolto per arrivare alla
+           famiglia e alla sua icona illustrata */
+        if (!chiave) {
+          var sl = (url.replace(/[?#].*$/, '').split('/').filter(Boolean).pop() || (url.match(/=([^&]+)/) || [])[1] || '');
+          var fam = sl.replace(/-(usate|usati|usato|usata|nuove|nuovi|a-noleggio|noleggio)$/, '');
+          if (FAM_IMG[fam]) chiave = fam;
+          else if (!sl) {   /* voce corrente senza link: si prova con il nome */
+            var fn = slugify(c.textContent).replace(/-(usate|usati|usato|usata|a-noleggio|noleggio)$/, '');
+            if (FAM_IMG[fn]) chiave = fn;
+          }
+        }
         if (!chiave) { var t = c.textContent.toLowerCase(); Object.keys(ICONE).forEach(function (k) { if (!chiave && t.indexOf(k.split('-')[0].slice(0, 6)) > -1) chiave = k; }); }
         var nome = c.textContent.trim();
         c.className = 'tile' + (c.getAttribute('aria-current') || c.classList.contains('is-active') ? ' is-corrente' : '');
@@ -3007,6 +3554,8 @@
        (il modulo sta sempre sul vetro: se cade altrove, scambia con la precedente) */
     var slugP = document.body.dataset.slug || '';
     var testataB = righe[0].querySelector(':scope > .block');
+    /* sfera di vetro nella testata: tolta su richiesta di Sara (05/11/2026).
+       Le regole .orb restano nel CSS ma non hanno più bersaglio. */
     /* Pronto intervento: le icone delle macchine entrano nella testata, sotto titolo e testo */
     if (slugP === '/servizi/pronto-intervento/') {
       var sI = righe.filter(function (r) { return r.classList.contains('row-striscia'); })[0];
@@ -3110,6 +3659,149 @@
   /* INGRESSI · le sezioni entrano quando arrivano nello schermo: salgono di poco
      e si accendono, con un ritardo sfalsato tra titolo, testo e card. La
      testata ha il suo ingresso al caricamento. Movimento ridotto: tutto fermo. */
+  /* EFFETTO ACQUA sui titoli (05/11/2026, richiesta Sara): quando un titolo entra nello schermo
+     si increspa come una superficie d'acqua e si ferma nitido in poco più di un secondo.
+     Filtro SVG (turbolenza + spostamento) per titolo, tolto a fine animazione. Con « riduci movimento » niente. */
+  /* icone dell'agenzia: sono disegnate su fondo bianco pieno. Due filtri SVG tolgono il bianco
+     (trasparenza in base alla luminosità): « icona-bianca » le rende bianche sul rosso, « icona-trasparente » tiene i colori */
+  /* Sezioni con titolo, elenco di card e una CTA in fondo (es. « Prodotti consigliati »):
+     la CTA va a destra del titolo, sulla stessa riga (richiesta Sara 05/11/2026). Su mobile torna sotto il testo. */
+  /* icone delle strisce dentro un cerchio di vetro vero (un elemento, non uno pseudo-elemento):
+     l'icona sta sempre al centro del cerchio, qualunque sia il file */
+  /* il modulo « Richiedi informazioni » in fondo alle pagine interne è una sezione bianca a sé (come in home),
+     così non si confonde con la striscia rossa che lo precede */
+  /* Famiglie con « Prodotti consigliati » (es. Lavastoviglie): dopo il contenitore dei consigliati
+     le sezioni finali sono SEZIONI a tutta larghezza alternate (Sara 05/11/2026):
+     Dove si usano = bianca · Approfondimenti = rossa · Le altre macchine = bianca · Richiedi informazioni = rossa (moduloBianco) */
+  function sezioniFinaliAlterne() {
+    var cons = document.querySelector('.wrap > .row.row-consigliati');
+    if (!cons || !document.querySelector('[data-tpl="famiglia"]')) return;
+    var righe = [], r = cons.nextElementSibling;
+    while (r) { if (r.classList.contains('row') && !r.classList.contains('wf-doc') && !r.classList.contains('row-ultima') && r.offsetHeight) righe.push(r); r = r.nextElementSibling; }
+    righe.forEach(function (x, i) {
+      x.classList.remove('t-outline', 't-vetro', 't-bianca', 'vi-band', 'vi-band--frost', 'vi-band--contour', 'vi-band--ribbed');
+      x.classList.add('t-piena', 'row-sezione');
+      if (i % 2 === 0) x.classList.add('t-bianca'); else x.classList.add('row-sezione-rossa');
+    });
+  }
+
+  /* REGOLA (Sara 05/11/2026): nelle sezioni bianche le icone sono le versioni AZZURRE della cartella icone */
+  function iconeAzzurre() {
+    document.querySelectorAll('.wrap > .row.t-bianca .tile img.tile-ico, .striscia-scheda .tile img.tile-ico').forEach(function (i) {
+      var src = i.getAttribute('src') || '';
+      if (/\/azzurre\//.test(src)) return;
+      if (/\/icone-(macchine|categorie)\/rosse\//.test(src)) src = src.replace('/rosse/', '/azzurre/');
+      else if (/\/settori\/[^/]+V01\.(webp|svg)/.test(src)) src = src.replace(/\/settori\/([^/]+)V01\.(webp|svg)/, '/settori/azzurre/$1V01azz.$2');
+      i.setAttribute('src', src);
+    });
+  }
+
+  /* tutti i moduli di richiesta: azioni = « Invia » + WhatsApp, niente Numero Verde (è nella barra) — Sara 05/11/2026 */
+  function azioniModuli() {
+    document.querySelectorAll('.form').forEach(function (fm) {
+      var inv = fm.querySelector('button[type="submit"]'), az = inv && inv.parentElement; if (!az || /candidatura/i.test(inv.textContent)) return;
+      az.querySelectorAll('a.btn[href^="tel:"]').forEach(function (x) { x.remove(); });
+      if (!az.querySelector('.btn-whatsapp')) az.insertAdjacentHTML('beforeend', "<a class=\"btn btn-whatsapp\" href=\"https://wa.me/\" target=\"_blank\" rel=\"noopener\" aria-label=\"Scrivici su WhatsApp, numero da fornire (si apre in una nuova scheda)\"> <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z\"/></svg> WhatsApp</a>");
+    });
+  }
+
+  function moduloBianco() {
+    if (document.body.dataset.pagina === 'home') return;
+    document.querySelectorAll('.wrap > .row.row-ultima.t-vetro').forEach(function (r) {
+      if (!r.querySelector('.form, form')) return;
+      r.classList.remove('t-vetro'); r.classList.add('t-bianca', 't-piena', 'row-modulo', 'row-vetro', 'row-form');
+      /* alternanza delle SEZIONI (Sara 05/11/2026): se la sezione prima è bianca a tutta larghezza,
+         il modulo diventa una sezione rossa a tutta larghezza; i contenitori non si toccano */
+      var prima = r.previousElementSibling;
+      while (prima && (!prima.classList.contains('row') || prima.offsetHeight === 0)) prima = prima.previousElementSibling;
+      if (prima && prima.classList.contains('t-bianca') && prima.classList.contains('t-piena')) {
+        r.classList.remove('t-bianca', 'row-vetro', 'vi-band', 'vi-band--ribbed', 'vi-band--frost', 'vi-band--contour'); r.classList.add('row-modulo-rosso'); prima.style.setProperty('margin-bottom', '0', 'important');
+      }
+      /* stesso modulo della home: sottotitolo e azioni (invio, WhatsApp; il Numero Verde è nella barra) */
+      var sub = r.querySelector('.form-sub'); if (sub) sub.textContent = 'Verrai contattato da un nostro consulente entro 48 ore.';
+      var inv = r.querySelector('.form button[type="submit"]'), az = inv && inv.parentElement;
+      if (az && !az.querySelector('.btn-whatsapp')) {
+        az.querySelectorAll('a.btn').forEach(function (x) { x.remove(); });
+        az.insertAdjacentHTML('beforeend', "<a class=\"btn btn-whatsapp\" href=\"https://wa.me/\" target=\"_blank\" rel=\"noopener\" aria-label=\"Scrivici su WhatsApp, numero da fornire (si apre in una nuova scheda)\"> <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z\"/></svg> WhatsApp</a>");
+      }
+    });
+  }
+
+  function avvolgiIcone() {
+    document.querySelectorAll(':is(.tiles-icone,.tiles) > .tile > .tile-ico').forEach(function (i) {
+      if (i.parentElement.querySelector(':scope > .ico-vetro')) return;
+      var v = document.createElement('span'); v.className = 'ico-vetro'; v.setAttribute('aria-hidden', 'true');
+      i.parentNode.insertBefore(v, i); v.appendChild(i);
+    });
+  }
+
+  function ctaAccantoTitolo() {
+    document.querySelectorAll('.wrap > .row > .block').forEach(function (b) {
+      if (b.querySelector(':scope > .testa-cta')) return;
+      var h = b.querySelector(':scope > h2'), ult = b.lastElementChild;
+      if (!h || !ult || ult.tagName !== 'P') return;
+      var bt = ult.querySelectorAll('.btn'); if (!bt.length || ult.textContent.trim() !== [].map.call(bt, function (x) { return x.textContent.trim(); }).join('').trim()) return;
+      if (!b.querySelector(':scope > .grid, :scope > [class*="grid"], :scope > .board, :scope > [data-consigliati]')) return;
+      var testa = document.createElement('div'); testa.className = 'testa-cta';
+      var sx = document.createElement('div'); sx.className = 'testa-cta-testo';
+      var kick = h.previousElementSibling && h.previousElementSibling.classList.contains('kicker') ? h.previousElementSibling : null;
+      var lede = h.nextElementSibling && h.nextElementSibling.classList.contains('lede') ? h.nextElementSibling : null;
+      b.insertBefore(testa, kick || h);
+      [kick, h, lede].forEach(function (x) { if (x) sx.appendChild(x); });
+      testa.appendChild(sx); ult.classList.add('testa-cta-azioni'); testa.appendChild(ult);
+    });
+  }
+
+  function filtriIcone() {
+    if (document.getElementById('icona-bianca')) return;
+    var d = document.createElement('div');
+    d.innerHTML = '<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>' +
+      '<filter id="icona-bianca" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -0.34 -1.14 -0.12 0 1.6" result="m"/><feComposite in="m" in2="SourceGraphic" operator="in"/></filter>' +
+      '<filter id="icona-trasparente" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -0.43 -1.43 -0.14 0 2" result="m"/><feComposite in="m" in2="SourceGraphic" operator="in"/></filter>' +
+      '</defs></svg>';
+    document.body.appendChild(d.firstChild);
+  }
+
+  function acquaTitoli() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg'), n = 0;
+    svg.setAttribute('width', '0'); svg.setAttribute('height', '0'); svg.setAttribute('aria-hidden', 'true');
+    svg.style.position = 'absolute'; document.body.appendChild(svg);
+    function acqua(h) {
+      var id = 'acqua-' + (n++), f = document.createElementNS(ns, 'filter');
+      f.setAttribute('id', id); f.setAttribute('x', '-6%'); f.setAttribute('y', '-40%'); f.setAttribute('width', '112%'); f.setAttribute('height', '180%');
+      f.innerHTML = '<feTurbulence type="fractalNoise" baseFrequency="0.01 0.07" numOctaves="2" seed="' + (n * 7) + '" result="t"/>' +
+        '<feDisplacementMap in="SourceGraphic" in2="t" scale="0" xChannelSelector="R" yChannelSelector="G"/>';
+      svg.appendChild(f);
+      var st = { h: h, tu: f.firstChild, dm: f.lastChild, id: id, forza: 0, meta: 0, t: 0, giro: false };
+      function passo(ora) {
+        st.forza += (st.meta - st.forza) * 0.06;
+        var w = ora / 1000;
+        st.dm.setAttribute('scale', (st.forza).toFixed(2));
+        st.tu.setAttribute('baseFrequency', (0.010 + 0.003 * Math.sin(w * 1.3)).toFixed(4) + ' ' + (0.07 + 0.02 * Math.sin(w * 0.9)).toFixed(4));
+        if (st.forza > 0.15 || st.meta > 0) { h.style.filter = 'url(#' + id + ')'; requestAnimationFrame(passo); }
+        else { h.style.filter = ''; st.giro = false; }
+      }
+      st.avvia = function () { if (!st.giro) { st.giro = true; requestAnimationFrame(passo); } };
+      return st;
+    }
+    var titoli = [].slice.call(document.querySelectorAll('.hero-copy h1, .wrap > .row-testata h1'));
+    titoli.forEach(function (h) {
+      var st = acqua(h);
+      /* ingresso: onda forte che si calma */
+      st.entra = function () { st.forza = 34; st.meta = 0; st.avvia(); };
+      /* passaggio del mouse: superficie che continua a muoversi piano */
+      h.addEventListener('pointerenter', function () { st.meta = 9; st.avvia(); });
+      h.addEventListener('pointerleave', function () { st.meta = 0; });
+      h._acqua = st;
+    });
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (v) {
+      v.forEach(function (x) { if (x.isIntersecting) { io.unobserve(x.target); x.target._acqua.entra(); } });
+    }, { threshold: 0.35 });
+    titoli.forEach(function (h) { io.observe(h); });
+  }
+
   function ingressi() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
     var righe = [].slice.call(document.querySelectorAll('.wrap > .row')).filter(function (r) {
@@ -3124,7 +3816,7 @@
         v.target.classList.add('in-vista');
         io.unobserve(v.target);
       });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
     righe.forEach(function (r) {
       /* ritardo sfalsato per i figli principali della sezione */
       [].slice.call(r.querySelectorAll('.block > *, .card, .sede, .formula')).slice(0, 14).forEach(function (el, i) {
@@ -3193,6 +3885,10 @@
     renderFamiglia();
     renderScheda();
     renderMappaSedi();
+    riempiConsigliati(); riempiBcleanHub();
+    riempiVantaggi();
+    riempiFusione();
+    animaFusione();
 
     var hd = document.querySelector('[data-header]');
     if (hd) { hd.className = 'site-header'; hd.innerHTML = header(); }
@@ -3280,7 +3976,7 @@
     heroFluido();
     homeScena();
     scenaInterna();
-    ingressi();
+    sezioniFinaliAlterne(); iconeAzzurre(); moduloBianco(); azioniModuli(); avvolgiIcone(); ctaAccantoTitolo(); ingressi(); acquaTitoli(); filtriIcone();
     percorsoTappe();
     formeLaterali();
 
@@ -3378,6 +4074,17 @@
         var i = v.lastIndexOf(' ');
         if (i < 0 || el.textContent.trim().split(/\s+/).length < 3) return;
         var parola = v.slice(i + 1).replace(/-/g, '‑');
+        /* se le due parole unite non entrano nella riga il blocco indivisibile verrebbe
+           spezzato a metà parola (« DISINCHIOSTRA / TA »): in quel caso si lascia lo
+           spazio normale, meglio una parola sola in fondo che una parola tagliata */
+        var pre = v.slice(0, i), j = pre.lastIndexOf(' ');
+        var g = document.createElement('span');
+        g.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none';
+        g.textContent = pre.slice(j + 1) + ' ' + parola;
+        el.appendChild(g);
+        var entra = g.getBoundingClientRect().width <= el.clientWidth;
+        g.remove();
+        if (!entra) return;
         last.nodeValue = v.slice(0, i) + ' ' + parola + coda;
       });
     })();

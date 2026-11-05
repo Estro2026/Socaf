@@ -662,3 +662,22 @@ i 4 servizi che restano.
 | `/sedi/` | Deve restituire **404** |
 
 **Stima: 20 h** (responsive, accessibilità, cross-browser e QA)
+
+---
+
+## Aggiornamento 03/11/2026 · modifiche sito 2.0
+
+Nuove note per lo sviluppo, scritte dentro il mockup (stesso formato delle altre; stime in `dev-estimate-novita-2026-11.md`, **proposta non approvata**):
+
+| Nota | Dove | Cosa |
+| --- | --- | --- |
+| 136 | home, hub, famiglie | Prodotti consigliati (selezione manuale) |
+| 137 | `/azienda/certificazioni/` | Pagina Certificazioni, ISO 9001 documentata |
+| 138 | Chi siamo, home | L'integrazione: cinque vantaggi da una sola sorgente |
+| 139 | — | tolta (04/11): il video andrà come sfondo della hero |
+| 140–141 | `/prodotti-per-la-pulizia/bclean/` | BClean: testo del cliente ed elenco prodotti (xlsx) |
+| 142–143 | pagina Industria, pagina PA | Macrosettore (URL invariati) · acquisti verdi |
+| 144 | home | Titolo, una sola ricerca, CTA intermedie, Numero Verde verde, WhatsApp |
+| 145 | hub prodotti | Banner BClean (voce dedicata, non una delle 13 categorie) |
+
+Punti aperti collegati: OP-19 → OP-26 in `open-points.md`.
