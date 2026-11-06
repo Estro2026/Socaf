@@ -1377,8 +1377,8 @@ html,body{overflow-x:clip}
    e poi la completerebbe, con un salto visibile. La pagina resta quindi
    invisibile finché il montaggio non è finito (classe wf-pronto).
    Rete di sicurezza: se lo script non parte, l'animazione la mostra comunque
-   dopo 1,2 s, così il contenuto non resta mai nascosto. */
-body{opacity:0;animation:wf-reveal .01s linear 1.2s forwards}
+   dopo 10 s, così il contenuto non resta mai nascosto. */
+body{opacity:0;animation:wf-reveal .01s linear 10s forwards}
 body.wf-pronto{opacity:1;animation:none;transition:opacity .18s ease}
 @keyframes wf-reveal{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){body.wf-pronto{transition:none}}
@@ -9512,13 +9512,6 @@ body.ha-ingressi .wrap > .row:not(.row-testata):not(.in-vista) :is(h2,.lede,.kic
    contenuto e si leggeva come una pellicola sopra titolo e galleria. */
 body.scheda-mosaico .split > div:not(.sticky-col) .block.t-bianca::before{content:none !important}
 
-/* 296 · Titoli lunghi nelle testate: le parole non devono uscire dalla colonna
-   (richiesta Sara 05/11/2026 — « Carta igienica Maxi Jumbo 320 mt DISINCHIOSTRATA »)
-   Una parola sola più larga della colonna (DISINCHIOSTRATA a 52 px) sbordava di 51 px
-   anche a 1440. Prima si prova la sillabazione italiana, poi, se non basta, si spezza. */
-.intro-testata h1,.pagina-intro h1,.row-testata h1{
-  hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere}
-.intro-testata .lede,.pagina-intro .lede{overflow-wrap:break-word}
 
 /* 297 · Icone delle macchine nella testata di Pronto intervento: più grandi
    (richiesta Sara 05/11/2026). Da 58 a 78 px, la stessa misura delle strisce
@@ -9528,3 +9521,91 @@ body.pagina-interna .row-testata .testata-icone .tile-ico{
   width:78px;height:78px;padding:17px}
 body.pagina-interna .row-testata .tiles-icone.testata-icone{
   grid-template-columns:repeat(auto-fill,minmax(124px,1fr))}
+
+/* 298 · Galleria della scheda prodotto: via il vetro rimasto sotto la foto
+   (06/11/2026). Il riquadro aveva ancora backdrop-filter saturate(1.8) blur(20px)
+   ereditato dal segnaposto, sopra un fondo bianco pieno: non serve a nulla,
+   crea un livello di composizione in più e su alcune schede schiariva la zona. */
+.pagina-intro .gallery-main:not(.ph){
+  backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+
+/* 299 · Schede prodotto: via la copia sfocata del fondale (06/11/2026)
+   `.mood .macchine::before` duplicava l'intero fondale (linee, fasci, bagliori bianchi) con
+   blur(38px) a opacità .9 e dimensioni maggiori dello schermo. L'originale è già sotto, quindi
+   la copia non aggiunge nulla, e Chrome disegna gli strati grandi sfocati a piastrelle da 256 px:
+   un difetto su una piastrella dà una fascia chiara con bordo verticale netto che attraversa
+   anche le strisce rosse tra le tessere. Sulle schede prodotto resta solo il fondale e le sue linee. */
+body.scheda-mosaico .mood .macchine::before{display:none !important}
+
+/* 300 · Niente sillabazione automatica (06/11/2026)
+   Il trattino « ac-/qua » nei titoli delle testate era colpa del blocco 296, che attivava
+   `hyphens:auto`: ora è tolto, insieme a quello delle etichette sotto le icone. Una parola che non
+   entra va a capo intera; se è più larga della colonna si rimpicciolisce il titolo (JS) e solo come
+   ultima risorsa si spezza, senza trattino. */
+:is(h1,h2,h3,h4,.lede,.kicker,.card-name,.tile span,.row-testata p,.row-testata li,.pagina-intro p){
+  hyphens:manual !important;-webkit-hyphens:manual !important;overflow-wrap:break-word !important;word-break:normal !important}
+
+/* 301 · « Le linee » di BClean: azzurro al posto del rosso (richiesta Sara 06/11/2026)
+   Le card avevano sfondo che sfuma in rosa, ombra interna rossa e anello rosso in hover.
+   Ora: Azzurro #0085cf e Crystal Blue #4fbdf7 della VI, stesso comportamento di prima.
+   La card Ecolabel resta verde (è il colore del marchio Ecolabel, non il rosso). */
+:is(#_l1,body):is(#_l2,body):is(#_l3,body):is(#_l4,body) .bclean-hub-linee a:not(.eco){
+  background:linear-gradient(150deg,rgba(255,255,255,.96),rgba(207,234,250,.72)) !important;
+  box-shadow:inset 0 1.5px 0 #fff,inset 0 -12px 20px -14px rgba(0,133,207,.24),inset 0 0 0 1px rgba(0,133,207,.28),0 16px 26px -20px rgba(0,58,82,.45) !important}
+:is(#_l1,body):is(#_l2,body):is(#_l3,body):is(#_l4,body) .bclean-hub-linee a:not(.eco):is(:hover,:focus-visible){
+  background:linear-gradient(150deg,#fff,rgba(160,214,245,.85)) !important;
+  box-shadow:inset 0 1.5px 0 #fff,inset 0 0 0 2px #0085cf,0 18px 28px -18px rgba(0,80,111,.5) !important}
+:is(#_l1,body):is(#_l2,body):is(#_l3,body):is(#_l4,body) .row-bclean-hub .bclean-hub-linee a:not(.eco):is(:hover,:focus-visible)::after{
+  opacity:1;color:#0085cf !important}
+
+/* 302 · Pronto intervento: ingrandito il SIMBOLO, non solo il cerchio (richiesta Sara 06/11/2026)
+   Il giro precedente aveva portato il cerchio da 58 a 78 px, ma l'immagine ha 17 px di margine
+   interno: il disegno restava di 44 px. Ora cerchio 86 px e margine 8 px: il simbolo è di 70 px. */
+:is(#_p1,body):is(#_p2,body):is(#_p3,body) body.pagina-interna .row-testata .testata-icone .tile .ico-vetro,
+body.pagina-interna .row-testata .testata-icone .tile .ico-vetro{width:86px !important;height:86px !important}
+body.pagina-interna .row-testata .testata-icone .tile .ico-vetro .tile-ico,
+body.pagina-interna .row-testata .testata-icone .tile .tile-ico{width:86px !important;height:86px !important;padding:8px !important}
+body.pagina-interna .row-testata .tiles-icone.testata-icone{grid-template-columns:repeat(auto-fill,minmax(132px,1fr))}
+
+/* 304 · Pronto intervento: simboli ancora più grandi (richiesta Sara 06/11/2026)
+   Cerchio 112 px e simbolo 96 px (prima 86 e 70). Il contenitore passa da 760 a 1000 px così le
+   sei voci restano su una riga; sotto i 900 px scendono su due righe da tre. */
+body.pagina-interna .row-testata .testata-macchine{max-width:min(100%,1000px)}
+body.pagina-interna .row-testata .testata-icone .tile .ico-vetro,
+body.pagina-interna .row-testata .testata-icone .tile .ico-vetro .tile-ico,
+body.pagina-interna .row-testata .testata-icone .tile .tile-ico{width:112px !important;height:112px !important}
+body.pagina-interna .row-testata .testata-icone .tile .tile-ico{padding:8px !important}
+body.pagina-interna .row-testata .tiles-icone.testata-icone{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px 10px}
+@media (max-width:900px){
+  body.pagina-interna .row-testata .tiles-icone.testata-icone{grid-template-columns:repeat(3,minmax(0,1fr))}
+  body.pagina-interna .row-testata .testata-icone .tile .ico-vetro,
+  body.pagina-interna .row-testata .testata-icone .tile .ico-vetro .tile-ico,
+  body.pagina-interna .row-testata .testata-icone .tile .tile-ico{width:92px !important;height:92px !important}
+}
+
+/* 304b · la sezione 210 tiene le icone della testata su UNA riga con colonne fisse da 96 px (!important)
+   e scorrimento orizzontale su mobile: la nuova misura si adegua a quel layout, non lo sostituisce */
+.pagina-interna .row-testata .tiles-icone.testata-icone{
+  grid-auto-columns:128px !important;gap:12px 14px !important}
+@media (max-width:760px){
+  .pagina-interna .row-testata .tiles-icone.testata-icone{grid-auto-columns:104px !important}
+  body.pagina-interna .row-testata .testata-icone .tile .ico-vetro,
+  body.pagina-interna .row-testata .testata-icone .tile .ico-vetro .tile-ico,
+  body.pagina-interna .row-testata .testata-icone .tile .tile-ico{width:92px !important;height:92px !important}
+}
+
+/* 304c · stesso peso di selettore della 210 (ha :is(#_p,body)): senza non vince */
+:is(#_q1,body):is(#_q2,body):is(#_q3,body).pagina-interna .row-testata .tiles-icone.testata-icone{
+  grid-auto-columns:128px !important;gap:12px 14px !important}
+@media (max-width:760px){
+  :is(#_q1,body):is(#_q2,body):is(#_q3,body).pagina-interna .row-testata .tiles-icone.testata-icone{grid-auto-columns:104px !important}
+}
+
+/* 304d · fascia intermedia (761–900 px): la riga da 838 px superava il blocco, quindi il
+   comportamento compatto (colonne da 104 px, scorrimento se serve) parte già a 900 px */
+@media (max-width:900px){
+  :is(#_q1,body):is(#_q2,body):is(#_q3,body).pagina-interna .row-testata .tiles-icone.testata-icone{grid-auto-columns:104px !important}
+  :is(#_q1,body):is(#_q2,body):is(#_q3,body).pagina-interna .row-testata.testata-breve > .block > .testata-macchine{
+    width:auto !important;max-width:100% !important;overflow-x:auto}
+}
+

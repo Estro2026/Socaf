@@ -455,7 +455,8 @@
     lavastoviglie: ['GREEN CLEAN LAVASTOVIGLIE', 'GREEN CLEAN BRILLANTANTE', 'NEW TEC BRIL H', 'NEW TEC EXTRA'],
     lavanderia: ['BCLEAN VORTEX', 'B-CLEAN FIBRA', 'B-CLEAN CLORACTIVE', 'B-CLEAN TEXTIL']
   };
-  var CONSIGLIATI_FAMIGLIA = { 'lavastoviglie': 'lavastoviglie', 'lavatrici': 'lavanderia' };
+  /* tolti da Lavastoviglie e Lavatrici su richiesta di Sara (06/11/2026): restano solo in home e nell'hub BClean */
+  var CONSIGLIATI_FAMIGLIA = {};
   function consigliatiCards(chiave) {
     return (CONSIGLIATI[chiave] || []).map(function (nome, i) {
       var p = bcleanTrova(nome); if (!p) return '';
@@ -1005,7 +1006,9 @@
     set('[data-m-modello]', esc(p.nome));
     /* galleria: foto segnaposto */
     var gm = document.querySelector('.gallery-main[data-m-generico]');
-    if (gm) { gm.classList.remove('ph'); gm.innerHTML = '<img src="' + BASE + 'assets/images/categorie/prod-' + (sc.i % 4 + 1) + '.jpg" alt="">'; }
+    /* via tutte le classi del segnaposto, non solo .ph: .ph-volume lasciava il
+       fondo sfumato e il triangolo di luce (::after) sopra la fotografia */
+    if (gm) { gm.classList.remove('ph', 'ph-volume', 'ph-pattern', 'ph-img'); gm.innerHTML = '<img src="' + BASE + 'assets/images/categorie/prod-' + (sc.i % 4 + 1) + '.jpg" alt="">'; }
     var sk = document.querySelector('.skel[data-m-generico]');
     if (sk) sk.outerHTML = '<p style="margin:0"><span class="todo">[DESCRIZIONE DA FORNIRE dal cliente: impieghi e modalità d\'uso]</span></p>';
     /* specifiche: i dati che abbiamo */
@@ -2733,7 +2736,7 @@
        colonna: invece di spezzarla a metà si rimpicciolisce il titolo quanto basta,
        con un limite sotto il quale non si scende. */
     function titoloCheEntra(h) {
-      h.style.fontSize = '';
+      h.style.removeProperty('font-size');
       var base = parseFloat(getComputedStyle(h).fontSize), disp = h.clientWidth;
       if (!disp || !base) return;
       /* misura con un gemello nascosto dentro lo stesso titolo: così eredita font,
@@ -2748,7 +2751,9 @@
         largo = Math.max(largo, g.getBoundingClientRect().width);
       });
       g.remove();
-      if (largo > disp) h.style.fontSize = Math.max(base * 0.62, base * (disp / largo)) + 'px';
+      /* 6% di margine: a misura esatta l'arrotondamento dei pixel faceva
+         sbordare la parola di un soffio e il browser la spezzava lo stesso */
+      if (largo > disp * 0.94) h.style.setProperty('font-size', Math.max(base * 0.58, base * (disp * 0.94 / largo)) + 'px', 'important');
     }
 
     function misura() {
@@ -2764,6 +2769,20 @@
       });
     }
     misura();
+    /* la colonna del titolo cambia larghezza dopo il primo calcolo (arrivano galleria,
+       modulo, caratteri): si rifà la misura ogni volta che una testata cambia larghezza */
+    if ('ResizeObserver' in window) {
+      var ultimaL = new WeakMap(), tm;
+      var ro = new ResizeObserver(function (voci) {
+        var cambiata = voci.some(function (v) {
+          var w = Math.round(v.contentRect.width), p = ultimaL.get(v.target);
+          ultimaL.set(v.target, w);
+          return p !== undefined && p !== w;
+        });
+        if (cambiata) { clearTimeout(tm); tm = setTimeout(misura, 60); }
+      });
+      testate.forEach(function (b) { ro.observe(b); });
+    }
     window.addEventListener('load', misura);
     window.addEventListener('resize', function () { clearTimeout(misura.t); misura.t = setTimeout(misura, 120); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(misura);
@@ -3720,7 +3739,10 @@
       /* stesso modulo della home: sottotitolo e azioni (invio, WhatsApp; il Numero Verde è nella barra) */
       var sub = r.querySelector('.form-sub'); if (sub) sub.textContent = 'Verrai contattato da un nostro consulente entro 48 ore.';
       var inv = r.querySelector('.form button[type="submit"]'), az = inv && inv.parentElement;
-      if (az && !az.querySelector('.btn-whatsapp')) {
+      /* modulo di candidatura (Lavora con noi): niente WhatsApp, solo l'invio (richiesta Sara 06/11/2026) */
+      var candidatura = inv && /candidatura/i.test(inv.textContent);
+      if (candidatura && az) az.querySelectorAll('.btn-whatsapp').forEach(function (x) { x.remove(); });
+      if (az && !candidatura && !az.querySelector('.btn-whatsapp')) {
         az.querySelectorAll('a.btn').forEach(function (x) { x.remove(); });
         az.insertAdjacentHTML('beforeend', "<a class=\"btn btn-whatsapp\" href=\"https://wa.me/\" target=\"_blank\" rel=\"noopener\" aria-label=\"Scrivici su WhatsApp, numero da fornire (si apre in una nuova scheda)\"> <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z\"/></svg> WhatsApp</a>");
       }
@@ -3857,6 +3879,18 @@
   function decoraVI() {
     document.body.insertAdjacentHTML('afterbegin', '<div class="vi-bg" aria-hidden="true"><span class="vi-bolla b1"></span><span class="vi-bolla b2"></span></div>');
     var tipi = ['frost', 'contour', 'ribbed'], k = 0;
+    /* Pagine famiglia: la fascia va alle sezioni BIANCHE a piena larghezza, in ordine, non a una
+       posizione fissa. Con la riga promo nascosta (Lavastoviglie, Lavatrici) la posizione si sfasava
+       e la fascia finiva su una striscia a contorno. Nelle famiglie con la promo il risultato è lo stesso. */
+    if (document.querySelector('[data-tpl="famiglia"]')) {
+      [].slice.call(document.querySelectorAll('.wrap > .row')).forEach(function (r, i) {
+        if (i === 0 || r.hidden || r.classList.contains('wf-doc') || !r.classList.contains('t-bianca') || !r.classList.contains('t-piena') ||
+            r.classList.contains('row-striscia') || r.querySelector('form, .form')) return;
+        ['vi-band', 'vi-band--frost', 'vi-band--contour', 'vi-band--ribbed'].forEach(function (c) { r.classList.remove(c); });
+        r.classList.add('vi-band', 'vi-band--' + tipi[k++ % 3]);
+      });
+      return;
+    }
     [].slice.call(document.querySelectorAll('.wrap > .row')).forEach(function (r, i) {
       if (i === 0 || i % 3 !== 1 || r.classList.contains('wf-doc')) return;
       r.classList.add('vi-band', 'vi-band--' + tipi[k++ % 3]);
@@ -4063,30 +4097,44 @@
       });
     })();
     /* niente parola sola sull'ultima riga, in ogni browser: le ultime due parole di titoli e testi
-       sono unite da uno spazio indivisibile; i trattini dell'ultima parola (« i-mop ») non spezzano */
+       sono unite da uno spazio indivisibile; i trattini dell'ultima parola (« i-mop ») non spezzano.
+       Il blocco unito si usa SOLO se entra nella riga: si misura a font caricato (con il carattere
+       di ripiego, più stretto, il blocco sembrava entrare e poi la parola si spezzava) e si rifà
+       quando la finestra cambia larghezza. Si parte sempre dal testo originale. */
     (function nienteVedove() {
-      document.querySelectorAll('h1, h2, h3, h4, p, li, dd, .card-desc, .formula-p, .card-name, .formula-h').forEach(function (el) {
-        if (el.closest('.devnote, script, style, [contenteditable], .row-striscia, .row-settori, .striscia-scheda')) return;
-        var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), n, last = null;
-        while ((n = w.nextNode())) if (n.nodeValue.trim()) last = n;
-        if (!last) return;
-        var v = last.nodeValue.replace(/\s+$/, ''), coda = last.nodeValue.slice(v.length);
-        var i = v.lastIndexOf(' ');
-        if (i < 0 || el.textContent.trim().split(/\s+/).length < 3) return;
-        var parola = v.slice(i + 1).replace(/-/g, '‑');
-        /* se le due parole unite non entrano nella riga il blocco indivisibile verrebbe
-           spezzato a metà parola (« DISINCHIOSTRA / TA »): in quel caso si lascia lo
-           spazio normale, meglio una parola sola in fondo che una parola tagliata */
-        var pre = v.slice(0, i), j = pre.lastIndexOf(' ');
-        var g = document.createElement('span');
-        g.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none';
-        g.textContent = pre.slice(j + 1) + ' ' + parola;
-        el.appendChild(g);
-        var entra = g.getBoundingClientRect().width <= el.clientWidth;
-        g.remove();
-        if (!entra) return;
-        last.nodeValue = v.slice(0, i) + ' ' + parola + coda;
-      });
+      var NBSP = ' ', NBH = '‑';
+      function applica() {
+        document.querySelectorAll('h1, h2, h3, h4, p, li, dd, .card-desc, .formula-p, .card-name, .formula-h').forEach(function (el) {
+          if (el.closest('.devnote, script, style, [contenteditable], .row-striscia, .row-settori, .striscia-scheda')) return;
+          var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), n, last = null;
+          while ((n = w.nextNode())) if (n.nodeValue.trim()) last = n;
+          if (!last) return;
+          if (el.dataset.vedova) {      /* già applicato: torna al testo originale */
+            var m = last.nodeValue.match(/^([\s\S]*?) ([^\s ]*)(\s*)$/);
+            if (m) last.nodeValue = m[1] + ' ' + m[2].replace(/‑/g, '-') + m[3];
+            delete el.dataset.vedova;
+          }
+          var v = last.nodeValue.replace(/\s+$/, ''), coda = last.nodeValue.slice(v.length);
+          var i = v.lastIndexOf(' ');
+          if (i < 0 || el.textContent.trim().split(/\s+/).length < 3) return;
+          var parola = v.slice(i + 1).replace(/-/g, NBH);
+          var pre = v.slice(0, i), j = pre.lastIndexOf(' ');
+          var g = document.createElement('span');
+          g.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;pointer-events:none';
+          g.textContent = pre.slice(j + 1) + ' ' + parola;
+          el.appendChild(g);
+          var cs = getComputedStyle(el);
+          var utile = el.clientWidth - parseFloat(cs.paddingLeft || 0) - parseFloat(cs.paddingRight || 0);
+          var entra = g.getBoundingClientRect().width <= utile * 0.97;
+          g.remove();
+          if (!entra) return;
+          last.nodeValue = v.slice(0, i) + NBSP + parola + coda;
+          el.dataset.vedova = '1';
+        });
+      }
+      applica();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(applica);
+      var tv; window.addEventListener('resize', function () { clearTimeout(tv); tv = setTimeout(applica, 150); });
     })();
     /* strisce a icone: il titolo su più righe si stringe alla sua riga più lunga,
        così lo stacco dalle icone è sempre quello previsto (40px) e non resta un vuoto */
