@@ -292,7 +292,8 @@
         var moved = [];
         [].slice.call(blk.children).forEach(function (el) {
           if (el.matches && (el.matches('p.small') || el.matches('.notice') || el.matches('p.wordcount'))) moved.push(el);
-          else if (el.tagName === 'P' && el.querySelector(':scope > .todo, :scope > .taskflag, :scope > .openpoint') &&
+          /* il testo introduttivo resta in pagina anche se contiene un segnaposto [DA DEFINIRE…] (15/11/2026) */
+          else if (el.tagName === 'P' && !el.classList.contains('lede') && el.querySelector(':scope > .todo, :scope > .taskflag, :scope > .openpoint') &&
                    el.textContent.replace(/\s+/g, ' ').trim().length < 240) moved.push(el);
         });
         [].slice.call(blk.querySelectorAll('.wf-doc, p.wordcount')).forEach(function (el) {
@@ -500,19 +501,14 @@
     { id: 'iso-14001', sigla: ['ISO', '14001'], nome: 'ISO 14001', sub: 'Gestione ambientale',
       testo: 'La certificazione ISO 14001 garantisce che le nostre attività siano gestite secondo criteri di sostenibilità e responsabilità ambientale. Un impegno concreto volto a ridurre gli impatti ambientali, ottimizzare l\'utilizzo delle risorse e migliorare continuamente le nostre performance.' },
     { id: 'iso-45001', sigla: ['ISO', '45001'], nome: 'ISO 45001', sub: 'Salute e sicurezza sul lavoro',
-      testo: 'ISO 45001 è la certificazione internazionale per i sistemi di gestione della salute e sicurezza sul lavoro. Attesta che un\'azienda adotta procedure e controlli per prevenire infortuni, ridurre i rischi professionali e garantire un ambiente di lavoro sicuro e conforme alle normative vigenti.' },
-    { id: 'cam', sigla: ['CAM'], nome: 'CAM', sub: 'Criteri Ambientali Minimi',
-      testo: 'La conformità ai CAM garantisce il rispetto dei requisiti ambientali previsti dalla normativa italiana per gli acquisti verdi della Pubblica Amministrazione. Un riconoscimento che conferma la nostra attenzione verso sostenibilità, qualità e tutela dell\'ambiente.',
-      link: [['Settore Pubblica Amministrazione', '/settori/pubblica-amministrazione/']] },
-    { id: 'epd', sigla: ['EPD'], nome: 'EPD', sub: 'Dichiarazione ambientale di prodotto',
-      testo: 'Dichiarazione ambientale di prodotto verificata da ente terzo che comunica in modo trasparente gli impatti ambientali di un prodotto lungo l\'intero ciclo di vita, dalla produzione allo smaltimento, secondo standard internazionali.' }
+      testo: 'ISO 45001 è la certificazione internazionale per i sistemi di gestione della salute e sicurezza sul lavoro. Attesta che un\'azienda adotta procedure e controlli per prevenire infortuni, ridurre i rischi professionali e garantire un ambiente di lavoro sicuro e conforme alle normative vigenti.' }
+    /* CAM ed EPD tolti il 16/11/2026: non sono da inserire (indicazione del cliente) */
   ];
   /* Pagina Certificazioni (revisione 04/11/2026): sigilli in alto, ISO 9001 in evidenza con il certificato,
      poi tre gruppi. Solo per ISO 9001 c'è un documento: le altre voci dichiarano che gli estremi vanno confermati. */
   var CERT_GRUPPI = [
     { t: 'Ambiente e sicurezza', ids: ['iso-14001', 'iso-45001'] },
-    { t: 'Prodotti', ids: ['ecolabel', 'epd'] },
-    { t: 'Pubblica Amministrazione', ids: ['cam'] }
+    { t: 'Prodotti', ids: ['ecolabel'] }
   ];
   function certSigillo(c, grande) {
     return '<span class="cert-badge' + (grande ? ' cert-badge-xl' : '') + '" aria-hidden="true">' + c.sigla.map(function (r, i) { return i ? '<b>' + esc(r) + '</b>' : '<span>' + esc(r) + '</span>'; }).join('') + '</span>';
@@ -556,22 +552,22 @@
       'e va verificato se ne esistono altre (es. la politica qualità: <a href="https://www.datocms-assets.com/60899/1715936223-politica-per-la-qualita.pdf" target="_blank" rel="noopener">documento già nel piè di pagina</a>). I loghi ufficiali dei marchi vanno forniti: qui sono sigle tipografiche.</p>' +
       '</section>' + devNote(137, 'Certificazioni', [
         ['Origine', 'Pagina WordPress <code>/azienda/certificazioni/</code> con un Repeater ACF: sigla, nome, sottotitolo, testo, gruppo, dati (facoltativi), PDF (facoltativo), collegamenti.'],
-        ['Struttura', 'Fila di sigilli con ancore · ISO 9001 in evidenza con il certificato e la barra di validità (calcolata sulle date) · tre gruppi: ambiente e sicurezza, prodotti, Pubblica Amministrazione.'],
+        ['Struttura', 'Fila di sigilli con ancore · ISO 9001 in evidenza con il certificato e la barra di validità (calcolata sulle date) · due gruppi: ambiente e sicurezza (ISO 14001, ISO 45001), prodotti (Ecolabel UE). CAM ed EPD tolti il 16/11/2026.'],
         ['Dati', 'Solo ISO 9001 ha un documento: Bureau Veritas, certificato IT335877, valido fino al 17/09/2027, sede di Osio Sotto. Per le altre voci servono estremi: <span class="openpoint">OP-25</span>.'],
-        ['Collegamenti', 'Ecolabel → categoria Ecolabel e linea BClean; CAM → settore Pubblica Amministrazione.']], 'Stima 3 h (proposta)') + '</div>';
+        ['Collegamenti', 'Ecolabel → categoria Ecolabel, linea BClean e settore Pubblica Amministrazione.']], 'Stima 3 h (proposta)') + '</div>';
   }
 
   /* Integrazione Socaf · Bottoni · Tecno Clean — testi PROPOSTA ricavati da fatti del cliente e dell'agenzia: da validare */
   var VANTAGGI = [
-    { t: 'Ampliamento dell\'offerta', b: 'Macchine, detergenti, carta, attrezzature e consumabili in un unico fornitore.',
+    { t: 'Un\'offerta più completa', b: 'Un solo fornitore per macchine, detergenti, carta, attrezzature e consumabili.',
       e: 'Alle macchine Socaf si aggiungono i detergenti, la carta e i consumabili in cui Tecno Clean è specializzata, e nuove famiglie di macchine, dalle lavastoviglie alle lavatrici.' },
-    { t: 'Maggiore copertura territoriale', b: 'Cinque sedi tra Lombardia, Veneto e Friuli.',
+    { t: 'Una rete più estesa sul territorio', b: 'Cinque sedi, da Milano fino a Pordenone.',
       e: 'Cinque sedi tra Lombardia, Veneto e Friuli: Osio Sotto, Castenedolo, Mazzo di Rho, Settimo di Pescantina e Cordenons.' },
-    { t: 'Competenze complementari', b: 'Tre esperienze diverse, dalle imprese di servizi all\'Ho.Re.Ca.',
+    { t: 'Competenze complementari', b: 'Esperienza su macchine, imprese di servizi e settore Ho.Re.Ca.',
       e: 'Tre realtà con esperienze diverse: Socaf sulle macchine, Bottoni sulle imprese di servizi, Tecno Clean sull\'Ho.Re.Ca. e sui consumabili.' },
-    { t: 'Maggiore capacità di assistenza', b: 'Pronto intervento e assistenza tecnica da cinque sedi.',
+    { t: 'Assistenza tecnica più estesa', b: 'Pronto intervento con officine mobili e ricambi originali.',
       e: 'Pronto intervento e assistenza tecnica con officine mobili e un magazzino di ricambi originali. [DA CONFERMARE: da quali sedi]' },
-    { t: 'Nuovi prodotti e servizi', b: 'Nuove famiglie di prodotti e la linea BClean.',
+    { t: 'Nuove famiglie di prodotti', b: 'Lavastoviglie, lavatrici e il marchio BClean.',
       e: 'Nuove famiglie di prodotti — lavastoviglie, macchine del ghiaccio, trattamento acqua, lavatrici ed essiccatoi — e BClean, la nuova linea di detergenti e prodotti in carta.' }
   ];
   function vantaggiHtml(esteso) {
@@ -604,18 +600,18 @@
       '</div>' +
       '<div class="fusione-stage" role="img" aria-label="Socaf, Bottoni e Tecno Clean si uniscono in un\'unica azienda">' +
       '<span class="fc fc-1"><img src="' + BASE + 'assets/logo/socaf21-payoff-rgb-white.svg" alt=""></span>' +
-      '<span class="fc fc-2"><img src="' + BASE + 'assets/Bottoni.webp" alt=""></span>' +
-      '<span class="fc fc-3"><img src="' + BASE + 'assets/Tecnoclean.webp" alt=""></span>' +
+      '<span class="fc fc-2"><img src="' + BASE + 'assets/logo/bottoni-bianco.svg" alt=""></span>' +
+      '<span class="fc fc-3"><img src="' + BASE + 'assets/logo/tecnoclean-bianco.svg" alt=""></span>' +
       '<span class="fc-core"><b>1</b><small>azienda dal<br>1° gennaio 2027</small></span></div>' +
       '<div class="fusione-dati">' +
       '<p class="dato"><small>Oltre</small><b data-count="40000">40.000</b><span>clienti attivi</span></p>' +
       '<p class="dato"><b data-count="5">5</b><span>sedi in Lombardia,<br>Veneto e Friuli</span></p>' +
-      '<p class="dato"><b data-count="3">3</b><span>realtà in<br>un\'unica azienda</span></p>' +
+      '<p class="dato"><b data-count="3">3</b><span>storie, un\'unica azienda</span></p>' +
       (home ? '<p class="dato-nota"><span class="todo">[DA CONFERMARE: 40.000 riferito a Socaf o al gruppo]</span></p>' : '') + '</div>' +
       (home ? vantaggiScena(home) : '') + '</div>';
   }
   function vantaggiScena(home) {
-    return '<h3 class="fusione-sub">Cosa cambia per chi lavora con noi</h3>' +
+    return '<h3 class="fusione-sub">Che cosa cambia per i nostri clienti</h3>' +
       '<ul class="fusione-vantaggi">' + VANTAGGI.map(function (x, i) {
         return '<li style="--i:' + i + '"><span class="fv-ico" aria-hidden="true"><svg viewBox="0 0 24 24">' + ICONE_VANTAGGI[i] + '</svg></span><i class="fv-n" aria-hidden="true">0' + (i + 1) + '</i><b>' + esc(x.t) + '</b><span class="fv-t">' + esc(home ? x.b : x.e) + '</span></li>';
       }).join('') + '</ul>';
@@ -659,11 +655,8 @@
   }
 
   /* BClean — pagina dedicata: testo del cliente + elenco prodotti dal file xlsx */
-  var BCLEAN_TESTO = [
-    'Da questo importante percorso di integrazione tra Socaf, Bottoni e Tecno Clean nasce anche BClean, il nuovo marchio che segna un’evoluzione significativa nel mondo della pulizia professionale. BClean non è soltanto un nome, ma il risultato concreto dell’unione tra le competenze tecniche, la solidità commerciale e l’esperienza maturata nel tempo dalle tre aziende. Tre realtà complementari che, mettendo a fattor comune know‑how, visione e capacità operative, danno vita a un progetto più ampio, moderno e orientato al futuro.',
-    'Con BClean prende forma un’offerta completa e coordinata di prodotti in carta, detergenti professionali e soluzioni chimiche sviluppate per garantire standard elevati di qualità, affidabilità costante e una gestione più semplice, razionale e uniforme delle forniture. L’obiettivo è creare un punto di riferimento unico per tutti i professionisti del settore, capace di semplificare i processi di acquisto, ottimizzare la continuità delle forniture e assicurare un livello di servizio sempre più integrato.',
-    'BClean nasce quindi come un marchio che unisce tradizione e innovazione, mettendo al centro la volontà di offrire ai clienti un’esperienza più fluida, coerente e orientata alla crescita. Un passo avanti importante, che consolida la collaborazione tra le tre aziende e apre la strada a nuove opportunità di sviluppo, ampliando la gamma e rafforzando la presenza sul mercato con un’identità chiara, riconoscibile e affidabile.'
-  ];
+  /* testo della pagina dal copy UX « BClean » (inserito il 15/11/2026) */
+  var BCLEAN_TESTO = ["BClean riunisce in un unico marchio le competenze tecniche, la rete commerciale e l'esperienza di Socaf, Bottoni e Tecno Clean, attive nella pulizia professionale dal 1982, dal 1983 e dal 1992. Il marchio nasce con la fusione delle tre aziende e amplia la gamma di prodotti che Socaf offre ai suoi clienti.", "La gamma comprende detergenti per bagni, superfici e pavimenti, prodotti per l'Ho.Re.Ca. e per la lavanderia, una linea di biocidi e una linea di detergenti con marchio Ecolabel UE. I dieci prodotti Green Clean della linea Ecolabel coprono vetri, bagni, pavimenti, sgrassaggio, piatti a mano e lavastoviglie. La linea Carta comprende bobine, asciugamani e carta igienica. Le confezioni vanno dal flacone da 750 ml alle taniche da 5, 10 e 25 kg, fino ai formati da 200, 1.000 e 1.200 kg per i consumi più alti.", "Con un unico marchio per detergenti e carta, acquisti e riordini passano da un solo fornitore e le forniture restano uniformi nel tempo. I consulenti Socaf indicano per ogni ambiente i prodotti e i dosaggi adatti."];
   function lineaBclean(l) {
     var eco = l.linea === 'Ecolabel';
     return '<section class="bclean-linea' + (eco ? ' is-eco' : '') + '" id="linea-' + slugify(l.linea) + '">' +
@@ -690,11 +683,12 @@
     var nC = 0, nD = 0; carta.forEach(function (l) { nC += l.prodotti.length; }); chim.forEach(function (l) { nD += l.prodotti.length; });
     return '<div class="row row-bclean-testo"><section class="block">' +
       '<span class="block-id">BLOCCO · La linea BClean — <span class="cond">testo del cliente</span></span>' +
+      '<p class="bclean-logo-pag"><img class="bclean-logo" src="' + BASE + 'assets/logo/bclean.svg" alt="BClean" width="198" height="94"></p>' +
       '<div class="testo-pagina"><div class="testo">' + BCLEAN_TESTO.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') + '</div></div>' +
       '</section>' + devNote(140, 'BClean — testo', [
         ['Origine', 'Pagina WordPress figlia di <code>/prodotti-per-la-pulizia/</code> con il testo fornito dal cliente (3 paragrafi), non riscritto.'],
         ['Posizione', 'Voce dedicata nell\'area detergenti, consumabili e attrezzature: banner in cima all\'hub, non una delle 13 categorie.'],
-        ['Attenzione', 'Non esiste ancora una pagina pubblica del marchio. Logo BClean: da fornire.']], 'Stima 1 h (proposta)') + '</div>' +
+        ['Attenzione', 'Non esiste ancora una pagina pubblica del marchio. Logo BClean: ricevuto il 16/11/2026 in SVG (<code>assets/logo/bclean.svg</code>). Manca una versione bianca per i fondi scuri.']], 'Stima 1 h (proposta)') + '</div>' +
       '<div class="row row-bclean-prodotti"><section class="block">' +
       '<span class="block-id">BLOCCO · I prodotti BClean — <span class="cond">elenco dal file del cliente</span></span>' +
       '<h2>I prodotti BClean</h2>' +
@@ -711,6 +705,10 @@
   }
 
   /* Macrosettore Industria: Officine e Edilizia stanno dentro (richiesta Socaf) */
+  var DESC_DENTRO_IND = {
+    'officine-metalmeccanica': 'Lavapezzi, aspiratori per trucioli e idropulitrici a caldo',
+    'edilizia-cantieri': 'Aspiratori, idropulitrici e spazzatrici'
+  };
   function righeMacroIndustria(I) {
     var figli = Object.keys(I.lista).filter(function (k) { return I.lista[k].padre === 'industria'; });
     return '<div class="row row-macrosettore"><section class="block">' +
@@ -720,7 +718,9 @@
         var v = I.lista[k], nomi = (v.subs || []).slice(0, 3).map(function (sk) { return CAT && CAT.SOTTO[sk] ? CAT.SOTTO[sk].nome.toLowerCase() : ''; }).filter(Boolean);
         return '<article class="card"><div class="card-media foto"><img src="' + BASE + 'assets/images/categorie/sett-' + k + '.jpg" alt="' + esc(v.nome) + '" loading="lazy"></div>' +
           '<div class="card-body"><span class="card-name">' + esc(v.nome) + '</span>' +
-          (nomi.length ? '<span class="card-meta">Macchine: ' + esc(nomi.join(', ')) + '</span>' : '') +
+          /* testo della card dal copy UX « D9 Industria · aggiornamento novembre 2026 » (15/11); se manca, l'elenco automatico */
+          (DESC_DENTRO_IND[k] ? '<span class="card-meta">' + esc(DESC_DENTRO_IND[k]) + '</span>'
+            : nomi.length ? '<span class="card-meta">Macchine: ' + esc(nomi.join(', ')) + '</span>' : '') +
           a(I.base + k + '/', 'Vedi', 'card-link') + '</div></article>';
       }).join('') + '</div>' +
       '<p class="small">Officine e metalmeccanica ed Edilizia e cantieri sono dentro il macrosettore Industria: non compaiono più tra i settori di primo livello. Gli indirizzi restano quelli di oggi.</p>' +
@@ -729,17 +729,17 @@
         ['URL', '<b>Non cambiano</b>: la gerarchia è di navigazione (menu annidato, briciole), non di indirizzo. <span class="openpoint">OP-20</span>'],
         ['Menu', 'Voci annidate sotto Industria nella tendina Settori; nei settori di primo livello restano sette voci in ordine alfabetico.']], 'Stima 1,5 h (proposta)') + '</div>';
   }
-  /* Pubblica Amministrazione: acquisti verdi → CAM ed Ecolabel (testi del cliente) */
+  /* Pubblica Amministrazione: acquisti verdi → Ecolabel (testi del cliente); CAM tolto il 16/11/2026 */
   function righePAVerdi() {
     var pick = function (id) { return CERT.filter(function (c) { return c.id === id; })[0]; };
     return '<div class="row row-pa-verdi"><section class="block">' +
       '<span class="block-id">BLOCCO · Acquisti verdi — <span class="cond">proposta per il nuovo settore</span></span>' +
       '<h2>Acquisti verdi nella Pubblica Amministrazione</h2>' +
-      '<div class="grid grid-2 pa-grid">' + ['cam', 'ecolabel'].map(function (id) {
+      '<div class="grid grid-2 pa-grid">' + ['ecolabel'].map(function (id) {
         var c = pick(id);
         return '<article class="card cert-mini pa-card">' + certSigillo(c, true) + '<div class="card-body"><span class="pa-kicker">' + (id === 'cam' ? 'Criteri ambientali minimi' : 'Marchio di qualità ecologica') + '</span><h3 class="card-name">' + esc(c.nome) + '</h3><p class="card-desc">' + esc(c.testo) + '</p>' + a('/azienda/certificazioni/#' + id, 'Vai alla certificazione', 'card-link') + '</div></article>';
       }).join('') + '</div></section>' + devNote(143, 'Acquisti verdi (Pubblica Amministrazione)', [
-        ['Origine', 'Blocco statico con due card dalla pagina Certificazioni (CAM, Ecolabel UE); testi del cliente.'],
+        ['Origine', 'Blocco statico con la card Ecolabel UE della pagina Certificazioni; testi del cliente. La card CAM è stata tolta il 16/11/2026 (CAM non da inserire).'],
         ['Stato', 'Proposta per il settore nuovo: non richiesta esplicitamente. <span class="openpoint">OP-20</span>']], 'Stima 0,5 h (proposta)') + '</div>';
   }
 
@@ -756,11 +756,22 @@
     set('[data-sub-crumb-fam]', a('/' + s.fam + '/', fam.nome));
     set('[data-sub-crumb]', esc(fam.nuova ? s.nome : fam.nome + ' ' + s.nome.toLowerCase()));
     set('[data-sub-h1]', esc(s.h1));
-    set('[data-sub-intro]', esc(fam.intro));
-    set('[data-sub-h2]', fam.nuova ? esc(s.h1) : 'Le ' + esc(fam.nome.toLowerCase()) + ' ' + esc(s.nome.toLowerCase()));
+    var CS = COPY_UX_SUB[key];
+    if (CS) {
+      var TT = window.SOCAF_TESTI || {};
+      if (!TT[FONTE]) TT[FONTE] = { s: CS.schede.map(function (x) { return { h: x.h, b: x.b }; }) };
+      faqDa(CS.faq);
+      [['title', CS.title], ['description', CS.meta]].forEach(function (m) {
+        var el = document.head.querySelector('meta[name="' + m[0] + '"]');
+        if (!el) { el = document.createElement('meta'); el.name = m[0]; document.head.appendChild(el); }
+        el.content = m[1];
+      });
+    }
+    set('[data-sub-intro]', CS ? segnaposto(esc(CS.intro)) : esc(fam.intro));
+    set('[data-sub-h2]', CS ? esc(CS.h2) : fam.nuova ? esc(s.h1) : 'Le ' + esc(fam.nome.toLowerCase()) + ' ' + esc(s.nome.toLowerCase()));
     set('[data-sub-list]', list.map(cardMacchina).join(''));
     set('[data-sub-count]', list.length ? list.length + (list.length === 1 ? ' macchina' : ' macchine') : 'Prodotti da definire');
-    set('[data-sub-approf]', 'Come si sceglie: ' + esc(s.h1.toLowerCase()));
+    set('[data-sub-approf]', CS ? esc(CS.h2Approf) : 'Come si sceglie: ' + esc(s.h1.toLowerCase()));
     set('[data-sub-faq-title]', 'Domande frequenti');
     set('[data-sub-words]', s.lungo ? 'LUNGHEZZA PREVISTA · 400–600 PAROLE — una delle 8 sottocategorie con domanda misurabile'
                                     : 'LUNGHEZZA PREVISTA · 200–300 PAROLE — sottocategoria senza domanda misurabile');
@@ -785,6 +796,8 @@
      solo dove il documento li cambia. Le schede sono le prime sei sezioni del testo di approfondimento;
      null = scheda invariata, h = null = titolo invariato. */
   var COPY_UX = {
+    /* famiglia nuova: copy UX « D3 Lavastoviglie », inserito il 15/11/2026 (su socaf.it la pagina non esiste) */
+    lavastoviglie: {"title": "Lavastoviglie professionali per bar e ristoranti | Socaf", "meta": "Lavastoviglie professionali: lavabicchieri, lavapiatti, lavaoggetti, a traino e trattamento acqua. Installazione e assistenza Socaf.", "intro": "Le lavastoviglie professionali lavano piatti, bicchieri, vassoi e utensili di bar, ristoranti e mense, con detergente e brillantante dosati in automatico. Socaf installa le macchine e tara i sistemi di dosaggio.", "schede": [{"h": null, "b": ["Sono macchine per il lavaggio delle stoviglie in bar, ristoranti, mense e cucine collettive. Detergente e brillantante si dosano in automatico, con dosatori installati e regolati da tecnici qualificati. Il lavaggio avviene tra 45 e 60 °C, il risciacquo tra 83 e 90 °C: in questa fase il brillantante fa asciugare le stoviglie più in fretta e senza aloni."]}, {"h": null, "b": ["Si parte da che cosa si lava: bicchieri, piatti, vassoi o utensili. Contano poi l'altezza utile di passaggio, che nella serie AS arriva a 40 cm per vassoi e piatti pizza, e la durezza dell'acqua di rete, che incide sui dosaggi di detergente."]}, {"h": null, "b": ["Nella serie AS le lavabicchieri lavorano con cesti da 40×40 cm e le lavapiatti con cesti da 50×50 cm. Tra le lavapiatti ci sono anche modelli a cappottina, a cesto singolo o doppio. Le lavaoggetti trattano utensili, teglie e parti smontabili dei macchinari da cucina. I sistemi di trattamento acqua, tra cui gli addolcitori, preparano l'acqua che alimenta la macchina. [DA DEFINIRE CON SOCAF: caratteristiche delle lavastoviglie a traino]"]}, {"h": null, "b": ["Bar, caffetterie e gelaterie usano soprattutto le lavabicchieri. Ristoranti, mense e ristorazione collettiva lavorano con lavapiatti e lavaoggetti. [DA DEFINIRE CON SOCAF: ambienti d'uso delle lavastoviglie a traino e altri settori serviti]"]}, {"h": null, "b": ["[DA DEFINIRE CON SOCAF: fattori che incidono sul costo e formule disponibili, acquisto o noleggio]"]}, {"h": null, "b": ["Socaf cura la manutenzione di lavastoviglie e lavabicchieri e offre il pronto intervento con furgoni attrezzati. I tecnici formano gli operatori sull'uso corretto di macchine e prodotti. La taratura dei dosatori adegua detergente e brillantante alla durezza dell'acqua, e la manutenzione periodica comprende la disincrostazione con un prodotto acido specifico per lavastoviglie."]}], "faq": ["Che differenza c'è tra lavabicchieri e lavapiatti?", "Serve un sistema di trattamento dell'acqua?", "Quanto costa una lavastoviglie professionale?", "Si può noleggiare una lavastoviglie professionale?", "Che assistenza è compresa?"]},
     lavapavimenti: {
       title: 'Lavapavimenti professionali e lavasciuga industriali | Socaf',
       meta: 'Lavapavimenti professionali e lavasciuga pavimenti industriali: piccole, uomo a terra, uomo a bordo, combinate e i-mop. Nuove, a noleggio o usate.',
@@ -910,9 +923,19 @@
   /* promo noleggio/usato: il copy UX vale per tutte le famiglie che hanno un documento */
   var COPY_UX_PROMO = { nolKicker: 'Assistenza inclusa', nolH: 'Anche a noleggio', nolP: 'Noleggio a breve o lungo periodo, con consegna inclusa. Ritiro e consegna da tutte e cinque le sedi.',
     usaKicker: 'Garanzia 3-12 mesi', usaH: 'Anche usata', usaP: 'Ricondizionate e controllate prima della consegna. Valutiamo e ritiriamo la tua macchina usata.' };
+  /* domande frequenti dal copy UX: sostituiscono le domande segnaposto del template (le risposte restano da scrivere) */
+  function faqDa(arr) {
+    [].slice.call(document.querySelectorAll('.faq details > summary')).forEach(function (sm, i) {
+      if (arr[i]) sm.textContent = arr[i]; else if (sm.parentNode) sm.parentNode.remove();
+    });
+  }
+  /* COPY UX delle sottocategorie nuove (documenti « D2 … copy per UX »), inserito il 15/11/2026 */
+  var COPY_UX_SUB = {"lavastoviglie/lavabicchieri": {"title": "Lavabicchieri professionali per bar e caffetterie | Socaf", "meta": "Lavabicchieri professionali per bar, caffetterie e gelaterie, anche in acciaio inox a doppia parete. Installazione e assistenza Socaf.", "intro": "Le lavabicchieri professionali lavano bicchieri e tazze di bar, caffetterie, gelaterie e piccola ristorazione. Socaf le installa, tara i dosatori di detergente e brillantante e ne segue la manutenzione.", "h2": "I modelli di lavabicchieri", "h2Approf": "Come si sceglie una lavabicchieri professionale", "schede": [{"h": null, "b": ["Sono lavastoviglie dedicate a bicchieri e tazze, più compatte delle lavapiatti. I modelli della serie AS sono costruiti in acciaio inox, con carrozzeria a doppia parete che li rende silenziosi e isolati termicamente. Un pannello elettronico mostra le fasi del lavaggio, e il brillantante nel risciacquo lascia i bicchieri asciutti e senza aloni."]}, {"h": null, "b": ["Si valutano la dimensione del cesto, 40×40 cm nella serie AS, e l'altezza utile per i bicchieri più alti. Conta anche l'acqua di rete: con acqua dura servono un sistema di trattamento a monte o detergenti e brillantanti formulati per acque dure."]}, {"h": null, "b": ["Nei bar, nelle caffetterie, nelle gelaterie e nella piccola ristorazione."]}], "faq": ["Che differenza c'è tra lavabicchieri e lavapiatti?", "Quanti bicchieri entrano in un cesto?", "Serve un addolcitore per l'acqua?", "Quali detergenti e brillantanti usare?", "Chi installa la macchina e ne cura la manutenzione?"]}, "lavastoviglie/lavapiatti": {"title": "Lavapiatti professionali e a cappottina | Socaf", "meta": "Lavapiatti professionali anche a cappottina, a cesto singolo o doppio, per ristoranti e mense. Installazione e assistenza Socaf.", "intro": "Le lavapiatti professionali lavano piatti, posate, tazze e vassoi di ristoranti, mense e ristorazione collettiva. Socaf propone anche modelli a cappottina, a cesto singolo o doppio, e ne cura installazione e assistenza.", "h2": "I modelli di lavapiatti", "h2Approf": "Come si sceglie una lavapiatti professionale", "schede": [{"h": null, "b": ["Sono lavastoviglie per piatti, posate, tazze e vassoi; nella serie AS lavorano con cesti da 50×50 cm. Nelle versioni a cappottina la macchina lavora un cesto singolo o doppio; su alcuni modelli la cappottina è automatica. Il lavaggio avviene tra 45 e 60 °C, il risciacquo tra 83 e 90 °C."]}, {"h": null, "b": ["Si valutano il volume di stoviglie da lavare, la scelta tra cesto singolo e doppio e l'altezza utile di passaggio, che nella serie AS arriva a 40 cm per vassoi e piatti pizza. La durezza dell'acqua di rete incide sui dosaggi di detergente e brillantante."]}, {"h": null, "b": ["Nei ristoranti, nelle mense, nelle cucine collettive e nel settore alimentare."]}], "faq": ["Quando conviene una lavapiatti a cappottina?", "Che cosa cambia tra cesto singolo e doppio?", "Quanti cesti lava in un'ora?", "Quali detergenti e brillantanti servono?", "Chi installa la macchina e regola i dosatori?"]}, "lavastoviglie/lavaoggetti": {"title": "Lavaoggetti professionali per cucine | Socaf", "meta": "Lavaoggetti professionali per utensili, teglie e parti smontabili dei macchinari da cucina, anche con sporco incrostato. Assistenza Socaf.", "intro": "Le lavaoggetti professionali lavano utensili, teglie e parti smontabili dei macchinari da cucina, anche con sporco incrostato. Socaf le installa e ne segue manutenzione e assistenza.", "h2": "I modelli di lavaoggetti", "h2Approf": "Come si sceglie una lavaoggetti professionale", "schede": [{"h": null, "b": ["Sono macchine per lavare utensili, teglie e parti smontabili dei macchinari impiegati nella preparazione degli alimenti. Lo sporco organico incrostato o essiccato si rimuove con detergenti concentrati specifici per lavaoggetti."]}, {"h": null, "b": ["[DA DEFINIRE CON SOCAF: criteri di scelta, dimensioni della vasca e degli oggetti da lavare] Con acque dure e molto dure servono detergenti formulati per queste condizioni. Per lo sporco più tenace, l'ammollo in uno sgrassante a bassa schiuma prepara gli oggetti al lavaggio."]}, {"h": null, "b": ["Nelle cucine di ristoranti e mense e nei laboratori del settore alimentare."]}], "faq": ["Che differenza c'è tra lavaoggetti e lavapiatti?", "Quali oggetti si possono lavare?", "Serve l'ammollo prima del lavaggio?", "Quali detergenti usare con acque dure?", "Chi installa la macchina e ne cura la manutenzione?"]}, "lavastoviglie/lavastoviglie-a-traino": {"title": "Lavastoviglie a traino professionali | Socaf", "meta": "Lavastoviglie a traino professionali per la ristorazione. Installazione, taratura dei dosatori e assistenza tecnica Socaf.", "intro": "Le lavastoviglie a traino sono lavastoviglie professionali per la ristorazione. [DA DEFINIRE CON SOCAF: come funzionano e per quali volumi di lavaggio] Socaf le installa e ne cura manutenzione e assistenza.", "h2": "Modelli di lavastoviglie", "h2Approf": "Come si sceglie una lavastoviglie a traino", "schede": [{"h": null, "b": ["[DA DEFINIRE CON SOCAF: che cosa sono e come funzionano le lavastoviglie a traino]"]}, {"h": null, "b": ["[DA DEFINIRE CON SOCAF: criteri di scelta] La durezza dell'acqua di rete incide sui dosaggi di detergente e brillantante."]}, {"h": null, "b": ["[DA DEFINIRE CON SOCAF: ambienti d'uso]"]}], "faq": ["Come funziona una lavastoviglie a traino?", "Per quanti coperti è indicata?", "Quanto spazio serve per installarla?", "Quali detergenti e brillantanti usare?", "Che assistenza è compresa?"]}, "lavastoviglie/trattamento-acqua": {"title": "Trattamento acqua per lavastoviglie | Socaf", "meta": "Addolcitori e sistemi di trattamento acqua per lavastoviglie e lavabicchieri professionali, con i marchi Walo e Brita. Chiedi a Socaf.", "intro": "I sistemi di trattamento acqua depurano l'acqua di rete che alimenta lavastoviglie e lavabicchieri professionali: addolcitori, filtri a cartuccia, decarbonatori o impianti a osmosi inversa. Socaf propone sistemi Walo e Brita.", "h2": "I sistemi di trattamento acqua", "h2Approf": "Come si sceglie un sistema di trattamento acqua", "schede": [{"h": null, "b": ["Gli addolcitori agiscono sulla durezza dell'acqua; filtri a cartuccia, decarbonatori e impianti a osmosi inversa la depurano con tecniche diverse."]}, {"h": null, "b": ["La scelta dipende dalla durezza dell'acqua di rete e dalla macchina da alimentare. Il sistema adottato incide anche sul detergente: per acque depurate esistono formulazioni specifiche, e con l'osmosi inversa i dosaggi scendono rispetto ai filtri a cartuccia."]}, {"h": null, "b": ["A monte di lavastoviglie e lavabicchieri in bar, ristoranti e mense. Alcune lavabicchieri integrano l'osmosi inversa nella macchina."]}], "faq": ["Quando serve un addolcitore?", "Che differenza c'è tra addolcitore e osmosi inversa?", "Ogni quanto si sostituisce la cartuccia del filtro?", "Il trattamento acqua cambia il dosaggio del detergente?", "Chi installa il sistema e ne cura la manutenzione?"]}};
   function applicaCopyUx(key) {
     var C = COPY_UX[key]; if (!C) return null;
-    var T = (window.SOCAF_TESTI || {})['/' + key + '/'];
+    var TT = window.SOCAF_TESTI || {}, T = TT['/' + key + '/'];
+    if (!T && C.schede) T = TT['/' + key + '/'] = { s: C.schede.map(function () { return { h: null, b: [] }; }) };
+    if (C.faq) faqDa(C.faq);
     if (T && T.s && C.schede) C.schede.forEach(function (sc, i) {
       if (!sc || !T.s[i]) return;
       if (sc.h) T.s[i].h = sc.h;
@@ -930,7 +953,7 @@
       '<dt>Title</dt><dd>' + esc(C.title) + '</dd><dt>Meta description</dt><dd>' + esc(C.meta) + '</dd>' +
       '<dt>Dove</dt><dd>Plugin SEO (Yoast / Rank Math) della pagina di archivio della famiglia. Nel mockup sono anche nell\'<code>&lt;head&gt;</code>, generati dallo script.</dd>' +
       '<dt>Alt delle immagini</dt><dd>Card delle tipologie: nome della tipologia' + (C.alt ? ' (eccezioni: ' + Object.keys(C.alt).map(function (k) { return '«' + esc(C.alt[k]) + '»'; }).join(', ') + ')' : '') +
-      '. Noleggio: «' + esc(C.promo.nolAlt || 'Consegna di una macchina Socaf a noleggio') + '». Usato: «' + esc(C.promo.usaAlt || 'Macchine nello showroom Socaf') + '».</dd></dl></div>');
+      '. Noleggio: «' + esc((C.promo || {}).nolAlt || 'Consegna di una macchina Socaf a noleggio') + '». Usato: «' + esc((C.promo || {}).usaAlt || 'Macchine nello showroom Socaf') + '».</dd></dl></div>');
     return C;
   }
 
@@ -1190,6 +1213,26 @@
     '/servizi/soluzioni-finanziarie/': { h1: 'Soluzioni di finanziamento per le macchine per la pulizia', lede: 'Per l\'acquisto di lavapavimenti, idropulitrici e altre macchine per la pulizia, Socaf propone formule di finanziamento e di pagamento su misura.',
       title: 'Finanziamento macchine pulizia: soluzioni su misura | Socaf', meta: 'Finanziamento macchine pulizia: Socaf propone soluzioni di pagamento su misura per l\'acquisto di lavapavimenti e idropulitrici. Chiedi informazioni.' }
   };
+  /* copy UX per pagina (15/11/2026): sostituzioni per indice sulle sezioni della pagina, senza toccare TESTI
+     (le fonti come /socaf/ o /careers/ servono anche altrove). { indice: { h, b } }, un array dentro b = elenco puntato */
+  var COPY_UX_SEZ = {};
+
+  /* Azienda: copy UX consegnati a ottobre, inseriti il 15/11/2026 */
+  COPY_UX_PAG["/azienda/chi-siamo/"] = {"title": "Socaf chi siamo: soluzioni per il cleaning professionale", "meta": "Socaf chi siamo: tre realtà del cleaning professionale diventate un’unica azienda, con cinque sedi tra Lombardia, Veneto e Friuli. Chiama 800 480110.", "lede": "Siamo una famiglia di specialisti della pulizia professionale e mettiamo al primo posto chi lavora in Socaf e chi si affida a noi."};
+  COPY_UX_PAG["/azienda/innovazione-tecnologica/"] = {"title": "Socaf innovazione tecnologica: macchine per la pulizia", "meta": "Socaf innovazione tecnologica: ufficio studi interno, fornitori certificati e robot per la pulizia professionale. Richiedi maggiori informazioni.", "lede": "L’innovazione tecnologica di Socaf mette insieme prodotti di qualità e tecnologie avanzate: soluzioni su misura che semplificano il lavoro e velocizzano i processi di pulizia e igienizzazione professionale, costruite ascoltando le richieste di ogni cliente."};
+  COPY_UX_PAG["/azienda/il-nostro-impegno/"] = {"title": "Socaf il nostro impegno: territorio, sport e ambiente", "meta": "Socaf il nostro impegno: iniziative sociali a Osio Sotto, sostegno allo sport, progetti con le scuole e attenzione all’ambiente.", "lede": "Socaf affianca al lavoro l’impegno sociale: sostiene il territorio di Osio Sotto e lo sport, collabora con le scuole e riduce l’impatto ambientale di prodotti e processi."};
+  COPY_UX_PAG["/azienda/lavora-con-noi/"] = {"title": "Socaf lavora con noi: formazione, welfare e crescita", "meta": "Socaf lavora con noi: decisioni condivise, formazione continua, smart working e welfare aziendale. Invia il tuo curriculum.", "claim": "La forza di Socaf: le persone", "lede": "Ogni persona porta in Socaf competenze, passioni e storie. Arricchiscono il lavoro quotidiano e fanno del modo di lavorare dell’azienda qualcosa di unico. Per questo Socaf segue ciascuna con un percorso di crescita continuo e attento: parte dall’onboarding, prosegue con l’affiancamento ai responsabili e si estende ai corsi specialistici."};
+  COPY_UX_SEZ["/azienda/chi-siamo/"] = {"0": {"h": "Macchine, prodotti e servizi per gli ambienti di lavoro", "b": ["Socaf fornisce macchine, prodotti e servizi che migliorano la qualità e la vivibilità degli ambienti di lavoro. A ogni cliente proponiamo la soluzione più adatta alla sua attività, valutata su ritorno dell’investimento, prestazioni e funzionalità, e la completiamo con servizi aggiuntivi.", ["Sopralluoghi e test di prevendita sul campo", "Ricerca tecnologica a garanzia di aggiornamento", "Consulenza su misura sulle esigenze del cliente", "Più formule di pagamento personalizzate", "Formazione agli operatori della macchina", "Esperienza nel cleaning professionale dal 1982", "Collaborazione con produttori internazionali selezionati", "Esperienza maturata con clienti importanti, sia industriali sia professionali", "Servizio puntuale e assistenza tecnica sulle macchine", "Presenza sul territorio con cinque sedi e cura del cliente", "Flessibilità e rapidità di risposta alle richieste dei clienti", "Gamma ampia di prodotti e servizi, aggiornata di continuo"]]}, "1": {"h": "Soluzioni dei maggiori produttori internazionali, servizio su misura", "b": ["Socaf propone le soluzioni per il cleaning dei maggiori produttori internazionali e ne aggiorna la gamma grazie alla ricerca tecnologica. A questa offerta si affiancano consulenza, assistenza e supporto, costruiti su misura per il progetto di ogni cliente. Socaf vende e noleggia le macchine, valuta e sostituisce l’usato, fornisce ricambi in pronta consegna. Il servizio poggia su competenza tecnica, tempestività e flessibilità."]}, "2": {"h": "Tre realtà, un’unica azienda", "b": ["Socaf, Bottoni e Tecno Clean sono un’unica azienda dal 1° gennaio 2027: un nuovo riferimento nella distribuzione per la pulizia professionale, con cinque sedi tra Lombardia, Veneto e Friuli.", "Tre realtà complementari hanno messo in comune competenze, logistica e valori per superare i limiti strutturali di ciascuna, affrontare mercati più esigenti e puntare a obiettivi condivisi di crescita, innovazione e sostenibilità. Il risultato è un’offerta più ampia e un referente unico per ogni cliente."]}, "3": {"b": ["Socaf distribuisce in Italia soluzioni per il cleaning professionale dal 1982: vendita, formazione e assistenza tecnica, affidata a tecnici specializzati. Le tre sedi di Osio Sotto, Castenedolo e Mazzo di Rho contano oltre 90 collaboratori, che seguono il cliente dalla scelta della macchina all’assistenza."]}, "4": {"h": "Bottoni per la pulizia civile e sanitaria", "b": ["Bottoni, con sede a Settimo di Pescantina (VR), propone dal 1983 soluzioni per la pulizia industriale negli ambienti civili e sanitari. Le partnership con produttori italiani ed esteri e le certificazioni di settore permettono all’azienda di rispondere alle esigenze più diverse dei clienti con un’offerta sempre aggiornata."]}, "5": {"h": "Tecno Clean per la pulizia professionale", "b": ["Tecno Clean, con sede a Cordenons (PN), vende e noleggia dal 1992 soluzioni e prodotti per il cleaning professionale. Il noleggio riguarda macchine nuove e usate. Il modello distributivo si regge su una logistica strutturata e integrata con gli impianti."]}};
+  COPY_UX_SEZ["/azienda/innovazione-tecnologica/"] = {"0": {"h": "Materiali di qualità, prestazioni e tecnologie evolute", "b": ["Socaf propone prodotti di valore, sviluppati con materiali di qualità e dotati di prestazioni elevate e di tecnologie sempre più evolute. Per Socaf la qualità del prodotto e l’innovazione tecnologica non si separano: procedono insieme nella gamma."]}, "1": {"h": "Gamma sempre aggiornata", "b": ["Socaf segue con attenzione le innovazioni tecnologiche della pulizia professionale e industriale e individua le soluzioni tecnicamente più avanzate, riconosciute a livello mondiale, per offrire ai clienti una gamma aggiornata e all’avanguardia. La gamma comprende macchine lavapavimenti, spazzatrici, idropulitrici, aspiratori e accessori per la pulizia, ai quali si affiancano i robot lavapavimenti e i robot spazzatrici, che rendono la pulizia automatizzata e affidano alle macchine le operazioni con un’efficacia crescente.", "Per Socaf i robot rappresentano il vero futuro della pulizia professionale e mostrano il forte interesse dell’azienda per l’innovazione tecnologica."]}, "2": {"h": "Ricerca per ampliare la gamma", "b": ["Socaf opera nella pulizia professionale dal 1982 e fornisce macchine e prodotti di alto livello: lavapavimenti, spazzatrici, idropulitrici e aspiratori che semplificano il lavoro di igienizzazione in qualsiasi ambiente professionale e lo rendono più agevole.", "Per questo l’azienda considera essenziale ampliare e aggiornare la propria offerta giorno dopo giorno, esplorando nuove prospettive in settori e ambiti legati alla sicurezza e al comfort delle persone."]}, "3": {"h": "Ufficio studi e fornitori del settore", "b": ["Socaf si affida all’esperienza e alla professionalità del suo ufficio studi interno, che cerca nel panorama mondiale del cleaning le soluzioni di pulizia più avanzate per tecnologia e caratteristiche tecniche. Grazie a questo lavoro, le macchine lavapavimenti, le spazzatrici, le idropulitrici e gli aspiratori della gamma rispondono a ogni esigenza tecnica degli ambienti industriali e commerciali: lavano, aspirano, igienizzano e asciugano ogni tipo di sporco.", "Socaf collabora con i fornitori più importanti del cleaning, italiani ed esteri, che garantiscono all’azienda questi vantaggi:", ["Certificazione della qualità dei prodotti", "Miglioramento e aggiornamento continuo delle proposte", "Capacità di sviluppare prodotti sicuri, competitivi e innovativi nel tempo"]]}, "4": {"h": "Criteri di selezione delle soluzioni", "b": ["L’ufficio studi di Socaf valuta con attenzione le proposte dei fornitori, tutti certificati, per lavapavimenti, spazzatrici, idropulitrici, aspiratori, robot lavapavimenti e robot spazzatrici. L’obiettivo è individuare le soluzioni migliori, i prodotti all’avanguardia e quelli più indicati alle esigenze dei clienti.", "Nella gamma Socaf entra solo l’attrezzatura per il cleaning professionale che soddisfa i sei criteri che l’azienda considera fondamentali per ogni proposta:", ["Un posizionamento corretto nella gamma Socaf", "Qualità complessiva riconosciuta nel settore", "Un impiego affidabile e sicuro nel tempo", "La tecnologia più aggiornata disponibile", "Risposta alle esigenze del cliente", "Un prezzo competitivo rispetto al mercato"]]}};
+  COPY_UX_SEZ["/azienda/il-nostro-impegno/"] = {"0": {"b": ["A Osio Sotto, il territorio che accoglie Socaf da sempre, l’azienda ha promosso nel tempo iniziative sociali che coinvolgono collaboratori, figli e famiglie, e continua a farlo. Sono occasioni semplici di incontro, fatte di piccoli gesti, in cui cresce una comunità che si riconosce e che condivide il luogo in cui vive e lavora.", ["Cura dell’oratorio di Osio Sotto: pulizia con collaboratori e famiglie", "Costruzione di alcuni campi da padel e torneo interno organizzato da Socaf", "Aiuto alla Protezione Civile e a diverse associazioni del territorio", "Beneficenza tramite le iniziative di Confindustria BG"]]}, "1": {"b": ["Per Socaf lo sport è un valore che riguarda sia le persone dell’azienda sia il territorio. Ai collaboratori e alle loro famiglie offre convenzioni dedicate; sul territorio sostiene realtà professionistiche, giovanili e dilettantistiche.", "Tra le squadre professionistiche ci sono Vero Volley Milano, Volley Bergamo e Rugby Bergamo. A livello locale il sostegno riguarda padel, tamburello, sci, nuoto, nuoto artistico, calcio e pallavolo.", "Socaf è convinta che lo sport giovi alla crescita delle persone e dell’intera collettività, e per questo lo promuove anche tra i più giovani del territorio.", ["Vero Volley Milano", "Volley Bergamo", "Rugby Bergamo 1950"]]}, "2": {"b": ["Socaf porta il proprio lavoro nelle scuole e accoglie le scuole in azienda. Con diversi istituti scolastici del territorio realizza progetti formativi per la scuola media, le scuole superiori e l’università, ciascuno con obiettivi e finalità specifici. Questi progetti stringono il rapporto tra la scuola e il mondo del lavoro e si basano su una formazione e su un’educazione continue, connesse e complete, aperte a tutti gli attori del territorio."]}, "3": {"b": ["Il PMI Day, promosso da Confindustria, apre le aziende alle scuole. Una classe di scuola media di Osio Sotto è stata ospite dello stabilimento Socaf e ha visto da vicino come si lavora."]}, "4": {"b": ["Al Job festival di Confindustria Bergamo il personale Socaf ha incontrato i ragazzi del Pesenti e del Majorana, due istituti di Bergamo."]}, "5": {"b": ["I PCTO (Percorsi per le Competenze Trasversali e per l’Orientamento) portano gli studenti in azienda. Futuri tecnici e manutentori lavorano con i collaboratori dell’officina Socaf."]}, "6": {"b": ["Studenti di Scienze della comunicazione UNIBG in tirocinio"]}, "7": {"b": ["L’impatto ambientale pesa nelle scelte di Socaf, dai processi interni alla selezione dei prodotti in gamma. I marchi Aquarial e Caldofacile propongono soluzioni sempre più ecosostenibili, alimentate da energie rinnovabili. Nella gamma di pulizia i robot ECOBOT riducono i consumi di acqua ed elettricità e la gamma comprende anche detergenti con certificazione Ecolabel.", "Ogni giorno Socaf lavora per aumentare la consapevolezza dei collaboratori, ridurre i consumi energetici e usare meno carta: abitudini quotidiane che contribuiscono a tutelare l’intero ecosistema."]}};
+  COPY_UX_SEZ["/azienda/lavora-con-noi/"] = {"0": {"h": "Chi entra in Socaf trova un ambiente di ascolto vero: le persone si guardano in faccia, si stringono la mano, le idee vengono accolte e ogni feedback porta a migliorare.", "b": ["In Socaf la crescita è un percorso comune, perché il cambiamento coinvolge tutti. L’azienda valorizza il merito, incoraggia chi propone idee e prende le decisioni dopo un confronto costruttivo. Il principio è lineare: quando una persona cresce, cresce Socaf.", ["Creare opportunità condivise"]]}, "1": {"b": ["L’Academy è il percorso di formazione dei team Socaf: sessioni mirate, approfondimenti e momenti di confronto trasversali."]}, "2": {"b": ["La formazione parte dall’Academy Tech, con percorsi di inserimento a tappe che funzionano come una job rotation guidata, e arriva agli Aperitivi Commerciali, incontri con fornitori e partner che ampliano visione e competenze. In Socaf la crescita professionale non si interrompe."]}, "3": {"b": ["L’inserimento comincia prima del primo giorno, con un programma di benvenuto, le presentazioni e la visita alle filiali Socaf. Dopo due settimane un momento di confronto raccoglie le tue prime impressioni e le tue esigenze."]}, "4": {"b": ["Questionari e confronti dedicati fanno emergere i punti di forza e le aree di miglioramento. Collaboratori e responsabili hanno uno spazio per ascoltarsi con sincerità, crescere insieme e affrontare i temi di ogni giorno."]}, "5": {"b": ["L’Idea Box è una scatola in cui chiunque propone nuove soluzioni a problemi quotidiani di ogni genere. A fine anno un sondaggio premia l’idea migliore; ogni proposta, però, viene valutata e può diventare realtà. È uno strumento semplice per dare spazio alla creatività e al contributo di tutti."]}, "6": {"b": ["Socaf favorisce un equilibrio sano tra lavoro e vita personale con modalità di lavoro flessibili, che migliorano in modo concreto benessere, autonomia e produttività."]}, "7": {"b": ["Gli spazi interni ed esterni sono moderni, luminosi e curati, e una mensa è a disposizione di tutti i collaboratori. Ogni ambiente di Socaf è pensato per lavorare bene e far sentire le persone a proprio agio."]}, "8": {"b": ["Osio Sotto fa parte dell’identità di Socaf. L’azienda sostiene iniziative sociali e sportive e coinvolge collaboratori e famiglie in attività concrete: pulisce l’oratorio, costruisce campi da padel, affianca la Protezione Civile e le associazioni locali."]}, "9": {"b": ["Socaf riconosce il lavoro dei collaboratori con premi in welfare, assegnati in base a obiettivi chiari, condivisi e misurati. È un incentivo concreto alla crescita personale e professionale."]}, "10": {"b": ["Team building, eventi interni, iniziative sportive e momenti di socialità: occasioni per creare relazioni e divertirsi, vivendo l’azienda anche al di là del lavoro quotidiano."]}, "11": {"b": ["In Socaf le decisioni nascono dal confronto e ogni persona concorre al raggiungimento degli obiettivi comuni: per questo l’azienda preferisce ragionare sulle soluzioni, senza fermarsi ai problemi. Per entrare in squadra bastano flessibilità e disponibilità a metterti alla prova. Se vuoi farne parte, invia il tuo curriculum."]}, "12": {"b": ["La persona selezionata si occuperà di riparazioni, revisioni, manutenzioni, revamping e assistenza tecnica sulle macchine per la pulizia industriale.", "Mansioni principali: eseguire manutenzioni e riparazioni; effettuare, secondo le procedure e le istruzioni operative, la ricerca guasti e i preventivi di riparazione e di manutenzione ordinaria; gestire gli interventi con un approccio orientato al cliente.", "Requisiti: almeno 3 anni di esperienza come manutentore o tecnico riparatore; buone basi di meccanica ed elettronica; capacità diagnostiche e di problem solving; dimestichezza con le attrezzature meccaniche; spirito di squadra. Titolo preferenziale: esperienza nel cleaning industriale o in settori affini.", "Cosa offriamo: un ambiente di lavoro dinamico con opportunità di crescita; inquadramento e RAL definiti in base all’esperienza; formazione e affiancamento iniziale.", "Altre informazioni: orario full time, dal lunedì al venerdì; sede di lavoro a Osio Sotto (BG) e presso le sedi dei clienti. Per candidarti invia il tuo curriculum vitae e una lettera motivazionale.", "Il presente annuncio è rivolto ad entrambi i sessi, ai sensi delle leggi 903/77 e 125/91, e a persone di tutte le età e tutte le nazionalità, ai sensi dei decreti legislativi 215/03 e 216/03."]}, "13": {"b": ["La persona selezionata si occuperà dello sviluppo commerciale: cercherà nuove opportunità di business, seguirà i clienti già acquisiti e proporrà prodotti, soluzioni e offerte mirate.", "Mansioni principali: gestire i clienti dell’area assegnata; far crescere il fatturato con la vendita di prodotti e soluzioni; cercare nuova clientela nella stessa zona; aggiornare il CRM; preparare le offerte secondo le regole aziendali; rispettare i budget.", "Requisiti: forte motivazione e determinazione; spirito di squadra; voglia di imparare e migliorare; predisposizione al contatto con il cliente; patente B. Titolo preferenziale: esperienza commerciale nel cleaning professionale.", "Cosa offriamo: un ambiente di lavoro dinamico con opportunità di crescita; inquadramento a scelta tra agente Enasarco e dipendente con fisso, in entrambi i casi con provvigioni e premi; formazione e affiancamento iniziale; furgone e cellulare aziendali.", "Altre informazioni: orario full time, dal lunedì al venerdì. Per candidarti invia il tuo curriculum vitae e una lettera motivazionale.", "Il presente annuncio è rivolto ad entrambi i sessi, ai sensi delle leggi 903/77 e 125/91, e a persone di tutte le età e tutte le nazionalità, ai sensi dei decreti legislativi 215/03 e 216/03."]}, "14": {"b": ["Se la meccanica è la tua passione, la Socaf Academy Tech ti offre un’opportunità professionale concreta.", "La Socaf Academy Tech è un percorso di formazione gratuito per diventare tecnico riparatore, aperto a nuovi partecipanti e con possibilità di inserimento in azienda.", "Durante l’Academy approfondirai: la manutenzione e la riparazione di macchine professionali per la pulizia; le competenze meccaniche ed elettroniche; la ricerca e la diagnosi dei guasti; l’uso degli strumenti da officina.", "Cerchiamo persone con: diploma tecnico o professionale (meccanico, elettronico, elettrico o affine); passione per la meccanica; buona manualità; attitudine al problem solving e al lavoro di squadra. La patente B è preferibile.", "Info: inizio lunedì 5 ottobre 2026; durata di due settimane, fino a venerdì 16 ottobre 2026; lezioni in presenza dal lunedì al venerdì, con orario mattutino e pomeridiano.", "Chi completa positivamente l’Academy viene valutato per un inserimento in azienda.", "Compila il modulo e invia la tua candidatura: Socaf ti ricontatta per approfondire il tuo profilo.", "I dati inseriti nel presente modulo saranno trasmessi a Lavoropiù S.p.A., incaricata della gestione del processo di selezione, e saranno trattati esclusivamente per finalità di ricerca, valutazione e selezione dei candidati, nel rispetto della normativa vigente in materia di protezione dei dati personali.", "Il presente annuncio è rivolto ad entrambi i sessi, ai sensi delle leggi 903/77 e 125/91, e a persone di tutte le età e tutte le nazionalità, ai sensi dei decreti legislativi 215/03 e 216/03."]}};
+  COPY_UX_PAG["/prodotti-per-la-pulizia/bclean/"] = {"title": "BClean: detergenti professionali e prodotti in carta | Socaf", "meta": "BClean è il marchio di detergenti professionali e prodotti in carta di Socaf: bagni, superfici, pavimenti, Ho.Re.Ca., lavanderia e linea Ecolabel."};
+  /* usato per famiglia (copy UX D7) senza testi utili su socaf.it: testo introduttivo e tre linguette, inseriti il 15/11/2026 */
+  var COPY_USATO_TESTI = {"spazzatrici-usate": {"sub": "Le spazzatrici usate Socaf puliscono pavimentazioni interne ed esterne e appartengono a tre tipologie: uomo a terra, uomo a bordo e stradali. Prima di entrare nell'usato, ogni spazzatrice viene controllata e ricondizionata; la garanzia dura da 3 a 12 mesi. I nostri consulenti ti aiutano a scegliere la spazzatrice o la motoscopa usata adatta alle superfici da pulire e al tuo tipo di lavoro.", "s": [{"h": "Le tipologie dell'usato", "b": ["Una spazzatrice uomo a terra copre la pulizia di ogni giorno su superfici medio-piccole, sia interne sia esterne. Una spazzatrice uomo a bordo opera tanto all'interno quanto all'esterno. Le stradali sono versatili e servono a usi diversi.", "[DA DEFINIRE CON SOCAF: in quali situazioni l'acquisto di una spazzatrice usata conviene rispetto a una nuova]"]}, {"h": "Cosa verificare in una spazzatrice usata", "b": ["Prima dell'acquisto valuta questi aspetti della macchina.", ["Pavimento e area: la spazzatrice deve essere adatta al tipo di pavimento, dal cemento alle piastrelle all'asfalto. L'ampiezza dell'area da pulire orienta la scelta della larghezza di lavoro.", "Raccolta: un contenitore più capiente va svuotato meno spesso, un vantaggio su aree grandi o molto sporche.", "Alimentazione: nei modelli a batteria conta l'autonomia, che deve bastare per tutta l'area senza ricariche frequenti. Ci sono poi modelli elettrici, a benzina e diesel.", "Spazzole e filtri: le spazzole vanno scelte in base al pavimento; i filtri trattengono le particelle di polvere.", "Guida: verifica che la macchina sia facile da manovrare e che abbia le regolazioni e i comandi adatti al tuo lavoro.", "Manutenzione: controlla che i ricambi siano disponibili e che spazzole e filtri si sostituiscano con facilità."], "[DA DEFINIRE CON SOCAF: controlli specifici sull'usato, per esempio ore di lavoro e stato di spazzole, filtri e batterie]"]}, {"h": "Scegliere tra usato, noleggio e nuovo", "b": ["Socaf propone le spazzatrici nuove, a noleggio e nella formula dell'usato garantito.", "[DA DEFINIRE CON SOCAF: criteri per scegliere tra usato, noleggio e nuovo, per esempio durata dell'impiego, frequenza d'uso e servizi inclusi]"]}]}, "aspiratori-usati": {"sub": "Aspiratori usati per polveri, liquidi e solidi, venduti da Socaf in formula usato garantito: ogni macchina è controllata e ricondizionata, con garanzia da 3 a 12 mesi.", "s": [{"h": "Le tipologie di aspiratori usati", "b": ["L'usato Socaf comprende aspiratori professionali, industriali, per olio e trucioli e certificati ATEX.", "Gli aspiratori professionali sono compatti e mobili. Gli industriali raccolgono sporco secco, liquido o umido. Quelli per olio e trucioli lavorano a uso continuo su oli, refrigeranti ed emulsioni e restituiscono i liquidi filtrati alla macchina utensile.", "[DA DEFINIRE CON SOCAF: tipologie disponibili usate e impieghi in cui conviene l'usato]"]}, {"h": "Cosa verificare in un aspiratore usato", "b": ["Prima di comprare, controlla questi aspetti dell'aspiratore.", ["Uso continuo: per quante ore la macchina lavora senza interruzioni.", "Alimentazione: quale tipo serve nel tuo ambiente di lavoro.", "Sporco da aspirare: polveri, solidi o liquidi orientano la scelta della tipologia.", "Portata d'aria, potenza del motore e depressione: la resa in aspirazione dipende dalla loro combinazione.", "Materiale: il polipropilene resiste agli agenti chimici, l'acciaio inox a graffi e urti.", "Fusto: quello fisso è indicato per i liquidi, quello basculante agevola lo svuotamento di polveri e solidi."], "[DA DEFINIRE CON SOCAF: controlli specifici sull'usato, per esempio ore di lavoro e stato di filtri e motore]"]}, {"h": "La scelta tra aspiratore usato e nuovo", "b": ["Gli aspiratori Socaf sono disponibili nuovi oppure usati, con la formula dell'usato garantito.", "[DA DEFINIRE CON SOCAF: criteri per scegliere tra un aspiratore usato e uno nuovo, per esempio frequenza d'uso e durata dell'impiego]"]}]}, "altri-macchinari-usati": {"sub": "Con la stessa efficacia di macchine al primo utilizzo, i nostri macchinari usati garantiscono risultati efficaci e veloci.", "s": [{"h": "Le tipologie dell'usato", "b": ["Oltre a lavapavimenti, spazzatrici, idropulitrici e aspiratori, l'usato Socaf comprende altri macchinari: generatori di vapore, battitappeti, macchine per moquette e tessuti, macchine per la pulizia dei pannelli solari.", "[DA DEFINIRE CON SOCAF: monospazzole e vasche lavapezzi disponibili come usato; altre tipologie disponibili e impieghi in cui conviene l'usato]"]}, {"h": "Cosa verificare in un macchinario usato", "b": ["[DA DEFINIRE CON SOCAF: controlli da fare prima di acquistare un macchinario usato, tipologia per tipologia]"]}, {"h": "Macchinario usato o nuovo: la scelta", "b": ["Socaf vende questi macchinari sia nuovi sia nella formula dell'usato garantito.", "[DA DEFINIRE CON SOCAF: criteri per scegliere tra un macchinario usato e uno nuovo]"]}]}, "idropulitrici-usate": {"sub": "Ogni idropulitrice acqua calda usata Socaf viene controllata e ricondizionata prima della vendita ed è garantita da 3 a 12 mesi, come i modelli ad acqua fredda. I nostri consulenti ti aiutano a individuare, tra le idropulitrici professionali usate, quella più adatta allo sporco da rimuovere e al tuo ambiente di lavoro.", "s": [{"h": "L'usato garantito Socaf", "b": ["La formula dell'usato garantito nasce per le aziende che chiedono un'idropulitrice più economica insieme a standard di qualità elevati.", "Nell'usato Socaf ci sono impianti fissi, idropulitrici autonome e modelli ad acqua calda e ad acqua fredda. La macchina ad acqua fredda lavora con l'acqua alla temperatura dell'ambiente e regola la pressione. Quella ad acqua calda regola pressione e temperatura ed è indicata per grasso, incrostazioni e sporco ostinato."]}, {"h": "Le caratteristiche da verificare prima di comprare un'idropulitrice usata", "b": ["Prima dell'acquisto di un'idropulitrice usata verifica alcune caratteristiche: decidono il risultato di pulizia e l'adattamento della macchina al tuo lavoro.", ["Pressione e potenza: il getto deve avere la forza adatta allo sporco e alle incrostazioni della superficie da trattare.", "Portata d'acqua: incide sulla velocità del lavaggio; il risultato nasce dall'equilibrio tra portata e pressione.", "Regolazioni: pressione e portata regolabili adattano la macchina a superfici e lavori diversi.", "Getti e accessori: getti intercambiabili (piatto, concentrato, a ventaglio), prolunghe telescopiche, ugelli rotanti e spazzole ampliano gli impieghi della macchina.", "Dimensioni: per spostamenti frequenti e spazi stretti serve un modello compatto e maneggevole.", "Stato e manutenzione: motore, pompa, tubi e accessori vanno controllati, insieme alla storia della manutenzione e agli interventi di riparazione o ricondizionamento.", "Prova di funzionamento: chiedi di vedere la macchina in funzione prima di comprarla.", "Garanzia: tutela l'acquisto se dopo la consegna emergono problemi."]]}, {"h": "Motore elettrico, a scoppio o trifase", "b": ["L'alimentazione si sceglie in base al luogo di lavoro, alla fonte di energia disponibile e a quanto spesso la macchina va spostata.", "Il motore elettrico si collega alla rete: richiede una presa e poca manutenzione, e serve ai lavori di scala ridotta in ambito commerciale.", "Il motore a scoppio, a benzina o a diesel, rende la macchina indipendente dalla rete elettrica: un'idropulitrice a scoppio usata lavora nei cantieri edili, nelle zone rurali e all'aperto, e si trasporta dove serve l'intervento.", "Con il motore trifase la macchina regge lavori intensivi e prolungati negli impianti industriali."]}]}};
+  Object.keys(COPY_USATO_TESTI).forEach(function (k) {
+    var u = '/usato/' + k + '/', c = COPY_USATO_TESTI[k];
+    TESTI[u] = { t: (TESTI[u] || {}).t, claim: null, sub: c.sub, s: c.s };
+  });
   Object.keys(COPY_UX_FONTE).forEach(function (k) {
     var T = TESTI[k]; if (!T || !T.s) return;
     Object.keys(COPY_UX_FONTE[k]).forEach(function (i) {
@@ -1203,9 +1246,11 @@
   function testoHtml(b) {
     return (b || []).map(function (x) {
       return Array.isArray(x) ? '<ul>' + x.map(function (li) { return '<li>' + esc(li) + '</li>'; }).join('') + '</ul>'
-                              : '<p>' + esc(x) + '</p>';
+                              : '<p>' + segnaposto(esc(x)) + '</p>';
     }).join('');
   }
+  /* « [DA DEFINIRE CON SOCAF: …] » e simili nei testi: segnaposto evidenziato (15/11/2026) */
+  function segnaposto(html) { return html.replace(/\[DA [^\]]*\]/g, function (m) { return '<span class="todo">' + m + '</span>'; }); }
   function serveInfo(cosa) {
     return '<div class="need-info"><b>Servono informazioni</b><span>' + esc(cosa) + '</span></div>';
   }
@@ -1321,7 +1366,7 @@
     }},
     usato: { param: 'u', base: '/usato/', def: 'lavapavimenti-usate', lista: {
       'lavapavimenti-usate': { nome: 'Lavapavimenti usate', h1: 'Lavapavimenti industriali usate e lavasciuga usate', sing: 'una lavapavimenti', famcat: 'lavapavimenti' },
-      'idropulitrici-usate': { nome: 'Idropulitrici usate', h1: 'Idropulitrici usate', sing: "un'idropulitrice", famcat: 'idropulitrici' },
+      'idropulitrici-usate': { nome: 'Idropulitrici usate', h1: 'Idropulitrici usate ad acqua calda e fredda', sing: "un'idropulitrice", famcat: 'idropulitrici' },
       'spazzatrici-usate': { nome: 'Spazzatrici usate', h1: 'Spazzatrici usate', sing: 'una spazzatrice', famcat: 'spazzatrici' },
       'aspiratori-usati': { nome: 'Aspiratori usati', h1: 'Aspiratori usati', sing: 'un aspiratore', famcat: 'aspiratori' },
       'altri-macchinari-usati': { nome: 'Altri macchinari usati', h1: 'Altri macchinari usati', sing: 'una macchina', famcat: 'altri-macchinari' }
@@ -1374,7 +1419,9 @@
     v.Nome = v.Nome || (v.plur ? v.plur.charAt(0).toUpperCase() + v.plur.slice(1) : v.nome);
     if (v.famcat && CAT && CAT.FAMIGLIE[v.famcat]) {
       var n = 0; CAT.sottoDiFamiglia(v.famcat).forEach(function (sk) { n += (CAT.MACCHINE[sk] || []).length; });
-      v.catalogo = 'Le ' + n + ' ' + CAT.FAMIGLIE[v.famcat].nome.toLowerCase() + ' del catalogo, divise in ' + CAT.sottoDiFamiglia(v.famcat).length + ' tipologie.';
+      /* accordo al maschile per aspiratori, robot e altri macchinari (copy UX D7: « I 24 aspiratori del catalogo, divisi in 5 tipologie. ») */
+      var masch = /^(aspiratori|robot|altri-macchinari)$/.test(v.famcat);
+      v.catalogo = (masch ? 'I ' : 'Le ') + n + ' ' + CAT.FAMIGLIE[v.famcat].nome.toLowerCase() + ' del catalogo, ' + (masch ? 'divisi' : 'divise') + ' in ' + CAT.sottoDiFamiglia(v.famcat).length + ' tipologie.';
       if (tipo === 'usato') v.Nome = CAT.FAMIGLIE[v.famcat].nome;
     }
     v.approf = v.approf || 'Come si sceglie: ' + v.nome.toLowerCase();
@@ -1519,12 +1566,18 @@
     var USA_COPY = tipo === 'usato' ? {
       'lavapavimenti-usate': { doc: 'D7', title: 'Lavapavimenti industriale usata: usato garantito | Socaf',
         meta: 'Lavapavimenti industriale usata Socaf in formula usato garantito, con garanzia da 3 a 12 mesi. Richiedi la disponibilità dei modelli.',
-        approf: 'Comprare una lavapavimenti industriale usata' }
+        approf: 'Comprare una lavapavimenti industriale usata' },
+      'spazzatrici-usate': {"doc": "D7", "title": "Spazzatrici usate e motoscopa usata | Socaf", "meta": "Spazzatrici: usato garantito Socaf, garanzia da 3 a 12 mesi. Spazzatrici usate stradali, uomo a bordo e uomo a terra, ricondizionate. Chiedi disponibilità.", "approf": "Spazzatrice usata: quando conviene comprarla"},
+      'aspiratori-usati': {"doc": "D7", "title": "Aspiratori usati: industriali e professionali | Socaf", "meta": "Aspiratori: usato garantito Socaf. Aspiratori usati professionali, industriali e per olio e trucioli, ricondizionati e garantiti da 3 a 12 mesi.", "approf": "Scegliere aspiratori industriali usati", "faq1": "Quante ore di lavoro ha un aspiratore usato Socaf?"},
+      'altri-macchinari-usati': {"doc": "D7", "approf": "Quando conviene un macchinario usato", "title": "Monospazzola per pavimenti usata e altri macchinari | Socaf", "meta": "Monospazzola per pavimenti usata e altri macchinari in usato garantito Socaf, ricondizionati e garantiti da 3 a 12 mesi. Chiedi disponibilità.", "open": "OP-04"},
+      'idropulitrici-usate': {"doc": "D7", "title": "Idropulitrice acqua calda usata: usato garantito | Socaf", "meta": "Idropulitrice acqua calda usata Socaf, ricondizionata e garantita da 3 a 12 mesi. Anche ad acqua fredda e a scoppio. Richiedi la disponibilità.", "approf": "Comprare un'idropulitrice acqua calda usata"}
+      /* altri-macchinari-usati: title e meta applicati con badge OPEN (richiesta Sara 16/11/2026): Socaf deve confermare l'usato delle monospazzole e delle vasche lavapezzi (OP-04) in fase di approvazione */
     }[key] : null;
     if (USA_COPY) {
       var ha = [].slice.call(document.querySelectorAll('h2[data-t]')).filter(function (h) { return /Conviene comprare/.test(h.dataset.t); })[0];
       if (ha) ha.textContent = USA_COPY.approf;
-      SEO_IST = USA_COPY;
+      if (USA_COPY.faq1) { var q1 = document.querySelector('.faq details > summary'); if (q1) q1.textContent = USA_COPY.faq1; }
+      if (USA_COPY.title) SEO_IST = USA_COPY;
     }
     if (SEO_IST) {
       [['title', SEO_IST.title], ['description', SEO_IST.meta]].forEach(function (m) {
@@ -1534,7 +1587,8 @@
       });
       var dn0 = document.querySelector('.devnote');
       if (dn0) dn0.insertAdjacentHTML('beforebegin', '<div class="devnote"><div class="dn-h">DEV NOTE — SEO della pagina (copy UX ' + SEO_IST.doc + ')</div><dl>' +
-        '<dt>Title</dt><dd>' + esc(SEO_IST.title) + '</dd><dt>Meta description</dt><dd>' + esc(SEO_IST.meta) + '</dd>' +
+        '<dt>Title</dt><dd>' + esc(SEO_IST.title) + (SEO_IST.open ? ' <span class="openpoint">OPEN · ' + SEO_IST.open + '</span>' : '') + '</dd><dt>Meta description</dt><dd>' + esc(SEO_IST.meta) + (SEO_IST.open ? ' <span class="openpoint">OPEN · ' + SEO_IST.open + '</span>' : '') + '</dd>' +
+        (SEO_IST.open ? '<dt>Da confermare</dt><dd>Keyword « monospazzola per pavimenti usata » da non pubblicare in title e H1 finché Socaf non conferma che monospazzole e vasche lavapezzi sono disponibili come usato; altrimenti la keyword va riassegnata. <span class="openpoint">' + SEO_IST.open + '</span></dd>' : '') +
         '<dt>Dove</dt><dd>Plugin SEO (Yoast / Rank Math) della pagina. Nel mockup sono anche nell\'<code>&lt;head&gt;</code>, generati dallo script.</dd></dl></div>');
     }
 
@@ -1594,8 +1648,8 @@
     '/azienda/il-nostro-impegno/': { fonte: '/il-nostro-impegno/', sez: 'Azienda' },
     '/azienda/certificazioni/': { h1: 'Certificazioni', sez: 'Azienda', corpo: false, certificazioni: true, form: 'Richiedi maggiori informazioni',
       lede: 'Gli standard di qualità, ambiente e sicurezza e i marchi che attestano il nostro modo di lavorare.' },
-    '/prodotti-per-la-pulizia/bclean/': { h1: 'BClean', sez: 'Prodotti', sezNome: 'Detergenti, attrezzature e consumabili', corpo: false, bclean: true, form: 'Richiedi informazioni sulla linea BClean',
-      lede: 'BClean è il nuovo marchio di detergenti e prodotti in carta nato dall\'integrazione tra Socaf, Bottoni e Tecno Clean.' },
+    '/prodotti-per-la-pulizia/bclean/': { h1: 'BClean', sez: 'Prodotti', sezNome: 'Detergenti, attrezzature e consumabili', corpo: false, bclean: true, form: 'Richiedi informazioni sui prodotti BClean',
+      lede: 'BClean è il marchio di detergenti professionali e prodotti in carta nato dall\'integrazione di Socaf, Bottoni e Tecno Clean.' },
     '/azienda/lavora-con-noi/': { h1: 'Lavora con noi', fonte: ['/careers/', { fonte: '/lavora-con-noi/', h: 'Candidati' }], sez: 'Azienda', form: 'Invia la tua candidatura' },
     '/azienda/referenze/': { h1: 'Referenze', sez: 'Azienda', corpo: false, referenze: true,
       lede: 'Alcune delle aziende che hanno scelto Socaf per le macchine, i prodotti e l\'assistenza.' }
@@ -1633,12 +1687,16 @@
     set('[data-p-h1]', esc(h1));
     var lede = CU.lede || P.lede || t0.sub;
     var ld = document.querySelector('[data-p-lede]');
-    if (ld && t0.claim && !P.lede) ld.insertAdjacentHTML('beforebegin', '<p class="claim">' + esc(t0.claim) + '</p>');
+    var claim = CU.claim || t0.claim;
+    if (ld && claim && !P.lede) ld.insertAdjacentHTML('beforebegin', '<p class="claim">' + esc(claim) + '</p>');
     if (ld) { if (lede) ld.textContent = lede; else ld.outerHTML = serveInfo('Testo introduttivo: da fornire.'); }
-    if (ld && t0.claim && !P.lede) ld.insertAdjacentHTML('beforebegin', '<p class="claim">' + esc(t0.claim) + '</p>');
 
     /* corpo */
     var secs = sezioniDa(P.fonte);
+    if (COPY_UX_SEZ[url]) secs = secs.map(function (s, i) {
+      var c = COPY_UX_SEZ[url][i]; if (!c) return s;
+      return { h: c.h !== undefined ? c.h : s.h, b: c.b || s.b };
+    });
     if (P.corpo === false) drop('corpo');
     else set('[data-p-corpo]', secs.length ? secs.map(function (s) {
       return (s.h ? '<h2>' + esc(s.h) + '</h2>' : '') + '<div class="testo">' + testoHtml(s.b) + '</div>';
@@ -1812,6 +1870,9 @@
       ],
       faq: ['Quale aspiratore serve per oli, emulsioni e trucioli?', 'Come funziona una vasca lavapezzi?', 'A cosa serve l\'idropulitrice ad acqua calda?', 'Come scelgo la macchina giusta per la mia officina?']
     },
+    /* settori nuovi: copy UX consegnato a novembre, inserito il 15/11/2026 */
+    'assistenza-sociosanitaria': {"title": "Pulizia e igiene nelle strutture sociosanitarie | Socaf", "meta": "Macchine, detergenti disinfettanti e attrezzature per ospedali, case di cura e case di riposo, con formazione del personale. Consulenza Socaf.", "lede": "Ospedali, case di cura e case di riposo puliscono ogni giorno pavimenti, superfici e servizi igienici con una procedura che unisce detersione e disinfezione. Socaf fornisce macchine, detergenti disinfettanti e attrezzature, e prepara per ogni struttura un piano di lavoro con prodotti, dosaggi e frequenze.", "tab": [{"h": "Detersione e disinfezione delle superfici", "b": ["Nelle strutture sanitarie e assistenziali la pulizia comprende la disinfezione quotidiana di pavimenti, arredi, sanitari e superfici a rischio di contaminazione. Socaf propone detergenti disinfettanti registrati come presidi medico-chirurgici presso il Ministero della Salute, attivi contro batteri, funghi e virus, e formulazioni senza aldeidi che puliscono e disinfettano anche in presenza di sporco organico."]}, {"h": "Pavimenti, camere e aree comuni", "b": ["Corridoi, camere e aree comuni si lavano con lavapavimenti uomo a terra, tra cui modelli molto manovrabili anche in curva. Gli aspiratori a spalla, a cavo o a batteria, e gli aspiratori per solidi e liquidi completano la pulizia delle stanze e degli arredi."]}, {"h": "Lavanderia della struttura", "b": ["Per le strutture che lavano la biancheria al proprio interno, Socaf propone lavatrici professionali ed essiccatoi, installa gli impianti di lavanderia e cura l'assistenza tecnica sulle macchine."]}, {"h": "Attrezzature e metodi di lavaggio", "b": ["Per le aree sanitarie Socaf fornisce carrelli in acciaio inox per il lavaggio con frange pre-impregnate e telai per la scopatura con garza impregnata, il metodo usato in ambito ospedaliero. Le frange in microfibra Microrapid resistono a lavaggi oltre i 90 °C e ai cicli di sterilizzazione in autoclave."]}, {"h": "Igiene delle mani", "b": ["Per ambulatori e reparti sono disponibili lavamani igienizzanti senza profumo e gel alcolici senza risciacquo, adatti all'uso frequente nel settore sanitario."]}, {"h": "Formazione e piano di lavoro", "b": ["Socaf forma il personale con un piano di lavoro costruito sulla singola struttura: metodo e tempi di intervento, prodotti da usare per ogni attrezzatura e ambiente, dosaggi, frequenze e dispositivi di protezione richiesti. Per i disinfettanti a base di cloro, il diluitore Kalibra 100 controlla con precisione la concentrazione durante la diluizione."]}], "faq": ["Quali disinfettanti si usano nelle strutture sanitarie?", "Che cosa sono i presidi medico-chirurgici?", "Come si organizza la pulizia di una casa di riposo?", "Le frange in microfibra si possono sterilizzare?"]},
+    'pubblica-amministrazione': {"title": "Macchine per la pulizia degli enti pubblici | Socaf", "meta": "Lavapavimenti, aspiratori e spazzatrici stradali per enti pubblici, con detergenti Ecolabel. Consulenza e noleggio Socaf. Chiedi un preventivo.", "lede": "Uffici, scuole, strade e piazze degli enti pubblici richiedono macchine diverse: lavapavimenti e aspiratori per gli interni, spazzatrici compatte, da marciapiede e stradali per gli esterni. Socaf affianca gli enti con consulenza, noleggio e detergenti Ecolabel.", "tab": [{"h": "Uffici, scuole e sedi pubbliche", "b": ["Negli edifici pubblici si lavano ogni giorno pavimenti, corridoi e aree di passaggio con lavapavimenti uomo a terra e aspiratori per solidi e liquidi. Per scuole e asili Socaf propone detergenti disinfettanti per pavimenti, rivestimenti e servizi igienici."]}, {"h": "Strade, piazze e marciapiedi", "b": ["Le spazzatrici stradali elettriche puliscono strade e piazze, quelle da marciapiede lavorano sui percorsi pedonali. Le spazzatrici compatte lavorano su superfici interne ed esterne."]}, {"h": "Scopatura con garza impregnata", "b": ["Per gli uffici pubblici Socaf fornisce telai in alluminio per la scopatura dei pavimenti con garza impregnata, un metodo adottato nelle pubbliche amministrazioni e in ambito ospedaliero."]}, {"h": "Servizi igienici", "b": ["Detergenti disinfettanti con effetto deodorante trattano sanitari, rubinetterie e spogliatoi. Per il rifornimento dei bagni Socaf propone carta igienica Ecolabel prodotta con carta riciclata."]}, {"h": "Noleggio e assistenza", "b": ["Lavapavimenti, spazzatrici e idropulitrici si possono noleggiare a breve o a lungo termine. Il pronto intervento lavora con officine mobili e un magazzino di ricambi originali."]}, {"h": "Formazione del personale", "b": ["Socaf prepara per ogni struttura un piano di lavoro con metodo, tempi, prodotti, dosaggi, frequenze e dispositivi di protezione, e forma il personale che lo applica."]}], "faq": ["Socaf partecipa a gare d'appalto e al MePA?", "Quali detergenti hanno l'Ecolabel UE?", "Quale spazzatrice serve per strade e piazze?", "Un ente pubblico può noleggiare le macchine?"]},
     'edilizia-cantieri': {
       title: 'Aspirapolvere cantiere: polveri e detriti | Socaf',
       meta: 'Aspirapolvere cantiere Socaf: aspiratori per polvere e detriti dei lavori edili, più idropulitrici e spazzatrici per l\'edilizia. Chiedi una consulenza.',
@@ -1933,6 +1994,12 @@
     if (C.tab) {
       var b6 = blocco(6);
       var pezzi = b6 ? [].slice.call(b6.querySelectorAll(':scope > .testo, :scope > .need-info')) : [];
+      /* settori nuovi: la pagina ha un solo segnaposto, il copy porta più sezioni → le sezioni prendono il suo posto */
+      if (b6 && pezzi.length < C.tab.filter(Boolean).length && pezzi.length <= 1) {
+        var nuovo = C.tab.filter(Boolean).map(function (t) { return (t.h ? '<h3>' + esc(t.h) + '</h3>' : '') + '<div class="testo">' + parag(t.b || []) + '</div>'; }).join('');
+        if (pezzi[0]) pezzi[0].outerHTML = nuovo; else b6.insertAdjacentHTML('beforeend', nuovo);
+        pezzi = [];
+      }
       C.tab.forEach(function (t, i) {
         var el = pezzi[i]; if (!t || !el) return;
         var h = el.previousElementSibling;
@@ -3175,7 +3242,9 @@
       'logistica': ['logisticaV01', 'webp'], 'officine-metalmeccanica': ['officinaV01', 'webp'], 'edilizia-cantieri': ['ediliziaV01', 'webp'],
       'assistenza-sociosanitaria': ['assistenzasociosanitariaV01', 'webp'], 'pubblica-amministrazione': ['pubblicaamministrazioneV01', 'webp'] };
     /* icone illustrate dell'agenzia (cartella assets/icone): famiglie di macchine e categorie di prodotti */
-    var FAM_IMG = { 'lavapavimenti': 'lavapavimenti', 'spazzatrici': 'spazzatrici', 'idropulitrici': 'idropulitrici', 'aspiratori': 'aspiratori', 'robot': 'robot', 'altri-macchinari': 'altri-macchinari', 'lavatrici': 'lavanderia', 'lavastoviglie': 'cucina', 'sub:robot-': 'robot' };
+    var FAM_IMG = { 'lavapavimenti': 'lavapavimenti', 'spazzatrici': 'spazzatrici', 'idropulitrici': 'idropulitrici', 'aspiratori': 'aspiratori', 'robot': 'robot', 'altri-macchinari': 'altri-macchinari', 'lavatrici': 'lavanderia', 'lavastoviglie': 'cucina', 'sub:robot-': 'robot',
+      /* icone illustrate aggiunte il 13/11/2026: SVG solo in versione rossa */
+      'macchine-del-ghiaccio': 'ghiaccio.svg', 'lavamoquette': 'lavamoquette.svg', 'monospazzole': 'monospazzola.svg' };
     var CAT_IMG = { 'detergenti-pavimenti-parquet': 'webp', 'detergenti-enzimatici': 'webp', 'detergenti-disinfettanti': 'webp', 'detergenti-multiuso-sgrassanti': 'webp', 'detersivi-lavanderia-industriale': 'webp', 'igiene-mani': 'webp', 'carrelli-per-pulizie': 'webp', 'attrezzature': 'webp', 'panni-stracci-microfibra': 'webp', 'carta-e-dispenser': 'webp', 'sacchi': 'webp', 'dispositivi-di-protezione-individuale': 'webp', 'ecolabel': 'svg' };
     /* sottocategorie delle famiglie nuove: icone illustrate dell'agenzia (lavabicchieri, lavapiatti, osmosi, lavatrici, essicatoi);
        dove una sottocategoria non ha l'icona propria si usa quella della famiglia */
@@ -3185,7 +3254,11 @@
       var S = ICONE_SETT[k];
       if (S) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/settori/' +
         (azzurra ? 'azzurre/' + S[0] + 'azz' : S[0]) + '.' + S[1] + '?v=2" alt="" aria-hidden="true">';
-      if (FAM_IMG[k]) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-macchine/' + (azzurra ? 'azzurre' : 'rosse') + '/' + FAM_IMG[k] + '.webp" alt="" aria-hidden="true">';
+      if (FAM_IMG[k]) {
+        /* le icone già in SVG esistono solo rosse: si usa la rossa anche dove servirebbe l'azzurra */
+        var svgFam = /\.svg$/.test(FAM_IMG[k]);
+        return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-macchine/' + (azzurra && !svgFam ? 'azzurre' : 'rosse') + '/' + FAM_IMG[k] + (svgFam ? '' : '.webp') + '" alt="" aria-hidden="true">';
+      }
       if (/^cat:/.test(k)) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-categorie/' + (azzurra ? 'azzurre' : 'rosse') + '/' + k.slice(4) + '.' + CAT_IMG[k.slice(4)] + '" alt="" aria-hidden="true">';
       if (/^mac:/.test(k)) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-macchine/' + (azzurra ? 'azzurre' : 'rosse') + '/' + k.slice(4) + '.svg" alt="" aria-hidden="true">';
       return '<svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONE[k] || ICONE['altri-macchinari']) + '</svg>';
@@ -3558,7 +3631,7 @@
           var fam = sl.replace(/-(usate|usati|usato|usata|nuove|nuovi|a-noleggio|noleggio)$/, '');
           if (FAM_IMG[fam]) chiave = fam;
           else if (!sl) {   /* voce corrente senza link: si prova con il nome */
-            var fn = slugify(c.textContent).replace(/-(usate|usati|usato|usata|a-noleggio|noleggio)$/, '');
+            var fn = slugify(c.textContent).replace(/-op-\d+$/, '').replace(/-(usate|usati|usato|usata|a-noleggio|noleggio)$/, '');
             if (FAM_IMG[fn]) chiave = fn;
           }
         }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 708.66 708.66">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#Sfumatura_senza_nome_3);
+      }
+
+      .st0, .st1 {
+        isolation: isolate;
+        opacity: .5;
+      }
+
+      .st2, .st1 {
+        fill: #e40523;
+      }
+    </style>
+    <linearGradient id="Sfumatura_senza_nome_3" data-name="Sfumatura senza nome 3" x1="178.13" y1="423.56" x2="355.35" y2="423.56" gradientTransform="translate(0 707.89) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".85" stop-color="#e40523"/>
+    </linearGradient>
+  </defs>
+  <circle class="st0" cx="266.74" cy="284.33" r="88.61"/>
+  <g id="spazzatrice">
+    <g>
+      <path d="M281.56,436.52l112.14-201.5"/>
+      <path class="st2" d="M406.66,242.22l-112.14,201.5c-3.98,7.15-13.01,9.73-20.16,5.75s-9.73-13.01-5.75-20.16l112.14-201.5c3.98-7.15,13.01-9.73,20.16-5.75s9.73,13.01,5.75,20.16Z"/>
+    </g>
+  </g>
+  <path class="st1" d="M526.88,318.93l-153.89-21.55,3.66-26.1,153.89,21.55-3.66,26.1ZM428.3,496.08l-20.25,16.86-99.43-119.42,20.25-16.86,99.43,119.42h0ZM459.95,433.69l-16.28,20.73-115.44-90.64,16.27-20.73,115.45,90.64ZM485.19,387.13l-134.67-56.09,10.13-24.33,134.67,56.09-10.14,24.33h.01Z"/>
+</svg>

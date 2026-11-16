@@ -241,7 +241,7 @@ Le card usano le foto reali di `assets/STATICHE` (copie web in `assets/images/ca
 - **Trattamento acqua**: nessuna sottocategoria indicata → divisa per **marca** (Walo 3, Brita 2), unico dato certo dell'elenco.
 - **Lavatrici**: FX (105, 135, 180) e Lavacentrifughe (GVH80). **Essiccatoi**: GD450, GDZ 275/350/600 sotto « Professionali » (nome mio) e **Small Pro** (GDC201, GH10): l'elenco non dice se Small Pro è una linea di lavatrici o di essiccatoi.
 - **Macchine del ghiaccio**: nessun prodotto nell'elenco → pagina con stato vuoto dichiarato.
-- Errori di battitura corretti: « Dhir » → **Dihr**; **Meico** è il nome giusto (Sara, 04/11: non Meiko). Sigle lasciate come nel file (M-ICLEAN, FX, GD…).
+- Errori di battitura corretti: « Dhir » → **Dihr**; **Meiko** è il nome giusto (Sara, 16/11: sostituisce l'indicazione del 04/11, che dava « Meico »; produttore tedesco MEIKO, vedi la scheda ufficiale M-iClean su meiko.com). Nomi e indirizzi dei modelli corretti in `catalogo.js`. Sigle lasciate come nel file (M-ICLEAN, FX, GD…).
 - Indirizzi: `/lavastoviglie/`, `/macchine-del-ghiaccio/`, `/trattamento-acqua/`, `/lavatrici/`, `/essiccatoi/` (nessun dato di ricerca).
 **Conteggio**: hero « 146 macchine » = 119 dichiarate dal brief + 27 nuove (le 3 schede non raggiungibili di OP-15 restano contate).
 **Mancano**: descrizioni e schede (promesse per la settimana del 19/10), testi di famiglia e sottocategoria, foto vere (oggi scatti Socaf generici: segnaposto), icone per lavaoggetti, lavastoviglie a traino e macchine del ghiaccio (le altre usano le icone illustrate dell'agenzia), flag noleggio/usato, settori collegati.

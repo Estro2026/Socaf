@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 708.66 708.66">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        fill: #e40523;
+      }
+
+      .st1, .st2 {
+        isolation: isolate;
+        opacity: .5;
+      }
+
+      .st2 {
+        fill: url(#Sfumatura_senza_nome_16);
+      }
+
+      .st3 {
+        fill: none;
+        stroke: #e40523;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 13px;
+      }
+    </style>
+    <linearGradient id="Sfumatura_senza_nome_16" data-name="Sfumatura senza nome 16" x1="57.48" y1="773.7" x2="58.02" y2="773.15" gradientTransform="translate(-5225 76079.2) scale(98 -98)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0" stop-color="#fefdfd"/>
+      <stop offset=".12" stop-color="#f8c4cb"/>
+      <stop offset=".24" stop-color="#f3919e"/>
+      <stop offset=".37" stop-color="#ee6678"/>
+      <stop offset=".49" stop-color="#ea4359"/>
+      <stop offset=".61" stop-color="#e72741"/>
+      <stop offset=".74" stop-color="#e51430"/>
+      <stop offset=".87" stop-color="#e40826"/>
+      <stop offset="1" stop-color="#e40523"/>
+    </linearGradient>
+  </defs>
+  <rect class="st1" x="284.33" y="291.83" width="175" height="155" rx="24" ry="24"/>
+  <circle class="st0" cx="432.37" cy="448.58" r="25.25"/>
+  <circle class="st0" cx="319.33" cy="442.83" r="31"/>
+  <g id="lavapavimenti">
+    <path class="st3" d="M249.33,234.83h48l45,65"/>
+  </g>
+  <g>
+    <g>
+      <path class="st0" d="M434.67,201.84h0c3.84,0,6.95,3.11,6.95,6.95v155.63c0,3.84-3.11,6.95-6.95,6.95h0c-3.84,0-6.95-3.11-6.95-6.95v-155.63c0-3.84,3.11-6.95,6.95-6.95Z"/>
+      <path class="st0" d="M508.08,244.22h0c1.92,3.32.78,7.57-2.54,9.49l-134.78,77.82c-3.32,1.92-7.57.78-9.49-2.54h0c-1.92-3.32-.78-7.57,2.54-9.49l134.78-77.82c3.32-1.92,7.57-.78,9.49,2.54Z"/>
+      <path class="st0" d="M508.08,328.98h0c-1.92,3.32-6.17,4.46-9.49,2.54l-134.78-77.82c-3.32-1.92-4.46-6.17-2.54-9.49h0c1.92-3.32,6.17-4.46,9.49-2.54l134.78,77.82c3.32,1.92,4.46,6.17,2.54,9.49Z"/>
+    </g>
+    <path class="st3" d="M409.19,228.24l25.48,21.31,25.48-21.31"/>
+    <path class="st3" d="M460.14,346.12l-25.48-21.31-25.48,21.31"/>
+    <circle class="st2" cx="434.59" cy="283.68" r="26.61"/>
+  </g>
+  <path class="st3" d="M480.05,240.74l-4.34,22.17,22.03,8.47"/>
+  <path class="st3" d="M370.82,271.13l22.03-8.47-4.34-22.17"/>
+  <path class="st3" d="M497.74,301.48l-22.03,8.47,4.34,22.17"/>
+  <path class="st3" d="M388.51,332.39l4.34-22.17-22.03-8.47"/>
+</svg>
