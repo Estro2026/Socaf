@@ -138,9 +138,8 @@
     h += '</ul><a class="hdr-search" href="' + route('/?s=') + '" data-url="/?s=" title="Cerca · /?s=" aria-label="Cerca"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a><a class="phone-cta" href="tel:800480110"><span class="lbl">Numero verde</span>' + NUMERO_VERDE + '</a>' +
       '<button class="burger" type="button" aria-expanded="false" aria-controls="mobnav">Menu</button></div></div></div>';
 
-    h += '<div class="mobile-panel" id="mobnav" data-open="false"><div class="mobile-sticky">' +
-      '<a class="btn btn-ghost" href="' + route('/noleggio/') + '" data-url="/noleggio/">Noleggio</a>' +
-      '<a class="btn btn-primary" href="tel:800480110">' + NUMERO_VERDE + '</a></div>';
+    /* menu mobile (16/11/2026): niente numero verde qui (è già nella barra) e niente seconda copia di « Noleggio » */
+    h += '<div class="mobile-panel" id="mobnav" data-open="false">';
     MENU.forEach(function (m, i) {
       if (m.type === 'flat') { h += '<div class="acc">' + a(m.href, m.label) + '</div>'; }
       else {
@@ -149,9 +148,8 @@
           m.items.map(function (it) { return a(it[1], it[0], it[2] ? 'acc-sub' : ''); }).join('') + '</div></div>';
       }
     });
-    h += '<div class="acc">' + a('/servizi/pronto-intervento/', 'Pronto intervento') + '</div>' +
-      '<div class="acc">' + a('/news/', 'Approfondimenti') + '</div>' +
-      '<div class="acc"><a href="' + route('/?s=') + '" data-url="/?s=">Cerca</a></div></div>';
+    h += '<div class="mp-extra">' + a('/servizi/pronto-intervento/', 'Pronto intervento') + a('/news/', 'Approfondimenti') +
+      '<a class="mp-cerca" href="' + route('/?s=') + '" data-url="/?s="><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>Cerca nel sito</a></div></div>';
     return h;
   }
 
@@ -495,7 +493,7 @@
         ['Valido fino al', '17 settembre 2027'], ['Estensione al gruppo', '[DA CONFERMARE: Bottoni e Tecno Clean dal 2027]'], ['Sede certificata', 'Socaf S.p.A. · Via Trieste 14 · 24046 Osio Sotto (BG)'],
         ['Campo di applicazione', 'Commercializzazione, noleggio e assistenza di macchine per la pulizia ad uso industriale. Vendita e montaggio di apparecchi di raffrescamento industriali.']],
       pdf: 'assets/certificazioni/iso-9001-socaf-it335877.pdf' },
-    { id: 'ecolabel', sigla: ['Eco', 'label UE'], nome: 'Ecolabel UE', sub: 'Marchio europeo di qualità ecologica',
+    { id: 'ecolabel', sigla: ['Ecolabel', 'UE'], nome: 'Ecolabel UE', sub: 'Marchio europeo di qualità ecologica',
       testo: 'L\'Ecolabel UE è il marchio europeo di qualità ecologica che identifica prodotti e servizi a ridotto impatto ambientale durante l\'intero ciclo di vita. Questa certificazione garantisce il rispetto di rigorosi criteri ambientali, favorendo un utilizzo responsabile delle risorse naturali e standard elevati di sostenibilità.',
       link: [['I prodotti Ecolabel', '/prodotti-per-la-pulizia/ecolabel/'], ['La linea Ecolabel di BClean', BCLEAN_URL + '#linea-ecolabel']] },
     { id: 'iso-14001', sigla: ['ISO', '14001'], nome: 'ISO 14001', sub: 'Gestione ambientale',
@@ -511,7 +509,7 @@
     { t: 'Prodotti', ids: ['ecolabel'] }
   ];
   function certSigillo(c, grande) {
-    return '<span class="cert-badge' + (grande ? ' cert-badge-xl' : '') + '" aria-hidden="true">' + c.sigla.map(function (r, i) { return i ? '<b>' + esc(r) + '</b>' : '<span>' + esc(r) + '</span>'; }).join('') + '</span>';
+    return '<span class="cert-badge' + (grande ? ' cert-badge-xl' : '') + (c.sigla[0].length > 5 ? ' cert-badge-lungo' : '') + '" aria-hidden="true">' + c.sigla.map(function (r, i) { return i ? '<b>' + esc(r) + '</b>' : '<span>' + esc(r) + '</span>'; }).join('') + '</span>';
   }
   function certMesiAScadenza(iso) {
     var d = new Date(iso), n = new Date(), m = (d.getFullYear() - n.getFullYear()) * 12 + d.getMonth() - n.getMonth();
@@ -1290,8 +1288,9 @@
         '<div class="testo">' + testoHtml(s.b) + '</div></div>';
     });
     box.outerHTML = '<div class="t-tabs t-tabs--num">' +
-      '<div class="t-nav" role="tablist" aria-label="Perché noleggiare">' + nav + '</div>' +
-      '<div class="t-panes">' + panes + '</div></div>';
+      T_VISTA + '<div class="t-nav" role="tablist" aria-label="Perché noleggiare">' + nav + '</div>' + T_BACK +
+      '<div class="t-panes">' + panes + '</div>' +
+      '<div class="t-pager"><button type="button" class="t-prev">‹ Precedente</button><span class="t-conta" aria-live="polite"></span><button type="button" class="t-next">Successivo ›</button></div></div>';
   }
 
   function riempiTesti() {
@@ -1775,6 +1774,9 @@
      contenuto alla volta a destra. Su mobile l'indice è una fila di pillole.
      Si applica a ogni blocco con almeno due sezioni (titolo + testo). */
   var nTabs = 0;
+  /* modi di lettura degli elenchi a linguette su mobile: « Elenco » (tutti i punti, tocco = descrizione, poi si torna all'elenco) e « Punto per punto » (Precedente / Successivo) */
+  var T_VISTA = '<div class="t-vista" role="group" aria-label="Modo di lettura"><button type="button" data-vista="elenco" aria-pressed="true" title="Tutti i punti insieme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.3"/><circle cx="4.5" cy="12" r="1.3"/><circle cx="4.5" cy="18" r="1.3"/></svg><span>Panoramica</span></button><button type="button" data-vista="passi" aria-pressed="false" title="Un punto alla volta"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="5" width="10" height="14" rx="2.5"/><path d="M3 8.5v7M21 8.5v7"/></svg><span>Sfoglia</span></button></div>';
+  var T_BACK = '<button type="button" class="t-back">‹ Torna all\'elenco</button>';
   /* COPY UX delle pagine settore (documenti « D9 … copy per UX »).
      h2: { numero blocco: titolo }; tab: le sei voci del testo di approfondimento, null = invariata,
      { h: titolo, b: [paragrafi] } (« [DA …] » = segnaposto evidenziato); faq: le quattro domande;
@@ -2047,24 +2049,90 @@
       pezzi.forEach(function (el, i) {
         var h = el.previousElementSibling, titolo = 'Approfondimento ' + (i + 1);
         if (h && /^H[23]$/.test(h.tagName)) { titolo = h.textContent.trim(); h.remove(); }
-        nav += '<button type="button" role="tab" id="' + id + 'b' + i + '" aria-controls="' + id + 'p' + i + '" aria-selected="' + (i ? 'false' : 'true') + '"' +
+        nav += '<button type="button" role="tab" id="' + id + 'b' + i + '" data-n="' + (i < 9 ? '0' : '') + (i + 1) + '" aria-controls="' + id + 'p' + i + '" aria-selected="' + (i ? 'false' : 'true') + '"' +
           (el.classList.contains('need-info') ? ' class="is-vuoto"' : '') + '>' + esc(titolo) + '</button>';
         panes += '<div class="t-pane" role="tabpanel" id="' + id + 'p' + i + '" aria-labelledby="' + id + 'b' + i + '"' + (i ? ' hidden' : '') + '>' +
           '<h3>' + esc(titolo) + '</h3></div>';
         nodi.push(el);
       });
-      box.innerHTML = nav + '</div><div class="t-panes">' + panes + '</div>';
+      box.innerHTML = T_VISTA + nav + '</div>' + T_BACK + '<div class="t-panes">' + panes + '</div>' +
+        '<div class="t-pager"><button type="button" class="t-prev">‹ Precedente</button><span class="t-conta" aria-live="polite"></span><button type="button" class="t-next">Successivo ›</button></div>';
       var pp = box.querySelectorAll('.t-pane');
       nodi.forEach(function (el, i) { pp[i].appendChild(el); });
       [].slice.call(blk.querySelectorAll('[data-sub-par]')).forEach(function (w) { if (!w.children.length) w.remove(); });
     });
+    /* Elenchi a linguette su schermi stretti (16/11/2026). Due modi di lettura, a scelta con l'interruttore in alto:
+       « Elenco »: si vedono tutti i punti; toccandone uno compare la sua descrizione, con « Torna all'elenco »;
+       « Punto per punto »: un punto alla volta, con Precedente / Successivo e scorrimento col dito. */
+    var stretto = function () { return window.matchMedia && window.matchMedia('(max-width:860px)').matches; };
+    var VISTA_KEY = 'socaf-wf-vista';
+    function vistaSalvata() { try { return localStorage.getItem(VISTA_KEY) === 'passi' ? 'passi' : 'elenco'; } catch (err) { return 'elenco'; } }
+    function contaTab(box) {
+      var tabs = [].slice.call(box.querySelectorAll('[role=tab]')), cur = tabs.findIndex(function (x) { return x.getAttribute('aria-selected') === 'true'; });
+      var c = box.querySelector('.t-conta'); if (c) c.textContent = (cur + 1) + ' / ' + tabs.length;
+      var p = box.querySelector('.t-prev'), n = box.querySelector('.t-next');
+      if (p) p.disabled = cur <= 0; if (n) n.disabled = cur >= tabs.length - 1;
+    }
+    function inCima(box) {
+      if (!stretto()) return;
+      var cs = getComputedStyle(document.body);
+      var y = box.getBoundingClientRect().top + window.pageYOffset - (parseFloat(cs.getPropertyValue('--header-h')) || 100) - (parseFloat(cs.getPropertyValue('--devbar-h')) || 0) - 16;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    function selTab(box, idx, porta) {
+      var tabs = [].slice.call(box.querySelectorAll('[role=tab]')), b = tabs[idx]; if (!b) return;
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+      box.querySelectorAll('.t-pane').forEach(function (p) { p.hidden = p.id !== b.getAttribute('aria-controls'); });
+      contaTab(box); aggiornaFg();
+      if (b.parentNode.scrollWidth > b.parentNode.clientWidth && !stretto()) b.parentNode.scrollTo({ left: b.offsetLeft - 8, behavior: 'smooth' });
+      if (porta) inCima(box);
+    }
+    function impostaVista(box, vista, salva) {
+      box.dataset.vista = vista; box.dataset.stato = 'lista';
+      box.querySelectorAll('.t-vista button').forEach(function (x) { x.setAttribute('aria-pressed', x.dataset.vista === vista ? 'true' : 'false'); });
+      if (salva) { try { localStorage.setItem(VISTA_KEY, vista); } catch (err) {} }
+    }
+    /* i pulsanti seguono il colore del testo della sezione (bianco su rosso, scuro su bianco): lo stile della pagina si assesta dopo l'avvio, quindi si rilegge più volte */
+    function aggiornaFg() {
+      document.querySelectorAll('.t-tabs').forEach(function (bx) {
+        var s0 = bx.querySelector('[role=tab][aria-selected=true]'); if (s0) { var c0 = getComputedStyle(s0).color, m0 = c0.match(/[0-9.]+/g); if (m0 && m0.length >= 3) c0 = 'rgb(' + m0[0] + ',' + m0[1] + ',' + m0[2] + ')'; bx.style.setProperty('--t-fg', c0); }
+      });
+    }
+    document.querySelectorAll('.t-tabs').forEach(function (bx) { impostaVista(bx, vistaSalvata(), false); contaTab(bx); });
+    aggiornaFg(); setTimeout(aggiornaFg, 1500); setTimeout(aggiornaFg, 4000); window.addEventListener('load', aggiornaFg);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(aggiornaFg);
     document.addEventListener('click', function (e) {
+      var vb = e.target.closest && e.target.closest('.t-vista button');
+      if (vb) {
+        var bv = vb.closest('.t-tabs'); impostaVista(bv, vb.dataset.vista, true);
+        document.querySelectorAll('.t-tabs').forEach(function (x) { if (x !== bv) impostaVista(x, vb.dataset.vista, false); });
+        inCima(bv); return;
+      }
+      var bk = e.target.closest && e.target.closest('.t-back');
+      if (bk) { var bb = bk.closest('.t-tabs'); bb.dataset.stato = 'lista'; inCima(bb); return; }
+      var pg = e.target.closest && e.target.closest('.t-pager button');
+      if (pg) {
+        var bx = pg.closest('.t-tabs'), tabs = [].slice.call(bx.querySelectorAll('[role=tab]'));
+        var cur = tabs.findIndex(function (x) { return x.getAttribute('aria-selected') === 'true'; });
+        selTab(bx, cur + (pg.classList.contains('t-next') ? 1 : -1), true); return;
+      }
       var b = e.target.closest && e.target.closest('.t-nav [role=tab]'); if (!b) return;
       var box = b.closest('.t-tabs');
-      box.querySelectorAll('[role=tab]').forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
-      box.querySelectorAll('.t-pane').forEach(function (p) { p.hidden = p.id !== b.getAttribute('aria-controls'); });
-      if (b.parentNode.scrollWidth > b.parentNode.clientWidth) b.parentNode.scrollTo({ left: b.offsetLeft - 8, behavior: 'smooth' });
+      selTab(box, [].slice.call(box.querySelectorAll('[role=tab]')).indexOf(b), false);
+      if (stretto()) { box.dataset.stato = 'dettaglio'; inCima(box); }
     });
+    (function () {
+      var x0 = 0, y0 = 0, box0 = null;
+      document.addEventListener('touchstart', function (e) { var p = e.target.closest && e.target.closest('.t-panes'); var bx = p && p.closest('.t-tabs'); if (!bx || !stretto() || bx.dataset.vista !== 'passi') { box0 = null; return; } box0 = bx; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+      document.addEventListener('touchend', function (e) {
+        if (!box0) return; var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+        if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+          var tabs = [].slice.call(box0.querySelectorAll('[role=tab]')), cur = tabs.findIndex(function (x) { return x.getAttribute('aria-selected') === 'true'; });
+          selTab(box0, cur + (dx < 0 ? 1 : -1), true);
+        }
+        box0 = null;
+      }, { passive: true });
+    })();
     document.addEventListener('keydown', function (e) {
       var b = e.target.closest && e.target.closest('.t-nav [role=tab]'); if (!b) return;
       var d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (!d) return;
@@ -3253,13 +3321,13 @@
     function icoTile(k, azzurra) {
       var S = ICONE_SETT[k];
       if (S) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/settori/' +
-        (azzurra ? 'azzurre/' + S[0] + 'azz' : S[0]) + '.' + S[1] + '?v=2" alt="" aria-hidden="true">';
+        (azzurra ? 'azzurre/' + S[0] + 'azz' : S[0]) + '.' + S[1] + '?v=3" alt="" aria-hidden="true">';
       if (FAM_IMG[k]) {
         /* le icone già in SVG esistono solo rosse: si usa la rossa anche dove servirebbe l'azzurra */
         var svgFam = /\.svg$/.test(FAM_IMG[k]);
         return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-macchine/' + (azzurra && !svgFam ? 'azzurre' : 'rosse') + '/' + FAM_IMG[k] + (svgFam ? '' : '.webp') + '" alt="" aria-hidden="true">';
       }
-      if (/^cat:/.test(k)) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-categorie/' + (azzurra ? 'azzurre' : 'rosse') + '/' + k.slice(4) + '.' + CAT_IMG[k.slice(4)] + '" alt="" aria-hidden="true">';
+      if (/^cat:/.test(k)) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-categorie/' + (azzurra ? 'azzurre' : 'rosse') + '/' + k.slice(4) + '.' + CAT_IMG[k.slice(4)] + '?v=3" alt="" aria-hidden="true">';
       if (/^mac:/.test(k)) return '<img class="tile-ico tile-img" src="' + BASE + 'assets/images/icone-macchine/' + (azzurra ? 'azzurre' : 'rosse') + '/' + k.slice(4) + '.svg" alt="" aria-hidden="true">';
       return '<svg class="tile-ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONE[k] || ICONE['altri-macchinari']) + '</svg>';
     }
@@ -4079,6 +4147,14 @@
     copySettore();
     copyCategoria();
     schedeTesti();
+    /* tabelle a tre colonne (es. « Le formule e le durate »): su schermi stretti diventano schede con le etichette sopra ogni valore */
+    document.querySelectorAll('table.specs').forEach(function (tb) {
+      var th = [].slice.call(tb.querySelectorAll('thead th')); if (th.length < 3) return;
+      tb.classList.add('specs-carte');
+      [].slice.call(tb.querySelectorAll('tbody tr')).forEach(function (tr) {
+        [].slice.call(tr.children).forEach(function (c, i) { if (c.tagName === 'TD' && th[i]) c.setAttribute('data-label', th[i].textContent.trim()); });
+      });
+    });
     heroLiquido();
     heroFluido();
     homeScena();
@@ -4174,6 +4250,41 @@
        Il blocco unito si usa SOLO se entra nella riga: si misura a font caricato (con il carattere
        di ripiego, più stretto, il blocco sembrava entrare e poi la parola si spezzava) e si rifà
        quando la finestra cambia larghezza. Si parte sempre dal testo originale. */
+    /* Regole dell'a capo in italiano (16/11/2026): articoli, preposizioni e congiunzioni brevi non restano mai in fondo a una riga,
+       ma vanno a capo insieme alla parola che segue (spazio non divisibile). Vale per titoli e testi; non tocca note DEV, moduli e script. */
+    (function legaParoleBrevi() {
+      var BREVI = /(^|[\s («“"'’])(a|e|ed|o|od|i|il|lo|la|le|gli|un|uno|una|di|da|in|su|con|per|tra|fra|del|dei|dal|dai|al|ai|nel|nei|sul|sui|ne|si|se|ma|che|non|più|è|come|della|delle|dello|degli|dalla|dalle|nella|nelle|alla|alle|allo|agli|sulla|sulle|ogni|mai|già)( )(?=[^\s ])/gi;
+      document.querySelectorAll('h1, h2, h3, h4, p, li, dd, .lede, .card-name, .card-desc, summary, label, .kicker, .tile span, .chip, .mp-extra a, .acc > a, [role=tab], .t-pager button').forEach(function (el) {
+        if (el.closest('.devnote, .dn-drawer, script, style, [contenteditable], textarea, .devbar')) return;
+        var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), n, k;
+        while ((n = w.nextNode())) {
+          var v = n.nodeValue; if (!v || v.indexOf(' ') < 0) continue;
+          for (k = 0; k < 4; k++) { var nv = v.replace(BREVI, function (m, p1, p2) { return p1 + p2 + ' '; }); if (nv === v) break; v = nv; }
+          if (v !== n.nodeValue) n.nodeValue = v;
+        }
+      });
+    })();
+    /* Scheda macchina su mobile (16/11/2026): il modulo sta in fondo a una pagina molto lunga. Dopo la prima schermata compare un pulsante fisso che porta al modulo; sparisce quando il modulo è in vista. */
+    (function schedaCtaMobile() {
+      var col = document.querySelector('.scheda-mosaico .sticky-col'), hero = document.querySelector('.scheda-mosaico .pagina-intro');
+      if (!col || !hero) return;
+      col.id = col.id || 'modulo-scheda';
+      var a = document.createElement('a');
+      a.className = 'scheda-cta-mobile'; a.href = '#' + col.id; a.textContent = 'Richiedi informazioni';
+      a.setAttribute('aria-label', 'Vai al modulo per richiedere informazioni su questa macchina');
+      document.body.appendChild(a);
+      /* Visibile solo dopo la prima schermata e finché il modulo è ancora più in basso dello schermo:
+         sparisce appena il modulo entra in vista (o è già stato superato) e ricompare risalendo sopra il modulo. */
+      function aggiorna() {
+        var oltreHero = hero.getBoundingClientRect().bottom < 0;
+        var moduloSotto = col.getBoundingClientRect().top > window.innerHeight;
+        a.classList.toggle('is-visibile', oltreHero && moduloSotto);
+      }
+      window.addEventListener('scroll', aggiorna, { passive: true });
+      window.addEventListener('resize', aggiorna);
+      window.addEventListener('load', aggiorna);
+      aggiorna();
+    })();
     (function nienteVedove() {
       var NBSP = ' ', NBH = '‑';
       function applica() {
